@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Phonics Lesson 3 — Short /ă/ CVC Words"/>
+  <title>Mini OpenStax — Lesson 3: Short a (/ă/) Words</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 3: Short a (/ă/) Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH3: Decode and read additional CVC words with short /ă/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <!-- 📚 5-BUTTON NAVIGATION BAR -->
+    <nav class="chapter-nav" id="chapter-nav">
+      <a href="chapter-1.html" class="chapter-btn">Lesson 2</a>
+      <a href="chapter-2.html" class="chapter-btn active">Lesson 3</a>
+      <a href="chapter-3.html" class="chapter-btn">Lesson 4</a>
+      <a href="chapter-4.html" class="chapter-btn">Lesson 5</a>
+      <a href="chapter-5.html" class="chapter-btn">Lesson 6</a>
+    </nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>All words follow the CVC (consonant-vowel-consonant) pattern with short <strong>/ă/</strong>:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud. All words are from Lesson 3 or earlier:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 2;
+      const CHAPTER_CONFIG = {
+        title: "Lesson 3: Short a (/ă/) Words",
+        loTags: ["LO PH3: Decode and read additional CVC words with short /ă/"],
+        contentWords: [
+          "nab", "nag", "Nan", "nap", "Nat", "tab", "tad", "tag", "tan", "tap", "fan", "fad", "fat",
+          "pad", "pan", "pat", "pal", "Pam", "bad", "bag", "bam", "ban", "bat", "man", "mat", "mad",
+          "map", "Mac"
+        ],
+        sentences: [
+          "Mac had a map.",
+          "Pam had a pal.",
+          "Pam can tag Sam.",
+          "Nat had a tan cat.",
+          "The tan cat ran at a fat rat.",
+          "A mad cat can nab a bad rat.",
+          "Nan had a tan bag.",
+          "The bag had a tan tag.",
+          "The man at bat had a tan cap.",
+          "Pat can fan the man at bat."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word is in Lesson 3?", options: [{id:"a",text:"nap",is_correct:true},{id:"b",text:"napk",is_correct:false},{id:"c",text:"nape",is_correct:false},{id:"d",text:"napt",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 3 word?", options: [{id:"a",text:"man",is_correct:false},{id:"b",text:"map",is_correct:false},{id:"c",text:"mad",is_correct:false},{id:"d",text:"max",is_correct:true}] },
+          { id: "3", prompt: "What sound does 'a' make in 'fan'?", options: [{id:"a",text:"/ā/",is_correct:false},{id:"b",text:"/ă/",is_correct:true},{id:"c",text:"/â/",is_correct:false},{id:"d",text:"/ä/",is_correct:false}] },
+          { id: "4", prompt: "Which word ends with /n/ and has short /ă/?", options: [{id:"a",text:"pan",is_correct:true},{id:"b",text:"pant",is_correct:false},{id:"c",text:"pane",is_correct:false},{id:"d",text:"pain",is_correct:false}] },
+          { id: "5", prompt: "How many consonants are in 'bad'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "6", prompt: "Which word is a name in Lesson 3?", options: [{id:"a",text:"Sam",is_correct:false},{id:"b",text:"Nat",is_correct:true},{id:"c",text:"Tom",is_correct:false},{id:"d",text:"Ben",is_correct:false}] },
+          { id: "7", prompt: "Which sentence uses only Lesson 2–3 words?", options: [{id:"a",text:"Pam had a pal.",is_correct:true},{id:"b",text:"Pam had a car.",is_correct:false},{id:"c",text:"Pam sat on a mat.",is_correct:false},{id:"d",text:"Pam ran to a map.",is_correct:false}] },
+          { id: "8", prompt: "Which word is an action (verb)?", options: [{id:"a",text:"fan",is_correct:true},{id:"b",text:"man",is_correct:false},{id:"c",text:"map",is_correct:false},{id:"d",text:"cap",is_correct:false}] },
+          { id: "9", prompt: "Which word is NOT decodable using only Lessons 1–3?", options: [{id:"a",text:"bat",is_correct:false},{id:"b",text:"bad",is_correct:false},{id:"c",text:"bam",is_correct:false},{id:"d",text:"bomb",is_correct:true}] },
+          { id: "10", prompt: "In 'The tan cat ran at a fat rat', how many Lesson 3 words appear?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
+          { id: "11", prompt: "Which word starts with 'p' and has short /ă/?", options: [{id:"a",text:"pal",is_correct:true},{id:"b",text:"pail",is_correct:false},{id:"c",text:"pain",is_correct:false},{id:"d",text:"pane",is_correct:false}] },
+          { id: "12", prompt: "What closes the vowel in 'mat'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 't'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
+          { id: "13", prompt: "Which word is a real Lesson 3 word ending in /d/?", options: [{id:"a",text:"fad",is_correct:true},{id:"b",text:"fade",is_correct:false},{id:"c",text:"fadd",is_correct:false},{id:"d",text:"fated",is_correct:false}] },
+          { id: "14", prompt: "Which word could be confused with a non-decodable word?", options: [{id:"a",text:"tab",is_correct:true},{id:"b",text:"table",is_correct:false},{id:"c",text:"tame",is_correct:false},{id:"d",text:"tape",is_correct:false}] },
+          { id: "15", prompt: "Which sentence is from Lesson 3?", options: [{id:"a",text:"Mac had a map.",is_correct:true},{id:"b",text:"Mac had a car.",is_correct:false},{id:"c",text:"Mac sat on a mat.",is_correct:false},{id:"d",text:"Mac ran to a map.",is_correct:false}] },
+          { id: "16", prompt: "How many letters are in 'pad'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
+          { id: "17", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"fan",is_correct:true},{id:"b",text:"bag",is_correct:false},{id:"c",text:"map",is_correct:false},{id:"d",text:"bat",is_correct:false}] },
+          { id: "18", prompt: "What phonics rule applies to all Lesson 3 words?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"Closed syllable with short /ă/",is_correct:true},{id:"c",text:"Open syllable",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
+          { id: "19", prompt: "Which word list item begins with 'n'?", options: [{id:"a",text:"nab",is_correct:true},{id:"b",text:"napk",is_correct:false},{id:"c",text:"name",is_correct:false},{id:"d",text:"nape",is_correct:false}] },
+          { id: "20", prompt: "Which word contains the blend 'bl'?", options: [{id:"a",text:"bat",is_correct:false},{id:"b",text:"bad",is_correct:false},{id:"c",text:"bam",is_correct:true},{id:"d",text:"ban",is_correct:false}] }
+        ]
+      };
+
+      // Render word list
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      // Render sentences
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      // Render quiz
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Show feedback
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 3*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Great job!' : correctCount >= 10 ? 'Keep practicing!' : 'Review Lesson 3 and try again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      // Submit handler
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      // Initialize
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
