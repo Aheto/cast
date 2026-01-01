@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Phonics Lesson 2 — Short /ă/ CVC Words"/>
+  <title>Mini OpenStax — Lesson 2: Short a (/ă/) Words</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 2: Short a (/ă/) Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH2: Decode and read CVC words with short /ă/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <!-- 📚 5-BUTTON NAVIGATION BAR -->
+    <nav class="chapter-nav" id="chapter-nav">
+      <a href="chapter-1.html" class="chapter-btn active">Lesson 2</a>
+      <a href="chapter-2.html" class="chapter-btn">Lesson 3</a>
+      <a href="chapter-3.html" class="chapter-btn">Lesson 4</a>
+      <a href="chapter-4.html" class="chapter-btn">Lesson 5</a>
+      <a href="chapter-5.html" class="chapter-btn">Lesson 6</a>
+    </nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>All words follow the CVC (consonant-vowel-consonant) pattern with short <strong>/ă/</strong>:</p>
+        <div class="word-list" id="word-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud. All words are from Lesson 2 or earlier:</p>
+        <div class="sentences" id="sentences">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // 🔧 CHAPTER CONFIGURATION
+      const currentChapter = 1;
+      const CHAPTER_CONFIG = {
+        title: "Lesson 2: Short a (/ă/) Words",
+        loTags: ["LO PH2: Decode and read CVC words with short /ă/"],
+        contentWords: [
+          "at", "am", "an", "ad", "Al", "sad", "Sal", "sap", "sat", "Sam",
+          "sag", "rat", "ram", "rag", "ran", "rap", "can", "cap", "cat", "cab",
+          "hat", "ham", "had", "Hal"
+        ],
+        sentences: [
+          "Sad Sam sat.",
+          "Sam had a rag.",
+          "Can a rag sag?",
+          "Al had a hat.",
+          "Hal had a cap.",
+          "Sal had a can.",
+          "A rat ran at a ham.",
+          "A cat ran at a rat.",
+          "A cat can rap a rat."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word is in the Lesson 2 list?", options: [{id:"a",text:"ad",is_correct:true},{id:"b",text:"add",is_correct:false},{id:"c",text:"aid",is_correct:false},{id:"d",text:"and",is_correct:false}] },
+          { id: "2", prompt: "Which word does NOT belong?", options: [{id:"a",text:"cat",is_correct:false},{id:"b",text:"cap",is_correct:false},{id:"c",text:"cake",is_correct:true},{id:"d",text:"can",is_correct:false}] },
+          { id: "3", prompt: "How is the 'a' in 'Sam' pronounced?", options: [{id:"a",text:"Long /ā/",is_correct:false},{id:"b",text:"Short /ă/",is_correct:true},{id:"c",text:"Silent",is_correct:false},{id:"d",text:"Like 'ah'",is_correct:false}] },
+          { id: "4", prompt: "Which is a real Lesson 2 word?", options: [{id:"a",text:"hand",is_correct:false},{id:"b",text:"ham",is_correct:true},{id:"c",text:"halt",is_correct:false},{id:"d",text:"hard",is_correct:false}] },
+          { id: "5", prompt: "What type of syllable is 'cap'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
+          { id: "6", prompt: "Which word is NOT in Lesson 2?", options: [{id:"a",text:"rat",is_correct:false},{id:"b",text:"ram",is_correct:false},{id:"c",text:"ran",is_correct:false},{id:"d",text:"ranp",is_correct:true}] },
+          { id: "7", prompt: "Which sentence uses only Lesson 2 words?", options: [{id:"a",text:"Sam ran at a cat.",is_correct:true},{id:"b",text:"Sam ran to a car.",is_correct:false},{id:"c",text:"Sam had a map.",is_correct:false},{id:"d",text:"Sam sat on a mat.",is_correct:false}] },
+          { id: "8", prompt: "Why is 'ad' in Lesson 2 but not 'add'?", options: [{id:"a",text:"'add' has a double consonant (CVCC)",is_correct:true},{id:"b",text:"'ad' is a sight word",is_correct:false},{id:"c",text:"'add' uses long vowel",is_correct:false},{id:"d",text:"'ad' is more common",is_correct:false}] },
+          { id: "9", prompt: "Which word ends with /n/ and has short /ă/?", options: [{id:"a",text:"an",is_correct:true},{id:"b",text:"and",is_correct:false},{id:"c",text:"ant",is_correct:false},{id:"d",text:"any",is_correct:false}] },
+          { id: "10", prompt: "In 'A cat ran at a ham', how many Lesson 2 words are there?", options: [{id:"a",text:"4",is_correct:false},{id:"b",text:"5",is_correct:true},{id:"c",text:"6",is_correct:false},{id:"d",text:"7",is_correct:false}] },
+          { id: "11", prompt: "Which is a name from Lesson 2?", options: [{id:"a",text:"Tom",is_correct:false},{id:"b",text:"Hal",is_correct:true},{id:"c",text:"Ben",is_correct:false},{id:"d",text:"Tim",is_correct:false}] },
+          { id: "12", prompt: "Which word is an action (verb) in Lesson 2?", options: [{id:"a",text:"hat",is_correct:false},{id:"b",text:"sad",is_correct:false},{id:"c",text:"ran",is_correct:true},{id:"d",text:"ham",is_correct:false}] },
+          { id: "13", prompt: "What sound does 'a' make in 'rag'?", options: [{id:"a",text:"/ā/",is_correct:false},{id:"b",text:"/ă/",is_correct:true},{id:"c",text:"/â/",is_correct:false},{id:"d",text:"/ä/",is_correct:false}] },
+          { id: "14", prompt: "Which word could be confused with a non-Lesson 2 word?", options: [{id:"a",text:"ad",is_correct:true},{id:"b",text:"am",is_correct:false},{id:"c",text:"at",is_correct:false},{id:"d",text:"an",is_correct:false}] },
+          { id: "15", prompt: "Which sentence is from Lesson 2?", options: [{id:"a",text:"Al had a hat.",is_correct:true},{id:"b",text:"Al had a car.",is_correct:false},{id:"c",text:"Al sat on a mat.",is_correct:false},{id:"d",text:"Al ran to a map.",is_correct:false}] },
+          { id: "16", prompt: "How many consonants are in 'cap'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "17", prompt: "Which word is not a noun in Lesson 2?", options: [{id:"a",text:"cat",is_correct:false},{id:"b",text:"ham",is_correct:false},{id:"c",text:"sad",is_correct:true},{id:"d",text:"hat",is_correct:false}] },
+          { id: "18", prompt: "What closes the vowel in 'Sam'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 'm'",is_correct:true},{id:"c",text:"Capital letter",is_correct:false},{id:"d",text:"It's open",is_correct:false}] },
+          { id: "19", prompt: "Which word list item ends with /t/?", options: [{id:"a",text:"at",is_correct:true},{id:"b",text:"am",is_correct:false},{id:"c",text:"an",is_correct:false},{id:"d",text:"ad",is_correct:false}] },
+          { id: "20", prompt: "What phonics pattern does Lesson 2 teach?", options: [{id:"a",text:"Long vowels",is_correct:false},{id:"b",text:"Silent e",is_correct:false},{id:"c",text:"Closed syllables with short /ă/",is_correct:true},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+        ]
+      };
+
+      // Render word list
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      // Render sentences
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      // Render quiz
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Show feedback
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 2*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Great job!' : correctCount >= 10 ? 'Keep practicing!' : 'Review Lesson 2 and try again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      // Submit handler
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      // Initialize
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
