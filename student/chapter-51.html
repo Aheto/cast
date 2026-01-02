@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 52 — Consonant Digraph 'sh'"/>
+  <title>Mini OpenStax — Lesson 52: Consonant Digraph sh</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 52: Consonant Digraph sh</h1>
+        <div class="lo-tags" id="lo-tags">LO PH52: Decode words with the consonant digraph 'sh' in closed syllables</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words containing the consonant digraph <strong>sh</strong> in closed syllables:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–52:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 51;    // chapter-51.html = Lesson 52
+      const maxChapter = 110;       // Update when adding more lessons
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 52: Consonant Digraph sh",
+        loTags: ["LO PH52: Decode words with the consonant digraph 'sh' in closed syllables"],
+        contentWords: [
+          "shag", "sham", "shaft", "shed", "Shep", "shelf", "ship", "shin", "shift", "shot",
+          "shop", "shod", "shut", "shun", "shunt", "shred", "shrimp", "shrub", "shrug"
+        ],
+        sentences: [
+          "Glen hit a shin on the shelf.",
+          "Stan shut the lid on the bin.",
+          "A big ship went past in the fog.",
+          "There was a shag rug in the shop.",
+          "Shep the pup hid in a shrub.",
+          "Clint had shrimp from a can.",
+          "A hen had a nest on a shelf in the shed.",
+          "A cab shot past the van.",
+          "Was the plan just a sham?",
+          "Did the man just shrug?"
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word begins with the digraph 'sh'?", options: [{id:"a",text:"ship",is_correct:true},{id:"b",text:"sip",is_correct:false},{id:"c",text:"chip",is_correct:false},{id:"d",text:"skip",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 52 word?", options: [{id:"a",text:"shut",is_correct:false},{id:"b",text:"shun",is_correct:false},{id:"c",text:"shark",is_correct:true},{id:"d",text:"shrub",is_correct:false}] },
+          { id: "3", prompt: "What digraph starts 'shin'?", options: [{id:"a",text:"ch",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"sh",is_correct:true},{id:"d",text:"wh",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to close tightly'?", options: [{id:"a",text:"shut",is_correct:true},{id:"b",text:"shun",is_correct:false},{id:"c",text:"shag",is_correct:false},{id:"d",text:"sham",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'shrub'?", options: [{id:"a",text:"4",is_correct:false},{id:"b",text:"5",is_correct:true},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 52 words?", options: [{id:"a",text:"A big ship went past in the fog.",is_correct:true},{id:"b",text:"A big car went past.",is_correct:false},{id:"c",text:"The fog sat on a mat.",is_correct:false},{id:"d",text:"The fog ran to a map.",is_correct:false}] },
+          { id: "7", prompt: "Which word refers to a small crustacean often eaten as food?", options: [{id:"a",text:"shrimp",is_correct:true},{id:"b",text:"shrub",is_correct:false},{id:"c",text:"shelf",is_correct:false},{id:"d",text:"shin",is_correct:false}] },
+          { id: "8", prompt: "What closes the vowel in 'shot'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 't'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
+          { id: "9", prompt: "In 'Glen hit a shin on the shelf', how many Lesson 52 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'fake or deceptive'?", options: [{id:"a",text:"sham",is_correct:true},{id:"b",text:"shag",is_correct:false},{id:"c",text:"shut",is_correct:false},{id:"d",text:"shun",is_correct:false}] },
+          { id: "11", prompt: "Which word means 'to avoid deliberately'?", options: [{id:"a",text:"shun",is_correct:true},{id:"b",text:"shrug",is_correct:false},{id:"c",text:"shut",is_correct:false},{id:"d",text:"sham",is_correct:false}] },
+          { id: "12", prompt: "Which word ends with /t/ and means 'to expel with force'?", options: [{id:"a",text:"shot",is_correct:true},{id:"b",text:"shut",is_correct:false},{id:"c",text:"shunt",is_correct:false},{id:"d",text:"shift",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 52?", options: [{id:"a",text:"Shep the pup hid in a shrub.",is_correct:true},{id:"b",text:"Shep the pup hid in a car.",is_correct:false},{id:"c",text:"Shep sat on a mat.",is_correct:false},{id:"d",text:"Shep ran to a map.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'shred'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:false},{id:"c",text:"4",is_correct:true},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"shun",is_correct:true},{id:"b",text:"shrub",is_correct:false},{id:"c",text:"shelf",is_correct:false},{id:"d",text:"ship",is_correct:false}] },
+          { id: "16", prompt: "What syllable type is 'shag'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
+          { id: "17", prompt: "Which word describes a raised part of the leg below the knee?", options: [{id:"a",text:"shin",is_correct:true},{id:"b",text:"shaft",is_correct:false},{id:"c",text:"shed",is_correct:false},{id:"d",text:"shod",is_correct:false}] },
+          { id: "18", prompt: "Which word might complete: 'Stan ___ the lid'?", options: [{id:"a",text:"shut",is_correct:true},{id:"b",text:"shun",is_correct:false},{id:"c",text:"sham",is_correct:false},{id:"d",text:"shag",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both 'shag rug' and 'shag' as a descriptive term?", options: [{id:"a",text:"shag",is_correct:true},{id:"b",text:"shop",is_correct:false},{id:"c",text:"ship",is_correct:false},{id:"d",text:"shin",is_correct:false}] },
+          { id: "20", prompt: "What consonant digraph is taught in Lesson 52?", options: [{id:"a",text:"ch",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"sh",is_correct:true},{id:"d",text:"wh",is_correct:false}] }
+        ]
+      };
+
+      // Render word list
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      // Render sentences
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      // ✅ UNLIMITED NAVIGATION
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      // Render quiz
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // WhatsApp feedback
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20}`;
+        const summary = `*Mini OpenStax — Phonics Lesson 52*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the "sh" digraph!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 52 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
