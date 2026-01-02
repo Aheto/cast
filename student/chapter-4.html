@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 5 — Short /ă/ CVC and /aw/ words"/>
-  <title>Mini OpenStax — Lesson 5: Short a (/ă/) and /aw/ Words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 5 — Short /ĭ/ CVC words"/>
+  <title>Mini OpenStax — Lesson 5: Short i (/ĭ/) Words</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -34,8 +34,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 5: Short a (/ă/) and /aw/ Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH5: Decode CVC and /aw/ words with short /ă/ or /aw/ patterns</div>
+        <h1 id="chapter-title">Lesson 5: Short i (/ĭ/) Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH5: Decode CVC words with short /ĭ/ in closed syllables</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -46,13 +46,13 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Includes CVC words with short <strong>/ă/</strong> and <strong>/aw/</strong> (as in *saw*, *jaw*):</p>
+        <p>Closed syllable CVC words with short <strong>/ĭ/</strong> (as in <em>sit</em>):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud. All words are from Lesson 5 or earlier:</p>
+        <p>Read aloud. All words are decodable from Lessons 2–5:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
@@ -71,48 +71,51 @@
     (function () {
       'use strict';
 
-      const currentChapter = 4;
-      const maxChapter = 6; // Lesson 7 = chapter-6.html
+      // 🔧 CONFIGURE PER PROJECT
+      const currentChapter = 4;      // chapter-4.html = Lesson 5
+      const maxChapter = 20;         // Update when adding more lessons
+
       const CHAPTER_CONFIG = {
-        title: "Lesson 5: Short a (/ă/) and /aw/ Words",
-        loTags: ["LO PH5: Decode CVC and /aw/ words with short /ă/ or /aw/ patterns"],
+        title: "Lesson 5: Short i (/ĭ/) Words",
+        loTags: ["LO PH5: Decode CVC words with short /ĭ/ in closed syllables"],
         contentWords: [
-          "ax", "fax", "max", "tax", "sax", "hag", "ham", "has", "hat", "jaw",
-          "law", "raw", "saw", "taw", "paw", "yak", "zap", "zag", "wax", "vax"
+          "it", "hid", "hip", "bib", "bin", "if", "him", "hit", "bid", "bit",
+          "in", "big", "did", "dim", "sic", "sip", "fib", "dig", "dip", "Sid",
+          "Sis", "fig", "sin", "sit"
         ],
         sentences: [
-          "Max faxed a tax fax.",
-          "The yak had a jaw.",
-          "Jaw Sam saw a yak.",
-          "Law Pam saw a yak.",
-          "Raw Dan saw a yak.",
-          "Saw Dan saw a yak.",
-          "Taw Jan saw a yak.",
-          "Paw Nan saw a yak.",
-          "The yak had a raw jaw."
+          "Sid hid in a bin.",
+          "Sis hit a big fig.",
+          "Did Sid sit?",
+          "Sid did sit.",
+          "Sis hid a bib.",
+          "If Sid digs, he digs in.",
+          "Big Sid digs in a bin.",
+          "Sis sips if it is dim.",
+          "Fig? No, it is a fib!"
         ],
         whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word is in Lesson 5?", options: [{id:"a",text:"fax",is_correct:true},{id:"b",text:"face",is_correct:false},{id:"c",text:"fact",is_correct:false},{id:"d",text:"fade",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 5 word?", options: [{id:"a",text:"sax",is_correct:false},{id:"b",text:"sack",is_correct:true},{id:"c",text:"tax",is_correct:false},{id:"d",text:"max",is_correct:false}] },
-          { id: "3", prompt: "What sound does 'a' make in 'fax'?", options: [{id:"a",text:"/ā/",is_correct:false},{id:"b",text:"/ă/",is_correct:true},{id:"c",text:"/â/",is_correct:false},{id:"d",text:"/ä/",is_correct:false}] },
-          { id: "4", prompt: "Which word ends with /z/?", options: [{id:"a",text:"sax",is_correct:true},{id:"b",text:"saw",is_correct:false},{id:"c",text:"sam",is_correct:false},{id:"d",text:"sap",is_correct:false}] },
-          { id: "5", prompt: "How many letters are in 'jaw'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "6", prompt: "Which word is a body part?", options: [{id:"a",text:"jaw",is_correct:true},{id:"b",text:"saw",is_correct:false},{id:"c",text:"law",is_correct:false},{id:"d",text:"raw",is_correct:false}] },
-          { id: "7", prompt: "Which sentence uses only Lesson 2–5 words?", options: [{id:"a",text:"The yak had a jaw.",is_correct:true},{id:"b",text:"The yak had a car.",is_correct:false},{id:"c",text:"The yak sat on a mat.",is_correct:false},{id:"d",text:"The yak ran to a map.",is_correct:false}] },
-          { id: "8", prompt: "Which word is a tool?", options: [{id:"a",text:"saw",is_correct:true},{id:"b",text:"jaw",is_correct:false},{id:"c",text:"yak",is_correct:false},{id:"d",text:"fax",is_correct:false}] },
-          { id: "9", prompt: "Which word begins with 'v'?", options: [{id:"a",text:"vax",is_correct:true},{id:"b",text:"van",is_correct:false},{id:"c",text:"vat",is_correct:false},{id:"d",text:"vac",is_correct:false}] },
-          { id: "10", prompt: "In 'Raw Dan saw a yak', how many Lesson 5 words appear?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "11", prompt: "Which word could NOT be sounded out using only short /ă/ rules?", options: [{id:"a",text:"jaw",is_correct:true},{id:"b",text:"fax",is_correct:false},{id:"c",text:"sax",is_correct:false},{id:"d",text:"tax",is_correct:false}] },
-          { id: "12", prompt: "What is unusual about 'jaw'?", options: [{id:"a",text:"It uses 'aw' but has short /ă/",is_correct:true},{id:"b",text:"It has a silent letter",is_correct:false},{id:"c",text:"It uses long /ā/",is_correct:false},{id:"d",text:"It's a two-syllable word",is_correct:false}] },
-          { id: "13", prompt: "Which word ends with /w/?", options: [{id:"a",text:"saw",is_correct:true},{id:"b",text:"sap",is_correct:false},{id:"c",text:"sat",is_correct:false},{id:"d",text:"sam",is_correct:false}] },
-          { id: "14", prompt: "Which sentence is from Lesson 5?", options: [{id:"a",text:"Max faxed a tax fax.",is_correct:true},{id:"b",text:"Max faxed a tax car.",is_correct:false},{id:"c",text:"Max sat on a fax.",is_correct:false},{id:"d",text:"Max ran to a map.",is_correct:false}] },
-          { id: "15", prompt: "How many consonants are in 'fax'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "16", prompt: "Which word is a verb?", options: [{id:"a",text:"saw",is_correct:true},{id:"b",text:"yak",is_correct:false},{id:"c",text:"jaw",is_correct:false},{id:"d",text:"law",is_correct:false}] },
-          { id: "17", prompt: "What phonics pattern do most Lesson 5 words follow?", options: [{id:"a",text:"Closed CVC with short /ă/",is_correct:true},{id:"b",text:"Silent e",is_correct:false},{id:"c",text:"Open syllable",is_correct:false},{id:"d",text:"Diphthongs",is_correct:false}] },
-          { id: "18", prompt: "Which word begins with /z/?", options: [{id:"a",text:"zap",is_correct:false},{id:"b",text:"zag",is_correct:true},{id:"c",text:"zat",is_correct:false},{id:"d",text:"zam",is_correct:false}] },
-          { id: "19", prompt: "Which word list item contains 'aw'?", options: [{id:"a",text:"law",is_correct:true},{id:"b",text:"lap",is_correct:false},{id:"c",text:"lad",is_correct:false},{id:"d",text:"lag",is_correct:false}] },
-          { id: "20", prompt: "Which word is a real animal?", options: [{id:"a",text:"yak",is_correct:true},{id:"b",text:"fax",is_correct:false},{id:"c",text:"tax",is_correct:false},{id:"d",text:"sax",is_correct:false}] }
+          { id: "1", prompt: "Which word is in Lesson 5?", options: [{id:"a",text:"sit",is_correct:true},{id:"b",text:"site",is_correct:false},{id:"c",text:"sight",is_correct:false},{id:"d",text:"sigh",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 5 word?", options: [{id:"a",text:"dig",is_correct:false},{id:"b",text:"dip",is_correct:false},{id:"c",text:"dipk",is_correct:true},{id:"d",text:"dim",is_correct:false}] },
+          { id: "3", prompt: "What sound does 'i' make in 'hit'?", options: [{id:"a",text:"/ī/",is_correct:false},{id:"b",text:"/ĭ/",is_correct:true},{id:"c",text:"/ē/",is_correct:false},{id:"d",text:"/ă/",is_correct:false}] },
+          { id: "4", prompt: "Which word ends with /p/?", options: [{id:"a",text:"hip",is_correct:true},{id:"b",text:"him",is_correct:false},{id:"c",text:"hid",is_correct:false},{id:"d",text:"hit",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'bin'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
+          { id: "6", prompt: "Which is a name in Lesson 5?", options: [{id:"a",text:"Sid",is_correct:true},{id:"b",text:"Sam",is_correct:false},{id:"c",text:"Sal",is_correct:false},{id:"d",text:"Nat",is_correct:false}] },
+          { id: "7", prompt: "Which sentence uses only Lesson 5 words?", options: [{id:"a",text:"Sid hid in a bin.",is_correct:true},{id:"b",text:"Sid hid in a car.",is_correct:false},{id:"c",text:"Sid sat on a mat.",is_correct:false},{id:"d",text:"Sid ran to a map.",is_correct:false}] },
+          { id: "8", prompt: "Which word is a verb?", options: [{id:"a",text:"sit",is_correct:true},{id:"b",text:"bib",is_correct:false},{id:"c",text:"bin",is_correct:false},{id:"d",text:"fig",is_correct:false}] },
+          { id: "9", prompt: "Which word begins with /f/?", options: [{id:"a",text:"fig",is_correct:true},{id:"b",text:"dig",is_correct:false},{id:"c",text:"big",is_correct:false},{id:"d",text:"sit",is_correct:false}] },
+          { id: "10", prompt: "In 'Sis hit a big fig', how many Lesson 5 words?", options: [{id:"a",text:"3",is_correct:false},{id:"b",text:"4",is_correct:true},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "11", prompt: "Which word could be a baby's item?", options: [{id:"a",text:"bib",is_correct:true},{id:"b",text:"bin",is_correct:false},{id:"c",text:"dig",is_correct:false},{id:"d",text:"sip",is_correct:false}] },
+          { id: "12", prompt: "What closes the vowel in 'sit'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 't'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
+          { id: "13", prompt: "Which word ends with /g/?", options: [{id:"a",text:"big",is_correct:true},{id:"b",text:"bit",is_correct:false},{id:"c",text:"bid",is_correct:false},{id:"d",text:"bin",is_correct:false}] },
+          { id: "14", prompt: "Which sentence is from Lesson 5?", options: [{id:"a",text:"Fig? No, it is a fib!",is_correct:true},{id:"b",text:"Fig? No, it is a fan!",is_correct:false},{id:"c",text:"Fig? No, it is a map!",is_correct:false},{id:"d",text:"Fig? No, it is a yak!",is_correct:false}] },
+          { id: "15", prompt: "How many consonants in 'sip'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "16", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"sit",is_correct:true},{id:"b",text:"bib",is_correct:false},{id:"c",text:"fig",is_correct:false},{id:"d",text:"bin",is_correct:false}] },
+          { id: "17", prompt: "What syllable type is 'dim'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
+          { id: "18", prompt: "Which word begins with 's' and has short /ĭ/?", options: [{id:"a",text:"sit",is_correct:true},{id:"b",text:"saw",is_correct:false},{id:"c",text:"sad",is_correct:false},{id:"d",text:"sax",is_correct:false}] },
+          { id: "19", prompt: "Which word means 'not true'?", options: [{id:"a",text:"fib",is_correct:true},{id:"b",text:"fig",is_correct:false},{id:"c",text:"sip",is_correct:false},{id:"d",text:"sic",is_correct:false}] },
+          { id: "20", prompt: "What vowel sound is taught in Lesson 5?", options: [{id:"a",text:"Short /ă/",is_correct:false},{id:"b",text:"Short /ĕ/",is_correct:false},{id:"c",text:"Short /ĭ/",is_correct:true},{id:"d",text:"Long /ī/",is_correct:false}] }
         ]
       };
 
@@ -132,15 +135,11 @@
         ).join('');
       }
 
-      // Render 5-button navigation (Home + current + next 3 lessons)
+      // ✅ UNLIMITED NAVIGATION
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [];
-
-        // Button 1: Always Homepage
         buttons.push({ label: "Home", url: "../index.html", active: false });
-
-        // Buttons 2–5: Current + next 3 lessons (max = 6)
         for (let i = 0; i < 4; i++) {
           const chapterNum = currentChapter + i;
           if (chapterNum > maxChapter) break;
@@ -151,7 +150,6 @@
             active: (i === 0)
           });
         }
-
         nav.innerHTML = buttons.map(btn => `
           <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
             ${btn.label}
@@ -178,7 +176,7 @@
         `).join('');
       }
 
-      // Show feedback with WhatsApp summary
+      // Feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0;
@@ -206,13 +204,12 @@
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Great job!' : correctCount >= 10 ? 'Keep practicing!' : 'Review Lesson 5 and try again.'}</strong></p>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered short /ĭ/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 5 words again.'}</strong></p>
             <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
           </div>
         `;
       }
 
-      // Submit handler
       function setupQuizListeners() {
         document.getElementById('submit-quiz').addEventListener('click', () => {
           const form = document.getElementById('quiz-form');
@@ -229,7 +226,6 @@
         });
       }
 
-      // Initialize
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
