@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 16 — Consonant Blend 'sn'"/>
+  <title>Mini OpenStax — Lesson 16: Consonant Blend sn</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 16: Consonant Blend sn</h1>
+        <div class="lo-tags" id="lo-tags">LO PH16: Decode words with initial consonant blend 'sn' in closed syllables</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words beginning with the consonant blend <strong>sn</strong> in closed syllables:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–16:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 15;     // chapter-15.html = Lesson 16
+      const maxChapter = 60;         // Update when adding more lessons
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 16: Consonant Blend sn",
+        loTags: ["LO PH16: Decode words with initial consonant blend 'sn' in closed syllables"],
+        contentWords: [
+          "snag", "snap", "snub", "snug", "snip", "snob"
+        ],
+        sentences: [
+          "The sled hit a snag.",
+          "Did the sled snap the snag?",
+          "Sal met Jan at the bus stop.",
+          "Did a snob snub Jan on the bus?",
+          "The hat had a snap on it.",
+          "The snug cap had a snap.",
+          "A bug sat snug in a rug.",
+          "Sis can snip a slit in the rag."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word begins with the blend 'sn'?", options: [{id:"a",text:"snap",is_correct:true},{id:"b",text:"lap",is_correct:false},{id:"c",text:"map",is_correct:false},{id:"d",text:"cap",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 16 word?", options: [{id:"a",text:"snip",is_correct:false},{id:"b",text:"snob",is_correct:false},{id:"c",text:"snap",is_correct:false},{id:"d",text:"slip",is_correct:true}] },
+          { id: "3", prompt: "What blend starts 'snug'?", options: [{id:"a",text:"st",is_correct:false},{id:"b",text:"sl",is_correct:false},{id:"c",text:"sn",is_correct:true},{id:"d",text:"sp",is_correct:false}] },
+          { id: "4", prompt: "Which word ends with /p/?", options: [{id:"a",text:"snap",is_correct:true},{id:"b",text:"snag",is_correct:false},{id:"c",text:"snub",is_correct:false},{id:"d",text:"snip",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'snob'?", options: [{id:"a",text:"3",is_correct:false},{id:"b",text:"4",is_correct:true},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 16 words?", options: [{id:"a",text:"The sled hit a snag.",is_correct:true},{id:"b",text:"The sled hit a car.",is_correct:false},{id:"c",text:"The sled sat on a mat.",is_correct:false},{id:"d",text:"The sled ran to a map.",is_correct:false}] },
+          { id: "7", prompt: "Which word means 'to cut quickly'?", options: [{id:"a",text:"snip",is_correct:true},{id:"b",text:"snap",is_correct:false},{id:"c",text:"snag",is_correct:false},{id:"d",text:"snub",is_correct:false}] },
+          { id: "8", prompt: "What closes the vowel in 'snip'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 'p'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
+          { id: "9", prompt: "In 'Sis can snip a slit in the rag', how many Lesson 16 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "10", prompt: "Which word describes something tight-fitting?", options: [{id:"a",text:"snug",is_correct:true},{id:"b",text:"snob",is_correct:false},{id:"c",text:"snag",is_correct:false},{id:"d",text:"snap",is_correct:false}] },
+          { id: "11", prompt: "Which word means 'to treat with disdain'?", options: [{id:"a",text:"snub",is_correct:true},{id:"b",text:"snap",is_correct:false},{id:"c",text:"snip",is_correct:false},{id:"d",text:"snag",is_correct:false}] },
+          { id: "12", prompt: "Which word ends with /g/?", options: [{id:"a",text:"snag",is_correct:true},{id:"b",text:"snap",is_correct:false},{id:"c",text:"snip",is_correct:false},{id:"d",text:"snob",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 16?", options: [{id:"a",text:"The snug cap had a snap.",is_correct:true},{id:"b",text:"The snug cap had a car.",is_correct:false},{id:"c",text:"The cap sat on a mat.",is_correct:false},{id:"d",text:"The cap ran to a map.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'snap'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:true},{id:"d",text:"0",is_correct:false}] },
+          { id: "15", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"snip",is_correct:true},{id:"b",text:"snag",is_correct:false},{id:"c",text:"snap",is_correct:false},{id:"d",text:"snob",is_correct:false}] },
+          { id: "16", prompt: "What syllable type is 'snub'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
+          { id: "17", prompt: "Which word refers to an arrogant person?", options: [{id:"a",text:"snob",is_correct:true},{id:"b",text:"snag",is_correct:false},{id:"c",text:"snap",is_correct:false},{id:"d",text:"snip",is_correct:false}] },
+          { id: "18", prompt: "Which word means 'to break suddenly'?", options: [{id:"a",text:"snap",is_correct:true},{id:"b",text:"snip",is_correct:false},{id:"c",text:"snub",is_correct:false},{id:"d",text:"snag",is_correct:false}] },
+          { id: "19", prompt: "Which word is a sharp projection that can catch or tear?", options: [{id:"a",text:"snag",is_correct:true},{id:"b",text:"snap",is_correct:false},{id:"c",text:"snip",is_correct:false},{id:"d",text:"snob",is_correct:false}] },
+          { id: "20", prompt: "What consonant blend is taught in Lesson 16?", options: [{id:"a",text:"st",is_correct:false},{id:"b",text:"sl",is_correct:false},{id:"c",text:"sn",is_correct:true},{id:"d",text:"sp",is_correct:false}] }
+        ]
+      };
+
+      // Render word list
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      // Render sentences
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      // ✅ UNLIMITED NAVIGATION
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      // Render quiz
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // WhatsApp feedback
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 16*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the "sn" blend!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 16 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
