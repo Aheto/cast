@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 38 — Sight Words"/>
+  <title>Mini OpenStax — Lesson 38: Sight Words</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 38: Sight Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH38: Recognize and read high-frequency sight words</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>High-frequency <strong>sight words</strong> (not decodable by phonics rules):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. These sentences include sight words from Lesson 38:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 37;    // chapter-37.html = Lesson 38
+      const maxChapter = 90;        // Update when adding more lessons
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 38: Sight Words",
+        loTags: ["LO PH38: Recognize and read high-frequency sight words"],
+        contentWords: [
+          "I", "of", "from", "one", "been", "was", "what", "her"
+        ],
+        sentences: [
+          "The trip was fun.",
+          "The fat rat fled from the cat.",
+          "Deb had a sip of pop from a can.",
+          "I had one plum, but it was a big one.",
+          "The plum had been on a twig.",
+          "Drip, drip! What was the drip from?",
+          "The drip was from the tub.",
+          "Did the dog grab a scrap of ham from the cat?",
+          "Fran got a pup from Fred. Fred let her pet the pup."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word means 'existing previously'?", options: [{id:"a",text:"been",is_correct:true},{id:"b",text:"one",is_correct:false},{id:"c",text:"of",is_correct:false},{id:"d",text:"I",is_correct:false}] },
+          { id: "2", prompt: "Which word is a personal pronoun used by the speaker?", options: [{id:"a",text:"I",is_correct:true},{id:"b",text:"her",is_correct:false},{id:"c",text:"was",is_correct:false},{id:"d",text:"what",is_correct:false}] },
+          { id: "3", prompt: "Which word shows possession or relationship?", options: [{id:"a",text:"of",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"one",is_correct:false},{id:"d",text:"been",is_correct:false}] },
+          { id: "4", prompt: "Which word indicates origin or source?", options: [{id:"a",text:"from",is_correct:true},{id:"b",text:"of",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"was",is_correct:false}] },
+          { id: "5", prompt: "How is 'I' different from most decodable words?", options: [{id:"a",text:"It doesn't follow phonics rules",is_correct:true},{id:"b",text:"It has two vowels",is_correct:false},{id:"c",text:"It ends with a consonant",is_correct:false},{id:"d",text:"It is always capitalized",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 38 sight words correctly?", options: [{id:"a",text:"I had one plum.",is_correct:true},{id:"b",text:"I hop on a log.",is_correct:false},{id:"c",text:"I sat on a mat.",is_correct:false},{id:"d",text:"I ran to a map.",is_correct:false}] },
+          { id: "7", prompt: "Which word is a past tense form of 'be'?", options: [{id:"a",text:"was",is_correct:true},{id:"b",text:"been",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"what",is_correct:false}] },
+          { id: "8", prompt: "Which word is used to ask a question about identity or nature?", options: [{id:"a",text:"what",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"of",is_correct:false},{id:"d",text:"one",is_correct:false}] },
+          { id: "9", prompt: "In 'Fred let her pet the pup', what does 'her' refer to?", options: [{id:"a",text:"Fran",is_correct:true},{id:"b",text:"Fred",is_correct:false},{id:"c",text:"pup",is_correct:false},{id:"d",text:"cat",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'a single unit'?", options: [{id:"a",text:"one",is_correct:true},{id:"b",text:"of",is_correct:false},{id:"c",text:"from",is_correct:false},{id:"d",text:"I",is_correct:false}] },
+          { id: "11", prompt: "Which word appears in the phrase 'sip of pop'?", options: [{id:"a",text:"of",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"been",is_correct:false}] },
+          { id: "12", prompt: "Which word is always written with a capital letter?", options: [{id:"a",text:"I",is_correct:true},{id:"b",text:"was",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"of",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 38?", options: [{id:"a",text:"The drip was from the tub.",is_correct:true},{id:"b",text:"The drip was in the car.",is_correct:false},{id:"c",text:"The drip sat on a mat.",is_correct:false},{id:"d",text:"The drip ran to a map.",is_correct:false}] },
+          { id: "14", prompt: "How many sight words are in 'I had one plum'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"1",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          { id: "15", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"her",is_correct:true},{id:"b",text:"one",is_correct:false},{id:"c",text:"plum",is_correct:false},{id:"d",text:"tub",is_correct:false}] },
+          { id: "16", prompt: "What type of word is 'was'?", options: [{id:"a",text:"Verb",is_correct:true},{id:"b",text:"Noun",is_correct:false},{id:"c",text:"Adjective",is_correct:false},{id:"d",text:"Preposition",is_correct:false}] },
+          { id: "17", prompt: "Which word could complete: 'What was the drip ___?'", options: [{id:"a",text:"from",is_correct:true},{id:"b",text:"of",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"been",is_correct:false}] },
+          { id: "18", prompt: "Which word is a possessive pronoun?", options: [{id:"a",text:"her",is_correct:true},{id:"b",text:"I",is_correct:false},{id:"c",text:"one",is_correct:false},{id:"d",text:"what",is_correct:false}] },
+          { id: "19", prompt: "Which word is used in both 'sip of pop' and 'scrap of ham'?", options: [{id:"a",text:"of",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"was",is_correct:false}] },
+          { id: "20", prompt: "What is the focus of Lesson 38?", options: [{id:"a",text:"Consonant blends",is_correct:false},{id:"b",text:"Short vowels",is_correct:false},{id:"c",text:"Sight words",is_correct:true},{id:"d",text:"Long vowels",is_correct:false}] }
+        ]
+      };
+
+      // Render word list
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      // Render sentences
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      // ✅ UNLIMITED NAVIGATION
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      // Render quiz
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // WhatsApp feedback
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 38*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the sight words!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 38 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
