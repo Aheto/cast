@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Mini OpenStax: Lesson 80: -onk Pattern"/>
+    <title>Mini OpenStax - Lesson 80: -onk Pattern</title>
+    <style>
+        /* CSS derived from Template v4.0 [cite: 21-45] */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+        .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+        .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+        .chapter-btn { padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
+        .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+        .section { margin-bottom: 1.5rem; }
+        .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+        .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+        .sentences { line-height: 1.6; }
+        .quiz { margin-top: 2rem; }
+        .question { margin-bottom: 1.2rem; }
+        .options { margin-left: 1rem; }
+        .option { margin: 0.4rem 0; }
+        .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+        .btn:hover { background: #218838; }
+        .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1 id="chapter-title">Lesson 80: -onk Pattern</h1>
+                <div class="lo-tags" id="lo-tags">LO PH80: Decode words with the -onk pattern</div>
+            </div>
+            <div class="role-badge">Student View</div>
+        </div>
+
+        <nav class="chapter-nav" id="chapter-nav"></nav>
+
+        <main id="main-content">
+            <div class="section">
+                <h2>Word List</h2>
+                <p>Focus on the closed syllable <strong>-onk</strong> pattern.</p>
+                <div class="word-list" id="word-list"></div>
+            </div>
+
+            <div class="section">
+                <h2>Practice Sentences</h2>
+                <p>Read aloud. All words are decodable from Lessons 2-80[cite: 66].</p>
+                <div class="sentences" id="sentences"></div>
+            </div>
+
+            <div class="quiz" id="quiz-container">
+                <h2>Quick Check (20 Questions)</h2>
+                <p>Select the best answer for each question.</p>
+                <form id="quiz-form"></form>
+                <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+            </div>
+            <div id="feedback"></div>
+        </main>
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            const currentChapter = 79; // Lesson 80 
+            const maxChapter = 150;
+            const CHAPTER_CONFIG = {
+                title: "Lesson 80: -onk Pattern",
+                loTags: ["LO PH80: Decode words with the -onk pattern"],
+                contentWords: ["conk", "honk"], // 
+                sentences: [
+                    "1) The cab can honk at the bus.", // [cite: 271]
+                    "2) The bus can honk at the van.", // [cite: 272]
+                    "3) The van can honk at the truck.", // [cite: 273]
+                    "4) The truck can honk at the cab." // [cite: 274]
+                ],
+                whatsappNumber: "233257320201",
+                assessmentItems: [
+                    // LEVEL 10/10 RANDOMIZATION: 5 correct per option A-D 
+                    // A-Correct
+                    { id: "1", prompt: "A car horn will ___.", options: [{id:"a", text:"honk", is_correct:true}, {id:"b", text:"hank", is_correct:false}, {id:"c", text:"hunk", is_correct:false}, {id:"d", text:"hink", is_correct:false}]},
+                    { id: "2", prompt: "To hit on the head (slang): ___.", options: [{id:"a", text:"conk", is_correct:true}, {id:"b", text:"can", is_correct:false}, {id:"c", text:"chunk", is_correct:false}, {id:"d", text:"cook", is_correct:false}]},
+                    { id: "3", prompt: "The cab can ___ at the bus.", options: [{id:"a", text:"honk", is_correct:true}, {id:"b", text:"hop", is_correct:false}, {id:"c", text:"hot", is_correct:false}, {id:"d", text:"hum", is_correct:false}]},
+                    { id: "4", prompt: "Complete: h + onk = ___", options: [{id:"a", text:"honk", is_correct:true}, {id:"b", text:"hank", is_correct:false}, {id:"c", text:"hunk", is_correct:false}, {id:"d", text:"hon", is_correct:false}]},
+                    { id: "5", prompt: "Identify the -onk word:", options: [{id:"a", text:"conk", is_correct:true}, {id:"b", text:"bank", is_correct:false}, {id:"c", text:"sink", is_correct:false}, {id:"d", text:"junk", is_correct:false}]},
+                    
+                    // B-Correct
+                    { id: "6", prompt: "The truck can ___ at the cab.", options: [{id:"a", text:"hunk", is_correct:false}, {id:"b", text:"honk", is_correct:true}, {id:"c", text:"hank", is_correct:false}, {id:"d", text:"hiss", is_correct:false}]},
+                    { id: "7", prompt: "Which word rhymes with 'bonk'?", options: [{id:"a", text:"bank", is_correct:false}, {id:"b", text:"conk", is_correct:true}, {id:"c", text:"bunk", is_correct:false}, {id:"d", text:"back", is_correct:false}]},
+                    { id: "8", prompt: "The bus can ___ at the van.", options: [{id:"a", text:"hang", is_correct:false}, {id:"b", text:"honk", is_correct:true}, {id:"c", text:"hunt", is_correct:false}, {id:"d", text:"hint", is_correct:false}]},
+                    { id: "9", prompt: "Select the correctly spelled word:", options: [{id:"a", text:"konk", is_correct:false}, {id:"b", text:"conk", is_correct:true}, {id:"c", text:"conck", is_correct:false}, {id:"d", text:"conke", is_correct:false}]},
+                    { id: "10", prompt: "A loud sound from a truck is a ___.", options: [{id:"a", text:"hump", is_correct:false}, {id:"b", text:"honk", is_correct:true}, {id:"c", text:"hush", is_correct:false}, {id:"d", text:"hank", is_correct:false}]},
+                    
+                    // C-Correct
+                    { id: "11", prompt: "The van can ___ at the truck.", options: [{id:"a", text:"hark", is_correct:false}, {id:"b", text:"hunk", is_correct:false}, {id:"c", text:"honk", is_correct:true}, {id:"d", text:"hike", is_correct:false}]},
+                    { id: "12", prompt: "Which word has the 'o' sound as in 'hot'?", options: [{id:"a", text:"hunk", is_correct:false}, {id:"b", text:"hank", is_correct:false}, {id:"c", text:"conk", is_correct:true}, {id:"d", text:"hink", is_correct:false}]},
+                    { id: "13", prompt: "I heard a loud ___ from the geese.", options: [{id:"a", text:"hush", is_correct:false}, {id:"b", text:"hand", is_correct:false}, {id:"c", text:"honk", is_correct:true}, {id:"d", text:"hint", is_correct:false}]},
+                    { id: "14", prompt: "If you hit your head, you might ___ it.", options: [{id:"a", text:"can", is_correct:false}, {id:"b", text:"coin", is_correct:false}, {id:"c", text:"conk", is_correct:true}, {id:"d", text:"cone", is_correct:false}]},
+                    { id: "15", prompt: "Fill in the blank: The cab can ___.", options: [{id:"a", text:"huff", is_correct:false}, {id:"b", text:"halt", is_correct:false}, {id:"c", text:"honk", is_correct:true}, {id:"d", text:"help", is_correct:false}]},
+
+                    // D-Correct
+                    { id: "16", prompt: "Which word ends with -onk?", options: [{id:"a", text:"bank", is_correct:false}, {id:"b", text:"sink", is_correct:false}, {id:"c", text:"junk", is_correct:false}, {id:"d", text:"honk", is_correct:true}]},
+                    { id: "17", prompt: "Rhyme with 'honk':", options: [{id:"a", text:"hang", is_correct:false}, {id:"b", text:"hunk", is_correct:false}, {id:"c", text:"hank", is_correct:false}, {id:"d", text:"conk", is_correct:true}]},
+                    { id: "18", prompt: "The ___ can honk at the bus.", options: [{id:"a", text:"cat", is_correct:false}, {id:"b", text:"can", is_correct:false}, {id:"c", text:"cup", is_correct:false}, {id:"d", text:"cab", is_correct:true}]},
+                    { id: "19", prompt: "The van can honk at the ___.", options: [{id:"a", text:"track", is_correct:false}, {id:"b", text:"trick", is_correct:false}, {id:"c", text:"tuck", is_correct:false}, {id:"d", text:"truck", is_correct:true}]},
+                    { id: "20", prompt: "To sound a horn is to ___.", options: [{id:"a", text:"hark", is_correct:false}, {id:"b", text:"hulk", is_correct:false}, {id:"c", text:"hank", is_correct:false}, {id:"d", text:"honk", is_correct:true}]}
+                ]
+            };
+
+            function renderWords() {
+                document.getElementById('word-list').innerHTML = CHAPTER_CONFIG.contentWords
+                    .map(word => `<span class="word-item">${word}</span>`).join("");
+            }
+
+            function renderSentences() {
+                document.getElementById('sentences').innerHTML = CHAPTER_CONFIG.sentences
+                    .map(s => `<p>${s}</p>`).join("");
+            }
+
+            function renderNavigation() {
+                const nav = document.getElementById('chapter-nav');
+                const buttons = [{ label: "Home", url: "../index.html", active: false }];
+                for (let i = 0; i < 4; i++) {
+                    const chapterNum = currentChapter + i;
+                    if (chapterNum > maxChapter) break;
+                    buttons.push({
+                        label: `Lesson ${chapterNum + 1}`,
+                        url: `chapter-${chapterNum}.html`,
+                        active: i === 0
+                    });
+                }
+                nav.innerHTML = buttons.map(btn => 
+                    `<a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">${btn.label}</a>`
+                ).join("");
+            }
+
+            function renderQuiz() {
+                document.getElementById('quiz-form').innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+                    <div class="question">
+                        <strong>${q.id}. ${q.prompt}</strong>
+                        <div class="options">
+                            ${q.options.map(opt => `
+                                <div class="option">
+                                    <label>
+                                        <input type="radio" name="q${q.id}" value="${opt.id}" required>
+                                        ${opt.id.toUpperCase()}. ${opt.text}
+                                    </label>
+                                </div>
+                            `).join("")}
+                        </div>
+                    </div>
+                `).join("");
+            }
+
+            function showFeedback(answers) {
+                const items = CHAPTER_CONFIG.assessmentItems;
+                let correctCount = 0;
+                let reportParts = [];
+
+                items.forEach((item, i) => {
+                    const userAns = answers[i];
+                    const correctOpt = item.options.find(o => o.is_correct);
+                    const isCorrect = userAns === correctOpt.id;
+                    if (isCorrect) {
+                        correctCount++;
+                        reportParts.push(`${item.id}. Correct: ${correctOpt.text}`);
+                    } else {
+                        const userText = item.options.find(o => o.id === userAns)?.text || '-';
+                        reportParts.push(`${item.id}. X You chose: ${userText} | Correct: ${correctOpt.text}`);
+                    }
+                });
+
+                const score = `${correctCount}/${items.length}`;
+                const summary = `*Mini OpenStax - ${CHAPTER_CONFIG.title}*\nScore: ${score}\n\n`;
+                const message = encodeURIComponent(summary + reportParts.join('\n'));
+                const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+                document.getElementById('feedback').innerHTML = `
+                    <div class="feedback">
+                        <h3>Results: ${score}</h3>
+                        <p><strong>${correctCount >= 15 ? "Great job! You've mastered Lesson 80!" : "Keep practicing those -onk words!"}</strong></p>
+                        <a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;text-decoration:none;display:inline-block;">Send Report to Instructor</a>
+                    </div>`;
+            }
+
+            function setupQuizListeners() {
+                document.getElementById('submit-quiz').addEventListener('click', () => {
+                    const form = document.getElementById('quiz-form');
+                    const answers = CHAPTER_CONFIG.assessmentItems.map(q => {
+                        const selected = form.querySelector(`input[name="q${q.id}"]:checked`);
+                        return selected ? selected.value : null;
+                    });
+                    if (answers.includes(null)) { alert("Please answer all questions."); return; }
+                    showFeedback(answers);
+                });
+            }
+
+            function init() {
+                document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+                document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+                renderNavigation();
+                renderWords();
+                renderSentences();
+                renderQuiz();
+                setupQuizListeners();
+            }
+
+            if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+        })();
+    </script>
+</body>
+</html>
