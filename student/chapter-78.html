@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 78 — ng/nk Patterns (-ank)"/>
-  <title>Mini OpenStax — Lesson 78: -ank Pattern</title>
+  <meta name="description" content="Mini OpenStax: Lesson 79 — ng/nk Patterns (-unk)"/>
+  <title>Mini OpenStax — Lesson 79: -unk Pattern</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -34,8 +34,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 78: -ank Pattern</h1>
-        <div class="lo-tags" id="lo-tags">LO PH78: Decode words with the -ank pattern (ng/nk family)</div>
+        <h1 id="chapter-title">Lesson 79: -unk Pattern</h1>
+        <div class="lo-tags" id="lo-tags">LO PH79: Decode words with the -unk pattern (ng/nk family)</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,13 +45,13 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words ending in the <strong>-ank</strong> pattern (part of the <em>ng/nk</em> family):</p>
+        <p>Words ending in the <strong>-unk</strong> pattern (part of the <em>ng/nk</em> family):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–78:</p>
+        <p>Read aloud. All words are decodable from Lessons 2–79:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
@@ -70,47 +70,47 @@
     (function () {
       'use strict';
 
-      const currentChapter = 77;    // chapter-77.html = Lesson 78
+      const currentChapter = 78;    // chapter-78.html = Lesson 79
       const maxChapter = 150;        
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 78: -ank Pattern",
-        loTags: ["LO PH78: Decode words with the -ank pattern (ng/nk family)"],
+        title: "Lesson 79: -unk Pattern",
+        loTags: ["LO PH79: Decode words with the -unk pattern (ng/nk family)"],
         contentWords: [
-          "bank", "sank", "tank", "rank", "yank", "lank", "dank", "Hank", "blank", "clank", "flank", "plank", "spank", "thank", "crank", "drank", "frank", "shrank", "prank"
+          "sunk", "junk", "bunk", "hunk", "dunk", "flunk", "plunk", "slunk", "skunk", "stunk", "chunk", "drunk", "trunk", "shrunk"
         ],
         sentences: [
-          "Mom said, 'Thank you, Hank.'",
-          "The cloth shrank when it got wet.",
-          "At dusk, the sun sank in the west.",
-          "Frank drank a glass of milk at lunch.",
-          "Hank can fish from the bank of the pond.",
-          "The ship hit a big rock and sank in the gulf.",
-          "Dad said they must stop the truck and get a tank of gas.",
-          "Frank can fill in a blank check, and the bank will cash it."
+          "1) Max cut a chunk from a ham.",
+          "2) Max had a hunk of ham at lunch.",
+          "3) Frank slept on a bunk bed at camp.",
+          "4) Frank can dunk Hank in the pond.",
+          "5) Kim kept her junk in a big trunk.",
+          "6) Beth did not flunk the big math test.",
+          "7) The dog ran from the skunk. The skunk stunk!",
+          "8) Brad had let the cap get wet, and it had shrunk."
         ],
         whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the -ank pattern?", options: [{id:"a",text:"bank",is_correct:true},{id:"b",text:"back",is_correct:false},{id:"c",text:"book",is_correct:false},{id:"d",text:"band",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 78 word?", options: [{id:"a",text:"plank",is_correct:false},{id:"b",text:"sink",is_correct:true},{id:"c",text:"tank",is_correct:false},{id:"d",text:"crank",is_correct:false}] },
-          { id: "3", prompt: "What pattern ends the word 'thank'?", options: [{id:"a",text:"-onk",is_correct:false},{id:"b",text:"-ank",is_correct:true},{id:"c",text:"-ink",is_correct:false},{id:"d",text:"-unk",is_correct:false}] },
-          { id: "4", prompt: "Which word means the edge of a pond or river?", options: [{id:"a",text:"bank",is_correct:true},{id:"b",text:"rank",is_correct:false},{id:"c",text:"yank",is_correct:false},{id:"d",text:"dank",is_correct:false}] },
-          { id: "5", prompt: "How many letters are in 'shrank'?", options: [{id:"a",text:"5",is_correct:false},{id:"b",text:"6",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"7",is_correct:false}] },
-          { id: "6", prompt: "Which sentence is from the lesson?", options: [{id:"a",text:"Mom said, 'Thank you, Hank.'",is_correct:true},{id:"b",text:"Mom said, 'Pick up the tank.'",is_correct:false},{id:"c",text:"Mom had a red pen.",is_correct:false},{id:"d",text:"Mom sat on a mat.",is_correct:false}] },
-          { id: "7", prompt: "What happened to the cloth when it got wet?", options: [{id:"a",text:"It shrank",is_correct:true},{id:"b",text:"It sank",is_correct:false},{id:"c",text:"It stank",is_correct:false},{id:"d",text:"It drank",is_correct:false}] },
-          { id: "8", prompt: "At dusk, where did the sun sink?", options: [{id:"a",text:"In the east",is_correct:false},{id:"b",text:"In the west",is_correct:true},{id:"c",text:"In the tank",is_correct:false},{id:"d",text:"In the gulf",is_correct:false}] },
-          { id: "9", prompt: "What did Frank drink at lunch?", options: [{id:"a",text:"A glass of milk",is_correct:true},{id:"b",text:"A glass of water",is_correct:false},{id:"c",text:"A tank of gas",is_correct:false},{id:"d",text:"A pop",is_correct:false}] },
-          { id: "10", prompt: "In 'The ship hit a rock and sank', what does 'sank' mean?", options: [{id:"a",text:"Went under water",is_correct:true},{id:"b",text:"Floated away",is_correct:false},{id:"c",text:"Started to fly",is_correct:false},{id:"d",text:"Broke apart",is_correct:false}] },
-          { id: "11", prompt: "Which word describes something wet and cold?", options: [{id:"a",text:"dank",is_correct:true},{id:"b",text:"lank",is_correct:false},{id:"c",text:"rank",is_correct:false},{id:"d",text:"bank",is_correct:false}] },
-          { id: "12", prompt: "What must Dad stop the truck to get?", options: [{id:"a",text:"A tank of gas",is_correct:true},{id:"b",text:"A blank check",is_correct:false},{id:"c",text:"A plank of wood",is_correct:false},{id:"d",text:"A glass of milk",is_correct:false}] },
-          { id: "13", prompt: "Which word is a person's name?", options: [{id:"a",text:"Hank",is_correct:true},{id:"b",text:"bank",is_correct:false},{id:"c",text:"sank",is_correct:false},{id:"d",text:"tank",is_correct:false}] },
-          { id: "14", prompt: "Which word means a trick?", options: [{id:"a",text:"prank",is_correct:true},{id:"b",text:"crank",is_correct:false},{id:"c",text:"plank",is_correct:false},{id:"d",text:"flank",is_correct:false}] },
-          { id: "15", prompt: "What syllable type are these -ank words?", options: [{id:"a",text:"Closed",is_correct:true},{id:"b",text:"Open",is_correct:false},{id:"c",text:"Silent E",is_correct:false},{id:"d",text:"Vowel Team",is_correct:false}] },
-          { id: "16", prompt: "How many consonants are in 'blank'?", options: [{id:"a",text:"4 (b, l, n, k)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "17", prompt: "Which word rhymes with 'tank'?", options: [{id:"a",text:"sank",is_correct:true},{id:"b",text:"sink",is_correct:false},{id:"c",text:"tuck",is_correct:false},{id:"d",text:"task",is_correct:false}] },
-          { id: "18", prompt: "Frank can fill in a ___ check.", options: [{id:"a",text:"blank",is_correct:true},{id:"b",text:"thank",is_correct:false},{id:"c",text:"plank",is_correct:false},{id:"d",text:"prank",is_correct:false}] },
-          { id: "19", prompt: "Which word starts with a blend and ends with -ank?", options: [{id:"a",text:"plank",is_correct:true},{id:"b",text:"bank",is_correct:false},{id:"c",text:"sank",is_correct:false},{id:"d",text:"tank",is_correct:false}] },
-          { id: "20", prompt: "Which lesson number is this?", options: [{id:"a",text:"78",is_correct:true},{id:"b",text:"77",is_correct:false},{id:"c",text:"79",is_correct:false},{id:"d",text:"80",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the -unk pattern?", options: [{id:"a",text:"sunk",is_correct:true},{id:"b",text:"sand",is_correct:false},{id:"c",text:"sink",is_correct:false},{id:"d",text:"sang",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 79 word?", options: [{id:"a",text:"junk",is_correct:false},{id:"b",text:"bank",is_correct:true},{id:"c",text:"bunk",is_correct:false},{id:"d",text:"hunk",is_correct:false}] },
+          { id: "3", prompt: "What pattern ends the word 'trunk'?", options: [{id:"a",text:"-ank",is_correct:false},{id:"b",text:"-onk",is_correct:false},{id:"c",text:"-ink",is_correct:false},{id:"d",text:"-unk",is_correct:true}] },
+          { id: "4", prompt: "Which word means to fail a test?", options: [{id:"a",text:"flunk",is_correct:true},{id:"b",text:"plunk",is_correct:false},{id:"c",text:"slunk",is_correct:false},{id:"d",text:"chunk",is_correct:false}] },
+          { id: "5", prompt: "What did Max cut from a ham?", options: [{id:"a",text:"A hunk",is_correct:false},{id:"b",text:"A chunk",is_correct:true},{id:"c",text:"A trunk",is_correct:false},{id:"d",text:"A junk",is_correct:false}] },
+          { id: "6", prompt: "Where did Frank sleep at camp?", options: [{id:"a",text:"On a bunk bed",is_correct:true},{id:"b",text:"In a trunk",is_correct:false},{id:"c",text:"On a deck",is_correct:false},{id:"d",text:"In a tank",is_correct:false}] },
+          { id: "7", prompt: "The skunk ___!", options: [{id:"a",text:"sank",is_correct:false},{id:"b",text:"stunk",is_correct:true},{id:"c",text:"slunk",is_correct:false},{id:"d",text:"shrunk",is_correct:false}] },
+          { id: "8", prompt: "What did Kim keep in a big trunk?", options: [{id:"a",text:"Her junk",is_correct:true},{id:"b",text:"Her ham",is_correct:false},{id:"c",text:"Her milk",is_correct:false},{id:"d",text:"Her skunk",is_correct:false}] },
+          { id: "9", prompt: "What happened to Brad's cap when it got wet?", options: [{id:"a",text:"It stunk",is_correct:false},{id:"b",text:"It shrunk",is_correct:true},{id:"c",text:"It sunk",is_correct:false},{id:"d",text:"It flunked",is_correct:false}] },
+          { id: "10", prompt: "Frank can ___ Hank in the pond.", options: [{id:"a",text:"dunk",is_correct:true},{id:"b",text:"hunk",is_correct:false},{id:"c",text:"junk",is_correct:false},{id:"d",text:"bunk",is_correct:false}] },
+          { id: "11", prompt: "Which word rhymes with 'sunk'?", options: [{id:"a",text:"hunk",is_correct:true},{id:"b",text:"sang",is_correct:false},{id:"c",text:"sink",is_correct:false},{id:"d",text:"sock",is_correct:false}] },
+          { id: "12", prompt: "Which word starts with a triple blend and ends with -unk?", options: [{id:"a",text:"shrunk",is_correct:true},{id:"b",text:"junk",is_correct:false},{id:"c",text:"bunk",is_correct:false},{id:"d",text:"sunk",is_correct:false}] },
+          { id: "13", prompt: "Max had a hunk of ham at ___.", options: [{id:"a",text:"camp",is_correct:false},{id:"b",text:"lunch",is_correct:true},{id:"c",text:"the pond",is_correct:false},{id:"d",text:"the bank",is_correct:false}] },
+          { id: "14", prompt: "Which word describes a large piece of something?", options: [{id:"a",text:"hunk",is_correct:true},{id:"b",text:"flunk",is_correct:false},{id:"c",text:"plunk",is_correct:false},{id:"d",text:"slunk",is_correct:false}] },
+          { id: "15", prompt: "What syllable type is the word 'junk'?", options: [{id:"a",text:"Closed",is_correct:true},{id:"b",text:"Open",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel Team",is_correct:false}] },
+          { id: "16", prompt: "Which word is an animal known for its smell?", options: [{id:"a",text:"skunk",is_correct:true},{id:"b",text:"trunk",is_correct:false},{id:"c",text:"chunk",is_correct:false},{id:"d",text:"plunk",is_correct:false}] },
+          { id: "17", prompt: "Beth did not ___ the big math test.", options: [{id:"a",text:"flunk",is_correct:true},{id:"b",text:"junk",is_correct:false},{id:"c",text:"bunk",is_correct:false},{id:"d",text:"hunk",is_correct:false}] },
+          { id: "18", prompt: "How many letters are in 'skunk'?", options: [{id:"a",text:"4",is_correct:false},{id:"b",text:"5",is_correct:true},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "19", prompt: "Who ran from the skunk?", options: [{id:"a",text:"The dog",is_correct:true},{id:"b",text:"Max",is_correct:false},{id:"c",text:"Frank",is_correct:false},{id:"d",text:"Beth",is_correct:false}] },
+          { id: "20", prompt: "Which word starts with 'dr' and ends with -unk?", options: [{id:"a",text:"drunk",is_correct:true},{id:"b",text:"dunk",is_correct:false},{id:"c",text:"trunk",is_correct:false},{id:"d",text:"shrunk",is_correct:false}] }
         ]
       };
 
@@ -185,16 +185,13 @@
         });
 
         const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 78*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const summary = `*Mini OpenStax — Phonics Lesson 79*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
         const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
 
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the -ank pattern!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 78 words again.'}</strong></p>
             <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
           </div>
         `;
@@ -226,11 +223,7 @@
         setupQuizListeners();
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
+      init();
     })();
   </script>
 </body>
