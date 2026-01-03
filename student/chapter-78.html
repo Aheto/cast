@@ -1,219 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Mini OpenStax: Lesson 79: -unk Pattern"/>
-    <title>Mini OpenStax - Lesson 79: -unk Pattern</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
-        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-        .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
-        .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
-        .chapter-btn { padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
-        .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
-        .section { margin-bottom: 1.5rem; }
-        .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-        .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
-        .sentences { line-height: 1.6; }
-        .quiz { margin-top: 2rem; }
-        .question { margin-bottom: 1.2rem; }
-        .options { margin-left: 1rem; }
-        .option { margin: 0.4rem 0; }
-        .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
-        .btn:hover { background: #218838; }
-        .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 78 — ng/nk Patterns (-ank)"/>
+  <title>Mini OpenStax — Lesson 78: -ank Pattern</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div>
-                <h1 id="chapter-title">Lesson 79: -unk Pattern</h1>
-                <div class="lo-tags" id="lo-tags">LO PH79: Decode words with the -unk pattern</div>
-            </div>
-            <div class="role-badge">Student View</div>
-        </div>
-
-        <nav class="chapter-nav" id="chapter-nav"></nav>
-
-        <main id="main-content">
-            <div class="section">
-                <h2>Word List</h2>
-                <p>Focus on the closed syllable <strong>-unk</strong> pattern.</p>
-                <div class="word-list" id="word-list"></div>
-            </div>
-
-            <div class="section">
-                <h2>Practice Sentences</h2>
-                <p>Read aloud. All words are decodable from Lessons 2-79.</p>
-                <div class="sentences" id="sentences"></div>
-            </div>
-
-            <div class="quiz" id="quiz-container">
-                <h2>Quick Check (20 Questions)</h2>
-                <p>Select the best answer for each question.</p>
-                <form id="quiz-form"></form>
-                <button type="button" class="btn" id="submit-quiz">Check Answers</button>
-            </div>
-            <div id="feedback"></div>
-        </main>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 78: -ank Pattern</h1>
+        <div class="lo-tags" id="lo-tags">LO PH78: Decode words with the -ank pattern (ng/nk family)</div>
+      </div>
+      <div class="role-badge">Student View</div>
     </div>
 
-    <script>
-        (function () {
-            'use strict';
+    <nav class="chapter-nav" id="chapter-nav"></nav>
 
-            const currentChapter = 78; 
-            const maxChapter = 150;
-            const CHAPTER_CONFIG = {
-                title: "Lesson 79: -unk Pattern",
-                loTags: ["LO PH79: Decode words with the -unk pattern"],
-                contentWords: ["sunk", "junk", "bunk", "hunk", "dunk", "flunk", "plunk", "slunk", "skunk", "stunk", "chunk", "drunk", "trunk", "shrunk"],
-                sentences: [
-                    "1) Max cut a chunk from a ham.",
-                    "2) Max had a hunk of ham at lunch.",
-                    "3) Frank slept on a bunk bed at camp.",
-                    "4) Frank can dunk Hank in the pond.",
-                    "5) Kim kept her junk in a big trunk.",
-                    "6) Beth did not flunk the big math test.",
-                    "7) The dog ran from the skunk.",
-                    "8) The skunk stunk!",
-                    "9) Brad had let the cap get wet, and it had shrunk."
-                ],
-                whatsappNumber: "233257320201",
-                assessmentItems: [
-                    // A-Correct (5 items)
-                    { id: "1", prompt: "The ship went under water; it ___.", options: [{id:"a", text:"sunk", is_correct:true}, {id:"b", text:"sink", is_correct:false}, {id:"c", text:"sung", is_correct:false}, {id:"d", text:"sang", is_correct:false}]},
-                    { id: "2", prompt: "Do not throw ___ on the floor.", options: [{id:"a", text:"junk", is_correct:true}, {id:"b", text:"jump", is_correct:false}, {id:"c", text:"just", is_correct:false}, {id:"d", text:"jink", is_correct:false}]},
-                    { id: "3", prompt: "A bed with one on top of the other is a ___ bed.", options: [{id:"a", text:"bunk", is_correct:true}, {id:"b", text:"bank", is_correct:false}, {id:"c", text:"buck", is_correct:false}, {id:"d", text:"bung", is_correct:false}]},
-                    { id: "4", prompt: "Max cut a ___ of ham.", options: [{id:"a", text:"hunk", is_correct:true}, {id:"b", text:"hank", is_correct:false}, {id:"c", text:"huck", is_correct:false}, {id:"d", text:"hung", is_correct:false}]},
-                    { id: "5", prompt: "Frank can ___ Hank in the pond.", options: [{id:"a", text:"dunk", is_correct:true}, {id:"b", text:"duck", is_correct:false}, {id:"c", text:"dang", is_correct:false}, {id:"d", text:"dent", is_correct:false}]},
-                    
-                    // B-Correct (5 items)
-                    { id: "6", prompt: "Beth did not ___ the math test.", options: [{id:"a", text:"flux", is_correct:false}, {id:"b", text:"flunk", is_correct:true}, {id:"c", text:"flask", is_correct:false}, {id:"d", text:"flung", is_correct:false}]},
-                    { id: "7", prompt: "He will ___ the keys on the desk.", options: [{id:"a", text:"plumb", is_correct:false}, {id:"b", text:"plunk", is_correct:true}, {id:"c", text:"pluck", is_correct:false}, {id:"d", text:"plan", is_correct:false}]},
-                    { id: "8", prompt: "The cat ___ away when it was scared.", options: [{id:"a", text:"slack", is_correct:false}, {id:"b", text:"slunk", is_correct:true}, {id:"c", text:"slick", is_correct:false}, {id:"d", text:"sling", is_correct:false}]},
-                    { id: "9", prompt: "A black animal with a white stripe is a ___.", options: [{id:"a", text:"skink", is_correct:false}, {id:"b", text:"skunk", is_correct:true}, {id:"c", text:"skid", is_correct:false}, {id:"d", text:"skip", is_correct:false}]},
-                    { id: "10", prompt: "The skunk ___!", options: [{id:"a", text:"sting", is_correct:false}, {id:"b", text:"stunk", is_correct:true}, {id:"c", text:"stack", is_correct:false}, {id:"d", text:"stuck", is_correct:false}]},
-                    
-                    // C-Correct (5 items)
-                    { id: "11", prompt: "Max cut a big ___ from the ham.", options: [{id:"a", text:"check", is_correct:false}, {id:"b", text:"chink", is_correct:false}, {id:"c", text:"chunk", is_correct:true}, {id:"d", text:"chuck", is_correct:false}]},
-                    { id: "12", prompt: "He has ___ too much milk.", options: [{id:"a", text:"drink", is_correct:false}, {id:"b", text:"drank", is_correct:false}, {id:"c", text:"drunk", is_correct:true}, {id:"d", text:"dregs", is_correct:false}]},
-                    { id: "13", prompt: "Kim kept junk in a big ___.", options: [{id:"a", text:"truck", is_correct:false}, {id:"b", text:"trick", is_correct:false}, {id:"c", text:"trunk", is_correct:true}, {id:"d", text:"track", is_correct:false}]},
-                    { id: "14", prompt: "The wet cap had ___.", options: [{id:"a", text:"shrank", is_correct:false}, {id:"b", text:"shred", is_correct:false}, {id:"c", text:"shrunk", is_correct:true}, {id:"d", text:"shrimp", is_correct:false}]},
-                    { id: "15", prompt: "What is the opposite of 'rose' (to the surface)?", options: [{id:"a", text:"sang", is_correct:false}, {id:"b", text:"sung", is_correct:false}, {id:"c", text:"sunk", is_correct:true}, {id:"d", text:"sink", is_correct:false}]},
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words ending in the <strong>-ank</strong> pattern (part of the <em>ng/nk</em> family):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
 
-                    // D-Correct (5 items)
-                    { id: "16", prompt: "Old things you do not want are called ___.", options: [{id:"a", text:"jest", is_correct:false}, {id:"b", text:"just", is_correct:false}, {id:"c", text:"jack", is_correct:false}, {id:"d", text:"junk", is_correct:true}]},
-                    { id: "17", prompt: "Frank slept on a ___.", options: [{id:"a", text:"bench", is_correct:false}, {id:"b", text:"bank", is_correct:false}, {id:"c", text:"buck", is_correct:false}, {id:"d", text:"bunk", is_correct:true}]},
-                    { id: "18", prompt: "To put someone in water quickly is to ___ them.", options: [{id:"a", text:"deck", is_correct:false}, {id:"b", text:"dock", is_correct:false}, {id:"c", text:"dark", is_correct:false}, {id:"d", text:"dunk", is_correct:true}]},
-                    { id: "19", prompt: "If it smells bad, it ___.", options: [{id:"a", text:"stank", is_correct:false}, {id:"b", text:"sting", is_correct:false}, {id:"c", text:"stink", is_correct:false}, {id:"d", text:"stunk", is_correct:true}]},
-                    { id: "20", prompt: "A large box for storage is a ___.", options: [{id:"a", text:"tank", is_correct:false}, {id:"b", text:"tuck", is_correct:false}, {id:"c", text:"thump", is_correct:false}, {id:"d", text:"trunk", is_correct:true}]}
-                ]
-            };
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–78:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
 
-            function renderWords() {
-                document.getElementById('word-list').innerHTML = CHAPTER_CONFIG.contentWords
-                    .map(word => `<span class="word-item">${word}</span>`).join("");
-            }
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
 
-            function renderSentences() {
-                document.getElementById('sentences').innerHTML = CHAPTER_CONFIG.sentences
-                    .map(s => `<p>${s}</p>`).join("");
-            }
+      <div id="feedback"></div>
+    </main>
+  </div>
 
-            function renderNavigation() {
-                const nav = document.getElementById('chapter-nav');
-                const buttons = [{ label: "Home", url: "../index.html", active: false }];
-                for (let i = 0; i < 4; i++) {
-                    const chapterNum = currentChapter + i;
-                    if (chapterNum > maxChapter) break;
-                    buttons.push({
-                        label: `Lesson ${chapterNum + 1}`,
-                        url: `chapter-${chapterNum}.html`,
-                        active: i === 0
-                    });
-                }
-                nav.innerHTML = buttons.map(btn => 
-                    `<a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">${btn.label}</a>`
-                ).join("");
-            }
+  <script>
+    (function () {
+      'use strict';
 
-            function renderQuiz() {
-                document.getElementById('quiz-form').innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-                    <div class="question">
-                        <strong>${q.id}. ${q.prompt}</strong>
-                        <div class="options">
-                            ${q.options.map(opt => `
-                                <div class="option">
-                                    <label>
-                                        <input type="radio" name="q${q.id}" value="${opt.id}" required>
-                                        ${opt.id.toUpperCase()}. ${opt.text}
-                                    </label>
-                                </div>
-                            `).join("")}
-                        </div>
-                    </div>
-                `).join("");
-            }
+      const currentChapter = 77;    // chapter-77.html = Lesson 78
+      const maxChapter = 150;        
 
-            function showFeedback(answers) {
-                const items = CHAPTER_CONFIG.assessmentItems;
-                let correctCount = 0;
-                let reportParts = [];
+      const CHAPTER_CONFIG = {
+        title: "Lesson 78: -ank Pattern",
+        loTags: ["LO PH78: Decode words with the -ank pattern (ng/nk family)"],
+        contentWords: [
+          "bank", "sank", "tank", "rank", "yank", "lank", "dank", "Hank", "blank", "clank", "flank", "plank", "spank", "thank", "crank", "drank", "frank", "shrank", "prank"
+        ],
+        sentences: [
+          "Mom said, 'Thank you, Hank.'",
+          "The cloth shrank when it got wet.",
+          "At dusk, the sun sank in the west.",
+          "Frank drank a glass of milk at lunch.",
+          "Hank can fish from the bank of the pond.",
+          "The ship hit a big rock and sank in the gulf.",
+          "Dad said they must stop the truck and get a tank of gas.",
+          "Frank can fill in a blank check, and the bank will cash it."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word ends with the -ank pattern?", options: [{id:"a",text:"bank",is_correct:true},{id:"b",text:"back",is_correct:false},{id:"c",text:"book",is_correct:false},{id:"d",text:"band",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 78 word?", options: [{id:"a",text:"plank",is_correct:false},{id:"b",text:"sink",is_correct:true},{id:"c",text:"tank",is_correct:false},{id:"d",text:"crank",is_correct:false}] },
+          { id: "3", prompt: "What pattern ends the word 'thank'?", options: [{id:"a",text:"-onk",is_correct:false},{id:"b",text:"-ank",is_correct:true},{id:"c",text:"-ink",is_correct:false},{id:"d",text:"-unk",is_correct:false}] },
+          { id: "4", prompt: "Which word means the edge of a pond or river?", options: [{id:"a",text:"bank",is_correct:true},{id:"b",text:"rank",is_correct:false},{id:"c",text:"yank",is_correct:false},{id:"d",text:"dank",is_correct:false}] },
+          { id: "5", prompt: "How many letters are in 'shrank'?", options: [{id:"a",text:"5",is_correct:false},{id:"b",text:"6",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"7",is_correct:false}] },
+          { id: "6", prompt: "Which sentence is from the lesson?", options: [{id:"a",text:"Mom said, 'Thank you, Hank.'",is_correct:true},{id:"b",text:"Mom said, 'Pick up the tank.'",is_correct:false},{id:"c",text:"Mom had a red pen.",is_correct:false},{id:"d",text:"Mom sat on a mat.",is_correct:false}] },
+          { id: "7", prompt: "What happened to the cloth when it got wet?", options: [{id:"a",text:"It shrank",is_correct:true},{id:"b",text:"It sank",is_correct:false},{id:"c",text:"It stank",is_correct:false},{id:"d",text:"It drank",is_correct:false}] },
+          { id: "8", prompt: "At dusk, where did the sun sink?", options: [{id:"a",text:"In the east",is_correct:false},{id:"b",text:"In the west",is_correct:true},{id:"c",text:"In the tank",is_correct:false},{id:"d",text:"In the gulf",is_correct:false}] },
+          { id: "9", prompt: "What did Frank drink at lunch?", options: [{id:"a",text:"A glass of milk",is_correct:true},{id:"b",text:"A glass of water",is_correct:false},{id:"c",text:"A tank of gas",is_correct:false},{id:"d",text:"A pop",is_correct:false}] },
+          { id: "10", prompt: "In 'The ship hit a rock and sank', what does 'sank' mean?", options: [{id:"a",text:"Went under water",is_correct:true},{id:"b",text:"Floated away",is_correct:false},{id:"c",text:"Started to fly",is_correct:false},{id:"d",text:"Broke apart",is_correct:false}] },
+          { id: "11", prompt: "Which word describes something wet and cold?", options: [{id:"a",text:"dank",is_correct:true},{id:"b",text:"lank",is_correct:false},{id:"c",text:"rank",is_correct:false},{id:"d",text:"bank",is_correct:false}] },
+          { id: "12", prompt: "What must Dad stop the truck to get?", options: [{id:"a",text:"A tank of gas",is_correct:true},{id:"b",text:"A blank check",is_correct:false},{id:"c",text:"A plank of wood",is_correct:false},{id:"d",text:"A glass of milk",is_correct:false}] },
+          { id: "13", prompt: "Which word is a person's name?", options: [{id:"a",text:"Hank",is_correct:true},{id:"b",text:"bank",is_correct:false},{id:"c",text:"sank",is_correct:false},{id:"d",text:"tank",is_correct:false}] },
+          { id: "14", prompt: "Which word means a trick?", options: [{id:"a",text:"prank",is_correct:true},{id:"b",text:"crank",is_correct:false},{id:"c",text:"plank",is_correct:false},{id:"d",text:"flank",is_correct:false}] },
+          { id: "15", prompt: "What syllable type are these -ank words?", options: [{id:"a",text:"Closed",is_correct:true},{id:"b",text:"Open",is_correct:false},{id:"c",text:"Silent E",is_correct:false},{id:"d",text:"Vowel Team",is_correct:false}] },
+          { id: "16", prompt: "How many consonants are in 'blank'?", options: [{id:"a",text:"4 (b, l, n, k)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"5",is_correct:false}] },
+          { id: "17", prompt: "Which word rhymes with 'tank'?", options: [{id:"a",text:"sank",is_correct:true},{id:"b",text:"sink",is_correct:false},{id:"c",text:"tuck",is_correct:false},{id:"d",text:"task",is_correct:false}] },
+          { id: "18", prompt: "Frank can fill in a ___ check.", options: [{id:"a",text:"blank",is_correct:true},{id:"b",text:"thank",is_correct:false},{id:"c",text:"plank",is_correct:false},{id:"d",text:"prank",is_correct:false}] },
+          { id: "19", prompt: "Which word starts with a blend and ends with -ank?", options: [{id:"a",text:"plank",is_correct:true},{id:"b",text:"bank",is_correct:false},{id:"c",text:"sank",is_correct:false},{id:"d",text:"tank",is_correct:false}] },
+          { id: "20", prompt: "Which lesson number is this?", options: [{id:"a",text:"78",is_correct:true},{id:"b",text:"77",is_correct:false},{id:"c",text:"79",is_correct:false},{id:"d",text:"80",is_correct:false}] }
+        ]
+      };
 
-                items.forEach((item, i) => {
-                    const userAns = answers[i];
-                    const correctOpt = item.options.find(o => o.is_correct);
-                    const isCorrect = userAns === correctOpt.id;
-                    if (isCorrect) {
-                        correctCount++;
-                        reportParts.push(`${item.id}. Correct: ${correctOpt.text}`);
-                    } else {
-                        const userText = item.options.find(o => o.id === userAns)?.text || '-';
-                        reportParts.push(`${item.id}. X You chose: ${userText} | Correct: ${correctOpt.text}`);
-                    }
-                });
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
 
-                const score = `${correctCount}/${items.length}`;
-                const summary = `*Mini OpenStax - ${CHAPTER_CONFIG.title}*\nScore: ${score}\n\n`;
-                const message = encodeURIComponent(summary + reportParts.join('\n'));
-                const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
 
-                document.getElementById('feedback').innerHTML = `
-                    <div class="feedback">
-                        <h3>Results: ${score}</h3>
-                        <p><strong>${correctCount >= 15 ? 'Excellent! Mastered!' : 'Keep practicing!'}</strong></p>
-                        <a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;text-decoration:none;display:inline-block;">Send Report to Instructor</a>
-                    </div>`;
-            }
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
 
-            function setupQuizListeners() {
-                document.getElementById('submit-quiz').addEventListener('click', () => {
-                    const form = document.getElementById('quiz-form');
-                    const answers = CHAPTER_CONFIG.assessmentItems.map(q => {
-                        const selected = form.querySelector(`input[name="q${q.id}"]:checked`);
-                        return selected ? selected.value : null;
-                    });
-                    if (answers.includes(null)) { alert("Answer all questions."); return; }
-                    showFeedback(answers);
-                });
-            }
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
 
-            function init() {
-                document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
-                document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-                renderNavigation();
-                renderWords();
-                renderSentences();
-                renderQuiz();
-                setupQuizListeners();
-            }
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
 
-            if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
-        })();
-    </script>
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 78*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the -ank pattern!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 78 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
 </body>
 </html>
