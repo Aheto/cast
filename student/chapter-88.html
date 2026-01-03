@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 89 — Vowel Team Syllables (ea) Part 4"/>
+  <title>Mini OpenStax — Lesson 89: Vowel Team ea (Part 4)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 89: Vowel Team ea (Part 4)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH89: Decode advanced words with the long e vowel team (ea) in multisyllabic contexts</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Advanced words featuring the <strong>ea</strong> vowel team:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–89:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 88;    // chapter-88.html = Lesson 89
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 89: Vowel Team ea (Part 4)",
+        loTags: ["LO PH89: Decode advanced words with the long e vowel team (ea) in multisyllabic contexts"],
+        contentWords: [
+          "pea", "peak", "peal", "peach", "preach", "plea", "plead", "pleat", "read", "real", "ream", "reap", "rear", "reach", "tea", "teak", "team", "tear", "teach", "treat", "tweak", "zeal", "weak", "wean", "wheat", "year", "yeast", "veal"
+        ],
+        sentences: [
+          "1) Cliff was sick and felt weak.",
+          "2) Neal sat in a rear seat on the bus.",
+          "3) Beth says her team can beat their team.",
+          "4) Ann will help Jeff and teach him to read.",
+          "5) A wisp of steam went up from the hot cup of tea.",
+          "6) Bess will plead with Mom to get the doll at the shop.",
+          "7) Each year, the men on the ranch reap the crop of wheat.",
+          "8) Jill got a deep cut on her heel, but she did not shed a tear.",
+          "9) Max can pluck a sweet peach from the branch of a peach tree.",
+          "10) Frank must plod up the path to reach the peak of the steep hill."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Why did Cliff feel weak?", options: [{id:"a",text:"he was sick",is_correct:true},{id:"b",text:"he was sad",is_correct:false},{id:"c",text:"he was lost",is_correct:false},{id:"d",text:"he was hot",is_correct:false}] },
+          { id: "2", prompt: "Where did Neal sit on the bus?", options: [{id:"a",text:"in a rear seat",is_correct:true},{id:"b",text:"in the front",is_correct:false},{id:"c",text:"near the driver",is_correct:false},{id:"d",text:"on a bench",is_correct:false}] },
+          { id: "3", prompt: "What does Beth say her team can do?", options: [{id:"a",text:"beat their team",is_correct:true},{id:"b",text:"teach their team",is_correct:false},{id:"c",text:"read with them",is_correct:false},{id:"d",text:"reap the crop",is_correct:false}] },
+          { id: "4", prompt: "What will Ann teach Jeff to do?", options: [{id:"a",text:"to read",is_correct:true},{id:"b",text:"to plead",is_correct:false},{id:"c",text:"to preach",is_correct:false},{id:"d",text:"to reap",is_correct:false}] },
+          { id: "5", prompt: "What went up from the hot cup of tea?", options: [{id:"a",text:"a wisp of steam",is_correct:true},{id:"b",text:"a leaf",is_correct:false},{id:"c",text:"a wisp of smoke",is_correct:false},{id:"d",text:"a tea bag",is_correct:false}] },
+          { id: "6", prompt: "What will Bess plead with Mom to get?", options: [{id:"a",text:"the doll at the shop",is_correct:true},{id:"b",text:"a cup of tea",is_correct:false},{id:"c",text:"a sweet peach",is_correct:false},{id:"d",text:"a rear seat",is_correct:false}] },
+          { id: "7", prompt: "What crop do the men on the ranch reap each year?", options: [{id:"a",text:"wheat",is_correct:true},{id:"b",text:"beans",is_correct:false},{id:"c",text:"peaches",is_correct:false},{id:"d",text:"peas",is_correct:false}] },
+          { id: "8", prompt: "Did Jill cry when she got a cut on her heel?", options: [{id:"a",text:"no, she did not shed a tear",is_correct:true},{id:"b",text:"yes, she did cry",is_correct:false},{id:"c",text:"she felt weak",is_correct:false},{id:"d",text:"she went to the shop",is_correct:false}] },
+          { id: "9", prompt: "Where can Max pluck a sweet peach from?", options: [{id:"a",text:"the branch of a peach tree",is_correct:true},{id:"b",text:"the rear seat",is_correct:false},{id:"c",text:"a hot cup",is_correct:false},{id:"d",text:"a steep hill",is_correct:false}] },
+          { id: "10", prompt: "What must Frank reach at the top of the hill?", options: [{id:"a",text:"the peak",is_correct:true},{id:"b",text:"the stream",is_correct:false},{id:"c",text:"the beach",is_correct:false},{id:"d",text:"the ranch",is_correct:false}] },
+          { id: "11", prompt: "Which word means a group of people playing together?", options: [{id:"a",text:"team",is_correct:true},{id:"b",text:"tea",is_correct:false},{id:"c",text:"teak",is_correct:false},{id:"d",text:"tear",is_correct:false}] },
+          { id: "12", prompt: "Which word refers to a type of hard wood?", options: [{id:"a",text:"teak",is_correct:true},{id:"b",text:"peak",is_correct:false},{id:"c",text:"beak",is_correct:false},{id:"d",text:"weak",is_correct:false}] },
+          { id: "13", prompt: "Which word means the same as 'harvest'?", options: [{id:"a",text:"reap",is_correct:true},{id:"b",text:"read",is_correct:false},{id:"c",text:"reach",is_correct:false},{id:"d",text:"real",is_correct:false}] },
+          { id: "14", prompt: "Which word describes something that is not fake?", options: [{id:"a",text:"real",is_correct:true},{id:"b",text:"read",is_correct:false},{id:"c",text:"rear",is_correct:false},{id:"d",text:"ream",is_correct:false}] },
+          { id: "15", prompt: "Which word is an ingredient used in bread to make it rise?", options: [{id:"a",text:"yeast",is_correct:true},{id:"b",text:"year",is_correct:false},{id:"c",text:"wheat",is_correct:false},{id:"d",text:"zeal",is_correct:false}] },
+          { id: "16", prompt: "Which word means a fold in a piece of cloth?", options: [{id:"a",text:"pleat",is_correct:true},{id:"b",text:"plead",is_correct:false},{id:"c",text:"plea",is_correct:false},{id:"d",text:"peak",is_correct:false}] },
+          { id: "17", prompt: "Which word refers to the meat from a calf?", options: [{id:"a",text:"veal",is_correct:true},{id:"b",text:"zeal",is_correct:false},{id:"c",text:"real",is_correct:false},{id:"d",text:"peal",is_correct:false}] },
+          { id: "18", prompt: "Which word means the opposite of strong?", options: [{id:"a",text:"weak",is_correct:true},{id:"b",text:"wean",is_correct:false},{id:"c",text:"wheat",is_correct:false},{id:"d",text:"zeal",is_correct:false}] },
+          { id: "19", prompt: "Which word means a loud ringing of bells?", options: [{id:"a",text:"peal",is_correct:true},{id:"b",text:"peak",is_correct:false},{id:"c",text:"plea",is_correct:false},{id:"d",text:"real",is_correct:false}] },
+          { id: "20", prompt: "Which word means great energy or enthusiasm?", options: [{id:"a",text:"zeal",is_correct:true},{id:"b",text:"teal",is_correct:false},{id:"c",text:"real",is_correct:false},{id:"d",text:"veal",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 89*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
