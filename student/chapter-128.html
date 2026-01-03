@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 129 — Multisyllable Words"/>
+  <title>Mini OpenStax — Lesson 128: Multisyllable Words</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 129: Multisyllable Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH129: Recognize and decode multisyllable words with prefixes and varied stress patterns.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="content-main">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Practice reading these words by identifying the two syllables in each:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud, paying attention to the multisyllable words:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Test your knowledge of the words and sentences from Lesson 129.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 128; // chapter-128.html = Lesson 129
+      const maxChapter = 150;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 129: Multisyllable Words",
+        loTags: ["LO PH129: Recognize and decode multisyllable words with prefixes and varied stress patterns."],
+        contentWords: [
+          "discuss", "display", "disgust", "adjust", "insist", "appear", "allow", "annoy", "attack", "attempt", "until", "subtract", "collect", "connect", "contain", "complain", "consent", "command", "expect", "explain", "increase", "indeed", "intend", "invent", "employ", "enjoy", "balloon"
+        ],
+        sentences: [
+          "1) If you insist, I'll do the job now.",
+          "2) I intend to do the job as soon as I can.",
+          "3) A hot air balloon can float in the air.",
+          "4) If you subtract three from ten, you get seven.",
+          "5) Jean can expect to enjoy herself at the picnic.",
+          "6) The trash truck does not collect trash on Sunday.",
+          "7) The troop could not attack until they got the command.",
+          "8) The two boys sat down to discuss their plans for the weekend."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "When will the person do the job if you insist?", options: [{id:"a",text:"next week",is_correct:false},{id:"b",text:"now",is_correct:true},{id:"c",text:"Sunday",is_correct:false},{id:"d",text:"never",is_correct:false}] },
+          { id: "2", prompt: "What does the person intend to do as soon as they can?", options: [{id:"a",text:"go to a picnic",is_correct:false},{id:"b",text:"do the job",is_correct:true},{id:"c",text:"invent a balloon",is_correct:false},{id:"d",text:"collect trash",is_correct:false}] },
+          { id: "3", prompt: "What can a hot air balloon do?", options: [{id:"a",text:"subtract",is_correct:false},{id:"b",text:"float in the air",is_correct:true},{id:"c",text:"complain",is_correct:false},{id:"d",text:"attack",is_correct:false}] },
+          { id: "4", prompt: "If you subtract three from ten, what do you get?", options: [{id:"a",text:"six",is_correct:false},{id:"b",text:"seven",is_correct:true},{id:"c",text:"eight",is_correct:false},{id:"d",text:"ten",is_correct:false}] },
+          { id: "5", prompt: "Where can Jean expect to enjoy herself?", options: [{id:"a",text:"at the dentist",is_correct:false},{id:"b",text:"at the picnic",is_correct:true},{id:"c",text:"in the kitchen",is_correct:false},{id:"d",text:"at the zoo",is_correct:false}] },
+          { id: "6", prompt: "When does the trash truck NOT collect trash?", options: [{id:"a",text:"Monday",is_correct:false},{id:"b",text:"Sunday",is_correct:true},{id:"c",text:"August",is_correct:false},{id:"d",text:"Saturday",is_correct:false}] },
+          { id: "7", prompt: "What did the troop need before they could attack?", options: [{id:"a",text:"a balloon",is_correct:false},{id:"b",text:"the command",is_correct:true},{id:"c",text:"a picnic",is_correct:false},{id:"d",text:"an insect",is_correct:false}] },
+          { id: "8", prompt: "What did the two boys sit down to discuss?", options: [{id:"a",text:"their homework",is_correct:false},{id:"b",text:"plans for the weekend",is_correct:true},{id:"c",text:"the trash truck",is_correct:false},{id:"d",text:"a bad habit",is_correct:false}] },
+          { id: "9", prompt: "Which word means to talk about something?", options: [{id:"a",text:"display",is_correct:false},{id:"b",text:"discuss",is_correct:true},{id:"c",text:"disgust",is_correct:false},{id:"d",text:"adjust",is_correct:false}] },
+          { id: "10", prompt: "Which word means to bring things together?", options: [{id:"a",text:"collect",is_correct:true},{id:"b",text:"subtract",is_correct:false},{id:"c",text:"complain",is_correct:false},{id:"d",text:"increase",is_correct:false}] },
+          { id: "11", prompt: "Which word means to make something better or fit?", options: [{id:"a",text:"annoy",is_correct:false},{id:"b",text:"adjust",is_correct:true},{id:"c",text:"appear",is_correct:false},{id:"d",text:"intend",is_correct:false}] },
+          { id: "12", prompt: "Which word means the opposite of 'decrease'?", options: [{id:"a",text:"increase",is_correct:true},{id:"b",text:"invent",is_correct:false},{id:"c",text:"insist",is_correct:false},{id:"d",text:"intend",is_correct:false}] },
+          { id: "13", prompt: "What do you do if you are unhappy with something?", options: [{id:"a",text:"consent",is_correct:false},{id:"b",text:"complain",is_correct:true},{id:"c",text:"connect",is_correct:false},{id:"d",text:"contain",is_correct:false}] },
+          { id: "14", prompt: "Which word means to create something new?", options: [{id:"a",text:"invent",is_correct:true},{id:"b",text:"intend",is_correct:false},{id:"c",text:"insist",is_correct:false},{id:"d",text:"increase",is_correct:false}] },
+          { id: "15", prompt: "Which word means to give a job to someone?", options: [{id:"a",text:"enjoy",is_correct:false},{id:"b",text:"employ",is_correct:true},{id:"c",text:"explain",is_correct:false},{id:"d",text:"expect",is_correct:false}] },
+          { id: "16", prompt: "Which word means to show something?", options: [{id:"a",text:"display",is_correct:true},{id:"b",text:"disgust",is_correct:false},{id:"c",text:"discuss",is_correct:false},{id:"d",text:"adjust",is_correct:false}] },
+          { id: "17", prompt: "Which word means to give permission?", options: [{id:"a",text:"command",is_correct:false},{id:"b",text:"consent",is_correct:true},{id:"c",text:"contain",is_correct:false},{id:"d",text:"complain",is_correct:false}] },
+          { id: "18", prompt: "Which word means to bother someone?", options: [{id:"a",text:"allow",is_correct:false},{id:"b",text:"annoy",is_correct:true},{id:"c",text:"appear",is_correct:false},{id:"d",text:"attack",is_correct:false}] },
+          { id: "19", prompt: "How many syllables are in 'balloon'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] },
+          { id: "20", prompt: "Which word means to make things clear?", options: [{id:"a",text:"expect",is_correct:false},{id:"b",text:"explain",is_correct:true},{id:"c",text:"employ",is_correct:false},{id:"d",text:"enjoy",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 129*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
