@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 108 — Silent e at end (se, ze, ve)"/>
+  <title>Mini OpenStax — Lesson 108: Silent e at end</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 108: Silent e at end</h1>
+        <div class="lo-tags" id="lo-tags">LO PH108: Decode words with silent e markers after s, z, and v.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words ending with <strong>silent e</strong> (se, ze, ve):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. These sentences practice the silent e endings:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 107;    // chapter-107.html = Lesson 108
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 108: Silent e at end",
+        loTags: ["LO PH108: Decode words with silent e markers after s, z, and v."],
+        contentWords: [
+          "sense", "tense", "rinse", "else", "geese", "goose", "loose", "moose", "noose", "house", "mouse", "blouse", "coarse", "hoarse", "crease", "grease", "breeze", "freeze", "sneeze", "squeeze", "leave", "weave", "sleeve", "solve", "twelve", "groove"
+        ],
+        sentences: [
+          "1) A hound had a keen sense of smell.",
+          "2) The train will leave the town at ten.",
+          "3) If you freeze the food, it will not spoil.",
+          "4) Fay got some grease on the sleeve of her blouse.",
+          "5) Fay can rinse the grease off of her sleeve.",
+          "6) Jack and Jill live in a big house on Main Street.",
+          "7) At the ranch, Jean saw some deer and a big moose.",
+          "8) The mouse could not get loose from the mouse trap.",
+          "9) Bess must clean up her mess or else Mom will get mad."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What kind of sense did the hound have?", options: [{id:"a",text:"sense of sight",is_correct:false},{id:"b",text:"sense of smell",is_correct:true},{id:"c",text:"sense of sound",is_correct:false},{id:"d",text:"sense of touch",is_correct:false}] },
+          { id: "2", prompt: "When will the train leave the town?", options: [{id:"a",text:"at noon",is_correct:false},{id:"b",text:"at six",is_correct:false},{id:"c",text:"at ten",is_correct:true},{id:"d",text:"at dawn",is_correct:false}] },
+          { id: "3", prompt: "What happens if you freeze the food?", options: [{id:"a",text:"it will spoil",is_correct:false},{id:"b",text:"it will stay moist",is_correct:false},{id:"c",text:"it will not spoil",is_correct:true},{id:"d",text:"it will boil",is_correct:false}] },
+          { id: "4", prompt: "Where did Fay get grease?", options: [{id:"a",text:"on her hand",is_correct:false},{id:"b",text:"on the sleeve of her blouse",is_correct:true},{id:"c",text:"on the floor",is_correct:false},{id:"d",text:"on the map",is_correct:false}] },
+          { id: "5", prompt: "What can Fay do to get her sleeve clean?", options: [{id:"a",text:"rinse the grease off",is_correct:true},{id:"b",text:"freeze the blouse",is_correct:false},{id:"c",text:"weave a new one",is_correct:false},{id:"d",text:"squeeze the sleeve",is_correct:false}] },
+          { id: "6", prompt: "Where do Jack and Jill live?", options: [{id:"a",text:"in a shack",is_correct:false},{id:"b",text:"in a big house",is_correct:true},{id:"c",text:"near the ranch",is_correct:false},{id:"d",text:"in the town",is_correct:false}] },
+          { id: "7", prompt: "What did Jean see at the ranch besides deer?", options: [{id:"a",text:"a goose",is_correct:false},{id:"b",text:"a big moose",is_correct:true},{id:"c",text:"a hound",is_correct:false},{id:"d",text:"a pig",is_correct:false}] },
+          { id: "8", prompt: "Why was the mouse stuck?", options: [{id:"a",text:"it was tense",is_correct:false},{id:"b",text:"it could not get loose from the trap",is_correct:true},{id:"c",text:"it was too big",is_correct:false},{id:"d",text:"it found some grease",is_correct:false}] },
+          { id: "9", prompt: "What must Bess do to keep Mom from getting mad?", options: [{id:"a",text:"clean up her mess",is_correct:true},{id:"b",text:"rinse her blouse",is_correct:false},{id:"c",text:"leave the house",is_correct:false},{id:"d",text:"solve a math test",is_correct:false}] },
+          { id: "10", prompt: "Which word means to wash with water?", options: [{id:"a",text:"rinse",is_correct:true},{id:"b",text:"sense",is_correct:false},{id:"c",text:"tense",is_correct:false},{id:"d",text:"else",is_correct:false}] },
+          { id: "11", prompt: "Which word is a large animal with antlers?", options: [{id:"a",text:"moose",is_correct:true},{id:"b",text:"mouse",is_correct:false},{id:"c",text:"goose",is_correct:false},{id:"d",text:"noose",is_correct:false}] },
+          { id: "12", prompt: "Which word means the opposite of tight?", options: [{id:"a",text:"loose",is_correct:true},{id:"b",text:"goose",is_correct:false},{id:"c",text:"moose",is_correct:false},{id:"d",text:"noose",is_correct:false}] },
+          { id: "13", prompt: "Which word is a type of shirt for a girl?", options: [{id:"a",text:"blouse",is_correct:true},{id:"b",text:"house",is_correct:false},{id:"c",text:"mouse",is_correct:false},{id:"d",text:"sleeve",is_correct:false}] },
+          { id: "14", prompt: "What do you do when you have a cold?", options: [{id:"a",text:"sneeze",is_correct:true},{id:"b",text:"freeze",is_correct:false},{id:"c",text:"breeze",is_correct:false},{id:"d",text:"squeeze",is_correct:false}] },
+          { id: "15", prompt: "Which word means to find the answer?", options: [{id:"a",text:"solve",is_correct:true},{id:"b",text:"leave",is_correct:false},{id:"c",text:"weave",is_correct:false},{id:"d",text:"twelve",is_correct:false}] },
+          { id: "16", prompt: "Which number comes after eleven?", options: [{id:"a",text:"twelve",is_correct:true},{id:"b",text:"ten",is_correct:false},{id:"c",text:"solve",is_correct:false},{id:"d",text:"groove",is_correct:false}] },
+          { id: "17", prompt: "Complete the word: fr _ _ ze (to turn to ice).", options: [{id:"a",text:"ee",is_correct:true},{id:"b",text:"ea",is_correct:false},{id:"c",text:"oa",is_correct:false},{id:"d",text:"oo",is_correct:false}] },
+          { id: "18", prompt: "Which word means to go away?", options: [{id:"a",text:"leave",is_correct:true},{id:"b",text:"sleeve",is_correct:false},{id:"c",text:"weave",is_correct:false},{id:"d",text:"solve",is_correct:false}] },
+          { id: "19", prompt: "Which word rhymes with 'house'?", options: [{id:"a",text:"mouse",is_correct:true},{id:"b",text:"moose",is_correct:false},{id:"c",text:"moose",is_correct:false},{id:"d",text:"loose",is_correct:false}] },
+          { id: "20", prompt: "Complete the word: sl _ _ ve (part of a shirt).", options: [{id:"a",text:"ee",is_correct:true},{id:"b",text:"ea",is_correct:false},{id:"c",text:"ai",is_correct:false},{id:"d",text:"ay",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 108*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
