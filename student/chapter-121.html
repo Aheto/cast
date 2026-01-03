@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 122 — Endings with -ful"/>
+  <title>Mini OpenStax — Lesson 121: -ful Endings</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 122: -ful Endings</h1>
+        <div class="lo-tags" id="lo-tags">LO PH122: Recognize and decode the suffix -ful in words meaning 'full of'.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words ending in <strong>-ful</strong>. Note that while "full" has two L's, the suffix <strong>-ful</strong> only has one:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud. Notice how the suffix changes the meaning of the base word:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question based on Lesson 122.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 121;    // chapter-121.html = Lesson 122
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 122: -ful Endings",
+        loTags: ["LO PH122: Recognize and decode the suffix -ful in words meaning 'full of'."],
+        contentWords: [
+          "cupful", "handful", "helpful", "thankful", "joyful", "playful", "gleeful", "cheerful", "fearful", "tearful", "skillful", "stressful", "bashful", "painful", "lawful", "faithful", "mouthful", "spoonful"
+        ],
+        sentences: [
+          "1) The mouse was fearful of meeting the cat.",
+          "2) Dawn was joyful when she found her lost dog.",
+          "3) The bashful boy sat in the back of the class.",
+          "4) Jay had a playful pup that was his faithful pal.",
+          "5) Nell got a painful cut on her leg when she fell.",
+          "6) Paul is skillful at fixing things with his hands.",
+          "7) Nick was helpful and helped Paul fix a truck.",
+          "8) Hank was thankful to his mom for teaching him to read and spell."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Why was the mouse fearful?", options: [{id:"a",text:"it was lost",is_correct:false},{id:"b",text:"of meeting the cat",is_correct:true},{id:"c",text:"it was hungry",is_correct:false},{id:"d",text:"it was bashful",is_correct:false}] },
+          { id: "2", prompt: "How did Dawn feel when she found her dog?", options: [{id:"a",text:"fearful",is_correct:false},{id:"b",text:"joyful",is_correct:true},{id:"c",text:"bashful",is_correct:false},{id:"d",text:"painful",is_correct:false}] },
+          { id: "3", prompt: "Where did the bashful boy sit?", options: [{id:"a",text:"in the front",is_correct:false},{id:"b",text:"in the back of the class",is_correct:true},{id:"c",text:"on a truck",is_correct:false},{id:"d",text:"at the park",is_correct:false}] },
+          { id: "4", prompt: "Who was Jay's faithful pal?", options: [{id:"a",text:"Paul",is_correct:false},{id:"b",text:"a playful pup",is_correct:true},{id:"c",text:"the cat",is_correct:false},{id:"d",text:"Nick",is_correct:false}] },
+          { id: "5", prompt: "When did Nell get a painful cut?", options: [{id:"a",text:"when she fixed a truck",is_correct:false},{id:"b",text:"when she fell",is_correct:true},{id:"c",text:"when she read",is_correct:false},{id:"d",text:"when she ran",is_correct:false}] },
+          { id: "6", prompt: "What is Paul skillful at?", options: [{id:"a",text:"teaching",is_correct:false},{id:"b",text:"fixing things",is_correct:true},{id:"c",text:"singing",is_correct:false},{id:"d",text:"running",is_correct:false}] },
+          { id: "7", prompt: "Who helped Paul fix a truck?", options: [{id:"a",text:"Hank",is_correct:false},{id:"b",text:"Nick",is_correct:true},{id:"c",text:"Jay",is_correct:false},{id:"d",text:"the pup",is_correct:false}] },
+          { id: "8", prompt: "Why was Hank thankful to his mom?", options: [{id:"a",text:"for a gift",is_correct:false},{id:"b",text:"for teaching him to read and spell",is_correct:true},{id:"c",text:"for the dog",is_correct:false},{id:"d",text:"for lunch",is_correct:false}] },
+          { id: "9", prompt: "Which word means 'full of play'?", options: [{id:"a",text:"playful",is_correct:true},{id:"b",text:"playing",is_correct:false},{id:"c",text:"played",is_correct:false},{id:"d",text:"player",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'full of pain'?", options: [{id:"a",text:"painly",is_correct:false},{id:"b",text:"painful",is_correct:true},{id:"c",text:"pained",is_correct:false},{id:"d",text:"paining",is_correct:false}] },
+          { id: "11", prompt: "How many L's are at the end of the suffix -ful?", options: [{id:"a",text:"two",is_correct:false},{id:"b",text:"one",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"none",is_correct:false}] },
+          { id: "12", prompt: "Which word describes a shy person?", options: [{id:"a",text:"gleeful",is_correct:false},{id:"b",text:"bashful",is_correct:true},{id:"c",text:"skillful",is_correct:false},{id:"d",text:"thankful",is_correct:false}] },
+          { id: "13", prompt: "What is a 'spoonful'?", options: [{id:"a",text:"a broken spoon",is_correct:false},{id:"b",text:"as much as a spoon can hold",is_correct:true},{id:"c",text:"a new spoon",is_correct:false},{id:"d",text:"a metal spoon",is_correct:false}] },
+          { id: "14", prompt: "If you are full of thanks, you are:", options: [{id:"a",text:"thanking",is_correct:false},{id:"b",text:"thankful",is_correct:true},{id:"c",text:"thanksful",is_correct:false},{id:"d",text:"thanked",is_correct:false}] },
+          { id: "15", prompt: "Which word means full of joy?", options: [{id:"a",text:"joyful",is_correct:true},{id:"b",text:"joying",is_correct:false},{id:"c",text:"joyed",is_correct:false},{id:"d",text:"joys",is_correct:false}] },
+          { id: "16", prompt: "What is the base word of 'skillful'?", options: [{id:"a",text:"skil",is_correct:false},{id:"b",text:"skill",is_correct:true},{id:"c",text:"full",is_correct:false},{id:"d",text:"kill",is_correct:false}] },
+          { id: "17", prompt: "A word that describes being full of fear is:", options: [{id:"a",text:"fearing",is_correct:false},{id:"b",text:"fearful",is_correct:true},{id:"c",text:"feared",is_correct:false},{id:"d",text:"fearless",is_correct:false}] },
+          { id: "18", prompt: "Which word describes someone who helps others?", options: [{id:"a",text:"helped",is_correct:false},{id:"b",text:"helpful",is_correct:true},{id:"c",text:"helping",is_correct:false},{id:"d",text:"helps",is_correct:false}] },
+          { id: "19", prompt: "If something is allowed by law, it is:", options: [{id:"a",text:"lawing",is_correct:false},{id:"b",text:"lawful",is_correct:true},{id:"c",text:"lawed",is_correct:false},{id:"d",text:"laws",is_correct:false}] },
+          { id: "20", prompt: "Which word describes a person who stays true to a friend?", options: [{id:"a",text:"playful",is_correct:false},{id:"b",text:"faithful",is_correct:true},{id:"c",text:"gleeful",is_correct:false},{id:"d",text:"bashful",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 122*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
