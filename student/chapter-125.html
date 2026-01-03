@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 126 — Multisyllable Words"/>
+  <title>Mini OpenStax — Lesson 125: Multisyllable Words</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 126: Multisyllable Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH126: Recognize and decode multisyllable words with various endings.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>These words have more than one syllable. Break them into parts to read them easily:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud. Pay attention to the two-syllable words:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question based on Lesson 126.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 125;    // chapter-125.html = Lesson 126
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 126: Multisyllable Words",
+        loTags: ["LO PH126: Recognize and decode multisyllable words with various endings."],
+        contentWords: [
+          "seven", "given", "chicken", "kitchen", "children", "kitten", "sudden", "happen", "closet", "planet", "jacket", "ticket", "pocket", "rocket", "blanket", "basket", "helmet", "address", "progress", "Congress", "helpless", "unless"
+        ],
+        sentences: [
+          "1) Six plus one is seven.",
+          "2) Jean left her jacket on the bus.",
+          "3) Mail must have an address and a stamp.",
+          "4) Stan had his ticket to the play in his pocket.",
+          "5) Paul set the clean dishes on a shelf in the kitchen.",
+          "6) Jill asked her mom if she could get a kitten as a pet.",
+          "7) Frank plans to play golf this weekend, unless it rains.",
+          "8) The bed in the downstairs bedroom has a blanket and a quilt.",
+          "9) At noon the children will leave the classroom and go out on the playground."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What is six plus one?", options: [{id:"a",text:"six",is_correct:false},{id:"b",text:"seven",is_correct:true},{id:"c",text:"eight",is_correct:false},{id:"d",text:"ten",is_correct:false}] },
+          { id: "2", prompt: "Where did Jean leave her jacket?", options: [{id:"a",text:"at home",is_correct:false},{id:"b",text:"on the bus",is_correct:true},{id:"c",text:"in the kitchen",is_correct:false},{id:"d",text:"on the playground",is_correct:false}] },
+          { id: "3", prompt: "What two things must mail have?", options: [{id:"a",text:"a name and a box",is_correct:false},{id:"b",text:"an address and a stamp",is_correct:true},{id:"c",text:"a ticket and a pocket",is_correct:false},{id:"d",text:"a jacket and a hat",is_correct:false}] },
+          { id: "4", prompt: "Where did Stan keep his ticket?", options: [{id:"a",text:"in his hand",is_correct:false},{id:"b",text:"in his pocket",is_correct:true},{id:"c",text:"in his basket",is_correct:false},{id:"d",text:"in his closet",is_correct:false}] },
+          { id: "5", prompt: "Where did Paul set the clean dishes?", options: [{id:"a",text:"in the bedroom",is_correct:false},{id:"b",text:"on a shelf in the kitchen",is_correct:true},{id:"c",text:"in the closet",is_correct:false},{id:"d",text:"on the bus",is_correct:false}] },
+          { id: "6", prompt: "What pet did Jill ask her mom for?", options: [{id:"a",text:"a chicken",is_correct:false},{id:"b",text:"a kitten",is_correct:true},{id:"c",text:"a dog",is_correct:false},{id:"d",text:"a rocket",is_correct:false}] },
+          { id: "7", prompt: "When does Frank plan to play golf?", options: [{id:"a",text:"at noon",is_correct:false},{id:"b",text:"this weekend",is_correct:true},{id:"c",text:"today",is_correct:false},{id:"d",text:"seven days from now",is_correct:false}] },
+          { id: "8", prompt: "Under what condition will Frank not play golf?", options: [{id:"a",text:"if he is busy",is_correct:false},{id:"b",text:"unless it rains",is_correct:true},{id:"c",text:"if he loses his ticket",is_correct:false},{id:"d",text:"unless he gets a kitten",is_correct:false}] },
+          { id: "9", prompt: "What is on the bed in the downstairs bedroom?", options: [{id:"a",text:"a jacket",is_correct:false},{id:"b",text:"a blanket and a quilt",is_correct:true},{id:"c",text:"a kitten",is_correct:false},{id:"d",text:"a basket",is_correct:false}] },
+          { id: "10", prompt: "Where do the children go at noon?", options: [{id:"a",text:"to the kitchen",is_correct:false},{id:"b",text:"to the playground",is_correct:true},{id:"c",text:"to the closet",is_correct:false},{id:"d",text:"to the bus",is_correct:false}] },
+          { id: "11", prompt: "Which word means a place to keep clothes?", options: [{id:"a",text:"kitchen",is_correct:false},{id:"b",text:"closet",is_correct:true},{id:"c",text:"pocket",is_correct:false},{id:"d",text:"jacket",is_correct:false}] },
+          { id: "12", prompt: "Which word rhymes with 'packet'?", options: [{id:"a",text:"seven",is_correct:false},{id:"b",text:"jacket",is_correct:true},{id:"c",text:"kitten",is_correct:false},{id:"d",text:"happen",is_correct:false}] },
+          { id: "13", prompt: "Which word refers to a baby cat?", options: [{id:"a",text:"chicken",is_correct:false},{id:"b",text:"kitten",is_correct:true},{id:"c",text:"planet",is_correct:false},{id:"d",text:"basket",is_correct:false}] },
+          { id: "14", prompt: "What is a large object in space like Earth?", options: [{id:"a",text:"rocket",is_correct:false},{id:"b",text:"planet",is_correct:true},{id:"c",text:"basket",is_correct:false},{id:"d",text:"address",is_correct:false}] },
+          { id: "15", prompt: "Which word is used for head protection?", options: [{id:"a",text:"jacket",is_correct:false},{id:"b",text:"helmet",is_correct:true},{id:"c",text:"blanket",is_correct:false},{id:"d",text:"pocket",is_correct:false}] },
+          { id: "16", prompt: "What word means 'without help'?", options: [{id:"a",text:"unless",is_correct:false},{id:"b",text:"helpless",is_correct:true},{id:"c",text:"progress",is_correct:false},{id:"d",text:"happen",is_correct:false}] },
+          { id: "17", prompt: "Which word has the 'et' ending?", options: [{id:"a",text:"seven",is_correct:false},{id:"b",text:"ticket",is_correct:true},{id:"c",text:"given",is_correct:false},{id:"d",text:"happen",is_correct:false}] },
+          { id: "18", prompt: "What word means moving forward?", options: [{id:"a",text:"address",is_correct:false},{id:"b",text:"progress",is_correct:true},{id:"c",text:"Congress",is_correct:false},{id:"d",text:"unless",is_correct:false}] },
+          { id: "19", prompt: "How many syllables are in the word 'children'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] },
+          { id: "20", prompt: "Which word refers to a farm bird?", options: [{id:"a",text:"kitten",is_correct:false},{id:"b",text:"chicken",is_correct:true},{id:"c",text:"rocket",is_correct:false},{id:"d",text:"planet",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 126*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
