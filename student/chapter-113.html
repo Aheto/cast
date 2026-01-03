@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 114 — Endings with s as /z/ (Part 2)"/>
+  <title>Mini OpenStax — Lesson 114: s as /z/ Endings Continued</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 114: s as /z/ Endings Continued</h1>
+        <div class="lo-tags" id="lo-tags">LO PH114: Decode plural and verb endings where 's' makes the voiced /z/ sound after vowels and voiced consonants.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words where the ending <strong>-s</strong> makes the <strong>/z/</strong> sound (voiced):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. Remember that the "s" at the end of these words sounds like a buzzing "z":</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 113;    // chapter-113.html = Lesson 114
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 114: s as /z/ Endings Continued",
+        loTags: ["LO PH114: Decode plural and verb endings where 's' makes the voiced /z/ sound after vowels and voiced consonants."],
+        contentWords: [
+          "seems", "dreams", "plans", "twins", "means", "jeans", "cleans", "rains", "towns", "ears", "years", "fears", "cheers", "stairs", "laws", "paws", "claws", "days", "ways", "boys", "toys", "peas", "trees", "comes", "leaves", "gives", "sleeves", "lives"
+        ],
+        sentences: [
+          "1) The two boys seem to be twins.",
+          "2) Mom will give the boys some toys to play with.",
+          "3) Nell has a pair of black jeans.",
+          "4) Ray lives on the west coast, near the sea.",
+          "5) Rick will be gone on a trip for three days.",
+          "6) When it rains, the streets are wet and slick.",
+          "7) The leaves on the trees are green in the spring.",
+          "8) The sleeves on the blouse were too long for Joy.",
+          "9) The hound has ears that droop and a tail that wags.",
+          "10) In two years, Ann will be three and Glen will be ten."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What do the two boys seem to be?", options: [{id:"a",text:"friends",is_correct:false},{id:"b",text:"twins",is_correct:true},{id:"c",text:"scouts",is_correct:false},{id:"d",text:"clowns",is_correct:false}] },
+          { id: "2", prompt: "What will Mom give the boys to play with?", options: [{id:"a",text:"jeans",is_correct:false},{id:"b",text:"some toys",is_correct:true},{id:"c",text:"peas",is_correct:false},{id:"d",text:"paws",is_correct:false}] },
+          { id: "3", prompt: "What color are Nell's jeans?", options: [{id:"a",text:"blue",is_correct:false},{id:"b",text:"black",is_correct:true},{id:"c",text:"gray",is_correct:false},{id:"d",text:"green",is_correct:false}] },
+          { id: "4", prompt: "Where does Ray live?", options: [{id:"a",text:"near the hills",is_correct:false},{id:"b",text:"on the west coast",is_correct:true},{id:"c",text:"in the south",is_correct:false},{id:"d",text:"at the ranch",is_correct:false}] },
+          { id: "5", prompt: "How long will Rick be gone on his trip?", options: [{id:"a",text:"two years",is_correct:false},{id:"b",text:"three days",is_correct:true},{id:"c",text:"ten days",is_correct:false},{id:"d",text:"three weeks",is_correct:false}] },
+          { id: "6", prompt: "What happens to the streets when it rains?", options: [{id:"a",text:"they get clean",is_correct:false},{id:"b",text:"they are wet and slick",is_correct:true},{id:"c",text:"they freeze",is_correct:false},{id:"d",text:"they have leaves",is_correct:false}] },
+          { id: "7", prompt: "When are the leaves on the trees green?", options: [{id:"a",text:"in the fall",is_correct:false},{id:"b",text:"in the spring",is_correct:true},{id:"c",text:"each day",is_correct:false},{id:"d",text:"in the morning",is_correct:false}] },
+          { id: "8", prompt: "What part of Joy's blouse was too long?", options: [{id:"a",text:"the sleeves",is_correct:true},{id:"b",text:"the collar",is_correct:false},{id:"c",text:"the seam",is_correct:false},{id:"d",text:"the cuffs",is_correct:false}] },
+          { id: "9", prompt: "What does the hound's tail do?", options: [{id:"a",text:"droops",is_correct:false},{id:"b",text:"wags",is_correct:true},{id:"c",text:"snaps",is_correct:false},{id:"d",text:"claws",is_correct:false}] },
+          { id: "10", prompt: "How old will Glen be in two years?", options: [{id:"a",text:"three",is_correct:false},{id:"b",text:"ten",is_correct:true},{id:"c",text:"twelve",is_correct:false},{id:"d",text:"seven",is_correct:false}] },
+          { id: "11", prompt: "Which word rhymes with 'clean'?", options: [{id:"a",text:"jeans",is_correct:true},{id:"b",text:"plans",is_correct:false},{id:"c",text:"rains",is_correct:false},{id:"d",text:"means",is_correct:true}] },
+          { id: "12", prompt: "Which word means more than one tree?", options: [{id:"a",text:"trees",is_correct:true},{id:"b",text:"treese",is_correct:false},{id:"c",text:"treez",is_correct:false},{id:"d",text:"tray",is_correct:false}] },
+          { id: "13", prompt: "Which word is the plural of 'paw'?", options: [{id:"a",text:"paws",is_correct:true},{id:"b",text:"pawsy",is_correct:false},{id:"c",text:"pawsing",is_correct:false},{id:"d",text:"pawsed",is_correct:false}] },
+          { id: "14", prompt: "Complete the word: dr _ _ ms (thoughts during sleep).", options: [{id:"a",text:"ea",is_correct:true},{id:"b",text:"ee",is_correct:false},{id:"c",text:"ai",is_correct:false},{id:"d",text:"oa",is_correct:false}] },
+          { id: "15", prompt: "Which word means more than one town?", options: [{id:"a",text:"towns",is_correct:true},{id:"b",text:"townes",is_correct:false},{id:"c",text:"town",is_correct:false},{id:"d",text:"towning",is_correct:false}] },
+          { id: "16", prompt: "In 'lives', the 's' sounds like:", options: [{id:"a",text:"/s/ (hiss)",is_correct:false},{id:"b",text:"/z/ (buzz)",is_correct:true},{id:"c",text:"/sh/",is_correct:false},{id:"d",text:"/ch/",is_correct:false}] },
+          { id: "17", prompt: "Which word means to shout with joy?", options: [{id:"a",text:"cheers",is_correct:true},{id:"b",text:"fears",is_correct:false},{id:"c",text:"stairs",is_correct:false},{id:"d",text:"years",is_correct:false}] },
+          { id: "18", prompt: "Which word is a small green vegetable?", options: [{id:"a",text:"peas",is_correct:true},{id:"b",text:"trees",is_correct:false},{id:"c",text:"bees",is_correct:false},{id:"d",text:"ways",is_correct:false}] },
+          { id: "19", prompt: "What is the plural of 'day'?", options: [{id:"a",text:"days",is_correct:true},{id:"b",text:"daise",is_correct:false},{id:"c",text:"dayes",is_correct:false},{id:"d",text:"daysz",is_correct:false}] },
+          { id: "20", prompt: "Which word refers to parts of a jacket for arms?", options: [{id:"a",text:"sleeves",is_correct:true},{id:"b",text:"leaves",is_correct:false},{id:"c",text:"jeans",is_correct:false},{id:"d",text:"claws",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 114*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
