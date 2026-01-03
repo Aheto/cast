@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 121 — Double Consonant + ing Endings"/>
+  <title>Mini OpenStax — Lesson 121: Double Consonant + ing</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 121: Double Consonant + ing</h1>
+        <div class="lo-tags" id="lo-tags">LO PH121: Identify and decode words where the final consonant is doubled before adding -ing.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Short vowel words that double the final consonant before adding <strong>-ing</strong>:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences. Notice how the base word changes spelling to keep its short vowel sound:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 120;    // chapter-120.html = Lesson 121
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 121: Double Consonant + ing",
+        loTags: ["LO PH121: Identify and decode words where the final consonant is doubled before adding -ing."],
+        contentWords: [
+          "stopping", "shopping", "chopping", "clapping", "skipping", "shipping", "dripping", "rubbing", "whizzing", "planning", "winning", "spinning", "grinning", "running", "wagging", "bragging", "digging", "begging", "letting", "getting", "sitting", "batting", "quitting", "cutting", "padding", "skidding", "humming", "swimming"
+        ],
+        sentences: [
+          "1) The hen is sitting on an egg in her nest.",
+          "2) The bus will soon be stopping at the bus stop.",
+          "3) Ann went swimming in the swimming pool.",
+          "4) Ann was dripping wet when she got out of the pool.",
+          "5) The train will go whizzing by on the train tracks.",
+          "6) Joan is planning on doing well on the spelling quiz.",
+          "7) Troy went shopping for a pair of boots and some jeans.",
+          "8) At the beach, Rex was sitting in the sun and getting a tan.",
+          "9) The dog was wagging its tail and begging for some food.",
+          "10) Mom is in the kitchen chopping the beef for our meal."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What is the hen sitting on?", options: [{id:"a",text:"a branch",is_correct:false},{id:"b",text:"an egg",is_correct:true},{id:"c",text:"the grass",is_correct:false},{id:"d",text:"a box",is_correct:false}] },
+          { id: "2", prompt: "Where will the bus be stopping?", options: [{id:"a",text:"at the shop",is_correct:false},{id:"b",text:"at the bus stop",is_correct:true},{id:"c",text:"at the tracks",is_correct:false},{id:"d",text:"at the nest",is_correct:false}] },
+          { id: "3", prompt: "What was Ann doing in the pool?", options: [{id:"a",text:"skipping",is_correct:false},{id:"b",text:"swimming",is_correct:true},{id:"c",text:"batting",is_correct:false},{id:"d",text:"chopping",is_correct:false}] },
+          { id: "4", prompt: "How was Ann when she got out of the pool?", options: [{id:"a",text:"dripping wet",is_correct:true},{id:"b",text:"hot and dry",is_correct:false},{id:"c",text:"bragging",is_correct:false},{id:"d",text:"running",is_correct:false}] },
+          { id: "5", prompt: "How will the train go by on the tracks?", options: [{id:"a",text:"stopping",is_correct:false},{id:"b",text:"whizzing",is_correct:true},{id:"c",text:"skidding",is_correct:false},{id:"d",text:"spinning",is_correct:false}] },
+          { id: "6", prompt: "What is Joan planning to do well on?", options: [{id:"a",text:"the swim meet",is_correct:false},{id:"b",text:"the spelling quiz",is_correct:true},{id:"c",text:"the shopping trip",is_correct:false},{id:"d",text:"the math test",is_correct:false}] },
+          { id: "7", prompt: "What did Troy go shopping for?", options: [{id:"a",text:"beef and eggs",is_correct:false},{id:"b",text:"boots and jeans",is_correct:true},{id:"c",text:"a swimming pool",is_correct:false},{id:"d",text:"a new bus",is_correct:false}] },
+          { id: "8", prompt: "What was Rex getting at the beach?", options: [{id:"a",text:"a tan",is_correct:true},{id:"b",text:"a fish",is_correct:false},{id:"c",text:"a snack",is_correct:false},{id:"d",text:"wet",is_correct:false}] },
+          { id: "9", prompt: "What was the dog doing with its tail?", options: [{id:"a",text:"spinning it",is_correct:false},{id:"b",text:"wagging it",is_correct:true},{id:"c",text:"clapping it",is_correct:false},{id:"d",text:"rubbing it",is_correct:false}] },
+          { id: "10", prompt: "What was the dog begging for?", options: [{id:"a",text:"a walk",is_correct:false},{id:"b",text:"some food",is_correct:true},{id:"c",text:"a toy",is_correct:false},{id:"d",text:"a swim",is_correct:false}] },
+          { id: "11", prompt: "Where is Mom chopping the beef?", options: [{id:"a",text:"in the shop",is_correct:false},{id:"b",text:"in the kitchen",is_correct:true},{id:"c",text:"at the beach",is_correct:false},{id:"d",text:"on the bus",is_correct:false}] },
+          { id: "12", prompt: "Which word is the base of 'winning'?", options: [{id:"a",text:"wing",is_correct:false},{id:"b",text:"win",is_correct:true},{id:"c",text:"winn",is_correct:false},{id:"d",text:"wins",is_correct:false}] },
+          { id: "13", prompt: "Correct spelling for the past tense of 'sit' with -ing?", options: [{id:"a",text:"siting",is_correct:false},{id:"b",text:"sitting",is_correct:true},{id:"c",text:"sittin",is_correct:false},{id:"d",text:"sit-ing",is_correct:false}] },
+          { id: "14", prompt: "Which word means moving very fast with a humming sound?", options: [{id:"a",text:"skidding",is_correct:false},{id:"b",text:"whizzing",is_correct:true},{id:"c",text:"tripping",is_correct:false},{id:"d",text:"stopping",is_correct:false}] },
+          { id: "15", prompt: "Why is the 'n' doubled in 'planning'?", options: [{id:"a",text:"because it's a long word",is_correct:false},{id:"b",text:"to keep the 'a' sound short",is_correct:true},{id:"c",text:"to make it plural",is_correct:false},{id:"d",text:"it is a silent letter",is_correct:false}] },
+          { id: "16", prompt: "Which word describes water falling in drops?", options: [{id:"a",text:"chopping",is_correct:false},{id:"b",text:"dripping",is_correct:true},{id:"c",text:"rubbing",is_correct:false},{id:"d",text:"padding",is_correct:false}] },
+          { id: "17", prompt: "Complete the word: run _ _ _ _", options: [{id:"a",text:"ning",is_correct:true},{id:"b",text:"ing",is_correct:false},{id:"c",text:"ming",is_correct:false},{id:"d",text:"ding",is_correct:false}] },
+          { id: "18", prompt: "Which word means bragging or talking proudly?", options: [{id:"a",text:"grinning",is_correct:false},{id:"b",text:"bragging",is_correct:true},{id:"c",text:"winning",is_correct:false},{id:"d",text:"getting",is_correct:false}] },
+          { id: "19", prompt: "Which action involves a knife and beef?", options: [{id:"a",text:"skipping",is_correct:false},{id:"b",text:"chopping",is_correct:true},{id:"c",text:"whizzing",is_correct:false},{id:"d",text:"batting",is_correct:false}] },
+          { id: "20", prompt: "What do you do in a pool?", options: [{id:"a",text:"shopping",is_correct:false},{id:"b",text:"swimming",is_correct:true},{id:"c",text:"quitting",is_correct:false},{id:"d",text:"digging",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 121*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
