@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 125 — Compound Words"/>
+  <title>Mini OpenStax — Lesson 124: Compound Words</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 125: Compound Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH125: Recognize and decode multisyllable compound words.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Compound words are made of two smaller words joined together. Read each part, then say the whole word:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud. Look for the compound words in each one:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question based on Lesson 125.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 124;    // chapter-124.html = Lesson 125
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 125: Compound Words",
+        loTags: ["LO PH125: Recognize and decode multisyllable compound words."],
+        contentWords: [
+          "mailbox", "classroom", "bedroom", "bathroom", "playground", "background", "himself", "herself", "cannot", "without", "upon", "outfit", "upstairs", "downstairs", "sailboat", "teaspoon", "seashell", "toothbrush", "sunset", "weekend", "cowboy", "railroad", "peanut", "handbag", "oatmeal"
+        ],
+        sentences: [
+          "1) At sunset, the sun sank in the west.",
+          "2) Neal cannot fix his truck without some help.",
+          "3) The mailbox for the house is near the street.",
+          "4) The upstairs bedroom has a bathroom next to it.",
+          "5) The railroad tracks run past the town on the east.",
+          "6) Jan got a green hat that matched her green outfit.",
+          "7) Tex has on a pair of cowboy boots and a big cowboy hat.",
+          "8) Ann fixed a big dish of oatmeal with milk for her lunch."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "When did the sun sink in the west?", options: [{id:"a",text:"at sunrise",is_correct:false},{id:"b",text:"at sunset",is_correct:true},{id:"c",text:"at noon",is_correct:false},{id:"d",text:"on the weekend",is_correct:false}] },
+          { id: "2", prompt: "What does Neal need to fix his truck?", options: [{id:"a",text:"oatmeal",is_correct:false},{id:"b",text:"some help",is_correct:true},{id:"c",text:"a mailbox",is_correct:false},{id:"d",text:"a handbag",is_correct:false}] },
+          { id: "3", prompt: "Where is the mailbox located?", options: [{id:"a",text:"near the street",is_correct:true},{id:"b",text:"in the bedroom",is_correct:false},{id:"c",text:"on the railroad",is_correct:false},{id:"d",text:"at the playground",is_correct:false}] },
+          { id: "4", prompt: "What is next to the upstairs bedroom?", options: [{id:"a",text:"a classroom",is_correct:false},{id:"b",text:"a bathroom",is_correct:true},{id:"c",text:"a sailboat",is_correct:false},{id:"d",text:"the background",is_correct:false}] },
+          { id: "5", prompt: "Where do the railroad tracks run?", options: [{id:"a",text:"past the town on the east",is_correct:true},{id:"b",text:"under the house",is_correct:false},{id:"c",text:"through the playground",is_correct:false},{id:"d",text:"into the sunset",is_correct:false}] },
+          { id: "6", prompt: "What matched Jan's green outfit?", options: [{id:"a",text:"a green handbag",is_correct:false},{id:"b",text:"a green hat",is_correct:true},{id:"c",text:"a green seashell",is_correct:false},{id:"d",text:"a green toothbrush",is_correct:false}] },
+          { id: "7", prompt: "What kind of boots does Tex have on?", options: [{id:"a",text:"rain boots",is_correct:false},{id:"b",text:"cowboy boots",is_correct:true},{id:"c",text:"hiking boots",is_correct:false},{id:"d",text:"snow boots",is_correct:false}] },
+          { id: "8", prompt: "What did Ann fix for lunch?", options: [{id:"a",text:"peanut butter",is_correct:false},{id:"b",text:"oatmeal with milk",is_correct:true},{id:"c",text:"peaches",is_correct:false},{id:"d",text:"a handful of nuts",is_correct:false}] },
+          { id: "9", prompt: "Which is a compound word for where students learn?", options: [{id:"a",text:"playground",is_correct:false},{id:"b",text:"classroom",is_correct:true},{id:"c",text:"bedroom",is_correct:false},{id:"d",text:"sailboard",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'not able to'?", options: [{id:"a",text:"without",is_correct:false},{id:"b",text:"cannot",is_correct:true},{id:"c",text:"upon",is_correct:false},{id:"d",text:"himself",is_correct:false}] },
+          { id: "11", prompt: "Which word describes a floor above the ground level?", options: [{id:"a",text:"downstairs",is_correct:false},{id:"b",text:"upstairs",is_correct:true},{id:"c",text:"background",is_correct:false},{id:"d",text:"weekend",is_correct:false}] },
+          { id: "12", prompt: "What do you use to clean your teeth?", options: [{id:"a",text:"teaspoon",is_correct:false},{id:"b",text:"toothbrush",is_correct:true},{id:"c",text:"handbag",is_correct:false},{id:"d",text:"seashell",is_correct:false}] },
+          { id: "13", prompt: "What might you find on a beach?", options: [{id:"a",text:"oatmeal",is_correct:false},{id:"b",text:"seashell",is_correct:true},{id:"c",text:"mailbox",is_correct:false},{id:"d",text:"railroad",is_correct:false}] },
+          { id: "14", prompt: "Which word consists of 'play' and 'ground'?", options: [{id:"a",text:"playground",is_correct:true},{id:"b",text:"background",is_correct:false},{id:"c",text:"cowboy",is_correct:false},{id:"d",text:"weekend",is_correct:false}] },
+          { id: "15", prompt: "Which compound word refers to Saturday and Sunday?", options: [{id:"a",text:"sunset",is_correct:false},{id:"b",text:"weekend",is_correct:true},{id:"c",text:"without",is_correct:false},{id:"d",text:"himself",is_correct:false}] },
+          { id: "16", prompt: "Which word is the opposite of 'upstairs'?", options: [{id:"a",text:"downstairs",is_correct:true},{id:"b",text:"background",is_correct:false},{id:"c",text:"outfit",is_correct:false},{id:"d",text:"sailboat",is_correct:false}] },
+          { id: "17", prompt: "Identify the compound word: 'Tex has a big cowboy hat.'", options: [{id:"a",text:"Tex",is_correct:false},{id:"b",text:"cowboy",is_correct:true},{id:"c",text:"big",is_correct:false},{id:"d",text:"hat",is_correct:false}] },
+          { id: "18", prompt: "What small word is inside 'handbag'?", options: [{id:"a",text:"hand",is_correct:true},{id:"b",text:"hang",is_correct:false},{id:"c",text:"band",is_correct:false},{id:"d",text:"had",is_correct:false}] },
+          { id: "19", prompt: "Which word means the same as 'lacking' or 'not with'?", options: [{id:"a",text:"without",is_correct:true},{id:"b",text:"cannot",is_correct:false},{id:"c",text:"upon",is_correct:false},{id:"d",text:"herself",is_correct:false}] },
+          { id: "20", prompt: "What is a small spoon used for tea?", options: [{id:"a",text:"tablespoon",is_correct:false},{id:"b",text:"teaspoon",is_correct:true},{id:"c",text:"seashell",is_correct:false},{id:"d",text:"peanut",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 125*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
