@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 124 — Negative Contractions with n't"/>
+  <title>Mini OpenStax — Lesson 123: n't Contractions</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 124: n't Contractions</h1>
+        <div class="lo-tags" id="lo-tags">LO PH124: Recognize and decode negative contractions using the n't suffix.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Negative contractions ending in <strong>n't</strong>. These words mean "not":</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud. Notice how the contraction combines a verb with the word "not":</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question based on Lesson 124.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 123;    // chapter-123.html = Lesson 124
+      const maxChapter = 150;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 124: n't Contractions",
+        loTags: ["LO PH124: Recognize and decode negative contractions using the n't suffix."],
+        contentWords: [
+          "didn't", "hadn't", "isn't", "hasn't", "haven't", "wouldn't", "couldn't", "shouldn't", "aren't", "weren't", "wasn't", "doesn't"
+        ],
+        sentences: [
+          "1) You shouldn't cheat or steal.",
+          "2) Gail hadn't seen Joan in two weeks.",
+          "3) Roy couldn't see well in the thick fog.",
+          "4) They aren't going to fail the test next week.",
+          "5) Jay isn't running on the track team this year.",
+          "6) Chuck didn't get to go on the trip to the beach.",
+          "7) I haven't been to the zoo in at least three years."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What should you not do according to sentence 1?", options: [{id:"a",text:"run",is_correct:false},{id:"b",text:"cheat or steal",is_correct:true},{id:"c",text:"go to the beach",is_correct:false},{id:"d",text:"fail the test",is_correct:false}] },
+          { id: "2", prompt: "How long had Gail not seen Joan?", options: [{id:"a",text:"three years",is_correct:false},{id:"b",text:"one week",is_correct:false},{id:"c",text:"two weeks",is_correct:true},{id:"d",text:"one month",is_correct:false}] },
+          { id: "3", prompt: "Why couldn't Roy see well?", options: [{id:"a",text:"he lost his glasses",is_correct:false},{id:"b",text:"it was dark",is_correct:false},{id:"c",text:"thick fog",is_correct:true},{id:"d",text:"it was raining",is_correct:false}] },
+          { id: "4", prompt: "When are they going to take the test?", options: [{id:"a",text:"this year",is_correct:false},{id:"b",text:"next week",is_correct:true},{id:"c",text:"today",is_correct:false},{id:"d",text:"two weeks",is_correct:false}] },
+          { id: "5", prompt: "What team is Jay not running on this year?", options: [{id:"a",text:"baseball",is_correct:false},{id:"b",text:"track",is_correct:true},{id:"c",text:"chess",is_correct:false},{id:"d",text:"swimming",is_correct:false}] },
+          { id: "6", prompt: "Where did Chuck not get to go?", options: [{id:"a",text:"the zoo",is_correct:false},{id:"b",text:"the beach",is_correct:true},{id:"c",text:"the ranch",is_correct:false},{id:"d",text:"the park",is_correct:false}] },
+          { id: "7", prompt: "How long has it been since the person went to the zoo?", options: [{id:"a",text:"two weeks",is_correct:false},{id:"b",text:"one year",is_correct:false},{id:"c",text:"at least three years",is_correct:true},{id:"d",text:"next week",is_correct:false}] },
+          { id: "8", prompt: "What does 'didn't' stand for?", options: [{id:"a",text:"did not",is_correct:true},{id:"b",text:"did net",is_correct:false},{id:"c",text:"do not",is_correct:false},{id:"d",text:"does not",is_correct:false}] },
+          { id: "9", prompt: "What does 'isn't' stand for?", options: [{id:"a",text:"is not",is_correct:true},{id:"b",text:"is note",is_correct:false},{id:"c",text:"was not",is_correct:false},{id:"d",text:"are not",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'could not'?", options: [{id:"a",text:"shouldn't",is_correct:false},{id:"b",text:"couldn't",is_correct:true},{id:"c",text:"wouldn't",is_correct:false},{id:"d",text:"hadn't",is_correct:false}] },
+          { id: "11", prompt: "What does the apostrophe replace in 'n't'?", options: [{id:"a",text:"the letter n",is_correct:false},{id:"b",text:"the letter o",is_correct:true},{id:"c",text:"the letter t",is_correct:false},{id:"d",text:"the letter i",is_correct:false}] },
+          { id: "12", prompt: "Which contraction means 'are not'?", options: [{id:"a",text:"aren't",is_correct:true},{id:"b",text:"weren't",is_correct:false},{id:"c",text:"wasn't",is_correct:false},{id:"d",text:"isn't",is_correct:false}] },
+          { id: "13", prompt: "Which word means 'have not'?", options: [{id:"a",text:"hasn't",is_correct:false},{id:"b",text:"haven't",is_correct:true},{id:"c",text:"hadn't",is_correct:false},{id:"d",text:"haven",is_correct:false}] },
+          { id: "14", prompt: "What is the contraction for 'was not'?", options: [{id:"a",text:"wasn't",is_correct:true},{id:"b",text:"weren't",is_correct:false},{id:"c",text:"isn't",is_correct:false},{id:"d",text:"wouldn't",is_correct:false}] },
+          { id: "15", prompt: "Which word means 'does not'?", options: [{id:"a",text:"doesn't",is_correct:true},{id:"b",text:"don't",is_correct:false},{id:"c",text:"didnot",is_correct:false},{id:"d",text:"doen't",is_correct:false}] },
+          { id: "16", prompt: "Identify the contraction in: 'Gail hadn't seen Joan.'", options: [{id:"a",text:"Gail",is_correct:false},{id:"b",text:"hadn't",is_correct:true},{id:"c",text:"seen",is_correct:false},{id:"d",text:"Joan",is_correct:false}] },
+          { id: "17", prompt: "Which word means 'should not'?", options: [{id:"a",text:"couldn't",is_correct:false},{id:"b",text:"shouldn't",is_correct:true},{id:"c",text:"wouldn't",is_correct:false},{id:"d",text:"shouldnt",is_correct:false}] },
+          { id: "18", prompt: "What does 'weren't' stand for?", options: [{id:"a",text:"were not",is_correct:true},{id:"b",text:"was not",is_correct:false},{id:"c",text:"are not",is_correct:false},{id:"d",text:"we are",is_correct:false}] },
+          { id: "19", prompt: "Which word means 'had not'?", options: [{id:"a",text:"hadn't",is_correct:true},{id:"b",text:"hasn't",is_correct:false},{id:"c",text:"haven't",is_correct:false},{id:"d",text:"hardn't",is_correct:false}] },
+          { id: "20", prompt: "What does 'wouldn't' stand for?", options: [{id:"a",text:"would not",is_correct:true},{id:"b",text:"will not",is_correct:false},{id:"c",text:"could not",is_correct:false},{id:"d",text:"was not",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 124*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
