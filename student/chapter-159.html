@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 160 — Magic E Syllables (Long a)"/>
+  <title>Mini OpenStax — Lesson 160: Magic E (Long a)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 160: Magic E (Long a)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH160: Decode Magic E words where a = /ā/ in the -are pattern</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words featuring the <strong>Magic E</strong> pattern (Long a sound) ending in <strong>-are</strong>:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable through Lesson 160:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 159;    // chapter-159.html = Lesson 160
+      const maxChapter = 262;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 160: Magic E (Long a)",
+        loTags: ["LO PH160: Decode Magic E words where a = /ā/ in the -are pattern"],
+        contentWords: [
+          [cite_start]"bare", "care", "dare", "fare", "hare", "mare", "rare", "flare", "scare", "share", "glare", "stare", "square", "aware", "compare" [cite: 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178]
+        ],
+        sentences: [
+          "Nancy found a rare silver coin.",
+          "Jane needs bus fare to travel on the bus.",
+          "The glare from the hot sun made Clint squint.",
+          "The little boy ran around the house in bare feet.",
+          "The growl from the puppy didn't scare the brave kitten.",
+          "The selfish boy won't share anything with the other children.",
+          [cite_start]"The cowboy let Jack saddle up the gray mare for a gallop around the ranch." [cite: 182, 183, 184, 185, 187, 188, 189, 190, 191]
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What did Nancy find?", options: [{id:"a",text:"a square box",is_correct:false},{id:"b",text:"a rare silver coin",is_correct:true},{id:"c",text:"a gray mare",is_correct:false},{id:"d",text:"bus fare",is_correct:false}] },
+          { id: "2", prompt: "What does Jane need to travel on the bus?", options: [{id:"a",text:"a share",is_correct:false},{id:"b",text:"bus fare",is_correct:true},{id:"c",text:"a rare coin",is_correct:false},{id:"d",text:"a mare",is_correct:false}] },
+          { id: "3", prompt: "What made Clint squint?", options: [{id:"a",text:"a scare",is_correct:false},{id:"b",text:"the glare from the sun",is_correct:true},{id:"c",text:"the rare coin",is_correct:false},{id:"d",text:"the gray mare",is_correct:false}] },
+          { id: "4", prompt: "How did the little boy run around the house?", options: [{id:"a",text:"in bare feet",is_correct:true},{id:"b",text:"with a flare",is_correct:false},{id:"c",text:"with a hare",is_correct:false},{id:"d",text:"in a square",is_correct:false}] },
+          { id: "5", prompt: "What didn't scare the brave kitten?", options: [{id:"a",text:"the hot sun",is_correct:false},{id:"b",text:"the growl from the puppy",is_correct:true},{id:"c",text:"the bus fare",is_correct:false},{id:"d",text:"the gray mare",is_correct:false}] },
+          { id: "6", prompt: "What won't the selfish boy do?", options: [{id:"a",text:"stare at children",is_correct:false},{id:"b",text:"share anything",is_correct:true},{id:"c",text:"dare to run",is_correct:false},{id:"d",text:"care for the kitten",is_correct:false}] },
+          { id: "7", prompt: "What did Jack saddle up?", options: [{id:"a",text:"a square",is_correct:false},{id:"b",text:"a gray mare",is_correct:true},{id:"c",text:"a rare coin",is_correct:false},{id:"d",text:"a flare",is_correct:false}] },
+          { id: "8", prompt: "Which word rhymes with 'care'?", options: [{id:"a",text:"mare",is_correct:true},{id:"b",text:"cane",is_correct:false},{id:"c",text:"case",is_correct:false},{id:"d",text:"cage",is_correct:false}] },
+          { id: "9", prompt: "Which word means a female horse?", options: [{id:"a",text:"mare",is_correct:true},{id:"b",text:"hare",is_correct:false},{id:"c",text:"fare",is_correct:false},{id:"d",text:"dare",is_correct:false}] },
+          { id: "10", prompt: "Which word describes something that is not common?", options: [{id:"a",text:"rare",is_correct:true},{id:"b",text:"bare",is_correct:false},{id:"c",text:"square",is_correct:false},{id:"d",text:"aware",is_correct:false}] },
+          { id: "11", prompt: "What sound does the 'a' make in 'stare'?", options: [{id:"a",text:"Short a",is_correct:false},{id:"b",text:"Long a",is_correct:true},{id:"c",text:"/ah/",is_correct:false},{id:"d",text:"It is silent",is_correct:false}] },
+          { id: "12", prompt: "Which word means to look for a long time with eyes wide open?", options: [{id:"a",text:"stare",is_correct:true},{id:"b",text:"glare",is_correct:false},{id:"c",text:"share",is_correct:false},{id:"d",text:"scare",is_correct:false}] },
+          { id: "13", prompt: "Identify the -are word: 'The brave kitten was not afraid.'", options: [{id:"a",text:"brave",is_correct:true},{id:"b",text:"kitten",is_correct:false},{id:"c",text:"not",is_correct:false},{id:"d",text:"was",is_correct:false}] },
+          { id: "14", prompt: "Which word means a shape with four equal sides?", options: [{id:"a",text:"square",is_correct:true},{id:"b",text:"mare",is_correct:false},{id:"c",text:"hare",is_correct:false},{id:"d",text:"fare",is_correct:false}] },
+          { id: "15", prompt: "Where did the cowboy let Jack ride?", options: [{id:"a",text:"around the ranch",is_correct:true},{id:"b",text:"around the house",is_correct:false},{id:"c",text:"to the bus",is_correct:false},{id:"d",text:"in the sun",is_correct:false}] },
+          { id: "16", prompt: "Which word means an animal like a large rabbit?", options: [{id:"a",text:"hare",is_correct:true},{id:"b",text:"mare",is_correct:false},{id:"c",text:"flare",is_correct:false},{id:"d",text:"glare",is_correct:false}] },
+          { id: "17", prompt: "In Magic E words like 'share', the final 'e' is:", options: [{id:"a",text:"silent",is_correct:true},{id:"b",text:"long",is_correct:false},{id:"c",text:"short",is_correct:false},{id:"d",text:"making a 'j' sound",is_correct:false}] },
+          { id: "18", prompt: "Which word means to be mindful or to know about something?", options: [{id:"a",text:"aware",is_correct:true},{id:"b",text:"compare",is_correct:false},{id:"c",text:"square",is_correct:false},{id:"d",text:"rare",is_correct:false}] },
+          { id: "19", prompt: "Which word means to look at two things to see how they are the same or different?", options: [{id:"a",text:"compare",is_correct:true},{id:"b",text:"aware",is_correct:false},{id:"c",text:"stare",is_correct:false},{id:"d",text:"glare",is_correct:false}] },
+          { id: "20", prompt: "Complete the sentence: 'The puppy's growl didn't ___ the kitten.'", options: [{id:"a",text:"scare",is_correct:true},{id:"b",text:"share",is_correct:false},{id:"c",text:"stare",is_correct:false},{id:"d",text:"glare",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 160*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the -are pattern!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 160 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
