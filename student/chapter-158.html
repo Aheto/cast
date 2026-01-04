@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 159 — Magic E Syllables (Long a)"/>
+  <title>Mini OpenStax — Lesson 159: Magic E (Long a)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 159: Magic E (Long a)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH159: Decode multi-syllabic Magic E words where a = /ā/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        [cite_start]<p>Multi-syllabic words featuring the <strong>Magic E</strong> pattern (Long a sound)[cite: 148]:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable through Lesson 159:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 158;    // chapter-158.html = Lesson 159
+      const maxChapter = 262;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 159: Magic E (Long a)",
+        loTags: ["LO PH159: Decode multi-syllabic Magic E words where a = /ā/"],
+        contentWords: [
+          "awake", "mistake", "insane", "airplane", "amaze", "escape", "engage", "embrace", "disgrace", "indicate", "complicate", "hesitate"
+        ],
+        sentences: [
+          [cite_start]"A black cloud may indicate that rain is on the way. [cite: 152]",
+          [cite_start]"The animal at the zoo could not escape from its cage. [cite: 153]",
+          [cite_start]"Grace and her sister embrace when they see each other. [cite: 154]",
+          [cite_start]"The clown can do magic tricks that amaze the children. [cite: 155]",
+          [cite_start]"An airplane can travel a long distance in a single day. [cite: 156]",
+          [cite_start]"The poor conduct of the player is a disgrace to his team. [cite: 157]",
+          [cite_start]"When you make a mistake, you shouldn't hesitate to admit it. [cite: 158]",
+          [cite_start]"Jake was awake at six, but he didn't get out of bed until seven. [cite: 159]"
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          [cite_start]{ id: "1", prompt: "Which word means to show or point out? [cite: 145]", options: [{id:"a",text:"hesitate",is_correct:false},{id:"b",text:"indicate",is_correct:true},{id:"c",text:"amaze",is_correct:false},{id:"d",text:"engage",is_correct:false}] },
+          [cite_start]{ id: "2", prompt: "What might a black cloud indicate? [cite: 152]", options: [{id:"a",text:"snow is coming",is_correct:false},{id:"b",text:"it is noon",is_correct:false},{id:"c",text:"rain is on the way",is_correct:true},{id:"d",text:"the sun is rising",is_correct:false}] },
+          [cite_start]{ id: "3", prompt: "In Magic E words like 'escape', the 'a' makes which sound? [cite: 148]", options: [{id:"a",text:"Long a (/ā/)",is_correct:true},{id:"b",text:"Short a",is_correct:false},{id:"c",text:"Silent",is_correct:false},{id:"d",text:"/aw/",is_correct:false}] },
+          [cite_start]{ id: "4", prompt: "Where could the animal not escape from? [cite: 153]", options: [{id:"a",text:"the forest",is_correct:false},{id:"b",text:"its cage",is_correct:true},{id:"c",text:"the stage",is_correct:false},{id:"d",text:"the plane",is_correct:false}] },
+          [cite_start]{ id: "5", prompt: "What do Grace and her sister do when they see each other? [cite: 154]", options: [{id:"a",text:"hesitate",is_correct:false},{id:"b",text:"embrace",is_correct:true},{id:"c",text:"disgrace",is_correct:false},{id:"d",text:"escape",is_correct:false}] },
+          [cite_start]{ id: "6", prompt: "Which word means to pause before doing something? [cite: 147]", options: [{id:"a",text:"hesitate",is_correct:true},{id:"b",text:"indicate",is_correct:false},{id:"c",text:"engage",is_correct:false},{id:"d",text:"awake",is_correct:false}] },
+          [cite_start]{ id: "7", prompt: "What can an airplane do in a single day? [cite: 156]", options: [{id:"a",text:"travel a long distance",is_correct:true},{id:"b",text:"stay on the stage",is_correct:false},{id:"c",text:"escape its cage",is_correct:false},{id:"d",text:"indicate rain",is_correct:false}] },
+          [cite_start]{ id: "8", prompt: "When should you admit it if you make a mistake? [cite: 158]", options: [{id:"a",text:"after a week",is_correct:false},{id:"b",text:"you shouldn't hesitate",is_correct:true},{id:"c",text:"only if you disgrace someone",is_correct:false},{id:"d",text:"when you are awake",is_correct:false}] },
+          [cite_start]{ id: "9", prompt: "At what time was Jake awake? [cite: 159]", options: [{id:"a",text:"five",is_correct:false},{id:"b",text:"six",is_correct:true},{id:"c",text:"seven",is_correct:false},{id:"d",text:"eight",is_correct:false}] },
+          [cite_start]{ id: "10", prompt: "What word describes the player's poor conduct to his team? [cite: 157]", options: [{id:"a",text:"a disgrace",is_correct:true},{id:"b",text:"an embrace",is_correct:false},{id:"c",text:"a mistake",is_correct:false},{id:"d",text:"an amaze",is_correct:false}] },
+          [cite_start]{ id: "11", prompt: "Which word rhymes with 'snake'? [cite: 138]", options: [{id:"a",text:"mistake",is_correct:true},{id:"b",text:"insane",is_correct:false},{id:"c",text:"escape",is_correct:false},{id:"d",text:"amaze",is_correct:false}] },
+          [cite_start]{ id: "12", prompt: "Which word means to make something more difficult? [cite: 146]", options: [{id:"a",text:"complicate",is_correct:true},{id:"b",text:"indicate",is_correct:false},{id:"c",text:"hesitate",is_correct:false},{id:"d",text:"engage",is_correct:false}] },
+          [cite_start]{ id: "13", prompt: "What can the clown's magic tricks do to children? [cite: 155]", options: [{id:"a",text:"indicate them",is_correct:false},{id:"b",text:"amaze them",is_correct:true},{id:"c",text:"complicate them",is_correct:false},{id:"d",text:"hesitate them",is_correct:false}] },
+          [cite_start]{ id: "14", prompt: "How many syllables are in the word 'airplane'? [cite: 140]", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          [cite_start]{ id: "15", prompt: "Which word means the opposite of 'asleep'? [cite: 137]", options: [{id:"a",text:"awake",is_correct:true},{id:"b",text:"mistake",is_correct:false},{id:"c",text:"insane",is_correct:false},{id:"d",text:"engage",is_correct:false}] },
+          [cite_start]{ id: "16", prompt: "Which word means to get involved or occupy? [cite: 143]", options: [{id:"a",text:"engage",is_correct:true},{id:"b",text:"escape",is_correct:false},{id:"c",text:"embrace",is_correct:false},{id:"d",text:"amaze",is_correct:false}] },
+          [cite_start]{ id: "17", prompt: "Identify the long 'a' word: 'You should not hesitate.' [cite: 158]", options: [{id:"a",text:"hesitate",is_correct:true},{id:"b",text:"should",is_correct:false},{id:"c",text:"not",is_correct:false},{id:"d",text:"you",is_correct:false}] },
+          [cite_start]{ id: "18", prompt: "In multi-syllabic Magic E words, where is the 'e' usually found? [cite: 136-147]", options: [{id:"a",text:"at the beginning",is_correct:false},{id:"b",text:"at the end of a syllable",is_correct:true},{id:"c",text:"in the middle of a syllable",is_correct:false},{id:"d",text:"it is never used",is_correct:false}] },
+          [cite_start]{ id: "19", prompt: "Which word means mentally ill? [cite: 139]", options: [{id:"a",text:"insane",is_correct:true},{id:"b",text:"mistake",is_correct:false},{id:"c",text:"awake",is_correct:false},{id:"d",text:"amaze",is_correct:false}] },
+          [cite_start]{ id: "20", prompt: "What did Jake do at seven o'clock? [cite: 159]", options: [{id:"a",text:"woke up",is_correct:false},{id:"b",text:"got out of bed",is_correct:true},{id:"c",text:"ate lunch",is_correct:false},{id:"d",text:"flew an airplane",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 159*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered multi-syllabic Magic E words!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 159 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
