@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 157 — Magic E Syllables (Long a)"/>
+  <title>Mini OpenStax — Lesson 157: Magic E (Long a)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 157: Magic E (Long a)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH157: Decode Magic E words where a = /ā/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words featuring the <strong>Magic E</strong> pattern (Long a sound):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable through Lesson 157:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 156;    // chapter-156.html = Lesson 157
+      const maxChapter = 262;        
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 157: Magic E (Long a)",
+        loTags: ["LO PH157: Decode Magic E words where a = /ā/"],
+        contentWords: [
+          "came", "fame", "game", "name", "same", "tame", "flame", "frame", "blame", "shame", "cane", "Jane", "plane", "ate", "date", "gate", "hate", "late", "plate", "skate", "state", "cave", "gave", "save", "wave", "brave", "shave", "base", "case", "chase", "gaze", "maze", "blaze"
+        ],
+        sentences: [
+          "Fred and Fran have the same last name.",
+          "Beth found a cave near the edge of the lake.",
+          "Jane made sure she wasn't late for the game.",
+          "If it rains today, they will cancel the game.",
+          "The teacher gave Roy a compliment on his reading.",
+          "A passenger must have a ticket to board the plane.",
+          "Jake ate a peanut butter and jelly sandwich for lunch.",
+          "After lunch, Jake cleaned his plate in the sink.",
+          "The fence around the house has a steel gate with a lock.",
+          "Next year, Jane will go to a state college to study medicine."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What sound does the 'a' make in a Magic E syllable?", options: [{id:"a",text:"Short a (as in cat)",is_correct:false},{id:"b",text:"Long a (as in name)",is_correct:true},{id:"c",text:"Short o sound",is_correct:false},{id:"d",text:"It is silent",is_correct:false}] },
+          { id: "2", prompt: "Which word rhymes with 'game'?", options: [{id:"a",text:"gave",is_correct:false},{id:"b",text:"gate",is_correct:false},{id:"c",text:"name",is_correct:true},{id:"d",text:"gaze",is_correct:false}] },
+          { id: "3", prompt: "What did Fred and Fran have in common?", options: [{id:"a",text:"the same last name",is_correct:true},{id:"b",text:"the same plane",is_correct:false},{id:"c",text:"the same plate",is_correct:false},{id:"d",text:"the same game",is_correct:false}] },
+          { id: "4", prompt: "Complete the sentence: 'Beth found a ___ near the lake.'", options: [{id:"a",text:"case",is_correct:false},{id:"b",text:"cave",is_correct:true},{id:"c",text:"cane",is_correct:false},{id:"d",text:"cage",is_correct:false}] },
+          { id: "5", prompt: "What did the teacher give Roy?", options: [{id:"a",text:"a plate",is_correct:false},{id:"b",text:"a compliment",is_correct:true},{id:"c",text:"a game",is_correct:false},{id:"d",text:"a ticket",is_correct:false}] },
+          { id: "6", prompt: "Which word means a structure you use to go through a fence?", options: [{id:"a",text:"gate",is_correct:true},{id:"b",text:"plate",is_correct:false},{id:"c",text:"state",is_correct:false},{id:"d",text:"skate",is_correct:false}] },
+          { id: "7", prompt: "Which word is an action done on ice or with wheels?", options: [{id:"a",text:"skate",is_correct:true},{id:"b",text:"state",is_correct:false},{id:"c",text:"late",is_correct:false},{id:"d",text:"hate",is_correct:false}] },
+          { id: "8", prompt: "What must a passenger have to board the plane?", options: [{id:"a",text:"a plate",is_correct:false},{id:"b",text:"a compliment",is_correct:false},{id:"c",text:"a ticket",is_correct:true},{id:"d",text:"a game",is_correct:false}] },
+          { id: "9", prompt: "What did Jake eat for lunch?", options: [{id:"a",text:"a peanut butter and jelly sandwich",is_correct:true},{id:"b",text:"a plate of fudge",is_correct:false},{id:"c",text:"a banana split",is_correct:false},{id:"d",text:"a sandwich on the plane",is_correct:false}] },
+          { id: "10", prompt: "Where will Jane go next year?", options: [{id:"a",text:"a state college",is_correct:true},{id:"b",text:"a cave",is_correct:false},{id:"c",text:"a game",is_correct:false},{id:"d",text:"to the sink",is_correct:false}] },
+          { id: "11", prompt: "Which word means to look steadily at something?", options: [{id:"a",text:"gaze",is_correct:true},{id:"b",text:"maze",is_correct:false},{id:"c",text:"blaze",is_correct:false},{id:"d",text:"chase",is_correct:false}] },
+          { id: "12", prompt: "Which word refers to a very bright fire?", options: [{id:"a",text:"blaze",is_correct:true},{id:"b",text:"base",is_correct:false},{id:"c",text:"maze",is_correct:false},{id:"d",text:"gaze",is_correct:false}] },
+          { id: "13", prompt: "Identify the long 'a' word: 'After lunch, Jake cleaned his plate.'", options: [{id:"a",text:"cleaned",is_correct:false},{id:"b",text:"lunch",is_correct:false},{id:"c",text:"plate",is_correct:true},{id:"d",text:"his",is_correct:false}] },
+          { id: "14", prompt: "In 'Magic E' words like 'came', what happens to the 'e'?", options: [{id:"a",text:"It is silent",is_correct:true},{id:"b",text:"It says /e/",is_correct:false},{id:"c",text:"It says /ee/",is_correct:false},{id:"d",text:"It makes the 'a' short",is_correct:false}] },
+          { id: "15", prompt: "Which word means not wild?", options: [{id:"a",text:"tame",is_correct:true},{id:"b",text:"same",is_correct:false},{id:"c",text:"fame",is_correct:false},{id:"d",text:"name",is_correct:false}] },
+          { id: "16", prompt: "Why was Jane careful not to be late?", options: [{id:"a",text:"for the plane",is_correct:false},{id:"b",text:"for the game",is_correct:true},{id:"c",text:"for college",is_correct:false},{id:"d",text:"for lunch",is_correct:false}] },
+          { id: "17", prompt: "Which word describes a path that is easy to get lost in?", options: [{id:"a",text:"maze",is_correct:true},{id:"b",text:"base",is_correct:false},{id:"c",text:"case",is_correct:false},{id:"d",text:"gaze",is_correct:false}] },
+          { id: "18", prompt: "Which word is a state of feeling bad because you did something wrong?", options: [{id:"a",text:"shame",is_correct:true},{id:"b",text:"blame",is_correct:false},{id:"c",text:"flame",is_correct:false},{id:"d",text:"frame",is_correct:false}] },
+          { id: "19", prompt: "How many letters are in 'compliment'?", options: [{id:"a",text:"9",is_correct:false},{id:"b",text:"10",is_correct:true},{id:"c",text:"11",is_correct:false},{id:"d",text:"8",is_correct:false}] },
+          { id: "20", prompt: "What is the Magic E rule for 'late'?", options: [{id:"a",text:"e makes a say its name",is_correct:true},{id:"b",text:"a makes e long",is_correct:false},{id:"c",text:"both letters are short",is_correct:false},{id:"d",text:"both letters are silent",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 157*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the Magic E pattern!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 157 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
