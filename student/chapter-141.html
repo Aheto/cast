@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 142 — Multisyllable Words with y sounding like long e"/>
+  <title>Mini OpenStax — Lesson 142: Multisyllable Words (y = /ē/)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 142: Multisyllable Words (y = /ē/)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH142: Decode multisyllable words where the final 'y' makes the long 'e' sound.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>In these multisyllable words, the final <strong>y</strong> sounds like a long <strong>e</strong> (/ē/):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud, focusing on the long <strong>e</strong> sound at the end of the <strong>y</strong> words:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Test your understanding of Lesson 142 vocabulary and sentence context.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 141; // chapter-141.html = Lesson 142
+      const maxChapter = 150;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 142: Multisyllable Words (y = /ē/)",
+        loTags: ["LO PH142: Decode multisyllable words where the final 'y' makes the long 'e' sound."],
+        contentWords: [
+          "badly", "softly", "quickly", "nearly", "mainly", "fairly", "ugly", "daily", "simply", "family", "exactly", "suddenly"
+        ],
+        sentences: [
+          "1) The Smith family went on a trip to the zoo.",
+          "2) At exactly twelve, the classroom bell rang.",
+          "3) Neal had to admit that things were going badly.",
+          "4) If you hustle, you can quickly finish this lesson.",
+          "5) Our team was nearly the winner of the big contest.",
+          "6) A leaf from the oak tree fell softly to the ground.",
+          "7) Jill said to Mom, 'That dinner was simply fantastic!'",
+          "8) The men on the ship were afraid of the big ugly sea monster."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Who went on a trip to the zoo?", options: [{id:"a",text:"The Smith family",is_correct:true},{id:"b",text:"The Smith team",is_correct:false},{id:"c",text:"The Smith neighbors",is_correct:false}] },
+          { id: "2", prompt: "At what time did the classroom bell ring?", options: [{id:"a",text:"nearly noon",is_correct:false},{id:"b",text:"exactly twelve",is_correct:true},{id:"c",text:"suddenly one",is_correct:false}] },
+          { id: "3", prompt: "How did Neal admit things were going?", options: [{id:"a",text:"fairly",is_correct:false},{id:"b",text:"badly",is_correct:true},{id:"c",text:"softly",is_correct:false}] },
+          { id: "4", prompt: "What should you do to finish the lesson quickly?", options: [{id:"a",text:"hustle",is_correct:true},{id:"b",text:"mumble",is_correct:false},{id:"c",text:"whisper",is_correct:false}] },
+          { id: "5", prompt: "Was the team the winner of the contest?", options: [{id:"a",text:"yes",is_correct:false},{id:"b",text:"nearly",is_correct:true},{id:"c",text:"exactly",is_correct:false}] },
+          { id: "6", prompt: "How did the oak leaf fall to the ground?", options: [{id:"a",text:"suddenly",is_correct:false},{id:"b",text:"softly",is_correct:true},{id:"c",text:"badly",is_correct:false}] },
+          { id: "7", prompt: "What did Jill think of the dinner?", options: [{id:"a",text:"It was ugly",is_correct:false},{id:"b",text:"It was simply fantastic",is_correct:true},{id:"c",text:"It was badly cooked",is_correct:false}] },
+          { id: "8", prompt: "Why were the men on the ship afraid?", options: [{id:"a",text:"of a big ugly sea monster",is_correct:true},{id:"b",text:"of the thunder",is_correct:false},{id:"c",text:"of the dark",is_correct:false}] },
+          { id: "9", prompt: "Which word means 'all the time' or 'every day'?", options: [{id:"a",text:"suddenly",is_correct:false},{id:"b",text:"daily",is_correct:true},{id:"c",text:"nearly",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'without warning'?", options: [{id:"a",text:"suddenly",is_correct:true},{id:"b",text:"exactly",is_correct:false},{id:"c",text:"mainly",is_correct:false}] },
+          { id: "11", prompt: "In 'family', what sound does the 'y' make?", options: [{id:"a",text:"long i",is_correct:false},{id:"b",text:"long e",is_correct:true},{id:"c",text:"short i",is_correct:false}] },
+          { id: "12", prompt: "What is the base word of 'quickly'?", options: [{id:"a",text:"quick",is_correct:true},{id:"b",text:"ly",is_correct:false},{id:"c",text:"lick",is_correct:false}] },
+          { id: "13", prompt: "Complete the phrase: '____十二' (exactly twelve).", options: [{id:"a",text:"fairly",is_correct:false},{id:"b",text:"exactly",is_correct:true},{id:"c",text:"simply",is_correct:false}] },
+          { id: "14", prompt: "Which word rhymes with 'ugly'?", options: [{id:"a",text:"softly",is_correct:false},{id:"b",text:"smugly",is_correct:true},{id:"c",text:"daily",is_correct:false}] },
+          { id: "15", prompt: "Which word means 'almost'?", options: [{id:"a",text:"exactly",is_correct:false},{id:"b",text:"nearly",is_correct:true},{id:"c",text:"fairly",is_correct:false}] },
+          { id: "16", prompt: "What kind of monster was it?", options: [{id:"a",text:"ugly",is_correct:true},{id:"b",text:"soft",is_correct:false},{id:"c",text:"simply",is_correct:false}] },
+          { id: "17", prompt: "In 'daily', what is the vowel team in the first syllable?", options: [{id:"a",text:"ai",is_correct:true},{id:"b",text:"ay",is_correct:false},{id:"c",text:"ea",is_correct:false}] },
+          { id: "18", prompt: "Which word describes how a leaf falls?", options: [{id:"a",text:"softly",is_correct:true},{id:"b",text:"ugly",is_correct:false},{id:"c",text:"exactly",is_correct:false}] },
+          { id: "19", prompt: "How many syllables are in 'suddenly'?", options: [{id:"a",text:"two",is_correct:false},{id:"b",text:"three",is_correct:true},{id:"c",text:"four",is_correct:false}] },
+          { id: "20", prompt: "Which word describes a group of related people?", options: [{id:"a",text:"daily",is_correct:false},{id:"b",text:"family",is_correct:true},{id:"c",text:"mainly",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 142*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
