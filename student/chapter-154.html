@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 155 — Soft G followed by i or y (/j/ sound)"/>
+  <title>Mini OpenStax — Lesson 155: Soft G followed by i or y (/j/ sound)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 155: Soft G followed by i or y (/j/ sound)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH155: Decode words where 'g' followed by 'i' or 'y' makes the soft /j/ sound.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List: Soft G with i and y</h2>
+        <p>In these words, the letter <strong>g</strong> makes the soft <strong>/j/</strong> sound because it is followed by <strong>i</strong> or <strong>y</strong>:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud, paying attention to the soft /j/ sound in the highlighted words:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Test your knowledge of Soft G words from Lesson 155.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 154; // chapter-154.html = Lesson 155
+      const maxChapter = 155;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 155: Soft G followed by i or y (/j/ sound)",
+        loTags: ["LO PH155: Decode words where 'g' followed by 'i' or 'y' makes the soft /j/ sound."],
+        contentWords: [
+          "gin", "gist", "magic", "logic", "rigid", "imagine", "digit", "ginger", "engine", "strategy", "engineer", "apology"
+        ],
+        sentences: [
+          "1) I accept your apology.",
+          "2) Neal needs to fix the engine in his truck.",
+          "3) The clown did some magic tricks for the children.",
+          "4) Betty has a clever strategy to solve the problem.",
+          "5) Cliff got the gist of what the teacher was saying.",
+          "6) A civil engineer helped to plan the bridge across the river.",
+          "7) There didn't seem to be any logic to the plot of the novel.",
+          "8) Kay couldn't imagine how the novel would end."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What does the speaker accept?", options: [{id:"a",text:"an apology",is_correct:true},{id:"b",text:"a gift",is_correct:false},{id:"c",text:"a challenge",is_correct:false}] },
+          { id: "2", prompt: "What does Neal need to fix in his truck?", options: [{id:"a",text:"the engine",is_correct:true},{id:"b",text:"the bridge",is_correct:false},{id:"c",text:"the strategy",is_correct:false}] },
+          { id: "3", prompt: "Who did magic tricks for the children?", options: [{id:"a",text:"the clown",is_correct:true},{id:"b",text:"the engineer",is_correct:false},{id:"c",text:"the principal",is_correct:false}] },
+          { id: "4", prompt: "What does Betty have to solve the problem?", options: [{id:"a",text:"a clever strategy",is_correct:true},{id:"b",text:"an engine",is_correct:false},{id:"c",text:"an apology",is_correct:false}] },
+          { id: "5", prompt: "What did Cliff get of what the teacher said?", options: [{id:"a",text:"the gist",is_correct:true},{id:"b",text:"the magic",is_correct:false},{id:"c",text:"the apology",is_correct:false}] },
+          { id: "6", prompt: "What kind of engineer helped plan the bridge?", options: [{id:"a",text:"a civil engineer",is_correct:true},{id:"b",text:"a magic engineer",is_correct:false},{id:"c",text:"a rigid engineer",is_correct:false}] },
+          { id: "7", prompt: "What was missing from the plot of the novel?", options: [{id:"a",text:"logic",is_correct:true},{id:"b",text:"magic",is_correct:false},{id:"c",text:"ginger",is_correct:false}] },
+          { id: "8", prompt: "What could Kay NOT do regarding the novel's end?", options: [{id:"a",text:"imagine it",is_correct:true},{id:"b",text:"fix it",is_correct:false},{id:"c",text:"apologize for it",is_correct:false}] },
+          { id: "9", prompt: "Which word refers to a part of a machine that provides power?", options: [{id:"a",text:"engine",is_correct:true},{id:"b",text:"ginger",is_correct:false},{id:"c",text:"digit",is_correct:false}] },
+          { id: "10", prompt: "Which word refers to any of the numerals 0 to 9?", options: [{id:"a",text:"digit",is_correct:true},{id:"b",text:"gist",is_correct:false},{id:"c",text:"gin",is_correct:false}] },
+          { id: "11", prompt: "Which word means a root used as a spice?", options: [{id:"a",text:"ginger",is_correct:true},{id:"b",text:"rigid",is_correct:false},{id:"c",text:"logic",is_correct:false}] },
+          { id: "12", prompt: "Which word means unable to bend or be forced out of shape?", options: [{id:"a",text:"rigid",is_correct:true},{id:"b",text:"magic",is_correct:false},{id:"c",text:"strategy",is_correct:false}] },
+          { id: "13", prompt: "Which word means to form a mental image of something?", options: [{id:"a",text:"imagine",is_correct:true},{id:"b",text:"engine",is_correct:false},{id:"c",text:"logic",is_correct:false}] },
+          { id: "14", prompt: "Which word means the main point or essence of a matter?", options: [{id:"a",text:"gist",is_correct:true},{id:"b",text:"digit",is_correct:false},{id:"c",text:"apology",is_correct:false}] },
+          { id: "15", prompt: "Which word refers to a plan of action designed to achieve a goal?", options: [{id:"a",text:"strategy",is_correct:true},{id:"b",text:"engine",is_correct:false},{id:"c",text:"magic",is_correct:false}] },
+          { id: "16", prompt: "Which word means reasoning conducted according to strict principles?", options: [{id:"a",text:"logic",is_correct:true},{id:"b",text:"magic",is_correct:false},{id:"c",text:"rigid",is_correct:false}] },
+          { id: "17", prompt: "Which word means expressing regret for a mistake?", options: [{id:"a",text:"apology",is_correct:true},{id:"b",text:"strategy",is_correct:false},{id:"c",text:"imagine",is_correct:false}] },
+          { id: "18", prompt: "What sound does 'g' make when followed by 'i' or 'y'?", options: [{id:"a",text:"soft /j/",is_correct:true},{id:"b",text:"hard /g/",is_correct:false},{id:"c",text:"silent",is_correct:false}] },
+          { id: "19", prompt: "A person who designs or builds machines/structures is an...", options: [{id:"a",text:"engineer",is_correct:true},{id:"b",text:"officer",is_correct:false},{id:"c",text:"apology",is_correct:false}] },
+          { id: "20", prompt: "Which word refers to mysterious or supernatural powers?", options: [{id:"a",text:"magic",is_correct:true},{id:"b",text:"logic",is_correct:false},{id:"c",text:"rigid",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = -4; i <= 0; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum < 150) continue; 
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 155*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
