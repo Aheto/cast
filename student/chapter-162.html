@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 163 — Magic E Syllables (i=/ī/)"/>
+  <title>Mini OpenStax — Lesson 163: Magic E (i=/ī/)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 163: Magic E (i=/ī/)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH163: Decode words with Magic E pattern (i = /ī/)</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words with the <strong>Magic E</strong> pattern where <em>i = /ī/</em> (long i):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–163:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Fisher-Yates shuffle
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 162;   // chapter-162.html = Lesson 163
+      const maxChapter = 261;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 163: Magic E (i=/ī/)",
+        loTags: ["LO PH163: Decode words with Magic E pattern (i = /ī/)"],
+        contentWords: [
+          "fine", "line", "mine", "nine", "pine", "wine", "spine", "shine", "whine", "pipe", "ripe", "wipe", "stripe", 
+          "dive", "five", "drive", "strive", "ice", "mice", "nice", "rice", "price", "slice", "spice", "twice",
+          "fire", "hire", "tire", "wire", "bite", "kite", "white", "quite"
+        ],
+        sentences: [
+          "Mike went on a five mile bike ride.",
+          "This spice gives the rice a nice taste.",
+          "The man must pay a fine for speeding in traffic.",
+          "The boy must not whine when he doesn't get his way.",
+          "Ray will wax and polish his truck to make it shine.",
+          "Grace waited in line to get her ticket to see the film.",
+          "Mike needed some help to fix the flat tire on his bike.",
+          "The cowboy found a lost silver mine near the edge of the ranch.",
+          "Jane had a scoop of vanilla ice cream with fudge sauce and nuts.",
+          "Jake reached out and grabbed a ripe peach from a branch of the peach tree."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word uses the Magic E pattern with i=/ī/?", options: [{id:"a",text:"shine",is_correct:true},{id:"b",text:"ship",is_correct:false},{id:"c",text:"sit",is_correct:false},{id:"d",text:"sip",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 163 word?", options: [{id:"a",text:"twice",is_correct:false},{id:"b",text:"spine",is_correct:false},{id:"c",text:"grine",is_correct:true},{id:"d",text:"quite",is_correct:false}] },
+          { id: "3", prompt: "What sound does 'i' make in 'ripe'?", options: [{id:"a",text:"/ĭ/",is_correct:false},{id:"b",text:"/ī/",is_correct:true},{id:"c",text:"/e/",is_correct:false},{id:"d",text:"/i/",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to emit bright light'?", options: [{id:"a",text:"shine",is_correct:true},{id:"b",text:"whine",is_correct:false},{id:"c",text:"spine",is_correct:false},{id:"d",text:"pipe",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'strive'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 163 words?", options: [{id:"a",text:"Mike went on a five mile bike ride.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
+          { id: "7", prompt: "Which word means 'a punishment fee'?", options: [{id:"a",text:"fine",is_correct:true},{id:"b",text:"line",is_correct:false},{id:"c",text:"mine",is_correct:false},{id:"d",text:"wine",is_correct:false}] },
+          { id: "8", prompt: "What makes the 'i' long in 'white'?", options: [{id:"a",text:"Silent e",is_correct:true},{id:"b",text:"Double i",is_correct:false},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
+          { id: "9", prompt: "In 'This spice gives the rice a nice taste,' how many Lesson 163 words?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to complain in a high-pitched voice'?", options: [{id:"a",text:"whine",is_correct:true},{id:"b",text:"shine",is_correct:false},{id:"c",text:"ripe",is_correct:false},{id:"d",text:"slice",is_correct:false}] },
+          { id: "11", prompt: "Which word refers to a female rodent or plural of 'mouse'?", options: [{id:"a",text:"mice",is_correct:true},{id:"b",text:"rice",is_correct:false},{id:"c",text:"ice",is_correct:false},{id:"d",text:"spice",is_correct:false}] },
+          { id: "12", prompt: "Which word ends with Magic E and means 'ready to eat (fruit)'?", options: [{id:"a",text:"ripe",is_correct:true},{id:"b",text:"wipe",is_correct:false},{id:"c",text:"pipe",is_correct:false},{id:"d",text:"dive",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 163?", options: [{id:"a",text:"Grace waited in line to get her ticket to see the film.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'stripe'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "15", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"drive",is_correct:true},{id:"b",text:"price",is_correct:false},{id:"c",text:"kite",is_correct:false},{id:"d",text:"fire",is_correct:false}] },
+          { id: "16", prompt: "What syllable type is 'kite'?", options: [{id:"a",text:"Closed",is_correct:false},{id:"b",text:"Open",is_correct:false},{id:"c",text:"Magic E",is_correct:true},{id:"d",text:"Vowel Team",is_correct:false}] },
+          { id: "17", prompt: "Which word means 'to employ someone'?", options: [{id:"a",text:"hire",is_correct:true},{id:"b",text:"wire",is_correct:false},{id:"c",text:"tire",is_correct:false},{id:"d",text:"fire",is_correct:false}] },
+          { id: "18", prompt: "Which word might complete: 'Don’t ___ about bedtime!'?", options: [{id:"a",text:"whine",is_correct:true},{id:"b",text:"shine",is_correct:false},{id:"c",text:"wine",is_correct:false},{id:"d",text:"pine",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"five",is_correct:true},{id:"b",text:"tire",is_correct:true},{id:"c",text:"mine",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What phonics pattern is taught in Lesson 163?", options: [{id:"a",text:"-ink",is_correct:false},{id:"b",text:"Magic E (i=/ī/)",is_correct:true},{id:"c",text:"-ang",is_correct:false},{id:"d",text:"Bossy R",is_correct:false}] }
+        ]
+      };
+
+      // Render word list
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      // Render sentences
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      // Navigation
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      // 🔁 Render quiz WITH RANDOMIZED OPTIONS
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+
+        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          let shuffledOptions = [...q.options];
+          shuffle(shuffledOptions);
+
+          const correctOpt = q.options.find(opt => opt.is_correct);
+          window.quizCorrectMap[q.id] = correctOpt.id;
+
+          const optionsHTML = shuffledOptions.map((opt, idx) => {
+            const label = String.fromCharCode(97 + idx).toUpperCase();
+            return `
+              <div class="option">
+                <label>
+                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
+                </label>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="question">
+              <strong>${q.id}. ${q.prompt}</strong>
+              <div class="options">
+                ${optionsHTML}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        form.innerHTML = quizHTML;
+      }
+
+      // Feedback using correct map
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOptId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctOptId);
+          const isCorrect = userAns === correctOptId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 163*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the Magic E (i=/ī/) pattern!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 163 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
