@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 154 — The -dge Ending (/j/ sound)"/>
-  <title>Mini OpenStax — Lesson 154: The -dge Ending (/j/ sound)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 154 — Soft G Pattern (-dge)"/>
+  <title>Mini OpenStax — Lesson 154: -dge Pattern</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -26,14 +26,16 @@
     .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
     .btn:hover { background: #218838; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 154: The -dge Ending (/j/ sound)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH154: Decode words ending in '-dge' where it makes the soft /j/ sound.</div>
+        <h1 id="chapter-title">Lesson 154: -dge Pattern</h1>
+        <div class="lo-tags" id="lo-tags">LO PH154: Decode words with the -dge pattern (Soft G family)</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -42,20 +44,20 @@
 
     <main id="main-content">
       <div class="section">
-        <h2>🔤 Word List: The -dge Ending</h2>
-        <p>In these words, the trigraph <strong>-dge</strong> works together to make the <strong>/j/</strong> sound (like the letter J) at the end of a word:</p>
+        <h2>🔤 Word List</h2>
+        <p>Words ending in the <strong>-dge</strong> pattern (Soft G /j/ sound):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, focusing on the soft /j/ sound at the end of the <strong>-dge</strong> words:</p>
+        <p>Read aloud. All words are decodable through Lesson 154:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
       <div class="quiz" id="quiz-container">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your knowledge of words ending in -dge.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -68,47 +70,47 @@
     (function () {
       'use strict';
 
-      const currentChapter = 153; // chapter-153.html = Lesson 154
-      const maxChapter = 155;
+      const currentChapter = 153;    // chapter-153.html = Lesson 154
+      const maxChapter = 262;        // Updated based on source 19
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 154: The -dge Ending (/j/ sound)",
-        loTags: ["LO PH154: Decode words ending in '-dge' where it makes the soft /j/ sound."],
+        title: "Lesson 154: -dge Pattern",
+        loTags: ["LO PH154: Decode words with the -dge pattern (Soft G family)"],
         contentWords: [
           "edge", "hedge", "ledge", "wedge", "pledge", "badge", "ridge", "bridge", "dodge", "lodge", "budge", "fudge", "judge", "nudge", "grudge", "smudge"
         ],
         sentences: [
-          "1) A hedge ran along the edge of the lawn.",
-          "2) The cottage sits near the edge of the village.",
-          "3) Scott must dodge the bee to avoid getting stung.",
-          "4) The rock was so big that ten men could not budge it.",
-          "5) A sailboat sailed under the bridge and into the bay.",
-          "6) As a treat, Gail had a banana split with fudge sauce.",
-          "7) I saw Nancy nudge Sally and whisper something to her.",
-          "8) The angry man still held a grudge about the accident."
+          "A hedge ran along the edge of the lawn.",
+          "The cottage sits near the edge of the village.",
+          "Scott must dodge the bee to avoid getting stung.",
+          "The rock was so big that ten men could not budge it.",
+          "A sailboat sailed under the bridge and into the bay.",
+          "As a treat, Gail had a banana split with fudge sauce.",
+          "I saw Nancy nudge Sally and whisper something to her.",
+          "The angry man still held a grudge about the accident."
         ],
         whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Where did the hedge run?", options: [{id:"a",text:"along the edge of the lawn",is_correct:true},{id:"b",text:"under the bridge",is_correct:false},{id:"c",text:"on a ledge",is_correct:false}] },
-          { id: "2", prompt: "Where does the cottage sit?", options: [{id:"a",text:"near the edge of the village",is_correct:true},{id:"b",text:"on a mountain ridge",is_correct:false},{id:"c",text:"in a lodge",is_correct:false}] },
-          { id: "3", prompt: "What must Scott do to avoid getting stung?", options: [{id:"a",text:"dodge the bee",is_correct:true},{id:"b",text:"nudge the bee",is_correct:false},{id:"c",text:"budge the bee",is_correct:false}] },
-          { id: "4", prompt: "Why could ten men not move the rock?", options: [{id:"a",text:"it was too big to budge",is_correct:true},{id:"b",text:"it was on a bridge",is_correct:false},{id:"c",text:"it was a fudge rock",is_correct:false}] },
-          { id: "5", prompt: "Where did the sailboat sail?", options: [{id:"a",text:"under the bridge",is_correct:true},{id:"b",text:"over a hedge",is_correct:false},{id:"c",text:"into a lodge",is_correct:false}] },
-          { id: "6", prompt: "What kind of sauce did Gail have on her banana split?", options: [{id:"a",text:"fudge sauce",is_correct:true},{id:"b",text:"wedge sauce",is_correct:false},{id:"c",text:"grudge sauce",is_correct:false}] },
-          { id: "7", prompt: "What did Nancy do to Sally before whispering?", options: [{id:"a",text:"nudge her",is_correct:true},{id:"b",text:"judge her",is_correct:false},{id:"c",text:"smudge her",is_correct:false}] },
-          { id: "8", prompt: "What did the angry man hold about the accident?", options: [{id:"a",text:"a grudge",is_correct:true},{id:"b",text:"a badge",is_correct:false},{id:"c",text:"a pledge",is_correct:false}] },
-          { id: "9", prompt: "Which word refers to a row of bushes acting as a fence?", options: [{id:"a",text:"hedge",is_correct:true},{id:"b",text:"ledge",is_correct:false},{id:"c",text:"ridge",is_correct:false}] },
-          { id: "10", prompt: "Which word means a narrow shelf sticking out from a wall or cliff?", options: [{id:"a",text:"ledge",is_correct:true},{id:"b",text:"wedge",is_correct:false},{id:"c",text:"bridge",is_correct:false}] },
-          { id: "11", prompt: "Which word means a serious promise?", options: [{id:"a",text:"pledge",is_correct:true},{id:"b",text:"badge",is_correct:false},{id:"c",text:"judge",is_correct:false}] },
-          { id: "12", prompt: "Which word refers to a long narrow hilltop or mountain range?", options: [{id:"a",text:"ridge",is_correct:true},{id:"b",text:"bridge",is_correct:false},{id:"c",text:"lodge",is_correct:false}] },
-          { id: "13", prompt: "Which word means to move or shift something even a little bit?", options: [{id:"a",text:"budge",is_correct:true},{id:"b",text:"dodge",is_correct:false},{id:"c",text:"nudge",is_correct:false}] },
-          { id: "14", prompt: "Which word refers to a person who decides cases in a court of law?", options: [{id:"a",text:"judge",is_correct:true},{id:"b",text:"badge",is_correct:false},{id:"c",text:"lodge",is_correct:false}] },
-          { id: "15", prompt: "Which word means a dirty mark or blur?", options: [{id:"a",text:"smudge",is_correct:true},{id:"b",text:"fudge",is_correct:false},{id:"c",text:"wedge",is_correct:false}] },
-          { id: "16", prompt: "Which word refers to an object worn to show rank or membership?", options: [{id:"a",text:"badge",is_correct:true},{id:"b",text:"lodge",is_correct:false},{id:"c",text:"hedge",is_correct:false}] },
-          { id: "17", prompt: "Which word means a piece of wood or metal used to split or secure things?", options: [{id:"a",text:"wedge",is_correct:true},{id:"b",text:"ledge",is_correct:false},{id:"c",text:"bridge",is_correct:false}] },
-          { id: "18", prompt: "Which word means a cabin or a place for travelers to stay?", options: [{id:"a",text:"lodge",is_correct:true},{id:"b",text:"dodge",is_correct:false},{id:"c",text:"ridge",is_correct:false}] },
-          { id: "19", prompt: "In the word 'bridge', what sound does 'dge' make?", options: [{id:"a",text:"/j/ sound",is_correct:true},{id:"b",text:"/g/ sound",is_correct:false},{id:"c",text:"/d/ sound",is_correct:false}] },
-          { id: "20", prompt: "Which word describes a sweet, soft chocolate candy?", options: [{id:"a",text:"fudge",is_correct:true},{id:"b",text:"grudge",is_correct:false},{id:"c",text:"budge",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the /j/ sound spelled -dge?", options: [{id:"a",text:"bridge",is_correct:true},{id:"b",text:"bring",is_correct:false},{id:"c",text:"brick",is_correct:false},{id:"d",text:"brag",is_correct:false}] },
+          { id: "2", prompt: "In the word 'edge', what sound does 'dge' make?", options: [{id:"a",text:"/g/",is_correct:false},{id:"b",text:"/j/",is_correct:true},{id:"c",text:"/d/",is_correct:false},{id:"d",text:"/z/",is_correct:false}] },
+          { id: "3", prompt: "Which word means a row of bushes planted close together?", options: [{id:"a",text:"wedge",is_correct:false},{id:"b",text:"hedge",is_correct:true},{id:"c",text:"ledge",is_correct:false},{id:"d",text:"pledge",is_correct:false}] },
+          { id: "4", prompt: "Complete the sentence: 'The sailboat sailed under the ___.'", options: [{id:"a",text:"bridge",is_correct:true},{id:"b",text:"badge",is_correct:false},{id:"c",text:"budge",is_correct:false},{id:"d",text:"dodge",is_correct:false}] },
+          { id: "5", prompt: "Which word means to move slightly?", options: [{id:"a",text:"judge",is_correct:false},{id:"b",text:"budge",is_correct:true},{id:"c",text:"ridge",is_correct:false},{id:"d",text:"lodge",is_correct:false}] },
+          { id: "6", prompt: "What did Gail have with her banana split?", options: [{id:"a",text:"fudge sauce",is_correct:true},{id:"b",text:"ledge sauce",is_correct:false},{id:"c",text:"wedge sauce",is_correct:false},{id:"d",text:"nudge sauce",is_correct:false}] },
+          { id: "7", prompt: "Which word means to avoid something by moving quickly?", options: [{id:"a",text:"nudge",is_correct:false},{id:"b",text:"dodge",is_correct:true},{id:"c",text:"lodge",is_correct:false},{id:"d",text:"pledge",is_correct:false}] },
+          { id: "8", prompt: "How many letters are in the pattern that makes the /j/ sound in these words?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:true},{id:"d",text:"4",is_correct:false}] },
+          { id: "9", prompt: "Which word means a formal promise?", options: [{id:"a",text:"pledge",is_correct:true},{id:"b",text:"smudge",is_correct:false},{id:"c",text:"grudge",is_correct:false},{id:"d",text:"bridge",is_correct:false}] },
+          { id: "10", prompt: "Identify the -dge word: 'The rock was too big to move.'", options: [{id:"a",text:"budge",is_correct:true},{id:"b",text:"rock",is_correct:false},{id:"c",text:"big",is_correct:false},{id:"d",text:"move",is_correct:false}] },
+          { id: "11", prompt: "Which word means a persistent feeling of ill will?", options: [{id:"a",text:"grudge",is_correct:true},{id:"b",text:"judge",is_correct:false},{id:"c",text:"nudge",is_correct:false},{id:"d",text:"lodge",is_correct:false}] },
+          { id: "12", prompt: "What did Nancy do to Sally?", options: [{id:"a",text:"nudge",is_correct:true},{id:"b",text:"judge",is_correct:false},{id:"c",text:"dodge",is_correct:false},{id:"d",text:"pledge",is_correct:false}] },
+          { id: "13", prompt: "Which word refers to a dirty mark or smear?", options: [{id:"a",text:"smudge",is_correct:true},{id:"b",text:"badge",is_correct:false},{id:"c",text:"ridge",is_correct:false},{id:"d",text:"ledge",is_correct:false}] },
+          { id: "14", prompt: "Where does the cottage sit?", options: [{id:"a",text:"edge of the village",is_correct:true},{id:"b",text:"on a bridge",is_correct:false},{id:"c",text:"on a ridge",is_correct:false},{id:"d",text:"in a hedge",is_correct:false}] },
+          { id: "15", prompt: "Which word is a person who decides cases in a law court?", options: [{id:"a",text:"judge",is_correct:true},{id:"b",text:"lodge",is_correct:false},{id:"c",text:"badge",is_correct:false},{id:"d",text:"wedge",is_correct:false}] },
+          { id: "16", prompt: "Which word rhymes with 'ridge'?", options: [{id:"a",text:"bridge",is_correct:true},{id:"b",text:"edge",is_correct:false},{id:"c",text:"dodge",is_correct:false},{id:"d",text:"fudge",is_correct:false}] },
+          { id: "17", prompt: "How many -dge words are in: 'A hedge ran along the edge'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "18", prompt: "Which word describes a long, narrow hilltop or mountain range?", options: [{id:"a",text:"ridge",is_correct:true},{id:"b",text:"ledge",is_correct:false},{id:"c",text:"wedge",is_correct:false},{id:"d",text:"lodge",is_correct:false}] },
+          { id: "19", prompt: "What must Scott dodge?", options: [{id:"a",text:"a bee",is_correct:true},{id:"b",text:"a ball",is_correct:false},{id:"c",text:"a bus",is_correct:false},{id:"d",text:"a bridge",is_correct:false}] },
+          { id: "20", prompt: "What is the phonetic sound of 'dge'?", options: [{id:"a",text:"/j/",is_correct:true},{id:"b",text:"/d-g-e/",is_correct:false},{id:"c",text:"/g/",is_correct:false},{id:"d",text:"/s/",is_correct:false}] }
         ]
       };
 
@@ -184,12 +186,15 @@
 
         const score = `${correctCount}/20`;
         const summary = `*Mini OpenStax — Phonics Lesson 154*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
         const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
 
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the -dge pattern!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 154 words again.'}</strong></p>
             <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
           </div>
         `;
@@ -221,7 +226,11 @@
         setupQuizListeners();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
