@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 152 — Soft G at the End of Words (-ge)"/>
+  <title>Mini OpenStax — Lesson 152: Soft G at the End of Words (-ge)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 152: Soft G at the End of Words (-ge)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH152: Decode words where 'ge' at the end makes the soft /j/ sound.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Soft G Ending Word List</h2>
+        <p>In these words, the <strong>ge</strong> at the end makes the soft <strong>/j/</strong> sound (like the letter J):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud, paying attention to the soft /j/ sound at the end of the words:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Test your knowledge of words ending in soft G.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 151; // chapter-151.html = Lesson 152
+      const maxChapter = 155;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 152: Soft G at the End of Words (-ge)",
+        loTags: ["LO PH152: Decode words where 'ge' at the end makes the soft /j/ sound."],
+        contentWords: [
+          "tinge", "hinge", "fringe", "cringe", "twinge", "lunge", "plunge", "bulge", "indulge", "lounge", "challenge", "college"
+        ],
+        sentences: [
+          "1) The flower is pink with a red tinge.",
+          "2) Sally will indulge herself and have some candy.",
+          "3) Betty can lounge on the beach under a big umbrella.",
+          "4) The college math class will be a challenge for Frank.",
+          "5) Joan has a fancy green dress with fringe on the sleeves.",
+          "6) Jack felt a twinge of pain when the bee stung his finger.",
+          "7) A plunge into the swimming pool will quickly cool you off.",
+          "8) If you eat too much food, you may get a bulge in your middle."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "What color tinge does the pink flower have?", options: [{id:"a",text:"red",is_correct:true},{id:"b",text:"green",is_correct:false},{id:"c",text:"blue",is_correct:false}] },
+          { id: "2", prompt: "What will Sally indulge herself with?", options: [{id:"a",text:"some candy",is_correct:true},{id:"b",text:"a book",is_correct:false},{id:"c",text:"a swim",is_correct:false}] },
+          { id: "3", prompt: "Where can Betty lounge under an umbrella?", options: [{id:"a",text:"on the beach",is_correct:true},{id:"b",text:"at college",is_correct:false},{id:"c",text:"in the kitchen",is_correct:false}] },
+          { id: "4", prompt: "What class will be a challenge for Frank?", options: [{id:"a",text:"college math",is_correct:true},{id:"b",text:"history",is_correct:false},{id:"c",text:"gym",is_correct:false}] },
+          { id: "5", prompt: "Where is the fringe on Joan's dress?", options: [{id:"a",text:"on the sleeves",is_correct:true},{id:"b",text:"on the collar",is_correct:false},{id:"c",text:"on the belt",is_correct:false}] },
+          { id: "6", prompt: "When did Jack feel a twinge of pain?", options: [{id:"a",text:"when a bee stung him",is_correct:true},{id:"b",text:"when he lunged",is_correct:false},{id:"c",text:"when he ate candy",is_correct:false}] },
+          { id: "7", prompt: "What will quickly cool you off?", options: [{id:"a",text:"a plunge into the pool",is_correct:true},{id:"b",text:"lounging on the beach",is_correct:false},{id:"c",text:"eating too much",is_correct:false}] },
+          { id: "8", prompt: "What might happen if you eat too much food?", options: [{id:"a",text:"get a bulge in your middle",is_correct:true},{id:"b",text:"get a hinge",is_correct:false},{id:"c",text:"become a princess",is_correct:false}] },
+          { id: "9", prompt: "Which word refers to a slight trace of color?", options: [{id:"a",text:"tinge",is_correct:true},{id:"b",text:"fringe",is_correct:false},{id:"c",text:"hinge",is_correct:false}] },
+          { id: "10", prompt: "Which word refers to the joint on a door?", options: [{id:"a",text:"hinge",is_correct:true},{id:"b",text:"cringe",is_correct:false},{id:"c",text:"lunge",is_correct:false}] },
+          { id: "11", prompt: "Which word means to pull back in fear or disgust?", options: [{id:"a",text:"cringe",is_correct:true},{id:"b",text:"plunge",is_correct:false},{id:"c",text:"college",is_correct:false}] },
+          { id: "12", prompt: "Which word means a sudden forward movement?", options: [{id:"a",text:"lunge",is_correct:true},{id:"b",text:"twinge",is_correct:false},{id:"c",text:"lounge",is_correct:false}] },
+          { id: "13", prompt: "Which word means a sudden sharp pain?", options: [{id:"a",text:"twinge",is_correct:true},{id:"b",text:"tinge",is_correct:false},{id:"c",text:"bulge",is_correct:false}] },
+          { id: "14", prompt: "Which word means to dive or fall into something?", options: [{id:"a",text:"plunge",is_correct:true},{id:"b",text:"lunge",is_correct:false},{id:"c",text:"fringe",is_correct:false}] },
+          { id: "15", prompt: "Which word means a school for higher learning?", options: [{id:"a",text:"college",is_correct:true},{id:"b",text:"challenge",is_correct:false},{id:"c",text:"office",is_correct:false}] },
+          { id: "16", prompt: "Which word means a difficult task?", options: [{id:"a",text:"challenge",is_correct:true},{id:"b",text:"indulge",is_correct:false},{id:"c",text:"lounge",is_correct:false}] },
+          { id: "17", prompt: "Which word means to relax in a comfortable way?", options: [{id:"a",text:"lounge",is_correct:true},{id:"b",text:"cringe",is_correct:false},{id:"c",text:"plunge",is_correct:false}] },
+          { id: "18", prompt: "Which word means to allow yourself a treat?", options: [{id:"a",text:"indulge",is_correct:true},{id:"b",text:"bulge",is_correct:false},{id:"c",text:"tinge",is_correct:false}] },
+          { id: "19", prompt: "Which word means decorative trim with hanging threads?", options: [{id:"a",text:"fringe",is_correct:true},{id:"b",text:"hinge",is_correct:false},{id:"c",text:"twinge",is_correct:false}] },
+          { id: "20", prompt: "Which word means to swell or stick out?", options: [{id:"a",text:"bulge",is_correct:true},{id:"b",text:"lunge",is_correct:false},{id:"c",text:"tinge",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 152*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
