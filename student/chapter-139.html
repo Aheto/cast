@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 140 — Multisyllable Words with the -le Syllable Ending"/>
+  <title>Mini OpenStax — Lesson 140: Multisyllable Words (Ending le)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 140: Multisyllable Words (le Syllable)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH140: Decode multisyllable words ending with various 'consonant + le' patterns including 'ckle' and 'ngle'.</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Focus on words ending in <strong>-kle</strong> (often spelled <strong>ckle</strong>) and <strong>-gle</strong>:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read these sentences aloud, paying attention to the final <strong>-le</strong> syllables:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Test your knowledge of Lesson 140 vocabulary and context.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const currentChapter = 139; // chapter-139.html = Lesson 140
+      const maxChapter = 150;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 140: Multisyllable Words (le Syllable)",
+        loTags: ["LO PH140: Decode multisyllable words ending with various 'consonant + le' patterns including 'ckle' and 'ngle'."],
+        contentWords: [
+          "pickle", "tickle", "tackle", "crackle", "buckle", "freckle", "angle", "jungle", "single", "tingle", "twinkle", "sprinkle", "ankle"
+        ],
+        sentences: [
+          "1) The kitten will enjoy a tickle on the ear.",
+          "2) The cowboy had a belt with a big silver buckle.",
+          "3) Gail had a dill pickle with her cheese sandwich.",
+          "4) The animal in the zoo is from a jungle in Africa.",
+          "5) A house on Elm Street has a single room for rent.",
+          "6) That little brown spot on your cheek is a freckle.",
+          "7) Ann will tackle the difficult problem and solve it.",
+          "8) Kent must sprinkle the lawn to keep the grass green.",
+          "9) Matt sprained his ankle and must get around on crutches."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Where will the kitten enjoy a tickle?", options: [{id:"a",text:"on the nose",is_correct:false},{id:"b",text:"on the ear",is_correct:true},{id:"c",text:"on the tail",is_correct:false},{id:"d",text:"on the paw",is_correct:false}] },
+          { id: "2", prompt: "What kind of buckle did the cowboy have?", options: [{id:"a",text:"gold",is_correct:false},{id:"b",text:"silver",is_correct:true},{id:"c",text:"plastic",is_correct:false},{id:"d",text:"brass",is_correct:false}] },
+          { id: "3", prompt: "What did Gail have with her cheese sandwich?", options: [{id:"a",text:"a dill pickle",is_correct:true},{id:"b",text:"an apple",is_correct:false},{id:"c",text:"a banana",is_correct:false},{id:"d",text:"a cracker",is_correct:false}] },
+          { id: "4", prompt: "Where is the zoo animal originally from?", options: [{id:"a",text:"a farm in America",is_correct:false},{id:"b",text:"a jungle in Africa",is_correct:true},{id:"c",text:"a forest in Alaska",is_correct:false},{id:"d",text:"a desert",is_correct:false}] },
+          { id: "5", prompt: "How many rooms are for rent in the house on Elm Street?", options: [{id:"a",text:"double",is_correct:false},{id:"b",text:"single",is_correct:true},{id:"c",text:"triple",is_correct:false},{id:"d",text:"none",is_correct:false}] },
+          { id: "6", prompt: "What is the brown spot on the cheek called?", options: [{id:"a",text:"a pebble",is_correct:false},{id:"b",text:"a freckle",is_correct:true},{id:"c",text:"a bubble",is_correct:false},{id:"d",text:"a wrinkle",is_correct:false}] },
+          { id: "7", prompt: "What will Ann do with the difficult problem?", options: [{id:"a",text:"tackle and solve it",is_correct:true},{id:"b",text:"ignore it",is_correct:false},{id:"c",text:"mumble about it",is_correct:false},{id:"d",text:"tumble over it",is_correct:false}] },
+          { id: "8", prompt: "Why must Kent sprinkle the lawn?", options: [{id:"a",text:"to wash the car",is_correct:false},{id:"b",text:"to keep the grass green",is_correct:true},{id:"c",text:"to make a puddle",is_correct:false},{id:"d",text:"to find a pebble",is_correct:false}] },
+          { id: "9", prompt: "What did Matt sprain?", options: [{id:"a",text:"his wrist",is_correct:false},{id:"b",text:"his ankle",is_correct:true},{id:"c",text:"his elbow",is_correct:false},{id:"d",text:"his knee",is_correct:false}] },
+          { id: "10", prompt: "How does Matt get around after spraining his ankle?", options: [{id:"a",text:"on a bike",is_correct:false},{id:"b",text:"on crutches",is_correct:true},{id:"c",text:"in a wagon",is_correct:false},{id:"d",text:"running",is_correct:false}] },
+          { id: "11", prompt: "Which word means to water lightly?", options: [{id:"a",text:"sprinkle",is_correct:true},{id:"b",text:"crackle",is_correct:false},{id:"c",text:"twinkle",is_correct:false},{id:"d",text:"tingle",is_correct:false}] },
+          { id: "12", prompt: "Which word describes a starry night sky?", options: [{id:"a",text:"crackle",is_correct:false},{id:"b",text:"twinkle",is_correct:true},{id:"c",text:"buckle",is_correct:false},{id:"d",text:"tackle",is_correct:false}] },
+          { id: "13", prompt: "Which word means only one?", options: [{id:"a",text:"angle",is_correct:false},{id:"b",text:"single",is_correct:true},{id:"c",text:"jungle",is_correct:false},{id:"d",text:"tingle",is_correct:false}] },
+          { id: "14", prompt: "What word means a thick forest in a hot area?", options: [{id:"a",text:"puddle",is_correct:false},{id:"b",text:"jungle",is_correct:true},{id:"c",text:"shudder",is_correct:false},{id:"d",text:"ankle",is_correct:false}] },
+          { id: "15", prompt: "What is the spelling pattern for 'pickle'?", options: [{id:"a",text:"-kle",is_correct:false},{id:"b",text:"-ckle",is_correct:true},{id:"c",text:"-gle",is_correct:false},{id:"d",text:"-tle",is_correct:false}] },
+          { id: "16", prompt: "Which word means the space between two lines that meet?", options: [{id:"a",text:"ankle",is_correct:false},{id:"b",text:"angle",is_correct:true},{id:"c",text:"single",is_correct:false},{id:"d",text:"buckle",is_correct:false}] },
+          { id: "17", prompt: "What word describes a slight stinging or prickly feeling?", options: [{id:"a",text:"twinkle",is_correct:false},{id:"b",text:"tingle",is_correct:true},{id:"c",text:"sprinkle",is_correct:false},{id:"d",text:"crackle",is_correct:false}] },
+          { id: "18", prompt: "How many syllables are in 'freckle'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] },
+          { id: "19", prompt: "Complete the word: 'twink___'", options: [{id:"a",text:"el",is_correct:false},{id:"b",text:"le",is_correct:true},{id:"c",text:"al",is_correct:false},{id:"d",text:"il",is_correct:false}] },
+          { id: "20", prompt: "Which word rhymes with 'tickle'?", options: [{id:"a",text:"buckle",is_correct:false},{id:"b",text:"pickle",is_correct:true},{id:"c",text:"angle",is_correct:false},{id:"d",text:"single",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
+          <div class="question">
+            <strong>${q.id}. ${q.prompt}</strong>
+            <div class="options">
+              ${q.options.map(opt => `
+                <div class="option">
+                  <label>
+                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
+                  </label>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOpt = item.options.find(o => o.is_correct);
+          const isCorrect = userAns === correctOpt.id;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20`;
+        const summary = `*Mini OpenStax — Phonics Lesson 140*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
