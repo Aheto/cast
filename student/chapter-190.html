@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 191 — ie = /ī/"/>
+  <title>Mini OpenStax — Lesson 191: ie = /ī/</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 191: ie = /ī/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH191: Decode words with vowel team ie = /ī/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words with the <strong>vowel team</strong> <em>ie</em> making the <strong>/ī/</strong> sound:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–191:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 190;   // chapter-190.html = Lesson 191
+      const maxChapter = 261;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 191: ie = /ī/",
+        loTags: ["LO PH191: Decode words with vowel team ie = /ī/"],
+        contentWords: [
+          "die", "lie", "pie", "tie",
+          "dies", "died", "lies", "lied", "ties", "tied",
+          "tries", "tried", "cries", "cried", "dries", "dried", "fries", "fried", "flies"
+        ],
+        sentences: [
+          "A prune is a dried plum.",
+          "The spider trapped three flies in its web.",
+          "Jake wore a brown jacket and a matching tie.",
+          "The baby will lie down in the crib and take a nap.",
+          "Betty tried to do her best in the spelling contest.",
+          "Without proper care, a house plant may dry up and die.",
+          "At dinner, Chuck had some fried chicken with french fries on the side.",
+          "After dinner, Chuck ate a piece of apple pie with vanilla ice cream."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word contains the vowel team 'ie' making /ī/?", options: [{id:"a",text:"pie",is_correct:true},{id:"b",text:"pat",is_correct:false},{id:"c",text:"pet",is_correct:false},{id:"d",text:"pot",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 191 word?", options: [{id:"a",text:"flies",is_correct:false},{id:"b",text:"dried",is_correct:false},{id:"c",text:"dye",is_correct:true},{id:"d",text:"lied",is_correct:false}] },
+          { id: "3", prompt: "In 'tie', what makes the long /ī/ sound?", options: [{id:"a",text:"Vowel team 'ie'",is_correct:true},{id:"b",text:"Silent e",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Y as vowel",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to recline horizontally'?", options: [{id:"a",text:"lie",is_correct:true},{id:"b",text:"tie",is_correct:false},{id:"c",text:"die",is_correct:false},{id:"d",text:"pie",is_correct:false}] },
+          { id: "5", prompt: "How many syllables in 'cried'?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 191 words?", options: [{id:"a",text:"Jake wore a brown jacket and a matching tie.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
+          { id: "7", prompt: "Which word is the past tense of 'try'?", options: [{id:"a",text:"tried",is_correct:true},{id:"b",text:"tries",is_correct:false},{id:"c",text:"tie",is_correct:false},{id:"d",text:"lie",is_correct:false}] },
+          { id: "8", prompt: "What vowel team is in 'flies'?", options: [{id:"a",text:"ie",is_correct:true},{id:"b",text:"ei",is_correct:false},{id:"c",text:"ey",is_correct:false},{id:"d",text:"ai",is_correct:false}] },
+          { id: "9", prompt: "In 'Betty tried to do her best,' how many Lesson 191 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'ceased to live'?", options: [{id:"a",text:"die",is_correct:true},{id:"b",text:"lie",is_correct:false},{id:"c",text:"tie",is_correct:false},{id:"d",text:"pie",is_correct:false}] },
+          { id: "11", prompt: "Which word refers to a baked dessert with fruit filling?", options: [{id:"a",text:"pie",is_correct:true},{id:"b",text:"tie",is_correct:false},{id:"c",text:"lie",is_correct:false},{id:"d",text:"die",is_correct:false}] },
+          { id: "12", prompt: "Which word ends with 'ie' and means 'not truthful'?", options: [{id:"a",text:"lied",is_correct:true},{id:"b",text:"died",is_correct:false},{id:"c",text:"tried",is_correct:false},{id:"d",text:"cried",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 191?", options: [{id:"a",text:"After dinner, Chuck ate a piece of apple pie with vanilla ice cream.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'fried'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word is the plural of 'fly' (insect)?", options: [{id:"a",text:"flies",is_correct:true},{id:"b",text:"flys",is_correct:false},{id:"c",text:"flied",is_correct:false},{id:"d",text:"flyies",is_correct:false}] },
+          { id: "16", prompt: "What phonics pattern is in 'cries'?", options: [{id:"a",text:"ie = /ī/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ei'",is_correct:false}] },
+          { id: "17", prompt: "Which word means 'made an effort'?", options: [{id:"a",text:"tried",is_correct:true},{id:"b",text:"died",is_correct:false},{id:"c",text:"lied",is_correct:false},{id:"d",text:"tied",is_correct:false}] },
+          { id: "18", prompt: "Which word might complete: 'He wore a neck ___.'?", options: [{id:"a",text:"tie",is_correct:true},{id:"b",text:"pie",is_correct:false},{id:"c",text:"lie",is_correct:false},{id:"d",text:"die",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"pie",is_correct:true},{id:"b",text:"tie",is_correct:true},{id:"c",text:"flies",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 191?", options: [{id:"a",text:"Vowel team ie = /ī/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+
+        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          let shuffledOptions = [...q.options];
+          shuffle(shuffledOptions);
+
+          const correctOpt = q.options.find(opt => opt.is_correct);
+          window.quizCorrectMap[q.id] = correctOpt.id;
+
+          const optionsHTML = shuffledOptions.map((opt, idx) => {
+            const label = String.fromCharCode(97 + idx).toUpperCase();
+            return `
+              <div class="option">
+                <label>
+                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
+                </label>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="question">
+              <strong>${q.id}. ${q.prompt}</strong>
+              <div class="options">
+                ${optionsHTML}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        form.innerHTML = quizHTML;
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOptId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctOptId);
+          const isCorrect = userAns === correctOptId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20}`;
+        const summary = `*Mini OpenStax — Phonics Lesson 191*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered ie=/ī/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 191 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
