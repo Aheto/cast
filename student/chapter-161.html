@@ -40,7 +40,6 @@
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
@@ -71,8 +70,17 @@
     (function () {
       'use strict';
 
-      const currentChapter = 161;   // chapter-161.html = Lesson 162
-      const maxChapter = 261;       // Supports all 262 lessons
+      // Fisher-Yates shuffle (in-place)
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 161;
+      const maxChapter = 261;
 
       const CHAPTER_CONFIG = {
         title: "Lesson 162: Magic E (i=/ī/)",
@@ -156,26 +164,47 @@
         `).join('');
       }
 
-      // Render quiz
+      // 🔁 Render quiz WITH RANDOMIZED OPTIONS
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
+        // Store mapping: question ID → correct option ID (for grading)
+        window.quizCorrectMap = {};
+
+        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          // Clone and shuffle options
+          let shuffledOptions = [...q.options];
+          shuffle(shuffledOptions);
+
+          // Find which shuffled option is correct and record its ORIGINAL id
+          const correctOpt = q.options.find(opt => opt.is_correct);
+          window.quizCorrectMap[q.id] = correctOpt.id;
+
+          // Generate radio options with shuffled order
+          const optionsHTML = shuffledOptions.map((opt, idx) => {
+            const label = String.fromCharCode(97 + idx).toUpperCase(); // A, B, C, D
+            return `
+              <div class="option">
+                <label>
+                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
+                </label>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="question">
+              <strong>${q.id}. ${q.prompt}</strong>
+              <div class="options">
+                ${optionsHTML}
+              </div>
             </div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
+
+        form.innerHTML = quizHTML;
       }
 
-      // WhatsApp feedback
+      // Feedback (now uses window.quizCorrectMap)
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0;
@@ -183,8 +212,9 @@
 
         items.forEach((item, i) => {
           const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const correctOptId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctOptId);
+          const isCorrect = userAns === correctOptId;
           if (isCorrect) {
             correctCount++;
             correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
