@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 226 — Short Vowel all = /awl/"/>
+  <title>Mini OpenStax — Lesson 226: all = /awl/</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 226: all = /awl/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH226: Decode words with all = /awl/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words with the <strong>all = /awl/</strong> pattern:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–226:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 225;   // chapter-225.html = Lesson 226
+      const maxChapter = 261;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 226: all = /awl/",
+        loTags: ["LO PH226: Decode words with all = /awl/"],
+        contentWords: [
+          "all", "ball", "call", "calling", "fall", "gall", "hall", "mall", "tall", "wall",
+          "small", "stall", "squall", "recall", "install",
+          "baseball", "basketball", "snowball", "pitfall"
+        ],
+        sentences: [
+          "Arthur can go shopping at the local mall.",
+          "Bert can install a new program on his computer.",
+          "This next fall, Judy will begin the fourth grade.",
+          "Over the years, the small boy grew into a tall youth.",
+          "Betty hung an oil painting on the wall of her bedroom.",
+          "Earl picked up a handful of snow and packed it into a snowball.",
+          "During roll call, the teacher will call out the name of each student.",
+          "The basketball player will bounce the ball twice, and then shoot it into the basket."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word contains 'all' making /awl/?", options: [{id:"a",text:"ball",is_correct:true},{id:"b",text:"bat",is_correct:false},{id:"c",text:"bad",is_correct:false},{id:"d",text:"ban",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 226 word?", options: [{id:"a",text:"basketball",is_correct:false},{id:"b",text:"snowball",is_correct:false},{id:"c",text:"waterfall",is_correct:true},{id:"d",text:"mall",is_correct:false}] },
+          { id: "3", prompt: "In 'wall', what sound does 'all' make?", options: [{id:"a",text:"/awl/",is_correct:true},{id:"b",text:"/ăl/",is_correct:false},{id:"c",text:"/äl/",is_correct:false},{id:"d",text:"/ōl/",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to put something in place for use'?", options: [{id:"a",text:"install",is_correct:true},{id:"b",text:"recall",is_correct:false},{id:"c",text:"stall",is_correct:false},{id:"d",text:"gall",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'basketball'?", options: [{id:"a",text:"10",is_correct:true},{id:"b",text:"9",is_correct:false},{id:"c",text:"11",is_correct:false},{id:"d",text:"8",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 226 words?", options: [{id:"a",text:"Arthur can go shopping at the local mall.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
+          { id: "7", prompt: "Which word refers to a building for public events or education?", options: [{id:"a",text:"hall",is_correct:true},{id:"b",text:"wall",is_correct:false},{id:"c",text:"mall",is_correct:false},{id:"d",text:"stall",is_correct:false}] },
+          { id: "8", prompt: "What pattern is in 'small'?", options: [{id:"a",text:"all = /awl/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
+          { id: "9", prompt: "In 'The basketball player will bounce the ball twice,' how many Lesson 226 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to summon by shouting'?", options: [{id:"a",text:"call",is_correct:true},{id:"b",text:"fall",is_correct:false},{id:"c",text:"wall",is_correct:false},{id:"d",text:"mall",is_correct:false}] },
+          { id: "11", prompt: "Which word describes someone of above-average height?", options: [{id:"a",text:"tall",is_correct:true},{id:"b",text:"small",is_correct:false},{id:"c",text:"ball",is_correct:false},{id:"d",text:"hall",is_correct:false}] },
+          { id: "12", prompt: "Which compound word means 'a ball made of compacted snow'?", options: [{id:"a",text:"snowball",is_correct:true},{id:"b",text:"baseball",is_correct:false},{id:"c",text:"basketball",is_correct:false},{id:"d",text:"pitfall",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 226?", options: [{id:"a",text:"Betty hung an oil painting on the wall of her bedroom.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'recall'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "15", prompt: "Which word means 'to remember something or bring it back'?", options: [{id:"a",text:"recall",is_correct:true},{id:"b",text:"install",is_correct:false},{id:"c",text:"squall",is_correct:false},{id:"d",text:"stall",is_correct:false}] },
+          { id: "16", prompt: "What phonics pattern is in 'calling'?", options: [{id:"a",text:"all = /awl/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
+          { id: "17", prompt: "Which word refers to a short, violent storm?", options: [{id:"a",text:"squall",is_correct:true},{id:"b",text:"stall",is_correct:false},{id:"c",text:"gall",is_correct:false},{id:"d",text:"pitfall",is_correct:false}] },
+          { id: "18", prompt: "Which word might complete: 'He hit a ___ in his plan.'?", options: [{id:"a",text:"pitfall",is_correct:true},{id:"b",text:"mall",is_correct:false},{id:"c",text:"hall",is_correct:false},{id:"d",text:"ball",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"mall",is_correct:true},{id:"b",text:"fall",is_correct:true},{id:"c",text:"ball",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 226?", options: [{id:"a",text:"Short vowel all = /awl/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+
+        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          let shuffledOptions = [...q.options];
+          shuffle(shuffledOptions);
+
+          const correctOpt = q.options.find(opt => opt.is_correct);
+          window.quizCorrectMap[q.id] = correctOpt.id;
+
+          const optionsHTML = shuffledOptions.map((opt, idx) => {
+            const label = String.fromCharCode(97 + idx).toUpperCase();
+            return `
+              <div class="option">
+                <label>
+                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
+                </label>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="question">
+              <strong>${q.id}. ${q.prompt}</strong>
+              <div class="options">
+                ${optionsHTML}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        form.innerHTML = quizHTML;
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOptId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctOptId);
+          const isCorrect = userAns === correctOptId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20}`;
+        const summary = `*Mini OpenStax — Phonics Lesson 226*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered all=/awl/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 226 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
