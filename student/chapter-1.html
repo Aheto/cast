@@ -179,6 +179,48 @@
         `).join('');
       }
 
+      function showFeedback(answers) {
+  // ... (existing correctness logic) ...
+
+  const score = correctCount;
+  const total = 20;
+  const mastery = score >= 15; // 75% = mastery
+
+  // === SEND TELEMETRY ===
+  if (typeof plausible !== 'undefined') {
+    // Event: lesson completed
+    plausible('LessonCompleted', {
+      props: {
+        lesson: currentChapter + 1, // Lesson 1 = chapter-0.html
+        score: score,
+        mastery: mastery,
+        timeOnTask: Math.floor((Date.now() - window.startTime) / 1000), // seconds
+        attempts: (localStorage.getItem('quiz_attempts_' + currentChapter) || 0) + 1
+      }
+    });
+
+    // Track per-question accuracy
+    answers.forEach((ans, i) => {
+      const qNum = i + 1;
+      const isCorrect = ans === window.quizCorrectMap[String(qNum)];
+      plausible('QuestionAnswered', {
+        props: {
+          lesson: currentChapter + 1,
+          question: qNum,
+          correct: isCorrect
+        }
+      });
+    });
+  }
+
+  // === SAVE ATTEMPT COUNT ===
+  const attemptsKey = 'quiz_attempts_' + currentChapter;
+  const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+  localStorage.setItem(attemptsKey, attempts);
+
+  // ... (rest of your feedback UI) ...
+}
+
       // Show feedback with WhatsApp summary
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
