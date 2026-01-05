@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 3 — Short /ă/ CVC Words"/>
-  <title>Mini OpenStax — Lesson 3: Short a (/ă/) Words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 3 — Closed Syllables: a = /ă/"/>
+  <title>Mini OpenStax — Lesson 3: a = /ă/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -34,29 +34,36 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 3: Short a (/ă/) Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH3: Decode and read CVC words with short /ă/</div>
+        <h1 id="chapter-title">Lesson 3: a = /ă/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH3: Decode CVC words with short vowel a = /ă/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>All words follow the CVC (consonant-vowel-consonant) pattern with short <strong>/ă/</strong>:</p>
+        <p>Words with the <strong>short vowel</strong> <em>a</em> making the <strong>/ă/</strong> sound in closed syllables:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud. All words are from Lesson 3 or earlier:</p>
+        <p>Read aloud. All words are decodable from Lessons 2–3:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <!-- Student Name Prompt -->
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <p>Please enter your name to personalize your report:</p>
+        <input type="text" id="student-name" placeholder="e.g., Kwame" maxlength="30" style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;">
+        <button type="button" class="btn" id="save-name">Save and Start Quiz</button>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -71,15 +78,27 @@
     (function () {
       'use strict';
 
-      const currentChapter = 2;
-      const maxChapter = 6; // Lesson 7 = chapter-6.html
+      window.startTime = Date.now();
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 2;   // chapter-2.html = Lesson 3
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
+
       const CHAPTER_CONFIG = {
-        title: "Lesson 3: Short a (/ă/) Words",
-        loTags: ["LO PH3: Decode and read CVC words with short /ă/"],
+        title: "Lesson 3: a = /ă/",
+        loTags: ["LO PH3: Decode CVC words with short vowel a = /ă/"],
         contentWords: [
-          "nab", "nag", "Nan", "nap", "Nat", "tab", "tad", "tag", "tan", "tap", "fan", "fad", "fat",
-          "pad", "pan", "pat", "pal", "Pam", "bad", "bag", "bam", "ban", "bat", "man", "mat", "mad",
-          "map", "Mac"
+          "nab", "nag", "Nan", "nap", "Nat", "tab", "tad", "tag", "tan", "tap",
+          "fan", "fad", "fat", "pad", "pan", "pat", "pal", "Pam", "bad", "bag",
+          "bam", "ban", "bat", "man", "mat", "mad", "map", "Mac"
         ],
         sentences: [
           "Mac had a map.",
@@ -93,56 +112,45 @@
           "The man at bat had a tan cap.",
           "Pat can fan the man at bat."
         ],
-        whatsappNumber: "233257320201",
+        whatsappNumber: WHATSAPP_NUMBER,
         assessmentItems: [
-          { id: "1", prompt: "Which word is in Lesson 3?", options: [{id:"a",text:"nap",is_correct:true},{id:"b",text:"napk",is_correct:false},{id:"c",text:"nape",is_correct:false},{id:"d",text:"napt",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 3 word?", options: [{id:"a",text:"man",is_correct:false},{id:"b",text:"map",is_correct:false},{id:"c",text:"mad",is_correct:false},{id:"d",text:"max",is_correct:true}] },
-          { id: "3", prompt: "What sound does 'a' make in 'fan'?", options: [{id:"a",text:"/ā/",is_correct:false},{id:"b",text:"/ă/",is_correct:true},{id:"c",text:"/â/",is_correct:false},{id:"d",text:"/ä/",is_correct:false}] },
-          { id: "4", prompt: "Which word ends with /n/ and has short /ă/?", options: [{id:"a",text:"pan",is_correct:true},{id:"b",text:"pant",is_correct:false},{id:"c",text:"pane",is_correct:false},{id:"d",text:"pain",is_correct:false}] },
-          { id: "5", prompt: "How many consonants are in 'bad'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "6", prompt: "Which word is a name in Lesson 3?", options: [{id:"a",text:"Sam",is_correct:false},{id:"b",text:"Nat",is_correct:true},{id:"c",text:"Tom",is_correct:false},{id:"d",text:"Ben",is_correct:false}] },
-          { id: "7", prompt: "Which sentence uses only Lesson 2–3 words?", options: [{id:"a",text:"Pam had a pal.",is_correct:true},{id:"b",text:"Pam had a car.",is_correct:false},{id:"c",text:"Pam sat on a mat.",is_correct:false},{id:"d",text:"Pam ran to a map.",is_correct:false}] },
-          { id: "8", prompt: "Which word is an action (verb)?", options: [{id:"a",text:"fan",is_correct:true},{id:"b",text:"man",is_correct:false},{id:"c",text:"map",is_correct:false},{id:"d",text:"cap",is_correct:false}] },
-          { id: "9", prompt: "Which word is NOT decodable using only Lessons 1–3?", options: [{id:"a",text:"bat",is_correct:false},{id:"b",text:"bad",is_correct:false},{id:"c",text:"bam",is_correct:false},{id:"d",text:"bomb",is_correct:true}] },
-          { id: "10", prompt: "In 'The tan cat ran at a fat rat', how many Lesson 3 words appear?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "11", prompt: "Which word starts with 'p' and has short /ă/?", options: [{id:"a",text:"pal",is_correct:true},{id:"b",text:"pail",is_correct:false},{id:"c",text:"pain",is_correct:false},{id:"d",text:"pane",is_correct:false}] },
-          { id: "12", prompt: "What closes the vowel in 'mat'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 't'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
-          { id: "13", prompt: "Which word is a real Lesson 3 word ending in /d/?", options: [{id:"a",text:"fad",is_correct:true},{id:"b",text:"fade",is_correct:false},{id:"c",text:"fadd",is_correct:false},{id:"d",text:"fated",is_correct:false}] },
-          { id: "14", prompt: "Which word could be confused with a non-decodable word?", options: [{id:"a",text:"tab",is_correct:true},{id:"b",text:"table",is_correct:false},{id:"c",text:"tame",is_correct:false},{id:"d",text:"tape",is_correct:false}] },
-          { id: "15", prompt: "Which sentence is from Lesson 3?", options: [{id:"a",text:"Mac had a map.",is_correct:true},{id:"b",text:"Mac had a car.",is_correct:false},{id:"c",text:"Mac sat on a mat.",is_correct:false},{id:"d",text:"Mac ran to a map.",is_correct:false}] },
-          { id: "16", prompt: "How many letters are in 'pad'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "17", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"fan",is_correct:true},{id:"b",text:"bag",is_correct:false},{id:"c",text:"map",is_correct:false},{id:"d",text:"bat",is_correct:false}] },
-          { id: "18", prompt: "What phonics rule applies to all Lesson 3 words?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"Closed syllable with short /ă/",is_correct:true},{id:"c",text:"Open syllable",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "19", prompt: "Which word list item begins with 'n'?", options: [{id:"a",text:"nab",is_correct:true},{id:"b",text:"napk",is_correct:false},{id:"c",text:"name",is_correct:false},{id:"d",text:"nape",is_correct:false}] },
-          { id: "20", prompt: "Which word contains the blend 'bl'?", options: [{id:"a",text:"bat",is_correct:false},{id:"b",text:"bad",is_correct:false},{id:"c",text:"bam",is_correct:true},{id:"d",text:"ban",is_correct:false}] }
+          { id: "1", prompt: "Which word has short a = /ă/?", options: [{id:"a",text:"map",is_correct:true},{id:"b",text:"make",is_correct:false},{id:"c",text:"mail",is_correct:false},{id:"d",text:"main",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 3 word?", options: [{id:"a",text:"man",is_correct:false},{id:"b",text:"mat",is_correct:false},{id:"c",text:"may",is_correct:true},{id:"d",text:"mad",is_correct:false}] },
+          { id: "3", prompt: "In 'fan', what sound does 'a' make?", options: [{id:"a",text:"/ă/",is_correct:true},{id:"b",text:"/ā/",is_correct:false},{id:"c",text:"/e/",is_correct:false},{id:"d",text:"/o/",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'a male given name'?", options: [{id:"a",text:"Mac",is_correct:true},{id:"b",text:"map",is_correct:false},{id:"c",text:"mad",is_correct:false},{id:"d",text:"mat",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'Pam'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 3 words?", options: [{id:"a",text:"Mac had a map.",is_correct:true},{id:"b",text:"She ran fast.",is_correct:false},{id:"c",text:"He ate cake.",is_correct:false},{id:"d",text:"It is big.",is_correct:false}] },
+          { id: "7", prompt: "Which word refers to a small square of fabric?", options: [{id:"a",text:"— (not listed)",is_correct:true},{id:"b",text:"tag",is_correct:false},{id:"c",text:"tan",is_correct:false},{id:"d",text:"tab",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is in 'bat'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
+          { id: "9", prompt: "In 'The tan cat ran at a fat rat,' how many Lesson 3 words?", options: [{id:"a",text:"7",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to seize suddenly'?", options: [{id:"a",text:"nab",is_correct:true},{id:"b",text:"nap",is_correct:false},{id:"c",text:"nag",is_correct:false},{id:"d",text:"Nat",is_correct:false}] },
+          { id: "11", prompt: "Which word describes someone angry?", options: [{id:"a",text:"mad",is_correct:true},{id:"b",text:"sad",is_correct:false},{id:"c",text:"glad",is_correct:false},{id:"d",text:"bad",is_correct:false}] },
+          { id: "12", prompt: "Which word ends with 'a' and means 'a female name'?", options: [{id:"a",text:"Nan",is_correct:true},{id:"b",text:"Pam",is_correct:false},{id:"c",text:"Nat",is_correct:false},{id:"d",text:"Mac",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 3?", options: [{id:"a",text:"Pam had a pal.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'bag'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'Put on your ___.'?", options: [{id:"a",text:"cap",is_correct:true},{id:"b",text:"cat",is_correct:false},{id:"c",text:"can",is_correct:false},{id:"d",text:"car",is_correct:false}] },
+          { id: "16", prompt: "What phonics pattern is in 'nap'?", options: [{id:"a",text:"Short vowel a = /ă/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:true},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "17", prompt: "Which word refers to a writing instrument?", options: [{id:"a",text:"— (not listed)",is_correct:true},{id:"b",text:"tag",is_correct:false},{id:"c",text:"tan",is_correct:false},{id:"d",text:"tab",is_correct:false}] },
+          { id: "18", prompt: "Which word might complete: 'The ___ ran fast.'?", options: [{id:"a",text:"cat",is_correct:true},{id:"b",text:"cap",is_correct:false},{id:"c",text:"can",is_correct:false},{id:"d",text:"car",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"Mac",is_correct:true},{id:"b",text:"map",is_correct:true},{id:"c",text:"cat",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 3?", options: [{id:"a",text:"Closed syllables with short a = /ă/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
         ]
       };
 
-      // Render word list
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML = 
+          CHAPTER_CONFIG.contentWords.map(word => `<span class="word-item">${word}</span>`).join('');
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        document.getElementById('sentences').innerHTML = 
+          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // Render 5-button navigation (Home + current + next 3 lessons)
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [];
-
-        // Button 1: Always Homepage
         buttons.push({ label: "Home", url: "../index.html", active: false });
-
-        // Buttons 2–5: Current + next 3 lessons (max = 6)
         for (let i = 0; i < 4; i++) {
           const chapterNum = currentChapter + i;
           if (chapterNum > maxChapter) break;
@@ -153,7 +161,6 @@
             active: (i === 0)
           });
         }
-
         nav.innerHTML = buttons.map(btn => `
           <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
             ${btn.label}
@@ -161,26 +168,28 @@
         `).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          let shuffledOptions = [...q.options];
+          shuffle(shuffledOptions);
+
+          const correctOpt = q.options.find(opt => opt.is_correct);
+          window.quizCorrectMap[q.id] = correctOpt.id;
+
+          const optionsHTML = shuffledOptions.map((opt, idx) => {
+            const label = String.fromCharCode(97 + idx).toUpperCase();
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optionsHTML}</div></div>`;
+        }).join('');
+
+        form.innerHTML = quizHTML;
       }
 
-      // Show feedback with WhatsApp summary
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0;
@@ -188,33 +197,46 @@
 
         items.forEach((item, i) => {
           const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const correctOptId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctOptId);
+          const isCorrect = userAns === correctOptId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === userAns)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 3*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount;
+        const total = 20;
+        const mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round((score/total)*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
 
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Great job!' : correctCount >= 10 ? 'Keep practicing!' : 'Review Lesson 3 and try again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent! You’ve mastered short a=/ă/!' : score >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 3 words again.'}</strong></p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${whatsappUrl}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report to Instructor via WhatsApp
+            </a>
           </div>
         `;
       }
 
-      // Submit handler
       function setupQuizListeners() {
         document.getElementById('submit-quiz').addEventListener('click', () => {
           const form = document.getElementById('quiz-form');
@@ -231,7 +253,33 @@
         });
       }
 
-      // Initialize
+      function initNamePrompt() {
+        const savedName = localStorage.getItem('student_name');
+        const namePrompt = document.getElementById('student-name-prompt');
+        const quizContainer = document.getElementById('quiz-container');
+
+        if (savedName) {
+          namePrompt.style.display = 'none';
+          quizContainer.style.display = 'block';
+        } else {
+          namePrompt.style.display = 'block';
+          quizContainer.style.display = 'none';
+
+          document.getElementById('save-name').addEventListener('click', () => {
+            const nameInput = document.getElementById('student-name');
+            const name = nameInput.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              namePrompt.style.display = 'none';
+              quizContainer.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              nameInput.focus();
+            }
+          });
+        }
+      }
+
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
@@ -240,6 +288,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
