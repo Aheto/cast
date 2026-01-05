@@ -68,6 +68,9 @@
   </div>
 
   <script>
+
+    // Track start time for time-on-task
+window.startTime = Date.now();
     (function () {
       'use strict';
 
@@ -220,6 +223,8 @@
 
   // ... (rest of your feedback UI) ...
 }
+      // Save mastery status
+localStorage.setItem('mastery_' + currentChapter, mastery ? '1' : '0');
 
       // Show feedback with WhatsApp summary
       function showFeedback(answers) {
