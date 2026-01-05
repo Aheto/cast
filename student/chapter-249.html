@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 250 — Silent Letters: Miscellaneous III"/>
+  <title>Mini OpenStax — Lesson 250: Miscellaneous Silent Letters III</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 250: Miscellaneous Silent Letters III</h1>
+        <div class="lo-tags" id="lo-tags">LO PH250: Recognize words with silent u and irregular spellings</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words with <strong>silent or irregular letters</strong> (e.g., silent <em>u</em> after <em>g</em>):</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. These words must be recognized as sight words due to irregular spelling.</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 249;   // chapter-249.html = Lesson 250
+      const maxChapter = 261;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 250: Miscellaneous Silent Letters III",
+        loTags: ["LO PH250: Recognize words with silent u and irregular spellings"],
+        contentWords: [
+          "guy", "guard", "guess", "guest", "guilt", "guilty", "guild", "guitar", "guide", "guile", "guise", "disguise", "guardian", "guarantee", "league", "vague", "plague", "rogue", "vogue"
+        ],
+        sentences: [
+          "The cowboy played a country song on his guitar.",
+          "John will play in a baseball league this spring.",
+          "The teacher can guide the student through the lesson.",
+          "The bank has a guard to protect the money in the vault.",
+          "The jury must decide whether the man is guilty of a crime.",
+          "The famous actor wore a fake beard and dark glasses as a disguise.",
+          "When you read a new word, it is better to sound it out than to guess.",
+          "The hotel guest hung a\"Do not disturb\" sign on the door of his room."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word has a silent 'u' after 'g'?", options: [{id:"a",text:"guest",is_correct:true},{id:"b",text:"goat",is_correct:false},{id:"c",text:"gap",is_correct:false},{id:"d",text:"get",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 250 word?", options: [{id:"a",text:"vogue",is_correct:false},{id:"b",text:"rogue",is_correct:false},{id:"c",text:"glue",is_correct:true},{id:"d",text:"guarantee",is_correct:false}] },
+          { id: "3", prompt: "In 'guess', is the 'u' pronounced?", options: [{id:"a",text:"No, it is silent",is_correct:true},{id:"b",text:"Yes, as /yoo/",is_correct:false},{id:"c",text:"Yes, as /uh/",is_correct:false},{id:"d",text:"It makes a /w/ sound",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to form an opinion without enough information'?", options: [{id:"a",text:"guess",is_correct:true},{id:"b",text:"guide",is_correct:false},{id:"c",text:"guard",is_correct:false},{id:"d",text:"guilt",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'disguise'?", options: [{id:"a",text:"8",is_correct:true},{id:"b",text:"7",is_correct:false},{id:"c",text:"9",is_correct:false},{id:"d",text:"6",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 250 words?", options: [{id:"a",text:"The cowboy played a country song on his guitar.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
+          { id: "7", prompt: "Which word refers to a person who watches over or protects?", options: [{id:"a",text:"guard",is_correct:true},{id:"b",text:"guild",is_correct:false},{id:"c",text:"guile",is_correct:false},{id:"d",text:"guise",is_correct:false}] },
+          { id: "8", prompt: "What is silent in 'guilty'?", options: [{id:"a",text:"The 'u'",is_correct:true},{id:"b",text:"The 'g'",is_correct:false},{id:"c",text:"The 'l'",is_correct:false},{id:"d",text:"The 't'",is_correct:false}] },
+          { id: "9", prompt: "In 'The jury must decide whether the man is guilty of a crime,' how many Lesson 250 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to show the way or give directions'?", options: [{id:"a",text:"guide",is_correct:true},{id:"b",text:"guard",is_correct:false},{id:"c",text:"guess",is_correct:false},{id:"d",text:"guarantee",is_correct:false}] },
+          { id: "11", prompt: "Which word describes someone who is not honest and uses trickery?", options: [{id:"a",text:"guile",is_correct:true},{id:"b",text:"guilt",is_correct:false},{id:"c",text:"guy",is_correct:false},{id:"d",text:"guitar",is_correct:false}] },
+          { id: "12", prompt: "Which word ends with silent 'ue' and means 'fashionable trend'?", options: [{id:"a",text:"vogue",is_correct:true},{id:"b",text:"rogue",is_correct:false},{id:"c",text:"league",is_correct:false},{id:"d",text:"plague",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 250?", options: [{id:"a",text:"The famous actor wore a fake beard and dark glasses as a disguise.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'guarantee'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'He felt a deep sense of ___ after lying.'?", options: [{id:"a",text:"guilt",is_correct:true},{id:"b",text:"guide",is_correct:false},{id:"c",text:"guest",is_correct:false},{id:"d",text:"guitar",is_correct:false}] },
+          { id: "16", prompt: "What is special about the 'u' in 'guard'?", options: [{id:"a",text:"It is silent",is_correct:true},{id:"b",text:"It makes a /yoo/ sound",is_correct:false},{id:"c",text:"It doubles the g sound",is_correct:false},{id:"d",text:"It is pronounced /uh/",is_correct:false}] },
+          { id: "17", prompt: "Which word refers to a promise or assurance?", options: [{id:"a",text:"guarantee",is_correct:true},{id:"b",text:"guild",is_correct:false},{id:"c",text:"guise",is_correct:false},{id:"d",text:"guile",is_correct:false}] },
+          { id: "18", prompt: "Which word might complete: 'Don’t ___—read the word carefully.'?", options: [{id:"a",text:"guess",is_correct:true},{id:"b",text:"guide",is_correct:false},{id:"c",text:"guard",is_correct:false},{id:"d",text:"guy",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"guitar",is_correct:true},{id:"b",text:"league",is_correct:true},{id:"c",text:"guest",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 250?", options: [{id:"a",text:"Words with silent u after g and irregular spellings",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+
+        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          let shuffledOptions = [...q.options];
+          shuffle(shuffledOptions);
+
+          const correctOpt = q.options.find(opt => opt.is_correct);
+          window.quizCorrectMap[q.id] = correctOpt.id;
+
+          const optionsHTML = shuffledOptions.map((opt, idx) => {
+            const label = String.fromCharCode(97 + idx).toUpperCase();
+            return `
+              <div class="option">
+                <label>
+                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
+                </label>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="question">
+              <strong>${q.id}. ${q.prompt}</strong>
+              <div class="options">
+                ${optionsHTML}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        form.innerHTML = quizHTML;
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOptId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctOptId);
+          const isCorrect = userAns === correctOptId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20}`;
+        const summary = `*Mini OpenStax — Phonics Lesson 250*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered silent u and irregular spellings!' : correctCount >= 10 ? 'Good! Review silent u in g-words.' : 'Practice Lesson 250 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
