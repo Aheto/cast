@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 220 — R-Controlled ur = /ər/"/>
+  <title>Mini OpenStax — Lesson 220: ur = /ər/</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn:hover { background: #218838; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .correct { color: #28a745; }
+    .incorrect { color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 220: ur = /ər/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH220: Decode words with r-controlled ur = /ər/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words with the <strong>r-controlled</strong> <em>ur</em> making the <strong>/ər/</strong> sound:</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud. All words are decodable from Lessons 2–220:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 219;   // chapter-219.html = Lesson 220
+      const maxChapter = 261;
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 220: ur = /ər/",
+        loTags: ["LO PH220: Decode words with r-controlled ur = /ər/"],
+        contentWords: [
+          "fur", "burn", "turn", "curb", "curl", "hurl", "hurt", "surf", "blur", "spur",
+          "burst", "churn", "church",
+          "curve", "curse", "nurse", "purse", "urge", "surge"
+        ],
+        sentences: [
+          "A nurse is a person who helps the sick.",
+          "The puppy has a coat of short black fur.",
+          "The family will go to church on Sunday morning.",
+          "The pitcher will hurl a fast pitch to the catcher.",
+          "Sue asked Lou to turn down the volume on the radio.",
+          "The lady carried a brown purse under her right arm.",
+          "The man can park his car on the street next to the curb.",
+          "Joe must try to control his urge to eat too much candy and ice cream."
+        ],
+        whatsappNumber: "233257320201",
+        assessmentItems: [
+          { id: "1", prompt: "Which word contains 'ur' making /ər/?", options: [{id:"a",text:"nurse",is_correct:true},{id:"b",text:"nut",is_correct:false},{id:"c",text:"nap",is_correct:false},{id:"d",text:"net",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 220 word?", options: [{id:"a",text:"surge",is_correct:false},{id:"b",text:"blur",is_correct:false},{id:"c",text:"murmur",is_correct:true},{id:"d",text:"burn",is_correct:false}] },
+          { id: "3", prompt: "In 'hurt', what sound does 'ur' make?", options: [{id:"a",text:"/ər/",is_correct:true},{id:"b",text:"/är/",is_correct:false},{id:"c",text:"/ôr/",is_correct:false},{id:"d",text:"/ūr/",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'a person trained to care for the sick'?", options: [{id:"a",text:"nurse",is_correct:true},{id:"b",text:"purse",is_correct:false},{id:"c",text:"curse",is_correct:false},{id:"d",text:"church",is_correct:false}] },
+          { id: "5", prompt: "How many letters in 'surge'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 220 words?", options: [{id:"a",text:"The lady carried a brown purse under her right arm.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
+          { id: "7", prompt: "Which word refers to the soft hair covering an animal’s body?", options: [{id:"a",text:"fur",is_correct:true},{id:"b",text:"curl",is_correct:false},{id:"c",text:"spur",is_correct:false},{id:"d",text:"blur",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is in 'church'?", options: [{id:"a",text:"R-controlled",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Open syllable",is_correct:false},{id:"d",text:"Closed syllable",is_correct:false}] },
+          { id: "9", prompt: "In 'Joe must try to control his urge to eat too much candy,' how many Lesson 220 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to throw forcefully with the arm'?", options: [{id:"a",text:"hurl",is_correct:true},{id:"b",text:"burn",is_correct:false},{id:"c",text:"turn",is_correct:false},{id:"d",text:"curl",is_correct:false}] },
+          { id: "11", prompt: "Which word describes a place of Christian worship?", options: [{id:"a",text:"church",is_correct:true},{id:"b",text:"curve",is_correct:false},{id:"c",text:"curb",is_correct:false},{id:"d",text:"purse",is_correct:false}] },
+          { id: "12", prompt: "Which word ends with 'ur' and means 'to rotate rapidly (as in cream)'?", options: [{id:"a",text:"churn",is_correct:true},{id:"b",text:"burn",is_correct:false},{id:"c",text:"hurt",is_correct:false},{id:"d",text:"surf",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 220?", options: [{id:"a",text:"The pitcher will hurl a fast pitch to the catcher.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
+          { id: "14", prompt: "How many consonants in 'blur'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word means 'a strong desire or impulse'?", options: [{id:"a",text:"urge",is_correct:true},{id:"b",text:"spur",is_correct:false},{id:"c",text:"curse",is_correct:false},{id:"d",text:"burst",is_correct:false}] },
+          { id: "16", prompt: "What phonics pattern is in 'curb'?", options: [{id:"a",text:"R-controlled ur = /ər/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
+          { id: "17", prompt: "Which word refers to the edge of a road where cars can stop?", options: [{id:"a",text:"curb",is_correct:true},{id:"b",text:"curve",is_correct:false},{id:"c",text:"church",is_correct:false},{id:"d",text:"fur",is_correct:false}] },
+          { id: "18", prompt: "Which word might complete: 'Don’t ___ the engine too hard.'?", options: [{id:"a",text:"burn",is_correct:true},{id:"b",text:"turn",is_correct:false},{id:"c",text:"hurl",is_correct:false},{id:"d",text:"surf",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"nurse",is_correct:true},{id:"b",text:"fur",is_correct:true},{id:"c",text:"church",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 220?", options: [{id:"a",text:"R-controlled ur = /ər/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel teams",is_correct:false}] }
+        ]
+      };
+
+      function renderWords() {
+        const container = document.getElementById('word-list');
+        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
+          `<span class="word-item">${word}</span>`
+        ).join('');
+      }
+
+      function renderSentences() {
+        const container = document.getElementById('sentences');
+        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
+          `<p>${s}</p>`
+        ).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [];
+        buttons.push({ label: "Home", url: "../index.html", active: false });
+        for (let i = 0; i < 4; i++) {
+          const chapterNum = currentChapter + i;
+          if (chapterNum > maxChapter) break;
+          const lessonNum = chapterNum + 1;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${chapterNum}.html`,
+            active: (i === 0)
+          });
+        }
+        nav.innerHTML = buttons.map(btn => `
+          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
+            ${btn.label}
+          </a>
+        `).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+
+        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          let shuffledOptions = [...q.options];
+          shuffle(shuffledOptions);
+
+          const correctOpt = q.options.find(opt => opt.is_correct);
+          window.quizCorrectMap[q.id] = correctOpt.id;
+
+          const optionsHTML = shuffledOptions.map((opt, idx) => {
+            const label = String.fromCharCode(97 + idx).toUpperCase();
+            return `
+              <div class="option">
+                <label>
+                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
+                </label>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="question">
+              <strong>${q.id}. ${q.prompt}</strong>
+              <div class="options">
+                ${optionsHTML}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        form.innerHTML = quizHTML;
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0;
+        let correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const userAns = answers[i];
+          const correctOptId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctOptId);
+          const isCorrect = userAns === correctOptId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+          }
+        });
+
+        const score = `${correctCount}/20}`;
+        const summary = `*Mini OpenStax — Phonics Lesson 220*\nStudent: [Name]\nScore: ${score}\n\n`;
+        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
+        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
+        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
+        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}</h3>
+            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered r-controlled ur=/ər/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 220 words again.'}</strong></p>
+            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(selected ? selected.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
