@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 5 — Short Vowel i"/>
-  <title>Mini OpenStax — Lesson 5: Short Vowel i</title>
+  <meta name="description" content="Mini OpenStax: Lesson 6 — Short Vowel i (Part 2)"/>
+  <title>Mini OpenStax — Lesson 6: Short Vowel i (Part 2)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 5: Short Vowel i</h1>
-        <div class="lo-tags" id="lo-tags">LO PH5: Decode CVC words with short i</div>
+        <h1 id="chapter-title">Lesson 6: Short Vowel i (Part 2)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH6: Decode additional CVC words with short i</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -90,48 +90,50 @@
         return array;
       }
 
-      const currentChapter = 4; // chapter-4.html = Lesson 5
+      const currentChapter = 5; // chapter-5.html = Lesson 6
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 5: Short Vowel i",
-        loTags: ["LO PH5: Decode CVC words with short i"],
+        title: "Lesson 6: Short Vowel i (Part 2)",
+        loTags: ["LO PH6: Decode additional CVC words with short i"],
         contentWords: [
-          "it", "if", "in", "hid", "him", "hip", "hit", "bib", "bid", "big", "bin", "bit",
-          "did", "dig", "dim", "dip", "sic", "Sid", "sin", "sip", "Sis", "sit", "fib", "fig", "fin", "fit"
+          "rib", "rid", "rig", "rim", "rip", "pig", "pin", "pit", "lid", "lip", "lit", "Liz",
+          "tin", "tip", "tic", "Tim", "jig", "Jim", "kid", "kit", "kin", "Kim",
+          "wig", "win", "wit", "Vic", "vim", "nip", "zip", "yip"
         ],
         sentences: [
-          "Sis had jam. Sid had a fig.",
-          "Sid bit the big fat fig.",
-          "Did the big hat fit Hal?",
-          "Did the big hat sag a bit?",
-          "Sis can sit in the cab.",
-          "The cab hit a big dip.",
-          "The bad lad hid in a bin.",
-          "If Sid can bat, Sid can hit it."
+          "Jim had a fat lip.",
+          "The cap had a rip in it.",
+          "Did the big wig fit Liz?",
+          "A big pig did a jig in a pit.",
+          "A big lid can fit a big pan.",
+          "A lid can tip. A lid can hit a rim.",
+          "Did the rat nip the cat in a rib?",
+          "Did the cat yip? Did the rat zip?",
+          "Vic had wit. Vic had vim. Vic can win!"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word has a short i sound?", options: [{id:"a",text:"big",is_correct:true},{id:"b",text:"bag",is_correct:false},{id:"c",text:"bug",is_correct:false},{id:"d",text:"bog",is_correct:false}] },
-          { id: "2", prompt: "Which is a name from the sentences?", options: [{id:"a",text:"Sid",is_correct:true},{id:"b",text:"Sis",is_correct:true},{id:"c",text:"Sam",is_correct:false},{id:"d",text:"Both A and B",is_correct:true}] },
-          { id: "3", prompt: "How many letters in 'bit'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to strike sharply'?", options: [{id:"a",text:"hit",is_correct:true},{id:"b",text:"sit",is_correct:false},{id:"c",text:"fit",is_correct:false},{id:"d",text:"bit",is_correct:false}] },
-          { id: "5", prompt: "How many consonants in 'fig'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 5 and earlier words?", options: [{id:"a",text:"If Sid can bat, Sid can hit it.",is_correct:true},{id:"b",text:"She likes ice cream.",is_correct:false},{id:"c",text:"We saw birds.",is_correct:false},{id:"d",text:"He flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word rhymes with 'big'?", options: [{id:"a",text:"fig",is_correct:true},{id:"b",text:"bag",is_correct:false},{id:"c",text:"bug",is_correct:false},{id:"d",text:"beg",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is 'sit'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'The cab hit a big dip,' how many short-i words?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "10", prompt: "Which word might complete: 'She took a small ___.'?", options: [{id:"a",text:"sip",is_correct:true},{id:"b",text:"sap",is_correct:false},{id:"c",text:"sep",is_correct:false},{id:"d",text:"sop",is_correct:false}] },
-          { id: "11", prompt: "Which word begins with /f/ and has short i?", options: [{id:"a",text:"fig",is_correct:true},{id:"b",text:"fib",is_correct:true},{id:"c",text:"fin",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "12", prompt: "Which word has the same vowel sound as 'hid'?", options: [{id:"a",text:"bid",is_correct:true},{id:"b",text:"had",is_correct:false},{id:"c",text:"hud",is_correct:false},{id:"d",text:"hod",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 5?", options: [{id:"a",text:"Sis can sit in the cab.",is_correct:true},{id:"b",text:"He ate a taco.",is_correct:false},{id:"c",text:"They played soccer.",is_correct:false},{id:"d",text:"She drew a sun.",is_correct:false}] },
-          { id: "14", prompt: "How many short-i words in: 'Sid bit the big fat fig.'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Put on your shoes and ___.'?", options: [{id:"a",text:"sit",is_correct:false},{id:"b",text:"hit",is_correct:false},{id:"c",text:"fit",is_correct:false},{id:"d",text:"None are contextually appropriate",is_correct:true}] },
-          { id: "16", prompt: "What phonics pattern is in 'dim'?", options: [{id:"a",text:"Short i in closed syllable",is_correct:true},{id:"b",text:"Long i",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel digraph",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and a sentence?", options: [{id:"a",text:"Sid",is_correct:true},{id:"b",text:"fig",is_correct:true},{id:"c",text:"bit",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'He has a red ___.'?", options: [{id:"a",text:"bib",is_correct:true},{id:"b",text:"bab",is_correct:false},{id:"c",text:"beb",is_correct:false},{id:"d",text:"bob",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'The bad lad hid in a bin' connects to which concept?", options: [{id:"a",text:"Short i CVC words",is_correct:true},{id:"b",text:"Long vowels",is_correct:false},{id:"c",text:"Consonant blends",is_correct:false},{id:"d",text:"Sight words only",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 5?", options: [{id:"a",text:"Short i in closed syllables",is_correct:true},{id:"b",text:"Short a",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word starts with /j/ and has short i?", options: [{id:"a",text:"jig",is_correct:true},{id:"b",text:"Jim",is_correct:true},{id:"c",text:"jam",is_correct:false},{id:"d",text:"Both A and B",is_correct:true}] },
+          { id: "2", prompt: "Which is a name from the sentences?", options: [{id:"a",text:"Vic",is_correct:true},{id:"b",text:"Liz",is_correct:true},{id:"c",text:"Kim",is_correct:false},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "3", prompt: "How many letters in 'win'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to make a sharp, high sound'?", options: [{id:"a",text:"yip",is_correct:true},{id:"b",text:"zip",is_correct:false},{id:"c",text:"wig",is_correct:false},{id:"d",text:"vim",is_correct:false}] },
+          { id: "5", prompt: "How many consonants in 'kid'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "6", prompt: "Which sentence is from Lesson 6?", options: [{id:"a",text:"Vic had wit. Vic had vim. Vic can win!",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "7", prompt: "Which word rhymes with 'pig'?", options: [{id:"a",text:"jig",is_correct:true},{id:"b",text:"peg",is_correct:false},{id:"c",text:"pug",is_correct:false},{id:"d",text:"pag",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is 'tin'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "9", prompt: "In 'A lid can tip. A lid can hit a rim,' how many short-i words?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "10", prompt: "Which word might complete: 'She gave a quick ___.'?", options: [{id:"a",text:"nip",is_correct:true},{id:"b",text:"nap",is_correct:false},{id:"c",text:"nop",is_correct:false},{id:"d",text:"nup",is_correct:false}] },
+          { id: "11", prompt: "Which word begins with /z/ and has short i?", options: [{id:"a",text:"zip",is_correct:true},{id:"b",text:"zap",is_correct:false},{id:"c",text:"zig",is_correct:false},{id:"d",text:"None",is_correct:false}] },
+          { id: "12", prompt: "Which word has the same vowel sound as 'rib'?", options: [{id:"a",text:"kid",is_correct:true},{id:"b",text:"rob",is_correct:false},{id:"c",text:"rub",is_correct:false},{id:"d",text:"rab",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'wig'?", options: [{id:"a",text:"Did the big wig fit Liz?",is_correct:true},{id:"b",text:"Jim had a fat lip.",is_correct:false},{id:"c",text:"A big pig did a jig.",is_correct:false},{id:"d",text:"The rat nipped the cat.",is_correct:false}] },
+          { id: "14", prompt: "How many short-i words in: 'Did the rat nip the cat in a rib?'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'He showed great ___ and energy.'?", options: [{id:"a",text:"vim",is_correct:true},{id:"b",text:"vum",is_correct:false},{id:"c",text:"vam",is_correct:false},{id:"d",text:"vem",is_correct:false}] },
+          { id: "16", prompt: "What phonics pattern is in 'win'?", options: [{id:"a",text:"Short i in closed syllable",is_correct:true},{id:"b",text:"Long i",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel digraph",is_correct:false}] },
+          { id: "17", prompt: "Which word appears in both the word list and a sentence?", options: [{id:"a",text:"Jim",is_correct:true},{id:"b",text:"Vic",is_correct:true},{id:"c",text:"wig",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "18", prompt: "Which word might complete: 'The hat had a small ___.'?", options: [{id:"a",text:"rip",is_correct:true},{id:"b",text:"rap",is_correct:false},{id:"c",text:"rop",is_correct:false},{id:"d",text:"rep",is_correct:false}] },
+          { id: "19", prompt: "The sentence 'Did the cat yip?' focuses on which skills?", options: [{id:"a",text:"Decoding short i + questioning",is_correct:true},{id:"b",text:"Long vowels",is_correct:false},{id:"c",text:"Sight words only",is_correct:false},{id:"d",text:"Consonant digraphs",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 6?", options: [{id:"a",text:"Short i in closed syllables",is_correct:true},{id:"b",text:"Short a",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Diphthongs",is_correct:false}] }
         ]
       };
 
@@ -146,14 +148,14 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ NAVIGATION: 5 buttons — Home + Lesson 5 to 8
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 6 to 9
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
 
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i; // c = 4,5,6,7
-          const lessonNum = c + 1;      // Lesson 5,6,7,8
+          const c = currentChapter + i; // c = 5,6,7,8
+          const lessonNum = c + 1;      // Lesson 6,7,8,9
           if (c > maxChapter) break;
           buttons.push({ 
             label: `Lesson ${lessonNum}`, 
@@ -221,7 +223,7 @@
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
               mastery ? 'You’ve mastered short i!' :
-              score >= 10 ? 'Review missed items.' : 'Practice Lesson 5 words again.'
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 6 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
             <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
