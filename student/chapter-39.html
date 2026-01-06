@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 40 — Final Consonant Blends: -sk, -sp"/>
-  <title>Mini OpenStax — Lesson 40: Final -sk, -sp Blends</title>
+  <meta name="description" content="Mini OpenStax: Lesson 40 — Final Consonant Blends -sk and -sp"/>
+  <title>Mini OpenStax — Lesson 40: Final Consonant Blends -sk and -sp</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 40: Final -sk, -sp Blends</h1>
-        <div class="lo-tags" id="lo-tags">LO PH40: Decode words with final consonant blends -sk and -sp</div>
+        <h1 id="chapter-title">Lesson 40: Final Consonant Blends -sk and -sp</h1>
+        <div class="lo-tags" id="lo-tags">LO PH40: Decode words ending with /sk/ and /sp/ blends</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words ending with the <strong>consonant blends "-sk" and "-sp"</strong> in closed syllables:</p>
+        <p>Words ending with <strong>-sk</strong> or <strong>-sp</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–40:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,10 +95,11 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 40: Final -sk, -sp Blends",
-        loTags: ["LO PH40: Decode words with final consonant blends -sk and -sp"],
+        title: "Lesson 40: Final Consonant Blends -sk and -sp",
+        loTags: ["LO PH40: Decode words ending with /sk/ and /sp/ blends"],
         contentWords: [
-          "ask", "bask", "cask", "mask", "task", "desk", "disk", "risk", "dusk", "husk", "tusk",
+          "ask", "bask", "cask", "mask", "task",
+          "desk", "disk", "risk", "dusk", "husk", "tusk",
           "gasp", "hasp", "rasp", "lisp", "wisp"
         ],
         sentences: [
@@ -114,48 +114,65 @@
           "What was the risk in the plan? Did Dan gasp at the risk?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the '-sk' blend?", options: [{id:"a",text:"mask",is_correct:true},{id:"b",text:"map",is_correct:false},{id:"c",text:"mast",is_correct:false},{id:"d",text:"mat",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 40 word?", options: [{id:"a",text:"disk",is_correct:false},{id:"b",text:"wisp",is_correct:false},{id:"c",text:"whisk",is_correct:true},{id:"d",text:"rasp",is_correct:false}] },
-          { id: "3", prompt: "In 'lisp', how many consonants end the word?", options: [{id:"a",text:"2 (s + p)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to speak with /s/ sounding like /th/'?", options: [{id:"a",text:"lisp",is_correct:true},{id:"b",text:"wisp",is_correct:false},{id:"c",text:"gasp",is_correct:false},{id:"d",text:"risk",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'husk'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 40 and review words?", options: [{id:"a",text:"At dusk, the sun was in the west.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a covering for the face used in plays or parties?", options: [{id:"a",text:"mask",is_correct:true},{id:"b",text:"task",is_correct:false},{id:"c",text:"desk",is_correct:false},{id:"d",text:"disk",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'gasp'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Did the test ask a lot of Stan?', how many Lesson 40 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'a very thin or faint streak (e.g., of fog)'?", options: [{id:"a",text:"wisp",is_correct:true},{id:"b",text:"lisp",is_correct:false},{id:"c",text:"hasp",is_correct:false},{id:"d",text:"tusk",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'Please ___ Mr. Lee a question.'?", options: [{id:"a",text:"ask",is_correct:true},{id:"b",text:"task",is_correct:false},{id:"c",text:"risk",is_correct:false},{id:"d",text:"disk",is_correct:false}] },
-          { id: "12", prompt: "Which word refers to the hard pointed teeth of an elephant?", options: [{id:"a",text:"tusk",is_correct:true},{id:"b",text:"husk",is_correct:false},{id:"c",text:"mask",is_correct:false},{id:"d",text:"desk",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 40?", options: [{id:"a",text:"Pam let her cat bask in the sun.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'disk'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'He took a sharp ___ when he saw the surprise.'?", options: [{id:"a",text:"gasp",is_correct:true},{id:"b",text:"lisp",is_correct:false},{id:"c",text:"wisp",is_correct:false},{id:"d",text:"hasp",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'rasp'?", options: [{id:"a",text:"Closed syllable with final -sp blend",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"mask",is_correct:true},{id:"b",text:"desk",is_correct:true},{id:"c",text:"risk",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'The old chest had a metal ___ to keep it closed.'?", options: [{id:"a",text:"hasp",is_correct:true},{id:"b",text:"husk",is_correct:false},{id:"c",text:"disk",is_correct:false},{id:"d",text:"task",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'At dusk, the sun was in the west' connects to which earlier lesson?", options: [{id:"a",text:"Lesson 39 (west, dusk)",is_correct:true},{id:"b",text:"Lesson 20 only",is_correct:false},{id:"c",text:"Lesson 18 only",is_correct:false},{id:"d",text:"Lesson 16 only",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 40?", options: [{id:"a",text:"Final consonant blends '-sk' and '-sp' in closed syllables",is_correct:true},{id:"b",text:"Initial consonant blends",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the /sk/ blend?", options: [{id:"a",text:"desk",is_correct:true},{id:"b",text:"cop",is_correct:false},{id:"c",text:"sun",is_correct:false},{id:"d",text:"fog",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to lie in pleasant warmth'?", options: [{id:"a",text:"bask",is_correct:true},{id:"b",text:"mask",is_correct:false},{id:"c",text:"task",is_correct:false},{id:"d",text:"risk",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'wisp'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to a speech pattern where /s/ sounds like /th/?", options: [{id:"a",text:"lisp",is_correct:true},{id:"b",text:"gasp",is_correct:false},{id:"c",text:"rasp",is_correct:false},{id:"d",text:"husk",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 40?", options: [{id:"a",text:"At dusk, the sun was in the west.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'mask'?", options: [{id:"a",text:"task",is_correct:true},{id:"b",text:"wisp",is_correct:false},{id:"c",text:"lisp",is_correct:false},{id:"d",text:"gasp",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'risk'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Did the test ask a lot of Stan?', how many /sk/ or /sp/ words?", options: [{id:"a",text:"1 (ask)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'He wore a ___ to the costume party.'?", options: [{id:"a",text:"mask",is_correct:true},{id:"b",text:"desk",is_correct:false},{id:"c",text:"risk",is_correct:false},{id:"d",text:"wisp",is_correct:false}] },
+          { id: "10", prompt: "Which word ends with /sp/ and means 'to take a sudden, sharp breath'?", options: [{id:"a",text:"gasp",is_correct:true},{id:"b",text:"rasp",is_correct:false},{id:"c",text:"lisp",is_correct:false},{id:"d",text:"hasp",is_correct:false}] },
+          { id: "11", prompt: "Which word appears in sentence 9?", options: [{id:"a",text:"risk",is_correct:true},{id:"b",text:"gasp",is_correct:true},{id:"c",text:"plan",is_correct:false},{id:"d",text:"Both A and B",is_correct:true}] },
+          { id: "12", prompt: "How many words in the list end with /sk/?", options: [{id:"a",text:"11",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"10",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'bask'?", options: [{id:"a",text:"Pam let her cat bask in the sun.",is_correct:true},{id:"b",text:"A man in a mask ran.",is_correct:false},{id:"c",text:"I must dust the desk.",is_correct:false},{id:"d",text:"At dusk, the sun...",is_correct:false}] },
+          { id: "14", prompt: "How many /sp/ words are in the word list?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'The elephant’s long ___ is used for drinking.'?", options: [{id:"a",text:"tusk",is_correct:true},{id:"b",text:"mask",is_correct:false},{id:"c",text:"desk",is_correct:false},{id:"d",text:"risk",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'husk'?", options: [{id:"a",text:"Final consonant blend /sk/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'At dusk, the sun was in the west' reviews which earlier concept?", options: [{id:"a",text:"Final blend /st/ (from Lesson 39)",is_correct:true},{id:"b",text:"Short u (/ŭ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT in the Lesson 40 word list?", options: [{id:"a",text:"cop",is_correct:true},{id:"b",text:"mask",is_correct:false},{id:"c",text:"task",is_correct:false},{id:"d",text:"wisp",is_correct:false}] },
+          { id: "19", prompt: "Which word refers to a fastener on a chest or door?", options: [{id:"a",text:"hasp",is_correct:true},{id:"b",text:"rasp",is_correct:false},{id:"c",text:"cask",is_correct:false},{id:"d",text:"disk",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 40?", options: [{id:"a",text:"Final consonant blends /sk/ and /sp/ in closed syllables",is_correct:true},{id:"b",text:"Beginning consonant blends",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
       // --- UI Rendering ---
       function renderWords() {
-        document.getElementById('word-list').innerHTML =
-          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
+        // Split into -sk and -sp groups for clarity
+        const skWords = ["ask", "bask", "cask", "mask", "task", "desk", "disk", "risk", "dusk", "husk", "tusk"];
+        const spWords = ["gasp", "hasp", "rasp", "lisp", "wisp"];
+        const html = 
+          `<div style="width:100%; margin-bottom:0.5rem;"><strong>-sk words:</strong></div>` +
+          skWords.map(w => `<span class="word-item">${w}</span>`).join('') +
+          `<div style="width:100%; margin:0.75rem 0;"><strong>-sp words:</strong></div>` +
+          spWords.map(w => `<span class="word-item">${w}</span>`).join('');
+        document.getElementById('word-list').innerHTML = html;
       }
 
       function renderSentences() {
+        // Handle the two-part sentence 9
+        const sentences = [...CHAPTER_CONFIG.sentences];
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 40 to 43
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 39,40,41,42
+          const lessonNum = c + 1;      // Lesson 40,41,42,43
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -176,7 +193,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -205,14 +221,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the final -sk and -sp blends!' :
+              mastery ? 'You’ve mastered the /sk/ and /sp/ blends!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 40 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -239,7 +258,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -290,7 +308,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
