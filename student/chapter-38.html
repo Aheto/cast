@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 39 — Final Consonant Blend: -st"/>
-  <title>Mini OpenStax — Lesson 39: Final -st Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 39 — Final Consonant Blend -st"/>
+  <title>Mini OpenStax — Lesson 39: Final Consonant Blend -st</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 39: Final -st Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH39: Decode words with final consonant blend -st</div>
+        <h1 id="chapter-title">Lesson 39: Final Consonant Blend -st</h1>
+        <div class="lo-tags" id="lo-tags">LO PH39: Decode words ending with consonant blend /st/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words ending with the <strong>consonant blend "-st"</strong> in closed syllables:</p>
+        <p>Words ending with the **-st** blend:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–39:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,14 +95,12 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 39: Final -st Blend",
-        loTags: ["LO PH39: Decode words with final consonant blend -st"],
+        title: "Lesson 39: Final Consonant Blend -st",
+        loTags: ["LO PH39: Decode words ending with consonant blend /st/"],
         contentWords: [
           "cast", "fast", "last", "mast", "past", "vast",
           "best", "jest", "nest", "pest", "rest", "test", "vest", "west", "zest",
-          "fist", "list", "mist",
-          "cost", "lost",
-          "bust", "dust", "gust", "just", "must", "rust"
+          "fist", "list", "mist", "cost", "lost", "bust", "dust", "gust", "just", "must", "rust"
         ],
         sentences: [
           "Sam had a cast on one leg.",
@@ -115,36 +112,41 @@
           "One of us must dust in the den.",
           "Fran had a red vest. The vest cost a lot.",
           "I can swim fast, but Sid can swim best.",
-          "Greg did best on the big test. At last, Greg can rest."
+          "Greg did best on the big test.",
+          "At last, Greg can rest."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the '-st' blend?", options: [{id:"a",text:"fast",is_correct:true},{id:"b",text:"fan",is_correct:false},{id:"c",text:"fat",is_correct:false},{id:"d",text:"fan",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 39 word?", options: [{id:"a",text:"test",is_correct:false},{id:"b",text:"jest",is_correct:false},{id:"c",text:"text",is_correct:true},{id:"d",text:"vest",is_correct:false}] },
-          { id: "3", prompt: "In 'rust', how many consonants end the word?", options: [{id:"a",text:"2 (s + t)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to clean with a cloth or duster'?", options: [{id:"a",text:"dust",is_correct:true},{id:"b",text:"rust",is_correct:false},{id:"c",text:"gust",is_correct:false},{id:"d",text:"bust",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'zest'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 39 and review words?", options: [{id:"a",text:"The sun set in the west.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a small insect that damages crops?", options: [{id:"a",text:"pest",is_correct:true},{id:"b",text:"jest",is_correct:false},{id:"c",text:"nest",is_correct:false},{id:"d",text:"vest",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'last'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Greg did best on the big test,' how many Lesson 39 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'not slow'?", options: [{id:"a",text:"fast",is_correct:true},{id:"b",text:"last",is_correct:false},{id:"c",text:"past",is_correct:false},{id:"d",text:"vast",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'Please check your ___ before leaving.'?", options: [{id:"a",text:"list",is_correct:true},{id:"b",text:"fist",is_correct:false},{id:"c",text:"mist",is_correct:false},{id:"d",text:"nest",is_correct:false}] },
-          { id: "12", prompt: "Which word has a short /u/ sound and means 'powdered metal oxidation'?", options: [{id:"a",text:"rust",is_correct:true},{id:"b",text:"dust",is_correct:false},{id:"c",text:"gust",is_correct:false},{id:"d",text:"must",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 39?", options: [{id:"a",text:"One of us must dust in the den.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'mast'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'At ___, we finished the race.'?", options: [{id:"a",text:"last",is_correct:true},{id:"b",text:"fast",is_correct:false},{id:"c",text:"vast",is_correct:false},{id:"d",text:"past",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'jest'?", options: [{id:"a",text:"Closed syllable with final -st blend",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"vest",is_correct:true},{id:"b",text:"west",is_correct:true},{id:"c",text:"test",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'He made a tight ___ when angry.'?", options: [{id:"a",text:"fist",is_correct:true},{id:"b",text:"list",is_correct:false},{id:"c",text:"mist",is_correct:false},{id:"d",text:"nest",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'Sam had a cast on one leg' connects to which concept?", options: [{id:"a",text:"Medical vocabulary + final -st",is_correct:true},{id:"b",text:"Initial blends only",is_correct:false},{id:"c",text:"Sight words only",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 39?", options: [{id:"a",text:"Final consonant blend '-st' in closed syllables",is_correct:true},{id:"b",text:"Initial consonant blends",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the /st/ blend?", options: [{id:"a",text:"cast",is_correct:true},{id:"b",text:"leg",is_correct:false},{id:"c",text:"bug",is_correct:false},{id:"d",text:"sun",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to move quickly through water'?", options: [{id:"a",text:"swim fast",is_correct:false},{id:"b",text:"fast",is_correct:true},{id:"c",text:"best",is_correct:false},{id:"d",text:"rest",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'vest'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word describes an annoying insect?", options: [{id:"a",text:"pest",is_correct:true},{id:"b",text:"nest",is_correct:false},{id:"c",text:"west",is_correct:false},{id:"d",text:"rust",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 39?", options: [{id:"a",text:"At last, Greg can rest.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'past'?", options: [{id:"a",text:"last",is_correct:true},{id:"b",text:"pest",is_correct:false},{id:"c",text:"vest",is_correct:false},{id:"d",text:"rust",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'test'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'I had the list, but I lost it', how many /st/ words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'The ship’s ___ was torn in the storm.'?", options: [{id:"a",text:"mast",is_correct:true},{id:"b",text:"vest",is_correct:false},{id:"c",text:"nest",is_correct:false},{id:"d",text:"rust",is_correct:false}] },
+          { id: "10", prompt: "Which word is the superlative form of 'good'?", options: [{id:"a",text:"best",is_correct:true},{id:"b",text:"fast",is_correct:false},{id:"c",text:"just",is_correct:false},{id:"d",text:"most",is_correct:false}] },
+          { id: "11", prompt: "Which word appears in sentence 5 AND sentence 7?", options: [{id:"a",text:"rust",is_correct:true},{id:"b",text:"dust",is_correct:true},{id:"c",text:"tin",is_correct:false},{id:"d",text:"red",is_correct:false}] },
+          { id: "12", prompt: "How many unique /st/ words are in the word list?", options: [{id:"a",text:"26",is_correct:true},{id:"b",text:"20",is_correct:false},{id:"c",text:"15",is_correct:false},{id:"d",text:"12",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the phrase 'big test'?", options: [{id:"a",text:"Greg did best on the big test.",is_correct:true},{id:"b",text:"I can swim fast.",is_correct:false},{id:"c",text:"The sun set in the west.",is_correct:false},{id:"d",text:"Sam had a cast.",is_correct:false}] },
+          { id: "14", prompt: "Which word means 'fair and morally right'?", options: [{id:"a",text:"just",is_correct:true},{id:"b",text:"must",is_correct:false},{id:"c",text:"jest",is_correct:false},{id:"d",text:"cost",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'The ___ blew leaves across the yard.'?", options: [{id:"a",text:"gust",is_correct:true},{id:"b",text:"rust",is_correct:false},{id:"c",text:"dust",is_correct:true},{id:"d",text:"fist",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'zest'?", options: [{id:"a",text:"Final consonant blend /st/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'The rust from the tin can was red' reviews which earlier concept?", options: [{id:"a",text:"Short u (/ŭ/)",is_correct:true},{id:"b",text:"Consonant blend /dr/",is_correct:false},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT a /st/ word?", options: [{id:"a",text:"leg",is_correct:true},{id:"b",text:"cast",is_correct:false},{id:"c",text:"fast",is_correct:false},{id:"d",text:"last",is_correct:false}] },
+          { id: "19", prompt: "Which word in the list is an archaic term for 'joke'?", options: [{id:"a",text:"jest",is_correct:true},{id:"b",text:"zest",is_correct:false},{id:"c",text:"bust",is_correct:false},{id:"d",text:"vast",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 39?", options: [{id:"a",text:"Final consonant blend /st/ in closed syllables",is_correct:true},{id:"b",text:"Beginning consonant blends",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
       // --- UI Rendering ---
       function renderWords() {
+        // Group for visual clarity
+        const group1 = CHAPTER_CONFIG.contentWords.slice(0, 15);
+        const group2 = CHAPTER_CONFIG.contentWords.slice(15);
+        const allWords = [...group1, "", ...group2]; // blank for spacing
         document.getElementById('word-list').innerHTML =
-          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
+          allWords.map(w => w ? `<span class="word-item">${w}</span>` : `<div style="width:100%;height:0.5rem;"></div>`).join('');
       }
 
       function renderSentences() {
@@ -152,14 +154,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 39 to 42
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 38,39,40,41
+          const lessonNum = c + 1;      // Lesson 39,40,41,42
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -180,7 +190,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -209,14 +218,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the final -st blend!' :
+              mastery ? 'You’ve mastered the /st/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 39 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -243,7 +255,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -294,7 +305,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
