@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 28 — Consonant Blends: scr"/>
-  <title>Mini OpenStax — Lesson 28: scr Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 28 — Consonant Blend scr"/>
+  <title>Mini OpenStax — Lesson 28: Consonant Blend scr</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 28: scr Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH28: Decode words with consonant blend scr</div>
+        <h1 id="chapter-title">Lesson 28: Consonant Blend scr</h1>
+        <div class="lo-tags" id="lo-tags">LO PH28: Decode words with consonant blend /scr/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words beginning with the <strong>consonant blend "scr"</strong> in closed syllables:</p>
+        <p>Consonant blend <strong>scr</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–28:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,8 +95,8 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 28: scr Blend",
-        loTags: ["LO PH28: Decode words with consonant blend scr"],
+        title: "Lesson 28: Consonant Blend scr",
+        loTags: ["LO PH28: Decode words with consonant blend /scr/"],
         contentWords: [
           "scrap", "scram", "scrub"
         ],
@@ -110,26 +109,26 @@
           "A bad brat hit Brad. Scat, brat! Scram!"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the 'scr' blend?", options: [{id:"a",text:"scrub",is_correct:true},{id:"b",text:"rub",is_correct:false},{id:"c",text:"crub",is_correct:false},{id:"d",text:"shrub",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 28 word?", options: [{id:"a",text:"scrap",is_correct:false},{id:"b",text:"scram",is_correct:false},{id:"c",text:"scream",is_correct:true},{id:"d",text:"scrub",is_correct:false}] },
-          { id: "3", prompt: "In 'scrap', how many consonants start the word?", options: [{id:"a",text:"3 (s + c + r)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"1",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to clean vigorously'?", options: [{id:"a",text:"scrub",is_correct:true},{id:"b",text:"scrap",is_correct:false},{id:"c",text:"scram",is_correct:false},{id:"d",text:"scream",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'scram'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 28 and review words?", options: [{id:"a",text:"Ron can scrub the tub.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word means 'a small leftover piece' (e.g., of food or paper)?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"scram",is_correct:false},{id:"c",text:"scrub",is_correct:false},{id:"d",text:"crab",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'scrub'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Fred can trot. Fred can scram,' how many Lesson 28 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word is a command meaning 'Go away quickly!'?", options: [{id:"a",text:"Scram!",is_correct:true},{id:"b",text:"Scrap!",is_correct:false},{id:"c",text:"Scrub!",is_correct:false},{id:"d",text:"Stop!",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'He used a brush to ___ the dirty floor.'?", options: [{id:"a",text:"scrap",is_correct:false},{id:"b",text:"scram",is_correct:false},{id:"c",text:"scrub",is_correct:true},{id:"d",text:"scream",is_correct:false}] },
-          { id: "12", prompt: "Which word refers to leftovers a dog might eat?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"scram",is_correct:false},{id:"c",text:"scrub",is_correct:false},{id:"d",text:"brat",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 28?", options: [{id:"a",text:"A bad brat hit Brad. Scat, brat! Scram!",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'scrap'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Don’t just stand there—___!'?", options: [{id:"a",text:"scram",is_correct:true},{id:"b",text:"scrap",is_correct:false},{id:"c",text:"scrub",is_correct:false},{id:"d",text:"scream",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'scrub'?", options: [{id:"a",text:"Consonant blend scr + short u",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"scram",is_correct:true},{id:"c",text:"scrub",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'She saved every ___ of paper for her art project.'?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"scram",is_correct:false},{id:"c",text:"scrub",is_correct:false},{id:"d",text:"scat",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'A bad brat hit Brad' connects to which earlier lesson?", options: [{id:"a",text:"Lesson 21 (brat, Brad)",is_correct:true},{id:"b",text:"Lesson 20 (smug)",is_correct:false},{id:"c",text:"Lesson 18 (swim)",is_correct:false},{id:"d",text:"Lesson 16 (snob)",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 28?", options: [{id:"a",text:"Consonant blend 'scr' in closed syllables",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word begins with the /scr/ blend?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"spot",is_correct:false},{id:"c",text:"tub",is_correct:false},{id:"d",text:"pan",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to clean something hard with a brush'?", options: [{id:"a",text:"scrub",is_correct:true},{id:"b",text:"scrap",is_correct:false},{id:"c",text:"scram",is_correct:false},{id:"d",text:"brat",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'scram'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "4", prompt: "Which word is a command meaning 'go away quickly'?", options: [{id:"a",text:"Scram!",is_correct:true},{id:"b",text:"Scrap!",is_correct:false},{id:"c",text:"Scrub!",is_correct:false},{id:"d",text:"Scat!",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 28?", options: [{id:"a",text:"Fred can trot. Fred can scram.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'trap'?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"scram",is_correct:false},{id:"c",text:"scrub",is_correct:false},{id:"d",text:"tub",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'scrub'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Spot got a scrap', how many /scr/ words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'After dinner, the dog ate the meat ___.'?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"scram",is_correct:false},{id:"c",text:"scrub",is_correct:false},{id:"d",text:"pan",is_correct:false}] },
+          { id: "10", prompt: "Which sentence uses 'scram' as a verb?", options: [{id:"a",text:"Fred can scram.",is_correct:true},{id:"b",text:"Spot got a scrap.",is_correct:false},{id:"c",text:"Ron can scrub.",is_correct:false},{id:"d",text:"Jan had ham.",is_correct:false}] },
+          { id: "11", prompt: "How many /scr/ words are in the word list?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
+          { id: "12", prompt: "Which word appears in both a sentence and the word list?", options: [{id:"a",text:"scrap",is_correct:true},{id:"b",text:"scram",is_correct:true},{id:"c",text:"scrub",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "13", prompt: "Which sentence includes the word 'brat'?", options: [{id:"a",text:"A bad brat hit Brad. Scat, brat! Scram!",is_correct:true},{id:"b",text:"Fred can trot.",is_correct:false},{id:"c",text:"Jan had ham in a pan.",is_correct:false},{id:"d",text:"Ron can scrub the tub.",is_correct:false}] },
+          { id: "14", prompt: "How many /scr/ words in: 'If Spot can beg, Spot can get a big scrap.'?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'Please ___ the dirty floor before guests arrive.'?", options: [{id:"a",text:"scrub",is_correct:true},{id:"b",text:"scrap",is_correct:false},{id:"c",text:"scram",is_correct:false},{id:"d",text:"trot",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'scram'?", options: [{id:"a",text:"Consonant blend /scr/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'Fred can trot' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /tr/ (from Lesson 26)",is_correct:true},{id:"b",text:"Short o (/ŏ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT a /scr/ word?", options: [{id:"a",text:"spot",is_correct:true},{id:"b",text:"scrap",is_correct:false},{id:"c",text:"scram",is_correct:false},{id:"d",text:"scrub",is_correct:false}] },
+          { id: "19", prompt: "Which interjection appears alongside 'Scram!' in Lesson 28?", options: [{id:"a",text:"Scat!",is_correct:true},{id:"b",text:"Go!",is_correct:false},{id:"c",text:"Run!",is_correct:false},{id:"d",text:"Stop!",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 28?", options: [{id:"a",text:"Consonant blend /scr/ in closed syllables",is_correct:true},{id:"b",text:"Short u",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -144,14 +143,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 28 to 31
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 27,28,29,30
+          const lessonNum = c + 1;      // Lesson 28,29,30,31
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -172,7 +179,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -201,14 +207,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the scr blend!' :
+              mastery ? 'You’ve mastered the /scr/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 28 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -235,7 +244,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -286,7 +294,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
