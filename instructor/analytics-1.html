@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Analytics</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Attempt Reports</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f5f5f5;
+      background: #f8f9fa;
+      color: #333;
     }
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      background: white;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     .header {
       display: flex;
@@ -27,14 +25,15 @@
       flex-wrap: wrap;
       gap: 10px;
     }
-    .chapter-nav {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 15px 0;
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
     }
-    .chapter-btn {
+    .nav {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
       padding: 8px 16px;
       background: #007bff;
       color: white;
@@ -42,472 +41,184 @@
       border-radius: 4px;
       font-size: 14px;
     }
-    .chapter-btn.active, .chapter-btn:hover {
+    .btn:hover {
       background: #0056b3;
     }
-    h1 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 30px;
+    .active {
+      background: #0056b3 !important;
     }
-    .search-container {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 30px;
-      justify-content: center;
+    .search-box {
+      margin: 20px 0;
+      text-align: center;
     }
     #student-search {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ddd;
+      padding: 8px 12px;
+      width: 250px;
+      border: 1px solid #ccc;
       border-radius: 4px;
-      width: 300px;
+      font-size: 16px;
     }
     #search-btn {
-      padding: 10px 20px;
-      background: #007bff;
+      padding: 8px 16px;
+      background: #28a745;
       color: white;
       border: none;
       border-radius: 4px;
+      margin-left: 10px;
       cursor: pointer;
-      font-size: 16px;
     }
     #search-btn:hover {
-      background: #0056b3;
+      background: #218838;
     }
-    .results-container {
+    .attempts-container {
       display: none;
     }
-    .section {
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
-    }
-    .section h2 {
-      color: #007bff;
-      margin-bottom: 15px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 15px;
-    }
-    .stat-card {
-      background: #f8f9fa;
-      padding: 15px;
+    .attempt-card {
+      background: white;
+      border: 1px solid #dee2e6;
       border-radius: 6px;
-      text-align: center;
+      padding: 16px;
+      margin-bottom: 12px;
     }
-    .stat-value {
-      font-size: 24px;
-      font-weight: bold;
-      color: #28a745;
-    }
-    .stat-label {
-      font-size: 14px;
-      color: #666;
-      margin-top: 5px;
-    }
-    .quiz-list {
-      list-style: none;
-      padding: 0;
-    }
-    .quiz-item {
-      background: #f8f9fa;
-      margin-bottom: 10px;
-      padding: 12px;
-      border-radius: 6px;
-    }
-    .quiz-header {
+    .attempt-header {
       display: flex;
       justify-content: space-between;
       font-weight: bold;
       margin-bottom: 8px;
     }
-    .quiz-details {
+    .attempt-details {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 10px;
-    }
-    .mastery-badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
-    }
-    .mastery-pass {
-      background: #28a745;
-    }
-    .mastery-fail {
-      background: #dc3545;
-    }
-    .names-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .name-tag {
-      background: #e9ecef;
-      padding: 5px 10px;
-      border-radius: 20px;
       font-size: 14px;
     }
+    .label {
+      font-weight: bold;
+      color: #495057;
+    }
     .error {
-      color: #dc3545;
       text-align: center;
+      color: #dc3545;
       padding: 20px;
       font-weight: bold;
-    }
-    .lesson-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .lesson-item {
-      background: #f8f9fa;
-      padding: 8px;
-      border-radius: 4px;
-      text-align: center;
-      font-size: 12px;
-    }
-    .lesson-mastered {
-      background: #d4edda;
-      border: 1px solid #c3e6cb;
-    }
-    @media (max-width: 600px) {
-      .search-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      #student-search {
-        width: 100%;
-      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>Student Performance Analytics</h1>
-      <div class="role-badge" style="background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">
-        Instructor View
+      <h1>Phonics Quiz Attempt Reports (Lessons 2–262)</h1>
+      <div class="nav">
+        <a href="../index.html" class="btn">Home</a>
+        <a href="analytics-1.html" class="btn active">Analytics</a>
       </div>
     </div>
-    
-    <!-- 5-button navigation system -->
-    <nav class="chapter-nav">
-      <a href="../index.html" class="chapter-btn">Home</a>
-      <a href="analytics-1.html" class="chapter-btn active">Analytics</a>
-      <a href="analytics-2.html" class="chapter-btn">Progress</a>
-      <a href="analytics-3.html" class="chapter-btn">Reports</a>
-      <a href="analytics-4.html" class="chapter-btn">Settings</a>
-    </nav>
-    
-    <div class="search-container">
-      <input type="text" id="student-search" placeholder="Enter student name...">
-      <button id="search-btn">Search</button>
+
+    <div class="search-box">
+      <input type="text" id="student-search" placeholder="Enter student name (optional)" />
+      <button id="search-btn">Show All Attempts</button>
     </div>
-    
-    <div id="results" class="results-container">
-      <!-- Results will be populated here -->
-    </div>
+
+    <div id="results" class="attempts-container"></div>
   </div>
 
   <script>
-    document.getElementById('search-btn').addEventListener('click', searchStudent);
+    document.getElementById('search-btn').addEventListener('click', loadAllAttempts);
     document.getElementById('student-search').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') searchStudent();
+      if (e.key === 'Enter') loadAllAttempts();
     });
 
-    function searchStudent() {
-      const searchTerm = document.getElementById('student-search').value.trim();
-      if (!searchTerm) {
-        alert('Please enter a student name');
-        return;
-      }
-
-      // Get all localStorage keys
+    function loadAllAttempts() {
+      const searchTerm = document.getElementById('student-search').value.trim().toLowerCase();
       const allKeys = Object.keys(localStorage);
-      const studentData = {
-        names: new Set(),
-        quizzes: []
-      };
+      const attempts = [];
 
-      // Collect all names that match the search term
-      for (const key of allKeys) {
-        // Check for student_name entries
-        if (key === 'student_name') {
-          const name = localStorage.getItem(key);
-          if (name && matchesSearch(name, searchTerm)) {
-            studentData.names.add(name);
-          }
-        }
-        // Check names in report data
-        if (key.startsWith('quiz_report_')) {
+      // Scan all possible report keys for lessons 2–262 (chapters 1–261)
+      for (let chapter = 1; chapter <= 261; chapter++) {
+        const reportKeyBase = `quiz_report_${chapter}`;
+        const attemptCounts = {};
+
+        // Count how many times this quiz was attempted
+        const attemptsKey = `quiz_attempts_${chapter}`;
+        const totalAttempts = parseInt(localStorage.getItem(attemptsKey)) || 0;
+
+        // Reconstruct individual attempts (we assume each report save = one attempt)
+        // In your current system, only the latest report is saved per lesson,
+        // so we can only show the latest attempt per lesson.
+        // To support true multi-attempt history, you'd need to store arrays.
+        // For now, we show what's available.
+
+        const reportKey = reportKeyBase;
+        const reportStr = localStorage.getItem(reportKey);
+        if (reportStr) {
           try {
-            const report = JSON.parse(localStorage.getItem(key));
-            if (report.student && matchesSearch(report.student, searchTerm)) {
-              studentData.names.add(report.student);
+            const report = JSON.parse(reportStr);
+            const studentName = (report.student || localStorage.getItem('student_name') || '[Unknown]').trim();
+            
+            if (!searchTerm || studentName.toLowerCase().includes(searchTerm)) {
+              const lessonNum = chapter + 1; // chapter-1.html = Lesson 2
+              const score = report.score !== undefined ? report.score : 'N/A';
+              const total = report.total || 20;
+              const timeSpent = report.timeSpent ? `${report.timeSpent} sec` : 'N/A';
+              const date = report.date ? new Date(report.date).toLocaleString() : 'N/A';
+
+              attempts.push({
+                studentName,
+                lessonNum,
+                score,
+                total,
+                timeSpent,
+                date
+              });
             }
           } catch (e) {
-            // Skip invalid JSON
+            // Skip invalid reports
           }
         }
       }
 
-      // If still no names, check current student_name
-      if (studentData.names.size === 0) {
-        const currentName = localStorage.getItem('student_name');
-        if (currentName && matchesSearch(currentName, searchTerm)) {
-          studentData.names.add(currentName);
-        }
-      }
+      displayAttempts(attempts, searchTerm);
+    }
 
-      if (studentData.names.size === 0) {
-        showResults(null, 'No student found with that name');
+    function displayAttempts(attempts, searchTerm) {
+      const container = document.getElementById('results');
+      if (attempts.length === 0) {
+        container.innerHTML = `<div class="error">No quiz attempts found${searchTerm ? ` for "${searchTerm}"` : ''}.</div>`;
+        container.style.display = 'block';
         return;
       }
 
-      // Now fetch data for ALL chapters (0 to 260 = Lessons 1 to 261)
-      // But note: Lessons 2-262 correspond to chapters 1-261 (chapter-N.html = Lesson N+1)
-      // So we process chapters 1 through 261 (which is index 1 to 261)
-      for (let chapter = 1; chapter <= 261; chapter++) {
-        const masteryKey = `mastery_${chapter}`;
-        const attemptsKey = `quiz_attempts_${chapter}`;
-        const reportKey = `quiz_report_${chapter}`;
-
-        const mastery = localStorage.getItem(masteryKey) === '1';
-        const attempts = parseInt(localStorage.getItem(attemptsKey)) || 0;
-        let quizData = null;
-
-        if (localStorage.getItem(reportKey)) {
-          try {
-            quizData = JSON.parse(localStorage.getItem(reportKey));
-          } catch (e) {
-            // Use basic data if parsing fails
-          }
-        }
-
-        // Only include if student name matches OR if we have report data with matching name
-        let includeQuiz = false;
-        if (quizData && quizData.student) {
-          includeQuiz = Array.from(studentData.names).some(name => 
-            matchesSearch(quizData.student, name)
-          );
-        } else {
-          // If no report, include if any name matches current student set
-          includeQuiz = studentData.names.size > 0;
-        }
-
-        if (includeQuiz || (studentData.names.size > 0 && attempts > 0)) {
-          studentData.quizzes.push({
-            chapter,
-            mastery,
-            attempts,
-            date: quizData?.date || null,
-            timeSpent: quizData?.timeSpent || null,
-            score: quizData?.score !== undefined ? quizData.score : null,
-            total: quizData?.total || 20
-          });
-        }
-      }
-
-      displayResults(studentData);
-    }
-
-    function matchesSearch(name, searchTerm) {
-      return name.toLowerCase().includes(searchTerm.toLowerCase());
-    }
-
-    function displayResults(data) {
-      const quizzes = data.quizzes;
-      const totalQuizzes = quizzes.length;
-      let totalCorrect = 0;
-      let totalWrong = 0;
-      let totalTimeSpent = 0;
-      const marks = [];
-      const days = new Set();
-      const attemptsPerQuiz = {};
-      let masteredCount = 0;
-
-      quizzes.forEach(quiz => {
-        if (quiz.score !== null) {
-          totalCorrect += quiz.score;
-          totalWrong += (quiz.total - quiz.score);
-          marks.push(quiz.score);
-        }
-        if (quiz.timeSpent) {
-          totalTimeSpent += quiz.timeSpent;
-        }
-        if (quiz.date) {
-          days.add(new Date(quiz.date).toDateString());
-        }
-        attemptsPerQuiz[quiz.chapter] = quiz.attempts;
-        if (quiz.mastery) masteredCount++;
+      // Sort by date (newest first) if available
+      attempts.sort((a, b) => {
+        if (a.date === 'N/A' && b.date === 'N/A') return 0;
+        if (a.date === 'N/A') return 1;
+        if (b.date === 'N/A') return -1;
+        return new Date(b.date) - new Date(a.date);
       });
 
-      const averageMark = marks.length > 0 ? (totalCorrect / marks.length).toFixed(1) : 0;
-      const highestMark = marks.length > 0 ? Math.max(...marks) : 0;
-      const lowestMark = marks.length > 0 ? Math.min(...marks) : 0;
-
-      // Find repeated marks
-      const markCount = {};
-      marks.forEach(mark => {
-        markCount[mark] = (markCount[mark] || 0) + 1;
-      });
-      const repeatedMarks = Object.entries(markCount)
-        .filter(([mark, count]) => count > 1)
-        .map(([mark, count]) => `${mark} (${count} times)`);
-
-      // Build lesson completion grid
-      const lessonGrid = [];
-      for (let i = 1; i <= 261; i++) {
-        const quiz = quizzes.find(q => q.chapter === i);
-        const isMastered = quiz ? quiz.mastery : false;
-        const attempts = quiz ? quiz.attempts : 0;
-        const lessonNum = i + 1; // Lesson = chapter + 1
-        
-        lessonGrid.push(`
-          <div class="lesson-item ${isMastered ? 'lesson-mastered' : ''}" 
-               title="Lesson ${lessonNum}: ${attempts} attempts${isMastered ? ' - Mastered' : ''}">
-            L${lessonNum}
-          </div>
-        `);
-      }
-
-      const namesList = Array.from(data.names).map(name => 
-        `<span class="name-tag">${name}</span>`
-      ).join('');
-
-      const quizList = quizzes.map(quiz => {
-        const dateStr = quiz.date ? new Date(quiz.date).toLocaleDateString() : 'Unknown date';
-        const timeStr = quiz.timeSpent ? `${quiz.timeSpent}s` : 'Unknown time';
-        const masteryClass = quiz.mastery ? 'mastery-pass' : 'mastery-fail';
-        const masteryText = quiz.mastery ? 'Mastered' : 'Needs Review';
-        const scoreStr = quiz.score !== null ? `${quiz.score}/${quiz.total}` : 'Not recorded';
-        const lessonNum = parseInt(quiz.chapter) + 1;
-
-        return `
-          <div class="quiz-item">
-            <div class="quiz-header">
-              <span>Lesson ${lessonNum} (chapter-${quiz.chapter}.html)</span>
-              <span class="mastery-badge ${masteryClass}">${masteryText}</span>
+      let html = `<h2 style="margin-top: 30px;">${attempts.length} Quiz Attempt(s) Found</h2>`;
+      attempts.forEach(att => {
+        html += `
+          <div class="attempt-card">
+            <div class="attempt-header">
+              <span>Lesson ${att.lessonNum}</span>
+              <span>${att.score}/${att.total}</span>
             </div>
-            <div class="quiz-details">
-              <div>Date: ${dateStr}</div>
-              <div>Time: ${timeStr}</div>
-              <div>Attempts: ${quiz.attempts}</div>
-              <div>Score: ${scoreStr}</div>
+            <div class="attempt-details">
+              <div><span class="label">Student:</span> ${att.studentName}</div>
+              <div><span class="label">Time Spent:</span> ${att.timeSpent}</div>
+              <div><span class="label">Date:</span> ${att.date}</div>
             </div>
           </div>
         `;
-      }).join('');
+      });
 
-      const resultsHTML = `
-        <div class="section">
-          <h2>Student Information</h2>
-          <div class="names-list">${namesList}</div>
-        </div>
-        
-        <div class="section">
-          <h2>Performance Summary</h2>
-          <div class="grid">
-            <div class="stat-card">
-              <div class="stat-value">${totalQuizzes}</div>
-              <div class="stat-label">Quizzes Taken</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${masteredCount}</div>
-              <div class="stat-label">Lessons Mastered</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${totalCorrect}</div>
-              <div class="stat-label">Total Correct</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${totalWrong}</div>
-              <div class="stat-label">Total Wrong</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${days.size}</div>
-              <div class="stat-label">Active Days</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${Math.round(totalTimeSpent / 60)}m</div>
-              <div class="stat-label">Total Time (min)</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="section">
-          <h2>Lesson Completion Overview (Lessons 2-262)</h2>
-          <div class="lesson-grid">
-            ${lessonGrid.join('')}
-          </div>
-        </div>
-        
-        <div class="section">
-          <h2>Quiz Details</h2>
-          ${quizList || '<p>No quiz records found</p>'}
-        </div>
-        
-        <div class="section">
-          <h2>Marks Analysis</h2>
-          <div class="grid">
-            <div class="stat-card">
-              <div class="stat-value">${averageMark}</div>
-              <div class="stat-label">Average Mark</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${highestMark}</div>
-              <div class="stat-label">Highest Mark</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${lowestMark}</div>
-              <div class="stat-label">Lowest Mark</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-value">${repeatedMarks.length}</div>
-              <div class="stat-label">Repeated Marks</div>
-            </div>
-          </div>
-          ${repeatedMarks.length > 0 ? 
-            `<div style="margin-top: 15px;">
-              <strong>Repeated Marks:</strong> ${repeatedMarks.join(', ')}
-            </div>` : ''}
-        </div>
-        
-        <div class="section">
-          <h2>Attempts per Quiz</h2>
-          <div class="grid">
-            ${Object.entries(attemptsPerQuiz).map(([lesson, attempts]) => {
-              const lessonNum = parseInt(lesson) + 1;
-              return `
-                <div class="stat-card">
-                  <div class="stat-value">${attempts}</div>
-                  <div class="stat-label">Lesson ${lessonNum}</div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-      `;
-
-      showResults(resultsHTML);
+      container.innerHTML = html;
+      container.style.display = 'block';
     }
 
-    function showResults(html, error = null) {
-      const resultsContainer = document.getElementById('results');
-      if (error) {
-        resultsContainer.innerHTML = `<div class="error">${error}</div>`;
-      } else {
-        resultsContainer.innerHTML = html;
-      }
-      resultsContainer.style.display = 'block';
-    }
+    // Load attempts on page load
+    window.addEventListener('DOMContentLoaded', loadAllAttempts);
   </script>
 </body>
 </html>
