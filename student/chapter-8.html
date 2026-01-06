@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 9 — Closed Syllables: e = /ĕ/"/>
-  <title>Mini OpenStax — Lesson 9: e = /ĕ/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 9 — Short Vowel e"/>
+  <title>Mini OpenStax — Lesson 9: Short Vowel e</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 9: e = /ĕ/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH9: Decode CVC words with short vowel e = /ĕ/</div>
+        <h1 id="chapter-title">Lesson 9: Short Vowel e</h1>
+        <div class="lo-tags" id="lo-tags">LO PH9: Decode CVC words with short e</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>short vowel</strong> <em>e</em> making the <strong>/ĕ/</strong> sound in closed syllables:</p>
+        <p>Short <strong>e</strong> CVC words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–9:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -91,13 +90,13 @@
         return array;
       }
 
-      const currentChapter = 8;
+      const currentChapter = 8; // chapter-8.html = Lesson 9
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 9: e = /ĕ/",
-        loTags: ["LO PH9: Decode CVC words with short vowel e = /ĕ/"],
+        title: "Lesson 9: Short Vowel e",
+        loTags: ["LO PH9: Decode CVC words with short e"],
         contentWords: [
           "Ed", "let", "led", "leg", "bed", "beg", "Ben", "bet", "men", "met", "Mel",
           "peg", "pen", "pep", "pet", "web", "wet", "wed"
@@ -114,26 +113,26 @@
           "If the pup can sit up, the pup can beg."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word has short e = /ĕ/?", options: [{id:"a",text:"bed",is_correct:true},{id:"b",text:"bead",is_correct:false},{id:"c",text:"beat",is_correct:false},{id:"d",text:"bite",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 9 word?", options: [{id:"a",text:"peg",is_correct:false},{id:"b",text:"pen",is_correct:false},{id:"c",text:"pan",is_correct:true},{id:"d",text:"pet",is_correct:false}] },
-          { id: "3", prompt: "In 'let', what sound does 'e' make?", options: [{id:"a",text:"/ĕ/",is_correct:true},{id:"b",text:"/ē/",is_correct:false},{id:"c",text:"/eɪ/",is_correct:false},{id:"d",text:"/ĭ/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'a male given name'?", options: [{id:"a",text:"Ben",is_correct:true},{id:"b",text:"bed",is_correct:false},{id:"c",text:"beg",is_correct:false},{id:"d",text:"bet",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'Mel'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 9 words?", options: [{id:"a",text:"Ben had a nap in the bed.",is_correct:false},{id:"b",text:"Peg had a wet leg.",is_correct:true},{id:"c",text:"Tim met Ed at the bus.",is_correct:false},{id:"d",text:"None — all include review words",is_correct:true}] },
-          { id: "7", prompt: "Which word refers to an article made of woven strands for catching insects?", options: [{id:"a",text:"web",is_correct:true},{id:"b",text:"wed",is_correct:false},{id:"c",text:"wet",is_correct:false},{id:"d",text:"peg",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'pet'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "9", prompt: "In 'Mel had a pet pig in a pen,' how many Lesson 9 words?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to ask for something humbly'?", options: [{id:"a",text:"beg",is_correct:true},{id:"b",text:"bet",is_correct:false},{id:"c",text:"bed",is_correct:false},{id:"d",text:"Ben",is_correct:false}] },
-          { id: "11", prompt: "Which word describes moisture on a surface?", options: [{id:"a",text:"wet",is_correct:true},{id:"b",text:"web",is_correct:false},{id:"c",text:"wed",is_correct:false},{id:"d",text:"pep",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'e' and means 'to walk down the aisle in a ceremony'?", options: [{id:"a",text:"wed",is_correct:true},{id:"b",text:"wet",is_correct:false},{id:"c",text:"web",is_correct:false},{id:"d",text:"peg",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 9?", options: [{id:"a",text:"If the pup can sit up, the pup can beg.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'leg'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'She sat on the ___.'?", options: [{id:"a",text:"bed",is_correct:true},{id:"b",text:"beg",is_correct:false},{id:"c",text:"bet",is_correct:false},{id:"d",text:"Ben",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'met'?", options: [{id:"a",text:"Short vowel e = /ĕ/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:true},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'to encounter or be introduced to'?", options: [{id:"a",text:"met",is_correct:true},{id:"b",text:"let",is_correct:false},{id:"c",text:"led",is_correct:false},{id:"d",text:"leg",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'He made a small ___.'?", options: [{id:"a",text:"bet",is_correct:true},{id:"b",text:"bed",is_correct:false},{id:"c",text:"beg",is_correct:false},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"Ed",is_correct:true},{id:"b",text:"Ben",is_correct:true},{id:"c",text:"Mel",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 9?", options: [{id:"a",text:"Closed syllables with short e = /ĕ/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word has a short e sound?", options: [{id:"a",text:"bed",is_correct:true},{id:"b",text:"bad",is_correct:false},{id:"c",text:"bid",is_correct:false},{id:"d",text:"bud",is_correct:false}] },
+          { id: "2", prompt: "Which is a name from the sentences?", options: [{id:"a",text:"Ed",is_correct:true},{id:"b",text:"Ben",is_correct:true},{id:"c",text:"Mel",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "3", prompt: "How many letters in 'pen'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to ask for something'?", options: [{id:"a",text:"beg",is_correct:true},{id:"b",text:"bed",is_correct:false},{id:"c",text:"bet",is_correct:false},{id:"d",text:"bag",is_correct:false}] },
+          { id: "5", prompt: "How many consonants in 'web'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "6", prompt: "Which sentence is from Lesson 9?", options: [{id:"a",text:"Peg had a wet leg.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "7", prompt: "Which word rhymes with 'bed'?", options: [{id:"a",text:"wed",is_correct:true},{id:"b",text:"bad",is_correct:false},{id:"c",text:"bid",is_correct:false},{id:"d",text:"bud",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is 'leg'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "9", prompt: "In 'Mel had a pet pig in a pen,' how many short-e words?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "10", prompt: "Which word might complete: 'She wrote with a ___.'?", options: [{id:"a",text:"pen",is_correct:true},{id:"b",text:"pan",is_correct:false},{id:"c",text:"pin",is_correct:false},{id:"d",text:"pun",is_correct:false}] },
+          { id: "11", prompt: "Which word begins with /b/ and has short e?", options: [{id:"a",text:"bed",is_correct:true},{id:"b",text:"beg",is_correct:true},{id:"c",text:"bet",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "12", prompt: "Which word has the same vowel sound as 'web'?", options: [{id:"a",text:"wed",is_correct:true},{id:"b",text:"wab",is_correct:false},{id:"c",text:"wib",is_correct:false},{id:"d",text:"wob",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'beg'?", options: [{id:"a",text:"If the pup can sit up, the pup can beg.",is_correct:true},{id:"b",text:"Peg had a wet leg.",is_correct:false},{id:"c",text:"Tim met Ed.",is_correct:false},{id:"d",text:"Ben had a nap.",is_correct:false}] },
+          { id: "14", prompt: "How many short-e words in: 'Peg let a leg dip in the tub.'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'Don’t ___ on the floor!'?", options: [{id:"a",text:"bed",is_correct:false},{id:"b",text:"beg",is_correct:false},{id:"c",text:"sit",is_correct:false},{id:"d",text:"None are correct",is_correct:true}] },
+          { id: "16", prompt: "What phonics pattern is in 'met'?", options: [{id:"a",text:"Short e in closed syllable",is_correct:true},{id:"b",text:"Long e",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel digraph",is_correct:false}] },
+          { id: "17", prompt: "Which word appears in both the word list and a sentence?", options: [{id:"a",text:"Peg",is_correct:false},{id:"b",text:"leg",is_correct:true},{id:"c",text:"web",is_correct:true},{id:"d",text:"Both B and C",is_correct:true}] },
+          { id: "18", prompt: "Which word might complete: 'He fell and hurt his ___.'?", options: [{id:"a",text:"leg",is_correct:true},{id:"b",text:"lag",is_correct:false},{id:"c",text:"log",is_correct:false},{id:"d",text:"lig",is_correct:false}] },
+          { id: "19", prompt: "The sentence 'Can a bug rip up a web?' focuses on which skills?", options: [{id:"a",text:"Short e decoding + comprehension",is_correct:true},{id:"b",text:"Long vowels",is_correct:false},{id:"c",text:"Sight words only",is_correct:false},{id:"d",text:"Consonant blends",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 9?", options: [{id:"a",text:"Short e in closed syllables",is_correct:true},{id:"b",text:"Short u",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Diphthongs",is_correct:false}] }
         ]
       };
 
@@ -148,14 +147,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 9 to 12
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 8,9,10,11
+          const lessonNum = c + 1;      // Lesson 9,10,11,12
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -176,7 +183,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -205,14 +211,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered short e=/ĕ/!' :
+              mastery ? 'You’ve mastered short e!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 9 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -239,7 +248,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -290,7 +298,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
