@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 42 — Final Consonant Blend: -nt"/>
-  <title>Mini OpenStax — Lesson 42: Final -nt Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 42 — Final Consonant Blend -nt"/>
+  <title>Mini OpenStax — Lesson 42: Final Consonant Blend -nt</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 42: Final -nt Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH42: Decode words with final consonant blend -nt</div>
+        <h1 id="chapter-title">Lesson 42: Final Consonant Blend -nt</h1>
+        <div class="lo-tags" id="lo-tags">LO PH42: Decode words ending with consonant blend /nt/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words ending with the <strong>consonant blend "-nt"</strong> in closed syllables:</p>
+        <p>Words ending with the <strong>-nt</strong> blend:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–42:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,11 +95,13 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 42: Final -nt Blend",
-        loTags: ["LO PH42: Decode words with final consonant blend -nt"],
+        title: "Lesson 42: Final Consonant Blend -nt",
+        loTags: ["LO PH42: Decode words ending with consonant blend /nt/"],
         contentWords: [
-          "bent", "sent", "rent", "tent", "went", "pent", "dent", "lent", "vent", "Kent",
-          "ant", "pant", "rant", "tint", "lint", "mint", "hint", "bunt", "hunt", "runt"
+          "bent", "sent", "rent", "tent", "went", "pent",
+          "dent", "lent", "vent", "Kent",
+          "ant", "pant", "rant", "tint", "lint", "mint", "hint",
+          "bunt", "hunt", "runt"
         ],
         sentences: [
           "Dad sent Kent on a trip.",
@@ -111,30 +112,30 @@
           "The pup was not big, and was just a runt.",
           "At bat, Glen can bunt in a run.",
           "Kent set up a tent at the pond.",
-          "Deb got lint on her hat. The lint had a red tint.",
-          "Clem let a hint drop, but Fran did not get the hint."
+          "Deb got lint on her hat.",
+          "The lint had a red tint."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the '-nt' blend?", options: [{id:"a",text:"tent",is_correct:true},{id:"b",text:"ten",is_correct:false},{id:"c",text:"test",is_correct:false},{id:"d",text:"tap",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 42 word?", options: [{id:"a",text:"sent",is_correct:false},{id:"b",text:"went",is_correct:false},{id:"c",text:"scent",is_correct:true},{id:"d",text:"dent",is_correct:false}] },
-          { id: "3", prompt: "In 'bunt', how many consonants end the word?", options: [{id:"a",text:"2 (n + t)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to throw out or release (e.g., a secret clue)'?", options: [{id:"a",text:"hint",is_correct:true},{id:"b",text:"rant",is_correct:false},{id:"c",text:"vent",is_correct:false},{id:"d",text:"mint",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'runt'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 42 and review words?", options: [{id:"a",text:"Kent set up a tent at the pond.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a small, dirty particle (e.g., from clothes)?", options: [{id:"a",text:"lint",is_correct:true},{id:"b",text:"mint",is_correct:false},{id:"c",text:"tint",is_correct:false},{id:"d",text:"rant",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'sent'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Dad lent Kent the van,' how many Lesson 42 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:true},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to breathe heavily after exercise'?", options: [{id:"a",text:"pant",is_correct:true},{id:"b",text:"rant",is_correct:false},{id:"c",text:"bunt",is_correct:false},{id:"d",text:"hunt",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'Please ___ me your notes.'?", options: [{id:"a",text:"lent",is_correct:false},{id:"b",text:"send",is_correct:false},{id:"c",text:"rent",is_correct:true},{id:"d",text:"bent",is_correct:false}] },
-          { id: "12", prompt: "Which word describes a small or undersized animal (e.g., 'just a ___')?", options: [{id:"a",text:"runt",is_correct:true},{id:"b",text:"ant",is_correct:false},{id:"c",text:"tent",is_correct:false},{id:"d",text:"vent",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 42?", options: [{id:"a",text:"The pup can run and pant a lot.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'dent'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'He began to ___ when he was angry.'?", options: [{id:"a",text:"rant",is_correct:true},{id:"b",text:"hint",is_correct:false},{id:"c",text:"tint",is_correct:false},{id:"d",text:"bunt",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'went'?", options: [{id:"a",text:"Closed syllable with final -nt blend",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"tent",is_correct:true},{id:"b",text:"dent",is_correct:true},{id:"c",text:"hint",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'A red ___ made the photo look vintage.'?", options: [{id:"a",text:"tint",is_correct:true},{id:"b",text:"mint",is_correct:false},{id:"c",text:"lint",is_correct:false},{id:"d",text:"rant",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'Clem let a hint drop' connects to which earlier character?", options: [{id:"a",text:"Clem (Lesson 31)",is_correct:true},{id:"b",text:"Fred only",is_correct:false},{id:"c",text:"Stan only",is_correct:false},{id:"d",text:"Glen only",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 42?", options: [{id:"a",text:"Final consonant blend '-nt' in closed syllables",is_correct:true},{id:"b",text:"Initial consonant blends",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the /nt/ blend?", options: [{id:"a",text:"sent",is_correct:true},{id:"b",text:"trip",is_correct:false},{id:"c",text:"van",is_correct:false},{id:"d",text:"pond",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to give something temporarily' (past tense of 'lend')?", options: [{id:"a",text:"lent",is_correct:true},{id:"b",text:"sent",is_correct:false},{id:"c",text:"rent",is_correct:false},{id:"d",text:"bent",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'tent'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word describes a small, underdeveloped animal?", options: [{id:"a",text:"runt",is_correct:true},{id:"b",text:"rant",is_correct:false},{id:"c",text:"bunt",is_correct:false},{id:"d",text:"hint",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 42?", options: [{id:"a",text:"Kent set up a tent at the pond.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'sent'?", options: [{id:"a",text:"tent",is_correct:true},{id:"b",text:"pant",is_correct:true},{id:"c",text:"rant",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "7", prompt: "What syllable type is 'bent'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Dad sent Kent on a trip', how many /nt/ words?", options: [{id:"a",text:"2 (sent, Kent)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'She gave a subtle ___ about the surprise.'?", options: [{id:"a",text:"hint",is_correct:true},{id:"b",text:"rant",is_correct:false},{id:"c",text:"vent",is_correct:false},{id:"d",text:"mint",is_correct:false}] },
+          { id: "10", prompt: "Which word refers to a small insect often found in kitchens?", options: [{id:"a",text:"ant",is_correct:true},{id:"b",text:"lint",is_correct:false},{id:"c",text:"tint",is_correct:false},{id:"d",text:"runt",is_correct:false}] },
+          { id: "11", prompt: "Which proper name appears in multiple sentences?", options: [{id:"a",text:"Kent",is_correct:true},{id:"b",text:"Dad",is_correct:true},{id:"c",text:"Glen",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "12", prompt: "How many unique /nt/ words are in the word list?", options: [{id:"a",text:"20",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"18",is_correct:false},{id:"d",text:"22",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'dent'?", options: [{id:"a",text:"On the trip, the van got a dent.",is_correct:true},{id:"b",text:"Dad sent Kent.",is_correct:false},{id:"c",text:"The pup can run.",is_correct:false},{id:"d",text:"Kent set up a tent.",is_correct:false}] },
+          { id: "14", prompt: "Which word means 'to breathe heavily after exertion'?", options: [{id:"a",text:"pant",is_correct:true},{id:"b",text:"rant",is_correct:false},{id:"c",text:"bunt",is_correct:false},{id:"d",text:"hunt",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'He hit a ___ in the baseball game.'?", options: [{id:"a",text:"bunt",is_correct:true},{id:"b",text:"runt",is_correct:false},{id:"c",text:"hint",is_correct:false},{id:"d",text:"tent",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'mint'?", options: [{id:"a",text:"Final consonant blend /nt/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'Deb got lint on her hat' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /l/ blends (e.g., /cl/, /fl/)",is_correct:true},{id:"b",text:"Short i (/ĭ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT a /nt/ word?", options: [{id:"a",text:"trip",is_correct:true},{id:"b",text:"sent",is_correct:false},{id:"c",text:"tent",is_correct:false},{id:"d",text:"went",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in sentence 9 AND 10?", options: [{id:"a",text:"lint",is_correct:true},{id:"b",text:"hat",is_correct:false},{id:"c",text:"red",is_correct:false},{id:"d",text:"tint",is_correct:true}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 42?", options: [{id:"a",text:"Final consonant blend /nt/ in closed syllables",is_correct:true},{id:"b",text:"Beginning consonant blends",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -145,18 +146,32 @@
       }
 
       function renderSentences() {
+        // The original PDF shows "Clem let a hint drop..." as sentence 10,
+        // but the uploaded content stops at "The lint had a red tint."
+        // We'll use the 10 sentences provided in the knowledge base.
+        const sentences = CHAPTER_CONFIG.sentences;
+        // Combine last two as a single sentence per PDF
+        const finalSentences = [...sentences.slice(0, 8), `${sentences[8]} ${sentences[9]}`];
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          finalSentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 42 to 45
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 41,42,43,44
+          const lessonNum = c + 1;      // Lesson 42,43,44,45
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -177,7 +192,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -206,14 +220,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the final -nt blend!' :
+              mastery ? 'You’ve mastered the /nt/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 42 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -240,7 +257,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -291,7 +307,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
