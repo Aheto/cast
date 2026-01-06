@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 2 — Closed Syllables: a = /ă/"/>
-  <title>Mini OpenStax — Lesson 2: a = /ă/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 2 — Short Vowel a"/>
+  <title>Mini OpenStax — Lesson 2: Short Vowel a</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 2: a = /ă/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH2: Decode CVC words with short vowel a = /ă/</div>
+        <h1 id="chapter-title">Lesson 2: Short Vowel a</h1>
+        <div class="lo-tags" id="lo-tags">LO PH2: Decode CVC words with short a</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,13 +48,13 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>short vowel</strong> <em>a</em> making the <strong>/ă/</strong> sound in closed syllables:</p>
+        <p>Short <strong>a</strong> CVC words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lesson 2:</p>
+        <p>Read aloud. All words use short a:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
@@ -91,50 +91,47 @@
         return array;
       }
 
-      const currentChapter = 1;
+      const currentChapter = 1; // chapter-1.html = Lesson 2
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 2: a = /ă/",
-        loTags: ["LO PH2: Decode CVC words with short vowel a = /ă/"],
+        title: "Lesson 2: Short Vowel a",
+        loTags: ["LO PH2: Decode CVC words with short a"],
         contentWords: [
-          "at", "am", "an", "ad", "Al", "sad", "Sal", "sap", "sat", "Sam", "sag",
-          "rat", "ram", "rag", "ran", "rap", "can", "cap", "cat", "cab",
-          "hat", "ham", "had", "Hal"
+          "cap", "map", "nap", "tap", "gap", "lap", "rap", "sap", "zap", "dad", "mad", "pad", "bad", "sad", "had"
         ],
         sentences: [
-          "Sad Sam sat.",
-          "Sam had a rag.",
-          "Can a rag sag?",
-          "Al had a hat.",
-          "Hal had a cap.",
-          "Sal had a can.",
-          "A rat ran at a ham.",
-          "A cat ran at a rat.",
-          "A cat can rap a rat."
+          "Sam had a cap.",
+          "Sam had a map.",
+          "Sam took a nap.",
+          "Sam gave a tap.",
+          "Sam sat on a lap.",
+          "Sam had a red cap.",
+          "Sam had a big map.",
+          "Sam took a long nap."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word has short a = /ă/?", options: [{id:"a",text:"cat",is_correct:true},{id:"b",text:"cake",is_correct:false},{id:"c",text:"came",is_correct:false},{id:"d",text:"cave",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 2 word?", options: [{id:"a",text:"cap",is_correct:false},{id:"b",text:"cab",is_correct:false},{id:"c",text:"car",is_correct:true},{id:"d",text:"can",is_correct:false}] },
-          { id: "3", prompt: "In 'hat', what sound does 'a' make?", options: [{id:"a",text:"/ă/",is_correct:true},{id:"b",text:"/ā/",is_correct:false},{id:"c",text:"/e/",is_correct:false},{id:"d",text:"/o/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'a male given name'?", options: [{id:"a",text:"Sam",is_correct:true},{id:"b",text:"sap",is_correct:false},{id:"c",text:"sag",is_correct:false},{id:"d",text:"sad",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'Hal'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 2 words?", options: [{id:"a",text:"Sad Sam sat.",is_correct:true},{id:"b",text:"She ran fast.",is_correct:false},{id:"c",text:"He ate cake.",is_correct:false},{id:"d",text:"It is big.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a small piece of cloth for cleaning?", options: [{id:"a",text:"rag",is_correct:true},{id:"b",text:"rat",is_correct:false},{id:"c",text:"ram",is_correct:false},{id:"d",text:"rap",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'cap'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "9", prompt: "In 'A cat ran at a rat,' how many Lesson 2 words?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"2",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to move quickly on foot'?", options: [{id:"a",text:"ran",is_correct:true},{id:"b",text:"rap",is_correct:false},{id:"c",text:"ram",is_correct:false},{id:"d",text:"rag",is_correct:false}] },
-          { id: "11", prompt: "Which word describes someone feeling unhappy?", options: [{id:"a",text:"sad",is_correct:true},{id:"b",text:"mad",is_correct:false},{id:"c",text:"glad",is_correct:false},{id:"d",text:"bad",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'a' and means 'a male name'?", options: [{id:"a",text:"Al",is_correct:true},{id:"b",text:"Hal",is_correct:false},{id:"c",text:"Sal",is_correct:false},{id:"d",text:"Sam",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 2?", options: [{id:"a",text:"Sal had a can.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'ham'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Put on your ___.'?", options: [{id:"a",text:"hat",is_correct:true},{id:"b",text:"had",is_correct:false},{id:"c",text:"ham",is_correct:false},{id:"d",text:"ran",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'can'?", options: [{id:"a",text:"Short vowel a = /ă/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:true},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word refers to a male pig?", options: [{id:"a",text:"— (not listed)",is_correct:true},{id:"b",text:"rat",is_correct:false},{id:"c",text:"ram",is_correct:false},{id:"d",text:"rap",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'The ___ ran fast.'?", options: [{id:"a",text:"rat",is_correct:true},{id:"b",text:"rag",is_correct:false},{id:"c",text:"ram",is_correct:false},{id:"d",text:"rap",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"Sam",is_correct:true},{id:"b",text:"cat",is_correct:true},{id:"c",text:"rat",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 2?", options: [{id:"a",text:"Closed syllables with short a = /ă/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word has a short a sound?", options: [{id:"a",text:"cap",is_correct:true},{id:"b",text:"cop",is_correct:false},{id:"c",text:"cup",is_correct:false},{id:"d",text:"keep",is_correct:false}] },
+          { id: "2", prompt: "Which is NOT a Lesson 2 word?", options: [{id:"a",text:"map",is_correct:false},{id:"b",text:"tap",is_correct:false},{id:"c",text:"top",is_correct:true},{id:"d",text:"nap",is_correct:false}] },
+          { id: "3", prompt: "In 'bad', how many letters?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to rest briefly'?", options: [{id:"a",text:"nap",is_correct:true},{id:"b",text:"tap",is_correct:false},{id:"c",text:"map",is_correct:false},{id:"d",text:"cap",is_correct:false}] },
+          { id: "5", prompt: "How many consonants in 'sad'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "6", prompt: "Which sentence uses only Lesson 2 words?", options: [{id:"a",text:"Sam had a cap.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
+          { id: "7", prompt: "Which word rhymes with 'map'?", options: [{id:"a",text:"cap",is_correct:true},{id:"b",text:"mop",is_correct:false},{id:"c",text:"mip",is_correct:false},{id:"d",text:"mup",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is in 'lap'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "9", prompt: "In 'Sam took a nap,' how many Lesson 2 words?", options: [{id:"a",text:"2 (Sam, nap)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'father'?", options: [{id:"a",text:"dad",is_correct:true},{id:"b",text:"bad",is_correct:false},{id:"c",text:"mad",is_correct:false},{id:"d",text:"sad",is_correct:false}] },
+          { id: "11", prompt: "Which word might complete: 'Don’t ___ it!'?", options: [{id:"a",text:"zap",is_correct:true},{id:"b",text:"zip",is_correct:false},{id:"c",text:"zop",is_correct:false},{id:"d",text:"zup",is_correct:false}] },
+          { id: "12", prompt: "Which word has the same vowel sound as 'cat'?", options: [{id:"a",text:"hat",is_correct:false},{id:"b",text:"had",is_correct:true},{id:"c",text:"hot",is_correct:false},{id:"d",text:"hit",is_correct:false}] },
+          { id: "13", prompt: "Which sentence is from Lesson 2?", options: [{id:"a",text:"Sam had a big map.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
+          { id: "14", prompt: "How many short a words in: 'Dad had a bad cap.'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"2",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'Sit on my ___.'?", options: [{id:"a",text:"lap",is_correct:true},{id:"b",text:"lip",is_correct:false},{id:"c",text:"lop",is_correct:false},{id:"d",text:"lup",is_correct:false}] },
+          { id: "16", prompt: "What phonics pattern is in 'sad'?", options: [{id:"a",text:"Short a in closed syllable",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"cap",is_correct:true},{id:"b",text:"map",is_correct:true},{id:"c",text:"nap",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "18", prompt: "Which word might complete: 'The ___ was on the wall.'?", options: [{id:"a",text:"map",is_correct:true},{id:"b",text:"mop",is_correct:false},{id:"c",text:"mip",is_correct:false},{id:"d",text:"mup",is_correct:false}] },
+          { id: "19", prompt: "The sentence 'Sam took a long nap' connects to which concept?", options: [{id:"a",text:"Short a CVC words",is_correct:true},{id:"b",text:"Long vowels",is_correct:false},{id:"c",text:"Consonant blends",is_correct:false},{id:"d",text:"Sight words",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 2?", options: [{id:"a",text:"Short a in closed syllables",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
         ]
       };
 
@@ -177,7 +174,7 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
+      // --- ✅ ENHANCED showFeedback: Saves report to localStorage ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -203,17 +200,23 @@
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        // Generate full report text (same as WhatsApp)
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
 
+        // ✅ SAVE REPORT TO LOCALSTORAGE FOR ANALYTICS
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        // Generate WhatsApp URL
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered short a=/ă/!' :
+              mastery ? 'You’ve mastered short a!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 2 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
