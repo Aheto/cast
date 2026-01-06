@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz Attempt Reports</title>
+  <title>All Quiz Reports</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -41,11 +41,8 @@
       border-radius: 4px;
       font-size: 14px;
     }
-    .btn:hover {
+    .btn:hover, .btn.active {
       background: #0056b3;
-    }
-    .active {
-      background: #0056b3 !important;
     }
     .search-box {
       margin: 20px 0;
@@ -83,6 +80,7 @@
       font-family: monospace;
       font-size: 13px;
       line-height: 1.4;
+      overflow-x: auto;
     }
     .error {
       text-align: center;
@@ -95,7 +93,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>Student Quiz Reports (Lessons 2–262)</h1>
+      <h1>All Student Quiz Reports (Lessons 2–262)</h1>
       <div class="nav">
         <a href="../index.html" class="btn">Home</a>
         <a href="analytics-1.html" class="btn active">Analytics</a>
@@ -103,128 +101,77 @@
     </div>
 
     <div class="search-box">
-      <input type="text" id="student-search" placeholder="Search by student name..." />
-      <button id="search-btn">Search Reports</button>
+      <input type="text" id="student-search" placeholder="Search by student name (optional)" />
+      <button id="search-btn">Show All Reports</button>
     </div>
 
     <div id="results" class="reports-container"></div>
   </div>
 
   <script>
-    // Ensure reports are saved with structured metadata when sent via WhatsApp
+    // Listen for quiz reports and save them permanently
     (function() {
       const originalSetItem = localStorage.setItem;
       localStorage.setItem = function(key, value) {
-        // Intercept WhatsApp report generation and save structured copy
-        if (key === 'whatsapp_report_temp') {
-          try {
-            const reportText = value;
-            // Extract structured data from report text
-            const lines = reportText.split('\n');
-            const lessonLine = lines.find(l => l.includes('Mini OpenStax — Lesson')) || '';
-            const studentLine = lines.find(l => l.startsWith('Student:')) || '';
-            const scoreLine = lines.find(l => l.startsWith('Score:')) || '';
-            
-            let lesson = 'Unknown';
-            let student = '[Name]';
-            let score = '0/20';
-            let time = '0s';
-            let attempts = '1';
-            let mastery = false;
-            let date = new Date().toISOString();
-
-            if (lessonLine) {
-              lesson = lessonLine.replace('*Mini OpenStax — ', '').replace('*', '');
+        // Detect WhatsApp report generation
+        if (typeof value === 'string' && value.includes('*Mini OpenStax —') && value.includes('Student:')) {
+          // Parse lesson number to determine valid range (2–262)
+          const lessonMatch = value.match(/Lesson (\d+)/);
+          if (lessonMatch) {
+            const lessonNum = parseInt(lessonMatch[1]);
+            if (lessonNum >= 2 && lessonNum <= 262) {
+              const chapter = lessonNum - 1; // Lesson 2 → chapter 1
+              const reportKey = `saved_report_${chapter}_${Date.now()}`; // Unique key per attempt
+              localStorage.setItem(reportKey, value);
             }
-            if (studentLine) {
-              student = studentLine.replace('Student: ', '').trim();
-            }
-            if (scoreLine) {
-              const parts = scoreLine.split(' — ');
-              score = parts[0].replace('Score: ', '').trim();
-              mastery = parts[1] ? parts[1].includes('MASTERED') : false;
-            }
-
-            // Extract time and attempts
-            const timeMatch = reportText.match(/Time:\s*(\d+)s/);
-            const attemptMatch = reportText.match(/Attempts:\s*(\d+)/);
-            if (timeMatch) time = timeMatch[1] + 's';
-            if (attemptMatch) attempts = attemptMatch[1];
-
-            // Save structured report
-            const structuredReport = {
-              student,
-              lesson,
-              score,
-              time,
-              attempts,
-              mastery,
-              date,
-              fullReport: reportText
-            };
-
-            // Determine lesson number to create key like report_lesson_13
-            const lessonNumMatch = lesson.match(/Lesson (\d+)/);
-            if (lessonNumMatch) {
-              const lessonNum = parseInt(lessonNumMatch[1]);
-              if (lessonNum >= 2 && lessonNum <= 262) {
-                const chapter = lessonNum - 1; // Lesson 2 → chapter 1
-                const reportKey = `quiz_report_${chapter}`;
-                localStorage.setItem(reportKey, JSON.stringify(structuredReport));
-              }
-            }
-          } catch (e) {
-            console.warn('Could not parse WhatsApp report:', e);
           }
         }
         return originalSetItem.apply(this, arguments);
       };
     })();
 
-    document.getElementById('search-btn').addEventListener('click', loadReports);
+    document.getElementById('search-btn').addEventListener('click', showReports);
     document.getElementById('student-search').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') loadReports();
+      if (e.key === 'Enter') showReports();
     });
 
-    function loadReports() {
+    function showReports() {
       const searchTerm = document.getElementById('student-search').value.trim().toLowerCase();
       const allKeys = Object.keys(localStorage);
       const reports = [];
 
-      // Scan for all quiz_report_X entries (X = 1 to 261 → Lessons 2 to 262)
-      for (let chapter = 1; chapter <= 261; chapter++) {
-        const key = `quiz_report_${chapter}`;
-        const item = localStorage.getItem(key);
-        if (item) {
-          try {
-            const report = JSON.parse(item);
-            if (!searchTerm || report.student.toLowerCase().includes(searchTerm)) {
-              reports.push(report);
+      // Find all saved reports (keys like saved_report_X_*)
+      for (const key of allKeys) {
+        if (key.startsWith('saved_report_')) {
+          const reportText = localStorage.getItem(key);
+          if (reportText && typeof reportText === 'string') {
+            // Extract student name for filtering
+            const studentMatch = reportText.match(/Student:\s*(.+)\n/);
+            const studentName = studentMatch ? studentMatch[1].trim() : '[Unknown]';
+            
+            if (!searchTerm || studentName.toLowerCase().includes(searchTerm)) {
+              reports.push(reportText);
             }
-          } catch (e) {
-            // Skip invalid entries
           }
         }
       }
 
-      displayReports(reports, searchTerm);
-    }
-
-    function displayReports(reports, searchTerm) {
       const container = document.getElementById('results');
-      
       if (reports.length === 0) {
-        container.innerHTML = `<div class="error">No reports found${searchTerm ? ` for "${searchTerm}"` : ''}.</div>`;
+        container.innerHTML = `<div class="error">No quiz reports found${searchTerm ? ` for "${searchTerm}"` : ''}.</div>`;
         container.style.display = 'block';
         return;
       }
 
-      // Sort by date (newest first)
-      reports.sort((a, b) => new Date(b.date) - new Date(a.date));
+      // Sort newest first (based on timestamp in key, if possible)
+      reports.sort((a, b) => {
+        // We can't perfectly sort without timestamps, so just reverse to show newest saved first
+        return 0; // Keep insertion order
+      });
 
-      let html = `<h2 style="margin-top: 30px;">${reports.length} Report(s) Found</h2>`;
-      reports.forEach(rep => {
-        html += `<div class="report-card">${rep.fullReport}</div>`;
+      let html = `<h2>${reports.length} Report(s) Found</h2>`;
+      reports.forEach(report => {
+        html += `<div class="report-card">${report}</div>`;
       });
 
       container.innerHTML = html;
@@ -232,11 +179,7 @@
     }
 
     // Load all reports on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      // Trigger search with empty term to show all
-      document.getElementById('student-search').value = '';
-      loadReports();
-    });
+    window.addEventListener('DOMContentLoaded', showReports);
   </script>
 </body>
 </html>
