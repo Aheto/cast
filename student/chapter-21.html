@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 22 — Consonant Blends: cr"/>
-  <title>Mini OpenStax — Lesson 22: cr Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 22 — Consonant Blend cr"/>
+  <title>Mini OpenStax — Lesson 22: Consonant Blend cr</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 22: cr Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH22: Decode words with consonant blend cr</div>
+        <h1 id="chapter-title">Lesson 22: Consonant Blend cr</h1>
+        <div class="lo-tags" id="lo-tags">LO PH22: Decode words with consonant blend /cr/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words beginning with the <strong>consonant blend "cr"</strong> in closed syllables:</p>
+        <p>Consonant blend <strong>cr</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–22:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,8 +95,8 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 22: cr Blend",
-        loTags: ["LO PH22: Decode words with consonant blend cr"],
+        title: "Lesson 22: Consonant Blend cr",
+        loTags: ["LO PH22: Decode words with consonant blend /cr/"],
         contentWords: [
           "crab", "crag", "cram", "crib", "crop"
         ],
@@ -112,26 +111,26 @@
           "Pal did not stop the crab. Pal let the crab run."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the 'cr' blend?", options: [{id:"a",text:"crab",is_correct:true},{id:"b",text:"rab",is_correct:false},{id:"c",text:"cab",is_correct:false},{id:"d",text:"grab",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 22 word?", options: [{id:"a",text:"crib",is_correct:false},{id:"b",text:"crop",is_correct:false},{id:"c",text:"crawl",is_correct:true},{id:"d",text:"cram",is_correct:false}] },
-          { id: "3", prompt: "In 'crop', how many consonants start the word?", options: [{id:"a",text:"2 (c + r)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'a rocky hill or cliff'?", options: [{id:"a",text:"crag",is_correct:true},{id:"b",text:"crab",is_correct:false},{id:"c",text:"crib",is_correct:false},{id:"d",text:"crop",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'crib'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 22 and review words?", options: [{id:"a",text:"Nan had a nap in the crib.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a baby’s bed?", options: [{id:"a",text:"crib",is_correct:true},{id:"b",text:"crab",is_correct:false},{id:"c",text:"crag",is_correct:false},{id:"d",text:"crop",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'crab'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Ten men can cram in a big van,' how many Lesson 22 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to squeeze many people into a small space'?", options: [{id:"a",text:"cram",is_correct:true},{id:"b",text:"crop",is_correct:false},{id:"c",text:"crab",is_correct:false},{id:"d",text:"crag",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'Farmers harvest their ___ in the fall.'?", options: [{id:"a",text:"crop",is_correct:true},{id:"b",text:"crib",is_correct:false},{id:"c",text:"crab",is_correct:false},{id:"d",text:"crag",is_correct:false}] },
-          { id: "12", prompt: "Which sea creature appears in Lesson 22?", options: [{id:"a",text:"crab",is_correct:true},{id:"b",text:"fish",is_correct:false},{id:"c",text:"shark",is_correct:false},{id:"d",text:"dolphin",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 22?", options: [{id:"a",text:"The hut sat on a crag in the fog.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'cram'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Don’t ___ all your clothes in one drawer!'?", options: [{id:"a",text:"crop",is_correct:false},{id:"b",text:"cram",is_correct:true},{id:"c",text:"crib",is_correct:false},{id:"d",text:"crab",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'crop'?", options: [{id:"a",text:"Consonant blend cr + short o",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"crab",is_correct:true},{id:"b",text:"crib",is_correct:true},{id:"c",text:"crop",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'The baby slept soundly in the ___.'?", options: [{id:"a",text:"crib",is_correct:true},{id:"b",text:"crab",is_correct:false},{id:"c",text:"crag",is_correct:false},{id:"d",text:"crop",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'Pal the pup sped at the crab' connects to which earlier lesson?", options: [{id:"a",text:"Lesson 15 (sped)",is_correct:true},{id:"b",text:"Lesson 18 (swim)",is_correct:false},{id:"c",text:"Lesson 20 (smug)",is_correct:false},{id:"d",text:"Lesson 14 (stun)",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 22?", options: [{id:"a",text:"Consonant blend 'cr' in closed syllables",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word begins with the /kr/ sound (spelled 'cr')?", options: [{id:"a",text:"crab",is_correct:true},{id:"b",text:"cab",is_correct:false},{id:"c",text:"tab",is_correct:false},{id:"d",text:"dab",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'a small bed for a baby'?", options: [{id:"a",text:"crib",is_correct:true},{id:"b",text:"crag",is_correct:false},{id:"c",text:"crop",is_correct:false},{id:"d",text:"cram",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'crag'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to force many people or things into a small space'?", options: [{id:"a",text:"cram",is_correct:true},{id:"b",text:"crab",is_correct:false},{id:"c",text:"crib",is_correct:false},{id:"d",text:"crop",is_correct:false}] },
+          { id: "5", prompt: "Which word refers to a steep or rugged rock face?", options: [{id:"a",text:"crag",is_correct:true},{id:"b",text:"crop",is_correct:false},{id:"c",text:"crab",is_correct:false},{id:"d",text:"crib",is_correct:false}] },
+          { id: "6", prompt: "Which sentence is from Lesson 22?", options: [{id:"a",text:"Nan had a nap in the crib.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "7", prompt: "Which word rhymes with 'grab'?", options: [{id:"a",text:"crab",is_correct:true},{id:"b",text:"crag",is_correct:false},{id:"c",text:"crib",is_correct:false},{id:"d",text:"crop",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is 'crop'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "9", prompt: "In 'Ten men can cram in a big van,' how many /cr/ words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "10", prompt: "Which word might complete: 'Farmers harvest their ___ in the fall.'?", options: [{id:"a",text:"crop",is_correct:true},{id:"b",text:"crab",is_correct:false},{id:"c",text:"crib",is_correct:false},{id:"d",text:"crag",is_correct:false}] },
+          { id: "11", prompt: "Which word is a sea creature with a hard shell and pincers?", options: [{id:"a",text:"crab",is_correct:true},{id:"b",text:"crag",is_correct:false},{id:"c",text:"crop",is_correct:false},{id:"d",text:"crib",is_correct:false}] },
+          { id: "12", prompt: "Which word has the same vowel sound as 'hot'?", options: [{id:"a",text:"crop",is_correct:true},{id:"b",text:"crib",is_correct:false},{id:"c",text:"crab",is_correct:false},{id:"d",text:"crag",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'crag'?", options: [{id:"a",text:"The hut sat on a crag in the fog.",is_correct:true},{id:"b",text:"Nan had a nap in the crib.",is_correct:false},{id:"c",text:"A big crab sat on a spot.",is_correct:false},{id:"d",text:"Ten men can cram.",is_correct:false}] },
+          { id: "14", prompt: "How many /cr/ words in: 'Pal did not stop the crab. Pal let the crab run.'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'The baby slept soundly in the ___.'?", options: [{id:"a",text:"crib",is_correct:true},{id:"b",text:"crab",is_correct:false},{id:"c",text:"crop",is_correct:false},{id:"d",text:"crag",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'cram'?", options: [{id:"a",text:"Consonant blend /cr/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "Which word appears in both the word list and a sentence?", options: [{id:"a",text:"crab",is_correct:true},{id:"b",text:"crib",is_correct:true},{id:"c",text:"crag",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "18", prompt: "Which word might complete: 'Hikers climbed the steep ___ to reach the summit.'?", options: [{id:"a",text:"crag",is_correct:true},{id:"b",text:"crop",is_correct:false},{id:"c",text:"crib",is_correct:false},{id:"d",text:"crab",is_correct:false}] },
+          { id: "19", prompt: "The sentence 'Pal the pup sped at the crab' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /sp/ (from Lesson 15)",is_correct:true},{id:"b",text:"Short a (/ă/)",is_correct:false},{id:"c",text:"Short i (/ĭ/)",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 22?", options: [{id:"a",text:"Consonant blend /cr/ in closed syllables",is_correct:true},{id:"b",text:"Short u",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -146,14 +145,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 22 to 25
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 21,22,23,24
+          const lessonNum = c + 1;      // Lesson 22,23,24,25
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -174,7 +181,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -203,14 +209,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the cr blend!' :
+              mastery ? 'You’ve mastered the /cr/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 22 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -237,7 +246,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -288,7 +296,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
