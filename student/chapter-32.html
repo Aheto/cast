@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 33 — Consonant Blends: pl"/>
-  <title>Mini OpenStax — Lesson 33: pl Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 33 — Consonant Blend pl"/>
+  <title>Mini OpenStax — Lesson 33: Consonant Blend pl</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 33: pl Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH33: Decode words with consonant blend pl</div>
+        <h1 id="chapter-title">Lesson 33: Consonant Blend pl</h1>
+        <div class="lo-tags" id="lo-tags">LO PH33: Decode words with consonant blend /pl/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words beginning with the <strong>consonant blend "pl"</strong> in closed syllables:</p>
+        <p>Consonant blend <strong>pl</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–33:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,8 +95,8 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 33: pl Blend",
-        loTags: ["LO PH33: Decode words with consonant blend pl"],
+        title: "Lesson 33: Consonant Blend pl",
+        loTags: ["LO PH33: Decode words with consonant blend /pl/"],
         contentWords: [
           "plan", "pled", "plod", "plop", "plot", "plum", "plug", "plus"
         ],
@@ -112,26 +111,26 @@
           "Did Peg flop on the bed? Did Peg plop on the bed?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the 'pl' blend?", options: [{id:"a",text:"plan",is_correct:true},{id:"b",text:"pan",is_correct:false},{id:"c",text:"fan",is_correct:false},{id:"d",text:"clan",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 33 word?", options: [{id:"a",text:"plum",is_correct:false},{id:"b",text:"plug",is_correct:false},{id:"c",text:"place",is_correct:true},{id:"d",text:"plus",is_correct:false}] },
-          { id: "3", prompt: "In 'plot', how many consonants start the word?", options: [{id:"a",text:"2 (p + l)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to fill a hole or gap' (e.g., in a wall or pipe)?", options: [{id:"a",text:"plug",is_correct:true},{id:"b",text:"plan",is_correct:false},{id:"c",text:"plod",is_correct:false},{id:"d",text:"plum",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'plod'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 33 and review words?", options: [{id:"a",text:"Fran had a plum.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word means 'to walk slowly and heavily'?", options: [{id:"a",text:"plod",is_correct:true},{id:"b",text:"plop",is_correct:false},{id:"c",text:"plan",is_correct:false},{id:"d",text:"plug",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'plug'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Stan had a plan. The plan let Stan win,' how many Lesson 33 words?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word is a deep purple fruit often eaten fresh?", options: [{id:"a",text:"plum",is_correct:true},{id:"b",text:"plot",is_correct:false},{id:"c",text:"plus",is_correct:false},{id:"d",text:"plug",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'She made a ___ to study every night.'?", options: [{id:"a",text:"plan",is_correct:true},{id:"b",text:"plug",is_correct:false},{id:"c",text:"plod",is_correct:false},{id:"d",text:"plum",is_correct:false}] },
-          { id: "12", prompt: "Which word is the past tense of 'plead' (to beg or argue formally)?", options: [{id:"a",text:"pled",is_correct:true},{id:"b",text:"plod",is_correct:false},{id:"c",text:"plot",is_correct:false},{id:"d",text:"plus",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 33?", options: [{id:"a",text:"Clem can plug the slit in the can.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'plus'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'He dropped into the chair with a loud ___.'?", options: [{id:"a",text:"plop",is_correct:true},{id:"b",text:"plod",is_correct:false},{id:"c",text:"plan",is_correct:false},{id:"d",text:"plug",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'plum'?", options: [{id:"a",text:"Consonant blend pl + short u",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"plum",is_correct:true},{id:"b",text:"plan",is_correct:true},{id:"c",text:"plug",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'Add two ___ three to get five.'?", options: [{id:"a",text:"plus",is_correct:true},{id:"b",text:"plot",is_correct:false},{id:"c",text:"plod",is_correct:false},{id:"d",text:"plum",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'The man had a crop on a plot' connects to which earlier lesson?", options: [{id:"a",text:"Lesson 22 (crop)",is_correct:true},{id:"b",text:"Lesson 20 (smug)",is_correct:false},{id:"c",text:"Lesson 18 (swim)",is_correct:false},{id:"d",text:"Lesson 16 (slit)",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 33?", options: [{id:"a",text:"Consonant blend 'pl' in closed syllables",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word begins with the /pl/ blend?", options: [{id:"a",text:"plan",is_correct:true},{id:"b",text:"fig",is_correct:false},{id:"c",text:"crab",is_correct:false},{id:"d",text:"bed",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to fill a hole or gap'?", options: [{id:"a",text:"plug",is_correct:true},{id:"b",text:"plot",is_correct:false},{id:"c",text:"plum",is_correct:false},{id:"d",text:"plus",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'plus'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to a small piece of land used for growing crops?", options: [{id:"a",text:"plot",is_correct:true},{id:"b",text:"plan",is_correct:false},{id:"c",text:"plum",is_correct:false},{id:"d",text:"plod",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 33?", options: [{id:"a",text:"Stan had a plan. The plan let Stan win.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'hum'?", options: [{id:"a",text:"plum",is_correct:true},{id:"b",text:"plan",is_correct:false},{id:"c",text:"plug",is_correct:false},{id:"d",text:"plus",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'plug'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Clem can plug the slit in the can', how many /pl/ words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'She made a ___ to study every night.'?", options: [{id:"a",text:"plan",is_correct:true},{id:"b",text:"plot",is_correct:false},{id:"c",text:"plum",is_correct:false},{id:"d",text:"plus",is_correct:false}] },
+          { id: "10", prompt: "Which word is the past tense of 'plead' (meaning to beg earnestly)?", options: [{id:"a",text:"pled",is_correct:true},{id:"b",text:"plod",is_correct:false},{id:"c",text:"plop",is_correct:false},{id:"d",text:"plug",is_correct:false}] },
+          { id: "11", prompt: "Which name appears in the sentence with 'plum'?", options: [{id:"a",text:"Fran",is_correct:true},{id:"b",text:"Fred",is_correct:true},{id:"c",text:"Clem",is_correct:false},{id:"d",text:"Both A and B",is_correct:true}] },
+          { id: "12", prompt: "Which word appears in both the word list and sentence 4?", options: [{id:"a",text:"plod",is_correct:true},{id:"b",text:"plot",is_correct:false},{id:"c",text:"plug",is_correct:false},{id:"d",text:"plum",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the phrase 'Did Peg plop on the bed?'?", options: [{id:"a",text:"Did Peg flop on the bed? Did Peg plop on the bed?",is_correct:true},{id:"b",text:"Fran had a plum.",is_correct:false},{id:"c",text:"Clem can plug the slit.",is_correct:false},{id:"d",text:"The man had a crop.",is_correct:false}] },
+          { id: "14", prompt: "How many /pl/ words in: 'Fred had a plum plus a fig.'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'He walked slowly with heavy steps, like he was ___ding.'?", options: [{id:"a",text:"plod",is_correct:true},{id:"b",text:"plop",is_correct:false},{id:"c",text:"plug",is_correct:false},{id:"d",text:"plan",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'plop'?", options: [{id:"a",text:"Consonant blend /pl/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'Did Greg beg? Greg did beg. Greg pled.' reviews which earlier concept?", options: [{id:"a",text:"Irregular past-tense verbs",is_correct:true},{id:"b",text:"Short e (/ĕ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT a /pl/ word?", options: [{id:"a",text:"fig",is_correct:true},{id:"b",text:"plan",is_correct:false},{id:"c",text:"plot",is_correct:false},{id:"d",text:"plug",is_correct:false}] },
+          { id: "19", prompt: "Which word in the list is also a type of fruit?", options: [{id:"a",text:"plum",is_correct:true},{id:"b",text:"plot",is_correct:false},{id:"c",text:"plan",is_correct:false},{id:"d",text:"plus",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 33?", options: [{id:"a",text:"Consonant blend /pl/ in closed syllables",is_correct:true},{id:"b",text:"Short u",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -142,18 +141,28 @@
       }
 
       function renderSentences() {
+        // Combine the two-part last sentence as in source
+        const sentences = [...CHAPTER_CONFIG.sentences];
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 33 to 36
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 32,33,34,35
+          const lessonNum = c + 1;      // Lesson 33,34,35,36
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -174,7 +183,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -203,14 +211,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the pl blend!' :
+              mastery ? 'You’ve mastered the /pl/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 33 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -237,7 +248,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -288,7 +298,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
