@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 52 — Consonant Digraph sh"/>
-  <title>Mini OpenStax — Lesson 52: Consonant Digraph sh</title>
+  <meta name="description" content="Mini OpenStax: Lesson 53 — Consonant Digraph sh (final position)"/>
+  <title>Mini OpenStax — Lesson 53: Consonant Digraph sh</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 52: Consonant Digraph sh</h1>
-        <div class="lo-tags" id="lo-tags">LO PH52: Decode words with consonant digraph /sh/</div>
+        <h1 id="chapter-title">Lesson 53: Consonant Digraph sh</h1>
+        <div class="lo-tags" id="lo-tags">LO PH53: Decode words with consonant digraph /sh/ in final position</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Consonant digraph <strong>sh</strong> words:</p>
+        <p>Consonant digraph <strong>sh</strong> words (final position):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -90,55 +90,50 @@
         return array;
       }
 
-      // ✅ CORRECTED: chapter-52.html → Lesson 52 → currentChapter = 52
-      // (Because chapter-X.html = Lesson X)
-      // But to match your original logic where chapter-51 = Lesson 52, we keep currentChapter = 51.
-      // However, for clarity with file name, we now align: chapter-52.html = Lesson 52 → currentChapter = 52
-      // Let's standardize: FILE = chapter-N.html → LESSON = N → currentChapter = N
-      const currentChapter = 52; // because this is chapter-52.html → Lesson 52
+      // ✅ DO NOT CHANGE: chapter-52.html = Lesson 53 → currentChapter = 52
+      const currentChapter = 52;
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 52: Consonant Digraph sh",
-        loTags: ["LO PH52: Decode words with consonant digraph /sh/"],
+        title: "Lesson 53: Consonant Digraph sh",
+        loTags: ["LO PH53: Decode words with consonant digraph /sh/ in final position"],
         contentWords: [
-          "shag", "sham", "shaft", "shed", "Shep", "shelf", "ship", "shin", "shift", "shot",
-          "shop", "shod", "shut", "shun", "shunt", "shred", "shrimp", "shrub", "shrug"
+          "ash", "cash", "dash", "bash", "gash", "hash", "lash", "mash", "smash", 
+          "rash", "sash", "brash", "crash", "trash", "clash", "flash", "slash", "splash"
         ],
         sentences: [
-          "Glen hit a shin on the shelf.",
-          "Stan shut the lid on the bin.",
-          "A big ship went past in the fog.",
-          "There was a shag rug in the shop.",
-          "Shep the pup hid in a shrub.",
-          "Clint had shrimp from a can.",
-          "A hen had a nest on a shelf in the shed.",
-          "A cab shot past the van.",
-          "Was the plan just a sham?",
-          "Did the man just shrug?"
+          "A van can crash in the fog.",
+          "Peg got a red rash on her skin.",
+          "The man had a gash on the hand.",
+          "Kent kept a lot of cash on hand.",
+          "Tom can swim and splash in the pond.",
+          "Dan must set the lid on the trash can.",
+          "Did a brash rat dash past the trash?",
+          "Did Brad bash the lamp?",
+          "Did the lamp smash?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the /sh/ digraph?", options: [{id:"a",text:"shag",is_correct:true},{id:"b",text:"cab",is_correct:false},{id:"c",text:"van",is_correct:false},{id:"d",text:"fog",is_correct:false}] },
-          { id: "2", prompt: "Which word means 'to move the shoulders upward briefly, often to show uncertainty'?", options: [{id:"a",text:"shrug",is_correct:true},{id:"b",text:"shunt",is_correct:false},{id:"c",text:"shred",is_correct:false},{id:"d",text:"shift",is_correct:false}] },
-          { id: "3", prompt: "How many letters in 'shrimp'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "4", prompt: "Which word refers to a small crustacean often eaten as seafood?", options: [{id:"a",text:"shrimp",is_correct:true},{id:"b",text:"shrub",is_correct:false},{id:"c",text:"shaft",is_correct:false},{id:"d",text:"sham",is_correct:false}] },
-          { id: "5", prompt: "Which sentence is from Lesson 52?", options: [{id:"a",text:"A cab shot past the van.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
-          { id: "6", prompt: "Which word rhymes with 'bin'?", options: [{id:"a",text:"shin",is_correct:true},{id:"b",text:"ship",is_correct:false},{id:"c",text:"shop",is_correct:false},{id:"d",text:"shut",is_correct:false}] },
-          { id: "7", prompt: "What syllable type is 'shut'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "8", prompt: "In 'Glen hit a shin on the shelf', how many /sh/ words?", options: [{id:"a",text:"2 (shin, shelf)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "9", prompt: "Which word might complete: 'Please ___ the door quietly.'?", options: [{id:"a",text:"shut",is_correct:true},{id:"b",text:"shun",is_correct:false},{id:"c",text:"shred",is_correct:false},{id:"d",text:"shift",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to avoid or ignore someone deliberately'?", options: [{id:"a",text:"shun",is_correct:true},{id:"b",text:"sham",is_correct:false},{id:"c",text:"shag",is_correct:false},{id:"d",text:"shed",is_correct:false}] },
-          { id: "11", prompt: "Which proper name appears in sentence 5?", options: [{id:"a",text:"Shep",is_correct:true},{id:"b",text:"Glen",is_correct:false},{id:"c",text:"Stan",is_correct:false},{id:"d",text:"Clint",is_correct:false}] },
-          { id: "12", prompt: "How many unique /sh/ words are in the word list?", options: [{id:"a",text:"19",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"20",is_correct:false},{id:"d",text:"12",is_correct:false}] },
-          { id: "13", prompt: "Which sentence includes the word 'sham'?", options: [{id:"a",text:"Was the plan just a sham?",is_correct:true},{id:"b",text:"A big ship went past.",is_correct:false},{id:"c",text:"Shep hid in a shrub.",is_correct:false},{id:"d",text:"Stan shut the lid.",is_correct:false}] },
-          { id: "14", prompt: "Which word appears in sentence 1 AND sentence 7?", options: [{id:"a",text:"shelf",is_correct:true},{id:"b",text:"shin",is_correct:false},{id:"c",text:"shed",is_correct:true},{id:"d",text:"Both A and C",is_correct:true}] },
-          { id: "15", prompt: "Which word might complete: 'He took a ___ at the target.'?", options: [{id:"a",text:"shot",is_correct:true},{id:"b",text:"shut",is_correct:false},{id:"c",text:"shun",is_correct:false},{id:"d",text:"shag",is_correct:false}] },
-          { id: "16", prompt: "What phonics feature is in 'shred'?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
-          { id: "17", prompt: "The sentence 'A big ship went past in the fog' reviews which earlier concept?", options: [{id:"a",text:"Sight word 'big' (from earlier lessons)",is_correct:true},{id:"b",text:"Short i (/ĭ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
-          { id: "18", prompt: "Which word is NOT in the Lesson 52 word list?", options: [{id:"a",text:"van",is_correct:true},{id:"b",text:"shag",is_correct:false},{id:"c",text:"shut",is_correct:false},{id:"d",text:"shrug",is_correct:false}] },
-          { id: "19", prompt: "Which word refers to a small evergreen bush?", options: [{id:"a",text:"shrub",is_correct:true},{id:"b",text:"shed",is_correct:false},{id:"c",text:"shaft",is_correct:false},{id:"d",text:"sham",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 52?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllables",is_correct:true},{id:"b",text:"Consonant blends",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the /sh/ digraph?", options: [{id:"a",text:"crash",is_correct:true},{id:"b",text:"van",is_correct:false},{id:"c",text:"fog",is_correct:false},{id:"d",text:"can",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to strike forcefully'?", options: [{id:"a",text:"bash",is_correct:true},{id:"b",text:"dash",is_correct:false},{id:"c",text:"lash",is_correct:false},{id:"d",text:"rash",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'splash'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to money?", options: [{id:"a",text:"cash",is_correct:true},{id:"b",text:"trash",is_correct:false},{id:"c",text:"sash",is_correct:false},{id:"d",text:"gash",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 53?", options: [{id:"a",text:"Tom can swim and splash in the pond.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'flash'?", options: [{id:"a",text:"slash",is_correct:true},{id:"b",text:"crash",is_correct:true},{id:"c",text:"Both A and B",is_correct:true},{id:"d",text:"cash",is_correct:true}] },
+          { id: "7", prompt: "What syllable type is 'trash'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Did the lamp smash?', how many /sh/ words?", options: [{id:"a",text:"1 (smash)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'He got a ___ on his arm.'?", options: [{id:"a",text:"gash",is_correct:true},{id:"b",text:"rash",is_correct:true},{id:"c",text:"Either A or B",is_correct:true},{id:"d",text:"cash",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'a skin irritation'?", options: [{id:"a",text:"rash",is_correct:true},{id:"b",text:"sash",is_correct:false},{id:"c",text:"brash",is_correct:false},{id:"d",text:"dash",is_correct:false}] },
+          { id: "11", prompt: "How many unique /sh/ words are in the word list?", options: [{id:"a",text:"18",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"20",is_correct:false},{id:"d",text:"12",is_correct:false}] },
+          { id: "12", prompt: "Which sentence includes the word 'brash'?", options: [{id:"a",text:"Did a brash rat dash past the trash?",is_correct:true},{id:"b",text:"A van can crash.",is_correct:false},{id:"c",text:"Peg got a rash.",is_correct:false},{id:"d",text:"Kent kept cash.",is_correct:false}] },
+          { id: "13", prompt: "Which word appears in both sentence 6 and sentence 7?", options: [{id:"a",text:"trash",is_correct:true},{id:"b",text:"dash",is_correct:false},{id:"c",text:"crash",is_correct:false},{id:"d",text:"None",is_correct:false}] },
+          { id: "14", prompt: "Which word might complete: 'She wore a red ___.'?", options: [{id:"a",text:"sash",is_correct:true},{id:"b",text:"ash",is_correct:false},{id:"c",text:"mash",is_correct:false},{id:"d",text:"lash",is_correct:false}] },
+          { id: "15", prompt: "What phonics feature is in 'clash'?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "16", prompt: "The sentence 'A van can crash in the fog' reviews which earlier concept?", options: [{id:"a",text:"Sight word 'can'",is_correct:true},{id:"b",text:"Short a (/ă/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "17", prompt: "Which word is NOT in the Lesson 53 word list?", options: [{id:"a",text:"dish",is_correct:true},{id:"b",text:"crash",is_correct:false},{id:"c",text:"splash",is_correct:false},{id:"d",text:"smash",is_correct:false}] },
+          { id: "18", prompt: "Which word refers to something broken violently?", options: [{id:"a",text:"smash",is_correct:true},{id:"b",text:"mash",is_correct:true},{id:"c",text:"Both A and B",is_correct:true},{id:"d",text:"trash",is_correct:false}] },
+          { id: "19", prompt: "Which word contains a blend + 'sh'?", options: [{id:"a",text:"splash",is_correct:true},{id:"b",text:"trash",is_correct:true},{id:"c",text:"All of the above",is_correct:true},{id:"d",text:"ash",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 53?", options: [{id:"a",text:"Consonant digraph /sh/ in final position within closed syllables",is_correct:true},{id:"b",text:"Initial /sh/",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -153,7 +148,7 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ NAVIGATION: Home + up to 4 nearby lessons (total 5 buttons max)
+      // ✅ 5-button unlimited navigation (Home + 4 lessons)
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [];
@@ -161,37 +156,33 @@
         // Always include Home
         buttons.push({ label: "Home", url: "../index.html", active: false });
 
-        // Determine lesson number (current lesson = currentChapter)
-        const currentLesson = currentChapter; // e.g., 52
-        const totalLessons = maxChapter;      // since maxChapter = 261, lessons = 1 to 261
+        // Because chapter-N.html = Lesson N+1, the current lesson number is currentChapter + 1
+        const currentLesson = currentChapter + 1; // e.g., 52 → Lesson 53
+        const totalLessons = maxChapter + 1;      // e.g., 261 → max lesson 262
 
-        // Decide how many neighbor lessons to show (total buttons ≤ 5 → max 4 lesson buttons)
         const maxLessonButtons = 4;
         let startLesson, endLesson;
 
         if (totalLessons <= maxLessonButtons) {
-          // Fewer lessons than slots → show all
           startLesson = 1;
           endLesson = totalLessons;
         } else {
-          // Try to center current lesson
           const half = Math.floor(maxLessonButtons / 2);
           startLesson = Math.max(1, currentLesson - half);
           endLesson = startLesson + maxLessonButtons - 1;
-
-          // Adjust if we exceed total lessons
           if (endLesson > totalLessons) {
             endLesson = totalLessons;
             startLesson = Math.max(1, endLesson - maxLessonButtons + 1);
           }
         }
 
-        // Add lesson buttons
+        // Generate links: Lesson X → chapter-(X-1).html
         for (let lesson = startLesson; lesson <= endLesson; lesson++) {
-          const chapterIndex = lesson; // chapter-52.html = Lesson 52
-          const isActive = (lesson === currentLesson);
-          // Prevent link to non-existent chapter-0.html for lesson 0
           if (lesson < 1) continue;
+          const chapterIndex = lesson - 1; // Lesson 53 → chapter-52.html
+          const isActive = (lesson === currentLesson);
+          // Skip non-existent chapters (e.g., chapter--1.html)
+          if (chapterIndex < 0) continue;
           buttons.push({
             label: `Lesson ${lesson}`,
             url: `chapter-${chapterIndex}.html`,
@@ -252,14 +243,13 @@
         const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
         localStorage.setItem(reportKey, report);
 
-        // Fixed WhatsApp URL (removed space after wa.me/)
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the /sh/ digraph!' :
-              score >= 10 ? 'Review missed items.' : 'Practice Lesson 52 words again.'
+              mastery ? 'You’ve mastered final /sh/ words!' :
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 53 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
             <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
