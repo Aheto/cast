@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 4 — Closed Syllables: a = /ă/"/>
-  <title>Mini OpenStax — Lesson 4: a = /ă/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 4 — Short Vowel a (Part 3)"/>
+  <title>Mini OpenStax — Lesson 4: Short Vowel a (Part 3)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 4: a = /ă/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH4: Decode CVC words with short vowel a = /ă/</div>
+        <h1 id="chapter-title">Lesson 4: Short Vowel a (Part 3)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH4: Decode additional CVC words with short a</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>short vowel</strong> <em>a</em> making the <strong>/ă/</strong> sound in closed syllables:</p>
+        <p>Short <strong>a</strong> CVC words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–4:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -91,13 +90,13 @@
         return array;
       }
 
-      const currentChapter = 3;
+      const currentChapter = 3; // chapter-3.html = Lesson 4
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 4: a = /ă/",
-        loTags: ["LO PH4: Decode CVC words with short vowel a = /ă/"],
+        title: "Lesson 4: Short Vowel a (Part 3)",
+        loTags: ["LO PH4: Decode additional CVC words with short a"],
         contentWords: [
           "van", "vat", "dab", "dad", "dam", "Dan", "gab", "gag", "gal", "gap", "gas",
           "jab", "jam", "Jan", "lab", "lad", "lag", "lap", "yam", "yap", "wag", "zap"
@@ -114,26 +113,26 @@
           "The man at the lab had a vat."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word has short a = /ă/?", options: [{id:"a",text:"van",is_correct:true},{id:"b",text:"vane",is_correct:false},{id:"c",text:"vain",is_correct:false},{id:"d",text:"vein",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 4 word?", options: [{id:"a",text:"lap",is_correct:false},{id:"b",text:"lab",is_correct:false},{id:"c",text:"lack",is_correct:true},{id:"d",text:"lad",is_correct:false}] },
-          { id: "3", prompt: "In 'dad', what sound does 'a' make?", options: [{id:"a",text:"/ă/",is_correct:true},{id:"b",text:"/ā/",is_correct:false},{id:"c",text:"/e/",is_correct:false},{id:"d",text:"/o/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'a male given name'?", options: [{id:"a",text:"Dan",is_correct:true},{id:"b",text:"gas",is_correct:false},{id:"c",text:"jam",is_correct:false},{id:"d",text:"yam",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'Jan'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 4 words?", options: [{id:"a",text:"Dad had a bad van.",is_correct:true},{id:"b",text:"She ran fast.",is_correct:false},{id:"c",text:"He ate cake.",is_correct:false},{id:"d",text:"It is big.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a sweet spread made from fruit?", options: [{id:"a",text:"jam",is_correct:true},{id:"b",text:"yam",is_correct:false},{id:"c",text:"gas",is_correct:false},{id:"d",text:"zap",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'lap'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "9", prompt: "In 'The lad ran a lap,' how many Lesson 4 words?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to move a tail from side to side'?", options: [{id:"a",text:"wag",is_correct:true},{id:"b",text:"yap",is_correct:false},{id:"c",text:"zap",is_correct:false},{id:"d",text:"gag",is_correct:false}] },
-          { id: "11", prompt: "Which word describes a starchy root vegetable?", options: [{id:"a",text:"yam",is_correct:true},{id:"b",text:"jam",is_correct:false},{id:"c",text:"gas",is_correct:false},{id:"d",text:"van",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'a' and means 'a female name'?", options: [{id:"a",text:"Jan",is_correct:true},{id:"b",text:"Dan",is_correct:false},{id:"c",text:"Van",is_correct:false},{id:"d",text:"Man",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 4?", options: [{id:"a",text:"Jan had a nap.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'dam'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Put gas in the ___.'?", options: [{id:"a",text:"van",is_correct:true},{id:"b",text:"vat",is_correct:false},{id:"c",text:"yam",is_correct:false},{id:"d",text:"zap",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'gap'?", options: [{id:"a",text:"Short vowel a = /ă/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:true},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'to speak rapidly'?", options: [{id:"a",text:"gab",is_correct:true},{id:"b",text:"gag",is_correct:false},{id:"c",text:"gap",is_correct:false},{id:"d",text:"gas",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'The dog will ___.'?", options: [{id:"a",text:"wag",is_correct:true},{id:"b",text:"yap",is_correct:true},{id:"c",text:"zap",is_correct:false},{id:"d",text:"Both A and B",is_correct:true}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"Dad",is_correct:true},{id:"b",text:"Dan",is_correct:true},{id:"c",text:"Jan",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 4?", options: [{id:"a",text:"Closed syllables with short a = /ă/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word starts with /v/ and has short a?", options: [{id:"a",text:"van",is_correct:true},{id:"b",text:"vat",is_correct:true},{id:"c",text:"vet",is_correct:false},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "2", prompt: "Which word is a name of a boy in the sentences?", options: [{id:"a",text:"Dan",is_correct:true},{id:"b",text:"Jan",is_correct:false},{id:"c",text:"Sam",is_correct:false},{id:"d",text:"Pam",is_correct:false}] },
+          { id: "3", prompt: "How many short-a words in: 'The lad ran a lap.'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to move a tail quickly'?", options: [{id:"a",text:"wag",is_correct:true},{id:"b",text:"yap",is_correct:false},{id:"c",text:"gab",is_correct:false},{id:"d",text:"zap",is_correct:false}] },
+          { id: "5", prompt: "Which word rhymes with 'jam'?", options: [{id:"a",text:"dam",is_correct:true},{id:"b",text:"dad",is_correct:true},{id:"c",text:"Dan",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "6", prompt: "Which sentence is from Lesson 4?", options: [{id:"a",text:"Dan had a yam.",is_correct:true},{id:"b",text:"She likes ice cream.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They play piano.",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'gap'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "Which word is NOT in the Lesson 4 list?", options: [{id:"a",text:"zap",is_correct:false},{id:"b",text:"zip",is_correct:true},{id:"c",text:"yap",is_correct:false},{id:"d",text:"wag",is_correct:false}] },
+          { id: "9", prompt: "In 'Dad had a gas can,' which word is from an earlier lesson?", options: [{id:"a",text:"can",is_correct:true},{id:"b",text:"gas",is_correct:false},{id:"c",text:"Dad",is_correct:false},{id:"d",text:"had",is_correct:false}] },
+          { id: "10", prompt: "Which word might complete: 'The dog can ___ its tail.'?", options: [{id:"a",text:"wag",is_correct:true},{id:"b",text:"yap",is_correct:false},{id:"c",text:"gab",is_correct:false},{id:"d",text:"zap",is_correct:false}] },
+          { id: "11", prompt: "Which word begins with /j/ and has short a?", options: [{id:"a",text:"jab",is_correct:true},{id:"b",text:"jam",is_correct:true},{id:"c",text:"Jan",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "12", prompt: "Which word has the same vowel sound as 'cat'?", options: [{id:"a",text:"yam",is_correct:true},{id:"b",text:"yet",is_correct:false},{id:"c",text:"yum",is_correct:false},{id:"d",text:"yip",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes a word that starts with /z/?", options: [{id:"a",text:"None of the sentences use 'zap'",is_correct:true},{id:"b",text:"Can a rat yap?",is_correct:false},{id:"c",text:"The man had a vat.",is_correct:false},{id:"d",text:"Dan had a yam.",is_correct:false}] },
+          { id: "14", prompt: "How many short-a words in: 'The man at the lab had a vat.'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'He gave a loud ___.'?", options: [{id:"a",text:"yap",is_correct:true},{id:"b",text:"yip",is_correct:false},{id:"c",text:"yup",is_correct:false},{id:"d",text:"yep",is_correct:false}] },
+          { id: "16", prompt: "What phonics pattern is in 'lag'?", options: [{id:"a",text:"Short a in closed syllable",is_correct:true},{id:"b",text:"Long a",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel digraph",is_correct:false}] },
+          { id: "17", prompt: "Which word appears in both the word list and a sentence?", options: [{id:"a",text:"Dad",is_correct:true},{id:"b",text:"Dan",is_correct:true},{id:"c",text:"Jan",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "18", prompt: "Which word might complete: 'She spread jam on her ___.'?", options: [{id:"a",text:"yam",is_correct:true},{id:"b",text:"yak",is_correct:false},{id:"c",text:"yen",is_correct:false},{id:"d",text:"yet",is_correct:false}] },
+          { id: "19", prompt: "The sentence 'Can a rat yap?' focuses on which skills?", options: [{id:"a",text:"Decoding short a + questioning",is_correct:true},{id:"b",text:"Long vowels",is_correct:false},{id:"c",text:"Sight words only",is_correct:false},{id:"d",text:"Consonant digraphs",is_correct:false}] },
+          { id: "20", prompt: "What is the main phonics concept in Lesson 4?", options: [{id:"a",text:"Short a in closed syllables",is_correct:true},{id:"b",text:"Silent letters",is_correct:false},{id:"c",text:"Long vowel teams",is_correct:false},{id:"d",text:"Diphthongs",is_correct:false}] }
         ]
       };
 
@@ -151,10 +150,15 @@
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
-        for (let i = 0; i < 4; i++) {
+        for (let i = -2; i < 2; i++) {
           const c = currentChapter + i;
-          if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          const lessonNum = c + 1;
+          if (c < 0 || c > maxChapter) continue;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
@@ -176,7 +180,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -205,14 +208,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered short a=/ă/!' :
+              mastery ? 'You’ve mastered short a!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 4 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -239,7 +245,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -290,7 +295,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
