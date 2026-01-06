@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 50 — Consonant Blends (Front and End)"/>
-  <title>Mini OpenStax — Lesson 50: Consonant Blends (Front and End)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 51 — Sight Words"/>
+  <title>Mini OpenStax — Lesson 51: Sight Words</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -17,7 +17,7 @@
     .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
     .section { margin-bottom: 1.5rem; }
     .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; font-weight: bold; }
     .sentences { line-height: 1.6; }
     .quiz { margin-top: 2rem; }
     .question { margin-bottom: 1.2rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 50: Consonant Blends (Front and End)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH50: Decode words with blends at beginning AND end</div>
+        <h1 id="chapter-title">Lesson 51: Sight Words</h1>
+        <div class="lo-tags" id="lo-tags">LO SW51: Recognize and use high-frequency irregular sight words</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -47,8 +47,8 @@
 
     <main id="main-content">
       <div class="section">
-        <h2>🔤 Word List</h2>
-        <p>Words with consonant blends at the <strong>beginning AND end</strong>:</p>
+        <h2>🔤 Sight Word List</h2>
+        <p>High-frequency irregular words to recognize by sight:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -90,53 +90,46 @@
         return array;
       }
 
-      const currentChapter = 49; // chapter-49.html = Lesson 50
+      const currentChapter = 50; // chapter-50.html = Lesson 51
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 50: Consonant Blends (Front and End)",
-        loTags: ["LO PH50: Decode words with blends at beginning AND end"],
+        title: "Lesson 51: Sight Words",
+        loTags: ["LO SW51: Recognize and use high-frequency irregular sight words"],
         contentWords: [
-          "craft", "draft", "drift", "swift",
-          "slept", "swept", "crept",
-          "scalp", "skulk",
-          "spilt", "stilt",
-          "clasp", "gulp",
-          "blink", "flint", "plump"
+          "says", "said", "you", "your", "they", "their", "there", "where", "are", "were"
         ],
         sentences: [
-          "The swift drift made the raft move fast.",
-          "He crept and slept in the craft.",
-          "She swept the spilt milk with a clasp.",
-          "The plump cat blinked and skulked near the scalp.",
-          "A draft blew through the stilt house.",
-          "He took a gulp and blinked fast.",
-          "The flint sparked in the dark craft.",
-          "She slept while the swift wind drift past.",
-          "He crept past the stilt and clasp."
+          'I said, "Where were you?"',
+          "Where were they?",
+          "What was said?",
+          "You and I are the best.",
+          "You and your dog must run fast.",
+          "Tom says your dad can trust you.",
+          "They said their dad and mom are strict."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word has a blend at the BEGINNING and END?", options: [{id:"a",text:"craft",is_correct:true},{id:"b",text:"cat",is_correct:false},{id:"c",text:"run",is_correct:false},{id:"d",text:"go",is_correct:false}] },
-          { id: "2", prompt: "Which word means 'to move slowly and quietly'?", options: [{id:"a",text:"crept",is_correct:true},{id:"b",text:"slept",is_correct:false},{id:"c",text:"ran",is_correct:false},{id:"d",text:"jumped",is_correct:false}] },
-          { id: "3", prompt: "How many letters in 'swept'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "4", prompt: "Which word refers to something made by hand?", options: [{id:"a",text:"craft",is_correct:true},{id:"b",text:"draft",is_correct:false},{id:"c",text:"drift",is_correct:false},{id:"d",text:"swift",is_correct:false}] },
-          { id: "5", prompt: "Which sentence is from Lesson 50?", options: [{id:"a",text:"The swift drift made the raft move fast.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
-          { id: "6", prompt: "Which word rhymes with 'drift'?", options: [{id:"a",text:"swift",is_correct:true},{id:"b",text:"craft",is_correct:false},{id:"c",text:"crept",is_correct:false},{id:"d",text:"blink",is_correct:false}] },
-          { id: "7", prompt: "What syllable type is 'stilt'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "8", prompt: "In 'He crept and slept in the craft', how many blend-at-both-ends words?", options: [{id:"a",text:"3 (crept, slept, craft)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"1",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "9", prompt: "Which word might complete: 'She held the necklace with a tight ___.'?", options: [{id:"a",text:"clasp",is_correct:true},{id:"b",text:"scalp",is_correct:false},{id:"c",text:"gulp",is_correct:false},{id:"d",text:"flint",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to swallow quickly'?", options: [{id:"a",text:"gulp",is_correct:true},{id:"b",text:"skulk",is_correct:false},{id:"c",text:"flint",is_correct:false},{id:"d",text:"plump",is_correct:false}] },
-          { id: "11", prompt: "Which sentence includes the word 'scalp'?", options: [{id:"a",text:"The plump cat blinked and skulked near the scalp.",is_correct:true},{id:"b",text:"The cat slept.",is_correct:false},{id:"c",text:"She swept the floor.",is_correct:false},{id:"d",text:"He took a draft.",is_correct:false}] },
-          { id: "12", prompt: "How many words are in the Lesson 50 word list?", options: [{id:"a",text:"16",is_correct:true},{id:"b",text:"14",is_correct:false},{id:"c",text:"18",is_correct:false},{id:"d",text:"12",is_correct:false}] },
-          { id: "13", prompt: "Which word begins with /sw/ and ends with /pt/?", options: [{id:"a",text:"swept",is_correct:true},{id:"b",text:"swift",is_correct:false},{id:"c",text:"spilt",is_correct:false},{id:"d",text:"skulk",is_correct:false}] },
-          { id: "14", prompt: "Which word appears in sentence 3 AND means 'spilled'?", options: [{id:"a",text:"spilt",is_correct:true},{id:"b",text:"milk",is_correct:false},{id:"c",text:"swept",is_correct:false},{id:"d",text:"clasp",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'The bird stood on a ___ to see far.'?", options: [{id:"a",text:"stilt",is_correct:true},{id:"b",text:"scalp",is_correct:false},{id:"c",text:"gulp",is_correct:false},{id:"d",text:"blink",is_correct:false}] },
-          { id: "16", prompt: "What phonics feature is in 'skulk'?", options: [{id:"a",text:"Initial /sk/ + final /lk/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
-          { id: "17", prompt: "The word 'flint' reviews which blend combinations?", options: [{id:"a",text:"Initial /fl/ + final /nt/",is_correct:true},{id:"b",text:"/bl/ + /mp/",is_correct:false},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent e",is_correct:false}] },
-          { id: "18", prompt: "Which word is NOT in the Lesson 50 word list?", options: [{id:"a",text:"pond",is_correct:true},{id:"b",text:"craft",is_correct:false},{id:"c",text:"swept",is_correct:false},{id:"d",text:"plump",is_correct:false}] },
-          { id: "19", prompt: "Which word combines /dr/ and /ft/?", options: [{id:"a",text:"drift",is_correct:true},{id:"b",text:"draft",is_correct:true},{id:"c",text:"craft",is_correct:false},{id:"d",text:"swift",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 50?", options: [{id:"a",text:"Words with consonant blends at BOTH beginning and end",is_correct:true},{id:"b",text:"Sight words only",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
+          { id: "1", prompt: "Which word is the past tense of 'say'?", options: [{id:"a",text:"said",is_correct:true},{id:"b",text:"says",is_correct:false},{id:"c",text:"are",is_correct:false},{id:"d",text:"were",is_correct:false}] },
+          { id: "2", prompt: "Which word shows possession for the pronoun 'you'?", options: [{id:"a",text:"your",is_correct:true},{id:"b",text:"you",is_correct:false},{id:"c",text:"they",is_correct:false},{id:"d",text:"their",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'were'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to a place (as in 'over ___')?", options: [{id:"a",text:"there",is_correct:true},{id:"b",text:"their",is_correct:false},{id:"c",text:"where",is_correct:false},{id:"d",text:"they",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 51?", options: [{id:"a",text:'I said, "Where were you?"',is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word is used to ask about location?", options: [{id:"a",text:"where",is_correct:true},{id:"b",text:"there",is_correct:false},{id:"c",text:"their",is_correct:false},{id:"d",text:"they",is_correct:false}] },
+          { id: "7", prompt: "Which word is the present tense form of 'to be' for plural subjects?", options: [{id:"a",text:"are",is_correct:true},{id:"b",text:"were",is_correct:false},{id:"c",text:"said",is_correct:false},{id:"d",text:"says",is_correct:false}] },
+          { id: "8", prompt: "In 'They said their dad...', how many sight words from the list appear?", options: [{id:"a",text:"2 (They, their)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: '___ must finish your homework.'?", options: [{id:"a",text:"You",is_correct:true},{id:"b",text:"Your",is_correct:false},{id:"c",text:"They",is_correct:false},{id:"d",text:"There",is_correct:false}] },
+          { id: "10", prompt: "Which word shows possession for 'they'?", options: [{id:"a",text:"their",is_correct:true},{id:"b",text:"there",is_correct:false},{id:"c",text:"they",is_correct:false},{id:"d",text:"where",is_correct:false}] },
+          { id: "11", prompt: "Which sentence contains both 'said' and 'strict'?", options: [{id:"a",text:"They said their dad and mom are strict.",is_correct:true},{id:"b",text:"What was said?",is_correct:false},{id:"c",text:"Tom says your dad...",is_correct:false},{id:"d",text:"You and I are the best.",is_correct:false}] },
+          { id: "12", prompt: "Which sight word appears in sentence 4 AND sentence 5?", options: [{id:"a",text:"You",is_correct:true},{id:"b",text:"your",is_correct:false},{id:"c",text:"are",is_correct:true},{id:"d",text:"Both A and C",is_correct:true}] },
+          { id: "13", prompt: "Which sentence includes the word 'trust'?", options: [{id:"a",text:"Tom says your dad can trust you.",is_correct:true},{id:"b",text:"Where were they?",is_correct:false},{id:"c",text:"What was said?",is_correct:false},{id:"d",text:"They said their dad...",is_correct:false}] },
+          { id: "14", prompt: "How many sight words from the list are in: 'You and your dog must run fast.'?", options: [{id:"a",text:"2 (You, your)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "15", prompt: "Which word is essential in the question '___ did you go?'", options: [{id:"a",text:"Where",is_correct:true},{id:"b",text:"There",is_correct:false},{id:"c",text:"They",is_correct:false},{id:"d",text:"Their",is_correct:false}] },
+          { id: "16", prompt: "Which word is always spelled with an 'a' but pronounced like /ɛ/ (as in 'bed')?", options: [{id:"a",text:"says",is_correct:true},{id:"b",text:"said",is_correct:false},{id:"c",text:"are",is_correct:false},{id:"d",text:"were",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'Tom says your dad can trust you' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /tr/ (from Lesson 26)",is_correct:true},{id:"b",text:"Short u (/ŭ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT in the Lesson 51 sight word list?", options: [{id:"a",text:"dog",is_correct:true},{id:"b",text:"says",is_correct:false},{id:"c",text:"were",is_correct:false},{id:"d",text:"there",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in sentence 1, 2, and 3?", options: [{id:"a",text:"said",is_correct:true},{id:"b",text:"were",is_correct:true},{id:"c",text:"where",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What reading skill is taught in Lesson 51?", options: [{id:"a",text:"Instant recognition of high-frequency irregular sight words",is_correct:true},{id:"b",text:"Decoding consonant blends",is_correct:false},{id:"c",text:"Syllable division",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -151,14 +144,14 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ NAVIGATION: 5 buttons — Home + Lesson 50 to 53
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 51 to 54
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
 
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i; // c = 49,50,51,52
-          const lessonNum = c + 1;      // Lesson 50,51,52,53
+          const c = currentChapter + i; // c = 50,51,52,53
+          const lessonNum = c +  1;      // Lesson 51,52,53,54
           if (c > maxChapter) break;
           buttons.push({ 
             label: `Lesson ${lessonNum}`, 
@@ -225,8 +218,8 @@
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered complex blend words!' :
-              score >= 10 ? 'Review missed items.' : 'Practice Lesson 50 words again.'
+              mastery ? 'You’ve mastered these sight words!' :
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 51 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
             <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
