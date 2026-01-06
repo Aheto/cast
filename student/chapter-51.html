@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 52 — Consonant Digraph 'sh' in Closed Syllables"/>
-  <title>Mini OpenStax — Lesson 52: Consonant Digraph 'sh'</title>
+  <meta name="description" content="Mini OpenStax: Lesson 52 — Consonant Digraph sh"/>
+  <title>Mini OpenStax — Lesson 52: Consonant Digraph sh</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 52: Consonant Digraph "sh"</h1>
-        <div class="lo-tags" id="lo-tags">LO PH52: Decode words with the consonant digraph "sh" in closed syllables</div>
+        <h1 id="chapter-title">Lesson 52: Consonant Digraph sh</h1>
+        <div class="lo-tags" id="lo-tags">LO PH52: Decode words with consonant digraph /sh/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the consonant digraph <strong>"sh"</strong> in closed syllables:</p>
+        <p>Consonant digraph <strong>sh</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -67,7 +67,7 @@
       </div>
 
       <div class="quiz" id="quiz-container" style="display:none;">
-        <h2>📝 Quick Check (10 Questions)</h2>
+        <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
@@ -95,11 +95,11 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 52: Consonant Digraph \"sh\"",
-        loTags: ["LO PH52: Decode words with the consonant digraph \"sh\" in closed syllables"],
+        title: "Lesson 52: Consonant Digraph sh",
+        loTags: ["LO PH52: Decode words with consonant digraph /sh/"],
         contentWords: [
-          "shag", "sham", "shaft", "shed", "Shep", "shelf", "ship", "shin", "shift",
-          "shot", "shop", "shod", "shut", "shun", "shunt", "shred", "shrimp", "shrub", "shrug"
+          "shag", "sham", "shaft", "shed", "Shep", "shelf", "ship", "shin", "shift", "shot",
+          "shop", "shod", "shut", "shun", "shunt", "shred", "shrimp", "shrub", "shrug"
         ],
         sentences: [
           "Glen hit a shin on the shelf.",
@@ -114,16 +114,26 @@
           "Did the man just shrug?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word contains the consonant digraph \"sh\"?", options: [{id:"a",text:"ship",is_correct:true},{id:"b",text:"cat",is_correct:false},{id:"c",text:"big",is_correct:false},{id:"d",text:"van",is_correct:false}] },
-          { id: "2", prompt: "What sound do the letters \"sh\" make together?", options: [{id:"a",text:"/ʃ/ as in \"shut\"",is_correct:true},{id:"b",text:"/s/ + /h/",is_correct:false},{id:"c",text:"/ch/",is_correct:false},{id:"d",text:"/th/",is_correct:false}] },
-          { id: "3", prompt: "Which word means \"to close something firmly\"?", options: [{id:"a",text:"shut",is_correct:true},{id:"b",text:"shun",is_correct:false},{id:"c",text:"shift",is_correct:false},{id:"d",text:"shag",is_correct:false}] },
-          { id: "4", prompt: "In the sentence \"Shep the pup hid in a shrub,\" what is the \"sh\" word?", options: [{id:"a",text:"shrub",is_correct:true},{id:"b",text:"pup",is_correct:false},{id:"c",text:"hid",is_correct:false},{id:"d",text:"Shep",is_correct:true}] },
-          { id: "5", prompt: "How many \"sh\" words are in the Lesson 52 list?", options: [{id:"a",text:"19",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"20",is_correct:false},{id:"d",text:"12",is_correct:false}] },
-          { id: "6", prompt: "Which sentence includes the word \"sham\"?", options: [{id:"a",text:"Was the plan just a sham?",is_correct:true},{id:"b",text:"A cab shot past the van.",is_correct:false},{id:"c",text:"Clint had shrimp.",is_correct:false},{id:"d",text:"Stan shut the bin.",is_correct:false}] },
-          { id: "7", prompt: "What syllable type is \"ship\"?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Vowel team",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "8", prompt: "Which word might describe a false trick?", options: [{id:"a",text:"sham",is_correct:true},{id:"b",text:"shag",is_correct:false},{id:"c",text:"shin",is_correct:false},{id:"d",text:"shod",is_correct:false}] },
-          { id: "9", prompt: "The word \"shrimp\" appears in which sentence?", options: [{id:"a",text:"Clint had shrimp from a can.",is_correct:true},{id:"b",text:"A hen had a nest.",is_correct:false},{id:"c",text:"Glen hit a shin.",is_correct:false},{id:"d",text:"A big ship went past.",is_correct:false}] },
-          { id: "10", prompt: "Which word best completes: \"He gave a ______ and walked away.\"?", options: [{id:"a",text:"shrug",is_correct:true},{id:"b",text:"shun",is_correct:false},{id:"c",text:"shaft",is_correct:false},{id:"d",text:"shred",is_correct:false}] }
+          { id: "1", prompt: "Which word begins with the /sh/ digraph?", options: [{id:"a",text:"shag",is_correct:true},{id:"b",text:"cab",is_correct:false},{id:"c",text:"van",is_correct:false},{id:"d",text:"fog",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to move the shoulders upward briefly, often to show uncertainty'?", options: [{id:"a",text:"shrug",is_correct:true},{id:"b",text:"shunt",is_correct:false},{id:"c",text:"shred",is_correct:false},{id:"d",text:"shift",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'shrimp'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to a small crustacean often eaten as seafood?", options: [{id:"a",text:"shrimp",is_correct:true},{id:"b",text:"shrub",is_correct:false},{id:"c",text:"shaft",is_correct:false},{id:"d",text:"sham",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 52?", options: [{id:"a",text:"A cab shot past the van.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'bin'?", options: [{id:"a",text:"shin",is_correct:true},{id:"b",text:"ship",is_correct:false},{id:"c",text:"shop",is_correct:false},{id:"d",text:"shut",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'shut'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Glen hit a shin on the shelf', how many /sh/ words?", options: [{id:"a",text:"2 (shin, shelf)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'Please ___ the door quietly.'?", options: [{id:"a",text:"shut",is_correct:true},{id:"b",text:"shun",is_correct:false},{id:"c",text:"shred",is_correct:false},{id:"d",text:"shift",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to avoid or ignore someone deliberately'?", options: [{id:"a",text:"shun",is_correct:true},{id:"b",text:"sham",is_correct:false},{id:"c",text:"shag",is_correct:false},{id:"d",text:"shed",is_correct:false}] },
+          { id: "11", prompt: "Which proper name appears in sentence 5?", options: [{id:"a",text:"Shep",is_correct:true},{id:"b",text:"Glen",is_correct:false},{id:"c",text:"Stan",is_correct:false},{id:"d",text:"Clint",is_correct:false}] },
+          { id: "12", prompt: "How many unique /sh/ words are in the word list?", options: [{id:"a",text:"19",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"20",is_correct:false},{id:"d",text:"12",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'sham'?", options: [{id:"a",text:"Was the plan just a sham?",is_correct:true},{id:"b",text:"A big ship went past.",is_correct:false},{id:"c",text:"Shep hid in a shrub.",is_correct:false},{id:"d",text:"Stan shut the lid.",is_correct:false}] },
+          { id: "14", prompt: "Which word appears in sentence 1 AND sentence 7?", options: [{id:"a",text:"shelf",is_correct:true},{id:"b",text:"shin",is_correct:false},{id:"c",text:"shed",is_correct:true},{id:"d",text:"Both A and C",is_correct:true}] },
+          { id: "15", prompt: "Which word might complete: 'He took a ___ at the target.'?", options: [{id:"a",text:"shot",is_correct:true},{id:"b",text:"shut",is_correct:false},{id:"c",text:"shun",is_correct:false},{id:"d",text:"shag",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'shred'?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'A big ship went past in the fog' reviews which earlier concept?", options: [{id:"a",text:"Sight word 'big' (from earlier lessons)",is_correct:true},{id:"b",text:"Short i (/ĭ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT in the Lesson 52 word list?", options: [{id:"a",text:"van",is_correct:true},{id:"b",text:"shag",is_correct:false},{id:"c",text:"shut",is_correct:false},{id:"d",text:"shrug",is_correct:false}] },
+          { id: "19", prompt: "Which word refers to a small evergreen bush?", options: [{id:"a",text:"shrub",is_correct:true},{id:"b",text:"shed",is_correct:false},{id:"c",text:"shaft",is_correct:false},{id:"d",text:"sham",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 52?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllables",is_correct:true},{id:"b",text:"Consonant blends",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -191,7 +201,7 @@
           }
         });
 
-        const score = correctCount, total = 10, mastery = score >= 8;
+        const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
         const attemptsKey = `quiz_attempts_${currentChapter}`;
         const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
@@ -211,9 +221,9 @@
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
-            <p><strong>${mastery ? '🎉 Great job!' : score >= 6 ? 'Good effort!' : 'Review and retry.'}</strong> ${
-              mastery ? 'You’ve mastered the \"sh\" digraph!' :
-              score >= 6 ? 'Review the sentences and word list.' : 'Practice the \"sh\" words again.'
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the /sh/ digraph!' :
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 52 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
             <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
@@ -227,7 +237,7 @@
         document.getElementById('submit-quiz').addEventListener('click', () => {
           const form = document.getElementById('quiz-form');
           const answers = [];
-          for (let i = 1; i <= CHAPTER_CONFIG.assessmentItems.length; i++) {
+          for (let i = 1; i <= 20; i++) {
             const el = form.querySelector(`input[name="q${i}"]:checked`);
             answers.push(el ? el.value : null);
           }
