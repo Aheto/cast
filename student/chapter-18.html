@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 19 — Consonant Blends: sk"/>
-  <title>Mini OpenStax — Lesson 19: sk Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 19 — Consonant Blend sk"/>
+  <title>Mini OpenStax — Lesson 19: Consonant Blend sk</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 19: sk Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH19: Decode words with consonant blend sk</div>
+        <h1 id="chapter-title">Lesson 19: Consonant Blend sk</h1>
+        <div class="lo-tags" id="lo-tags">LO PH19: Decode words with consonant blend /sk/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words beginning with the <strong>consonant blend "sk"</strong> in closed syllables:</p>
+        <p>Consonant blend <strong>sk</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–19:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,8 +95,8 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 19: sk Blend",
-        loTags: ["LO PH19: Decode words with consonant blend sk"],
+        title: "Lesson 19: Consonant Blend sk",
+        loTags: ["LO PH19: Decode words with consonant blend /sk/"],
         contentWords: [
           "skid", "skim", "skin", "skip", "skit"
         ],
@@ -111,26 +110,26 @@
           "The skin can get red in the hot sun."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the 'sk' blend?", options: [{id:"a",text:"skin",is_correct:true},{id:"b",text:"kin",is_correct:false},{id:"c",text:"sin",is_correct:false},{id:"d",text:"spin",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 19 word?", options: [{id:"a",text:"skip",is_correct:false},{id:"b",text:"skit",is_correct:false},{id:"c",text:"skate",is_correct:true},{id:"d",text:"skid",is_correct:false}] },
-          { id: "3", prompt: "In 'skim', how many consonants start the word?", options: [{id:"a",text:"2 (s + k)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to glide uncontrollably on a surface'?", options: [{id:"a",text:"skid",is_correct:true},{id:"b",text:"skim",is_correct:false},{id:"c",text:"skip",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'skit'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 19 and review words?", options: [{id:"a",text:"Stan can skip.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays games.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to the outer covering of the body?", options: [{id:"a",text:"skin",is_correct:true},{id:"b",text:"skid",is_correct:false},{id:"c",text:"skim",is_correct:false},{id:"d",text:"skip",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'skip'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'A cut on the skin can get a scab,' how many Lesson 19 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to move by hopping on one foot'?", options: [{id:"a",text:"skip",is_correct:true},{id:"b",text:"skit",is_correct:false},{id:"c",text:"skid",is_correct:false},{id:"d",text:"skim",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'The car began to ___ on the icy road.'?", options: [{id:"a",text:"skim",is_correct:false},{id:"b",text:"skid",is_correct:true},{id:"c",text:"skip",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
-          { id: "12", prompt: "Which word means 'a short, humorous play'?", options: [{id:"a",text:"skit",is_correct:true},{id:"b",text:"skin",is_correct:false},{id:"c",text:"skid",is_correct:false},{id:"d",text:"skip",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 19?", options: [{id:"a",text:"Liz did a skit.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"They watched TV.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'skim'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Don’t ___ the cream off the top!'?", options: [{id:"a",text:"skim",is_correct:true},{id:"b",text:"skip",is_correct:false},{id:"c",text:"skid",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'skin'?", options: [{id:"a",text:"Consonant blend sk + short i",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which body-related word appears in Lesson 19?", options: [{id:"a",text:"skin",is_correct:true},{id:"b",text:"skit",is_correct:false},{id:"c",text:"skid",is_correct:false},{id:"d",text:"skip",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Children love to ___ rocks across the pond.'?", options: [{id:"a",text:"skim",is_correct:true},{id:"b",text:"skid",is_correct:false},{id:"c",text:"skip",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"skip",is_correct:true},{id:"b",text:"skit",is_correct:true},{id:"c",text:"skin",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 19?", options: [{id:"a",text:"Consonant blend 'sk' in closed syllables",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word begins with the /sk/ blend?", options: [{id:"a",text:"skip",is_correct:true},{id:"b",text:"kip",is_correct:false},{id:"c",text:"sip",is_correct:false},{id:"d",text:"slip",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to glide uncontrollably on a surface'?", options: [{id:"a",text:"skid",is_correct:true},{id:"b",text:"skim",is_correct:false},{id:"c",text:"skin",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'skit'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'a short dramatic or comedic performance'?", options: [{id:"a",text:"skit",is_correct:true},{id:"b",text:"skip",is_correct:false},{id:"c",text:"skin",is_correct:false},{id:"d",text:"skid",is_correct:false}] },
+          { id: "5", prompt: "Which word has the same beginning blend as 'skim'?", options: [{id:"a",text:"skip",is_correct:true},{id:"b",text:"trim",is_correct:false},{id:"c",text:"grim",is_correct:false},{id:"d",text:"prim",is_correct:false}] },
+          { id: "6", prompt: "Which sentence is from Lesson 19?", options: [{id:"a",text:"Stan can skip.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "7", prompt: "Which word rhymes with 'ship'?", options: [{id:"a",text:"skip",is_correct:true},{id:"b",text:"skid",is_correct:false},{id:"c",text:"skin",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is 'skim'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "9", prompt: "In 'A sled can skid in wet mud,' how many /sk/ words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "10", prompt: "Which word might complete: 'Children love to ___ rope.'?", options: [{id:"a",text:"skip",is_correct:true},{id:"b",text:"skid",is_correct:false},{id:"c",text:"skim",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
+          { id: "11", prompt: "Which word refers to the outer covering of the body?", options: [{id:"a",text:"skin",is_correct:true},{id:"b",text:"skip",is_correct:false},{id:"c",text:"skit",is_correct:false},{id:"d",text:"skid",is_correct:false}] },
+          { id: "12", prompt: "Which word has the same vowel sound as 'bed'?", options: [{id:"a",text:"None – all have short i (/ĭ/)",is_correct:true},{id:"b",text:"skip",is_correct:false},{id:"c",text:"skin",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'skit'?", options: [{id:"a",text:"Liz did a skit.",is_correct:true},{id:"b",text:"Stan can skip.",is_correct:false},{id:"c",text:"A sled can skid.",is_correct:false},{id:"d",text:"The skin can get red.",is_correct:false}] },
+          { id: "14", prompt: "How many /sk/ words in: 'The skin can get red in the hot sun.'?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'The car began to ___ on the icy road.'?", options: [{id:"a",text:"skid",is_correct:true},{id:"b",text:"skip",is_correct:false},{id:"c",text:"skim",is_correct:false},{id:"d",text:"skit",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'skin'?", options: [{id:"a",text:"Consonant blend /sk/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "Which word appears in both the word list and a sentence?", options: [{id:"a",text:"skip",is_correct:true},{id:"b",text:"skit",is_correct:true},{id:"c",text:"skid",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "18", prompt: "Which word might complete: 'She did a quick ___ of the article before class.'?", options: [{id:"a",text:"skim",is_correct:true},{id:"b",text:"skid",is_correct:false},{id:"c",text:"skin",is_correct:false},{id:"d",text:"skip",is_correct:false}] },
+          { id: "19", prompt: "The sentence 'A cut on the skin can get a scab' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /sc/ (from Lesson 17)",is_correct:true},{id:"b",text:"Short o (/ŏ/)",is_correct:false},{id:"c",text:"Short u (/ŭ/)",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 19?", options: [{id:"a",text:"Consonant blend /sk/ in closed syllables",is_correct:true},{id:"b",text:"Short a",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -145,14 +144,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 19 to 22
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 18,19,20,21
+          const lessonNum = c + 1;      // Lesson 19,20,21,22
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -173,7 +180,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -202,14 +208,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the sk blend!' :
+              mastery ? 'You’ve mastered the /sk/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 19 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -236,7 +245,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -287,7 +295,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
