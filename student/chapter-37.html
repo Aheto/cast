@@ -38,7 +38,7 @@
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 38: Sight Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH38: Recognize and read high-frequency sight words</div>
+        <div class="lo-tags" id="lo-tags">LO SW38: Recognize and use high-frequency sight words</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Sight Word List</h2>
-        <p>Memorize these high-frequency words. They may not follow regular phonics rules:</p>
+        <p>High-frequency words to recognize by sight:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. These sentences use Lesson 38 sight words and review vocabulary:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -97,7 +96,7 @@
 
       const CHAPTER_CONFIG = {
         title: "Lesson 38: Sight Words",
-        loTags: ["LO PH38: Recognize and read high-frequency sight words"],
+        loTags: ["LO SW38: Recognize and use high-frequency sight words"],
         contentWords: [
           "I", "of", "from", "one", "been", "was", "what", "her"
         ],
@@ -110,29 +109,29 @@
           "Drip, drip! What was the drip from?",
           "The drip was from the tub.",
           "Did the dog grab a scrap of ham from the cat?",
-          "Fran got a pup from Fred. Fred let her pet the pup."
+          "Fran got a pup from Fred.\nFred let her pet the pup."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word means 'the speaker or writer'?", options: [{id:"a",text:"I",is_correct:true},{id:"b",text:"her",is_correct:false},{id:"c",text:"one",is_correct:false},{id:"d",text:"was",is_correct:false}] },
-          { id: "2", prompt: "Which word shows possession or association (e.g., 'her book')?", options: [{id:"a",text:"her",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"of",is_correct:false},{id:"d",text:"been",is_correct:false}] },
-          { id: "3", prompt: "Which word is used to ask a question about identity or nature?", options: [{id:"a",text:"what",is_correct:true},{id:"b",text:"was",is_correct:false},{id:"c",text:"one",is_correct:false},{id:"d",text:"I",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to come out of or start at a place'?", options: [{id:"a",text:"from",is_correct:true},{id:"b",text:"of",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"been",is_correct:false}] },
-          { id: "5", prompt: "How do you spell the word that means 'existed in the past' and appears in 'The trip ___ fun'?", options: [{id:"a",text:"was",is_correct:true},{id:"b",text:"is",is_correct:false},{id:"c",text:"were",is_correct:false},{id:"d",text:"been",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 38 and review words?", options: [{id:"a",text:"I had one plum, but it was a big one.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word expresses the number 1?", options: [{id:"a",text:"one",is_correct:true},{id:"b",text:"I",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"what",is_correct:false}] },
-          { id: "8", prompt: "Which word completes: 'Fran got a pup ___ Fred'?", options: [{id:"a",text:"from",is_correct:true},{id:"b",text:"of",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"was",is_correct:false}] },
-          { id: "9", prompt: "In 'The plum had been on a twig,' which word is a Lesson 38 sight word?", options: [{id:"a",text:"been",is_correct:true},{id:"b",text:"plum",is_correct:false},{id:"c",text:"twig",is_correct:false},{id:"d",text:"had",is_correct:false}] },
-          { id: "10", prompt: "Which word often follows a noun to show belonging (e.g., 'cup ___ tea')?", options: [{id:"a",text:"of",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"was",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: '___ let her pet the pup.'?", options: [{id:"a",text:"Fred",is_correct:false},{id:"b",text:"Her",is_correct:true},{id:"c",text:"Was",is_correct:false},{id:"d",text:"One",is_correct:false}] },
-          { id: "12", prompt: "Which word is used in questions like '___ happened?'", options: [{id:"a",text:"What",is_correct:true},{id:"b",text:"From",is_correct:false},{id:"c",text:"Of",is_correct:false},{id:"d",text:"Been",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 38?", options: [{id:"a",text:"Drip, drip! What was the drip from?",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many sight words are in: 'I had one plum, but it was a big one.'?", options: [{id:"a",text:"3 (I, one, was)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'This is a picture ___ my dog.'?", options: [{id:"a",text:"of",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"been",is_correct:false}] },
-          { id: "16", prompt: "Which word is always capitalized because it refers to yourself?", options: [{id:"a",text:"I",is_correct:true},{id:"b",text:"her",is_correct:false},{id:"c",text:"what",is_correct:false},{id:"d",text:"one",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"from",is_correct:true},{id:"b",text:"was",is_correct:true},{id:"c",text:"her",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'It ___ on a twig.'?", options: [{id:"a",text:"was",is_correct:true},{id:"b",text:"been",is_correct:false},{id:"c",text:"from",is_correct:false},{id:"d",text:"her",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'Fran got a pup from Fred' connects to which earlier lessons?", options: [{id:"a",text:"Lesson 24 (Fran, Fred)",is_correct:true},{id:"b",text:"Lesson 20 only",is_correct:false},{id:"c",text:"Lesson 18 only",is_correct:false},{id:"d",text:"Lesson 16 only",is_correct:false}] },
-          { id: "20", prompt: "What skill is taught in Lesson 38?", options: [{id:"a",text:"Recognizing high-frequency sight words",is_correct:true},{id:"b",text:"Consonant blends",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word means the speaker or writer (first person pronoun)?", options: [{id:"a",text:"I",is_correct:true},{id:"b",text:"her",is_correct:false},{id:"c",text:"one",is_correct:false},{id:"d",text:"was",is_correct:false}] },
+          { id: "2", prompt: "Which word expresses origin or source (e.g., 'a gift ___ Mom')?", options: [{id:"a",text:"from",is_correct:true},{id:"b",text:"of",is_correct:false},{id:"c",text:"been",is_correct:false},{id:"d",text:"what",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'been'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word is the past tense of 'be' for singular subjects?", options: [{id:"a",text:"was",is_correct:true},{id:"b",text:"been",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"one",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 38?", options: [{id:"a",text:"I had one plum, but it was a big one.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word shows possession or association (e.g., 'book ___ mine')?", options: [{id:"a",text:"of",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"I",is_correct:false}] },
+          { id: "7", prompt: "Which word is used to ask for information about something?", options: [{id:"a",text:"what",is_correct:true},{id:"b",text:"one",is_correct:false},{id:"c",text:"I",is_correct:false},{id:"d",text:"her",is_correct:false}] },
+          { id: "8", prompt: "In 'Fran got a pup from Fred. Fred let her pet the pup', how many sight words from the list appear?", options: [{id:"a",text:"3 (from, her, pup*)",is_correct:false},{id:"b",text:"2 (from, her)",is_correct:true},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'She gave the book to ___.'?", options: [{id:"a",text:"her",is_correct:true},{id:"b",text:"I",is_correct:false},{id:"c",text:"one",is_correct:false},{id:"d",text:"was",is_correct:false}] },
+          { id: "10", prompt: "Which word is a synonym for 'a single unit'?", options: [{id:"a",text:"one",is_correct:true},{id:"b",text:"I",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"what",is_correct:false}] },
+          { id: "11", prompt: "Which sentence contains the word 'been'?", options: [{id:"a",text:"The plum had been on a twig.",is_correct:true},{id:"b",text:"Drip, drip!",is_correct:false},{id:"c",text:"The trip was fun.",is_correct:false},{id:"d",text:"Deb had a sip.",is_correct:false}] },
+          { id: "12", prompt: "Which sight word appears in sentence 3 AND sentence 6?", options: [{id:"a",text:"from",is_correct:true},{id:"b",text:"of",is_correct:true},{id:"c",text:"what",is_correct:false},{id:"d",text:"Both A and B",is_correct:true}] },
+          { id: "13", prompt: "Which sentence includes 'her'?", options: [{id:"a",text:"Fran got a pup from Fred. Fred let her pet the pup.",is_correct:true},{id:"b",text:"The fat rat fled.",is_correct:false},{id:"c",text:"I had one plum.",is_correct:false},{id:"d",text:"The drip was from the tub.",is_correct:false}] },
+          { id: "14", prompt: "How many sight words from the list are in: 'I had one plum, but it was a big one.'?", options: [{id:"a",text:"3 (I, one, was)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word is essential in the question '___ did you go?'", options: [{id:"a",text:"what",is_correct:true},{id:"b",text:"her",is_correct:false},{id:"c",text:"been",is_correct:false},{id:"d",text:"of",is_correct:false}] },
+          { id: "16", prompt: "Which word is always capitalized in English?", options: [{id:"a",text:"I",is_correct:true},{id:"b",text:"her",is_correct:false},{id:"c",text:"one",is_correct:false},{id:"d",text:"from",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'The fat rat fled from the cat' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /fr/ (from Lesson 24)",is_correct:true},{id:"b",text:"Short a (/ă/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT in the Lesson 38 sight word list?", options: [{id:"a",text:"the",is_correct:true},{id:"b",text:"from",is_correct:false},{id:"c",text:"her",is_correct:false},{id:"d",text:"was",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both sentence 4 and sentence 5?", options: [{id:"a",text:"been",is_correct:false},{id:"b",text:"was",is_correct:false},{id:"c",text:"plum",is_correct:true},{id:"d",text:"one",is_correct:false}] },
+          { id: "20", prompt: "What reading skill is taught in Lesson 38?", options: [{id:"a",text:"Instant recognition of high-frequency sight words",is_correct:true},{id:"b",text:"Decoding consonant blends",is_correct:false},{id:"c",text:"Syllable division",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -143,18 +142,28 @@
       }
 
       function renderSentences() {
+        // Handle the two-line sentence 9
+        const sentences = CHAPTER_CONFIG.sentences.map(s => s.replace(/\n/g, ' '));
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 38 to 41
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 37,38,39,40
+          const lessonNum = c + 1;      // Lesson 38,39,40,41
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -175,7 +184,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -204,7 +212,10 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
@@ -238,7 +249,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -289,7 +299,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
