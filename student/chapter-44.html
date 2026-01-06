@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 44 — Final Consonant Blends -lk, -lf, -ld, -lp, -lm, -lb, -lc"/>
-  <title>Mini OpenStax — Lesson 44: Final Consonant Blends</title>
+  <meta name="description" content="Mini OpenStax: Lesson 45 — Final Consonant Blend -mp"/>
+  <title>Mini OpenStax — Lesson 45: Final Consonant Blend -mp</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 44: Final Consonant Blends</h1>
-        <div class="lo-tags" id="lo-tags">LO PH44: Decode words ending with /lk/, /lf/, /ld/, /lp/, /lm/, /lb/, /lc/</div>
+        <h1 id="chapter-title">Lesson 45: Final Consonant Blend -mp</h1>
+        <div class="lo-tags" id="lo-tags">LO PH45: Decode words ending with consonant blend /mp/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words ending with final consonant blends:</p>
+        <p>Words ending with the <strong>-mp</strong> blend:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -90,91 +90,76 @@
         return array;
       }
 
-      const currentChapter = 43; // chapter-43.html = Lesson 44
+      const currentChapter = 44; // chapter-44.html = Lesson 45
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 44: Final Consonant Blends",
-        loTags: ["LO PH44: Decode words ending with /lk/, /lf/, /ld/, /lp/, /lm/, /lb/, /lc/"],
+        title: "Lesson 45: Final Consonant Blend -mp",
+        loTags: ["LO PH45: Decode words ending with consonant blend /mp/"],
         contentWords: [
-          "milk", "silk", "bilk", "ilk", "elk", "bulk", "hulk", "sulk",
-          "elf", "self", "golf", "gulf",
-          "held", "weld", "meld",
-          "gild", "help", "yelp", "gulp", "pulp",
-          "elm", "helm", "film",
-          "bulb",
-          "talc"
+          "amp", "camp", "damp", "lamp", "ramp", "tamp", "ump",
+          "bump", "dump", "hump", "jump", "lump", "pump", "rump",
+          "imp", "limp", "pomp", "romp"
         ],
         sentences: [
-          "Ken can gulp pop from a can.",
-          "Sal held a list in her hand.",
-          "Pam can get film of her trip.",
-          "Nan got mad. Did Nan sit and sulk?",
-          "Al lost a golf bag and a golf club.",
-          "Fran got a red silk belt from her mom.",
-          "A tug went west in the gulf.",
-          "A big man sat at the helm of the tug.",
-          "The yelp of the pup got Jan up from her nap.",
-          "Run and help the pup, Jan!"
+          "At dusk, Kent set a lamp on the desk in the den.",
+          "Milt must get gas at the gas pump.",
+          "Milt went up a ramp in the van and felt a bump.",
+          "The bump on the ramp was a big lump of mud.",
+          "Brad can camp at the pond in a tent.",
+          "Brad and the pup can jump and romp at the pond.",
+          "The pup can yelp and romp on the damp sand.",
+          "Brad can jump from a log and land in the pond.",
+          "On a jump from a log, Brad hit one leg.",
+          "Brad got a lump on the leg. Did Brad limp?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the /lk/ blend?", options: [{id:"a",text:"milk",is_correct:true},{id:"b",text:"elf",is_correct:false},{id:"c",text:"held",is_correct:false},{id:"d",text:"film",is_correct:false}] },
-          { id: "2", prompt: "Which word means 'to swallow quickly or eagerly'?", options: [{id:"a",text:"gulp",is_correct:true},{id:"b",text:"yelp",is_correct:false},{id:"c",text:"sulk",is_correct:false},{id:"d",text:"meld",is_correct:false}] },
-          { id: "3", prompt: "How many letters in 'bulb'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
-          { id: "4", prompt: "Which word refers to a large, heavily built person (often from comics)?", options: [{id:"a",text:"Hulk",is_correct:true},{id:"b",text:"elm",is_correct:false},{id:"c",text:"talc",is_correct:false},{id:"d",text:"ilk",is_correct:false}] },
-          { id: "5", prompt: "Which sentence is from Lesson 44?", options: [{id:"a",text:"Run and help the pup, Jan!",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
-          { id: "6", prompt: "Which word rhymes with 'silk'?", options: [{id:"a",text:"milk",is_correct:true},{id:"b",text:"bulk",is_correct:true},{id:"c",text:"hulk",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "7", prompt: "What syllable type is 'film'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "8", prompt: "In 'Sal held a list in her hand', how many final blend words?", options: [{id:"a",text:"1 (held)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "9", prompt: "Which word might complete: 'The ___ cried out in pain.'?", options: [{id:"a",text:"pup",is_correct:false},{id:"b",text:"yelp",is_correct:true},{id:"c",text:"gulf",is_correct:false},{id:"d",text:"helm",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to be silent and withdrawn in bad temper'?", options: [{id:"a",text:"sulk",is_correct:true},{id:"b",text:"gulp",is_correct:false},{id:"c",text:"meld",is_correct:false},{id:"d",text:"bilk",is_correct:false}] },
-          { id: "11", prompt: "Which sentence includes the word 'silk'?", options: [{id:"a",text:"Fran got a red silk belt from her mom.",is_correct:true},{id:"b",text:"Ken can gulp pop.",is_correct:false},{id:"c",text:"Nan got mad.",is_correct:false},{id:"d",text:"A tug went west.",is_correct:false}] },
-          { id: "12", prompt: "How many unique final blend words are in the word list?", options: [{id:"a",text:"25",is_correct:true},{id:"b",text:"20",is_correct:false},{id:"c",text:"18",is_correct:false},{id:"d",text:"22",is_correct:false}] },
-          { id: "13", prompt: "Which word ends with /lf/ and means 'to assist'?", options: [{id:"a",text:"help",is_correct:true},{id:"b",text:"elf",is_correct:false},{id:"c",text:"golf",is_correct:false},{id:"d",text:"self",is_correct:false}] },
-          { id: "14", prompt: "Which word ends with /lm/ and appears in sentence 3?", options: [{id:"a",text:"film",is_correct:true},{id:"b",text:"helm",is_correct:false},{id:"c",text:"elm",is_correct:false},{id:"d",text:"talc",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'The ship’s ___ was steered by the captain.'?", options: [{id:"a",text:"helm",is_correct:true},{id:"b",text:"gulf",is_correct:false},{id:"c",text:"pulp",is_correct:false},{id:"d",text:"bulk",is_correct:false}] },
-          { id: "16", prompt: "What phonics feature is in 'talc'?", options: [{id:"a",text:"Final consonant blend /lc/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
-          { id: "17", prompt: "The sentence 'Al lost a golf bag' reviews which earlier concept?", options: [{id:"a",text:"Final blend /lf/ (from Lesson 44)",is_correct:true},{id:"b",text:"Short o (/ŏ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
-          { id: "18", prompt: "Which word is NOT in the Lesson 44 word list?", options: [{id:"a",text:"can",is_correct:true},{id:"b",text:"milk",is_correct:false},{id:"c",text:"silk",is_correct:false},{id:"d",text:"yelp",is_correct:false}] },
-          { id: "19", prompt: "Which blend appears in 'held', 'meld', and 'weld'?", options: [{id:"a",text:"/ld/",is_correct:true},{id:"b",text:"/lk/",is_correct:false},{id:"c",text:"/lp/",is_correct:false},{id:"d",text:"/lb/",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 44?", options: [{id:"a",text:"Multiple final consonant blends: /lk/, /lf/, /ld/, /lp/, /lm/, /lb/, /lc/",is_correct:true},{id:"b",text:"Beginning blends only",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the /mp/ blend?", options: [{id:"a",text:"lamp",is_correct:true},{id:"b",text:"desk",is_correct:false},{id:"c",text:"den",is_correct:false},{id:"d",text:"pond",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to play energetically and noisily'?", options: [{id:"a",text:"romp",is_correct:true},{id:"b",text:"jump",is_correct:false},{id:"c",text:"camp",is_correct:false},{id:"d",text:"pump",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'pump'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word describes something slightly wet?", options: [{id:"a",text:"damp",is_correct:true},{id:"b",text:"lump",is_correct:false},{id:"c",text:"rump",is_correct:false},{id:"d",text:"imp",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 45?", options: [{id:"a",text:"Brad got a lump on the leg. Did Brad limp?",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'camp'?", options: [{id:"a",text:"lamp",is_correct:true},{id:"b",text:"ramp",is_correct:true},{id:"c",text:"damp",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "7", prompt: "What syllable type is 'jump'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Milt went up a ramp in the van and felt a bump', how many /mp/ words?", options: [{id:"a",text:"2 (ramp, bump)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'Don’t forget to check the oil and the ___ before the trip.'?", options: [{id:"a",text:"pump",is_correct:true},{id:"b",text:"romp",is_correct:false},{id:"c",text:"imp",is_correct:false},{id:"d",text:"ump",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to walk with difficulty, favoring one leg'?", options: [{id:"a",text:"limp",is_correct:true},{id:"b",text:"jump",is_correct:false},{id:"c",text:"romp",is_correct:false},{id:"d",text:"camp",is_correct:false}] },
+          { id: "11", prompt: "Which name appears in sentence 1 AND sentence 2?", options: [{id:"a",text:"Kent",is_correct:false},{id:"b",text:"Milt",is_correct:true},{id:"c",text:"Brad",is_correct:false},{id:"d",text:"None",is_correct:false}] },
+          { id: "12", prompt: "How many unique /mp/ words are in the word list?", options: [{id:"a",text:"18",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"20",is_correct:false},{id:"d",text:"12",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'damp'?", options: [{id:"a",text:"The pup can yelp and romp on the damp sand.",is_correct:true},{id:"b",text:"At dusk, Kent set a lamp.",is_correct:false},{id:"c",text:"Milt went up a ramp.",is_correct:false},{id:"d",text:"Brad can camp.",is_correct:false}] },
+          { id: "14", prompt: "Which word refers to a raised area on the body, often from an injury?", options: [{id:"a",text:"lump",is_correct:true},{id:"b",text:"rump",is_correct:false},{id:"c",text:"hump",is_correct:false},{id:"d",text:"bump",is_correct:true}] },
+          { id: "15", prompt: "Which word might complete: 'The children love to ___ on the trampoline.'?", options: [{id:"a",text:"jump",is_correct:true},{id:"b",text:"limp",is_correct:false},{id:"c",text:"camp",is_correct:false},{id:"d",text:"pomp",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'rump'?", options: [{id:"a",text:"Final consonant blend /mp/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'At dusk, Kent set a lamp...' reviews which earlier concept?", options: [{id:"a",text:"Final blend /st/ (from Lesson 39)",is_correct:true},{id:"b",text:"Short u (/ŭ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT a /mp/ word?", options: [{id:"a",text:"desk",is_correct:true},{id:"b",text:"lamp",is_correct:false},{id:"c",text:"jump",is_correct:false},{id:"d",text:"pump",is_correct:false}] },
+          { id: "19", prompt: "Which sentence includes both 'jump' and 'pond'?", options: [{id:"a",text:"Brad can jump from a log and land in the pond.",is_correct:true},{id:"b",text:"Brad and the pup can jump and romp.",is_correct:false},{id:"c",text:"Brad got a lump.",is_correct:false},{id:"d",text:"Milt felt a bump.",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 45?", options: [{id:"a",text:"Final consonant blend /mp/ in closed syllables",is_correct:true},{id:"b",text:"Beginning consonant blends",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
       // --- UI Rendering ---
       function renderWords() {
-        // Group by blend for clarity
-        const groups = {
-          "/lk/": ["milk", "silk", "bilk", "ilk", "elk", "bulk", "hulk", "sulk"],
-          "/lf/": ["elf", "self", "golf", "gulf"],
-          "/ld/": ["held", "weld", "meld"],
-          "/lp/": ["gild", "help", "yelp", "gulp", "pulp"],
-          "/lm/": ["elm", "helm", "film"],
-          "/lb/": ["bulb"],
-          "/lc/": ["talc"]
-        };
-        let html = '';
-        for (const [blend, words] of Object.entries(groups)) {
-          html += `<div style="width:100%; margin:0.75rem 0 0.25rem;"><strong>${blend}:</strong></div>`;
-          html += words.map(w => `<span class="word-item">${w}</span>`).join('');
-        }
-        document.getElementById('word-list').innerHTML = html;
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
+        // Combine last two sentences per PDF
+        const sentences = [...CHAPTER_CONFIG.sentences.slice(0, 9)];
+        sentences.push(`${CHAPTER_CONFIG.sentences[9]}`);
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ NAVIGATION: 5 buttons — Home + Lesson 44 to 47
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 45 to 48
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
 
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i; // c = 43,44,45,46
-          const lessonNum = c + 1;      // Lesson 44,45,46,47
+          const c = currentChapter + i; // c = 44,45,46,47
+          const lessonNum = c + 1;      // Lesson 45,46,47,48
           if (c > maxChapter) break;
           buttons.push({ 
             label: `Lesson ${lessonNum}`, 
@@ -241,8 +226,8 @@
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered multiple final blends!' :
-              score >= 10 ? 'Review missed items.' : 'Practice Lesson 44 words again.'
+              mastery ? 'You’ve mastered the /mp/ blend!' :
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 45 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
             <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
