@@ -147,19 +147,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ UPDATED NAVIGATION: Always 5 buttons (Home + Lesson N to N+3)
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
-        for (let i = -2; i < 2; i++) {
+
+        for (let i = 0; i < 4; i++) {
           const c = currentChapter + i;
-          const lessonNum = c + 1;
-          if (c < 0 || c > maxChapter) continue;
+          const lessonNum = c + 1; // chapter-3.html → Lesson 4 (3+1)
+          if (c > maxChapter) break;
           buttons.push({ 
             label: `Lesson ${lessonNum}`, 
             url: `chapter-${c}.html`, 
             active: i === 0 
           });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
