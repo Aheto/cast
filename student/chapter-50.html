@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 51 — Sight Words"/>
-  <title>Mini OpenStax — Lesson 51: Sight Words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 50 — Consonant Blends (Front and End)"/>
+  <title>Mini OpenStax — Lesson 50: Consonant Blends (Front and End)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,40 +23,50 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 51: Sight Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH51: Recognize and read high-frequency irregular sight words</div>
+        <h1 id="chapter-title">Lesson 50: Consonant Blends (Front and End)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH50: Decode words with blends at beginning AND end</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>High-frequency <strong>sight words</strong> that do not follow standard phonics rules:</p>
+        <p>Words with consonant blends at the <strong>beginning AND end</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. These sentences include sight words from Lesson 51:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -70,137 +80,158 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 50;    // chapter-50.html = Lesson 51
-      const maxChapter = 110;       // Update when adding more lessons
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 49; // chapter-49.html = Lesson 50
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 51: Sight Words",
-        loTags: ["LO PH51: Recognize and read high-frequency irregular sight words"],
+        title: "Lesson 50: Consonant Blends (Front and End)",
+        loTags: ["LO PH50: Decode words with blends at beginning AND end"],
         contentWords: [
-          "says", "said", "you", "your", "they", "their", "there", "where", "are", "were"
+          "craft", "draft", "drift", "swift",
+          "slept", "swept", "crept",
+          "scalp", "skulk",
+          "spilt", "stilt",
+          "clasp", "gulp",
+          "blink", "flint", "plump"
         ],
         sentences: [
-          'I said, "Where were you?"',
-          "Where were they?",
-          "What was said?",
-          "You and I are the best.",
-          "You and your dog must run fast.",
-          "Tom says your dad can trust you.",
-          "They said their dad and mom are strict."
+          "The swift drift made the raft move fast.",
+          "He crept and slept in the craft.",
+          "She swept the spilt milk with a clasp.",
+          "The plump cat blinked and skulked near the scalp.",
+          "A draft blew through the stilt house.",
+          "He took a gulp and blinked fast.",
+          "The flint sparked in the dark craft.",
+          "She slept while the swift wind drift past.",
+          "He crept past the stilt and clasp."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word is the past tense of 'say'?", options: [{id:"a",text:"said",is_correct:true},{id:"b",text:"says",is_correct:false},{id:"c",text:"say",is_correct:false},{id:"d",text:"saying",is_correct:false}] },
-          { id: "2", prompt: "Which word refers to the person being spoken to?", options: [{id:"a",text:"you",is_correct:true},{id:"b",text:"they",is_correct:false},{id:"c",text:"I",is_correct:false},{id:"d",text:"he",is_correct:false}] },
-          { id: "3", prompt: "Which word shows possession for 'you'?", options: [{id:"a",text:"your",is_correct:true},{id:"b",text:"you",is_correct:false},{id:"c",text:"yours",is_correct:false},{id:"d",text:"you're",is_correct:false}] },
-          { id: "4", prompt: "Which word refers to multiple people?", options: [{id:"a",text:"they",is_correct:true},{id:"b",text:"you",is_correct:false},{id:"c",text:"I",is_correct:false},{id:"d",text:"he",is_correct:false}] },
-          { id: "5", prompt: "How is 'says' pronounced?", options: [{id:"a",text:"/sez/",is_correct:true},{id:"b",text:"/sāz/",is_correct:false},{id:"c",text:"/sīz/",is_correct:false},{id:"d",text:"/saz/",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 51 words correctly?", options: [{id:"a",text:"You and I are the best.",is_correct:true},{id:"b",text:"You and I run fast.",is_correct:false},{id:"c",text:"You sat on a mat.",is_correct:false},{id:"d",text:"You ran to a map.",is_correct:false}] },
-          { id: "7", prompt: "Which word means 'in or at that place'?", options: [{id:"a",text:"there",is_correct:true},{id:"b",text:"their",is_correct:false},{id:"c",text:"they're",is_correct:false},{id:"d",text:"here",is_correct:false}] },
-          { id: "8", prompt: "Which word is used to ask about location?", options: [{id:"a",text:"where",is_correct:true},{id:"b",text:"what",is_correct:false},{id:"c",text:"when",is_correct:false},{id:"d",text:"who",is_correct:false}] },
-          { id: "9", prompt: "In 'They said their dad...', what does 'their' show?", options: [{id:"a",text:"Possession",is_correct:true},{id:"b",text:"Location",is_correct:false},{id:"c",text:"Action",is_correct:false},{id:"d",text:"Time",is_correct:false}] },
-          { id: "10", prompt: "Which word is the past tense of 'are'?", options: [{id:"a",text:"were",is_correct:true},{id:"b",text:"was",is_correct:false},{id:"c",text:"are",is_correct:false},{id:"d",text:"been",is_correct:false}] },
-          { id: "11", prompt: "Which word appears in both 'your dog' and 'your dad'?", options: [{id:"a",text:"your",is_correct:true},{id:"b",text:"you",is_correct:false},{id:"c",text:"they",is_correct:false},{id:"d",text:"their",is_correct:false}] },
-          { id: "12", prompt: "Which word is always capitalized when used alone?", options: [{id:"a",text:"I",is_correct:false},{id:"b",text:"you",is_correct:false},{id:"c",text:"says",is_correct:false},{id:"d",text:"None of these",is_correct:true}] },
-          { id: "13", prompt: "Which sentence is from Lesson 51?", options: [{id:"a",text:"Tom says your dad can trust you.",is_correct:true},{id:"b",text:"Tom says your car can run.",is_correct:false},{id:"c",text:"Tom sat on a mat.",is_correct:false},{id:"d",text:"Tom ran to a map.",is_correct:false}] },
-          { id: "14", prompt: "How many sight words are in 'Where were you?'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"1",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "15", prompt: "Which word is NOT a pronoun?", options: [{id:"a",text:"says",is_correct:true},{id:"b",text:"you",is_correct:false},{id:"c",text:"they",is_correct:false},{id:"d",text:"I",is_correct:false}] },
-          { id: "16", prompt: "What type of word is 'are'?", options: [{id:"a",text:"Verb",is_correct:true},{id:"b",text:"Noun",is_correct:false},{id:"c",text:"Adjective",is_correct:false},{id:"d",text:"Preposition",is_correct:false}] },
-          { id: "17", prompt: "Which word completes: 'They said ___ dad...'", options: [{id:"a",text:"their",is_correct:true},{id:"b",text:"there",is_correct:false},{id:"c",text:"they're",is_correct:false},{id:"d",text:"your",is_correct:false}] },
-          { id: "18", prompt: "Which word is homophonous with 'their' and 'they’re'?", options: [{id:"a",text:"There",is_correct:true},{id:"b",text:"Where",is_correct:false},{id:"c",text:"Were",is_correct:false},{id:"d",text:"Said",is_correct:false}] },
-          { id: "19", prompt: "Which word is used in both 'Where were you?' and 'Where were they?'?", options: [{id:"a",text:"Where",is_correct:true},{id:"b",text:"were",is_correct:false},{id:"c",text:"you",is_correct:false},{id:"d",text:"they",is_correct:false}] },
-          { id: "20", prompt: "What is the focus of Lesson 51?", options: [{id:"a",text:"Consonant blends",is_correct:false},{id:"b",text:"Short vowels",is_correct:false},{id:"c",text:"Sight words",is_correct:true},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word has a blend at the BEGINNING and END?", options: [{id:"a",text:"craft",is_correct:true},{id:"b",text:"cat",is_correct:false},{id:"c",text:"run",is_correct:false},{id:"d",text:"go",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to move slowly and quietly'?", options: [{id:"a",text:"crept",is_correct:true},{id:"b",text:"slept",is_correct:false},{id:"c",text:"ran",is_correct:false},{id:"d",text:"jumped",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'swept'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to something made by hand?", options: [{id:"a",text:"craft",is_correct:true},{id:"b",text:"draft",is_correct:false},{id:"c",text:"drift",is_correct:false},{id:"d",text:"swift",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 50?", options: [{id:"a",text:"The swift drift made the raft move fast.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'drift'?", options: [{id:"a",text:"swift",is_correct:true},{id:"b",text:"craft",is_correct:false},{id:"c",text:"crept",is_correct:false},{id:"d",text:"blink",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'stilt'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'He crept and slept in the craft', how many blend-at-both-ends words?", options: [{id:"a",text:"3 (crept, slept, craft)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"1",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'She held the necklace with a tight ___.'?", options: [{id:"a",text:"clasp",is_correct:true},{id:"b",text:"scalp",is_correct:false},{id:"c",text:"gulp",is_correct:false},{id:"d",text:"flint",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to swallow quickly'?", options: [{id:"a",text:"gulp",is_correct:true},{id:"b",text:"skulk",is_correct:false},{id:"c",text:"flint",is_correct:false},{id:"d",text:"plump",is_correct:false}] },
+          { id: "11", prompt: "Which sentence includes the word 'scalp'?", options: [{id:"a",text:"The plump cat blinked and skulked near the scalp.",is_correct:true},{id:"b",text:"The cat slept.",is_correct:false},{id:"c",text:"She swept the floor.",is_correct:false},{id:"d",text:"He took a draft.",is_correct:false}] },
+          { id: "12", prompt: "How many words are in the Lesson 50 word list?", options: [{id:"a",text:"16",is_correct:true},{id:"b",text:"14",is_correct:false},{id:"c",text:"18",is_correct:false},{id:"d",text:"12",is_correct:false}] },
+          { id: "13", prompt: "Which word begins with /sw/ and ends with /pt/?", options: [{id:"a",text:"swept",is_correct:true},{id:"b",text:"swift",is_correct:false},{id:"c",text:"spilt",is_correct:false},{id:"d",text:"skulk",is_correct:false}] },
+          { id: "14", prompt: "Which word appears in sentence 3 AND means 'spilled'?", options: [{id:"a",text:"spilt",is_correct:true},{id:"b",text:"milk",is_correct:false},{id:"c",text:"swept",is_correct:false},{id:"d",text:"clasp",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'The bird stood on a ___ to see far.'?", options: [{id:"a",text:"stilt",is_correct:true},{id:"b",text:"scalp",is_correct:false},{id:"c",text:"gulp",is_correct:false},{id:"d",text:"blink",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'skulk'?", options: [{id:"a",text:"Initial /sk/ + final /lk/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The word 'flint' reviews which blend combinations?", options: [{id:"a",text:"Initial /fl/ + final /nt/",is_correct:true},{id:"b",text:"/bl/ + /mp/",is_correct:false},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent e",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT in the Lesson 50 word list?", options: [{id:"a",text:"pond",is_correct:true},{id:"b",text:"craft",is_correct:false},{id:"c",text:"swept",is_correct:false},{id:"d",text:"plump",is_correct:false}] },
+          { id: "19", prompt: "Which word combines /dr/ and /ft/?", options: [{id:"a",text:"drift",is_correct:true},{id:"b",text:"draft",is_correct:true},{id:"c",text:"craft",is_correct:false},{id:"d",text:"swift",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 50?", options: [{id:"a",text:"Words with consonant blends at BOTH beginning and end",is_correct:true},{id:"b",text:"Sight words only",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
-      // Render word list
+      // --- UI Rendering ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        document.getElementById('sentences').innerHTML =
+          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ UNLIMITED NAVIGATION
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 50 to 53
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+          const c = currentChapter + i; // c = 49,50,51,52
+          const lessonNum = c + 1;      // Lesson 50,51,52,53
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+
+        nav.innerHTML = buttons.map(b => 
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
-      // WhatsApp feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 51*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the sight words!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 51 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered complex blend words!' :
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 50 words again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -210,8 +241,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -219,6 +250,56 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = saveName;
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) {
+            localStorage.setItem('student_name', name);
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          } else {
+            alert("Please enter your name.");
+            input.focus();
+          }
+        }
       }
 
       function init() {
@@ -229,6 +310,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
