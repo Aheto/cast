@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 27 — Consonant Blends: gr"/>
-  <title>Mini OpenStax — Lesson 27: gr Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 27 — Consonant Blend gr"/>
+  <title>Mini OpenStax — Lesson 27: Consonant Blend gr</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 27: gr Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH27: Decode words with consonant blend gr</div>
+        <h1 id="chapter-title">Lesson 27: Consonant Blend gr</h1>
+        <div class="lo-tags" id="lo-tags">LO PH27: Decode words with consonant blend /gr/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words beginning with the <strong>consonant blend "gr"</strong> in closed syllables:</p>
+        <p>Consonant blend <strong>gr</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–27:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,8 +95,8 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 27: gr Blend",
-        loTags: ["LO PH27: Decode words with consonant blend gr"],
+        title: "Lesson 27: Consonant Blend gr",
+        loTags: ["LO PH27: Decode words with consonant blend /gr/"],
         contentWords: [
           "grab", "gram", "grad", "grid", "grim", "grin", "grip", "grit", "grub", "Greg"
         ],
@@ -112,26 +111,26 @@
           "Greg had fun. Greg had a big grin."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the 'gr' blend?", options: [{id:"a",text:"grin",is_correct:true},{id:"b",text:"rin",is_correct:false},{id:"c",text:"gin",is_correct:false},{id:"d",text:"green",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 27 word?", options: [{id:"a",text:"grab",is_correct:false},{id:"b",text:"grub",is_correct:false},{id:"c",text:"grape",is_correct:true},{id:"d",text:"Greg",is_correct:false}] },
-          { id: "3", prompt: "In 'grab', how many consonants start the word?", options: [{id:"a",text:"2 (g + r)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to take hold of suddenly'?", options: [{id:"a",text:"grab",is_correct:true},{id:"b",text:"grin",is_correct:false},{id:"c",text:"grid",is_correct:false},{id:"d",text:"grit",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'grad'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 27 and review words?", options: [{id:"a",text:"A crab can grab. A crab can grip.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a unit of weight (e.g., 1,000 grams = 1 kilogram)?", options: [{id:"a",text:"gram",is_correct:true},{id:"b",text:"grub",is_correct:false},{id:"c",text:"grim",is_correct:false},{id:"d",text:"grid",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'grit'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Greg had fun. Greg had a big grin,' how many Lesson 27 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to hold tightly with the hand'?", options: [{id:"a",text:"grip",is_correct:true},{id:"b",text:"grab",is_correct:false},{id:"c",text:"grub",is_correct:false},{id:"d",text:"grin",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'He showed a big ___ after winning the game.'?", options: [{id:"a",text:"grin",is_correct:true},{id:"b",text:"grim",is_correct:false},{id:"c",text:"grid",is_correct:false},{id:"d",text:"gram",is_correct:false}] },
-          { id: "12", prompt: "Which word is short for 'graduate'?", options: [{id:"a",text:"grad",is_correct:true},{id:"b",text:"grub",is_correct:false},{id:"c",text:"grit",is_correct:false},{id:"d",text:"grab",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 27?", options: [{id:"a",text:"The pad had a red grid on it.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'grub'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Be sure to ___ the railing when walking down steep stairs.'?", options: [{id:"a",text:"grip",is_correct:true},{id:"b",text:"grin",is_correct:false},{id:"c",text:"grab",is_correct:false},{id:"d",text:"grid",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'grim'?", options: [{id:"a",text:"Consonant blend gr + short i",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"grab",is_correct:true},{id:"b",text:"grip",is_correct:true},{id:"c",text:"Greg",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'The engineer drew a ___ to plan the circuit.'?", options: [{id:"a",text:"grid",is_correct:true},{id:"b",text:"grub",is_correct:false},{id:"c",text:"grit",is_correct:false},{id:"d",text:"gram",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'Spot can drag the rag on the rug' connects to which earlier lesson?", options: [{id:"a",text:"Lesson 23 (drag)",is_correct:true},{id:"b",text:"Lesson 20 (smug)",is_correct:false},{id:"c",text:"Lesson 18 (swim)",is_correct:false},{id:"d",text:"Lesson 16 (snag)",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 27?", options: [{id:"a",text:"Consonant blend 'gr' in closed syllables",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word begins with the /gr/ blend?", options: [{id:"a",text:"grab",is_correct:true},{id:"b",text:"rag",is_correct:false},{id:"c",text:"pad",is_correct:false},{id:"d",text:"crab",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to take something suddenly or firmly'?", options: [{id:"a",text:"grab",is_correct:true},{id:"b",text:"grin",is_correct:false},{id:"c",text:"grid",is_correct:false},{id:"d",text:"grub",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'grim'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word describes a stern or gloomy expression?", options: [{id:"a",text:"grim",is_correct:true},{id:"b",text:"grin",is_correct:false},{id:"c",text:"grab",is_correct:false},{id:"d",text:"grid",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 27?", options: [{id:"a",text:"Greg had fun. Greg had a big grin.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'dim'?", options: [{id:"a",text:"grim",is_correct:true},{id:"b",text:"grab",is_correct:false},{id:"c",text:"grid",is_correct:false},{id:"d",text:"grit",is_correct:false}] },
+          { id: "7", prompt: "What syllable type is 'grip'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'A crab can grab. A crab can grip.', how many /gr/ words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'He wore a wide ___ after winning the game.'?", options: [{id:"a",text:"grin",is_correct:true},{id:"b",text:"grab",is_correct:false},{id:"c",text:"grid",is_correct:false},{id:"d",text:"grub",is_correct:false}] },
+          { id: "10", prompt: "Which word refers to small, loose particles like sand?", options: [{id:"a",text:"grit",is_correct:true},{id:"b",text:"grid",is_correct:false},{id:"c",text:"gram",is_correct:false},{id:"d",text:"grad",is_correct:false}] },
+          { id: "11", prompt: "Which word is a common boy's name in the lesson?", options: [{id:"a",text:"Greg",is_correct:true},{id:"b",text:"Fred",is_correct:false},{id:"c",text:"Fran",is_correct:false},{id:"d",text:"Don",is_correct:false}] },
+          { id: "12", prompt: "Which word might refer to insect larvae used as fishing bait?", options: [{id:"a",text:"grub",is_correct:true},{id:"b",text:"grip",is_correct:false},{id:"c",text:"grid",is_correct:false},{id:"d",text:"grab",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'grid'?", options: [{id:"a",text:"The pad had a red grid on it.",is_correct:true},{id:"b",text:"Spot had a rag.",is_correct:false},{id:"c",text:"Greg had a big grin.",is_correct:false},{id:"d",text:"A crab can grab.",is_correct:false}] },
+          { id: "14", prompt: "How many /gr/ words in: 'If Greg can grip the drum, Greg can drag it.'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'She will ___ her diploma next year.'?", options: [{id:"a",text:"grad",is_correct:true},{id:"b",text:"grin",is_correct:false},{id:"c",text:"grab",is_correct:false},{id:"d",text:"grid",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'grub'?", options: [{id:"a",text:"Consonant blend /gr/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'Spot can drag the rag on the rug' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /dr/ (from Lesson 23)",is_correct:true},{id:"b",text:"Short a (/ă/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT a /gr/ word?", options: [{id:"a",text:"rag",is_correct:true},{id:"b",text:"grab",is_correct:false},{id:"c",text:"grin",is_correct:false},{id:"d",text:"grip",is_correct:false}] },
+          { id: "19", prompt: "Which word appears in both the word list and more than one sentence?", options: [{id:"a",text:"Greg",is_correct:true},{id:"b",text:"grip",is_correct:true},{id:"c",text:"grit",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 27?", options: [{id:"a",text:"Consonant blend /gr/ in closed syllables",is_correct:true},{id:"b",text:"Short u",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -146,14 +145,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 27 to 30
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 26,27,28,29
+          const lessonNum = c + 1;      // Lesson 27,28,29,30
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -174,7 +181,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -203,14 +209,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the gr blend!' :
+              mastery ? 'You’ve mastered the /gr/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 27 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -237,7 +246,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -288,7 +296,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
