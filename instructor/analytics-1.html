@@ -70,31 +70,19 @@
     #search-btn:hover {
       background: #218838;
     }
-    .attempts-container {
+    .reports-container {
       display: none;
     }
-    .attempt-card {
+    .report-card {
       background: white;
       border: 1px solid #dee2e6;
       border-radius: 6px;
       padding: 16px;
-      margin-bottom: 12px;
-    }
-    .attempt-header {
-      display: flex;
-      justify-content: space-between;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-    .attempt-details {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 10px;
-      font-size: 14px;
-    }
-    .label {
-      font-weight: bold;
-      color: #495057;
+      margin-bottom: 16px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.4;
     }
     .error {
       text-align: center;
@@ -107,7 +95,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>Phonics Quiz Attempt Reports (Lessons 2–262)</h1>
+      <h1>Student Quiz Reports (Lessons 2–262)</h1>
       <div class="nav">
         <a href="../index.html" class="btn">Home</a>
         <a href="analytics-1.html" class="btn active">Analytics</a>
@@ -115,110 +103,140 @@
     </div>
 
     <div class="search-box">
-      <input type="text" id="student-search" placeholder="Enter student name (optional)" />
-      <button id="search-btn">Show All Attempts</button>
+      <input type="text" id="student-search" placeholder="Search by student name..." />
+      <button id="search-btn">Search Reports</button>
     </div>
 
-    <div id="results" class="attempts-container"></div>
+    <div id="results" class="reports-container"></div>
   </div>
 
   <script>
-    document.getElementById('search-btn').addEventListener('click', loadAllAttempts);
-    document.getElementById('student-search').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') loadAllAttempts();
-    });
-
-    function loadAllAttempts() {
-      const searchTerm = document.getElementById('student-search').value.trim().toLowerCase();
-      const allKeys = Object.keys(localStorage);
-      const attempts = [];
-
-      // Scan all possible report keys for lessons 2–262 (chapters 1–261)
-      for (let chapter = 1; chapter <= 261; chapter++) {
-        const reportKeyBase = `quiz_report_${chapter}`;
-        const attemptCounts = {};
-
-        // Count how many times this quiz was attempted
-        const attemptsKey = `quiz_attempts_${chapter}`;
-        const totalAttempts = parseInt(localStorage.getItem(attemptsKey)) || 0;
-
-        // Reconstruct individual attempts (we assume each report save = one attempt)
-        // In your current system, only the latest report is saved per lesson,
-        // so we can only show the latest attempt per lesson.
-        // To support true multi-attempt history, you'd need to store arrays.
-        // For now, we show what's available.
-
-        const reportKey = reportKeyBase;
-        const reportStr = localStorage.getItem(reportKey);
-        if (reportStr) {
+    // Ensure reports are saved with structured metadata when sent via WhatsApp
+    (function() {
+      const originalSetItem = localStorage.setItem;
+      localStorage.setItem = function(key, value) {
+        // Intercept WhatsApp report generation and save structured copy
+        if (key === 'whatsapp_report_temp') {
           try {
-            const report = JSON.parse(reportStr);
-            const studentName = (report.student || localStorage.getItem('student_name') || '[Unknown]').trim();
+            const reportText = value;
+            // Extract structured data from report text
+            const lines = reportText.split('\n');
+            const lessonLine = lines.find(l => l.includes('Mini OpenStax — Lesson')) || '';
+            const studentLine = lines.find(l => l.startsWith('Student:')) || '';
+            const scoreLine = lines.find(l => l.startsWith('Score:')) || '';
             
-            if (!searchTerm || studentName.toLowerCase().includes(searchTerm)) {
-              const lessonNum = chapter + 1; // chapter-1.html = Lesson 2
-              const score = report.score !== undefined ? report.score : 'N/A';
-              const total = report.total || 20;
-              const timeSpent = report.timeSpent ? `${report.timeSpent} sec` : 'N/A';
-              const date = report.date ? new Date(report.date).toLocaleString() : 'N/A';
+            let lesson = 'Unknown';
+            let student = '[Name]';
+            let score = '0/20';
+            let time = '0s';
+            let attempts = '1';
+            let mastery = false;
+            let date = new Date().toISOString();
 
-              attempts.push({
-                studentName,
-                lessonNum,
-                score,
-                total,
-                timeSpent,
-                date
-              });
+            if (lessonLine) {
+              lesson = lessonLine.replace('*Mini OpenStax — ', '').replace('*', '');
+            }
+            if (studentLine) {
+              student = studentLine.replace('Student: ', '').trim();
+            }
+            if (scoreLine) {
+              const parts = scoreLine.split(' — ');
+              score = parts[0].replace('Score: ', '').trim();
+              mastery = parts[1] ? parts[1].includes('MASTERED') : false;
+            }
+
+            // Extract time and attempts
+            const timeMatch = reportText.match(/Time:\s*(\d+)s/);
+            const attemptMatch = reportText.match(/Attempts:\s*(\d+)/);
+            if (timeMatch) time = timeMatch[1] + 's';
+            if (attemptMatch) attempts = attemptMatch[1];
+
+            // Save structured report
+            const structuredReport = {
+              student,
+              lesson,
+              score,
+              time,
+              attempts,
+              mastery,
+              date,
+              fullReport: reportText
+            };
+
+            // Determine lesson number to create key like report_lesson_13
+            const lessonNumMatch = lesson.match(/Lesson (\d+)/);
+            if (lessonNumMatch) {
+              const lessonNum = parseInt(lessonNumMatch[1]);
+              if (lessonNum >= 2 && lessonNum <= 262) {
+                const chapter = lessonNum - 1; // Lesson 2 → chapter 1
+                const reportKey = `quiz_report_${chapter}`;
+                localStorage.setItem(reportKey, JSON.stringify(structuredReport));
+              }
             }
           } catch (e) {
-            // Skip invalid reports
+            console.warn('Could not parse WhatsApp report:', e);
+          }
+        }
+        return originalSetItem.apply(this, arguments);
+      };
+    })();
+
+    document.getElementById('search-btn').addEventListener('click', loadReports);
+    document.getElementById('student-search').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') loadReports();
+    });
+
+    function loadReports() {
+      const searchTerm = document.getElementById('student-search').value.trim().toLowerCase();
+      const allKeys = Object.keys(localStorage);
+      const reports = [];
+
+      // Scan for all quiz_report_X entries (X = 1 to 261 → Lessons 2 to 262)
+      for (let chapter = 1; chapter <= 261; chapter++) {
+        const key = `quiz_report_${chapter}`;
+        const item = localStorage.getItem(key);
+        if (item) {
+          try {
+            const report = JSON.parse(item);
+            if (!searchTerm || report.student.toLowerCase().includes(searchTerm)) {
+              reports.push(report);
+            }
+          } catch (e) {
+            // Skip invalid entries
           }
         }
       }
 
-      displayAttempts(attempts, searchTerm);
+      displayReports(reports, searchTerm);
     }
 
-    function displayAttempts(attempts, searchTerm) {
+    function displayReports(reports, searchTerm) {
       const container = document.getElementById('results');
-      if (attempts.length === 0) {
-        container.innerHTML = `<div class="error">No quiz attempts found${searchTerm ? ` for "${searchTerm}"` : ''}.</div>`;
+      
+      if (reports.length === 0) {
+        container.innerHTML = `<div class="error">No reports found${searchTerm ? ` for "${searchTerm}"` : ''}.</div>`;
         container.style.display = 'block';
         return;
       }
 
-      // Sort by date (newest first) if available
-      attempts.sort((a, b) => {
-        if (a.date === 'N/A' && b.date === 'N/A') return 0;
-        if (a.date === 'N/A') return 1;
-        if (b.date === 'N/A') return -1;
-        return new Date(b.date) - new Date(a.date);
-      });
+      // Sort by date (newest first)
+      reports.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      let html = `<h2 style="margin-top: 30px;">${attempts.length} Quiz Attempt(s) Found</h2>`;
-      attempts.forEach(att => {
-        html += `
-          <div class="attempt-card">
-            <div class="attempt-header">
-              <span>Lesson ${att.lessonNum}</span>
-              <span>${att.score}/${att.total}</span>
-            </div>
-            <div class="attempt-details">
-              <div><span class="label">Student:</span> ${att.studentName}</div>
-              <div><span class="label">Time Spent:</span> ${att.timeSpent}</div>
-              <div><span class="label">Date:</span> ${att.date}</div>
-            </div>
-          </div>
-        `;
+      let html = `<h2 style="margin-top: 30px;">${reports.length} Report(s) Found</h2>`;
+      reports.forEach(rep => {
+        html += `<div class="report-card">${rep.fullReport}</div>`;
       });
 
       container.innerHTML = html;
       container.style.display = 'block';
     }
 
-    // Load attempts on page load
-    window.addEventListener('DOMContentLoaded', loadAllAttempts);
+    // Load all reports on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      // Trigger search with empty term to show all
+      document.getElementById('student-search').value = '';
+      loadReports();
+    });
   </script>
 </body>
 </html>
