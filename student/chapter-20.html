@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 21 — Consonant Blends: br"/>
-  <title>Mini OpenStax — Lesson 21: br Blend</title>
+  <meta name="description" content="Mini OpenStax: Lesson 21 — Consonant Blend br"/>
+  <title>Mini OpenStax — Lesson 21: Consonant Blend br</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 21: br Blend</h1>
-        <div class="lo-tags" id="lo-tags">LO PH21: Decode words with consonant blend br</div>
+        <h1 id="chapter-title">Lesson 21: Consonant Blend br</h1>
+        <div class="lo-tags" id="lo-tags">LO PH21: Decode words with consonant blend /br/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,17 +48,16 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words beginning with the <strong>consonant blend "br"</strong> in closed syllables:</p>
+        <p>Consonant blend <strong>br</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–21:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <!-- ✅ Enhanced Name Prompt -->
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
@@ -96,8 +95,8 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 21: br Blend",
-        loTags: ["LO PH21: Decode words with consonant blend br"],
+        title: "Lesson 21: Consonant Blend br",
+        loTags: ["LO PH21: Decode words with consonant blend /br/"],
         contentWords: [
           "brag", "bran", "brat", "Brad", "brim", "bred"
         ],
@@ -111,26 +110,26 @@
           "A brat can brag, but Brad did not brag a bit."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the 'br' blend?", options: [{id:"a",text:"brim",is_correct:true},{id:"b",text:"rim",is_correct:false},{id:"c",text:"bin",is_correct:false},{id:"d",text:"grim",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 21 word?", options: [{id:"a",text:"brag",is_correct:false},{id:"b",text:"brat",is_correct:false},{id:"c",text:"bread",is_correct:true},{id:"d",text:"Brad",is_correct:false}] },
-          { id: "3", prompt: "In 'bran', how many consonants start the word?", options: [{id:"a",text:"2 (b + r)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to boast or talk proudly'?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"brat",is_correct:false},{id:"c",text:"brim",is_correct:false},{id:"d",text:"bran",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'brat'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 21 and review words?", options: [{id:"a",text:"Mom got a red hat. The red hat had a big brim.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He plays soccer.",is_correct:false},{id:"d",text:"They flew a kite.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to the outer edge of a hat?", options: [{id:"a",text:"brim",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"bran",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'brag'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "9", prompt: "In 'Brad got a hit! Brad ran. Brad sped! Brad slid in,' how many Lesson 21 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word is a proper noun (name of a person)?", options: [{id:"a",text:"Brad",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"brim",is_correct:false}] },
-          { id: "11", prompt: "Which word might complete: 'He ate a sandwich on ___ bread.'?", options: [{id:"a",text:"bran",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"brim",is_correct:false}] },
-          { id: "12", prompt: "Which word describes a badly behaved child?", options: [{id:"a",text:"brat",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brim",is_correct:false},{id:"d",text:"bred",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 21?", options: [{id:"a",text:"A brat can brag, but Brad did not brag a bit.",is_correct:true},{id:"b",text:"She baked cookies.",is_correct:false},{id:"c",text:"He rode a bike.",is_correct:false},{id:"d",text:"We saw birds.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'bred'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'Don’t ___ about your grade—it’s okay to be humble.'?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"brat",is_correct:false},{id:"c",text:"brim",is_correct:false},{id:"d",text:"bran",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'brim'?", options: [{id:"a",text:"Consonant blend br + short i",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "17", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"brat",is_correct:true},{id:"c",text:"Brad",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "18", prompt: "Which word might complete: 'The cereal is made from ___.'?", options: [{id:"a",text:"bred",is_correct:false},{id:"b",text:"bran",is_correct:true},{id:"c",text:"brim",is_correct:false},{id:"d",text:"brat",is_correct:false}] },
-          { id: "19", prompt: "The sentence 'Did Brad get smug?' connects to which earlier lesson?", options: [{id:"a",text:"Lesson 20 (smug)",is_correct:true},{id:"b",text:"Lesson 18 (swim)",is_correct:false},{id:"c",text:"Lesson 16 (snob)",is_correct:false},{id:"d",text:"Lesson 14 (stun)",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 21?", options: [{id:"a",text:"Consonant blend 'br' in closed syllables",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word begins with the /br/ blend?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"rag",is_correct:false},{id:"c",text:"bag",is_correct:false},{id:"d",text:"drag",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to boast proudly'?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"bran",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"bred",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'brim'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to the outer covering of certain grains, often used in cereals?", options: [{id:"a",text:"bran",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"bred",is_correct:false}] },
+          { id: "5", prompt: "Which word has the same beginning blend as 'bred'?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"red",is_correct:false},{id:"c",text:"bed",is_correct:false},{id:"d",text:"bled",is_correct:false}] },
+          { id: "6", prompt: "Which sentence is from Lesson 21?", options: [{id:"a",text:"Peg had ham on a bran bun.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "7", prompt: "Which word rhymes with 'dim'?", options: [{id:"a",text:"brim",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"bran",is_correct:false},{id:"d",text:"brat",is_correct:false}] },
+          { id: "8", prompt: "What syllable type is 'brat'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "9", prompt: "In 'Brad got a hit! Brad ran. Brad sped! Brad slid in,' how many /br/ words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"4",is_correct:false}] },
+          { id: "10", prompt: "Which word might complete: 'Don’t be a ___!' (meaning a badly behaved child)?", options: [{id:"a",text:"brat",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brim",is_correct:false},{id:"d",text:"bran",is_correct:false}] },
+          { id: "11", prompt: "Which word is a proper name from the sentences?", options: [{id:"a",text:"Brad",is_correct:true},{id:"b",text:"Sam",is_correct:true},{id:"c",text:"Peg",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "12", prompt: "Which word has the same vowel sound as 'bed'?", options: [{id:"a",text:"bred",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"brim",is_correct:false}] },
+          { id: "13", prompt: "Which sentence includes the word 'brim'?", options: [{id:"a",text:"Mom got a red hat. The red hat had a big brim.",is_correct:true},{id:"b",text:"Peg had ham on a bran bun.",is_correct:false},{id:"c",text:"A brat hit Sam.",is_correct:false},{id:"d",text:"Brad got a hit!",is_correct:false}] },
+          { id: "14", prompt: "How many /br/ words in: 'A brat can brag, but Brad did not brag a bit.'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'He couldn’t stop ___ about his victory.'?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"bran",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"brim",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'bred'?", options: [{id:"a",text:"Consonant blend /br/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "Which word appears in both the word list and a sentence?", options: [{id:"a",text:"brag",is_correct:true},{id:"b",text:"bran",is_correct:true},{id:"c",text:"Brad",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "18", prompt: "Which word might complete: 'She ate toast with butter and ___ flakes.'?", options: [{id:"a",text:"bran",is_correct:true},{id:"b",text:"brag",is_correct:false},{id:"c",text:"brat",is_correct:false},{id:"d",text:"brim",is_correct:false}] },
+          { id: "19", prompt: "The sentence 'Brad slid in' reviews which earlier concept?", options: [{id:"a",text:"Consonant blend /sl/ (from Lesson 13)",is_correct:true},{id:"b",text:"Short a (/ă/)",is_correct:false},{id:"c",text:"Short i (/ĭ/)",is_correct:false},{id:"d",text:"Long vowels",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 21?", options: [{id:"a",text:"Consonant blend /br/ in closed syllables",is_correct:true},{id:"b",text:"Short u",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -145,14 +144,22 @@
           CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 21 to 24
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
+          const c = currentChapter + i; // c = 20,21,22,23
+          const lessonNum = c + 1;      // Lesson 21,22,23,24
           if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
+          });
         }
+
         nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
@@ -173,7 +180,6 @@
         }).join('');
       }
 
-      // --- Telemetry & WhatsApp Report ---
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
@@ -202,14 +208,17 @@
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
-        report += `Report generated via Mini OpenStax. Share with instructor: https://wa.me/${WHATSAPP_NUMBER}`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the br blend!' :
+              mastery ? 'You’ve mastered the /br/ blend!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 21 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
@@ -236,7 +245,6 @@
         });
       }
 
-      // --- ✅ Enhanced Name Management ---
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -287,7 +295,6 @@
         }
       }
 
-      // --- Initialize ---
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
