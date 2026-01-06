@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 45 — Final Consonant Blend 'mp'"/>
-  <title>Mini OpenStax — Lesson 45: Final Consonant Blend mp</title>
+  <meta name="description" content="Mini OpenStax: Lesson 44 — Final Consonant Blends -lk, -lf, -ld, -lp, -lm, -lb, -lc"/>
+  <title>Mini OpenStax — Lesson 44: Final Consonant Blends</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,40 +23,50 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 45: Final Consonant Blend mp</h1>
-        <div class="lo-tags" id="lo-tags">LO PH45: Decode words with final consonant blend 'mp' in closed syllables</div>
+        <h1 id="chapter-title">Lesson 44: Final Consonant Blends</h1>
+        <div class="lo-tags" id="lo-tags">LO PH44: Decode words ending with /lk/, /lf/, /ld/, /lp/, /lm/, /lb/, /lc/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words ending with the consonant blend <strong>mp</strong> in closed syllables:</p>
+        <p>Words ending with final consonant blends:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–45:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -70,142 +80,174 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 44;    // chapter-44.html = Lesson 45
-      const maxChapter = 100;       // Update when adding more lessons
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 43; // chapter-43.html = Lesson 44
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 45: Final Consonant Blend mp",
-        loTags: ["LO PH45: Decode words with final consonant blend 'mp' in closed syllables"],
+        title: "Lesson 44: Final Consonant Blends",
+        loTags: ["LO PH44: Decode words ending with /lk/, /lf/, /ld/, /lp/, /lm/, /lb/, /lc/"],
         contentWords: [
-          "amp", "camp", "damp", "lamp", "ramp", "tamp", "ump",
-          "bump", "dump", "hump", "jump", "lump", "pump", "rump",
-          "imp", "limp", "pomp", "romp"
+          "milk", "silk", "bilk", "ilk", "elk", "bulk", "hulk", "sulk",
+          "elf", "self", "golf", "gulf",
+          "held", "weld", "meld",
+          "gild", "help", "yelp", "gulp", "pulp",
+          "elm", "helm", "film",
+          "bulb",
+          "talc"
         ],
         sentences: [
-          "At dusk, Kent set a lamp on the desk in the den.",
-          "Milt must get gas at the gas pump.",
-          "Milt went up a ramp in the van and felt a bump.",
-          "The bump on the ramp was a big lump of mud.",
-          "Brad can camp at the pond in a tent.",
-          "Brad and the pup can jump and romp at the pond.",
-          "The pup can yelp and romp on the damp sand.",
-          "Brad can jump from a log and land in the pond.",
-          "On a jump from a log, Brad hit one leg.",
-          "Brad got a lump on the leg. Did Brad limp?"
+          "Ken can gulp pop from a can.",
+          "Sal held a list in her hand.",
+          "Pam can get film of her trip.",
+          "Nan got mad. Did Nan sit and sulk?",
+          "Al lost a golf bag and a golf club.",
+          "Fran got a red silk belt from her mom.",
+          "A tug went west in the gulf.",
+          "A big man sat at the helm of the tug.",
+          "The yelp of the pup got Jan up from her nap.",
+          "Run and help the pup, Jan!"
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the blend 'mp'?", options: [{id:"a",text:"jump",is_correct:true},{id:"b",text:"jug",is_correct:false},{id:"c",text:"jam",is_correct:false},{id:"d",text:"job",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 45 word?", options: [{id:"a",text:"lamp",is_correct:false},{id:"b",text:"ramp",is_correct:false},{id:"c",text:"stamp",is_correct:true},{id:"d",text:"pump",is_correct:false}] },
-          { id: "3", prompt: "What blend ends 'bump'?", options: [{id:"a",text:"nd",is_correct:false},{id:"b",text:"mp",is_correct:true},{id:"c",text:"lt",is_correct:false},{id:"d",text:"nt",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to leap into the air'?", options: [{id:"a",text:"jump",is_correct:true},{id:"b",text:"romp",is_correct:false},{id:"c",text:"limp",is_correct:false},{id:"d",text:"camp",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'pump'?", options: [{id:"a",text:"3",is_correct:false},{id:"b",text:"4",is_correct:true},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 45 words?", options: [{id:"a",text:"Milt must get gas at the gas pump.",is_correct:true},{id:"b",text:"Milt must get gas at the car.",is_correct:false},{id:"c",text:"Milt sat on a mat.",is_correct:false},{id:"d",text:"Milt ran to a map.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a portable light source?", options: [{id:"a",text:"lamp",is_correct:true},{id:"b",text:"ramp",is_correct:false},{id:"c",text:"bump",is_correct:false},{id:"d",text:"lump",is_correct:false}] },
-          { id: "8", prompt: "What closes the vowel in 'camp'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The blend 'mp'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
-          { id: "9", prompt: "In 'Brad got a lump on the leg', how many Lesson 45 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to play energetically'?", options: [{id:"a",text:"romp",is_correct:true},{id:"b",text:"jump",is_correct:false},{id:"c",text:"limp",is_correct:false},{id:"d",text:"camp",is_correct:false}] },
-          { id: "11", prompt: "Which word describes something slightly wet?", options: [{id:"a",text:"damp",is_correct:true},{id:"b",text:"lump",is_correct:false},{id:"c",text:"rump",is_correct:false},{id:"d",text:"pomp",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with /mp/ and means 'to walk with difficulty'?", options: [{id:"a",text:"limp",is_correct:true},{id:"b",text:"jump",is_correct:false},{id:"c",text:"romp",is_correct:false},{id:"d",text:"camp",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 45?", options: [{id:"a",text:"Brad can camp at the pond in a tent.",is_correct:true},{id:"b",text:"Brad can camp at the park.",is_correct:false},{id:"c",text:"Brad sat on a mat.",is_correct:false},{id:"d",text:"Brad ran to a map.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'jump'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:true},{id:"d",text:"0",is_correct:false}] },
-          { id: "15", prompt: "Which word is NOT a verb?", options: [{id:"a",text:"lamp",is_correct:true},{id:"b",text:"jump",is_correct:false},{id:"c",text:"romp",is_correct:false},{id:"d",text:"limp",is_correct:false}] },
-          { id: "16", prompt: "What syllable type is 'damp'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "17", prompt: "Which word could describe a raised area on a road?", options: [{id:"a",text:"ramp",is_correct:true},{id:"b",text:"lamp",is_correct:false},{id:"c",text:"bump",is_correct:false},{id:"d",text:"lump",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Brad can ___ from a log'?", options: [{id:"a",text:"jump",is_correct:true},{id:"b",text:"romp",is_correct:false},{id:"c",text:"camp",is_correct:false},{id:"d",text:"limp",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both 'jump and romp' and 'yelp and romp'?", options: [{id:"a",text:"romp",is_correct:true},{id:"b",text:"jump",is_correct:false},{id:"c",text:"yelp",is_correct:false},{id:"d",text:"camp",is_correct:false}] },
-          { id: "20", prompt: "What final consonant blend is taught in Lesson 45?", options: [{id:"a",text:"mp",is_correct:true},{id:"b",text:"nt",is_correct:false},{id:"c",text:"nd",is_correct:false},{id:"d",text:"lt",is_correct:false}] }
+          { id: "1", prompt: "Which word ends with the /lk/ blend?", options: [{id:"a",text:"milk",is_correct:true},{id:"b",text:"elf",is_correct:false},{id:"c",text:"held",is_correct:false},{id:"d",text:"film",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to swallow quickly or eagerly'?", options: [{id:"a",text:"gulp",is_correct:true},{id:"b",text:"yelp",is_correct:false},{id:"c",text:"sulk",is_correct:false},{id:"d",text:"meld",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'bulb'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to a large, heavily built person (often from comics)?", options: [{id:"a",text:"Hulk",is_correct:true},{id:"b",text:"elm",is_correct:false},{id:"c",text:"talc",is_correct:false},{id:"d",text:"ilk",is_correct:false}] },
+          { id: "5", prompt: "Which sentence is from Lesson 44?", options: [{id:"a",text:"Run and help the pup, Jan!",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
+          { id: "6", prompt: "Which word rhymes with 'silk'?", options: [{id:"a",text:"milk",is_correct:true},{id:"b",text:"bulk",is_correct:true},{id:"c",text:"hulk",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
+          { id: "7", prompt: "What syllable type is 'film'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
+          { id: "8", prompt: "In 'Sal held a list in her hand', how many final blend words?", options: [{id:"a",text:"1 (held)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'The ___ cried out in pain.'?", options: [{id:"a",text:"pup",is_correct:false},{id:"b",text:"yelp",is_correct:true},{id:"c",text:"gulf",is_correct:false},{id:"d",text:"helm",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to be silent and withdrawn in bad temper'?", options: [{id:"a",text:"sulk",is_correct:true},{id:"b",text:"gulp",is_correct:false},{id:"c",text:"meld",is_correct:false},{id:"d",text:"bilk",is_correct:false}] },
+          { id: "11", prompt: "Which sentence includes the word 'silk'?", options: [{id:"a",text:"Fran got a red silk belt from her mom.",is_correct:true},{id:"b",text:"Ken can gulp pop.",is_correct:false},{id:"c",text:"Nan got mad.",is_correct:false},{id:"d",text:"A tug went west.",is_correct:false}] },
+          { id: "12", prompt: "How many unique final blend words are in the word list?", options: [{id:"a",text:"25",is_correct:true},{id:"b",text:"20",is_correct:false},{id:"c",text:"18",is_correct:false},{id:"d",text:"22",is_correct:false}] },
+          { id: "13", prompt: "Which word ends with /lf/ and means 'to assist'?", options: [{id:"a",text:"help",is_correct:true},{id:"b",text:"elf",is_correct:false},{id:"c",text:"golf",is_correct:false},{id:"d",text:"self",is_correct:false}] },
+          { id: "14", prompt: "Which word ends with /lm/ and appears in sentence 3?", options: [{id:"a",text:"film",is_correct:true},{id:"b",text:"helm",is_correct:false},{id:"c",text:"elm",is_correct:false},{id:"d",text:"talc",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'The ship’s ___ was steered by the captain.'?", options: [{id:"a",text:"helm",is_correct:true},{id:"b",text:"gulf",is_correct:false},{id:"c",text:"pulp",is_correct:false},{id:"d",text:"bulk",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'talc'?", options: [{id:"a",text:"Final consonant blend /lc/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'Al lost a golf bag' reviews which earlier concept?", options: [{id:"a",text:"Final blend /lf/ (from Lesson 44)",is_correct:true},{id:"b",text:"Short o (/ŏ/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT in the Lesson 44 word list?", options: [{id:"a",text:"can",is_correct:true},{id:"b",text:"milk",is_correct:false},{id:"c",text:"silk",is_correct:false},{id:"d",text:"yelp",is_correct:false}] },
+          { id: "19", prompt: "Which blend appears in 'held', 'meld', and 'weld'?", options: [{id:"a",text:"/ld/",is_correct:true},{id:"b",text:"/lk/",is_correct:false},{id:"c",text:"/lp/",is_correct:false},{id:"d",text:"/lb/",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 44?", options: [{id:"a",text:"Multiple final consonant blends: /lk/, /lf/, /ld/, /lp/, /lm/, /lb/, /lc/",is_correct:true},{id:"b",text:"Beginning blends only",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
-      // Render word list
+      // --- UI Rendering ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        // Group by blend for clarity
+        const groups = {
+          "/lk/": ["milk", "silk", "bilk", "ilk", "elk", "bulk", "hulk", "sulk"],
+          "/lf/": ["elf", "self", "golf", "gulf"],
+          "/ld/": ["held", "weld", "meld"],
+          "/lp/": ["gild", "help", "yelp", "gulp", "pulp"],
+          "/lm/": ["elm", "helm", "film"],
+          "/lb/": ["bulb"],
+          "/lc/": ["talc"]
+        };
+        let html = '';
+        for (const [blend, words] of Object.entries(groups)) {
+          html += `<div style="width:100%; margin:0.75rem 0 0.25rem;"><strong>${blend}:</strong></div>`;
+          html += words.map(w => `<span class="word-item">${w}</span>`).join('');
+        }
+        document.getElementById('word-list').innerHTML = html;
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        document.getElementById('sentences').innerHTML =
+          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ UNLIMITED NAVIGATION
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 44 to 47
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
+
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+          const c = currentChapter + i; // c = 43,44,45,46
+          const lessonNum = c + 1;      // Lesson 44,45,46,47
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+
+        nav.innerHTML = buttons.map(b => 
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
-      // WhatsApp feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 45*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the "mp" blend!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 45 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered multiple final blends!' :
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 44 words again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -215,8 +257,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -224,6 +266,56 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = saveName;
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) {
+            localStorage.setItem('student_name', name);
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          } else {
+            alert("Please enter your name.");
+            input.focus();
+          }
+        }
       }
 
       function init() {
@@ -234,6 +326,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
