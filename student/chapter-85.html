@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 86: ea Vowel Team Pattern"/>
-  <title>Mini OpenStax — Lesson 86: ea Vowel Team Pattern</title>
+  <meta name="description" content="Mini OpenStax: Lesson 86: ea=/ē/"/>
+  <title>Mini OpenStax — Lesson 86: ea=/ē/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 86: ea Vowel Team</h1>
-        <div class="lo-tags" id="lo-tags">LO PH86: Decode words with the /ea/ vowel team</div>
+        <h1 id="chapter-title">Lesson 86: ea=/ē/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH086: Decode words with vowel team "ea" pronounced /ē/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Target words with the <strong>ea</strong> vowel team:</p>
+        <p>Words with "ea" that say /ē/ (long e sound):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -82,62 +82,180 @@
       'use strict';
       window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 85; // chapter-85.html = Lesson 86
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 85;
+      const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 86: ea Vowel Team",
-        loTags: ["LO PH86: Decode words with the /ea/ vowel team"],
+        title: "Lesson 86: ea=/ē/",
+        loTags: ["LO PH086: Decode words with vowel team \"ea\" pronounced /ē/"],
         contentWords: [
-          "ear", "eat", "each", "east", "sea", "seal", "seam", "sear",
-          "seat", "sheaf", "shear", "sheath", "speak", "spear", "squeak",
-          "squeal", "steal", "steam", "stream", "streak", "scream", "smear",
-          "sneak"
+          "ear", "eat", "each", "east", "sea", "seal", "seam", "sear", "seat", "sheaf", "shear", "sheath",
+          "speak", "spear", "squeak", "squeal", "steal", "steam", "stream", "streak", "scream", "smear", "sneak"
         ],
         sentences: [
-          "1) The cat will sneak up on the rat.",
-          "2) The rat will squeak and squeal and flee from the cat.",
-          "3) A seal can catch a fish in the sea.",
-          "4) Mitch can catch a fish in the stream.",
-          "5) Lee got a seat in the back of the bus.",
-          "6) Bess can smear jam on a bun and eat it.",
-          "7) Bess got a streak of jam on her cheek.",
-          "8) Ann can sit on the bench and eat her lunch.",
-          "9) The sun will set in the west, not in the east.",
-          "10) A bee stung Jack on the ear. Did Jack yell and scream?"
+          "The cat will sneak up on the rat.",
+          "The rat will squeak and squeal and flee from the cat.",
+          "A seal can catch a fish in the sea.",
+          "Mitch can catch a fish in the stream.",
+          "Lee got a seat in the back of the bus.",
+          "Bess can smear jam on a bun and eat it.",
+          "Bess got a streak of jam on her cheek.",
+          "Ann can sit on the bench and eat her lunch.",
+          "The sun will set in the west, not in the east.",
+          "A bee stung Jack on the ear. Did Jack yell and scream?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Who will sneak up on the rat?", options: [{id:"a",text:"the cat",is_correct:true},{id:"b",text:"a seal",is_correct:false},{id:"c",text:"a bee",is_correct:false},{id:"d",text:"Mitch",is_correct:false}]},
-          { id: "2", prompt: "What sounds will the rat make?", options: [{id:"a",text:"squeak and squeal",is_correct:true},{id:"b",text:"yell and scream",is_correct:false},{id:"c",text:"honk and beep",is_correct:false},{id:"d",text:"cheep and chirp",is_correct:false}]},
-          { id: "3", prompt: "Where can a seal catch a fish?", options: [{id:"a",text:"in the sea",is_correct:true},{id:"b",text:"in the stream",is_correct:false},{id:"c",text:"on a bench",is_correct:false},{id:"d",text:"in the bus",is_correct:false}]},
-          { id: "4", prompt: "Where can Mitch catch a fish?", options: [{id:"a",text:"in the stream",is_correct:true},{id:"b",text:"in the sea",is_correct:false},{id:"c",text:"on the east side",is_correct:false},{id:"d",text:"in the tub",is_correct:false}]},
-          { id: "5", prompt: "Where was Lee's seat on the bus?", options: [{id:"a",text:"in the back",is_correct:true},{id:"b",text:"in the front",is_correct:false},{id:"c",text:"on the bench",is_correct:false},{id:"d",text:"on the streak",is_correct:false}]},
-          { id: "6", prompt: "What did Bess smear on her bun?", options: [{id:"a",text:"jam",is_correct:true},{id:"b",text:"butter",is_correct:false},{id:"c",text:"meat",is_correct:false},{id:"d",text:"a streak",is_correct:false}]},
-          { id: "7", prompt: "Where did Bess get a streak of jam?", options: [{id:"a",text:"on her cheek",is_correct:true},{id:"b",text:"on her ear",is_correct:false},{id:"c",text:"on her bun",is_correct:false},{id:"d",text:"on her seat",is_correct:false}]},
-          { id: "8", prompt: "What is Ann doing on the bench?", options: [{id:"a",text:"eating her lunch",is_correct:true},{id:"b",text:"catching a fish",is_correct:false},{id:"c",text:"sneaking up",is_correct:false},{id:"d",text:"screaming",is_correct:false}]},
-          { id: "9", prompt: "Where will the sun NOT set?", options: [{id:"a",text:"in the east",is_correct:true},{id:"b",text:"in the west",is_correct:false},{id:"c",text:"in the stream",is_correct:false},{id:"d",text:"in the sea",is_correct:false}]},
-          { id: "10", prompt: "Where did the bee sting Jack?", options: [{id:"a",text:"on the ear",is_correct:true},{id:"b",text:"on the cheek",is_correct:false},{id:"c",text:"on the seat",is_correct:false},{id:"d",text:"on the stream",is_correct:false}]},
-          { id: "11", prompt: "Which word means to move quietly to avoid being seen?", options: [{id:"a",text:"sneak",is_correct:true},{id:"b",text:"speak",is_correct:false},{id:"c",text:"steal",is_correct:false},{id:"d",text:"sear",is_correct:false}]},
-          { id: "12", prompt: "Which word describes a long, narrow mark?", options: [{id:"a",text:"streak",is_correct:true},{id:"b",text:"stream",is_correct:false},{id:"c",text:"steam",is_correct:false},{id:"d",text:"seam",is_correct:false}]},
-          { id: "13", prompt: "Which word means to talk?", options: [{id:"a",text:"speak",is_correct:true},{id:"b",text:"scream",is_correct:false},{id:"c",text:"squeal",is_correct:false},{id:"d",text:"sear",is_correct:false}]},
-          { id: "14", prompt: "Which word is a small body of flowing water?", options: [{id:"a",text:"stream",is_correct:true},{id:"b",text:"sea",is_correct:false},{id:"c",text:"seam",is_correct:false},{id:"d",text:"steam",is_correct:false}]},
-          { id: "15", prompt: "Which word means the line where two pieces of cloth are sewn?", options: [{id:"a",text:"seam",is_correct:true},{id:"b",text:"seal",is_correct:false},{id:"c",text:"seat",is_correct:false},{id:"d",text:"sear",is_correct:false}]},
-          { id: "16", prompt: "Which word means to burn or scorch the surface?", options: [{id:"a",text:"sear",is_correct:true},{id:"b",text:"seal",is_correct:false},{id:"c",text:"seat",is_correct:false},{id:"d",text:"steam",is_correct:false}]},
-          { id: "17", prompt: "Water vapor is called ____.", options: [{id:"a",text:"steam",is_correct:true},{id:"b",text:"stream",is_correct:false},{id:"c",text:"sear",is_correct:false},{id:"d",text:"sea",is_correct:false}]},
-          { id: "18", prompt: "Which word is a sharp-pointed weapon?", options: [{id:"a",text:"spear",is_correct:true},{id:"b",text:"shear",is_correct:false},{id:"c",text:"sheaf",is_correct:false},{id:"d",text:"speak",is_correct:false}]},
-          { id: "19", prompt: "To take something that is not yours is to ____.", options: [{id:"a",text:"steal",is_correct:true},{id:"b",text:"sneak",is_correct:false},{id:"c",text:"speak",is_correct:false},{id:"d",text:"sear",is_correct:false}]},
-          { id: "20", prompt: "A bundle of cut grain is a ____.", options: [{id:"a",text:"sheaf",is_correct:true},{id:"b",text:"sheath",is_correct:false},{id:"c",text:"shear",is_correct:false},{id:"d",text:"sear",is_correct:false}]}
+          { id: "1", prompt: "Which word has 'ea' that says /ē/?", options: [
+            {id:"a",text:"head",is_correct:false},
+            {id:"b",text:"seat",is_correct:true},
+            {id:"c",text:"bread",is_correct:false},
+            {id:"d",text:"dead",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'to take something without permission'?", options: [
+            {id:"a",text:"steal",is_correct:true},
+            {id:"b",text:"steam",is_correct:false},
+            {id:"c",text:"stream",is_correct:false},
+            {id:"d",text:"seat",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'speak'?", options: [
+            {id:"a",text:"sneak",is_correct:true},
+            {id:"b",text:"snack",is_correct:false},
+            {id:"c",text:"stack",is_correct:false},
+            {id:"d",text:"stuck",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word is a body part?", options: [
+            {id:"a",text:"ear",is_correct:true},
+            {id:"b",text:"eat",is_correct:false},
+            {id:"c",text:"east",is_correct:false},
+            {id:"d",text:"sea",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 'ea' = /ē/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"Lee got a seat.",is_correct:true},
+            {id:"c",text:"It is cold.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'a thin line where two pieces of fabric are sewn'?", options: [
+            {id:"a",text:"seam",is_correct:true},
+            {id:"b",text:"seal",is_correct:false},
+            {id:"c",text:"sea",is_correct:false},
+            {id:"d",text:"seat",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes what a rat does when scared?", options: [
+            {id:"a",text:"squeak",is_correct:true},
+            {id:"b",text:"smear",is_correct:false},
+            {id:"c",text:"sneak",is_correct:false},
+            {id:"d",text:"steam",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 'ea' pronounced in 'steam'?", options: [
+            {id:"a",text:"/ĕ/",is_correct:false},
+            {id:"b",text:"/ē/",is_correct:true},
+            {id:"c",text:"/æ/",is_correct:false},
+            {id:"d",text:"/ĭ/",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to coat messily'?", options: [
+            {id:"a",text:"smear",is_correct:true},
+            {id:"b",text:"scream",is_correct:false},
+            {id:"c",text:"squeal",is_correct:false},
+            {id:"d",text:"spear",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"ear",is_correct:true},
+            {id:"b",text:"eat",is_correct:false},
+            {id:"c",text:"each",is_correct:false},
+            {id:"d",text:"east",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word is a weapon used in ancient times?", options: [
+            {id:"a",text:"spear",is_correct:true},
+            {id:"b",text:"speak",is_correct:false},
+            {id:"c",text:"squeak",is_correct:false},
+            {id:"d",text:"steal",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"stream",is_correct:false},
+            {id:"b",text:"streak",is_correct:false},
+            {id:"c",text:"spread",is_correct:true},
+            {id:"d",text:"scream",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'The sun sets in the east,' what does 'east' mean?", options: [
+            {id:"a",text:"a direction",is_correct:true},
+            {id:"b",text:"a type of food",is_correct:false},
+            {id:"c",text:"a body part",is_correct:false},
+            {id:"d",text:"a sound",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to utter words aloud'?", options: [
+            {id:"a",text:"speak",is_correct:true},
+            {id:"b",text:"squeak",is_correct:false},
+            {id:"c",text:"sneak",is_correct:false},
+            {id:"d",text:"smear",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same vowel sound as 'beach'?", options: [
+            {id:"a",text:"each",is_correct:true},
+            {id:"b",text:"head",is_correct:false},
+            {id:"c",text:"bread",is_correct:false},
+            {id:"d",text:"dead",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /m/ and has 'ea' = /ē/?", options: [
+            {id:"a",text:"steam",is_correct:true},
+            {id:"b",text:"stream",is_correct:false},
+            {id:"c",text:"scream",is_correct:false},
+            {id:"d",text:"seam",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'sheath' mean?", options: [
+            {id:"a",text:"a cover for a knife or sword",is_correct:true},
+            {id:"b",text:"a type of animal",is_correct:false},
+            {id:"c",text:"a loud noise",is_correct:false},
+            {id:"d",text:"a stream",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes how a cat moves before pouncing?", options: [
+            {id:"a",text:"squeal",is_correct:false},
+            {id:"b",text:"sneak",is_correct:true},
+            {id:"c",text:"scream",is_correct:false},
+            {id:"d",text:"smear",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word is a homophone of 'eye'?", options: [
+            {id:"a",text:"ear",is_correct:false},
+            {id:"b",text:"eat",is_correct:false},
+            {id:"c",text:"I",is_correct:false},
+            {id:"d",text:"None of these",is_correct:true}
+          ]},
+          { id: "20", prompt: "Which word has 'ea' but does NOT say /ē/?", options: [
+            {id:"a",text:"bread",is_correct:true},
+            {id:"b",text:"seat",is_correct:false},
+            {id:"c",text:"steam",is_correct:false},
+            {id:"d",text:"speak",is_correct:false}
+          ]}
         ]
       };
+
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring']
+      ];
 
       function renderWords() {
         document.getElementById('word-list').innerHTML =
@@ -145,8 +263,15 @@
       }
 
       function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
@@ -155,23 +280,34 @@
         for (let i = 0; i < 4; i++) {
           const c = currentChapter + i;
           const lessonNum = c + 1;
-          if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${lessonNum}`, url: `chapter-${c}.html`, active: i === 0 });
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
         }
-        nav.innerHTML = buttons.map(b => `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const opts = shuffle([...q.options]);
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
           const correct = q.options.find(o => o.is_correct);
           window.quizCorrectMap[q.id] = correct.id;
-          const optHtml = opts.map((o, i) => {
-            const L = String.fromCharCode(65 + i);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
+
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
@@ -179,11 +315,13 @@
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
+
         items.forEach((item, i) => {
           const ans = answers[i];
           const correctId = window.quizCorrectMap[item.id];
           const correctOpt = item.options.find(o => o.id === correctId);
-          if (ans === correctId) {
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
             correctCount++;
             correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
@@ -191,27 +329,34 @@
           }
         });
 
-        const score = correctCount, mastery = score >= 15;
+        const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
-        const attemptsKey = `quiz_attempts_${currentChapter}`;
-        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
-        localStorage.setItem(attemptsKey, attempts);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
 
-        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/20 (${Math.round(score/20*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
-        if (correctList.length) report += `✅ CORRECT:\n${correctList.join('\n')}\n\n`;
-        if (incorrectList.length) report += `❌ INCORRECT:\n${incorrectList.join('\n')}\n\n`;
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}/20</h3>
-            <p><strong>${mastery ? '🎉 Excellent!' : 'Keep practicing.'}</strong></p>
-            <p>Time: ${timeOnTask}s | Attempts: ${attempts}</p>
-            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report via WhatsApp</a>
-          </div>`;
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
       }
 
       function setupQuizListeners() {
@@ -222,7 +367,10 @@
             const el = form.querySelector(`input[name="q${i}"]:checked`);
             answers.push(el ? el.value : null);
           }
-          if (answers.includes(null)) { alert("Please answer all questions."); return; }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
           showFeedback(answers);
         });
       }
@@ -235,30 +383,72 @@
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
 
-        promptDiv.style.display = 'block';
         if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
           display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
-          buttons.innerHTML = `<button type="button" class="btn" id="keep-btn">✅ Keep This Name</button> <button type="button" class="btn btn-secondary" id="change-btn">✏️ Change</button>`;
-          document.getElementById('keep-btn').onclick = () => { promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; };
-          document.getElementById('change-btn').onclick = () => { display.style.display = 'none'; input.style.display = 'block'; input.value = ''; input.focus(); buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save & Start</button>`; document.getElementById('save-new').onclick = saveName; };
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
         } else {
-          display.style.display = 'none'; input.style.display = 'block'; buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save & Start</button>`; document.getElementById('save-first').onclick = saveName;
-        }
-
-        function saveName() {
-          const name = input.value.trim();
-          if (name) { localStorage.setItem('student_name', name); promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; }
-          else { alert("Please enter your name."); }
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
         }
       }
 
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-        renderNavigation(); renderWords(); renderSentences(); renderQuiz(); setupQuizListeners(); initNamePrompt();
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
