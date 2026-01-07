@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 112 — Endings with s as /s/ (Part 2)"/>
-  <title>Mini OpenStax — Lesson 112: s as /s/ Endings</title>
+  <meta name="description" content="Mini OpenStax: Lesson 112: s=/s/"/>
+  <title>Mini OpenStax — Lesson 112: s=/s/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 112: s as /s/ Endings</h1>
-        <div class="lo-tags" id="lo-tags">LO PH112: Recognize and decode the unvoiced /s/ sound in plural and verb endings after p and k.</div>
+        <h1 id="chapter-title">Lesson 112: s=/s/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH112: Decode words where "s" says /s/ (continued)</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words where the ending <strong>-s</strong> makes the <strong>/s/</strong> sound:</p>
+        <p>Words where "s" says /s/ (as in <em>lips</em>):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, focusing on the unvoiced "s" at the end of the words:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -67,130 +80,279 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 111;    // chapter-111.html = Lesson 112
-      const maxChapter = 150;        
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 111;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 112: s as /s/ Endings",
-        loTags: ["LO PH112: Recognize and decode the unvoiced /s/ sound in plural and verb endings after p and k."],
+        title: "Lesson 112: s=/s/",
+        loTags: ["LO PH112: Decode words where \"s\" says /s/ (continued)"],
         contentWords: [
-          "lips", "tips", "cups", "shops", "stops", "crops", "scraps", "helps", "bumps", "clumps", "lamps", "keeps", "sweeps", "troops", "socks", "rocks", "blocks", "backs", "tracks", "slacks", "stacks", "checks", "picks", "sticks", "bricks", "tricks"
+          "lips", "dips", "nips", "hips", "tips", "strips", "grips", "slips", "trips", "clips", "drips", "flips", "rips", "ships", "whips", "skips", "zips", "stops", "pops", "tops", "drops", "shops", "cops", "flops", "props", "crops"
         ],
         sentences: [
-          "1) Ray keeps his room neat and clean.",
-          "2) The seal at the zoo can do tricks.",
-          "3) The scout saw some deer tracks on the trail.",
-          "4) Fran can give Fred some tips on how to play chess.",
-          "5) Cliff has on gray slacks and a pair of black socks.",
-          "6) At lunch, the dog will come up to Lee and beg for scraps of food.",
-          "7) Each day, the mail truck stops by and picks up the mail.",
-          "8) In the spring, the men on the ranch will plow the land and plant the crops."
+          "Her lips were red from the cold wind.",
+          "The cop stops the car with a hand signal.",
+          "He drops the ball and it pops on the floor.",
+          "The film shows a ship in a big storm.",
+          "She clips the paper to the report sheet.",
+          "The cat flips the cup off the table.",
+          "The crops grow well in the wet soil.",
+          "He skips rope in the school yard."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Who keeps his room neat and clean?", options: [{id:"a",text:"Cliff",is_correct:false},{id:"b",text:"Ray",is_correct:true},{id:"c",text:"Fred",is_correct:false},{id:"d",text:"Lee",is_correct:false}] },
-          { id: "2", prompt: "What can the seal at the zoo do?", options: [{id:"a",text:"scraps",is_correct:false},{id:"b",text:"tracks",is_correct:false},{id:"c",text:"tricks",is_correct:true},{id:"d",text:"crops",is_correct:false}] },
-          { id: "3", prompt: "What did the scout see on the trail?", options: [{id:"a",text:"deer tracks",is_correct:true},{id:"b",text:"bricks",is_correct:false},{id:"c",text:"lamps",is_correct:false},{id:"d",text:"cups",is_correct:false}] },
-          { id: "4", prompt: "What does Fran give Fred tips about?", options: [{id:"a",text:"milking cows",is_correct:false},{id:"b",text:"playing chess",is_correct:true},{id:"c",text:"planting crops",is_correct:false},{id:"d",text:"cleaning rooms",is_correct:false}] },
-          { id: "5", prompt: "What color are Cliff's slacks?", options: [{id:"a",text:"black",is_correct:false},{id:"b",text:"gray",is_correct:true},{id:"c",text:"white",is_correct:false},{id:"d",text:"blue",is_correct:false}] },
-          { id: "6", prompt: "What color are Cliff's socks?", options: [{id:"a",text:"gray",is_correct:false},{id:"b",text:"black",is_correct:true},{id:"c",text:"red",is_correct:false},{id:"d",text:"green",is_correct:false}] },
-          { id: "7", prompt: "What does the dog beg for at lunch?", options: [{id:"a",text:"cups",is_correct:false},{id:"b",text:"crops",is_correct:false},{id:"c",text:"scraps of food",is_correct:true},{id:"d",text:"sticks",is_correct:false}] },
-          { id: "8", prompt: "How often does the mail truck stop by?", options: [{id:"a",text:"each week",is_correct:false},{id:"b",text:"each day",is_correct:true},{id:"c",text:"at noon",is_correct:false},{id:"d",text:"never",is_correct:false}] },
-          { id: "9", prompt: "What does the mail truck pick up?", options: [{id:"a",text:"crops",is_correct:false},{id:"b",text:"the mail",is_correct:true},{id:"c",text:"bricks",is_correct:false},{id:"d",text:"socks",is_correct:false}] },
-          { id: "10", prompt: "When do the men on the ranch plant crops?", options: [{id:"a",text:"in the fall",is_correct:false},{id:"b",text:"in the spring",is_correct:true},{id:"c",text:"at dawn",is_correct:false},{id:"d",text:"each day",is_correct:false}] },
-          { id: "11", prompt: "Which word rhymes with 'shops'?", options: [{id:"a",text:"stops",is_correct:true},{id:"b",text:"lips",is_correct:false},{id:"c",text:"cups",is_correct:false},{id:"d",text:"keeps",is_correct:false}] },
-          { id: "12", prompt: "Which word means more than one lamp?", options: [{id:"a",text:"lamps",is_correct:true},{id:"b",text:"clumps",is_correct:false},{id:"c",text:"bumps",is_correct:false},{id:"d",text:"troops",is_correct:false}] },
-          { id: "13", prompt: "Which word refers to things used to build walls?", options: [{id:"a",text:"bricks",is_correct:true},{id:"b",text:"sticks",is_correct:false},{id:"c",text:"tracks",is_correct:false},{id:"d",text:"blocks",is_correct:false}] },
-          { id: "14", prompt: "What is the plural of 'sock'?", options: [{id:"a",text:"socks",is_correct:true},{id:"b",text:"socksz",is_correct:false},{id:"c",text:"sock",is_correct:false},{id:"d",text:"sokks",is_correct:false}] },
-          { id: "15", prompt: "Which word means to lift or take something?", options: [{id:"a",text:"picks",is_correct:true},{id:"b",text:"checks",is_correct:false},{id:"c",text:"stacks",is_correct:false},{id:"d",text:"sticks",is_correct:false}] },
-          { id: "16", prompt: "The word 'troops' refers to a group of...", options: [{id:"a",text:"animals",is_correct:false},{id:"b",text:"soldiers/scouts",is_correct:true},{id:"c",text:"crops",is_correct:false},{id:"d",text:"lamps",is_correct:false}] },
-          { id: "17", prompt: "In 'tricks', the 's' sounds like:", options: [{id:"a",text:"/z/ as in buzz",is_correct:false},{id:"b",text:"/s/ as in hiss",is_correct:true},{id:"c",text:"/sh/ as in ship",is_correct:false},{id:"d",text:"/ks/ as in box",is_correct:false}] },
-          { id: "18", prompt: "Which word means more than one cup?", options: [{id:"a",text:"cups",is_correct:true},{id:"b",text:"caps",is_correct:false},{id:"c",text:"crops",is_correct:false},{id:"d",text:"clumps",is_correct:false}] },
-          { id: "19", prompt: "What does Ray do with his room?", options: [{id:"a",text:"sweeps",is_correct:false},{id:"b",text:"keeps it neat",is_correct:true},{id:"c",text:"helps",is_correct:false},{id:"d",text:"checks",is_correct:false}] },
-          { id: "20", prompt: "Complete the word: st _ _ ks (piles of things).", options: [{id:"a",text:"ac",is_correct:true},{id:"b",text:"ec",is_correct:false},{id:"c",text:"ic",is_correct:false},{id:"d",text:"oc",is_correct:false}] }
+          { id: "1", prompt: "Which word has 's' that says /s/ as in 'lips'?", options: [
+            {id:"a",text:"dogs",is_correct:false},
+            {id:"b",text:"lips",is_correct:true},
+            {id:"c",text:"has",is_correct:false},
+            {id:"d",text:"his",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'edges of the mouth'?", options: [
+            {id:"a",text:"lips",is_correct:true},
+            {id:"b",text:"hips",is_correct:false},
+            {id:"c",text:"tips",is_correct:false},
+            {id:"d",text:"rips",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'trips'?", options: [
+            {id:"a",text:"slips",is_correct:true},
+            {id:"b",text:"bees",is_correct:false},
+            {id:"c",text:"trees",is_correct:false},
+            {id:"d",text:"sees",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word describes what police officers are called informally?", options: [
+            {id:"a",text:"cops",is_correct:true},
+            {id:"b",text:"shops",is_correct:false},
+            {id:"c",text:"ships",is_correct:false},
+            {id:"d",text:"whips",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 's' = /s/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"The cop stops the car.",is_correct:true},
+            {id:"c",text:"She has a dog.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to fall by accident'?", options: [
+            {id:"a",text:"trips",is_correct:true},
+            {id:"b",text:"skips",is_correct:false},
+            {id:"c",text:"flips",is_correct:false},
+            {id:"d",text:"grips",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes what you do to close a jacket?", options: [
+            {id:"a",text:"zips",is_correct:true},
+            {id:"b",text:"rips",is_correct:false},
+            {id:"c",text:"clips",is_correct:false},
+            {id:"d",text:"dips",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 's' pronounced in 'ships'?", options: [
+            {id:"a",text:"/z/ as in 'has'",is_correct:false},
+            {id:"b",text:"/s/ as in 'cats'",is_correct:true},
+            {id:"c",text:"/ʃ/ as in 'sure'",is_correct:false},
+            {id:"d",text:"/tʃ/ as in 'chair'",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to hold tightly'?", options: [
+            {id:"a",text:"grips",is_correct:true},
+            {id:"b",text:"slips",is_correct:false},
+            {id:"c",text:"drips",is_correct:false},
+            {id:"d",text:"nips",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"clips",is_correct:true},
+            {id:"b",text:"cops",is_correct:false},
+            {id:"c",text:"crops",is_correct:false},
+            {id:"d",text:"dips",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word means 'small pieces torn off'?", options: [
+            {id:"a",text:"rips",is_correct:true},
+            {id:"b",text:"strips",is_correct:false},
+            {id:"c",text:"flips",is_correct:false},
+            {id:"d",text:"whips",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"drops",is_correct:false},
+            {id:"b",text:"shops",is_correct:false},
+            {id:"c",text:"dogs",is_correct:true},
+            {id:"d",text:"props",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'He drops the ball,' what does 'drops' mean?", options: [
+            {id:"a",text:"lets fall",is_correct:true},
+            {id:"b",text:"throws",is_correct:false},
+            {id:"c",text:"catches",is_correct:false},
+            {id:"d",text:"kicks",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to move with quick light steps'?", options: [
+            {id:"a",text:"skips",is_correct:true},
+            {id:"b",text:"trips",is_correct:false},
+            {id:"c",text:"slips",is_correct:false},
+            {id:"d",text:"flips",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same 's' sound as 'tops'?", options: [
+            {id:"a",text:"pops",is_correct:true},
+            {id:"b",text:"his",is_correct:false},
+            {id:"c",text:"has",is_correct:false},
+            {id:"d",text:"please",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /s/ and means 'to turn over quickly'?", options: [
+            {id:"a",text:"flips",is_correct:true},
+            {id:"b",text:"grips",is_correct:false},
+            {id:"c",text:"rips",is_correct:false},
+            {id:"d",text:"ships",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'drips' mean?", options: [
+            {id:"a",text:"falls in small drops",is_correct:true},
+            {id:"b",text:"pours",is_correct:false},
+            {id:"c",text:"splashes",is_correct:false},
+            {id:"d",text:"evaporates",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes what farmers harvest?", options: [
+            {id:"a",text:"crops",is_correct:true},
+            {id:"b",text:"props",is_correct:false},
+            {id:"c",text:"shops",is_correct:false},
+            {id:"d",text:"whips",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'small bites or pinches'?", options: [
+            {id:"a",text:"nips",is_correct:true},
+            {id:"b",text:"dips",is_correct:false},
+            {id:"c",text:"tips",is_correct:false},
+            {id:"d",text:"hips",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has 's' but does NOT say /s/?", options: [
+            {id:"a",text:"has",is_correct:true},
+            {id:"b",text:"lips",is_correct:false},
+            {id:"c",text:"stops",is_correct:false},
+            {id:"d",text:"drops",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/l ips/g, 'lips'], [/s tops/g, 'stops'], [/d rops/g, 'drops'], [/p oints/g, 'points'], [/sp ots/g, 'spots']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 112*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -200,8 +362,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -209,6 +371,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -219,9 +439,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
