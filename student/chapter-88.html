@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 89: ea Vowel Team Pattern Continued"/>
-  <title>Mini OpenStax — Lesson 89: ea Vowel Team Pattern (Part 4)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 89: ea=/ē/"/>
+  <title>Mini OpenStax — Lesson 89: ea=/ē/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 89: ea Vowel Team (Part 4)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH89: Decode complex words with the /ea/ vowel team</div>
+        <h1 id="chapter-title">Lesson 89: ea=/ē/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH089: Decode words with vowel team "ea" pronounced /ē/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Target words with the <strong>ea</strong> vowel team:</p>
+        <p>Words with "ea" that say /ē/ (long e sound):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -82,62 +82,181 @@
       'use strict';
       window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 88; // chapter-88.html = Lesson 89
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 88;
+      const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 89: ea Vowel Team (Part 4)",
-        loTags: ["LO PH89: Decode complex words with the /ea/ vowel team"],
+        title: "Lesson 89: ea=/ē/",
+        loTags: ["LO PH089: Decode words with vowel team \"ea\" pronounced /ē/"],
         contentWords: [
-          "pea", "peak", "peal", "peach", "preach", "plea", "plead", "pleat",
-          "read", "real", "ream", "reap", "rear", "reach", "tea", "teak",
-          "team", "tear", "teach", "treat", "tweak", "zeal", "weak", "wean",
-          "wheat", "year", "yeast", "veal"
+          "pea", "peak", "peal", "peach", "preach", "plea", "plead", "pleat", "read", "real", "ream", "reap", "rear", "reach",
+          "tea", "teak", "team", "tear", "teach", "treat", "tweak", "zeal", "weak", "wean", "wheat", "year", "yeast", "veal"
         ],
         sentences: [
-          "1) Cliff was sick and felt weak.",
-          "2) Neal sat in a rear seat on the bus.",
-          "3) Beth says her team can beat their team.",
-          "4) Ann will help Jeff and teach him to read.",
-          "5) A wisp of steam went up from the hot cup of tea.",
-          "6) Bess will plead with Mom to get the doll at the shop.",
-          "7) Each year, the men on the ranch reap the crop of wheat.",
-          "8) Jill got a deep cut on her heel, but she did not shed a tear.",
-          "9) Max can pluck a sweet peach from the branch of a peach tree.",
-          "10) Frank must plod up the path to reach the peak of the steep hill."
+          "Cliff was sick and felt weak.",
+          "Neal sat in a rear seat on the bus.",
+          "Beth says her team can beat their team.",
+          "Ann will help Jeff and teach him to read.",
+          "A wisp of steam went up from the hot cup of tea.",
+          "Bess will plead with Mom to get the doll at the shop.",
+          "Each year, the men on the ranch reap the crop of wheat.",
+          "Jill got a deep cut on her heel, but she did not shed a tear.",
+          "Max can pluck a sweet peach from the branch of a peach tree.",
+          "Frank must plod up the path to reach the peak of the steep hill."
         ],
         assessmentItems: [
-          { id: "1", prompt: "How did Cliff feel because he was sick?", options: [{id:"a",text:"weak",is_correct:true},{id:"b",text:"real",is_correct:false},{id:"c",text:"zeal",is_correct:false},{id:"d",text:"teak",is_correct:false}]},
-          { id: "2", prompt: "Where did Neal sit on the bus?", options: [{id:"a",text:"in a rear seat",is_correct:true},{id:"b",text:"at the peak",is_correct:false},{id:"c",text:"on a ream",is_correct:false},{id:"d",text:"by the tea",is_correct:false}]},
-          { id: "3", prompt: "What does Beth say about her team?", options: [{id:"a",text:"they can beat the other team",is_correct:true},{id:"b",text:"they are weak",is_correct:false},{id:"c",text:"they reap wheat",is_correct:false},{id:"d",text:"they teach reading",is_correct:false}]},
-          { id: "4", prompt: "What will Ann teach Jeff to do?", options: [{id:"a",text:"read",is_correct:true},{id:"b",text:"preach",is_correct:false},{id:"c",text:"wean",is_correct:false},{id:"d",text:"tweak",is_correct:false}]},
-          { id: "5", prompt: "What came out of the hot cup of tea?", options: [{id:"a",text:"a wisp of steam",is_correct:true},{id:"b",text:"a yeast",is_correct:false},{id:"c",text:"a peach",is_correct:false},{id:"d",text:"a pleat",is_correct:false}]},
-          { id: "6", prompt: "Why will Bess plead with Mom?", options: [{id:"a",text:"to get a doll",is_correct:true},{id:"b",text:"to get some wheat",is_correct:false},{id:"c",text:"to reach the peak",is_correct:false},{id:"d",text:"to help Jeff",is_correct:false}]},
-          { id: "7", prompt: "What do the men on the ranch do each year?", options: [{id:"a",text:"reap the crop of wheat",is_correct:true},{id:"b",text:"teach Jeff to read",is_correct:false},{id:"c",text:"pluck a peach",is_correct:false},{id:"d",text:"sit in the rear",is_correct:false}]},
-          { id: "8", prompt: "What did Jill NOT do after getting a cut?", options: [{id:"a",text:"shed a tear",is_correct:true},{id:"b",text:"plead with Mom",is_correct:false},{id:"c",text:"eat veal",is_correct:false},{id:"d",text:"beat the team",is_correct:false}]},
-          { id: "9", prompt: "Where does Max get the peach from?", options: [{id:"a",text:"the branch of a peach tree",is_correct:true},{id:"b",text:"the rear seat",is_correct:false},{id:"c",text:"a ream of paper",is_correct:false},{id:"d",text:"the peak of the hill",is_correct:false}]},
-          { id: "10", prompt: "Where must Frank reach after plodding up the path?", options: [{id:"a",text:"the peak of the steep hill",is_correct:true},{id:"b",text:"the cup of tea",is_correct:false},{id:"c",text:"the wheat crop",is_correct:false},{id:"d",text:"the ranch",is_correct:false}]},
-          { id: "11", prompt: "Which word is a fruit that grows on a tree?", options: [{id:"a",text:"peach",is_correct:true},{id:"b",text:"wheat",is_correct:false},{id:"c",text:"yeast",is_correct:false},{id:"d",text:"veal",is_correct:false}]},
-          { id: "12", prompt: "Which word means a group of people working together?", options: [{id:"a",text:"team",is_correct:true},{id:"b",text:"tear",is_correct:false},{id:"c",text:"teak",is_correct:false},{id:"d",text:"tea",is_correct:false}]},
-          { id: "13", prompt: "Which word means an urgent request?", options: [{id:"a",text:"plea",is_correct:true},{id:"b",text:"peal",is_correct:false},{id:"c",text:"pea",is_correct:false},{id:"d",text:"peak",is_correct:false}]},
-          { id: "14", prompt: "Which word means to gather or harvest a crop?", options: [{id:"a",text:"reap",is_correct:true},{id:"b",text:"read",is_correct:false},{id:"c",text:"real",is_correct:false},{id:"d",text:"ream",is_correct:false}]},
-          { id: "15", prompt: "Which word is a grain used to make bread?", options: [{id:"a",text:"wheat",is_correct:true},{id:"b",text:"weak",is_correct:false},{id:"c",text:"wean",is_correct:false},{id:"d",text:"yeast",is_correct:false}]},
-          { id: "16", prompt: "Which word means 365 days?", options: [{id:"a",text:"year",is_correct:true},{id:"b",text:"yeast",is_correct:false},{id:"c",text:"zeal",is_correct:false},{id:"d",text:"veal",is_correct:false}]},
-          { id: "17", prompt: "Which word means a fold in cloth?", options: [{id:"a",text:"pleat",is_correct:true},{id:"b",text:"plead",is_correct:false},{id:"c",text:"plea",is_correct:false},{id:"d",text:"peach",is_correct:false}]},
-          { id: "18", prompt: "Which word refers to a very strong wood?", options: [{id:"a",text:"teak",is_correct:true},{id:"b",text:"tea",is_correct:false},{id:"c",text:"team",is_correct:false},{id:"d",text:"teach",is_correct:false}]},
-          { id: "19", prompt: "Which word means a loud ringing of bells?", options: [{id:"a",text:"peal",is_correct:true},{id:"b",text:"peak",is_correct:false},{id:"c",text:"pea",is_correct:false},{id:"d",text:"peach",is_correct:false}]},
-          { id: "20", prompt: "Which word means meat from a calf?", options: [{id:"a",text:"veal",is_correct:true},{id:"b",text:"yeast",is_correct:false},{id:"c",text:"wheat",is_correct:false},{id:"d",text:"year",is_correct:false}]}
+          { id: "1", prompt: "Which word has 'ea' that says /ē/?", options: [
+            {id:"a",text:"head",is_correct:false},
+            {id:"b",text:"peach",is_correct:true},
+            {id:"c",text:"bread",is_correct:false},
+            {id:"d",text:"dead",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'to instruct'?", options: [
+            {id:"a",text:"teach",is_correct:true},
+            {id:"b",text:"tweak",is_correct:false},
+            {id:"c",text:"team",is_correct:false},
+            {id:"d",text:"tear",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'sea'?", options: [
+            {id:"a",text:"pea",is_correct:true},
+            {id:"b",text:"pan",is_correct:false},
+            {id:"c",text:"pet",is_correct:false},
+            {id:"d",text:"pat",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word is a hot beverage?", options: [
+            {id:"a",text:"tea",is_correct:true},
+            {id:"b",text:"treat",is_correct:false},
+            {id:"c",text:"team",is_correct:false},
+            {id:"d",text:"teak",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 'ea' = /ē/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"Ann will teach Jeff to read.",is_correct:true},
+            {id:"c",text:"It is cold.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to harvest crops'?", options: [
+            {id:"a",text:"reap",is_correct:true},
+            {id:"b",text:"read",is_correct:false},
+            {id:"c",text:"real",is_correct:false},
+            {id:"d",text:"ream",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes the top of a mountain?", options: [
+            {id:"a",text:"peak",is_correct:true},
+            {id:"b",text:"peal",is_correct:false},
+            {id:"c",text:"peach",is_correct:false},
+            {id:"d",text:"plea",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 'ea' pronounced in 'weak'?", options: [
+            {id:"a",text:"/ĕ/",is_correct:false},
+            {id:"b",text:"/ē/",is_correct:true},
+            {id:"c",text:"/æ/",is_correct:false},
+            {id:"d",text:"/ĭ/",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to beg earnestly'?", options: [
+            {id:"a",text:"plead",is_correct:true},
+            {id:"b",text:"pleat",is_correct:false},
+            {id:"c",text:"preach",is_correct:false},
+            {id:"d",text:"peal",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"pea",is_correct:true},
+            {id:"b",text:"peak",is_correct:false},
+            {id:"c",text:"peal",is_correct:false},
+            {id:"d",text:"peach",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word is a type of hardwood?", options: [
+            {id:"a",text:"teak",is_correct:true},
+            {id:"b",text:"team",is_correct:false},
+            {id:"c",text:"tea",is_correct:false},
+            {id:"d",text:"tear",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"zeal",is_correct:false},
+            {id:"b",text:"veal",is_correct:false},
+            {id:"c",text:"great",is_correct:true},
+            {id:"d",text:"wheat",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'Jill did not shed a tear,' what does 'tear' mean?", options: [
+            {id:"a",text:"a drop of water from the eye",is_correct:true},
+            {id:"b",text:"to rip",is_correct:false},
+            {id:"c",text:"a hole",is_correct:false},
+            {id:"d",text:"a sound",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'genuine or true'?", options: [
+            {id:"a",text:"real",is_correct:true},
+            {id:"b",text:"read",is_correct:false},
+            {id:"c",text:"ream",is_correct:false},
+            {id:"d",text:"rear",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same vowel sound as 'beach'?", options: [
+            {id:"a",text:"each",is_correct:false},
+            {id:"b",text:"reach",is_correct:true},
+            {id:"c",text:"head",is_correct:false},
+            {id:"d",text:"bread",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /m/ and has 'ea' = /ē/?", options: [
+            {id:"a",text:"team",is_correct:true},
+            {id:"b",text:"tear",is_correct:false},
+            {id:"c",text:"tea",is_correct:false},
+            {id:"d",text:"teak",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'yeast' do in bread?", options: [
+            {id:"a",text:"makes it rise",is_correct:true},
+            {id:"b",text:"makes it sweet",is_correct:false},
+            {id:"c",text:"adds color",is_correct:false},
+            {id:"d",text:"makes it sour",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word means 'to stop breastfeeding'?", options: [
+            {id:"a",text:"wean",is_correct:true},
+            {id:"b",text:"weak",is_correct:false},
+            {id:"c",text:"wheat",is_correct:false},
+            {id:"d",text:"year",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'enthusiastic devotion'?", options: [
+            {id:"a",text:"zeal",is_correct:true},
+            {id:"b",text:"veal",is_correct:false},
+            {id:"c",text:"team",is_correct:false},
+            {id:"d",text:"treat",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has 'ea' but does NOT say /ē/?", options: [
+            {id:"a",text:"bread",is_correct:true},
+            {id:"b",text:"peach",is_correct:false},
+            {id:"c",text:"teach",is_correct:false},
+            {id:"d",text:"team",is_correct:false}
+          ]}
         ]
       };
+
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p each/g, 'peach'], [/p eak/g, 'peak'], [/f ee/g, 'fee'], [/f lea/g, 'flea']
+      ];
 
       function renderWords() {
         document.getElementById('word-list').innerHTML =
@@ -145,8 +264,15 @@
       }
 
       function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
@@ -155,23 +281,34 @@
         for (let i = 0; i < 4; i++) {
           const c = currentChapter + i;
           const lessonNum = c + 1;
-          if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${lessonNum}`, url: `chapter-${c}.html`, active: i === 0 });
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
         }
-        nav.innerHTML = buttons.map(b => `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const opts = shuffle([...q.options]);
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
           const correct = q.options.find(o => o.is_correct);
           window.quizCorrectMap[q.id] = correct.id;
-          const optHtml = opts.map((o, i) => {
-            const L = String.fromCharCode(65 + i);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
+
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
@@ -179,11 +316,13 @@
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
+
         items.forEach((item, i) => {
           const ans = answers[i];
           const correctId = window.quizCorrectMap[item.id];
           const correctOpt = item.options.find(o => o.id === correctId);
-          if (ans === correctId) {
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
             correctCount++;
             correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
@@ -191,27 +330,34 @@
           }
         });
 
-        const score = correctCount, mastery = score >= 15;
+        const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
-        const attemptsKey = `quiz_attempts_${currentChapter}`;
-        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
-        localStorage.setItem(attemptsKey, attempts);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
 
-        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/20 (${Math.round(score/20*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
-        if (correctList.length) report += `✅ CORRECT:\n${correctList.join('\n')}\n\n`;
-        if (incorrectList.length) report += `❌ INCORRECT:\n${incorrectList.join('\n')}\n\n`;
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}/20</h3>
-            <p><strong>${mastery ? '🎉 Excellent!' : 'Keep practicing.'}</strong></p>
-            <p>Time: ${timeOnTask}s | Attempts: ${attempts}</p>
-            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report via WhatsApp</a>
-          </div>`;
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
       }
 
       function setupQuizListeners() {
@@ -222,7 +368,10 @@
             const el = form.querySelector(`input[name="q${i}"]:checked`);
             answers.push(el ? el.value : null);
           }
-          if (answers.includes(null)) { alert("Please answer all questions."); return; }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
           showFeedback(answers);
         });
       }
@@ -235,30 +384,72 @@
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
 
-        promptDiv.style.display = 'block';
         if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
           display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
-          buttons.innerHTML = `<button type="button" class="btn" id="keep-btn">✅ Keep This Name</button> <button type="button" class="btn btn-secondary" id="change-btn">✏️ Change</button>`;
-          document.getElementById('keep-btn').onclick = () => { promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; };
-          document.getElementById('change-btn').onclick = () => { display.style.display = 'none'; input.style.display = 'block'; input.value = ''; input.focus(); buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save & Start</button>`; document.getElementById('save-new').onclick = saveName; };
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
         } else {
-          display.style.display = 'none'; input.style.display = 'block'; buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save & Start</button>`; document.getElementById('save-first').onclick = saveName;
-        }
-
-        function saveName() {
-          const name = input.value.trim();
-          if (name) { localStorage.setItem('student_name', name); promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; }
-          else { alert("Please enter your name."); }
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
         }
       }
 
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-        renderNavigation(); renderWords(); renderSentences(); renderQuiz(); setupQuizListeners(); initNamePrompt();
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
