@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 119 — Endings with Double Consonant + ed"/>
-  <title>Mini OpenStax — Lesson 119: Double Consonant + ed Endings</title>
+  <meta name="description" content="Mini OpenStax: Lesson 119: Double consonant + ed"/>
+  <title>Mini OpenStax — Lesson 119: Double consonant + ed</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 119: Double Consonant + ed</h1>
-        <div class="lo-tags" id="lo-tags">LO PH119: Identify and decode past tense words that require doubling the final consonant before adding -ed.</div>
+        <h1 id="chapter-title">Lesson 119: Double consonant + ed</h1>
+        <div class="lo-tags" id="lo-tags">LO PH119: Apply consonant doubling before "-ed" in one-syllable words</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Short vowel words that double the final consonant before adding <strong>-ed</strong>:</p>
+        <p>Words with doubled consonants + "-ed":</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences. Notice how the doubled consonant keeps the vowel sound short:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -67,132 +80,281 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 118;    // chapter-118.html = Lesson 119
-      const maxChapter = 150;        
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 118;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 119: Double Consonant + ed",
-        loTags: ["LO PH119: Identify and decode past tense words that require doubling the final consonant before adding -ed."],
+        title: "Lesson 119: Double consonant + ed",
+        loTags: ["LO PH119: Apply consonant doubling before \"-ed\" in one-syllable words"],
         contentWords: [
-          "nodded", "skidded", "chatted", "dotted", "spotted", "trotted", "tagged", "wagged", "begged", "jogged", "hugged", "bugged", "shrugged", "hummed", "grinned", "planned", "rubbed", "grabbed", "slipped", "skipped", "shipped", "trapped", "clapped", "flapped", "popped", "hopped", "stopped", "shopped", "dropped", "chopped"
+          "stopped", "dropped", "hopped", "skipped", "flipped", "slipped", "stripped", "dripped", "tripped", "shipped",
+          "whipped", "clapped", "snapped", "wrapped", "tapped", "grabbed", "bragged", "begged", "bagged", "tagged",
+          "sagged", "lagged", "nagged", "pegged", "rigged", "jogged", "plugged", "dragged", "bragged"
         ],
         sentences: [
-          "1) The crowd clapped and cheered when the play ended.",
-          "2) Paul dropped his glass and spilled milk on the rug.",
-          "3) Ann sat next to Greg on the bus and chatted with him.",
-          "4) In the rain, a van skidded on the slick street and crashed.",
-          "5) Fran reached out and grabbed the rail when she slipped on the step.",
-          "6) Chuck spotted his lost pup as it trotted down the street.",
-          "7) When the pup saw Chuck, it wagged its tail and ran up to him.",
-          "8) Chuck grinned as he picked up the pup and hugged it.",
-          "9) Mom hopped in the car and shopped for some food.",
-          "10) The cook chopped the beef and hummed a song."
+          "Ray stopped the car at the red light.",
+          "She dropped her keys on the floor.",
+          "The bunny hopped across the yard.",
+          "He skipped rope during recess.",
+          "She flipped the pancake in the pan.",
+          "He slipped on the wet floor.",
+          "They stripped the old paint off the wall.",
+          "Water dripped from the leaky faucet."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What did the crowd do when the play ended?", options: [{id:"a",text:"yelled",is_correct:false},{id:"b",text:"clapped and cheered",is_correct:true},{id:"c",text:"hopped",is_correct:false},{id:"d",text:"chatted",is_correct:false}] },
-          { id: "2", prompt: "What did Paul drop?", options: [{id:"a",text:"his hat",is_correct:false},{id:"b",text:"his glass",is_correct:true},{id:"c",text:"a plate",is_correct:false},{id:"d",text:"a box",is_correct:false}] },
-          { id: "3", prompt: "Where did Paul spill the milk?", options: [{id:"a",text:"on the desk",is_correct:false},{id:"b",text:"on the rug",is_correct:true},{id:"c",text:"in the sink",is_correct:false},{id:"d",text:"on his pants",is_correct:false}] },
-          { id: "4", prompt: "Who did Ann chat with on the bus?", options: [{id:"a",text:"Chuck",is_correct:false},{id:"b",text:"Greg",is_correct:true},{id:"c",text:"Paul",is_correct:false},{id:"d",text:"Fran",is_correct:false}] },
-          { id: "5", prompt: "What did the van do on the slick street?", options: [{id:"a",text:"stopped",is_correct:false},{id:"b",text:"skidded and crashed",is_correct:true},{id:"c",text:"hopped",is_correct:false},{id:"d",text:"shipped",is_correct:false}] },
-          { id: "6", prompt: "What did Fran grab when she slipped?", options: [{id:"a",text:"a bag",is_correct:false},{id:"b",text:"the rail",is_correct:true},{id:"c",text:"a chair",is_correct:false},{id:"d",text:"a belt",is_correct:false}] },
-          { id: "7", prompt: "What did the lost pup do when it saw Chuck?", options: [{id:"a",text:"it bit him",is_correct:false},{id:"b",text:"it wagged its tail",is_correct:true},{id:"c",text:"it hid",is_correct:false},{id:"d",text:"it skidded",is_correct:false}] },
-          { id: "8", prompt: "How did Chuck feel when he hugged the pup?", options: [{id:"a",text:"he cried",is_correct:false},{id:"b",text:"he grinned",is_correct:true},{id:"c",text:"he shrugged",is_correct:false},{id:"d",text:"he clapped",is_correct:false}] },
-          { id: "9", prompt: "What did the pup do down the street?", options: [{id:"a",text:"jogged",is_correct:false},{id:"b",text:"trotted",is_correct:true},{id:"c",text:"skipped",is_correct:false},{id:"d",text:"dropped",is_correct:false}] },
-          { id: "10", prompt: "What did Mom do for some food?", options: [{id:"a",text:"hopped in the car and shopped",is_correct:true},{id:"b",text:"planned a trip",is_correct:false},{id:"c",text:"dropped the beef",is_correct:false},{id:"d",text:"chatted with Greg",is_correct:false}] },
-          { id: "11", prompt: "What did the cook do while he chopped the beef?", options: [{id:"a",text:"clapped",is_correct:false},{id:"b",text:"hummed a song",is_correct:true},{id:"c",text:"nodded",is_correct:false},{id:"d",text:"bugged Mom",is_correct:false}] },
-          { id: "12", prompt: "Which word means to have moved on a wet road?", options: [{id:"a",text:"nodded",is_correct:false},{id:"b",text:"skidded",is_correct:true},{id:"c",text:"spotted",is_correct:false},{id:"d",text:"trapped",is_correct:false}] },
-          { id: "13", prompt: "Which word is the past tense of 'grin'?", options: [{id:"a",text:"grined",is_correct:false},{id:"b",text:"grinned",is_correct:true},{id:"c",text:"grining",is_correct:false},{id:"d",text:"grins",is_correct:false}] },
-          { id: "14", prompt: "Which word means to have moved like a rabbit?", options: [{id:"a",text:"shipped",is_correct:false},{id:"b",text:"hopped",is_correct:true},{id:"c",text:"chapped",is_correct:false},{id:"d",text:"rubbed",is_correct:false}] },
-          { id: "15", prompt: "Why do we double the 'p' in 'stopped'?", options: [{id:"a",text:"to make it long",is_correct:false},{id:"b",text:"to keep the vowel short",is_correct:true},{id:"c",text:"to make it /t/",is_correct:false},{id:"d",text:"it's a mistake",is_correct:false}] },
-          { id: "16", prompt: "Which word means to have lifted the shoulders?", options: [{id:"a",text:"nodded",is_correct:false},{id:"b",text:"shrugged",is_correct:true},{id:"c",text:"tagged",is_correct:false},{id:"d",text:"grabbed",is_correct:false}] },
-          { id: "17", prompt: "In 'clapped', the -ed sounds like:", options: [{id:"a",text:"/d/",is_correct:false},{id:"b",text:"/t/",is_correct:true},{id:"c",text:"/ed/",is_correct:false},{id:"d",text:"/z/",is_correct:false}] },
-          { id: "18", prompt: "Which word means to have moved something by boat or truck?", options: [{id:"a",text:"chopped",is_correct:false},{id:"b",text:"shipped",is_correct:true},{id:"c",text:"slipped",is_correct:false},{id:"d",text:"hopped",is_correct:false}] },
-          { id: "19", prompt: "Which word means to have moved your head up and down?", options: [{id:"a",text:"dotted",is_correct:false},{id:"b",text:"nodded",is_correct:true},{id:"c",text:"planned",is_correct:false},{id:"d",text:"begged",is_correct:false}] },
-          { id: "20", prompt: "Complete the word: dr _ _ ped (let fall).", options: [{id:"a",text:"op",is_correct:true},{id:"b",text:"up",is_correct:false},{id:"c",text:"ip",is_correct:false},{id:"d",text:"ap",is_correct:false}] }
+          { id: "1", prompt: "Which word correctly doubles the consonant before '-ed'?", options: [
+            {id:"a",text:"hoped",is_correct:false},
+            {id:"b",text:"stopped",is_correct:true},
+            {id:"c",text:"opened",is_correct:false},
+            {id:"d",text:"helped",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'let fall accidentally'?", options: [
+            {id:"a",text:"dropped",is_correct:true},
+            {id:"b",text:"hopped",is_correct:false},
+            {id:"c",text:"skipped",is_correct:false},
+            {id:"d",text:"flipped",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'wrapped'?", options: [
+            {id:"a",text:"tapped",is_correct:true},
+            {id:"b",text:"opened",is_correct:false},
+            {id:"c",text:"helped",is_correct:false},
+            {id:"d",text:"played",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word means 'to move by bouncing on one foot'?", options: [
+            {id:"a",text:"hopped",is_correct:true},
+            {id:"b",text:"skipped",is_correct:false},
+            {id:"c",text:"tripped",is_correct:false},
+            {id:"d",text:"slipped",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a correctly doubled word?", options: [
+            {id:"a",text:"He walked to school.",is_correct:false},
+            {id:"b",text:"She dropped her book.",is_correct:true},
+            {id:"c",text:"They played outside.",is_correct:false},
+            {id:"d",text:"We helped our mom.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to turn over quickly'?", options: [
+            {id:"a",text:"flipped",is_correct:true},
+            {id:"b",text:"slipped",is_correct:false},
+            {id:"c",text:"stripped",is_correct:false},
+            {id:"d",text:"dripped",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes what water does from a leak?", options: [
+            {id:"a",text:"dripped",is_correct:true},
+            {id:"b",text:"tripped",is_correct:false},
+            {id:"c",text:"shipped",is_correct:false},
+            {id:"d",text:"whipped",is_correct:false}
+          ]},
+          { id: "8", prompt: "Why is the 'p' doubled in 'stopped'?", options: [
+            {id:"a",text:"It ends in consonant + short vowel + consonant",is_correct:true},
+            {id:"b",text:"It has two syllables",is_correct:false},
+            {id:"c",text:"It ends in a vowel",is_correct:false},
+            {id:"d",text:"It's a long word",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to take hold of suddenly'?", options: [
+            {id:"a",text:"grabbed",is_correct:true},
+            {id:"b",text:"bragged",is_correct:false},
+            {id:"c",text:"begged",is_correct:false},
+            {id:"d",text:"bagged",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"bagged",is_correct:true},
+            {id:"b",text:"begged",is_correct:false},
+            {id:"c",text:"bragged",is_correct:false},
+            {id:"d",text:"clapped",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word means 'to boast proudly'?", options: [
+            {id:"a",text:"bragged",is_correct:true},
+            {id:"b",text:"begged",is_correct:false},
+            {id:"c",text:"tagged",is_correct:false},
+            {id:"d",text:"sagged",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT formed by doubling a consonant?", options: [
+            {id:"a",text:"played",is_correct:true},
+            {id:"b",text:"dragged",is_correct:false},
+            {id:"c",text:"jogged",is_correct:false},
+            {id:"d",text:"plugged",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'He slipped on the wet floor,' why did he slip?", options: [
+            {id:"a",text:"The floor was wet",is_correct:true},
+            {id:"b",text:"He tripped",is_correct:false},
+            {id:"c",text:"He jumped",is_correct:false},
+            {id:"d",text:"He ran",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to cover with paper or cloth'?", options: [
+            {id:"a",text:"wrapped",is_correct:true},
+            {id:"b",text:"tapped",is_correct:false},
+            {id:"c",text:"clapped",is_correct:false},
+            {id:"d",text:"snapped",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same pattern as 'begged'?", options: [
+            {id:"a",text:"tagged",is_correct:true},
+            {id:"b",text:"opened",is_correct:false},
+            {id:"c",text:"hoped",is_correct:false},
+            {id:"d",text:"helped",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with a doubled consonant and means 'to move slowly behind'?", options: [
+            {id:"a",text:"lagged",is_correct:true},
+            {id:"b",text:"nagged",is_correct:false},
+            {id:"c",text:"pegged",is_correct:false},
+            {id:"d",text:"rigged",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'sagged' mean?", options: [
+            {id:"a",text:"sank or drooped",is_correct:true},
+            {id:"b",text:"jumped",is_correct:false},
+            {id:"c",text:"ran",is_correct:false},
+            {id:"d",text:"shouted",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word means 'to fix unfairly in advance'?", options: [
+            {id:"a",text:"rigged",is_correct:true},
+            {id:"b",text:"jogged",is_correct:false},
+            {id:"c",text:"plugged",is_correct:false},
+            {id:"d",text:"dragged",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'to run at a slow, steady pace'?", options: [
+            {id:"a",text:"jogged",is_correct:true},
+            {id:"b",text:"plugged",is_correct:false},
+            {id:"c",text:"dragged",is_correct:false},
+            {id:"d",text:"bragged",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word is spelled INCORRECTLY (missing doubled consonant)?", options: [
+            {id:"a",text:"stoped",is_correct:true},
+            {id:"b",text:"dropped",is_correct:false},
+            {id:"c",text:"hopped",is_correct:false},
+            {id:"d",text:"skipped",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/st opped/g, 'stopped'], [/dr opped/g, 'dropped'], [/sk ipped/g, 'skipped'], [/sp lashed/g, 'splashed']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 119*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -202,8 +364,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -211,6 +373,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -221,9 +441,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
