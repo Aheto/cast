@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 53 — Consonant Digraph sh (final position)"/>
+  <meta name="description" content="Mini OpenStax: Lesson 53 — Consonant Digraph sh"/>
   <title>Mini OpenStax — Lesson 53: Consonant Digraph sh</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
@@ -38,7 +38,7 @@
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 53: Consonant Digraph sh</h1>
-        <div class="lo-tags" id="lo-tags">LO PH53: Decode words with consonant digraph /sh/ in final position</div>
+        <div class="lo-tags" id="lo-tags">LO PH53: Decode words with consonant digraph /sh/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Consonant digraph <strong>sh</strong> words (final position):</p>
+        <p>Consonant digraph <strong>sh</strong> words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -90,17 +90,16 @@
         return array;
       }
 
-      // ✅ DO NOT CHANGE: chapter-52.html = Lesson 53 → currentChapter = 52
-      const currentChapter = 52;
+      const currentChapter = 52; // chapter-52.html = Lesson 53
       const maxChapter = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
         title: "Lesson 53: Consonant Digraph sh",
-        loTags: ["LO PH53: Decode words with consonant digraph /sh/ in final position"],
+        loTags: ["LO PH53: Decode words with consonant digraph /sh/"],
         contentWords: [
-          "ash", "cash", "dash", "bash", "gash", "hash", "lash", "mash", "smash", 
-          "rash", "sash", "brash", "crash", "trash", "clash", "flash", "slash", "splash"
+          "ash", "cash", "dash", "bash", "gash", "hash", "lash", "mash", "smash", "rash", "sash", "brash", "crash", "trash",
+          "clash", "flash", "slash", "splash"
         ],
         sentences: [
           "A van can crash in the fog.",
@@ -114,26 +113,26 @@
           "Did the lamp smash?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the /sh/ digraph?", options: [{id:"a",text:"crash",is_correct:true},{id:"b",text:"van",is_correct:false},{id:"c",text:"fog",is_correct:false},{id:"d",text:"can",is_correct:false}] },
-          { id: "2", prompt: "Which word means 'to strike forcefully'?", options: [{id:"a",text:"bash",is_correct:true},{id:"b",text:"dash",is_correct:false},{id:"c",text:"lash",is_correct:false},{id:"d",text:"rash",is_correct:false}] },
-          { id: "3", prompt: "How many letters in 'splash'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "4", prompt: "Which word refers to money?", options: [{id:"a",text:"cash",is_correct:true},{id:"b",text:"trash",is_correct:false},{id:"c",text:"sash",is_correct:false},{id:"d",text:"gash",is_correct:false}] },
+          { id: "1", prompt: "Which word begins with the /sh/ sound but is spelled with 'sh'?", options: [{id:"a",text:"cash",is_correct:true},{id:"b",text:"van",is_correct:false},{id:"c",text:"fog",is_correct:false},{id:"d",text:"pond",is_correct:false}] },
+          { id: "2", prompt: "Which word means 'to strike forcefully'?", options: [{id:"a",text:"bash",is_correct:true},{id:"b",text:"dash",is_correct:false},{id:"c",text:"lash",is_correct:false},{id:"d",text:"mash",is_correct:false}] },
+          { id: "3", prompt: "How many letters in 'smash'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "4", prompt: "Which word refers to a skin irritation with red spots?", options: [{id:"a",text:"rash",is_correct:true},{id:"b",text:"gash",is_correct:false},{id:"c",text:"trash",is_correct:false},{id:"d",text:"sash",is_correct:false}] },
           { id: "5", prompt: "Which sentence is from Lesson 53?", options: [{id:"a",text:"Tom can swim and splash in the pond.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He flew a kite.",is_correct:false},{id:"d",text:"They played soccer.",is_correct:false}] },
-          { id: "6", prompt: "Which word rhymes with 'flash'?", options: [{id:"a",text:"slash",is_correct:true},{id:"b",text:"crash",is_correct:true},{id:"c",text:"Both A and B",is_correct:true},{id:"d",text:"cash",is_correct:true}] },
+          { id: "6", prompt: "Which word rhymes with 'bash'?", options: [{id:"a",text:"cash",is_correct:true},{id:"b",text:"dash",is_correct:true},{id:"c",text:"smash",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
           { id: "7", prompt: "What syllable type is 'trash'?", options: [{id:"a",text:"Closed syllable",is_correct:true},{id:"b",text:"Open syllable",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel team",is_correct:false}] },
-          { id: "8", prompt: "In 'Did the lamp smash?', how many /sh/ words?", options: [{id:"a",text:"1 (smash)",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "9", prompt: "Which word might complete: 'He got a ___ on his arm.'?", options: [{id:"a",text:"gash",is_correct:true},{id:"b",text:"rash",is_correct:true},{id:"c",text:"Either A or B",is_correct:true},{id:"d",text:"cash",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'a skin irritation'?", options: [{id:"a",text:"rash",is_correct:true},{id:"b",text:"sash",is_correct:false},{id:"c",text:"brash",is_correct:false},{id:"d",text:"dash",is_correct:false}] },
-          { id: "11", prompt: "How many unique /sh/ words are in the word list?", options: [{id:"a",text:"18",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"20",is_correct:false},{id:"d",text:"12",is_correct:false}] },
-          { id: "12", prompt: "Which sentence includes the word 'brash'?", options: [{id:"a",text:"Did a brash rat dash past the trash?",is_correct:true},{id:"b",text:"A van can crash.",is_correct:false},{id:"c",text:"Peg got a rash.",is_correct:false},{id:"d",text:"Kent kept cash.",is_correct:false}] },
-          { id: "13", prompt: "Which word appears in both sentence 6 and sentence 7?", options: [{id:"a",text:"trash",is_correct:true},{id:"b",text:"dash",is_correct:false},{id:"c",text:"crash",is_correct:false},{id:"d",text:"None",is_correct:false}] },
-          { id: "14", prompt: "Which word might complete: 'She wore a red ___.'?", options: [{id:"a",text:"sash",is_correct:true},{id:"b",text:"ash",is_correct:false},{id:"c",text:"mash",is_correct:false},{id:"d",text:"lash",is_correct:false}] },
-          { id: "15", prompt: "What phonics feature is in 'clash'?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
-          { id: "16", prompt: "The sentence 'A van can crash in the fog' reviews which earlier concept?", options: [{id:"a",text:"Sight word 'can'",is_correct:true},{id:"b",text:"Short a (/ă/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
-          { id: "17", prompt: "Which word is NOT in the Lesson 53 word list?", options: [{id:"a",text:"dish",is_correct:true},{id:"b",text:"crash",is_correct:false},{id:"c",text:"splash",is_correct:false},{id:"d",text:"smash",is_correct:false}] },
-          { id: "18", prompt: "Which word refers to something broken violently?", options: [{id:"a",text:"smash",is_correct:true},{id:"b",text:"mash",is_correct:true},{id:"c",text:"Both A and B",is_correct:true},{id:"d",text:"trash",is_correct:false}] },
-          { id: "19", prompt: "Which word contains a blend + 'sh'?", options: [{id:"a",text:"splash",is_correct:true},{id:"b",text:"trash",is_correct:true},{id:"c",text:"All of the above",is_correct:true},{id:"d",text:"ash",is_correct:false}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 53?", options: [{id:"a",text:"Consonant digraph /sh/ in final position within closed syllables",is_correct:true},{id:"b",text:"Initial /sh/",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
+          { id: "8", prompt: "In 'Did Brad bash the lamp? Did the lamp smash?', how many /sh/ words?", options: [{id:"a",text:"2 (bash, smash)",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
+          { id: "9", prompt: "Which word might complete: 'He has enough ___ to buy a new game.'?", options: [{id:"a",text:"cash",is_correct:true},{id:"b",text:"rash",is_correct:false},{id:"c",text:"gash",is_correct:false},{id:"d",text:"sash",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'to scatter or spread liquid violently'?", options: [{id:"a",text:"splash",is_correct:true},{id:"b",text:"slash",is_correct:false},{id:"c",text:"clash",is_correct:false},{id:"d",text:"flash",is_correct:false}] },
+          { id: "11", prompt: "Which sentence includes the word 'gash'?", options: [{id:"a",text:"The man had a gash on the hand.",is_correct:true},{id:"b",text:"A van can crash.",is_correct:false},{id:"c",text:"Peg got a red rash.",is_correct:false},{id:"d",text:"Dan set the lid.",is_correct:false}] },
+          { id: "12", prompt: "How many unique /sh/ words are in the word list?", options: [{id:"a",text:"18",is_correct:true},{id:"b",text:"15",is_correct:false},{id:"c",text:"20",is_correct:false},{id:"d",text:"12",is_correct:false}] },
+          { id: "13", prompt: "Which word describes someone who is rude or impertinent?", options: [{id:"a",text:"brash",is_correct:true},{id:"b",text:"crash",is_correct:false},{id:"c",text:"trash",is_correct:false},{id:"d",text:"clash",is_correct:false}] },
+          { id: "14", prompt: "Which word appears in sentence 7 AND sentence 6?", options: [{id:"a",text:"trash",is_correct:true},{id:"b",text:"dash",is_correct:false},{id:"c",text:"rat",is_correct:false},{id:"d",text:"lid",is_correct:false}] },
+          { id: "15", prompt: "Which word might complete: 'The lightning caused a bright ___ in the sky.'?", options: [{id:"a",text:"flash",is_correct:true},{id:"b",text:"splash",is_correct:false},{id:"c",text:"smash",is_correct:false},{id:"d",text:"rash",is_correct:false}] },
+          { id: "16", prompt: "What phonics feature is in 'slash'?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllable",is_correct:true},{id:"b",text:"Vowel team",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowel",is_correct:false}] },
+          { id: "17", prompt: "The sentence 'A van can crash in the fog' reviews which earlier concept?", options: [{id:"a",text:"Sight word 'can' (from earlier lessons)",is_correct:true},{id:"b",text:"Short a (/ă/)",is_correct:true},{id:"c",text:"Long vowels",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] },
+          { id: "18", prompt: "Which word is NOT in the Lesson 53 word list?", options: [{id:"a",text:"pond",is_correct:true},{id:"b",text:"cash",is_correct:false},{id:"c",text:"smash",is_correct:false},{id:"d",text:"splash",is_correct:false}] },
+          { id: "19", prompt: "Which word combines /cl/ (Lesson 31) and /sh/?", options: [{id:"a",text:"clash",is_correct:true},{id:"b",text:"crash",is_correct:false},{id:"c",text:"brash",is_correct:false},{id:"d",text:"trash",is_correct:false}] },
+          { id: "20", prompt: "What phonics concept is taught in Lesson 53?", options: [{id:"a",text:"Consonant digraph /sh/ in closed syllables",is_correct:true},{id:"b",text:"Consonant blends",is_correct:false},{id:"c",text:"Vowel digraphs",is_correct:false},{id:"d",text:"Silent letters",is_correct:false}] }
         ]
       };
 
@@ -144,53 +143,30 @@
       }
 
       function renderSentences() {
+        // Combine last two sentences as in PDF
+        const sentences = [...CHAPTER_CONFIG.sentences.slice(0, 7)];
+        sentences.push(`${CHAPTER_CONFIG.sentences[7]} ${CHAPTER_CONFIG.sentences[8]}`);
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ 5-button unlimited navigation (Home + 4 lessons)
+      // ✅ NAVIGATION: 5 buttons — Home + Lesson 53 to 56
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
 
-        // Always include Home
-        buttons.push({ label: "Home", url: "../index.html", active: false });
-
-        // Because chapter-N.html = Lesson N+1, the current lesson number is currentChapter + 1
-        const currentLesson = currentChapter + 1; // e.g., 52 → Lesson 53
-        const totalLessons = maxChapter + 1;      // e.g., 261 → max lesson 262
-
-        const maxLessonButtons = 4;
-        let startLesson, endLesson;
-
-        if (totalLessons <= maxLessonButtons) {
-          startLesson = 1;
-          endLesson = totalLessons;
-        } else {
-          const half = Math.floor(maxLessonButtons / 2);
-          startLesson = Math.max(1, currentLesson - half);
-          endLesson = startLesson + maxLessonButtons - 1;
-          if (endLesson > totalLessons) {
-            endLesson = totalLessons;
-            startLesson = Math.max(1, endLesson - maxLessonButtons + 1);
-          }
-        }
-
-        // Generate links: Lesson X → chapter-(X-1).html
-        for (let lesson = startLesson; lesson <= endLesson; lesson++) {
-          if (lesson < 1) continue;
-          const chapterIndex = lesson - 1; // Lesson 53 → chapter-52.html
-          const isActive = (lesson === currentLesson);
-          // Skip non-existent chapters (e.g., chapter--1.html)
-          if (chapterIndex < 0) continue;
-          buttons.push({
-            label: `Lesson ${lesson}`,
-            url: `chapter-${chapterIndex}.html`,
-            active: isActive
+        for (let i = 0; i < 4; i++) {
+          const c = currentChapter + i; // c = 52,53,54,55
+          const lessonNum = c + 1;      // Lesson 53,54,55,56
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
 
-        nav.innerHTML = buttons.map(b =>
+        nav.innerHTML = buttons.map(b => 
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
       }
@@ -248,7 +224,7 @@
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered final /sh/ words!' :
+              mastery ? 'You’ve mastered the /sh/ digraph!' :
               score >= 10 ? 'Review missed items.' : 'Practice Lesson 53 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
