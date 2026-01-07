@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 82: ee Vowel Team Pattern"/>
-  <title>Mini OpenStax — Lesson 82: ee Vowel Team Pattern</title>
+  <meta name="description" content="Mini OpenStax: Lesson 82: The 'ee' Pattern"/>
+  <title>Mini OpenStax — Lesson 82: The 'ee' Pattern</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 82: ee Vowel Team</h1>
-        <div class="lo-tags" id="lo-tags">LO PH82: Decode words with the /ee/ vowel team</div>
+        <h1 id="chapter-title">Lesson 82: The 'ee' Pattern</h1>
+        <div class="lo-tags" id="lo-tags">LO PH82: Decode and read words with the 'ee' vowel team (/ē/ sound)</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Target words with the <strong>ee</strong> vowel team:</p>
+        <p>These words use <strong>'ee'</strong> to make the long /ē/ sound:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -82,62 +82,118 @@
       'use strict';
       window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 81; // chapter-81.html = Lesson 82
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 81;
+      const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 82: ee Vowel Team",
-        loTags: ["LO PH82: Decode words with the /ee/ vowel team"],
-        contentWords: [
-          "see", "seed", "seek", "seem", "seen", "seep", "sheep", "sheet",
-          "sheen", "sheer", "sneer", "sleep", "sleet", "sleek", "eel", "steel",
-          "steep", "steer", "steed", "street", "speed", "speech", "spree",
-          "screen", "screech", "sweep", "sweet"
-        ],
+        title: "Lesson 82: The 'ee' Pattern",
+        loTags: ["LO PH82: Decode and read words with the 'ee' vowel team (/ē/ sound)"],
+        contentWords: ["see", "sheep", "steep", "sleep", "deep", "keep", "peep", "weep", "beep", "cheep"],
         sentences: [
-          "1) The plum was fresh and sweet.",
-          "2) The ranch had a flock of sheep.",
-          "3) Jack will plant a seed in the pot.",
-          "4) Did the speech seem long and dull?",
-          "5) Bess will sleep on a bunk bed at camp.",
-          "6) Bess had a quilt and a sheet on the bed.",
-          "7) Mitch can steer the truck up the street.",
-          "8) Mitch must not speed in the truck.",
-          "9) Scott must sweep up the mess he left on the rug.",
-          "10) Rick had a sleek steel sled. The sled can speed on a steep hill."
+          "The sheep sleep in the deep pen.",
+          "Do not wake the sheep!",
+          "The hill is too steep to climb.",
+          "Lee sees three sheep.",
+          "We keep sheep on our farm.",
+          "The baby birds cheep for food.",
+          "I hear a beep from the truck.",
+          "Do not weep, Lee.",
+          "Peep! Peep! The chicks call.",
+          "See the steep hill!"
         ],
         assessmentItems: [
-          { id: "1", prompt: "What word describes the plum in sentence 1?", options: [{id:"a",text:"sweet",is_correct:true},{id:"b",text:"steep",is_correct:false},{id:"c",text:"sleek",is_correct:false},{id:"d",text:"sheet",is_correct:false}]},
-          { id: "2", prompt: "What did the ranch have a flock of?", options: [{id:"a",text:"sheep",is_correct:true},{id:"b",text:"steeds",is_correct:false},{id:"c",text:"eels",is_correct:false},{id:"d",text:"seeds",is_correct:false}]},
-          { id: "3", prompt: "Where will Jack plant a seed?", options: [{id:"a",text:"in the pot",is_correct:true},{id:"b",text:"on the street",is_correct:false},{id:"c",text:"on the rug",is_correct:false},{id:"d",text:"in the truck",is_correct:false}]},
-          { id: "4", prompt: "What did Bess have on her bed besides a quilt?", options: [{id:"a",text:"a sheet",is_correct:true},{id:"b",text:"a screen",is_correct:false},{id:"c",text:"a seed",is_correct:false},{id:"d",text:"a plum",is_correct:false}]},
-          { id: "5", prompt: "What must Mitch NOT do in the truck?", options: [{id:"a",text:"speed",is_correct:true},{id:"b",text:"steer",is_correct:false},{id:"c",text:"sweep",is_correct:false},{id:"d",text:"sleep",is_correct:false}]},
-          { id: "6", prompt: "What kind of sled did Rick have?", options: [{id:"a",text:"sleek steel sled",is_correct:true},{id:"b",text:"steep sweet sled",is_correct:false},{id:"c",text:"green sheet sled",is_correct:false},{id:"d",text:"slow wood sled",is_correct:false}]},
-          { id: "7", prompt: "What must Scott sweep up?", options: [{id:"a",text:"the mess",is_correct:true},{id:"b",text:"the seeds",is_correct:false},{id:"c",text:"the quilt",is_correct:false},{id:"d",text:"the sheep",is_correct:false}]},
-          { id: "8", prompt: "Where can Rick's sled speed?", options: [{id:"a",text:"on a steep hill",is_correct:true},{id:"b",text:"up the street",is_correct:false},{id:"c",text:"on the rug",is_correct:false},{id:"d",text:"in the pot",is_correct:false}]},
-          { id: "9", prompt: "Which word means to look for something?", options: [{id:"a",text:"seek",is_correct:true},{id:"b",text:"seep",is_correct:false},{id:"c",text:"seem",is_correct:false},{id:"d",text:"seen",is_correct:false}]},
-          { id: "10", prompt: "Which word means a long-snouted fish-like animal?", options: [{id:"a",text:"eel",is_correct:true},{id:"b",text:"steed",is_correct:false},{id:"c",text:"sheen",is_correct:false},{id:"d",text:"sleet",is_correct:false}]},
-          { id: "11", prompt: "To guide a vehicle is to ____ it.", options: [{id:"a",text:"steer",is_correct:true},{id:"b",text:"sneer",is_correct:false},{id:"c",text:"sweep",is_correct:false},{id:"d",text:"sleep",is_correct:false}]},
-          { id: "12", prompt: "Frozen rain is called ____.", options: [{id:"a",text:"sleet",is_correct:true},{id:"b",text:"sheet",is_correct:false},{id:"c",text:"steel",is_correct:false},{id:"d",text:"steep",is_correct:false}]},
-          { id: "13", prompt: "A loud, high cry is a ____.", options: [{id:"a",text:"screech",is_correct:true},{id:"b",text:"speech",is_correct:false},{id:"c",text:"spree",is_correct:false},{id:"d",text:"screen",is_correct:false}]},
-          { id: "14", prompt: "Which word is a synonym for a horse?", options: [{id:"a",text:"steed",is_correct:true},{id:"b",text:"steel",is_correct:false},{id:"c",text:"sheer",is_correct:false},{id:"d",text:"seen",is_correct:false}]},
-          { id: "15", prompt: "What is a talk given to an audience?", options: [{id:"a",text:"speech",is_correct:true},{id:"b",text:"spree",is_correct:false},{id:"c",text:"screech",is_correct:false},{id:"d",text:"street",is_correct:false}]},
-          { id: "16", prompt: "Liquid that leaks slowly through a crack is said to ____.", options: [{id:"a",text:"seep",is_correct:true},{id:"b",text:"sweep",is_correct:false},{id:"c",text:"seek",is_correct:false},{id:"d",text:"seen",is_correct:false}]},
-          { id: "17", prompt: "A surface that is very shiny has a ____.", options: [{id:"a",text:"sheen",is_correct:true},{id:"b",text:"sheet",is_correct:false},{id:"c",text:"sheer",is_correct:false},{id:"d",text:"seed",is_correct:false}]},
-          { id: "18", prompt: "To look with a mocking or hateful smile is to ____.", options: [{id:"a",text:"sneer",is_correct:true},{id:"b",text:"steer",is_correct:false},{id:"c",text:"seem",is_correct:false},{id:"d",text:"see",is_correct:false}]},
-          { id: "19", prompt: "Complete the sentence: 'Did the speech ___ long?'", options: [{id:"a",text:"seem",is_correct:true},{id:"b",text:"seen",is_correct:false},{id:"c",text:"seed",is_correct:false},{id:"d",text:"seek",is_correct:false}]},
-          { id: "20", prompt: "What material was Rick's sled made of?", options: [{id:"a",text:"steel",is_correct:true},{id:"b",text:"sheet",is_correct:false},{id:"c",text:"pot",is_correct:false},{id:"d",text:"plum",is_correct:false}]}
+          { id: "1", prompt: "What sound does 'ee' make in 'sheep'?", options: [
+            {id:"a",text:"/æ/",is_correct:false},{id:"b",text:"/e/",is_correct:false},{id:"c",text:"/ē/",is_correct:true},{id:"d",text:"/i/",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word is spelled correctly?", options: [
+            {id:"a",text:"sheap",is_correct:false},{id:"b",text:"sheep",is_correct:true},{id:"c",text:"shiep",is_correct:false},{id:"d",text:"shyp",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'to rest with eyes closed'?", options: [
+            {id:"a",text:"steep",is_correct:false},{id:"b",text:"sleep",is_correct:true},{id:"c",text:"peep",is_correct:false},{id:"d",text:"weep",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word rhymes with 'deep'?", options: [
+            {id:"a",text:"dip",is_correct:false},{id:"b",text:"keep",is_correct:true},{id:"c",text:"dop",is_correct:false},{id:"d",text:"tap",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses 'steep' correctly?", options: [
+            {id:"a",text:"The soup is steep.",is_correct:false},{id:"b",text:"The hill is steep.",is_correct:true},{id:"c",text:"He steeped his tea.",is_correct:false},{id:"d",text:"She steeped on the grass.",is_correct:false}
+          ]},
+          { id: "6", prompt: "What does 'weep' mean?", options: [
+            {id:"a",text:"To laugh",is_correct:false},{id:"b",text:"To cry",is_correct:true},{id:"c",text:"To sleep",is_correct:false},{id:"d",text:"To jump",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word is a sound made by a bird?", options: [
+            {id:"a",text:"beep",is_correct:false},{id:"b",text:"cheep",is_correct:true},{id:"c",text:"peep",is_correct:false},{id:"d",text:"all of the above",is_correct:true}
+          ]},
+          { id: "8", prompt: "How many 'ee' words are in: 'See the sheep sleep.'?", options: [
+            {id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:true},{id:"d",text:"0",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"leap",is_correct:true},{id:"b",text:"keep",is_correct:false},{id:"c",text:"weep",is_correct:false},{id:"d",text:"peep",is_correct:false}
+          ]},
+          { id: "10", prompt: "Choose the correct spelling:", options: [
+            {id:"a",text:"slep",is_correct:false},{id:"b",text:"sleap",is_correct:false},{id:"c",text:"sleep",is_correct:true},{id:"d",text:"slepe",is_correct:false}
+          ]},
+          { id: "11", prompt: "What part of speech is 'deep' in 'a deep well'?", options: [
+            {id:"a",text:"verb",is_correct:false},{id:"b",text:"adjective",is_correct:true},{id:"c",text:"noun",is_correct:false},{id:"d",text:"adverb",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word has the same vowel sound as 'see'?", options: [
+            {id:"a",text:"sit",is_correct:false},{id:"b",text:"sea",is_correct:true},{id:"c",text:"sad",is_correct:false},{id:"d",text:"sat",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which sentence has a typo?", options: [
+            {id:"a",text:"The sheep sleep.",is_correct:false},{id:"b",text:"Lee sees sheep.",is_correct:false},{id:"c",text:"Do not wep, Lee.",is_correct:true},{id:"d",text:"Peep! Peep!",is_correct:false}
+          ]},
+          { id: "14", prompt: "How many syllables in 'sheep'?", options: [
+            {id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which 'ee' word means 'to make a short high sound'?", options: [
+            {id:"a",text:"beep",is_correct:false},{id:"b",text:"peep",is_correct:false},{id:"c",text:"cheep",is_correct:false},{id:"d",text:"all of the above",is_correct:true}
+          ]},
+          { id: "16", prompt: "What is the opposite of 'shallow'?", options: [
+            {id:"a",text:"wide",is_correct:false},{id:"b",text:"narrow",is_correct:false},{id:"c",text:"deep",is_correct:true},{id:"d",text:"flat",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word is a homophone of 'sea'?", options: [
+            {id:"a",text:"see",is_correct:true},{id:"b",text:"she",is_correct:false},{id:"c",text:"bee",is_correct:false},{id:"d",text:"tea",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word completes: 'Don’t ___ the baby bird.'?", options: [
+            {id:"a",text:"keep",is_correct:false},{id:"b",text:"peep",is_correct:true},{id:"c",text:"weep",is_correct:false},{id:"d",text:"beep",is_correct:false}
+          ]},
+          { id: "19", prompt: "In 'steep hill,' what kind of syllable is 'steep'?", options: [
+            {id:"a",text:"Closed",is_correct:false},{id:"b",text:"Open",is_correct:false},{id:"c",text:"Vowel team",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which sentence uses three 'ee' words correctly?", options: [
+            {id:"a",text:"See the sheep sleep.",is_correct:true},{id:"b",text:"Keep the deep beep.",is_correct:false},{id:"c",text:"Weep and cheep.",is_correct:false},{id:"d",text:"Peep the steep.",is_correct:false}
+          ]}
         ]
       };
+
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/slep/g, 'sleep'], [/shiep/g, 'sheep'], [/wep/g, 'weep']
+      ];
 
       function renderWords() {
         document.getElementById('word-list').innerHTML =
@@ -145,8 +201,15 @@
       }
 
       function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
@@ -155,23 +218,34 @@
         for (let i = 0; i < 4; i++) {
           const c = currentChapter + i;
           const lessonNum = c + 1;
-          if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${lessonNum}`, url: `chapter-${c}.html`, active: i === 0 });
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
         }
-        nav.innerHTML = buttons.map(b => `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const opts = shuffle([...q.options]);
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
           const correct = q.options.find(o => o.is_correct);
           window.quizCorrectMap[q.id] = correct.id;
-          const optHtml = opts.map((o, i) => {
-            const L = String.fromCharCode(65 + i);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
+
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
@@ -179,11 +253,13 @@
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
+
         items.forEach((item, i) => {
           const ans = answers[i];
           const correctId = window.quizCorrectMap[item.id];
           const correctOpt = item.options.find(o => o.id === correctId);
-          if (ans === correctId) {
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
             correctCount++;
             correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
@@ -191,27 +267,34 @@
           }
         });
 
-        const score = correctCount, mastery = score >= 15;
+        const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
-        const attemptsKey = `quiz_attempts_${currentChapter}`;
-        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
-        localStorage.setItem(attemptsKey, attempts);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
 
-        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/20 (${Math.round(score/20*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
-        if (correctList.length) report += `✅ CORRECT:\n${correctList.join('\n')}\n\n`;
-        if (incorrectList.length) report += `❌ INCORRECT:\n${incorrectList.join('\n')}\n\n`;
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}/20</h3>
-            <p><strong>${mastery ? '🎉 Excellent!' : 'Keep practicing.'}</strong></p>
-            <p>Time: ${timeOnTask}s | Attempts: ${attempts}</p>
-            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report via WhatsApp</a>
-          </div>`;
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the 'ee' pattern!' :
+              score >= 10 ? 'Review words like “cheep” vs “peep.”' : 'Practice 'ee' words daily—try spelling them aloud.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
       }
 
       function setupQuizListeners() {
@@ -222,7 +305,10 @@
             const el = form.querySelector(`input[name="q${i}"]:checked`);
             answers.push(el ? el.value : null);
           }
-          if (answers.includes(null)) { alert("Please answer all questions."); return; }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
           showFeedback(answers);
         });
       }
@@ -235,30 +321,72 @@
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
 
-        promptDiv.style.display = 'block';
         if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
           display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
-          buttons.innerHTML = `<button type="button" class="btn" id="keep-btn">✅ Keep This Name</button> <button type="button" class="btn btn-secondary" id="change-btn">✏️ Change</button>`;
-          document.getElementById('keep-btn').onclick = () => { promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; };
-          document.getElementById('change-btn').onclick = () => { display.style.display = 'none'; input.style.display = 'block'; input.value = ''; input.focus(); buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save & Start</button>`; document.getElementById('save-new').onclick = saveName; };
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
         } else {
-          display.style.display = 'none'; input.style.display = 'block'; buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save & Start</button>`; document.getElementById('save-first').onclick = saveName;
-        }
-
-        function saveName() {
-          const name = input.value.trim();
-          if (name) { localStorage.setItem('student_name', name); promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; }
-          else { alert("Please enter your name."); }
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
         }
       }
 
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-        renderNavigation(); renderWords(); renderSentences(); renderQuiz(); setupQuizListeners(); initNamePrompt();
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
