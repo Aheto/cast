@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 61 — Consonant Digraph 'wh'"/>
+  <meta name="description" content="Mini OpenStax: Lesson 61: Consonant Digraph wh"/>
   <title>Mini OpenStax — Lesson 61: Consonant Digraph wh</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
@@ -23,11 +23,14 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
@@ -35,28 +38,35 @@
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 61: Consonant Digraph wh</h1>
-        <div class="lo-tags" id="lo-tags">LO PH61: Decode words with the consonant digraph 'wh' in closed syllables</div>
+        <div class="lo-tags" id="lo-tags">LO PH61: Decode words with consonant digraph /wh/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words containing the consonant digraph <strong>wh</strong> in closed syllables:</p>
+        <p>Practice reading words with the consonant digraph <strong>wh</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–61:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -70,13 +80,23 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 60;    // chapter-60.html = Lesson 61
-      const maxChapter = 130;       // Update when adding more lessons
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 60; // chapter-60.html = Lesson 61
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
         title: "Lesson 61: Consonant Digraph wh",
-        loTags: ["LO PH61: Decode words with the consonant digraph 'wh' in closed syllables"],
+        loTags: ["LO PH61: Decode words with consonant digraph /wh/"],
         contentWords: [
           "when", "whet", "wham", "whip", "whim", "whiz", "which", "whisk"
         ],
@@ -88,120 +108,228 @@
           "When Chet was at bat, Chet got a hit.",
           "On a whim, Jim let the pup get a scrap of ham.",
           "Peg can whisk the dust from the desk with a cloth.",
-          "Bud had a frog and Ted had a frog. Which frog can jump the best?"
+          "Bud had a frog and Ted had a frog.\nWhich frog can jump the best?"
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the digraph 'wh'?", options: [{id:"a",text:"whip",is_correct:true},{id:"b",text:"ship",is_correct:false},{id:"c",text:"chip",is_correct:false},{id:"d",text:"trip",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 61 word?", options: [{id:"a",text:"which",is_correct:false},{id:"b",text:"whisk",is_correct:false},{id:"c",text:"what",is_correct:true},{id:"d",text:"whim",is_correct:false}] },
-          { id: "3", prompt: "What digraph starts 'whiz'?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"wh",is_correct:true},{id:"d",text:"ch",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to move very fast'?", options: [{id:"a",text:"whiz",is_correct:true},{id:"b",text:"whip",is_correct:false},{id:"c",text:"wham",is_correct:false},{id:"d",text:"whisk",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'whisk'?", options: [{id:"a",text:"4",is_correct:false},{id:"b",text:"5",is_correct:true},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 61 words?", options: [{id:"a",text:"Ben can snap a whip.",is_correct:true},{id:"b",text:"Ben can drive a car.",is_correct:false},{id:"c",text:"Ben sat on a mat.",is_correct:false},{id:"d",text:"Ben ran to a map.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a sudden idea or desire?", options: [{id:"a",text:"whim",is_correct:true},{id:"b",text:"whet",is_correct:false},{id:"c",text:"wham",is_correct:false},{id:"d",text:"which",is_correct:false}] },
-          { id: "8", prompt: "What closes the vowel in 'whip'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 'p'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
-          { id: "9", prompt: "In 'When Chet was at bat', how many Lesson 61 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to beat or stir quickly'?", options: [{id:"a",text:"whisk",is_correct:true},{id:"b",text:"whip",is_correct:false},{id:"c",text:"whiz",is_correct:false},{id:"d",text:"wham",is_correct:false}] },
-          { id: "11", prompt: "Which word is an exclamation for a loud impact?", options: [{id:"a",text:"wham",is_correct:true},{id:"b",text:"whip",is_correct:false},{id:"c",text:"whet",is_correct:false},{id:"d",text:"whim",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with /p/ and means 'a flexible strip for striking'?", options: [{id:"a",text:"whip",is_correct:true},{id:"b",text:"whiz",is_correct:false},{id:"c",text:"which",is_correct:false},{id:"d",text:"whisk",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 61?", options: [{id:"a",text:"On a whim, Jim let the pup get a scrap of ham.",is_correct:true},{id:"b",text:"Jim sat on a mat.",is_correct:false},{id:"c",text:"Jim ran to a map.",is_correct:false},{id:"d",text:"Jim had a car.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'which'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:true},{id:"d",text:"0",is_correct:false}] },
-          { id: "15", prompt: "Which word is NOT a verb?", options: [{id:"a",text:"when",is_correct:true},{id:"b",text:"whip",is_correct:false},{id:"c",text:"whisk",is_correct:false},{id:"d",text:"whiz",is_correct:false}] },
-          { id: "16", prompt: "What syllable type is 'whet'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "17", prompt: "Which word describes someone exceptionally skilled in a subject?", options: [{id:"a",text:"whiz",is_correct:true},{id:"b",text:"whim",is_correct:false},{id:"c",text:"wham",is_correct:false},{id:"d",text:"whip",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Peg can ___ the dust'?", options: [{id:"a",text:"whisk",is_correct:true},{id:"b",text:"whip",is_correct:false},{id:"c",text:"whiz",is_correct:false},{id:"d",text:"wham",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both questions: '___ frog can jump...?' and '___ Chet was at bat...?'", options: [{id:"a",text:"Which",is_correct:true},{id:"b",text:"When",is_correct:false},{id:"c",text:"Whiz",is_correct:false},{id:"d",text:"Whisk",is_correct:false}] },
-          { id: "20", prompt: "What consonant digraph is taught in Lesson 61?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"wh",is_correct:true},{id:"d",text:"ch",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'to move very fast'?", options: [
+            {id:"a",text:"wham",is_correct:false},
+            {id:"b",text:"whiz",is_correct:true},
+            {id:"c",text:"whet",is_correct:false},
+            {id:"d",text:"whisk",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'whip' mean in sentence 1?", options: [
+            {id:"a",text:"To defeat easily",is_correct:false},
+            {id:"b",text:"A flexible tool for striking",is_correct:true},
+            {id:"c",text:"To stir quickly",is_correct:false},
+            {id:"d",text:"A type of candy",is_correct:false}
+          ]},
+          { id: "3", prompt: "If someone acts 'on a whim,' they are acting...", options: [
+            {id:"a",text:"After careful planning",is_correct:false},
+            {id:"b",text:"On a sudden impulse",is_correct:true},
+            {id:"c",text:"With great caution",is_correct:false},
+            {id:"d",text:"In a group",is_correct:false}
+          ]},
+          { id: "4", prompt: "What does 'whisk' mean in sentence 7?", options: [
+            {id:"a",text:"To sweep or brush away quickly",is_correct:true},
+            {id:"b",text:"To cook slowly",is_correct:false},
+            {id:"c",text:"To shout loudly",is_correct:false},
+            {id:"d",text:"To freeze something",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses 'whiz' as a noun?", options: [
+            {id:"a",text:"The cab can whiz past the bus.",is_correct:false},
+            {id:"b",text:"Beth was a whiz at math.",is_correct:true},
+            {id:"c",text:"Clem can whip up lunch.",is_correct:false},
+            {id:"d",text:"Ben can snap a whip.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word is used to ask a question about choice?", options: [
+            {id:"a",text:"when",is_correct:false},
+            {id:"b",text:"which",is_correct:true},
+            {id:"c",text:"whim",is_correct:false},
+            {id:"d",text:"whet",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'whet' mean (though not used in sentences)?", options: [
+            {id:"a",text:"To sharpen or stimulate",is_correct:true},
+            {id:"b",text:"To throw away",is_correct:false},
+            {id:"c",text:"To whisper",is_correct:false},
+            {id:"d",text:"To whistle",is_correct:false}
+          ]},
+          { id: "8", prompt: "In sentence 5, what sport is Chet playing?", options: [
+            {id:"a",text:"Soccer",is_correct:false},
+            {id:"b",text:"Basketball",is_correct:false},
+            {id:"c",text:"Baseball",is_correct:true},
+            {id:"d",text:"Tennis",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which 'wh' word expresses a sudden loud sound (like an impact)?", options: [
+            {id:"a",text:"wham",is_correct:true},
+            {id:"b",text:"whiz",is_correct:false},
+            {id:"c",text:"whisk",is_correct:false},
+            {id:"d",text:"whip",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which sentence contains a compound sentence with two independent clauses?", options: [
+            {id:"a",text:"Ben can snap a whip.",is_correct:false},
+            {id:"b",text:"When Chet was at bat...",is_correct:false},
+            {id:"c",text:"Bud had a frog and Ted had a frog. Which frog can jump the best?",is_correct:true},
+            {id:"d",text:"On a whim, Jim let the pup...",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word is NOT in the Lesson 61 word list?", options: [
+            {id:"a",text:"wham",is_correct:false},
+            {id:"b",text:"whisk",is_correct:false},
+            {id:"c",text:"whiff",is_correct:true},
+            {id:"d",text:"whiz",is_correct:false}
+          ]},
+          { id: "12", prompt: "What is the /wh/ sound like in most American accents?", options: [
+            {id:"a",text:"/w/ as in 'water'",is_correct:true},
+            {id:"b",text:"/h/ as in 'hat'",is_correct:false},
+            {id:"c",text:"/f/ as in 'fish'",is_correct:false},
+            {id:"d",text:"Silent",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which sentence uses 'whip' as a verb meaning 'to prepare quickly'?", options: [
+            {id:"a",text:"Ben can snap a whip.",is_correct:false},
+            {id:"b",text:"Clem can whip up a hot lunch.",is_correct:true},
+            {id:"c",text:"Peg can whisk the dust.",is_correct:false},
+            {id:"d",text:"The cab can whiz past.",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which character appears in multiple past lessons?", options: [
+            {id:"a",text:"Ben",is_correct:false},
+            {id:"b",text:"Chet",is_correct:true},
+            {id:"c",text:"Peg",is_correct:false},
+            {id:"d",text:"Jim",is_correct:false}
+          ]},
+          { id: "15", prompt: "What does 'when' function as in sentence 5?", options: [
+            {id:"a",text:"A noun",is_correct:false},
+            {id:"b",text:"An adjective",is_correct:false},
+            {id:"c",text:"A subordinating conjunction",is_correct:true},
+            {id:"d",text:"An interjection",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which 'wh' word is often used before adjectives like 'best' or 'biggest'?", options: [
+            {id:"a",text:"whim",is_correct:false},
+            {id:"b",text:"which",is_correct:true},
+            {id:"c",text:"whet",is_correct:false},
+            {id:"d",text:"wham",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word could describe a genius student?", options: [
+            {id:"a",text:"whiz",is_correct:true},
+            {id:"b",text:"whim",is_correct:false},
+            {id:"c",text:"whet",is_correct:false},
+            {id:"d",text:"wham",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which sentence uses a food-related context?", options: [
+            {id:"a",text:"Ben can snap a whip.",is_correct:false},
+            {id:"b",text:"Clem can whip up a hot lunch.",is_correct:true},
+            {id:"c",text:"The cab can whiz past.",is_correct:false},
+            {id:"d",text:"Bud had a frog.",is_correct:false}
+          ]},
+          { id: "19", prompt: "How many 'wh' words appear in the 8 sentences?", options: [
+            {id:"a",text:"6",is_correct:true},
+            {id:"b",text:"7",is_correct:false},
+            {id:"c",text:"8",is_correct:false},
+            {id:"d",text:"5",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which phrase uses a 'wh' word correctly in everyday English?", options: [
+            {id:"a",text:"She is a math whiz.",is_correct:true},
+            {id:"b",text:"He gave a loud whim.",is_correct:false},
+            {id:"c",text:"They whet the crowd.",is_correct:false},
+            {id:"d",text:"The car made a soft wham.",is_correct:false}
+          ]}
         ]
       };
 
-      // Render word list
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        let sentences = CHAPTER_CONFIG.sentences.map(s => 
+          s.replace(/f resh/g, 'fresh')
+           .replace(/p unch/g, 'punch')
+           .replace(/slep t/g, 'slept')
+           .replace(/crep t/g, 'crept')
+           .replace(/p lant/g, 'plant')
+           // No typos in this PDF, but keep pipeline ready
+        );
+        document.getElementById('sentences').innerHTML =
+          sentences.map(s => `<p>${s.replace(/\n/g, '<br>')}</p>`).join('');
       }
 
-      // ✅ UNLIMITED NAVIGATION
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b => 
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
-      // WhatsApp feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 61*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the "wh" digraph!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 61 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -211,8 +339,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -220,6 +348,56 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = saveName;
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) {
+            localStorage.setItem('student_name', name);
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          } else {
+            alert("Please enter your name.");
+            input.focus();
+          }
+        }
       }
 
       function init() {
@@ -230,6 +408,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
