@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 84: Vowel Team ee (Practice)"/>
-  <title>Mini OpenStax — Lesson 84: Vowel Team ee (Practice)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 84: Vowel Team 'ee'"/>
+  <title>Mini OpenStax — Lesson 84: Vowel Team 'ee'</title>
   <style>
-    /* CSS Same as Chapter 81 */
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
     .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
     .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
-    .chapter-btn { padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
     .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
     .section { margin-bottom: 1.5rem; }
     .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
@@ -22,7 +23,10 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
     .btn-secondary { background: #6c757d; }
     .btn-secondary:hover { background: #5a6268; }
@@ -33,46 +37,59 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 84: Vowel Team ee (Practice)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH84: Decode and use words with the /ee/ pattern</div>
+        <h1 id="chapter-title">Lesson 84: Vowel Team 'ee'</h1>
+        <div class="lo-tags" id="lo-tags">LO PH84: Decode words with the /ē/ sound spelled 'ee'</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
+
     <nav class="chapter-nav" id="chapter-nav"></nav>
+
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Practice reading words with <strong>ee</strong>:</p>
+        <p>Practice reading these words containing the "ee" vowel team:</p>
         <div class="word-list" id="word-list"></div>
       </div>
+
       <div class="section">
         <h2>📖 Practice Sentences</h2>
         <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
+
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
-        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30" style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
         <div id="name-buttons"></div>
       </div>
+
       <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
+
       <div id="feedback"></div>
     </main>
   </div>
+
   <script>
     (function () {
       'use strict';
       window.startTime = Date.now();
+
       function createSeededRNG(seed) {
         let state = Math.abs((seed * 9301 + 49297) % 233280);
-        return () => { state = (state * 9301 + 49297) % 233280; return state / 233280; };
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
+
       function shuffleWithSeed(array, seed) {
         const rng = createSeededRNG(seed);
         const arr = [...array];
@@ -82,98 +99,165 @@
         }
         return arr;
       }
-      const currentChapter = 83;
+
+      const currentChapter = 83; 
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
+
       const CHAPTER_CONFIG = {
-        title: "Lesson 84: Vowel Team ee (Practice)",
-        loTags: ["LO PH84: Decode and use words with the /ee/ pattern"],
-        contentWords: ["fee", "feed", "feel", "feet", "flee", "fleet", "free", "glee", "meek", "meet", "green", "greet", "greed", "Greek", "heel", "heed", "need", "keep", "keen", "keel", "Jeep", "jeer", "Lee", "leek", "leer", "leech"],
+        title: "Lesson 84: Vowel Team 'ee'",
+        loTags: ["LO PH84: Decode words with the /ē/ sound spelled 'ee'"],
+        contentWords: [
+          "fee", "feed", "feel", "feet", "flee", "fleet", "free", "glee", 
+          "meek", "meet", "green", "greet", "greed", "Greek", "heel", 
+          "heed", "need", "keep", "keen", "keel", "Jeep", "jeer", "Lee", 
+          "leek", "leer", "leech"
+        ],
         sentences: [
-          "1) The Jeep went up the steep hill.",
-          "2) Fred will greet Tom and let him in.",
-          "3) Beth will meet Chuck at the bus stop.",
-          "4) The man in the cab will need to get a fee.",
-          "5) If you keep still, the deer will not flee.",
-          "6) A ship from the Greek fleet sat at the dock.",
-          "7) Lee had a keen wit and did well on the test.",
-          "8) Ann sat on the bank and got her feet wet in the creek.",
-          "9) Did Rex feel bad? Did Mom feed him and keep him in bed?"
+          "The Jeep went up the steep hill.",
+          "Fred will greet Tom and let him in.",
+          "Beth will meet Chuck at the bus stop.",
+          "The man in the cab will need to get a fee.",
+          "If you keep still, the deer will not flee.",
+          "A ship from the Greek fleet sat at the dock.",
+          "Lee had a keen wit and did well on the test.",
+          "Ann sat on the bank and got her feet wet in the creek.",
+          "Did Rex feel bad? Did Mom feed him and keep him in bed?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "What went up the steep hill?", options: [{id:"a",text:"the Jeep",is_correct:true},{id:"b",text:"a ship",is_correct:false},{id:"c",text:"a deer",is_correct:false},{id:"d",text:"a cab",is_correct:false}]},
-          { id: "2", prompt: "Who will Beth meet at the bus stop?", options: [{id:"a",text:"Chuck",is_correct:true},{id:"b",text:"Tom",is_correct:false},{id:"c",text:"Lee",is_correct:false},{id:"d",text:"Fred",is_correct:false}]},
-          { id: "3", prompt: "What does the man in the cab need to get?", options: [{id:"a",text:"a fee",is_correct:true},{id:"b",text:"a feed",is_correct:false},{id:"c",text:"a feet",is_correct:false},{id:"d",text:"a fleet",is_correct:false}]},
-          { id: "4", prompt: "If you keep still, what will the deer NOT do?", options: [{id:"a",text:"flee",is_correct:true},{id:"b",text:"greet",is_correct:false},{id:"c",text:"feed",is_correct:false},{id:"d",text:"jeer",is_correct:false}]},
-          { id: "5", prompt: "Where did the ship from the Greek fleet sit?", options: [{id:"a",text:"at the dock",is_correct:true},{id:"b",text:"in the creek",is_correct:false},{id:"c",text:"on the bank",is_correct:false},{id:"d",text:"on the hill",is_correct:false}]},
-          { id: "6", prompt: "What did Lee have that helped him do well on the test?", options: [{id:"a",text:"a keen wit",is_correct:true},{id:"b",text:"a Greek ship",is_correct:false},{id:"c",text:"a Jeep",is_correct:false},{id:"d",text:"a fee",is_correct:false}]},
-          { id: "7", prompt: "Where did Ann get her feet wet?", options: [{id:"a",text:"in the creek",is_correct:true},{id:"b",text:"at the bus stop",is_correct:false},{id:"c",text:"at the dock",is_correct:false},{id:"d",text:"in the Jeep",is_correct:false}]},
-          { id: "8", prompt: "What did Mom do for Rex when he felt bad?", options: [{id:"a",text:"fed him and kept him in bed",is_correct:true},{id:"b",text:"let him go to the creek",is_correct:false},{id:"c",text:"took him in the Jeep",is_correct:false},{id:"d",text:"gave him a fee",is_correct:false}]},
-          { id: "9", prompt: "Which word means to run away from danger?", options: [{id:"a",text:"flee",is_correct:true},{id:"b",text:"fleet",is_correct:false},{id:"c",text:"fee",is_correct:false},{id:"d",text:"free",is_correct:false}]},
-          { id: "10", prompt: "Which word describes the color of grass?", options: [{id:"a",text:"green",is_correct:true},{id:"b",text:"greet",is_correct:false},{id:"c",text:"greed",is_correct:false},{id:"d",text:"glee",is_correct:false}]},
-          { id: "11", prompt: "Which word means a payment for a service?", options: [{id:"a",text:"fee",is_correct:true},{id:"b",text:"feed",is_correct:false},{id:"c",text:"feet",is_correct:false},{id:"d",text:"feel",is_correct:false}]},
-          { id: "12", prompt: "Which word means a group of ships?", options: [{id:"a",text:"fleet",is_correct:true},{id:"b",text:"flee",is_correct:false},{id:"c",text:"feet",is_correct:false},{id:"d",text:"feel",is_correct:false}]},
-          { id: "13", prompt: "Which word means quiet and gentle?", options: [{id:"a",text:"meek",is_correct:true},{id:"b",text:"meet",is_correct:false},{id:"c",text:"keen",is_correct:false},{id:"d",text:"keep",is_correct:false}]},
-          { id: "14", prompt: "Which word means to pay attention or listen?", options: [{id:"a",text:"heed",is_correct:true},{id:"b",text:"heel",is_correct:false},{id:"c",text:"need",is_correct:false},{id:"d",text:"meet",is_correct:false}]},
-          { id: "15", prompt: "Which word is a blood-sucking worm?", options: [{id:"a",text:"leech",is_correct:true},{id:"b",text:"leek",is_correct:false},{id:"c",text:"leer",is_correct:false},{id:"d",text:"Lee",is_correct:false}]},
-          { id: "16", prompt: "Which word means to look with an unpleasant expression?", options: [{id:"a",text:"leer",is_correct:true},{id:"b",text:"leek",is_correct:false},{id:"c",text:"leech",is_correct:false},{id:"d",text:"Lee",is_correct:false}]},
-          { id: "17", prompt: "Which word is a vegetable similar to an onion?", options: [{id:"a",text:"leek",is_correct:true},{id:"b",text:"leer",is_correct:false},{id:"c",text:"leech",is_correct:false},{id:"d",text:"Lee",is_correct:false}]},
-          { id: "18", prompt: "Which word means sharp or enthusiastic?", options: [{id:"a",text:"keen",is_correct:true},{id:"b",text:"keep",is_correct:false},{id:"c",text:"keel",is_correct:false},{id:"d",text:"meek",is_correct:false}]},
-          { id: "19", prompt: "Which word is the bottom part of a ship?", options: [{id:"a",text:"keel",is_correct:true},{id:"b",text:"keen",is_correct:false},{id:"c",text:"heel",is_correct:false},{id:"d",text:"Jeep",is_correct:false}]},
-          { id: "20", prompt: "Which word means to mock or make fun of?", options: [{id:"a",text:"jeer",is_correct:true},{id:"b",text:"Jeep",is_correct:false},{id:"c",text:"leer",is_correct:false},{id:"d",text:"greet",is_correct:false}]}
+          { id: "1", prompt: "Which word means a charge or payment?", options: [{id:"a",text:"fee",is_correct:true},{id:"b",text:"feet",is_correct:false},{id:"c",text:"feed",is_correct:false},{id:"d",text:"flee",is_correct:false}]},
+          { id: "2", prompt: "To run away quickly is to...", options: [{id:"a",text:"flee",is_correct:true},{id:"b",text:"fleet",is_correct:false},{id:"c",text:"feel",is_correct:false},{id:"d",text:"feed",is_correct:false}]},
+          { id: "3", prompt: "Finish the sentence: The _____ went up the steep hill.", options: [{id:"a",text:"Jeep",is_correct:true},{id:"b",text:"Greek",is_correct:false},{id:"c",text:"Keel",is_correct:false},{id:"d",text:"Leek",is_correct:false}]},
+          { id: "4", prompt: "Which word rhymes with 'meet'?", options: [{id:"a",text:"feet",is_correct:true},{id:"b",text:"meek",is_correct:false},{id:"c",text:"keel",is_correct:false},{id:"d",text:"jeer",is_correct:false}]},
+          { id: "5", prompt: "Which word describes a color?", options: [{id:"a",text:"green",is_correct:true},{id:"b",text:"greed",is_correct:false},{id:"c",text:"greet",is_correct:false},{id:"d",text:"Greek",is_correct:false}]},
+          { id: "6", prompt: "To give food to someone is to _____ them.", options: [{id:"a",text:"feed",is_correct:true},{id:"b",text:"feel",is_correct:false},{id:"c",text:"feet",is_correct:false},{id:"d",text:"heed",is_correct:false}]},
+          { id: "7", prompt: "A group of ships is called a...", options: [{id:"a",text:"fleet",is_correct:true},{id:"b",text:"flee",is_correct:false},{id:"c",text:"glee",is_correct:false},{id:"d",text:"free",is_correct:false}]},
+          { id: "8", prompt: "Which word means to say hello?", options: [{id:"a",text:"greet",is_correct:true},{id:"b",text:"greed",is_correct:false},{id:"c",text:"green",is_correct:false},{id:"d",text:"Greek",is_correct:false}]},
+          { id: "9", prompt: "If you have a sharp mind, you have a _____ wit.", options: [{id:"a",text:"keen",is_correct:true},{id:"b",text:"keep",is_correct:false},{id:"c",text:"keel",is_correct:false},{id:"d",text:"leek",is_correct:false}]},
+          { id: "10", prompt: "Which word is a person's name?", options: [{id:"a",text:"Lee",is_correct:true},{id:"b",text:"leek",is_correct:false},{id:"c",text:"leer",is_correct:false},{id:"d",text:"leech",is_correct:false}]},
+          { id: "11", prompt: "The back part of your foot is the...", options: [{id:"a",text:"heel",is_correct:true},{id:"b",text:"heed",is_correct:false},{id:"c",text:"keel",is_correct:false},{id:"d",text:"feel",is_correct:false}]},
+          { id: "12", prompt: "Which word means to pay attention or listen?", options: [{id:"a",text:"heed",is_correct:true},{id:"b",text:"heel",is_correct:false},{id:"c",text:"need",is_correct:false},{id:"d",text:"feed",is_correct:false}]},
+          { id: "13", prompt: "A vegetable that looks like a large green onion is a...", options: [{id:"a",text:"leek",is_correct:true},{id:"b",text:"leech",is_correct:false},{id:"c",text:"leer",is_correct:false},{id:"d",text:"meek",is_correct:false}]},
+          { id: "14", prompt: "Which word means great joy or delight?", options: [{id:"a",text:"glee",is_correct:true},{id:"b",text:"free",is_correct:false},{id:"c",text:"flee",is_correct:false},{id:"d",text:"greet",is_correct:false}]},
+          { id: "15", prompt: "What do you do with your hands to hold onto something?", options: [{id:"a",text:"keep",is_correct:true},{id:"b",text:"keen",is_correct:false},{id:"c",text:"jeep",is_correct:false},{id:"d",text:"feet",is_correct:false}]},
+          { id: "16", prompt: "Which word rhymes with 'beer'?", options: [{id:"a",text:"jeer",is_correct:true},{id:"b",text:"jeep",is_correct:false},{id:"c",text:"heel",is_correct:false},{id:"d",text:"keen",is_correct:false}]},
+          { id: "17", prompt: "Something that costs nothing is...", options: [{id:"a",text:"free",is_correct:true},{id:"b",text:"fee",is_correct:false},{id:"c",text:"feed",is_correct:false},{id:"d",text:"flee",is_correct:false}]},
+          { id: "18", prompt: "A quiet or gentle person might be described as...", options: [{id:"a",text:"meek",is_correct:true},{id:"b",text:"meet",is_correct:false},{id:"c",text:"heed",is_correct:false},{id:"d",text:"keep",is_correct:false}]},
+          { id: "19", prompt: "The bottom of a ship is the...", options: [{id:"a",text:"keel",is_correct:true},{id:"b",text:"keen",is_correct:false},{id:"c",text:"keep",is_correct:false},{id:"d",text:"feel",is_correct:false}]},
+          { id: "20", prompt: "Which word refers to someone from Greece?", options: [{id:"a",text:"Greek",is_correct:true},{id:"b",text:"greed",is_correct:false},{id:"c",text:"greet",is_correct:false},{id:"d",text:"green",is_correct:false}]}
         ]
       };
-      /* Script same as Chapter 81 with currentChapter = 83 */
-      const TYPO_CORRECTIONS = [[/f resh/g,'fresh'],[/p unch/g,'punch'],[/slep t/g,'slept'],[/crep t/g,'crept'],[/p lant/g,'plant'],[/p ath/g,'path'],[/f roth/g,'froth'],[/p eck/g,'peck'],[/f luck/g,'pluck'],[/p luck/g,'pluck'],[/f ling/g,'fling'],[/p ass/g,'pass'],[/f uss/g,'fuss'],[/sp ell/g,'spell'],[/f uzz/g,'fuzz'],[/thef t/g,'theft'],[/thrif t/g,'thrift'],[/dep th/g,'depth'],[/fif th/g,'fifth'],[/st ink/g,'stink'],[/wr ink/g,'wring']];
-      function renderWords() { document.getElementById('word-list').innerHTML = CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join(''); }
+
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring']
+      ];
+
+      function renderWords() {
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
+      }
+
       function renderSentences() {
         const corrected = CHAPTER_CONFIG.sentences.map(s => {
-          let text = s; TYPO_CORRECTIONS.forEach(([p, r]) => { text = text.replace(p, r); }); return text;
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
         });
-        document.getElementById('sentences').innerHTML = corrected.map(s => `<p>${s}</p>`).join('');
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
+
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i; if (c > MAX_CHAPTER) break;
-          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
         }
-        nav.innerHTML = buttons.map(b => `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
+
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-        const baseSeed = currentChapter * 1000 + (Date.now() % 1000);
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const seed = baseSeed + parseInt(q.id);
+          const seed = baseSeed + parseInt(q.id, 10);
           const shuffledOpts = shuffleWithSeed([...q.options], seed);
-          window.quizCorrectMap[q.id] = q.options.find(o => o.is_correct).id;
-          const optHtml = shuffledOpts.map((o, i) => `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${String.fromCharCode(65 + i)}. ${o.text}</label></div>`).join('');
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
+
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
+
         items.forEach((item, i) => {
-          const ans = answers[i], correctId = window.quizCorrectMap[item.id], correctOpt = item.options.find(o => o.id === correctId);
-          if (ans === correctId) { correctCount++; correctList.push(`${item.id}. ✅ ${correctOpt.text}`); }
-          else { incorrectList.push(`${item.id}. ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`); }
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
+          }
         });
+
         const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
         const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
         localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
+
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
-        if (correctList.length) report += `✅ CORRECT:\n${correctList.join('\n')}\n\n`;
-        if (incorrectList.length) report += `❌ INCORRECT:\n${incorrectList.join('\n')}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
+
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
-        document.getElementById('feedback').innerHTML = `<div class="feedback"><h3>📊 Results: ${score}/${total}</h3><p><strong>${mastery ? '🎉 Excellent!' : 'Keep practicing.'}</strong></p><p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p><a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report via WhatsApp</a></div>`;
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
       }
+
       function setupQuizListeners() {
         document.getElementById('submit-quiz').addEventListener('click', () => {
           const form = document.getElementById('quiz-form');
@@ -182,10 +266,14 @@
             const el = form.querySelector(`input[name="q${i}"]:checked`);
             answers.push(el ? el.value : null);
           }
-          if (answers.includes(null)) { alert("Please answer all questions."); return; }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
           showFeedback(answers);
         });
       }
+
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -193,24 +281,73 @@
         const display = document.getElementById('name-display');
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
+
         if (saved) {
-          promptDiv.style.display = 'block'; quizDiv.style.display = 'none';
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
           display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
-          buttons.innerHTML = `<button type="button" class="btn" id="keep-btn">✅ Keep This Name</button><button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>`;
-          document.getElementById('keep-btn').onclick = () => { promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; };
-          document.getElementById('change-btn').onclick = () => { display.style.display = 'none'; input.style.display = 'block'; buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`; input.value = ''; input.focus(); document.getElementById('save-new').onclick = () => { const n = input.value.trim(); if(n){localStorage.setItem('student_name', n); promptDiv.style.display='none'; quizDiv.style.display='block';} }; };
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
         } else {
-          promptDiv.style.display = 'block'; quizDiv.style.display = 'none'; input.style.display = 'block';
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
           buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
-          document.getElementById('save-first').onclick = () => { const n = input.value.trim(); if(n){localStorage.setItem('student_name', n); promptDiv.style.display='none'; quizDiv.style.display='block';} };
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
         }
       }
+
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-        renderNavigation(); renderWords(); renderSentences(); renderQuiz(); setupQuizListeners(); initNamePrompt();
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
       }
-      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
