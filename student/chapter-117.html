@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 118 — Endings with ed as /t/"/>
-  <title>Mini OpenStax — Lesson 118: ed as /t/ Endings</title>
+  <meta name="description" content="Mini OpenStax: Lesson 118: ed=/t/"/>
+  <title>Mini OpenStax — Lesson 118: ed=/t/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 118: ed as /t/ Endings</h1>
-        <div class="lo-tags" id="lo-tags">LO PH118: Recognize and decode the /t/ sound in past tense endings following unvoiced consonants.</div>
+        <h1 id="chapter-title">Lesson 118: ed=/t/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH118: Decode words with "-ed" pronounced /t/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words where the ending <strong>-ed</strong> is pronounced as a <strong>/t/</strong> sound. These do <strong>not</strong> add an extra syllable:</p>
+        <p>Words where "-ed" says /t/ (after voiceless consonants):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud. Notice that the -ed ending sounds like /t/ and blends quickly with the base word:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -67,132 +80,282 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 117;    // chapter-117.html = Lesson 118
-      const maxChapter = 150;        
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 117;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 118: ed as /t/ Endings",
-        loTags: ["LO PH118: Recognize and decode the /t/ sound in past tense endings following unvoiced consonants."],
+        title: "Lesson 118: ed=/t/",
+        loTags: ["LO PH118: Decode words with \"-ed\" pronounced /t/"],
         contentWords: [
-          "asked", "soaked", "packed", "cracked", "picked", "tricked", "locked", "thanked", "winked", "blinked", "jumped", "camped", "helped", "fixed", "tossed", "crossed", "missed", "passed", "dressed", "sniffed", "reached", "coached", "matched", "pitched", "stretched", "brushed", "wished", "fished", "crashed", "splashed"
+          "asked", "soaked", "packed", "cracked", "picked", "tricked", "locked", "thanked", "winked", "blinked",
+          "jumped", "camped", "helped", "fixed", "tossed", "crossed", "missed", "passed", "dressed", "sniffed",
+          "reached", "coached", "matched", "pitched", "stretched", "brushed", "wished", "fished", "crashed", "splashed"
         ],
         sentences: [
-          "1) Ann packed her bags for the trip.",
-          "2) Dad got out his tools and fixed the truck.",
-          "3) Kay asked her mom if she could go out and play.",
-          "4) Matt picked a belt that matched his brown pants.",
-          "5) Brad thanked Beth when she helped him with his math.",
-          "6) Frank yawned and stretched and got out of bed.",
-          "7) Frank brushed his hair and cleaned his teeth.",
-          "8) The boys jumped in the pool and cooled off.",
-          "9) In the pool, Stan splashed Chuck and soaked him.",
-          "10) The car crashed into the fence and cracked the glass."
+          "Ann packed her bags for the trip.",
+          "Dad got out his tools and fixed the truck.",
+          "Kay asked her mom if she could go out and play.",
+          "Matt picked a belt that matched his brown pants.",
+          "Brad thanked Beth when she helped him with his math.",
+          "Frank yawned and stretched and got out of bed.",
+          "Frank brushed his hair and cleaned his teeth.",
+          "The boys jumped in the pool and cooled off.",
+          "In the pool, Stan splashed Chuck and soaked him."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What did Ann do for her trip?", options: [{id:"a",text:"lost her bags",is_correct:false},{id:"b",text:"packed her bags",is_correct:true},{id:"c",text:"sold her bags",is_correct:false},{id:"d",text:"mailed her bags",is_correct:false}] },
-          { id: "2", prompt: "What did Dad fix with his tools?", options: [{id:"a",text:"the fence",is_correct:false},{id:"b",text:"the truck",is_correct:true},{id:"c",text:"the pool",is_correct:false},{id:"d",text:"the bed",is_correct:false}] },
-          { id: "3", prompt: "What did Kay ask her mom?", options: [{id:"a",text:"if she could eat",is_correct:false},{id:"b",text:"if she could go out and play",is_correct:true},{id:"c",text:"if she could sleep",is_correct:false},{id:"d",text:"if she could help",is_correct:false}] },
-          { id: "4", prompt: "What did the belt match?", options: [{id:"a",text:"his black socks",is_correct:false},{id:"b",text:"his brown pants",is_correct:true},{id:"c",text:"his blue shirt",is_correct:false},{id:"d",text:"his hat",is_correct:false}] },
-          { id: "5", prompt: "Who did Brad thank?", options: [{id:"a",text:"Kay",is_correct:false},{id:"b",text:"Beth",is_correct:true},{id:"c",text:"Ann",is_correct:false},{id:"d",text:"Frank",is_correct:false}] },
-          { id: "6", prompt: "What did Beth help Brad with?", options: [{id:"a",text:"his bags",is_correct:false},{id:"b",text:"his math",is_correct:true},{id:"c",text:"his hair",is_correct:false},{id:"d",text:"his truck",is_correct:false}] },
-          { id: "7", prompt: "What did Frank do after he yawned and stretched?", options: [{id:"a",text:"went to sleep",is_correct:false},{id:"b",text:"got out of bed",is_correct:true},{id:"c",text:"jumped in the pool",is_correct:false},{id:"d",text:"fixed a truck",is_correct:false}] },
-          { id: "8", prompt: "What did Frank brush?", options: [{id:"a",text:"the cat",is_correct:false},{id:"b",text:"his hair",is_correct:true},{id:"c",text:"his clothes",is_correct:false},{id:"d",text:"the fence",is_correct:false}] },
-          { id: "9", prompt: "What happened when the boys jumped in the pool?", options: [{id:"a",text:"they got hot",is_correct:false},{id:"b",text:"they cooled off",is_correct:true},{id:"c",text:"they splashed a dog",is_correct:false},{id:"d",text:"they fished",is_correct:false}] },
-          { id: "10", prompt: "What did Stan do to Chuck?", options: [{id:"a",text:"helped him",is_correct:false},{id:"b",text:"splashed and soaked him",is_correct:true},{id:"c",text:"thanked him",is_correct:false},{id:"d",text:"picked him up",is_correct:false}] },
-          { id: "11", prompt: "What did the car crash into?", options: [{id:"a",text:"a tree",is_correct:false},{id:"b",text:"a fence",is_correct:true},{id:"c",text:"a truck",is_correct:false},{id:"d",text:"a pool",is_correct:false}] },
-          { id: "12", prompt: "What happened to the glass in the crash?", options: [{id:"a",text:"it spilled",is_correct:false},{id:"b",text:"it cracked",is_correct:true},{id:"c",text:"it melted",is_correct:false},{id:"d",text:"it was fixed",is_correct:false}] },
-          { id: "13", prompt: "In 'jumped', the -ed ending sounds like:", options: [{id:"a",text:"/d/",is_correct:false},{id:"b",text:"/t/",is_correct:true},{id:"c",text:"/ed/",is_correct:false},{id:"d",text:"/s/",is_correct:false}] },
-          { id: "14", prompt: "Which word means to have closed a door with a key?", options: [{id:"a",text:"picked",is_correct:false},{id:"b",text:"locked",is_correct:true},{id:"c",text:"tossed",is_correct:false},{id:"d",text:"fixed",is_correct:false}] },
-          { id: "15", prompt: "Which word means to have thrown something lightly?", options: [{id:"a",text:"passed",is_correct:false},{id:"b",text:"tossed",is_correct:true},{id:"c",text:"crossed",is_correct:false},{id:"d",text:"missed",is_correct:false}] },
-          { id: "16", prompt: "How many syllables are in the word 'brushed'?", options: [{id:"a",text:"one",is_correct:true},{id:"b",text:"two",is_correct:false},{id:"c",text:"three",is_correct:false},{id:"d",text:"none",is_correct:false}] },
-          { id: "17", prompt: "Complete the word: s _ _ ked (very wet).", options: [{id:"a",text:"oa",is_correct:true},{id:"b",text:"ee",is_correct:false},{id:"c",text:"ou",is_correct:false},{id:"d",text:"ai",is_correct:false}] },
-          { id: "18", prompt: "Which word is the past tense of 'wish'?", options: [{id:"a",text:"wishs",is_correct:false},{id:"b",text:"wished",is_correct:true},{id:"c",text:"wishing",is_correct:false},{id:"d",text:"wisht",is_correct:false}] },
-          { id: "19", prompt: "Which word means to have moved from one side to the other?", options: [{id:"a",text:"passed",is_correct:false},{id:"b",text:"crossed",is_correct:true},{id:"c",text:"reached",is_correct:false},{id:"d",text:"fixed",is_correct:false}] },
-          { id: "20", prompt: "In the word 'fixed', the -ed sounds like:", options: [{id:"a",text:"/d/",is_correct:false},{id:"b",text:"/t/",is_correct:true},{id:"c",text:"/ed/",is_correct:false},{id:"d",text:"/z/",is_correct:false}] }
+          { id: "1", prompt: "Which word has '-ed' that says /t/ as in 'asked'?", options: [
+            {id:"a",text:"played",is_correct:false},
+            {id:"b",text:"asked",is_correct:true},
+            {id:"c",text:"wanted",is_correct:false},
+            {id:"d",text:"howled",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'put items into a container for travel'?", options: [
+            {id:"a",text:"packed",is_correct:true},
+            {id:"b",text:"cracked",is_correct:false},
+            {id:"c",text:"picked",is_correct:false},
+            {id:"d",text:"tricked",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'locked'?", options: [
+            {id:"a",text:"winked",is_correct:true},
+            {id:"b",text:"played",is_correct:false},
+            {id:"c",text:"wanted",is_correct:false},
+            {id:"d",text:"howled",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word means 'to express gratitude'?", options: [
+            {id:"a",text:"thanked",is_correct:true},
+            {id:"b",text:"blinked",is_correct:false},
+            {id:"c",text:"jumped",is_correct:false},
+            {id:"d",text:"camped",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with '-ed' = /t/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"Ann packed her bags for the trip.",is_correct:true},
+            {id:"c",text:"It is cold.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to repair'?", options: [
+            {id:"a",text:"fixed",is_correct:true},
+            {id:"b",text:"tossed",is_correct:false},
+            {id:"c",text:"crossed",is_correct:false},
+            {id:"d",text:"missed",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes what Stan did to Chuck in the pool?", options: [
+            {id:"a",text:"splashed",is_correct:true},
+            {id:"b",text:"soaked",is_correct:false},
+            {id:"c",text:"dressed",is_correct:false},
+            {id:"d",text:"sniffed",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is '-ed' pronounced in 'brushed'?", options: [
+            {id:"a",text:"/d/",is_correct:false},
+            {id:"b",text:"/t/",is_correct:true},
+            {id:"c",text:"/əd/",is_correct:false},
+            {id:"d",text:"silent",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to throw lightly'?", options: [
+            {id:"a",text:"tossed",is_correct:true},
+            {id:"b",text:"passed",is_correct:false},
+            {id:"c",text:"dressed",is_correct:false},
+            {id:"d",text:"sniffed",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"asked",is_correct:true},
+            {id:"b",text:"blinked",is_correct:false},
+            {id:"c",text:"camped",is_correct:false},
+            {id:"d",text:"cracked",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word means 'to apply makeup or clothes'?", options: [
+            {id:"a",text:"dressed",is_correct:true},
+            {id:"b",text:"sniffed",is_correct:false},
+            {id:"c",text:"reached",is_correct:false},
+            {id:"d",text:"coached",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"played",is_correct:true},
+            {id:"b",text:"matched",is_correct:false},
+            {id:"c",text:"pitched",is_correct:false},
+            {id:"d",text:"stretched",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'Brad thanked Beth,' why did Brad thank her?", options: [
+            {id:"a",text:"She helped him with math",is_correct:true},
+            {id:"b",text:"She gave him a gift",is_correct:false},
+            {id:"c",text:"She played with him",is_correct:false},
+            {id:"d",text:"She cooked for him",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to move from one side to the other'?", options: [
+            {id:"a",text:"crossed",is_correct:true},
+            {id:"b",text:"missed",is_correct:false},
+            {id:"c",text:"passed",is_correct:false},
+            {id:"d",text:"dressed",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same '-ed' sound as 'jumped'?", options: [
+            {id:"a",text:"helped",is_correct:true},
+            {id:"b",text:"played",is_correct:false},
+            {id:"c",text:"wanted",is_correct:false},
+            {id:"d",text:"howled",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /t/ and means 'to inhale through the nose'?", options: [
+            {id:"a",text:"sniffed",is_correct:true},
+            {id:"b",text:"dressed",is_correct:false},
+            {id:"c",text:"passed",is_correct:false},
+            {id:"d",text:"missed",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'stretched' mean?", options: [
+            {id:"a",text:"extended the body",is_correct:true},
+            {id:"b",text:"ran fast",is_correct:false},
+            {id:"c",text:"jumped high",is_correct:false},
+            {id:"d",text:"shouted loudly",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes what a trainer does with a team?", options: [
+            {id:"a",text:"coached",is_correct:true},
+            {id:"b",text:"matched",is_correct:false},
+            {id:"c",text:"pitched",is_correct:false},
+            {id:"d",text:"brushed",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'to make a sudden loud noise by breaking'?", options: [
+            {id:"a",text:"crashed",is_correct:true},
+            {id:"b",text:"splashed",is_correct:false},
+            {id:"c",text:"soaked",is_correct:false},
+            {id:"d",text:"packed",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has '-ed' but does NOT say /t/?", options: [
+            {id:"a",text:"played",is_correct:true},
+            {id:"b",text:"asked",is_correct:false},
+            {id:"c",text:"packed",is_correct:false},
+            {id:"d",text:"fixed",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/sp eeding/g, 'speeding'], [/f eeling/g, 'feeling'], [/p layed/g, 'played'], [/p acked/g, 'packed'], [/sp lashed/g, 'splashed']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 118*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -202,8 +365,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -211,6 +374,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -221,9 +442,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
