@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 98 — Vowel Team Syllables (oa) Part 2"/>
-  <title>Mini OpenStax — Lesson 98: Vowel Team oa</title>
+  <meta name="description" content="Mini OpenStax: Lesson 98: oa=/ō/"/>
+  <title>Mini OpenStax — Lesson 98: oa=/ō/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 98: Vowel Team oa (Continued)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH98: Decode additional words with the long o vowel team (oa)</div>
+        <h1 id="chapter-title">Lesson 98: oa=/ō/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH098: Decode words with vowel team "oa" pronounced /ō/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>More words featuring the <strong>oa</strong> vowel team:</p>
+        <p>Words with "oa" that say /ō/ (long o sound):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–98:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,130 +80,280 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 97;    // chapter-97.html = Lesson 98
-      const maxChapter = 150;        
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 97;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 98: Vowel Team oa (Continued)",
-        loTags: ["LO PH98: Decode additional words with the long o vowel team (oa)"],
+        title: "Lesson 98: oa=/ō/",
+        loTags: ["LO PH098: Decode words with vowel team \"oa\" pronounced /ō/"],
         contentWords: [
-          "load", "loaf", "loan", "moat", "moan", "Joan", "road", "roam", "roach", "roast", "toad", "toast", "throat", "soap", "soak", "shoal", "poach", "hoax"
+          "load", "loaf", "loan", "moat", "moan", "Joan", "road", "roam", "roach", "roast", "toad", "toast", "throat",
+          "soap", "soak", "shoal", "poach", "hoax"
         ],
         sentences: [
-          "1) Joan will not loaf on her job.",
-          "2) Gail will soak in the tub and get clean.",
-          "3) Neal must pay off the loan from the bank.",
-          "4) Did a toad hop up on a log near the pond?",
-          "5) At lunch, Joan had roast beef on wheat toast.",
-          "6) The soap lay in a soap dish next to the sink.",
-          "7) The dump truck had a big load of junk in the back.",
-          "8) A big rock fell from the cliff and lay in the road."
+          "Joan will not loaf on her job.",
+          "Gail will soak in the tub and get clean.",
+          "Neal must pay off the loan from the bank.",
+          "Did a toad hop up on a log near the pond?",
+          "At lunch, Joan had roast beef on wheat toast.",
+          "The soap lay in a soap dish next to the sink.",
+          "The dump truck had a big load of junk in the back.",
+          "A big rock fell from the cliff and lay in the road."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What will Joan NOT do on her job?", options: [{id:"a",text:"roast",is_correct:false},{id:"b",text:"loaf",is_correct:true},{id:"c",text:"soak",is_correct:false},{id:"d",text:"moan",is_correct:false}] },
-          { id: "2", prompt: "Where will Gail soak to get clean?", options: [{id:"a",text:"in the tub",is_correct:true},{id:"b",text:"in the pond",is_correct:false},{id:"c",text:"on the road",is_correct:false},{id:"d",text:"in the sink",is_correct:false}] },
-          { id: "3", prompt: "What must Neal pay off?", options: [{id:"a",text:"the roast",is_correct:false},{id:"b",text:"the toad",is_correct:false},{id:"c",text:"the loan",is_correct:true},{id:"d",text:"the soap",is_correct:false}] },
-          { id: "4", prompt: "Where did the toad hop?", options: [{id:"a",text:"on a soap dish",is_correct:false},{id:"b",text:"on a log",is_correct:true},{id:"c",text:"in the truck",is_correct:false},{id:"d",text:"on the toast",is_correct:false}] },
-          { id: "5", prompt: "What kind of toast did Joan have for lunch?", options: [{id:"a",text:"oat toast",is_correct:false},{id:"b",text:"white toast",is_correct:false},{id:"c",text:"wheat toast",is_correct:true},{id:"d",text:"loaf toast",is_correct:false}] },
-          { id: "6", prompt: "Where was the soap dish?", options: [{id:"a",text:"next to the sink",is_correct:true},{id:"b",text:"in the tub",is_correct:false},{id:"c",text:"on the road",is_correct:false},{id:"d",text:"in the truck",is_correct:false}] },
-          { id: "7", prompt: "What did the dump truck have in the back?", options: [{id:"a",text:"a toad",is_correct:false},{id:"b",text:"a big load of junk",is_correct:true},{id:"c",text:"a loaf of bread",is_correct:false},{id:"d",text:"a soap dish",is_correct:false}] },
-          { id: "8", prompt: "What fell from the cliff?", options: [{id:"a",text:"a big rock",is_correct:true},{id:"b",text:"a toad",is_correct:false},{id:"c",text:"a dump truck",is_correct:false},{id:"d",text:"a loaf",is_correct:false}] },
-          { id: "9", prompt: "Where did the rock lay after it fell?", options: [{id:"a",text:"in the pond",is_correct:false},{id:"b",text:"in the road",is_correct:true},{id:"c",text:"on the log",is_correct:false},{id:"d",text:"in the tub",is_correct:false}] },
-          { id: "10", prompt: "What meat did Joan have on her toast?", options: [{id:"a",text:"ham",is_correct:false},{id:"b",text:"roast beef",is_correct:true},{id:"c",text:"pork",is_correct:false},{id:"d",text:"fish",is_correct:false}] },
-          { id: "11", prompt: "Which word is a person's name?", options: [{id:"a",text:"Joan",is_correct:true},{id:"b",text:"Loan",is_correct:false},{id:"c",text:"Moan",is_correct:false},{id:"d",text:"Roan",is_correct:false}] },
-          { id: "12", prompt: "Which word means a deep ditch around a castle?", options: [{id:"a",text:"moat",is_correct:true},{id:"b",text:"road",is_correct:false},{id:"c",text:"shoal",is_correct:false},{id:"d",text:"load",is_correct:false}] },
-          { id: "13", prompt: "Which word refers to part of your neck?", options: [{id:"a",text:"throat",is_correct:true},{id:"b",text:"toast",is_correct:false},{id:"c",text:"shoal",is_correct:false},{id:"d",text:"roach",is_correct:false}] },
-          { id: "14", prompt: "Which word means a trick or a prank?", options: [{id:"a",text:"hoax",is_correct:true},{id:"b",text:"soak",is_correct:false},{id:"c",text:"poach",is_correct:false},{id:"d",text:"loaf",is_correct:false}] },
-          { id: "15", prompt: "Which word means a shallow place in a body of water?", options: [{id:"a",text:"shoal",is_correct:true},{id:"b",text:"moat",is_correct:false},{id:"c",text:"road",is_correct:false},{id:"d",text:"load",is_correct:false}] },
-          { id: "16", prompt: "Which word means to wander around?", options: [{id:"a",text:"roam",is_correct:true},{id:"b",text:"roach",is_correct:false},{id:"c",text:"roast",is_correct:false},{id:"d",text:"road",is_correct:false}] },
-          { id: "17", prompt: "Which word means an insect?", options: [{id:"a",text:"roach",is_correct:true},{id:"b",text:"toad",is_correct:false},{id:"c",text:"shoal",is_correct:false},{id:"d",text:"loaf",is_correct:false}] },
-          { id: "18", prompt: "Which word means to cook in simmering liquid?", options: [{id:"a",text:"poach",is_correct:true},{id:"b",text:"roast",is_correct:false},{id:"c",text:"soak",is_correct:false},{id:"d",text:"loaf",is_correct:false}] },
-          { id: "19", prompt: "Which word means to be lazy or waste time?", options: [{id:"a",text:"loaf",is_correct:true},{id:"b",text:"load",is_correct:false},{id:"c",text:"loan",is_correct:false},{id:"d",text:"soak",is_correct:false}] },
-          { id: "20", prompt: "Complete the word: th _ _ at (part of the body).", options: [{id:"a",text:"oa",is_correct:true},{id:"b",text:"ai",is_correct:false},{id:"c",text:"ee",is_correct:false},{id:"d",text:"ea",is_correct:false}] }
+          { id: "1", prompt: "Which word has 'oa' that says /ō/?", options: [
+            {id:"a",text:"cat",is_correct:false},
+            {id:"b",text:"road",is_correct:true},
+            {id:"c",text:"cap",is_correct:false},
+            {id:"d",text:"cut",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'a sum of money borrowed'?", options: [
+            {id:"a",text:"loan",is_correct:true},
+            {id:"b",text:"loaf",is_correct:false},
+            {id:"c",text:"load",is_correct:false},
+            {id:"d",text:"moat",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'boat'?", options: [
+            {id:"a",text:"moat",is_correct:true},
+            {id:"b",text:"mat",is_correct:false},
+            {id:"c",text:"met",is_correct:false},
+            {id:"d",text:"mit",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word is a person's name?", options: [
+            {id:"a",text:"Joan",is_correct:true},
+            {id:"b",text:"joan",is_correct:false},
+            {id:"c",text:"roam",is_correct:false},
+            {id:"d",text:"hoax",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 'oa' = /ō/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"Joan had roast beef.",is_correct:true},
+            {id:"c",text:"It is cold.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to wander without a fixed destination'?", options: [
+            {id:"a",text:"roam",is_correct:true},
+            {id:"b",text:"roach",is_correct:false},
+            {id:"c",text:"roast",is_correct:false},
+            {id:"d",text:"road",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes a small freshwater fish?", options: [
+            {id:"a",text:"shoal",is_correct:true},
+            {id:"b",text:"soap",is_correct:false},
+            {id:"c",text:"soak",is_correct:false},
+            {id:"d",text:"moan",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 'oa' pronounced in 'toast'?", options: [
+            {id:"a",text:"/ă/",is_correct:false},
+            {id:"b",text:"/ō/",is_correct:true},
+            {id:"c",text:"/ĕ/",is_correct:false},
+            {id:"d",text:"/ĭ/",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to cook food by dry heat'?", options: [
+            {id:"a",text:"roast",is_correct:true},
+            {id:"b",text:"roach",is_correct:false},
+            {id:"c",text:"road",is_correct:false},
+            {id:"d",text:"load",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"hoax",is_correct:false},
+            {id:"b",text:"Joan",is_correct:false},
+            {id:"c",text:"load",is_correct:true},
+            {id:"d",text:"loan",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word is a baked food made from flour?", options: [
+            {id:"a",text:"loaf",is_correct:true},
+            {id:"b",text:"load",is_correct:false},
+            {id:"c",text:"loan",is_correct:false},
+            {id:"d",text:"moat",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"soap",is_correct:false},
+            {id:"b",text:"soak",is_correct:false},
+            {id:"c",text:"goat",is_correct:true},
+            {id:"d",text:"throat",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'Gail will soak in the tub,' what does 'soak' mean?", options: [
+            {id:"a",text:"to lie in liquid",is_correct:true},
+            {id:"b",text:"to wash quickly",is_correct:false},
+            {id:"c",text:"to dry off",is_correct:false},
+            {id:"d",text:"to swim",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'a deep, fake story'?", options: [
+            {id:"a",text:"hoax",is_correct:true},
+            {id:"b",text:"roach",is_correct:false},
+            {id:"c",text:"moan",is_correct:false},
+            {id:"d",text:"shoal",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same vowel sound as 'go'?", options: [
+            {id:"a",text:"road",is_correct:true},
+            {id:"b",text:"cat",is_correct:false},
+            {id:"c",text:"cut",is_correct:false},
+            {id:"d",text:"cot",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /d/ and has 'oa' = /ō/?", options: [
+            {id:"a",text:"load",is_correct:true},
+            {id:"b",text:"loan",is_correct:false},
+            {id:"c",text:"loaf",is_correct:false},
+            {id:"d",text:"moan",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'moan' mean?", options: [
+            {id:"a",text:"to groan or complain",is_correct:true},
+            {id:"b",text:"to laugh",is_correct:false},
+            {id:"c",text:"to shout",is_correct:false},
+            {id:"d",text:"to whisper",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes what you spread on bread?", options: [
+            {id:"a",text:"soap",is_correct:false},
+            {id:"b",text:"roast",is_correct:false},
+            {id:"c",text:"None of these — 'soap' is for washing",is_correct:true},
+            {id:"d",text:"moat",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'to catch fish or game illegally'?", options: [
+            {id:"a",text:"poach",is_correct:true},
+            {id:"b",text:"roach",is_correct:false},
+            {id:"c",text:"roast",is_correct:false},
+            {id:"d",text:"road",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has 'oa' but does NOT say /ō/?", options: [
+            {id:"a",text:"broad",is_correct:true},
+            {id:"b",text:"road",is_correct:false},
+            {id:"c",text:"load",is_correct:false},
+            {id:"d",text:"loan",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/f ool/g, 'fool'], [/f aint/g, 'faint'], [/p eel/g, 'peel'], [/p eek/g, 'peek'], [/p aid/g, 'paid'], [/p ail/g, 'pail'], [/p aint/g, 'paint'], [/Sp ain/g, 'Spain']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 98*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -202,8 +363,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -211,6 +372,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -221,9 +440,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
