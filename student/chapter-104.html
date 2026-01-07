@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 105 — Vowel Team Syllables (oy)"/>
-  <title>Mini OpenStax — Lesson 105: Vowel Team oy</title>
+  <meta name="description" content="Mini OpenStax: Lesson 105: oy"/>
+  <title>Mini OpenStax — Lesson 105: oy</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 105: Vowel Team oy</h1>
-        <div class="lo-tags" id="lo-tags">LO PH105: Decode words with the vowel team oy (as in 'boy')</div>
+        <h1 id="chapter-title">Lesson 105: oy</h1>
+        <div class="lo-tags" id="lo-tags">LO PH105: Decode words with vowel team "oy" pronounced /oi̯/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words featuring the <strong>oy</strong> vowel team:</p>
+        <p>Words with "oy" that say /oi̯/ (as in <em>boy</em>):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–105:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,128 +80,280 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 104;    // chapter-104.html = Lesson 105
-      const maxChapter = 150;        
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 104;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 105: Vowel Team oy",
-        loTags: ["LO PH105: Decode words with the vowel team oy (as in 'boy')"],
+        title: "Lesson 105: oy",
+        loTags: ["LO PH105: Decode words with vowel team \"oy\" pronounced /oi̯/"],
         contentWords: [
-          "boy", "joy", "coy", "toy", "Roy", "soy", "ploy", "Troy"
+          "boy", "coy", "Roy", "toy", "alloy", "buoy", "envoy", "joy", "Troy", "annoy", "ploy", "destroy", "employ", "enjoy", "deploy", "oyster", "soy", "soybean"
         ],
         sentences: [
-          "1) Jean will teach the boy to read.",
-          "2) Joy was coy and did not speak to Troy.",
-          "3) A ploy let the boy win the chess match.",
-          "4) Roy got a gift. The gift was a toy train.",
-          "5) The toy train ran round and round on a track.",
-          "6) Did Roy jump with joy at the toy?"
+          "Roy is a boy who likes to play with a toy.",
+          "The envoy brought a message to the king.",
+          "Do not annoy the dog or it may bite.",
+          "We will deploy the troops at dawn.",
+          "Joy is a feeling of great delight.",
+          "Soybeans are used to make soy milk and tofu.",
+          "The buoy floated in the bay near the ship.",
+          "The oyster shell was smooth and white."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What will Jean teach the boy?", options: [{id:"a",text:"to swim",is_correct:false},{id:"b",text:"to read",is_correct:true},{id:"c",text:"to draw",is_correct:false},{id:"d",text:"to jump",is_correct:false}] },
-          { id: "2", prompt: "Who did Joy not speak to?", options: [{id:"a",text:"Roy",is_correct:false},{id:"b",text:"the boy",is_correct:false},{id:"c",text:"Troy",is_correct:true},{id:"d",text:"Jean",is_correct:false}] },
-          { id: "3", prompt: "How did Joy act toward Troy?", options: [{id:"a",text:"loud",is_correct:false},{id:"b",text:"coy",is_correct:true},{id:"c",text:"mean",is_correct:false},{id:"d",text:"proud",is_correct:false}] },
-          { id: "4", prompt: "What helped the boy win the chess match?", options: [{id:"a",text:"a toy",is_correct:false},{id:"b",text:"a gift",is_correct:false},{id:"c",text:"a ploy",is_correct:true},{id:"d",text:"a joy",is_correct:false}] },
-          { id: "5", prompt: "What gift did Roy get?", options: [{id:"a",text:"a soy snack",is_correct:false},{id:"b",text:"a toy train",is_correct:true},{id:"c",text:"a book",is_correct:false},{id:"d",text:"a chess set",is_correct:false}] },
-          { id: "6", prompt: "How did the toy train move?", options: [{id:"a",text:"fast and slow",is_correct:false},{id:"b",text:"up and down",is_correct:false},{id:"c",text:"round and round",is_correct:true},{id:"d",text:"back and forth",is_correct:false}] },
-          { id: "7", prompt: "What did the toy train run on?", options: [{id:"a",text:"the grass",is_correct:false},{id:"b",text:"a track",is_correct:true},{id:"c",text:"the road",is_correct:false},{id:"d",text:"the water",is_correct:false}] },
-          { id: "8", prompt: "How did Roy feel about his gift?", options: [{id:"a",text:"he jumped with joy",is_correct:true},{id:"b",text:"he was coy",is_correct:false},{id:"c",text:"he was gaunt",is_correct:false},{id:"d",text:"he let out a groan",is_correct:false}] },
-          { id: "9", prompt: "Which word is a person's name?", options: [{id:"a",text:"Roy",is_correct:true},{id:"b",text:"Toy",is_correct:false},{id:"c",text:"Soy",is_correct:false},{id:"d",text:"Ploy",is_correct:false}] },
-          { id: "10", prompt: "Which word means a clever plan or trick?", options: [{id:"a",text:"ploy",is_correct:true},{id:"b",text:"boy",is_correct:false},{id:"c",text:"joy",is_correct:false},{id:"d",text:"toy",is_correct:false}] },
-          { id: "11", prompt: "Which word is a type of bean?", options: [{id:"a",text:"soy",is_correct:true},{id:"b",text:"coy",is_correct:false},{id:"c",text:"joy",is_correct:false},{id:"d",text:"boy",is_correct:false}] },
-          { id: "12", prompt: "Which word is the opposite of a girl?", options: [{id:"a",text:"boy",is_correct:true},{id:"b",text:"Troy",is_correct:false},{id:"c",text:"ploy",is_correct:false},{id:"d",text:"toy",is_correct:false}] },
-          { id: "13", prompt: "Which word means extremely happy?", options: [{id:"a",text:"joy",is_correct:true},{id:"b",text:"coy",is_correct:false},{id:"c",text:"soy",is_correct:false},{id:"d",text:"boy",is_correct:false}] },
-          { id: "14", prompt: "Complete the word: t _ _ (something to play with).", options: [{id:"a",text:"oy",is_correct:true},{id:"b",text:"ou",is_correct:false},{id:"c",text:"oa",is_correct:false},{id:"d",text:"ow",is_correct:false}] },
-          { id: "15", prompt: "Which word means shy or modest?", options: [{id:"a",text:"coy",is_correct:true},{id:"b",text:"joy",is_correct:false},{id:"c",text:"soy",is_correct:false},{id:"d",text:"boy",is_correct:false}] },
-          { id: "16", prompt: "Where did Roy's toy train run?", options: [{id:"a",text:"on a track",is_correct:true},{id:"b",text:"in the bay",is_correct:false},{id:"c",text:"on a trail",is_correct:false},{id:"d",text:"up a stair",is_correct:false}] },
-          { id: "17", prompt: "Who was coy?", options: [{id:"a",text:"Joy",is_correct:true},{id:"b",text:"Troy",is_correct:false},{id:"c",text:"Roy",is_correct:false},{id:"d",text:"the boy",is_correct:false}] },
-          { id: "18", prompt: "What did the boy win?", options: [{id:"a",text:"a chess match",is_correct:true},{id:"b",text:"a toy train",is_correct:false},{id:"c",text:"a big test",is_correct:false},{id:"d",text:"a coin",is_correct:false}] },
-          { id: "19", prompt: "Which word rhymes with 'boy' and is a city?", options: [{id:"a",text:"Troy",is_correct:true},{id:"b",text:"Soy",is_correct:false},{id:"c",text:"Coy",is_correct:false},{id:"d",text:"Ploy",is_correct:false}] },
-          { id: "20", prompt: "Complete the word: R _ _ (a boy's name).", options: [{id:"a",text:"oy",is_correct:true},{id:"b",text:"oa",is_correct:false},{id:"c",text:"ow",is_correct:false},{id:"d",text:"ou",is_correct:false}] }
+          { id: "1", prompt: "Which word has 'oy' that says /oi̯/ as in 'boy'?", options: [
+            {id:"a",text:"only",is_correct:false},
+            {id:"b",text:"boy",is_correct:true},
+            {id:"c",text:"money",is_correct:false},
+            {id:"d",text:"journey",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'a male child'?", options: [
+            {id:"a",text:"boy",is_correct:true},
+            {id:"b",text:"toy",is_correct:false},
+            {id:"c",text:"coy",is_correct:false},
+            {id:"d",text:"Roy",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'toy'?", options: [
+            {id:"a",text:"boy",is_correct:true},
+            {id:"b",text:"cat",is_correct:false},
+            {id:"c",text:"red",is_correct:false},
+            {id:"d",text:"run",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word is a person's name?", options: [
+            {id:"a",text:"Roy",is_correct:true},
+            {id:"b",text:"roy",is_correct:false},
+            {id:"c",text:"toy",is_correct:false},
+            {id:"d",text:"coy",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 'oy' = /oi̯/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"Roy is a boy who likes a toy.",is_correct:true},
+            {id:"c",text:"It is cold.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to make someone slightly angry'?", options: [
+            {id:"a",text:"annoy",is_correct:true},
+            {id:"b",text:"ploy",is_correct:false},
+            {id:"c",text:"deploy",is_correct:false},
+            {id:"d",text:"destroy",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes a sea creature that makes pearls?", options: [
+            {id:"a",text:"oyster",is_correct:true},
+            {id:"b",text:"buoy",is_correct:false},
+            {id:"c",text:"alloy",is_correct:false},
+            {id:"d",text:"envoy",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 'oy' pronounced in 'joy'?", options: [
+            {id:"a",text:"/ă/",is_correct:false},
+            {id:"b",text:"/ō/",is_correct:false},
+            {id:"c",text:"/oi̯/",is_correct:true},
+            {id:"d",text:"/ĭ/",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to hire for work'?", options: [
+            {id:"a",text:"employ",is_correct:true},
+            {id:"b",text:"deploy",is_correct:false},
+            {id:"c",text:"destroy",is_correct:false},
+            {id:"d",text:"enjoy",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"alloy",is_correct:true},
+            {id:"b",text:"annoy",is_correct:false},
+            {id:"c",text:"boy",is_correct:false},
+            {id:"d",text:"buoy",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word means 'to take pleasure in'?", options: [
+            {id:"a",text:"enjoy",is_correct:true},
+            {id:"b",text:"ploy",is_correct:false},
+            {id:"c",text:"coy",is_correct:false},
+            {id:"d",text:"soy",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"destroy",is_correct:false},
+            {id:"b",text:"employ",is_correct:false},
+            {id:"c",text:"loyal",is_correct:true},
+            {id:"d",text:"soybean",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'The envoy brought a message,' what is an 'envoy'?", options: [
+            {id:"a",text:"a messenger",is_correct:true},
+            {id:"b",text:"a king",is_correct:false},
+            {id:"c",text:"a ship",is_correct:false},
+            {id:"d",text:"a toy",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'a floating marker in water'?", options: [
+            {id:"a",text:"buoy",is_correct:true},
+            {id:"b",text:"boy",is_correct:false},
+            {id:"c",text:"alloy",is_correct:false},
+            {id:"d",text:"ploy",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same vowel sound as 'coin'?", options: [
+            {id:"a",text:"boy",is_correct:true},
+            {id:"b",text:"only",is_correct:false},
+            {id:"c",text:"money",is_correct:false},
+            {id:"d",text:"journey",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /y/ and has 'oy' = /oi̯/?", options: [
+            {id:"a",text:"boy",is_correct:true},
+            {id:"b",text:"alloy",is_correct:false},
+            {id:"c",text:"deploy",is_correct:false},
+            {id:"d",text:"destroy",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'coy' mean?", options: [
+            {id:"a",text:"shy or modest",is_correct:true},
+            {id:"b",text:"angry",is_correct:false},
+            {id:"c",text:"happy",is_correct:false},
+            {id:"d",text:"loud",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes a mixture of metals?", options: [
+            {id:"a",text:"alloy",is_correct:true},
+            {id:"b",text:"buoy",is_correct:false},
+            {id:"c",text:"envoy",is_correct:false},
+            {id:"d",text:"ploy",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'to send out for a specific purpose'?", options: [
+            {id:"a",text:"deploy",is_correct:true},
+            {id:"b",text:"employ",is_correct:false},
+            {id:"c",text:"annoy",is_correct:false},
+            {id:"d",text:"destroy",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has 'oy' but does NOT say /oi̯/?", options: [
+            {id:"a",text:"only",is_correct:true},
+            {id:"b",text:"boy",is_correct:false},
+            {id:"c",text:"toy",is_correct:false},
+            {id:"d",text:"joy",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/b oy/g, 'boy'], [/f ault/g, 'fault'], [/f launt/g, 'flaunt'], [/p oint/g, 'point'], [/p ool/g, 'pool'], [/p ooch/g, 'pooch'], [/p lain/g, 'plain'],
+        [/s our/g, 'sour'], [/f rown/g, 'frown'], [/c rown/g, 'crown'], [/d rown/g, 'drown']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 105*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -200,8 +363,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -209,6 +372,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -219,9 +440,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
