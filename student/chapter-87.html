@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 88 — Vowel Team Syllables (ea) Part 3"/>
-  <title>Mini OpenStax — Lesson 88: Vowel Team ea (Part 3)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 88: ea Vowel Team Pattern Continued"/>
+  <title>Mini OpenStax — Lesson 88: ea Vowel Team Pattern (Part 3)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 88: Vowel Team ea (Part 3)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH88: Decode words with the long e vowel team (ea) featuring varied onset blends</div>
+        <h1 id="chapter-title">Lesson 88: ea Vowel Team (Part 3)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH88: Decode more words with the /ea/ vowel team</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words featuring the <strong>ea</strong> vowel team (pronounced /e/):</p>
+        <p>Target words with the <strong>ea</strong> vowel team:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–88:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,15 +80,28 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 87;    // chapter-87.html = Lesson 88
-      const maxChapter = 150;        
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 87; // chapter-87.html = Lesson 88
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 88: Vowel Team ea (Part 3)",
-        loTags: ["LO PH88: Decode words with the long e vowel team (ea) featuring varied onset blends"],
+        title: "Lesson 88: ea Vowel Team (Part 3)",
+        loTags: ["LO PH88: Decode more words with the /ea/ vowel team"],
         contentWords: [
-          "fear", "feat", "feast", "flea", "freak", "gear", "gleam", "Jean", "heal", "heap", "hear", "heat", "lead", "leaf", "leak", "lean", "leap", "leash", "least", "meal", "mean", "meat", "near", "neat", "Neal"
+          "fear", "feat", "feast", "flea", "freak", "gear", "gleam",
+          "Jean", "heal", "heap", "hear", "heat", "lead", "leaf",
+          "leak", "lean", "leap", "leash", "least", "meal", "mean",
+          "meat", "near", "neat", "Neal"
         ],
         sentences: [
           "1) Neal can heat up a meal in a pan.",
@@ -91,112 +115,103 @@
           "9) Neal will eat lean meat, but not fat meat.",
           "10) Did a flea leap from a leaf and land on the dog?"
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What can Neal heat up in a pan?", options: [{id:"a",text:"a meal",is_correct:true},{id:"b",text:"a leaf",is_correct:false},{id:"c",text:"a leash",is_correct:false},{id:"d",text:"a feat",is_correct:false}] },
-          { id: "2", prompt: "How did Jean keep her desk?", options: [{id:"a",text:"neat and clean",is_correct:true},{id:"b",text:"lean and mean",is_correct:false},{id:"c",text:"near the sea",is_correct:false},{id:"d",text:"neat and cheap",is_correct:false}] },
-          { id: "3", prompt: "What must you do for someone to hear you?", options: [{id:"a",text:"speak up",is_correct:true},{id:"b",text:"leap up",is_correct:false},{id:"c",text:"heal up",is_correct:false},{id:"d",text:"lean up",is_correct:false}] },
-          { id: "4", prompt: "Where did Neal sit?", options: [{id:"a",text:"on the beach near the sea",is_correct:true},{id:"b",text:"on a heap of leaves",is_correct:false},{id:"c",text:"on a desk in the shop",is_correct:false},{id:"d",text:"on a gear in the truck",is_correct:false}] },
-          { id: "5", prompt: "What does Jean use to lead her dog?", options: [{id:"a",text:"a leash",is_correct:true},{id:"b",text:"a leaf",is_correct:false},{id:"c",text:"a meal",is_correct:false},{id:"d",text:"a gear",is_correct:false}] },
-          { id: "6", prompt: "What can a leaking pen drip on a pad?", options: [{id:"a",text:"ink",is_correct:true},{id:"b",text:"meat",is_correct:false},{id:"c",text:"cream",is_correct:false},{id:"d",text:"steam",is_correct:false}] },
-          { id: "7", prompt: "What happens to a cut in the skin so it can heal?", options: [{id:"a",text:"it will get a scab",is_correct:true},{id:"b",text:"it will get a leaf",is_correct:false},{id:"c",text:"it will leap",is_correct:false},{id:"d",text:"it will scream",is_correct:false}] },
-          { id: "8", prompt: "What kind of meat will Neal eat?", options: [{id:"a",text:"lean meat",is_correct:true},{id:"b",text:"fat meat",is_correct:false},{id:"c",text:"cheap meat",is_correct:false},{id:"d",text:"clean meat",is_correct:false}] },
-          { id: "9", prompt: "From where did the flea leap?", options: [{id:"a",text:"from a leaf",is_correct:true},{id:"b",text:"from a heap",is_correct:false},{id:"c",text:"from the sea",is_correct:false},{id:"d",text:"from a pan",is_correct:false}] },
-          { id: "10", prompt: "Where did the flea land?", options: [{id:"a",text:"on the dog",is_correct:true},{id:"b",text:"on Neal",is_correct:false},{id:"c",text:"on the desk",is_correct:false},{id:"d",text:"on the beach",is_correct:false}] },
-          { id: "11", prompt: "Which word means a large party or meal?", options: [{id:"a",text:"feast",is_correct:true},{id:"b",text:"fear",is_correct:false},{id:"c",text:"feat",is_correct:false},{id:"d",text:"freak",is_correct:false}] },
-          { id: "12", prompt: "Which word rhymes with 'clear'?", options: [{id:"a",text:"gear",is_correct:true},{id:"b",text:"gleam",is_correct:false},{id:"c",text:"great",is_correct:false},{id:"d",text:"glee",is_correct:false}] },
-          { id: "13", prompt: "Which word means to get better after being sick or hurt?", options: [{id:"a",text:"heal",is_correct:true},{id:"b",text:"hear",is_correct:false},{id:"c",text:"heat",is_correct:false},{id:"d",text:"heap",is_correct:false}] },
-          { id: "14", prompt: "Which word means a large pile of things?", options: [{id:"a",text:"heap",is_correct:true},{id:"b",text:"heal",is_correct:false},{id:"c",text:"heat",is_correct:false},{id:"d",text:"hear",is_correct:false}] },
-          { id: "15", prompt: "Which word means to jump a long way?", options: [{id:"a",text:"leap",is_correct:true},{id:"b",text:"lean",is_correct:false},{id:"c",text:"least",is_correct:false},{id:"d",text:"leash",is_correct:false}] },
-          { id: "16", prompt: "Which word refers to a small insect that jumps?", options: [{id:"a",text:"flea",is_correct:true},{id:"b",text:"feat",is_correct:false},{id:"c",text:"freak",is_correct:false},{id:"d",text:"fear",is_correct:false}] },
-          { id: "17", prompt: "Which word means something is very tidy?", options: [{id:"a",text:"neat",is_correct:true},{id:"b",text:"near",is_correct:false},{id:"c",text:"mean",is_correct:false},{id:"d",text:"meat",is_correct:false}] },
-          { id: "18", prompt: "Which word means not far away?", options: [{id:"a",text:"near",is_correct:true},{id:"b",text:"neat",is_correct:false},{id:"c",text:"mean",is_correct:false},{id:"d",text:"meat",is_correct:false}] },
-          { id: "19", prompt: "Which word is the name for food from an animal?", options: [{id:"a",text:"meat",is_correct:true},{id:"b",text:"mean",is_correct:false},{id:"c",text:"meal",is_correct:false},{id:"d",text:"near",is_correct:false}] },
-          { id: "20", prompt: "Which word means the smallest amount?", options: [{id:"a",text:"least",is_correct:true},{id:"b",text:"leash",is_correct:false},{id:"c",text:"leap",is_correct:false},{id:"d",text:"lean",is_correct:false}] }
+          { id: "1", prompt: "How can Neal prepare his meal?", options: [{id:"a",text:"heat it in a pan",is_correct:true},{id:"b",text:"eat it cold",is_correct:false},{id:"c",text:"keep it on a heap",is_correct:false},{id:"d",text:"put it on a leaf",is_correct:false}]},
+          { id: "2", prompt: "How did Jean keep her desk?", options: [{id:"a",text:"neat and clean",is_correct:true},{id:"b",text:"mean and lean",is_correct:false},{id:"c",text:"messy and wet",is_correct:false},{id:"d",text:"full of junk",is_correct:false}]},
+          { id: "3", prompt: "What must you do for me to hear you?", options: [{id:"a",text:"speak up",is_correct:true},{id:"b",text:"lean back",is_correct:false},{id:"c",text:"leap up",is_correct:false},{id:"d",text:"stay neat",is_correct:false}]},
+          { id: "4", prompt: "What question was asked about someone's words?", options: [{id:"a",text:"Did you mean what you said?",is_correct:true},{id:"b",text:"Did you hear the gear?",is_correct:false},{id:"c",text:"Did you see the flea?",is_correct:false},{id:"d",text:"Did you eat the meat?",is_correct:false}]},
+          { id: "5", prompt: "Where did Neal sit?", options: [{id:"a",text:"on the beach near the sea",is_correct:true},{id:"b",text:"on a heap of leaves",is_correct:false},{id:"c",text:"in a pan",is_correct:false},{id:"d",text:"under the gear",is_correct:false}]},
+          { id: "6", prompt: "What does Jean use to lead her dog?", options: [{id:"a",text:"a leash",is_correct:true},{id:"b",text:"a leaf",is_correct:false},{id:"c",text:"a beam",is_correct:false},{id:"d",text:"a cleat",is_correct:false}]},
+          { id: "7", prompt: "What happens if a pen has a leak?", options: [{id:"a",text:"it drips ink on the pad",is_correct:true},{id:"b",text:"it heals the skin",is_correct:false},{id:"c",text:"it becomes neat",is_correct:false},{id:"d",text:"it lands on the dog",is_correct:false}]},
+          { id: "8", prompt: "What forms on a cut to help it heal?", options: [{id:"a",text:"a scab",is_correct:true},{id:"b",text:"a leak",is_correct:false},{id:"c",text:"a flea",is_correct:false},{id:"d",text:"a meal",is_correct:false}]},
+          { id: "9", prompt: "What kind of meat does Neal eat?", options: [{id:"a",text:"lean meat",is_correct:true},{id:"b",text:"fat meat",is_correct:false},{id:"c",text:"cheap meat",is_correct:false},{id:"d",text:"hot meat",is_correct:false}]},
+          { id: "10", prompt: "Where did the flea leap from?", options: [{id:"a",text:"a leaf",is_correct:true},{id:"b",text:"the sea",is_correct:false},{id:"c",text:"a pan",is_correct:false},{id:"d",text:"a desk",is_correct:false}]},
+          { id: "11", prompt: "Which word means a large meal or celebration?", options: [{id:"a",text:"feast",is_correct:true},{id:"b",text:"feat",is_correct:false},{id:"c",text:"fear",is_correct:false},{id:"d",text:"freak",is_correct:false}]},
+          { id: "12", prompt: "Which word is a small jumping insect?", options: [{id:"a",text:"flea",is_correct:true},{id:"b",text:"leaf",is_correct:false},{id:"c",text:"leak",is_correct:false},{id:"d",text:"neat",is_correct:false}]},
+          { id: "13", prompt: "Which word means to jump a long distance?", options: [{id:"a",text:"leap",is_correct:true},{id:"b",text:"lean",is_correct:false},{id:"c",text:"leak",is_correct:false},{id:"d",text:"lead",is_correct:false}]},
+          { id: "14", prompt: "Which word describes a bright, soft light or glow?", options: [{id:"a",text:"gleam",is_correct:true},{id:"b",text:"gear",is_correct:false},{id:"c",text:"heal",is_correct:false},{id:"d",text:"heap",is_correct:false}]},
+          { id: "15", prompt: "Which word is the green part of a plant?", options: [{id:"a",text:"leaf",is_correct:true},{id:"b",text:"leash",is_correct:false},{id:"c",text:"least",is_correct:false},{id:"d",text:"meal",is_correct:false}]},
+          { id: "16", prompt: "Which word refers to equipment or tools?", options: [{id:"a",text:"gear",is_correct:true},{id:"b",text:"heap",is_correct:false},{id:"c",text:"near",is_correct:false},{id:"d",text:"mean",is_correct:false}]},
+          { id: "17", prompt: "Which word means an impressive achievement or act?", options: [{id:"a",text:"feat",is_correct:true},{id:"b",text:"fear",is_correct:false},{id:"c",text:"feast",is_correct:false},{id:"d",text:"freak",is_correct:false}]},
+          { id: "18", prompt: "Which word means to be close to something?", options: [{id:"a",text:"near",is_correct:true},{id:"b",text:"neat",is_correct:false},{id:"c",text:"mean",is_correct:false},{id:"d",text:"least",is_correct:false}]},
+          { id: "19", prompt: "A pile of things is called a ____.", options: [{id:"a",text:"heap",is_correct:true},{id:"b",text:"heat",is_correct:false},{id:"c",text:"heal",is_correct:false},{id:"d",text:"hear",is_correct:false}]},
+          { id: "20", prompt: "Which word means the smallest amount?", options: [{id:"a",text:"least",is_correct:true},{id:"b",text:"lean",is_correct:false},{id:"c",text:"lead",is_correct:false},{id:"d",text:"leap",is_correct:false}]}
         ]
       };
 
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        document.getElementById('sentences').innerHTML =
+          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
-          });
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > maxChapter) break;
+          buttons.push({ label: `Lesson ${lessonNum}`, url: `chapter-${c}.html`, active: i === 0 });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b => `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
-
+        let correctCount = 0, correctList = [], incorrectList = [];
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
-          if (isCorrect) {
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          if (ans === correctId) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 88*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/20 (${Math.round(score/20*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT:\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT:\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
-          </div>
-        `;
+            <h3>📊 Results: ${score}/20</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : 'Keep practicing.'}</strong></p>
+            <p>Time: ${timeOnTask}s | Attempts: ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report via WhatsApp</a>
+          </div>`;
       }
 
       function setupQuizListeners() {
@@ -204,25 +219,43 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
-          if (answers.includes(null)) {
-            alert("Please answer all questions.");
-            return;
-          }
+          if (answers.includes(null)) { alert("Please answer all questions."); return; }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        promptDiv.style.display = 'block';
+        if (saved) {
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `<button type="button" class="btn" id="keep-btn">✅ Keep This Name</button> <button type="button" class="btn btn-secondary" id="change-btn">✏️ Change</button>`;
+          document.getElementById('keep-btn').onclick = () => { promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; };
+          document.getElementById('change-btn').onclick = () => { display.style.display = 'none'; input.style.display = 'block'; input.value = ''; input.focus(); buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save & Start</button>`; document.getElementById('save-new').onclick = saveName; };
+        } else {
+          display.style.display = 'none'; input.style.display = 'block'; buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save & Start</button>`; document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) { localStorage.setItem('student_name', name); promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; }
+          else { alert("Please enter your name."); }
+        }
       }
 
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-        renderNavigation();
-        renderWords();
-        renderSentences();
-        renderQuiz();
-        setupQuizListeners();
+        renderNavigation(); renderWords(); renderSentences(); renderQuiz(); setupQuizListeners(); initNamePrompt();
       }
 
       init();
