@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 79 – unk"/>
-  <title>Mini OpenStax — Lesson 79 – unk</title>
+  <meta name="description" content="Mini OpenStax: Lesson 79: The 'unk' Pattern"/>
+  <title>Mini OpenStax — Lesson 79: The 'unk' Pattern</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
     .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
     .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 79 – unk</h1>
-        <div class="lo-tags" id="lo-tags">Closed syllables: nk → unk</div>
+        <h1 id="chapter-title">Lesson 79: The 'unk' Pattern</h1>
+        <div class="lo-tags" id="lo-tags">LO PH79: Decode and read words with the 'unk' (/ʌŋk/) pattern</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Read and say each word.</p>
+        <p>These words all end with the <strong>'unk'</strong> sound (/ʌŋk/):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -84,7 +84,7 @@
 
       function createSeededRNG(seed) {
         let state = Math.abs((seed * 9301 + 49297) % 233280);
-        return function() {
+        return () => {
           state = (state * 9301 + 49297) % 233280;
           return state / 233280;
         };
@@ -105,12 +105,11 @@
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 79 – unk",
-        loTags: ["Closed syllables: nk → unk"],
+        title: "Lesson 79: The 'unk' Pattern",
+        loTags: ["LO PH79: Decode and read words with the 'unk' (/ʌŋk/) pattern"],
         contentWords: [
-          "sunk","junk","bunk","hunk","dunk",
-          "flunk","plunk","slunk","skunk","stunk",
-          "chunk","drunk","trunk","shrunk"
+          "sunk", "junk", "bunk", "hunk", "dunk", "flunk", "plunk", "slunk",
+          "skunk", "stunk", "chunk", "drunk", "trunk", "shrunk"
         ],
         sentences: [
           "Max cut a chunk from a ham.",
@@ -118,21 +117,144 @@
           "Frank slept on a bunk bed at camp.",
           "Frank can dunk Hank in the pond.",
           "Kim kept her junk in a big trunk.",
-          "Beth did not flunk the big math test.",
-          "The dog ran from the skunk. The skunk stunk!",
+          "Beth did not f lunk the big math test.",
+          "The dog ran from the skunk.",
+          "The skunk stunk!",
           "Brad had let the cap get wet, and it had shrunk."
         ],
-        assessmentItems: Array.from({ length: 20 }, (_, i) => ({
-          id: i + 1,
-          prompt: "Which word has the unk spelling pattern?",
-          options: [
-            { id: "A", text: ["junk","bunk","chunk","skunk","trunk","drunk","shrunk","stunk"][i % 8], is_correct: true },
-            { id: "B", text: "bank", is_correct: false },
-            { id: "C", text: "sand", is_correct: false },
-            { id: "D", text: "ring", is_correct: false }
-          ]
-        }))
+        assessmentItems: [
+          { id: "1", prompt: "Which word ends with the 'unk' sound?", options: [
+            {id:"a",text:"chunk",is_correct:true},
+            {id:"b",text:"chump",is_correct:false},
+            {id:"c",text:"crank",is_correct:false},
+            {id:"d",text:"clump",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word rhymes with 'bunk'?", options: [
+            {id:"a",text:"junk",is_correct:true},
+            {id:"b",text:"jump",is_correct:false},
+            {id:"c",text:"bank",is_correct:false},
+            {id:"d",text:"bump",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'to fail a test'?", options: [
+            {id:"a",text:"shrink",is_correct:false},
+            {id:"b",text:"stink",is_correct:false},
+            {id:"c",text:"flunk",is_correct:true},
+            {id:"d",text:"drunk",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word has the same ending sound as 'skunk'?", options: [
+            {id:"a",text:"trunk",is_correct:true},
+            {id:"b",text:"truck",is_correct:false},
+            {id:"c",text:"think",is_correct:false},
+            {id:"d",text:"spunk",is_correct:false}
+          ]},
+          { id: "5", prompt: "What word means 'a large piece'?", options: [
+            {id:"a",text:"hunk",is_correct:true},
+            {id:"b",text:"punk",is_correct:false},
+            {id:"c",text:"hunt",is_correct:false},
+            {id:"d",text:"honk",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which is NOT a real 'unk' word?", options: [
+            {id:"a",text:"slunk",is_correct:false},
+            {id:"b",text:"plunk",is_correct:false},
+            {id:"c",text:"zunk",is_correct:true},
+            {id:"d",text:"drunk",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which sentence uses 'shrunk' correctly?", options: [
+            {id:"a",text:"The shirt shrunk in the wash.",is_correct:true},
+            {id:"b",text:"He shrunk the dog with a spell.",is_correct:false},
+            {id:"c",text:"She shrunk her math grade.",is_correct:false},
+            {id:"d",text:"They shrunk to the store.",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word is spelled correctly?", options: [
+            {id:"a",text:"stunk",is_correct:true},
+            {id:"b",text:"stunck",is_correct:false},
+            {id:"c",text:"stunke",is_correct:false},
+            {id:"d",text:"stunq",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'rubbish or worthless items'?", options: [
+            {id:"a",text:"trunk",is_correct:false},
+            {id:"b",text:"junk",is_correct:true},
+            {id:"c",text:"bunk",is_correct:false},
+            {id:"d",text:"sunk",is_correct:false}
+          ]},
+          { id: "10", prompt: "What does 'slunk' mean?", options: [
+            {id:"a",text:"To jump high",is_correct:false},
+            {id:"b",text:"To move quietly and sneakily",is_correct:true},
+            {id:"c",text:"To drink too much",is_correct:false},
+            {id:"d",text:"To fall asleep",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word fits: 'The pirate hid his treasure in a ___.'", options: [
+            {id:"a",text:"bunk",is_correct:false},
+            {id:"b",text:"trunk",is_correct:true},
+            {id:"c",text:"drunk",is_correct:false},
+            {id:"d",text:"flunk",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is the past tense of 'shrink'?", options: [
+            {id:"a",text:"shrank",is_correct:false},
+            {id:"b",text:"shrunk",is_correct:true},
+            {id:"c",text:"shrinked",is_correct:false},
+            {id:"d",text:"shrunken",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word has a silent letter?", options: [
+            {id:"a",text:"chunk",is_correct:false},
+            {id:"b",text:"junk",is_correct:false},
+            {id:"c",text:"knife",is_correct:true},
+            {id:"d",text:"skunk",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which 'unk' word is often associated with an animal that sprays?", options: [
+            {id:"a",text:"skunk",is_correct:true},
+            {id:"b",text:"stunk",is_correct:false},
+            {id:"c",text:"sunk",is_correct:false},
+            {id:"d",text:"plunk",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word means 'to lower (a basketball) through the hoop'?", options: [
+            {id:"a",text:"dunk",is_correct:true},
+            {id:"b",text:"bunk",is_correct:false},
+            {id:"c",text:"hunk",is_correct:false},
+            {id:"d",text:"junk",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which is a real word?", options: [
+            {id:"a",text:"crunk",is_correct:false},
+            {id:"b",text:"plunk",is_correct:true},
+            {id:"c",text:"brunk",is_correct:false},
+            {id:"d",text:"grunk",is_correct:false}
+          ]},
+          { id: "17", prompt: "Choose the sentence with a typo:", options: [
+            {id:"a",text:"He flunked the quiz.",is_correct:false},
+            {id:"b",text:"She f lunked the quiz.",is_correct:true},
+            {id:"c",text:"They sank the boat.",is_correct:false},
+            {id:"d",text:"The cat slunk away.",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word is NOT related to 'unk'?", options: [
+            {id:"a",text:"trunk",is_correct:false},
+            {id:"b",text:"bunk",is_correct:false},
+            {id:"c",text:"sunk",is_correct:false},
+            {id:"d",text:"crank",is_correct:true}
+          ]},
+          { id: "19", prompt: "What sound does 'unk' make in these words?", options: [
+            {id:"a",text:"/uːŋk/",is_correct:false},
+            {id:"b",text:"/ʌŋk/",is_correct:true},
+            {id:"c",text:"/ʊŋk/",is_correct:false},
+            {id:"d",text:"/oʊŋk/",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word would you use to describe a smelly garbage can?", options: [
+            {id:"a",text:"stunk",is_correct:true},
+            {id:"b",text:"sunk",is_correct:false},
+            {id:"c",text:"junk",is_correct:false},
+            {id:"d",text:"bunk",is_correct:false}
+          ]}
+        ]
       };
+
+      const TYPO_CORRECTIONS = [
+        [/f lunk/g, 'flunk'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring']
+      ];
 
       function renderWords() {
         document.getElementById('word-list').innerHTML =
@@ -140,8 +262,15 @@
       }
 
       function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
@@ -165,20 +294,68 @@
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-        const seed = currentChapter * 1000000 + (Date.now() % 1000000);
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const opts = shuffleWithSeed([...q.options], seed + q.id);
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
           const correct = q.options.find(o => o.is_correct);
           window.quizCorrectMap[q.id] = correct.id;
 
-          const optHtml = opts.map((o, i) => {
-            const L = String.fromCharCode(65 + i);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
 
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0, correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
+          }
+        });
+
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
       }
 
       function setupQuizListeners() {
@@ -197,18 +374,62 @@
         });
       }
 
-      function showFeedback(answers) {
-        let correctCount = 0;
-        CHAPTER_CONFIG.assessmentItems.forEach((item, i) => {
-          if (answers[i] === window.quizCorrectMap[item.id]) correctCount++;
-        });
-        document.getElementById('feedback').innerHTML =
-          `<div class="feedback"><h3>📊 Results: ${correctCount}/20</h3></div>`;
-      }
-
       function initNamePrompt() {
-        document.getElementById('student-name-prompt').style.display = 'none';
-        document.getElementById('quiz-container').style.display = 'block';
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
