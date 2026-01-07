@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 114 — Endings with s as /z/ (Part 2)"/>
-  <title>Mini OpenStax — Lesson 114: s as /z/ Endings Continued</title>
+  <meta name="description" content="Mini OpenStax: Lesson 114: s=/z/"/>
+  <title>Mini OpenStax — Lesson 114: s=/z/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 114: s as /z/ Endings Continued</h1>
-        <div class="lo-tags" id="lo-tags">LO PH114: Decode plural and verb endings where 's' makes the voiced /z/ sound after vowels and voiced consonants.</div>
+        <h1 id="chapter-title">Lesson 114: s=/z/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH114: Decode words where "s" says /z/ (continued)</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words where the ending <strong>-s</strong> makes the <strong>/z/</strong> sound (voiced):</p>
+        <p>Words where "s" says /z/ (after voiced sounds):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. Remember that the "s" at the end of these words sounds like a buzzing "z":</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -67,132 +80,279 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 113;    // chapter-113.html = Lesson 114
-      const maxChapter = 150;        
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 113;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 114: s as /z/ Endings Continued",
-        loTags: ["LO PH114: Decode plural and verb endings where 's' makes the voiced /z/ sound after vowels and voiced consonants."],
+        title: "Lesson 114: s=/z/",
+        loTags: ["LO PH114: Decode words where \"s\" says /z/ (continued)"],
         contentWords: [
-          "seems", "dreams", "plans", "twins", "means", "jeans", "cleans", "rains", "towns", "ears", "years", "fears", "cheers", "stairs", "laws", "paws", "claws", "days", "ways", "boys", "toys", "peas", "trees", "comes", "leaves", "gives", "sleeves", "lives"
+          "plans", "dreams", "teams", "leaves", "lives", "caves", "sleeves", "moves", "loves", "shoves", "proves", "grooves", "shelves", "wolves", "halves", "knives", "wives", "gives", "drives", "bees"
         ],
         sentences: [
-          "1) The two boys seem to be twins.",
-          "2) Mom will give the boys some toys to play with.",
-          "3) Nell has a pair of black jeans.",
-          "4) Ray lives on the west coast, near the sea.",
-          "5) Rick will be gone on a trip for three days.",
-          "6) When it rains, the streets are wet and slick.",
-          "7) The leaves on the trees are green in the spring.",
-          "8) The sleeves on the blouse were too long for Joy.",
-          "9) The hound has ears that droop and a tail that wags.",
-          "10) In two years, Ann will be three and Glen will be ten."
+          "Ann has big dreams for her life.",
+          "She plans to work with a team of vets.",
+          "The wolves live in caves in the cold north.",
+          "Bees move from flower to flower to get nectar.",
+          "He gives his wife a bunch of fresh red roses.",
+          "The shelves were full of books and old jars.",
+          "She loves to drive her new red sports car.",
+          "The wolves hunt in packs and eat raw meat."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What do the two boys seem to be?", options: [{id:"a",text:"friends",is_correct:false},{id:"b",text:"twins",is_correct:true},{id:"c",text:"scouts",is_correct:false},{id:"d",text:"clowns",is_correct:false}] },
-          { id: "2", prompt: "What will Mom give the boys to play with?", options: [{id:"a",text:"jeans",is_correct:false},{id:"b",text:"some toys",is_correct:true},{id:"c",text:"peas",is_correct:false},{id:"d",text:"paws",is_correct:false}] },
-          { id: "3", prompt: "What color are Nell's jeans?", options: [{id:"a",text:"blue",is_correct:false},{id:"b",text:"black",is_correct:true},{id:"c",text:"gray",is_correct:false},{id:"d",text:"green",is_correct:false}] },
-          { id: "4", prompt: "Where does Ray live?", options: [{id:"a",text:"near the hills",is_correct:false},{id:"b",text:"on the west coast",is_correct:true},{id:"c",text:"in the south",is_correct:false},{id:"d",text:"at the ranch",is_correct:false}] },
-          { id: "5", prompt: "How long will Rick be gone on his trip?", options: [{id:"a",text:"two years",is_correct:false},{id:"b",text:"three days",is_correct:true},{id:"c",text:"ten days",is_correct:false},{id:"d",text:"three weeks",is_correct:false}] },
-          { id: "6", prompt: "What happens to the streets when it rains?", options: [{id:"a",text:"they get clean",is_correct:false},{id:"b",text:"they are wet and slick",is_correct:true},{id:"c",text:"they freeze",is_correct:false},{id:"d",text:"they have leaves",is_correct:false}] },
-          { id: "7", prompt: "When are the leaves on the trees green?", options: [{id:"a",text:"in the fall",is_correct:false},{id:"b",text:"in the spring",is_correct:true},{id:"c",text:"each day",is_correct:false},{id:"d",text:"in the morning",is_correct:false}] },
-          { id: "8", prompt: "What part of Joy's blouse was too long?", options: [{id:"a",text:"the sleeves",is_correct:true},{id:"b",text:"the collar",is_correct:false},{id:"c",text:"the seam",is_correct:false},{id:"d",text:"the cuffs",is_correct:false}] },
-          { id: "9", prompt: "What does the hound's tail do?", options: [{id:"a",text:"droops",is_correct:false},{id:"b",text:"wags",is_correct:true},{id:"c",text:"snaps",is_correct:false},{id:"d",text:"claws",is_correct:false}] },
-          { id: "10", prompt: "How old will Glen be in two years?", options: [{id:"a",text:"three",is_correct:false},{id:"b",text:"ten",is_correct:true},{id:"c",text:"twelve",is_correct:false},{id:"d",text:"seven",is_correct:false}] },
-          { id: "11", prompt: "Which word rhymes with 'clean'?", options: [{id:"a",text:"jeans",is_correct:true},{id:"b",text:"plans",is_correct:false},{id:"c",text:"rains",is_correct:false},{id:"d",text:"means",is_correct:true}] },
-          { id: "12", prompt: "Which word means more than one tree?", options: [{id:"a",text:"trees",is_correct:true},{id:"b",text:"treese",is_correct:false},{id:"c",text:"treez",is_correct:false},{id:"d",text:"tray",is_correct:false}] },
-          { id: "13", prompt: "Which word is the plural of 'paw'?", options: [{id:"a",text:"paws",is_correct:true},{id:"b",text:"pawsy",is_correct:false},{id:"c",text:"pawsing",is_correct:false},{id:"d",text:"pawsed",is_correct:false}] },
-          { id: "14", prompt: "Complete the word: dr _ _ ms (thoughts during sleep).", options: [{id:"a",text:"ea",is_correct:true},{id:"b",text:"ee",is_correct:false},{id:"c",text:"ai",is_correct:false},{id:"d",text:"oa",is_correct:false}] },
-          { id: "15", prompt: "Which word means more than one town?", options: [{id:"a",text:"towns",is_correct:true},{id:"b",text:"townes",is_correct:false},{id:"c",text:"town",is_correct:false},{id:"d",text:"towning",is_correct:false}] },
-          { id: "16", prompt: "In 'lives', the 's' sounds like:", options: [{id:"a",text:"/s/ (hiss)",is_correct:false},{id:"b",text:"/z/ (buzz)",is_correct:true},{id:"c",text:"/sh/",is_correct:false},{id:"d",text:"/ch/",is_correct:false}] },
-          { id: "17", prompt: "Which word means to shout with joy?", options: [{id:"a",text:"cheers",is_correct:true},{id:"b",text:"fears",is_correct:false},{id:"c",text:"stairs",is_correct:false},{id:"d",text:"years",is_correct:false}] },
-          { id: "18", prompt: "Which word is a small green vegetable?", options: [{id:"a",text:"peas",is_correct:true},{id:"b",text:"trees",is_correct:false},{id:"c",text:"bees",is_correct:false},{id:"d",text:"ways",is_correct:false}] },
-          { id: "19", prompt: "What is the plural of 'day'?", options: [{id:"a",text:"days",is_correct:true},{id:"b",text:"daise",is_correct:false},{id:"c",text:"dayes",is_correct:false},{id:"d",text:"daysz",is_correct:false}] },
-          { id: "20", prompt: "Which word refers to parts of a jacket for arms?", options: [{id:"a",text:"sleeves",is_correct:true},{id:"b",text:"leaves",is_correct:false},{id:"c",text:"jeans",is_correct:false},{id:"d",text:"claws",is_correct:false}] }
+          { id: "1", prompt: "Which word has 's' that says /z/ as in 'dreams'?", options: [
+            {id:"a",text:"cats",is_correct:false},
+            {id:"b",text:"dreams",is_correct:true},
+            {id:"c",text:"bus",is_correct:false},
+            {id:"d",text:"miss",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'to have a goal or intention'?", options: [
+            {id:"a",text:"plans",is_correct:true},
+            {id:"b",text:"teams",is_correct:false},
+            {id:"c",text:"leaves",is_correct:false},
+            {id:"d",text:"lives",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'sleeves'?", options: [
+            {id:"a",text:"leaves",is_correct:true},
+            {id:"b",text:"cats",is_correct:false},
+            {id:"c",text:"bus",is_correct:false},
+            {id:"d",text:"miss",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word is the plural of 'wolf'?", options: [
+            {id:"a",text:"wolves",is_correct:true},
+            {id:"b",text:"wolfes",is_correct:false},
+            {id:"c",text:"wolf",is_correct:false},
+            {id:"d",text:"wolfs",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 's' = /z/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"She loves to drive her car.",is_correct:true},
+            {id:"c",text:"It is cold.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to hand over to someone'?", options: [
+            {id:"a",text:"gives",is_correct:true},
+            {id:"b",text:"drives",is_correct:false},
+            {id:"c",text:"moves",is_correct:false},
+            {id:"d",text:"shoves",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes where you store books on a wall?", options: [
+            {id:"a",text:"shelves",is_correct:true},
+            {id:"b",text:"caves",is_correct:false},
+            {id:"c",text:"grooves",is_correct:false},
+            {id:"d",text:"sleeves",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 's' pronounced in 'wives'?", options: [
+            {id:"a",text:"/s/ as in 'bus'",is_correct:false},
+            {id:"b",text:"/z/ as in 'dreams'",is_correct:true},
+            {id:"c",text:"/ʃ/",is_correct:false},
+            {id:"d",text:"silent",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to operate a vehicle'?", options: [
+            {id:"a",text:"drives",is_correct:true},
+            {id:"b",text:"moves",is_correct:false},
+            {id:"c",text:"shoves",is_correct:false},
+            {id:"d",text:"proves",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"bees",is_correct:true},
+            {id:"b",text:"caves",is_correct:false},
+            {id:"c",text:"dreams",is_correct:false},
+            {id:"d",text:"drives",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word means 'to show something is true'?", options: [
+            {id:"a",text:"proves",is_correct:true},
+            {id:"b",text:"shoves",is_correct:false},
+            {id:"c",text:"moves",is_correct:false},
+            {id:"d",text:"loves",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"grooves",is_correct:false},
+            {id:"b",text:"halves",is_correct:false},
+            {id:"c",text:"dogs",is_correct:true},
+            {id:"d",text:"knives",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'Bees move from flower to flower,' what do bees collect?", options: [
+            {id:"a",text:"nectar",is_correct:true},
+            {id:"b",text:"water",is_correct:false},
+            {id:"c",text:"leaves",is_correct:false},
+            {id:"d",text:"rocks",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to push with force'?", options: [
+            {id:"a",text:"shoves",is_correct:true},
+            {id:"b",text:"moves",is_correct:false},
+            {id:"c",text:"drives",is_correct:false},
+            {id:"d",text:"gives",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same 's' sound as 'teams'?", options: [
+            {id:"a",text:"dreams",is_correct:true},
+            {id:"b",text:"cats",is_correct:false},
+            {id:"c",text:"bus",is_correct:false},
+            {id:"d",text:"miss",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /z/ and means 'female spouses'?", options: [
+            {id:"a",text:"wives",is_correct:true},
+            {id:"b",text:"lives",is_correct:false},
+            {id:"c",text:"knives",is_correct:false},
+            {id:"d",text:"halves",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'lives' mean in 'The wolves live in caves'?", options: [
+            {id:"a",text:"resides or dwells",is_correct:true},
+            {id:"b",text:"is alive",is_correct:false},
+            {id:"c",text:"plays",is_correct:false},
+            {id:"d",text:"hunts",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes what you wear over your arms on a shirt?", options: [
+            {id:"a",text:"sleeves",is_correct:true},
+            {id:"b",text:"shelves",is_correct:false},
+            {id:"c",text:"caves",is_correct:false},
+            {id:"d",text:"grooves",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'to have deep affection for'?", options: [
+            {id:"a",text:"loves",is_correct:true},
+            {id:"b",text:"shoves",is_correct:false},
+            {id:"c",text:"moves",is_correct:false},
+            {id:"d",text:"drives",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has 's' but does NOT say /z/?", options: [
+            {id:"a",text:"cats",is_correct:true},
+            {id:"b",text:"dreams",is_correct:false},
+            {id:"c",text:"teams",is_correct:false},
+            {id:"d",text:"lives",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p lans/g, 'plans'], [/dr eams/g, 'dreams'], [/s helves/g, 'shelves'], [/p ounds/g, 'pounds']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 114*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -202,8 +362,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -211,6 +371,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -221,9 +439,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
