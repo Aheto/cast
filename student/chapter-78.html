@@ -77,112 +77,157 @@
     </main>
   </div>
 
-<script>
-(function () {
-'use strict';
-window.startTime = Date.now();
+  <script>
+    (function () {
+      'use strict';
+      window.startTime = Date.now();
 
-function createSeededRNG(seed) {
-  let state = Math.abs((seed * 9301 + 49297) % 233280);
-  return function() {
-    state = (state * 9301 + 49297) % 233280;
-    return state / 233280;
-  };
-}
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return function() {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
 
-function shuffleWithSeed(array, seed) {
-  const rng = createSeededRNG(seed);
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
 
-const currentChapter = 78;
-const MAX_CHAPTER = 261;
-const WHATSAPP_NUMBER = "233257320201";
+      const currentChapter = 78;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
-const CHAPTER_CONFIG = {
-  title: "Lesson 79 – unk",
-  loTags: ["Closed syllables: nk → unk"],
-  contentWords: [
-    "sunk","junk","bunk","hunk","dunk","flunk","plunk","slunk",
-    "skunk","stunk","chunk","drunk","trunk","shrunk"
-  ],
-  sentences: [
-    "Max cut a chunk from a ham.",
-    "Max had a hunk of ham at lunch.",
-    "Frank slept on a bunk bed at camp.",
-    "Frank can dunk Hank in the pond.",
-    "Kim kept her junk in a big trunk.",
-    "Beth did not flunk the big math test.",
-    "The dog ran from the skunk. The skunk stunk!",
-    "Brad had let the cap get wet, and it had shrunk."
-  ],
-  assessmentItems: Array.from({length:20},(_,i)=>({
-    id:i+1,
-    prompt:"Which word has the unk spelling pattern?",
-    options:[
-      {id:"A",text:"junk",is_correct:true},
-      {id:"B",text:"bank",is_correct:false},
-      {id:"C",text:"sand",is_correct:false},
-      {id:"D",text:"ring",is_correct:false}
-    ]
-  }))
-};
+      const CHAPTER_CONFIG = {
+        title: "Lesson 79 – unk",
+        loTags: ["Closed syllables: nk → unk"],
+        contentWords: [
+          "sunk","junk","bunk","hunk","dunk",
+          "flunk","plunk","slunk","skunk","stunk",
+          "chunk","drunk","trunk","shrunk"
+        ],
+        sentences: [
+          "Max cut a chunk from a ham.",
+          "Max had a hunk of ham at lunch.",
+          "Frank slept on a bunk bed at camp.",
+          "Frank can dunk Hank in the pond.",
+          "Kim kept her junk in a big trunk.",
+          "Beth did not flunk the big math test.",
+          "The dog ran from the skunk. The skunk stunk!",
+          "Brad had let the cap get wet, and it had shrunk."
+        ],
+        assessmentItems: Array.from({ length: 20 }, (_, i) => ({
+          id: i + 1,
+          prompt: "Which word has the unk spelling pattern?",
+          options: [
+            { id: "A", text: ["junk","bunk","chunk","skunk","trunk","drunk","shrunk","stunk"][i % 8], is_correct: true },
+            { id: "B", text: "bank", is_correct: false },
+            { id: "C", text: "sand", is_correct: false },
+            { id: "D", text: "ring", is_correct: false }
+          ]
+        }))
+      };
 
-function renderNavigation() {
-  const nav=document.getElementById('chapter-nav');
-  const buttons=[{label:"Home",url:"../index.html",active:false}];
-  for(let i=0;i<4;i++){
-    const c=currentChapter+i;
-    if(c>MAX_CHAPTER)break;
-    buttons.push({label:`Lesson ${c+1}`,url:`chapter-${c}.html`,active:i===0});
-  }
-  nav.innerHTML=buttons.map(b=>`<a href="${b.url}" class="chapter-btn ${b.active?'active':''}">${b.label}</a>`).join('');
-}
+      function renderWords() {
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
+      }
 
-function renderWords(){
-  document.getElementById('word-list').innerHTML=
-    CHAPTER_CONFIG.contentWords.map(w=>`<span class="word-item">${w}</span>`).join('');
-}
+      function renderSentences() {
+        document.getElementById('sentences').innerHTML =
+          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+      }
 
-function renderSentences(){
-  document.getElementById('sentences').innerHTML=
-    CHAPTER_CONFIG.sentences.map(s=>`<p>${s}</p>`).join('');
-}
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
+        for (let i = 0; i < 4; i++) {
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
+        }
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
+      }
 
-function renderQuiz(){
-  const form=document.getElementById('quiz-form');
-  window.quizCorrectMap={};
-  const seed=currentChapter*1000000+(Date.now()%1000000);
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+        const seed = currentChapter * 1000000 + (Date.now() % 1000000);
 
-  form.innerHTML=CHAPTER_CONFIG.assessmentItems.map(q=>{
-    const opts=shuffleWithSeed([...q.options],seed+q.id);
-    const correct=q.options.find(o=>o.is_correct);
-    window.quizCorrectMap[q.id]=correct.id;
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffleWithSeed([...q.options], seed + q.id);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
 
-    return `<div class="question"><strong>${q.id}. ${q.prompt}</strong>
-      <div class="options">
-      ${opts.map((o,i)=>`
-        <div class="option">
-          <label><input type="radio" name="q${q.id}" value="${o.id}" required>
-          ${String.fromCharCode(65+i)}. ${o.text}</label>
-        </div>`).join('')}
-      </div></div>`;
-  }).join('');
-}
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
 
-function init(){
-  renderNavigation();
-  renderWords();
-  renderSentences();
-  renderQuiz();
-}
-document.addEventListener('DOMContentLoaded',init);
-})();
-</script>
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function showFeedback(answers) {
+        let correctCount = 0;
+        CHAPTER_CONFIG.assessmentItems.forEach((item, i) => {
+          if (answers[i] === window.quizCorrectMap[item.id]) correctCount++;
+        });
+        document.getElementById('feedback').innerHTML =
+          `<div class="feedback"><h3>📊 Results: ${correctCount}/20</h3></div>`;
+      }
+
+      function initNamePrompt() {
+        document.getElementById('student-name-prompt').style.display = 'none';
+        document.getElementById('quiz-container').style.display = 'block';
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
 </body>
 </html>
