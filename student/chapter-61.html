@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 62 — Consonant Digraph 'ck'"/>
+  <meta name="description" content="Mini OpenStax: Lesson 62: Consonant Digraph ck"/>
   <title>Mini OpenStax — Lesson 62: Consonant Digraph ck</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
@@ -23,11 +23,14 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
@@ -35,28 +38,35 @@
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 62: Consonant Digraph ck</h1>
-        <div class="lo-tags" id="lo-tags">LO PH62: Decode words with the consonant digraph 'ck' in closed syllables</div>
+        <div class="lo-tags" id="lo-tags">LO PH62: Decode words with consonant digraph /ck/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words containing the consonant digraph <strong>ck</strong> in closed syllables:</p>
+        <p>Practice reading words with the consonant digraph <strong>ck</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–62:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -70,13 +80,23 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 61;    // chapter-61.html = Lesson 62
-      const maxChapter = 130;       // Update when adding more lessons
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 61; // chapter-61.html = Lesson 62
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
         title: "Lesson 62: Consonant Digraph ck",
-        loTags: ["LO PH62: Decode words with the consonant digraph 'ck' in closed syllables"],
+        loTags: ["LO PH62: Decode words with consonant digraph /ck/"],
         contentWords: [
           "back", "hack", "jack", "sack", "pack", "rack", "tack", "lack",
           "black", "clack", "slack", "track", "crack", "stack", "snack", "shack", "whack"
@@ -84,7 +104,7 @@
         sentences: [
           "The cup had a crack in the rim.",
           "Jack can chop and hack at a log.",
-          "Beth left her pack on the bus.",
+          "Beth left her p ack on the bus.",
           "Brad can whack a pitch with a bat.",
           "Jack can crack a whip and snap it.",
           "Clint had a snack in a sack at lunch.",
@@ -93,118 +113,226 @@
           "The hat sat on a rack in the back of the shop.",
           "The shop kept a stack of cloth on a shelf in back."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with the digraph 'ck'?", options: [{id:"a",text:"back",is_correct:true},{id:"b",text:"bad",is_correct:false},{id:"c",text:"bag",is_correct:false},{id:"d",text:"bat",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 62 word?", options: [{id:"a",text:"crack",is_correct:false},{id:"b",text:"snack",is_correct:false},{id:"c",text:"click",is_correct:true},{id:"d",text:"whack",is_correct:false}] },
-          { id: "3", prompt: "What digraph ends 'pack'?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"ck",is_correct:true},{id:"d",text:"ch",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to strike forcefully'?", options: [{id:"a",text:"whack",is_correct:true},{id:"b",text:"hack",is_correct:false},{id:"c",text:"crack",is_correct:false},{id:"d",text:"slack",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'black'?", options: [{id:"a",text:"4",is_correct:false},{id:"b",text:"5",is_correct:true},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 62 words?", options: [{id:"a",text:"Beth left her pack on the bus.",is_correct:true},{id:"b",text:"Beth left her car on the bus.",is_correct:false},{id:"c",text:"Beth sat on a mat.",is_correct:false},{id:"d",text:"Beth ran to a map.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a small meal?", options: [{id:"a",text:"snack",is_correct:true},{id:"b",text:"sack",is_correct:false},{id:"c",text:"stack",is_correct:false},{id:"d",text:"shack",is_correct:false}] },
-          { id: "8", prompt: "What closes the vowel in 'tack'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The digraph 'ck'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
-          { id: "9", prompt: "In 'The hat sat on a rack', how many Lesson 62 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'a thin, sharp pin'?", options: [{id:"a",text:"tack",is_correct:true},{id:"b",text:"rack",is_correct:false},{id:"c",text:"pack",is_correct:false},{id:"d",text:"lack",is_correct:false}] },
-          { id: "11", prompt: "Which word describes absence or shortage?", options: [{id:"a",text:"lack",is_correct:true},{id:"b",text:"slack",is_correct:false},{id:"c",text:"track",is_correct:false},{id:"d",text:"crack",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with /ck/ and means 'to cut roughly'?", options: [{id:"a",text:"hack",is_correct:true},{id:"b",text:"whack",is_correct:false},{id:"c",text:"snack",is_correct:false},{id:"d",text:"back",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 62?", options: [{id:"a",text:"Jack can crack a whip and snap it.",is_correct:true},{id:"b",text:"Jack sat on a mat.",is_correct:false},{id:"c",text:"Jack ran to a map.",is_correct:false},{id:"d",text:"Jack had a car.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'crack'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:false},{id:"c",text:"4",is_correct:true},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word is NOT a verb?", options: [{id:"a",text:"sack",is_correct:true},{id:"b",text:"hack",is_correct:false},{id:"c",text:"whack",is_correct:false},{id:"d",text:"crack",is_correct:false}] },
-          { id: "16", prompt: "What syllable type is 'snack'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "17", prompt: "Which word describes a small, rough hut?", options: [{id:"a",text:"shack",is_correct:true},{id:"b",text:"stack",is_correct:false},{id:"c",text:"slack",is_correct:false},{id:"d",text:"track",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Brad can ___ a pitch'?", options: [{id:"a",text:"whack",is_correct:true},{id:"b",text:"crack",is_correct:false},{id:"c",text:"snack",is_correct:false},{id:"d",text:"back",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both 'back of the shop' and 'shelf in back'?", options: [{id:"a",text:"back",is_correct:true},{id:"b",text:"rack",is_correct:false},{id:"c",text:"stack",is_correct:false},{id:"d",text:"shack",is_correct:false}] },
-          { id: "20", prompt: "What consonant digraph is taught in Lesson 62?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"ck",is_correct:true},{id:"d",text:"ch",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'to hit forcefully'?", options: [
+            {id:"a",text:"hack",is_correct:false},
+            {id:"b",text:"whack",is_correct:true},
+            {id:"c",text:"slack",is_correct:false},
+            {id:"d",text:"rack",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'crack' mean in sentence 1?", options: [
+            {id:"a",text:"A loud noise",is_correct:false},
+            {id:"b",text:"A narrow break",is_correct:true},
+            {id:"c",text:"To solve a problem",is_correct:false},
+            {id:"d",text:"A joke",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which sentence contains a typo that needs correction?", options: [
+            {id:"a",text:"Jack can chop and hack.",is_correct:false},
+            {id:"b",text:"Beth left her p ack on the bus.",is_correct:true},
+            {id:"c",text:"Clint had a snack.",is_correct:false},
+            {id:"d",text:"The cup had a crack.",is_correct:false}
+          ]},
+          { id: "4", prompt: "After correction, 'p ack' becomes:", options: [
+            {id:"a",text:"pack",is_correct:true},
+            {id:"b",text:"puck",is_correct:false},
+            {id:"c",text:"peck",is_correct:false},
+            {id:"d",text:"pick",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word means 'a small meal'?", options: [
+            {id:"a",text:"snack",is_correct:true},
+            {id:"b",text:"sack",is_correct:false},
+            {id:"c",text:"shack",is_correct:false},
+            {id:"d",text:"slack",is_correct:false}
+          ]},
+          { id: "6", prompt: "What does 'lack' mean (from word list)?", options: [
+            {id:"a",text:"To have too much",is_correct:false},
+            {id:"b",text:"To be without",is_correct:true},
+            {id:"c",text:"To jump high",is_correct:false},
+            {id:"d",text:"To make a loud sound",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which sentence mentions a character from Lesson 57?", options: [
+            {id:"a",text:"Brad can whack a pitch.",is_correct:false},
+            {id:"b",text:"Jack can crack a whip.",is_correct:true},
+            {id:"c",text:"Beth left her pack.",is_correct:false},
+            {id:"d",text:"Clint had a snack.",is_correct:false}
+          ]},
+          { id: "8", prompt: "What is a 'shack'?", options: [
+            {id:"a",text:"A large mansion",is_correct:false},
+            {id:"b",text:"A small, simple house",is_correct:true},
+            {id:"c",text:"A type of snack",is_correct:false},
+            {id:"d",text:"A loud noise",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes something loose or not tight?", options: [
+            {id:"a",text:"slack",is_correct:true},
+            {id:"b",text:"stack",is_correct:false},
+            {id:"c",text:"track",is_correct:false},
+            {id:"d",text:"whack",is_correct:false}
+          ]},
+          { id: "10", prompt: "In sentence 8, what causes Jack to possibly yelp?", options: [
+            {id:"a",text:"A crack",is_correct:false},
+            {id:"b",text:"A tack",is_correct:true},
+            {id:"c",text:"A snack",is_correct:false},
+            {id:"d",text:"A log",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which sentence uses 'back' as a noun (location)?", options: [
+            {id:"a",text:"The shop kept a stack... in back.",is_correct:true},
+            {id:"b",text:"Jack sat on a tack.",is_correct:false},
+            {id:"c",text:"Beth left her pack.",is_correct:false},
+            {id:"d",text:"Brad can whack a pitch.",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which 'ck' word is also a common boy's name?", options: [
+            {id:"a",text:"Jack",is_correct:true},
+            {id:"b",text:"Hack",is_correct:false},
+            {id:"c",text:"Whack",is_correct:false},
+            {id:"d",text:"Clack",is_correct:false}
+          ]},
+          { id: "13", prompt: "What sound does 'clack' describe?", options: [
+            {id:"a",text:"A soft whisper",is_correct:false},
+            {id:"b",text:"A sharp clicking noise",is_correct:true},
+            {id:"c",text:"A loud explosion",is_correct:false},
+            {id:"d",text:"A musical note",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to cut or chop roughly'?", options: [
+            {id:"a",text:"whack",is_correct:false},
+            {id:"b",text:"hack",is_correct:true},
+            {id:"c",text:"crack",is_correct:false},
+            {id:"d",text:"snack",is_correct:false}
+          ]},
+          { id: "15", prompt: "How many 'ck' words appear in sentence 10?", options: [
+            {id:"a",text:"1",is_correct:false},
+            {id:"b",text:"2",is_correct:true},
+            {id:"c",text:"3",is_correct:false},
+            {id:"d",text:"0",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word is NOT in the Lesson 62 word list?", options: [
+            {id:"a",text:"stack",is_correct:false},
+            {id:"b",text:"black",is_correct:false},
+            {id:"c",text:"thack",is_correct:true},
+            {id:"d",text:"track",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which phrase uses a 'ck' word correctly?", options: [
+            {id:"a",text:"She gave a slack hug.",is_correct:false},
+            {id:"b",text:"He built a stack of books.",is_correct:true},
+            {id:"c",text:"They ate a whack for lunch.",is_correct:false},
+            {id:"d",text:"The cat gave a sack.",is_correct:false}
+          ]},
+          { id: "18", prompt: "In sentence 5, what does 'crack a whip' mean?", options: [
+            {id:"a",text:"To break it",is_correct:false},
+            {id:"b",text:"To snap it loudly",is_correct:true},
+            {id:"c",text:"To store it",is_correct:false},
+            {id:"d",text:"To paint it",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which sentence has two 'ck' words?", options: [
+            {id:"a",text:"Clint had a snack in a sack at lunch.",is_correct:true},
+            {id:"b",text:"Jack can chop and hack.",is_correct:false},
+            {id:"c",text:"The cup had a crack.",is_correct:false},
+            {id:"d",text:"The hat sat on a rack.",is_correct:false}
+          ]},
+          { id: "20", prompt: "What is the spelling rule for /k/ at the end after a short vowel?", options: [
+            {id:"a",text:"Use 'c'",is_correct:false},
+            {id:"b",text:"Use 'k'",is_correct:false},
+            {id:"c",text:"Use 'ck'",is_correct:true},
+            {id:"d",text:"Use 'ch'",is_correct:false}
+          ]}
         ]
       };
 
-      // Render word list
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        let sentences = CHAPTER_CONFIG.sentences.map(s => 
+          s.replace(/f resh/g, 'fresh')
+           .replace(/p unch/g, 'punch')
+           .replace(/slep t/g, 'slept')
+           .replace(/crep t/g, 'crept')
+           .replace(/p lant/g, 'plant')
+           .replace(/p ack/g, 'pack')
+        );
+        document.getElementById('sentences').innerHTML =
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ UNLIMITED NAVIGATION
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b => 
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
-      // WhatsApp feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 62*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the "ck" digraph!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 62 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -214,8 +342,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -223,6 +351,56 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = saveName;
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) {
+            localStorage.setItem('student_name', name);
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          } else {
+            alert("Please enter your name.");
+            input.focus();
+          }
+        }
       }
 
       function init() {
@@ -233,6 +411,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
