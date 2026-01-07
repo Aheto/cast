@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 96 — Vowel Team Syllables (ay)"/>
-  <title>Mini OpenStax — Lesson 96: Vowel Team ay</title>
+  <meta name="description" content="Mini OpenStax: Lesson 96: ay=/ā/"/>
+  <title>Mini OpenStax — Lesson 96: ay=/ā/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 96: Vowel Team ay</h1>
-        <div class="lo-tags" id="lo-tags">LO PH96: Decode words with the long a vowel team (ay) at the end of syllables</div>
+        <h1 id="chapter-title">Lesson 96: ay=/ā/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH096: Decode words with vowel team "ay" pronounced /ā/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words featuring the <strong>ay</strong> vowel team (pronounced /ā/):</p>
+        <p>Words with "ay" that say /ā/ (long a sound):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–96:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,132 +80,279 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 95;    // chapter-95.html = Lesson 96
-      const maxChapter = 150;        
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 95;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 96: Vowel Team ay",
-        loTags: ["LO PH96: Decode words with the long a vowel team (ay) at the end of syllables"],
+        title: "Lesson 96: ay=/ā/",
+        loTags: ["LO PH096: Decode words with vowel team \"ay\" pronounced /ā/"],
         contentWords: [
-          "day", "lay", "may", "ray", "way", "Kay", "pay", "play", "pray", "say", "slay", "stay", "sway", "spray", "stray", "jay", "hay", "nay", "bay", "bray", "Fay", "fray", "gay", "gray", "clay", "tray"
+          "bay", "clay", "day", "gay", "hay", "jay", "lay", "may", "pay", "play", "ray", "say", "stay", "tray", "way", "yay"
         ],
         sentences: [
-          "1) The ship set sail in the bay.",
-          "2) Kay spent the day at the beach.",
-          "3) The chick must stay near the hen.",
-          "4) Jay had gray paint in a spray can.",
-          "5) What was the best way to do the job?",
-          "6) The man had gray hair and a gray beard.",
-          "7) On the ranch, the pup can play in the hay.",
-          "8) Fay must pay a tax on the pay from her job.",
-          "9) The tree may bend and sway in a strong wind.",
-          "10) From the top of the hill they can see the lay of the land."
+          "May I play with you at recess?",
+          "You may go if you will say \"Yes.\"",
+          "The bay is a safe place for the ship.",
+          "Did a jay fly over the tall tree?",
+          "The cat will lay on the mat in the sun.",
+          "The horse will eat hay from the tray.",
+          "It was the best day of the whole year!",
+          "Did you pay a fee to go on the trip?"
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Where did the ship set sail?", options: [{id:"a",text:"in the bay",is_correct:true},{id:"b",text:"on the clay",is_correct:false},{id:"c",text:"in the hay",is_correct:false},{id:"d",text:"at the tray",is_correct:false}] },
-          { id: "2", prompt: "Where did Kay spend the day?", options: [{id:"a",text:"at the beach",is_correct:true},{id:"b",text:"on the ranch",is_correct:false},{id:"c",text:"in the bay",is_correct:false},{id:"d",text:"at the job",is_correct:false}] },
-          { id: "3", prompt: "Who must stay near the hen?", options: [{id:"a",text:"the chick",is_correct:true},{id:"b",text:"the pup",is_correct:false},{id:"c",text:"Kay",is_correct:false},{id:"d",text:"Fay",is_correct:false}] },
-          { id: "4", prompt: "What color was Jay's paint?", options: [{id:"a",text:"gray",is_correct:true},{id:"b",text:"clay",is_correct:false},{id:"c",text:"black",is_correct:false},{id:"d",text:"green",is_correct:false}] },
-          { id: "5", prompt: "What kind of container was the gray paint in?", options: [{id:"a",text:"a spray can",is_correct:true},{id:"b",text:"a clay pot",is_correct:false},{id:"c",text:"a tray",is_correct:false},{id:"d",text:"a pail",is_correct:false}] },
-          { id: "6", prompt: "What did the man have on his face?", options: [{id:"a",text:"a gray beard",is_correct:true},{id:"b",text:"gray paint",is_correct:false},{id:"c",text:"a spray",is_correct:false},{id:"d",text:"a stray hair",is_correct:false}] },
-          { id: "7", prompt: "Where can the pup play on the ranch?", options: [{id:"a",text:"in the hay",is_correct:true},{id:"b",text:"in the bay",is_correct:false},{id:"c",text:"on the clay",is_correct:false},{id:"d",text:"on the tray",is_correct:false}] },
-          { id: "8", prompt: "What must Fay pay on her job earnings?", options: [{id:"a",text:"a tax",is_correct:true},{id:"b",text:"a fee",is_correct:false},{id:"c",text:"a bill",is_correct:false},{id:"d",text:"a debt",is_correct:false}] },
-          { id: "9", prompt: "What might the tree do in a strong wind?", options: [{id:"a",text:"bend and sway",is_correct:true},{id:"b",text:"stay and play",is_correct:false},{id:"c",text:"pray and pay",is_correct:false},{id:"d",text:"lay and slay",is_correct:false}] },
-          { id: "10", prompt: "What can they see from the top of the hill?", options: [{id:"a",text:"the lay of the land",is_correct:true},{id:"b",text:"the clay in the bay",is_correct:false},{id:"c",text:"the gray spray",is_correct:false},{id:"d",text:"the tray on the way",is_correct:false}] },
-          { id: "11", prompt: "Which word is a type of bird?", options: [{id:"a",text:"jay",is_correct:true},{id:"b",text:"hay",is_correct:false},{id:"c",text:"pay",is_correct:false},{id:"d",text:"way",is_correct:false}] },
-          { id: "12", prompt: "Which word means dried grass for animals?", options: [{id:"a",text:"hay",is_correct:true},{id:"b",text:"jay",is_correct:false},{id:"c",text:"bay",is_correct:false},{id:"d",text:"clay",is_correct:false}] },
-          { id: "13", prompt: "Which word refers to an animal that has no home?", options: [{id:"a",text:"stray",is_correct:true},{id:"b",text:"spray",is_correct:false},{id:"c",text:"stay",is_correct:false},{id:"d",text:"sway",is_correct:false}] },
-          { id: "14", prompt: "Which word means to kill?", options: [{id:"a",text:"slay",is_correct:true},{id:"b",text:"play",is_correct:false},{id:"c",text:"stay",is_correct:false},{id:"d",text:"sway",is_correct:false}] },
-          { id: "15", prompt: "Which word means soil used to make pots?", options: [{id:"a",text:"clay",is_correct:true},{id:"b",text:"tray",is_correct:false},{id:"c",text:"gray",is_correct:false},{id:"d",text:"fray",is_correct:false}] },
-          { id: "16", prompt: "Which word is a flat object used to carry things?", options: [{id:"a",text:"tray",is_correct:true},{id:"b",text:"clay",is_correct:false},{id:"c",text:"fray",is_correct:false},{id:"d",text:"gray",is_correct:false}] },
-          { id: "17", prompt: "Which word means a beam of light?", options: [{id:"a",text:"ray",is_correct:true},{id:"b",text:"day",is_correct:false},{id:"c",text:"way",is_correct:false},{id:"d",text:"may",is_correct:false}] },
-          { id: "18", prompt: "Which word means 'no'?", options: [{id:"a",text:"nay",is_correct:true},{id:"b",text:"say",is_correct:false},{id:"c",text:"may",is_correct:false},{id:"d",text:"lay",is_correct:false}] },
-          { id: "19", prompt: "Which word means the sound a donkey makes?", options: [{id:"a",text:"bray",is_correct:true},{id:"b",text:"fray",is_correct:false},{id:"c",text:"gray",is_correct:false},{id:"d",text:"spray",is_correct:false}] },
-          { id: "20", prompt: "Complete the word: s _ _ y (to move back and forth).", options: [{id:"a",text:"wa",is_correct:true},{id:"b",text:"ai",is_correct:false},{id:"c",text:"ea",is_correct:false},{id:"d",text:"ee",is_correct:false}] }
+          { id: "1", prompt: "Which word has 'ay' that says /ā/?", options: [
+            {id:"a",text:"cat",is_correct:false},
+            {id:"b",text:"day",is_correct:true},
+            {id:"c",text:"cap",is_correct:false},
+            {id:"d",text:"cut",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'to give money for something'?", options: [
+            {id:"a",text:"pay",is_correct:true},
+            {id:"b",text:"play",is_correct:false},
+            {id:"c",text:"say",is_correct:false},
+            {id:"d",text:"stay",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'May'?", options: [
+            {id:"a",text:"day",is_correct:true},
+            {id:"b",text:"man",is_correct:false},
+            {id:"c",text:"men",is_correct:false},
+            {id:"d",text:"mat",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word is a body of water partly enclosed by land?", options: [
+            {id:"a",text:"bay",is_correct:true},
+            {id:"b",text:"clay",is_correct:false},
+            {id:"c",text:"tray",is_correct:false},
+            {id:"d",text:"way",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 'ay' = /ā/?", options: [
+            {id:"a",text:"He ran fast.",is_correct:false},
+            {id:"b",text:"May I play with you?",is_correct:true},
+            {id:"c",text:"It is cold.",is_correct:false},
+            {id:"d",text:"They played.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to put down gently'?", options: [
+            {id:"a",text:"lay",is_correct:true},
+            {id:"b",text:"play",is_correct:false},
+            {id:"c",text:"say",is_correct:false},
+            {id:"d",text:"stay",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word describes a blue bird common in North America?", options: [
+            {id:"a",text:"jay",is_correct:true},
+            {id:"b",text:"ray",is_correct:false},
+            {id:"c",text:"way",is_correct:false},
+            {id:"d",text:"yay",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 'ay' pronounced in 'tray'?", options: [
+            {id:"a",text:"/ă/",is_correct:false},
+            {id:"b",text:"/ā/",is_correct:true},
+            {id:"c",text:"/ĕ/",is_correct:false},
+            {id:"d",text:"/ĭ/",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to speak words'?", options: [
+            {id:"a",text:"say",is_correct:true},
+            {id:"b",text:"stay",is_correct:false},
+            {id:"c",text:"play",is_correct:false},
+            {id:"d",text:"pay",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"bay",is_correct:true},
+            {id:"b",text:"clay",is_correct:false},
+            {id:"c",text:"day",is_correct:false},
+            {id:"d",text:"gay",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word is dried grass used as animal food?", options: [
+            {id:"a",text:"hay",is_correct:true},
+            {id:"b",text:"clay",is_correct:false},
+            {id:"c",text:"tray",is_correct:false},
+            {id:"d",text:"way",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"play",is_correct:false},
+            {id:"b",text:"stay",is_correct:false},
+            {id:"c",text:"gray",is_correct:true},
+            {id:"d",text:"yay",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'It was the best day...', what does 'day' mean?", options: [
+            {id:"a",text:"a 24-hour period",is_correct:true},
+            {id:"b",text:"a holiday",is_correct:false},
+            {id:"c",text:"a type of game",is_correct:false},
+            {id:"d",text:"a bird",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is an exclamation of joy?", options: [
+            {id:"a",text:"yay",is_correct:true},
+            {id:"b",text:"ray",is_correct:false},
+            {id:"c",text:"way",is_correct:false},
+            {id:"d",text:"may",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same vowel sound as 'rain'?", options: [
+            {id:"a",text:"play",is_correct:true},
+            {id:"b",text:"cat",is_correct:false},
+            {id:"c",text:"cut",is_correct:false},
+            {id:"d",text:"cot",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /y/ and has 'ay' = /ā/?", options: [
+            {id:"a",text:"yay",is_correct:true},
+            {id:"b",text:"day",is_correct:false},
+            {id:"c",text:"play",is_correct:false},
+            {id:"d",text:"bay",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'clay' mean?", options: [
+            {id:"a",text:"soft earth used for pottery",is_correct:true},
+            {id:"b",text:"a type of bird",is_correct:false},
+            {id:"c",text:"a body of water",is_correct:false},
+            {id:"d",text:"a metal tray",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes permission or possibility?", options: [
+            {id:"a",text:"may",is_correct:true},
+            {id:"b",text:"pay",is_correct:false},
+            {id:"c",text:"say",is_correct:false},
+            {id:"d",text:"stay",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'path or method'?", options: [
+            {id:"a",text:"way",is_correct:true},
+            {id:"b",text:"ray",is_correct:false},
+            {id:"c",text:"tray",is_correct:false},
+            {id:"d",text:"jay",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has 'ay' but does NOT say /ā/?", options: [
+            {id:"a",text:"says",is_correct:true},
+            {id:"b",text:"day",is_correct:false},
+            {id:"c",text:"play",is_correct:false},
+            {id:"d",text:"say",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ay/g, 'pay'], [/f air/g, 'fair'], [/p aid/g, 'paid'], [/p ail/g, 'pail'], [/p aint/g, 'paint'], [/Sp ain/g, 'Spain'], [/p ain/g, 'pain']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 96*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -204,8 +362,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -213,6 +371,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -223,9 +439,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
