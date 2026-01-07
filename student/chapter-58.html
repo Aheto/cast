@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 59 — Consonant Digraph 'th' (Unvoiced)"/>
-  <title>Mini OpenStax — Lesson 59: Consonant Digraph th</title>
+  <meta name="description" content="Mini OpenStax: Lesson 59: Consonant Digraph th (Unvoiced)"/>
+  <title>Mini OpenStax — Lesson 59: Consonant Digraph th (Unvoiced)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,40 +23,50 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 59: Consonant Digraph th</h1>
-        <div class="lo-tags" id="lo-tags">LO PH59: Decode words with the unvoiced consonant digraph 'th' in closed syllables</div>
+        <h1 id="chapter-title">Lesson 59: Consonant Digraph th (Unvoiced)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH59: Decode words with unvoiced consonant digraph /th/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words containing the <strong>unvoiced</strong> consonant digraph <strong>th</strong> in closed syllables:</p>
+        <p>Practice reading words with the unvoiced consonant digraph <strong>th</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–59:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -70,138 +80,258 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 58;    // chapter-58.html = Lesson 59
-      const maxChapter = 120;       // Update when adding more lessons
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 58; // chapter-58.html = Lesson 59
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 59: Consonant Digraph th",
-        loTags: ["LO PH59: Decode words with the unvoiced consonant digraph 'th' in closed syllables"],
+        title: "Lesson 59: Consonant Digraph th (Unvoiced)",
+        loTags: ["LO PH59: Decode words with unvoiced consonant digraph /th/"],
         contentWords: [
-          "thin", "thud", "theft", "thump", "thatch", "throb", "thrift", "thrust", "thrash", "thresh", "thrush"
+          "thin", "thud", "theft", "thump", "thatch", "throb", "thrift", "thrust",
+          "thrash", "thresh", "thrush"
         ],
         sentences: [
-          "A cop can stop a theft.",
+          "A cop can stop a thef t.",
           "The drum had a thin skin on top.",
           "Kim must not thump on the desk.",
           "The thin man had a crutch and a bad limp.",
           "A thrush had a nest on a branch of the elm.",
-          "Josh had thrift and did not spend a lot of cash.",
+          "Josh had thrif t and did not spend a lot of cash.",
           "Deb had a red rash on her hand. Did her hand itch and throb?",
           "Did Mitch drop the big chest? Did the thud get Mom up from her nap?"
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the unvoiced digraph 'th'?", options: [{id:"a",text:"thin",is_correct:true},{id:"b",text:"this",is_correct:false},{id:"c",text:"that",is_correct:false},{id:"d",text:"they",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 59 word?", options: [{id:"a",text:"throb",is_correct:false},{id:"b",text:"thrift",is_correct:false},{id:"c",text:"theme",is_correct:true},{id:"d",text:"thrush",is_correct:false}] },
-          { id: "3", prompt: "What digraph starts 'thatch'?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"ch",is_correct:false},{id:"c",text:"th",is_correct:true},{id:"d",text:"ph",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'the act of stealing'?", options: [{id:"a",text:"theft",is_correct:true},{id:"b",text:"thud",is_correct:false},{id:"c",text:"thump",is_correct:false},{id:"d",text:"thatch",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'thrush'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 59 words?", options: [{id:"a",text:"A cop can stop a theft.",is_correct:true},{id:"b",text:"A cop can drive a car.",is_correct:false},{id:"c",text:"The cop sat on a mat.",is_correct:false},{id:"d",text:"The cop ran to a map.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a type of songbird?", options: [{id:"a",text:"thrush",is_correct:true},{id:"b",text:"thatch",is_correct:false},{id:"c",text:"throb",is_correct:false},{id:"d",text:"thrift",is_correct:false}] },
-          { id: "8", prompt: "What closes the vowel in 'thud'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 'd'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
-          { id: "9", prompt: "In 'Did the thud get Mom up', how many Lesson 59 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'beating pain, like a heartbeat'?", options: [{id:"a",text:"throb",is_correct:true},{id:"b",text:"thump",is_correct:false},{id:"c",text:"thud",is_correct:false},{id:"d",text:"thrust",is_correct:false}] },
-          { id: "11", prompt: "Which word means 'to strike forcefully with a fist or object'?", options: [{id:"a",text:"thrash",is_correct:true},{id:"b",text:"thresh",is_correct:false},{id:"c",text:"thrust",is_correct:false},{id:"d",text:"thatch",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with /mp/ and means 'to hit repeatedly'?", options: [{id:"a",text:"thump",is_correct:true},{id:"b",text:"thud",is_correct:false},{id:"c",text:"theft",is_correct:false},{id:"d",text:"thin",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 59?", options: [{id:"a",text:"Josh had thrift and did not spend a lot of cash.",is_correct:true},{id:"b",text:"Josh sat on a mat.",is_correct:false},{id:"c",text:"Josh ran to a map.",is_correct:false},{id:"d",text:"Josh had a car.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'thin'?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:true},{id:"d",text:"0",is_correct:false}] },
-          { id: "15", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"thin",is_correct:true},{id:"b",text:"theft",is_correct:false},{id:"c",text:"thatch",is_correct:false},{id:"d",text:"thrush",is_correct:false}] },
-          { id: "16", prompt: "What syllable type is 'thud'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "17", prompt: "Which word describes careful use of money?", options: [{id:"a",text:"thrift",is_correct:true},{id:"b",text:"throb",is_correct:false},{id:"c",text:"thud",is_correct:false},{id:"d",text:"thump",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Kim must not ___ on the desk'?", options: [{id:"a",text:"thump",is_correct:true},{id:"b",text:"thud",is_correct:false},{id:"c",text:"thin",is_correct:false},{id:"d",text:"theft",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both 'thin man' and 'thin skin'?", options: [{id:"a",text:"thin",is_correct:true},{id:"b",text:"man",is_correct:false},{id:"c",text:"skin",is_correct:false},{id:"d",text:"thud",is_correct:false}] },
-          { id: "20", prompt: "What consonant digraph is taught in Lesson 59?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"ch",is_correct:false},{id:"c",text:"th",is_correct:true},{id:"d",text:"tch",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'stealing'?", options: [
+            {id:"a",text:"thrift",is_correct:false},
+            {id:"b",text:"theft",is_correct:true},
+            {id:"c",text:"thatch",is_correct:false},
+            {id:"d",text:"thrush",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'thin' describe?", options: [
+            {id:"a",text:"Heavy",is_correct:false},
+            {id:"b",text:"Wide",is_correct:false},
+            {id:"c",text:"Narrow in width or small in body",is_correct:true},
+            {id:"d",text:"Loud",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'to hit repeatedly'?", options: [
+            {id:"a",text:"thrash",is_correct:true},
+            {id:"b",text:"thrust",is_correct:false},
+            {id:"c",text:"thresh",is_correct:false},
+            {id:"d",text:"thud",is_correct:false}
+          ]},
+          { id: "4", prompt: "What sound does a heavy book make when it falls?", options: [
+            {id:"a",text:"thump",is_correct:false},
+            {id:"b",text:"thud",is_correct:true},
+            {id:"c",text:"throb",is_correct:false},
+            {id:"d",text:"thatch",is_correct:false}
+          ]},
+          { id: "5", prompt: "What material might cover a cottage roof?", options: [
+            {id:"a",text:"thrift",is_correct:false},
+            {id:"b",text:"thatch",is_correct:true},
+            {id:"c",text:"thrush",is_correct:false},
+            {id:"d",text:"theft",is_correct:false}
+          ]},
+          { id: "6", prompt: "If your head is pounding, it might...", options: [
+            {id:"a",text:"thrust",is_correct:false},
+            {id:"b",text:"throb",is_correct:true},
+            {id:"c",text:"thump",is_correct:false},
+            {id:"d",text:"thin",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'thrift' mean?", options: [
+            {id:"a",text:"Wasteful spending",is_correct:false},
+            {id:"b",text:"Careful use of money",is_correct:true},
+            {id:"c",text:"Loud noise",is_correct:false},
+            {id:"d",text:"A type of bird",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which bird is mentioned in the sentences?", options: [
+            {id:"a",text:"robin",is_correct:false},
+            {id:"b",text:"sparrow",is_correct:false},
+            {id:"c",text:"thrush",is_correct:true},
+            {id:"d",text:"eagle",is_correct:false}
+          ]},
+          { id: "9", prompt: "In the sentence 'Kim must not thump on the desk,' what is Kim asked NOT to do?", options: [
+            {id:"a",text:"Talk loudly",is_correct:false},
+            {id:"b",text:"Hit the desk hard",is_correct:true},
+            {id:"c",text:"Draw on it",is_correct:false},
+            {id:"d",text:"Stand up",is_correct:false}
+          ]},
+          { id: "10", prompt: "What does 'thrust' mean?", options: [
+            {id:"a",text:"To pull slowly",is_correct:false},
+            {id:"b",text:"To push forward suddenly",is_correct:true},
+            {id:"c",text:"To whisper",is_correct:false},
+            {id:"d",text:"To sit down",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word is a typo in the PDF that should be corrected?", options: [
+            {id:"a",text:"thef t → theft",is_correct:true},
+            {id:"b",text:"thin → thim",is_correct:false},
+            {id:"c",text:"thud → thud",is_correct:false},
+            {id:"d",text:"thrif t → thrifty",is_correct:false}
+          ]},
+          { id: "12", prompt: "After fixing the typo, how many 'th' words appear in sentence 1?", options: [
+            {id:"a",text:"0",is_correct:false},
+            {id:"b",text:"1",is_correct:true},
+            {id:"c",text:"2",is_correct:false},
+            {id:"d",text:"3",is_correct:false}
+          ]},
+          { id: "13", prompt: "What connects to a previous lesson in sentence 4?", options: [
+            {id:"a",text:"The word 'itch'",is_correct:false},
+            {id:"b",text:"The word 'crutch'",is_correct:true},
+            {id:"c",text:"The word 'man'",is_correct:false},
+            {id:"d",text:"The word 'limp'",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to separate grain from husks'?", options: [
+            {id:"a",text:"thresh",is_correct:true},
+            {id:"b",text:"thrash",is_correct:false},
+            {id:"c",text:"thrust",is_correct:false},
+            {id:"d",text:"throb",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which sentence contains TWO 'th' words?", options: [
+            {id:"a",text:"The thin man had a crutch...",is_correct:true},
+            {id:"b",text:"A cop can stop a theft.",is_correct:false},
+            {id:"c",text:"Did the thud get Mom up?",is_correct:false},
+            {id:"d",text:"Josh had thrift...",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which 'th' word describes a feeling of pain that pulses?", options: [
+            {id:"a",text:"thump",is_correct:false},
+            {id:"b",text:"thud",is_correct:false},
+            {id:"c",text:"throb",is_correct:true},
+            {id:"d",text:"thin",is_correct:false}
+          ]},
+          { id: "17", prompt: "What is the /th/ sound in these words?", options: [
+            {id:"a",text:"Voiced, like 'this'",is_correct:false},
+            {id:"b",text:"Unvoiced, like 'think'",is_correct:true},
+            {id:"c",text:"Same as 'sh'",is_correct:false},
+            {id:"d",text:"Silent",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word is NOT in the Lesson 59 word list?", options: [
+            {id:"a",text:"thatch",is_correct:false},
+            {id:"b",text:"thrift",is_correct:false},
+            {id:"c",text:"thatch",is_correct:false},
+            {id:"d",text:"witch",is_correct:true}
+          ]},
+          { id: "19", prompt: "Which sentence includes a character from Lesson 57?", options: [
+            {id:"a",text:"Mitch dropped the chest.",is_correct:true},
+            {id:"b",text:"Josh had thrift.",is_correct:false},
+            {id:"c",text:"Deb had a rash.",is_correct:false},
+            {id:"d",text:"Kim thumped the desk.",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which phrase uses a Lesson 59 word correctly?", options: [
+            {id:"a",text:"She showed great thrift by saving money.",is_correct:true},
+            {id:"b",text:"He ran with great thud.",is_correct:false},
+            {id:"c",text:"The thatch sang a song.",is_correct:false},
+            {id:"d",text:"They felt a thin in their leg.",is_correct:false}
+          ]}
         ]
       };
 
-      // Render word list
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        let sentences = CHAPTER_CONFIG.sentences.map(s => 
+          s.replace(/f resh/g, 'fresh')
+           .replace(/p unch/g, 'punch')
+           .replace(/slep t/g, 'slept')
+           .replace(/crep t/g, 'crept')
+           .replace(/p lant/g, 'plant')
+           .replace(/thef t/g, 'theft')
+           .replace(/thrif t/g, 'thrift')
+        );
+        document.getElementById('sentences').innerHTML =
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ UNLIMITED NAVIGATION
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b => 
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
-      // WhatsApp feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 59*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the unvoiced "th" digraph!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 59 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -211,8 +341,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -220,6 +350,56 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = saveName;
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) {
+            localStorage.setItem('student_name', name);
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          } else {
+            alert("Please enter your name.");
+            input.focus();
+          }
+        }
       }
 
       function init() {
@@ -230,6 +410,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
