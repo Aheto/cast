@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 83: More 'ee' Words"/>
-  <title>Mini OpenStax — Lesson 83: More 'ee' Words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 83: Vowel Team ee (Continued)"/>
+  <title>Mini OpenStax — Lesson 83: Vowel Team ee (Continued)</title>
   <style>
+    /* CSS Same as Chapter 81 */
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
     .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
     .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
     .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
-    .chapter-btn {
-      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
-    }
+    .chapter-btn { padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem; }
     .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
     .section { margin-bottom: 1.5rem; }
     .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
@@ -23,10 +22,7 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn {
-      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
-      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
-    }
+    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem; }
     .btn:hover { background: #218838; }
     .btn-secondary { background: #6c757d; }
     .btn-secondary:hover { background: #5a6268; }
@@ -37,59 +33,46 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 83: More 'ee' Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH83: Decode and read additional words with the 'ee' vowel team (/ē/ sound)</div>
+        <h1 id="chapter-title">Lesson 83: Vowel Team ee (Continued)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH83: Decode and use words with the /ee/ pattern</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
-
     <nav class="chapter-nav" id="chapter-nav"></nav>
-
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>More words with <strong>'ee'</strong> making the long /ē/ sound:</p>
+        <p>Practice reading words with <strong>ee</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
-
       <div class="section">
         <h2>📖 Practice Sentences</h2>
         <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
-
       <div id="student-name-prompt" class="section" style="display:none;">
         <h2>👤 Your Name</h2>
         <div id="name-display"></div>
-        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
-          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30" style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
         <div id="name-buttons"></div>
       </div>
-
       <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
-
       <div id="feedback"></div>
     </main>
   </div>
-
   <script>
     (function () {
       'use strict';
       window.startTime = Date.now();
-
       function createSeededRNG(seed) {
         let state = Math.abs((seed * 9301 + 49297) % 233280);
-        return () => {
-          state = (state * 9301 + 49297) % 233280;
-          return state / 233280;
-        };
+        return () => { state = (state * 9301 + 49297) % 233280; return state / 233280; };
       }
-
       function shuffleWithSeed(array, seed) {
         const rng = createSeededRNG(seed);
         const arr = [...array];
@@ -99,204 +82,98 @@
         }
         return arr;
       }
-
       const currentChapter = 82;
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
-
       const CHAPTER_CONFIG = {
-        title: "Lesson 83: More 'ee' Words",
-        loTags: ["LO PH83: Decode and read additional words with the 'ee' vowel team (/ē/ sound)"],
-        contentWords: ["bee", "deed", "cheer", "deer", "feet", "meet", "seek", "seed", "heel", "jeep"],
+        title: "Lesson 83: Vowel Team ee (Continued)",
+        loTags: ["LO PH83: Decode and use words with the /ee/ pattern"],
+        contentWords: ["bee", "beef", "beep", "beer", "beet", "beech", "bleed", "bleep", "breed", "breech", "deep", "deer", "deed", "deem", "cheek", "cheep", "cheer", "creed", "creek", "creep"],
         sentences: [
-          "The bee buzzed near the deer.",
-          "Deer have long legs and big feet.",
-          "Lee met a deer in the woods.",
-          "Do not seek the deer.",
-          "Be kind to bees and deer.",
-          "Cheer for the team!",
-          "She planted a seed.",
-          "He drove a red jeep.",
-          "My heel hurts.",
-          "A good deed is kind."
+          "1) Ann will not do a bad deed.",
+          "2) A cat can creep up on a rat.",
+          "3) A bee stung Bill on the cheek.",
+          "4) Did Fran clap and cheer the speech?",
+          "5) Frank can catch a fish in the creek.",
+          "6) They can breed sheep on a sheep ranch.",
+          "7) The chick said \"Cheep, cheep!\" to the hen.",
+          "8) The deer fled from the men and hid in the brush.",
+          "9) Beep! Beep! The cab went past the bus on the street."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word means 'an insect that makes honey'?", options: [
-            {id:"a",text:"bee",is_correct:true},{id:"b",text:"be",is_correct:false},{id:"c",text:"deed",is_correct:false},{id:"d",text:"heel",is_correct:false}
-          ]},
-          { id: "2", prompt: "Which word is a homophone of 'dear'?", options: [
-            {id:"a",text:"deer",is_correct:true},{id:"b",text:"deed",is_correct:false},{id:"c",text:"seed",is_correct:false},{id:"d",text:"jeep",is_correct:false}
-          ]},
-          { id: "3", prompt: "What does 'cheer' mean?", options: [
-            {id:"a",text:"To cry",is_correct:false},{id:"b",text:"To shout encouragement",is_correct:true},{id:"c",text:"To run away",is_correct:false},{id:"d",text:"To sleep",is_correct:false}
-          ]},
-          { id: "4", prompt: "Which word has the /ē/ sound but is NOT spelled with 'ee'?", options: [
-            {id:"a",text:"feet",is_correct:false},{id:"b",text:"meet",is_correct:false},{id:"c",text:"key",is_correct:true},{id:"d",text:"seed",is_correct:false}
-          ]},
-          { id: "5", prompt: "Which sentence uses 'deed' correctly?", options: [
-            {id:"a",text:"He did a good deed.",is_correct:true},{id:"b",text:"The deed ran fast.",is_correct:false},{id:"c",text:"She planted a deed.",is_correct:false},{id:"d",text:"My deed hurts.",is_correct:false}
-          ]},
-          { id: "6", prompt: "Which word means 'to look for'?", options: [
-            {id:"a",text:"meet",is_correct:false},{id:"b",text:"seek",is_correct:true},{id:"c",text:"heel",is_correct:false},{id:"d",text:"jeep",is_correct:false}
-          ]},
-          { id: "7", prompt: "How many 'ee' words are in: 'The bee met a deer.'?", options: [
-            {id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}
-          ]},
-          { id: "8", prompt: "Which word refers to the back part of your foot?", options: [
-            {id:"a",text:"heel",is_correct:true},{id:"b",text:"feet",is_correct:false},{id:"c",text:"seed",is_correct:false},{id:"d",text:"jeep",is_correct:false}
-          ]},
-          { id: "9", prompt: "Which is a vehicle?", options: [
-            {id:"a",text:"deer",is_correct:false},{id:"b",text:"jeep",is_correct:true},{id:"c",text:"bee",is_correct:false},{id:"d",text:"seed",is_correct:false}
-          ]},
-          { id: "10", prompt: "Which word completes: 'Plant a ___ to grow a tree.'?", options: [
-            {id:"a",text:"deed",is_correct:false},{id:"b",text:"seed",is_correct:true},{id:"c",text:"heel",is_correct:false},{id:"d",text:"cheer",is_correct:false}
-          ]},
-          { id: "11", prompt: "Which pair are both animals?", options: [
-            {id:"a",text:"bee, jeep",is_correct:false},{id:"b",text:"deer, bee",is_correct:true},{id:"c",text:"heel, seed",is_correct:false},{id:"d",text:"deed, meet",is_correct:false}
-          ]},
-          { id: "12", prompt: "What sound does 'ee' make in 'feet'?", options: [
-            {id:"a",text:"/i/",is_correct:false},{id:"b",text:"/e/",is_correct:false},{id:"c",text:"/ē/",is_correct:true},{id:"d",text:"/æ/",is_correct:false}
-          ]},
-          { id: "13", prompt: "Which sentence has a typo?", options: [
-            {id:"a",text:"The bee buzzed.",is_correct:false},{id:"b",text:"Lee met a de er.",is_correct:true},{id:"c",text:"Cheer for them!",is_correct:false},{id:"d",text:"He drove a jeep.",is_correct:false}
-          ]},
-          { id: "14", prompt: "Which word is a verb meaning 'to come together'?", options: [
-            {id:"a",text:"seek",is_correct:false},{id:"b",text:"meet",is_correct:true},{id:"c",text:"cheer",is_correct:false},{id:"d",text:"plant",is_correct:false}
-          ]},
-          { id: "15", prompt: "Which word is NOT in the word list?", options: [
-            {id:"a",text:"feet",is_correct:false},{id:"b",text:"tree",is_correct:true},{id:"c",text:"heel",is_correct:false},{id:"d",text:"jeep",is_correct:false}
-          ]},
-          { id: "16", prompt: "How many syllables in 'cheer'?", options: [
-            {id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}
-          ]},
-          { id: "17", prompt: "Which word means 'action or behavior'?", options: [
-            {id:"a",text:"deed",is_correct:true},{id:"b",text:"seed",is_correct:false},{id:"c",text:"heel",is_correct:false},{id:"d",text:"jeep",is_correct:false}
-          ]},
-          { id: "18", prompt: "Choose the correct spelling:", options: [
-            {id:"a",text:"jeap",is_correct:false},{id:"b",text:"jep",is_correct:false},{id:"c",text:"jeep",is_correct:true},{id:"d",text:"jiep",is_correct:false}
-          ]},
-          { id: "19", prompt: "Which word is a plural noun?", options: [
-            {id:"a",text:"bee",is_correct:false},{id:"b",text:"deer",is_correct:false},{id:"c",text:"feet",is_correct:true},{id:"d",text:"seed",is_correct:false}
-          ]},
-          { id: "20", prompt: "Which sentence uses THREE 'ee' words correctly?", options: [
-            {id:"a",text:"The bee met a deer.",is_correct:true},{id:"b",text:"Seek the seed, jeep!",is_correct:false},{id:"c",text:"Cheer for the heel!",is_correct:false},{id:"d",text:"Do a good deed, Lee.",is_correct:false}
-          ]}
+          { id: "1", prompt: "What stung Bill on the cheek?", options: [{id:"a",text:"a bee",is_correct:true},{id:"b",text:"a deer",is_correct:false},{id:"c",text:"a rat",is_correct:false},{id:"d",text:"a fish",is_correct:false}]},
+          { id: "2", prompt: "What will Ann NOT do?", options: [{id:"a",text:"a bad deed",is_correct:true},{id:"b",text:"a cheer",is_correct:false},{id:"c",text:"creep up",is_correct:false},{id:"d",text:"beep beep",is_correct:false}]},
+          { id: "3", prompt: "How does a cat move toward a rat?", options: [{id:"a",text:"creep up",is_correct:true},{id:"b",text:"bleed",is_correct:false},{id:"c",text:"cheer",is_correct:false},{id:"d",text:"bleep",is_correct:false}]},
+          { id: "4", prompt: "Where can Frank catch a fish?", options: [{id:"a",text:"in the creek",is_correct:true},{id:"b",text:"in the brush",is_correct:false},{id:"c",text:"on the street",is_correct:false},{id:"d",text:"on the ranch",is_correct:false}]},
+          { id: "5", prompt: "What sound did the chick make?", options: [{id:"a",text:"Cheep, cheep!",is_correct:true},{id:"b",text:"Beep! Beep!",is_correct:false},{id:"c",text:"Clap!",is_correct:false},{id:"d",text:"Cheer!",is_correct:false}]},
+          { id: "6", prompt: "What animal can they breed on the ranch?", options: [{id:"a",text:"sheep",is_correct:true},{id:"b",text:"deer",is_correct:false},{id:"c",text:"cats",is_correct:false},{id:"d",text:"chicks",is_correct:false}]},
+          { id: "7", prompt: "Where did the deer hide?", options: [{id:"a",text:"in the brush",is_correct:true},{id:"b",text:"in the creek",is_correct:false},{id:"c",text:"on the street",is_correct:false},{id:"d",text:"in a cab",is_correct:false}]},
+          { id: "8", prompt: "What did the cab do as it went past the bus?", options: [{id:"a",text:"went Beep! Beep!",is_correct:true},{id:"b",text:"crept up",is_correct:false},{id:"c",text:"stung Bill",is_correct:false},{id:"d",text:"did a bad deed",is_correct:false}]},
+          { id: "9", prompt: "Which word means meat from a cow?", options: [{id:"a",text:"beef",is_correct:true},{id:"b",text:"beer",is_correct:false},{id:"c",text:"beet",is_correct:false},{id:"d",text:"beech",is_correct:false}]},
+          { id: "10", prompt: "Which word describes something very far down?", options: [{id:"a",text:"deep",is_correct:true},{id:"b",text:"deem",is_correct:false},{id:"c",text:"deed",is_correct:false},{id:"d",text:"deer",is_correct:false}]},
+          { id: "11", prompt: "Which word is a type of vegetable?", options: [{id:"a",text:"beet",is_correct:true},{id:"b",text:"beef",is_correct:false},{id:"c",text:"beer",is_correct:false},{id:"d",text:"beech",is_correct:false}]},
+          { id: "12", prompt: "Which word means to shout with joy?", options: [{id:"a",text:"cheer",is_correct:true},{id:"b",text:"cheep",is_correct:false},{id:"c",text:"cheek",is_correct:false},{id:"d",text:"bleed",is_correct:false}]},
+          { id: "13", prompt: "What part of the face was mentioned in sentence 3?", options: [{id:"a",text:"cheek",is_correct:true},{id:"b",text:"cheer",is_correct:false},{id:"c",text:"creep",is_correct:false},{id:"d",text:"creed",is_correct:false}]},
+          { id: "14", prompt: "Which word means a system of beliefs?", options: [{id:"a",text:"creed",is_correct:true},{id:"b",text:"creek",is_correct:false},{id:"c",text:"creep",is_correct:false},{id:"d",text:"deem",is_correct:false}]},
+          { id: "15", prompt: "Which word is a type of tree?", options: [{id:"a",text:"beech",is_correct:true},{id:"b",text:"beef",is_correct:false},{id:"c",text:"beet",is_correct:false},{id:"d",text:"deer",is_correct:false}]},
+          { id: "16", prompt: "In sentence 1, 'deed' refers to what?", options: [{id:"a",text:"an action",is_correct:true},{id:"b",text:"a type of animal",is_correct:false},{id:"c",text:"a sound",is_correct:false},{id:"d",text:"a place",is_correct:false}]},
+          { id: "17", prompt: "Which word means to lose blood?", options: [{id:"a",text:"bleed",is_correct:true},{id:"b",text:"bleep",is_correct:false},{id:"c",text:"breed",is_correct:false},{id:"d",text:"breech",is_correct:false}]},
+          { id: "18", prompt: "Which word means to consider or judge?", options: [{id:"a",text:"deem",is_correct:true},{id:"b",text:"deed",is_correct:false},{id:"c",text:"deer",is_correct:false},{id:"d",text:"deep",is_correct:false}]},
+          { id: "19", prompt: "Sentence 9: Where was the bus?", options: [{id:"a",text:"on the street",is_correct:true},{id:"b",text:"in the brush",is_correct:false},{id:"c",text:"at the ranch",is_correct:false},{id:"d",text:"in the creek",is_correct:false}]},
+          { id: "20", prompt: "Which word is an animal with antlers?", options: [{id:"a",text:"deer",is_correct:true},{id:"b",text:"deed",is_correct:false},{id:"c",text:"deem",is_correct:false},{id:"d",text:"deep",is_correct:false}]}
         ]
       };
-
-      const TYPO_CORRECTIONS = [
-        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
-        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
-        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
-        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
-        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
-        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
-        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
-        [/de er/g, 'deer'], [/jep/g, 'jeep'], [/hee l/g, 'heel']
-      ];
-
-      function renderWords() {
-        document.getElementById('word-list').innerHTML =
-          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
-      }
-
+      /* Script same as Chapter 81 with currentChapter = 82 */
+      const TYPO_CORRECTIONS = [[/f resh/g,'fresh'],[/p unch/g,'punch'],[/slep t/g,'slept'],[/crep t/g,'crept'],[/p lant/g,'plant'],[/p ath/g,'path'],[/f roth/g,'froth'],[/p eck/g,'peck'],[/f luck/g,'pluck'],[/p luck/g,'pluck'],[/f ling/g,'fling'],[/p ass/g,'pass'],[/f uss/g,'fuss'],[/sp ell/g,'spell'],[/f uzz/g,'fuzz'],[/thef t/g,'theft'],[/thrif t/g,'thrift'],[/dep th/g,'depth'],[/fif th/g,'fifth'],[/st ink/g,'stink'],[/wr ink/g,'wring']];
+      function renderWords() { document.getElementById('word-list').innerHTML = CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join(''); }
       function renderSentences() {
         const corrected = CHAPTER_CONFIG.sentences.map(s => {
-          let text = s;
-          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
-            text = text.replace(pattern, replacement);
-          });
-          return text;
+          let text = s; TYPO_CORRECTIONS.forEach(([p, r]) => { text = text.replace(p, r); }); return text;
         });
-        document.getElementById('sentences').innerHTML =
-          corrected.map(s => `<p>${s}</p>`).join('');
+        document.getElementById('sentences').innerHTML = corrected.map(s => `<p>${s}</p>`).join('');
       }
-
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
         const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const c = currentChapter + i;
-          const lessonNum = c + 1;
-          if (c > MAX_CHAPTER) break;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${c}.html`,
-            active: i === 0
-          });
+          const c = currentChapter + i; if (c > MAX_CHAPTER) break;
+          buttons.push({ label: `Lesson ${c + 1}`, url: `chapter-${c}.html`, active: i === 0 });
         }
-        nav.innerHTML = buttons.map(b =>
-          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
-        ).join('');
+        nav.innerHTML = buttons.map(b => `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`).join('');
       }
-
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
-
+        const baseSeed = currentChapter * 1000 + (Date.now() % 1000);
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const seed = baseSeed + parseInt(q.id, 10);
+          const seed = baseSeed + parseInt(q.id);
           const shuffledOpts = shuffleWithSeed([...q.options], seed);
-          const correct = q.options.find(o => o.is_correct);
-          window.quizCorrectMap[q.id] = correct.id;
-
-          const optHtml = shuffledOpts.map((opt, idx) => {
-            const letter = String.fromCharCode(65 + idx);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
-          }).join('');
-
+          window.quizCorrectMap[q.id] = q.options.find(o => o.is_correct).id;
+          const optHtml = shuffledOpts.map((o, i) => `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${String.fromCharCode(65 + i)}. ${o.text}</label></div>`).join('');
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
-
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
-
         items.forEach((item, i) => {
-          const ans = answers[i];
-          const correctId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctId);
-          const isCorrect = ans === correctId;
-          if (isCorrect) {
-            correctCount++;
-            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
-          } else {
-            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
-          }
+          const ans = answers[i], correctId = window.quizCorrectMap[item.id], correctOpt = item.options.find(o => o.id === correctId);
+          if (ans === correctId) { correctCount++; correctList.push(`${item.id}. ✅ ${correctOpt.text}`); }
+          else { incorrectList.push(`${item.id}. ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`); }
         });
-
         const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
         const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
         localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
-
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
-        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
-        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        if (correctList.length) report += `✅ CORRECT:\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT:\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
-
-        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
-
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
-        document.getElementById('feedback').innerHTML = `
-          <div class="feedback">
-            <h3>📊 Results: ${score}/${total}</h3>
-            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered extended 'ee' words!' :
-              score >= 10 ? 'Review homophones like “deer/dear”.' : 'Practice spelling 'ee' words from dictation.'
-            }</p>
-            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
-            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
-              📲 Send Report via WhatsApp
-            </a>
-          </div>
-        `;
+        document.getElementById('feedback').innerHTML = `<div class="feedback"><h3>📊 Results: ${score}/${total}</h3><p><strong>${mastery ? '🎉 Excellent!' : 'Keep practicing.'}</strong></p><p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p><a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report via WhatsApp</a></div>`;
       }
-
       function setupQuizListeners() {
         document.getElementById('submit-quiz').addEventListener('click', () => {
           const form = document.getElementById('quiz-form');
@@ -305,14 +182,10 @@
             const el = form.querySelector(`input[name="q${i}"]:checked`);
             answers.push(el ? el.value : null);
           }
-          if (answers.includes(null)) {
-            alert("Please answer all questions.");
-            return;
-          }
+          if (answers.includes(null)) { alert("Please answer all questions."); return; }
           showFeedback(answers);
         });
       }
-
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
         const promptDiv = document.getElementById('student-name-prompt');
@@ -320,73 +193,24 @@
         const display = document.getElementById('name-display');
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
-
         if (saved) {
-          promptDiv.style.display = 'block';
-          quizDiv.style.display = 'none';
+          promptDiv.style.display = 'block'; quizDiv.style.display = 'none';
           display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
-          buttons.innerHTML = `
-            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
-            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
-          `;
-          document.getElementById('keep-btn').onclick = () => {
-            promptDiv.style.display = 'none';
-            quizDiv.style.display = 'block';
-          };
-          document.getElementById('change-btn').onclick = () => {
-            display.style.display = 'none';
-            input.style.display = 'block';
-            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
-            input.value = '';
-            input.focus();
-            document.getElementById('save-new').onclick = () => {
-              const name = input.value.trim();
-              if (name) {
-                localStorage.setItem('student_name', name);
-                promptDiv.style.display = 'none';
-                quizDiv.style.display = 'block';
-              } else {
-                alert("Please enter your name.");
-                input.focus();
-              }
-            };
-          };
+          buttons.innerHTML = `<button type="button" class="btn" id="keep-btn">✅ Keep This Name</button><button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>`;
+          document.getElementById('keep-btn').onclick = () => { promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; };
+          document.getElementById('change-btn').onclick = () => { display.style.display = 'none'; input.style.display = 'block'; buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`; input.value = ''; input.focus(); document.getElementById('save-new').onclick = () => { const n = input.value.trim(); if(n){localStorage.setItem('student_name', n); promptDiv.style.display='none'; quizDiv.style.display='block';} }; };
         } else {
-          promptDiv.style.display = 'block';
-          quizDiv.style.display = 'none';
-          display.style.display = 'none';
-          input.style.display = 'block';
+          promptDiv.style.display = 'block'; quizDiv.style.display = 'none'; input.style.display = 'block';
           buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
-          document.getElementById('save-first').onclick = () => {
-            const name = input.value.trim();
-            if (name) {
-              localStorage.setItem('student_name', name);
-              promptDiv.style.display = 'none';
-              quizDiv.style.display = 'block';
-            } else {
-              alert("Please enter your name.");
-              input.focus();
-            }
-          };
+          document.getElementById('save-first').onclick = () => { const n = input.value.trim(); if(n){localStorage.setItem('student_name', n); promptDiv.style.display='none'; quizDiv.style.display='block';} };
         }
       }
-
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-        renderNavigation();
-        renderWords();
-        renderSentences();
-        renderQuiz();
-        setupQuizListeners();
-        initNamePrompt();
+        renderNavigation(); renderWords(); renderSentences(); renderQuiz(); setupQuizListeners(); initNamePrompt();
       }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
     })();
   </script>
 </body>
