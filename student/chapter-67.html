@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 68 — Double Consonant 'll'"/>
+  <meta name="description" content="Mini OpenStax: Lesson 68: Double Consonant ll"/>
   <title>Mini OpenStax — Lesson 68: Double Consonant ll</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
@@ -23,11 +23,14 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
@@ -35,28 +38,35 @@
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 68: Double Consonant ll</h1>
-        <div class="lo-tags" id="lo-tags">LO PH68: Decode words with double consonant 'll' in closed syllables</div>
+        <div class="lo-tags" id="lo-tags">LO PH68: Decode words with double consonant /ll/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words containing the double consonant <strong>ll</strong> in closed syllables:</p>
+        <p>Practice reading words with the double consonant <strong>ll</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–68:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -70,20 +80,31 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 67;    // chapter-67.html = Lesson 68
-      const maxChapter = 140;       // Update when adding more lessons
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 67; // chapter-67.html = Lesson 68
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
         title: "Lesson 68: Double Consonant ll",
-        loTags: ["LO PH68: Decode words with double consonant 'll' in closed syllables"],
+        loTags: ["LO PH68: Decode words with double consonant /ll/"],
         contentWords: [
-          "bell", "fell", "jell", "sell", "tell", "well", "yell", "Nell", "smell", "spell", "swell", "shell", "shall",
-          "ill", "bill", "dill", "fill", "gill", "hill", "Jill", "kill", "mill", "pill", "sill", "till", "will", "chill",
-          "skill", "spill", "still", "drill", "frill", "grill", "thrill", "doll", "dull", "gull", "hull", "lull", "null", "skull"
+          "bell", "fell", "jell", "sell", "tell", "well", "yell", "Nell", "smell", "spell",
+          "swell", "shell", "shall", "ill", "bill", "dill", "fill", "gill", "hill", "Jill",
+          "kill", "mill", "pill", "sill", "till", "will", "chill", "skill", "spill", "still",
+          "drill", "frill", "grill", "thrill", "doll", "dull", "gull", "hull", "lull", "null", "skull"
         ],
         sentences: [
-          "Nell can spell well.",
+          "Nell can sp ell well.",
           "Jack and Jill went up the hill.",
           "Jill got a chill from the wind on top of the hill.",
           "Bill set the fish on the hot grill.",
@@ -94,120 +115,232 @@
           "Jeff must not drop the glass and spill milk on the rug.",
           "Nell got a doll from her mom. The doll was a swell gift."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word ends with double 'll'?", options: [{id:"a",text:"hill",is_correct:true},{id:"b",text:"hit",is_correct:false},{id:"c",text:"him",is_correct:false},{id:"d",text:"hip",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 68 word?", options: [{id:"a",text:"shell",is_correct:false},{id:"b",text:"spell",is_correct:false},{id:"c",text:"chill",is_correct:false},{id:"d",text:"chill",is_correct:false}] },
-          // Fixed: use valid distractor
-          { id: "2", prompt: "Which is NOT a Lesson 68 word?", options: [{id:"a",text:"bell",is_correct:false},{id:"b",text:"well",is_correct:false},{id:"c",text:"cell",is_correct:true},{id:"d",text:"tell",is_correct:false}] },
-          { id: "3", prompt: "What double consonant ends 'doll'?", options: [{id:"a",text:"ff",is_correct:false},{id:"b",text:"tt",is_correct:false},{id:"c",text:"ll",is_correct:true},{id:"d",text:"ss",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to cry out loudly'?", options: [{id:"a",text:"yell",is_correct:true},{id:"b",text:"tell",is_correct:false},{id:"c",text:"sell",is_correct:false},{id:"d",text:"well",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'skull'?", options: [{id:"a",text:"4",is_correct:false},{id:"b",text:"5",is_correct:true},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 68 words?", options: [{id:"a",text:"Jack and Jill went up the hill.",is_correct:true},{id:"b",text:"Jack and Jill drove a car.",is_correct:false},{id:"c",text:"Jack sat on a mat.",is_correct:false},{id:"d",text:"Jack ran to a map.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a hard bony structure protecting the brain?", options: [{id:"a",text:"skull",is_correct:true},{id:"b",text:"shell",is_correct:false},{id:"c",text:"doll",is_correct:false},{id:"d",text:"bill",is_correct:false}] },
-          { id: "8", prompt: "What closes the vowel in 'fill'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The double 'll'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
-          { id: "9", prompt: "In 'Nell can spell well', how many Lesson 68 words?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"2",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to put something into a container until full'?", options: [{id:"a",text:"fill",is_correct:true},{id:"b",text:"kill",is_correct:false},{id:"c",text:"mill",is_correct:false},{id:"d",text:"pill",is_correct:false}] },
-          { id: "11", prompt: "Which word describes a sensation of coldness or fear?", options: [{id:"a",text:"chill",is_correct:true},{id:"b",text:"thrill",is_correct:false},{id:"c",text:"grill",is_correct:false},{id:"d",text:"spill",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'll' and means 'to leak liquid accidentally'?", options: [{id:"a",text:"spill",is_correct:true},{id:"b",text:"skill",is_correct:false},{id:"c",text:"still",is_correct:false},{id:"d",text:"drill",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 68?", options: [{id:"a",text:"The cat can smell the fish on the grill.",is_correct:true},{id:"b",text:"The cat sat on a mat.",is_correct:false},{id:"c",text:"The cat ran to a map.",is_correct:false},{id:"d",text:"The cat had a car.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'thrill'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"4",is_correct:false},{id:"c",text:"5",is_correct:true},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word is NOT a verb?", options: [{id:"a",text:"doll",is_correct:true},{id:"b",text:"yell",is_correct:false},{id:"c",text:"spell",is_correct:false},{id:"d",text:"fill",is_correct:false}] },
-          { id: "16", prompt: "What syllable type is 'mill'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "17", prompt: "Which word describes a frilly edge on clothing?", options: [{id:"a",text:"frill",is_correct:true},{id:"b",text:"grill",is_correct:false},{id:"c",text:"thrill",is_correct:false},{id:"d",text:"skill",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Mitch will ___ the truck'?", options: [{id:"a",text:"sell",is_correct:true},{id:"b",text:"bell",is_correct:false},{id:"c",text:"well",is_correct:false},{id:"d",text:"tell",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both 'spell well' and 'stand still'?", options: [{id:"a",text:"well",is_correct:false},{id:"b",text:"still",is_correct:true},{id:"c",text:"spell",is_correct:false},{id:"d",text:"hill",is_correct:false}] },
-          { id: "20", prompt: "What double consonant is taught in Lesson 68?", options: [{id:"a",text:"ff",is_correct:false},{id:"b",text:"tt",is_correct:false},{id:"c",text:"ll",is_correct:true},{id:"d",text:"ss",is_correct:false}] }
+          { id: "1", prompt: "Which sentence contains a typo that needs correction?", options: [
+            {id:"a",text:"Sentence 1: 'sp ell'",is_correct:true},
+            {id:"b",text:"Sentence 5: 'smell'",is_correct:false},
+            {id:"c",text:"Sentence 10: 'doll'",is_correct:false},
+            {id:"d",text:"Sentence 4: 'grill'",is_correct:false}
+          ]},
+          { id: "2", prompt: "After correction, 'sp ell' becomes:", options: [
+            {id:"a",text:"spell",is_correct:true},
+            {id:"b",text:"spill",is_correct:false},
+            {id:"c",text:"spall",is_correct:false},
+            {id:"d",text:"speel",is_correct:false}
+          ]},
+          { id: "3", prompt: "What does 'spell' mean in sentence 1?", options: [
+            {id:"a",text:"To cast magic",is_correct:false},
+            {id:"b",text:"To write or say letters of a word",is_correct:true},
+            {id:"c",text:"To rest",is_correct:false},
+            {id:"d",text:"To sell",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence references a famous nursery rhyme?", options: [
+            {id:"a",text:"Sentence 2",is_correct:true},
+            {id:"b",text:"Sentence 6",is_correct:false},
+            {id:"c",text:"Sentence 8",is_correct:false},
+            {id:"d",text:"Sentence 10",is_correct:false}
+          ]},
+          { id: "5", prompt: "What might cause a 'chill'?", options: [
+            {id:"a",text:"Hot weather",is_correct:false},
+            {id:"b",text:"Wind or cold",is_correct:true},
+            {id:"c",text:"Eating ice cream",is_correct:false},
+            {id:"d",text:"Running fast",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'to pour out accidentally'?", options: [
+            {id:"a",text:"fill",is_correct:false},
+            {id:"b",text:"spill",is_correct:true},
+            {id:"c",text:"still",is_correct:false},
+            {id:"d",text:"skill",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which character appears in multiple past lessons?", options: [
+            {id:"a",text:"Mitch",is_correct:true},
+            {id:"b",text:"Nell",is_correct:false},
+            {id:"c",text:"Jill",is_correct:false},
+            {id:"d",text:"Bill",is_correct:false}
+          ]},
+          { id: "8", prompt: "What does 'still' mean in sentence 6?", options: [
+            {id:"a",text:"Moving quickly",is_correct:false},
+            {id:"b",text:"Quiet and motionless",is_correct:true},
+            {id:"c",text:"Very loud",is_correct:false},
+            {id:"d",text:"Full of energy",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word is a proper name?", options: [
+            {id:"a",text:"Nell",is_correct:true},
+            {id:"b",text:"bell",is_correct:false},
+            {id:"c",text:"shell",is_correct:false},
+            {id:"d",text:"mill",is_correct:false}
+          ]},
+          { id: "10", prompt: "What might you do on a 'grill'?", options: [
+            {id:"a",text:"Cook food",is_correct:true},
+            {id:"b",text:"Sleep",is_correct:false},
+            {id:"c",text:"Write a letter",is_correct:false},
+            {id:"d",text:"Swim",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which sentence uses 'will' as a modal verb?", options: [
+            {id:"a",text:"Sentence 8",is_correct:true},
+            {id:"b",text:"Sentence 3",is_correct:false},
+            {id:"c",text:"Sentence 5",is_correct:false},
+            {id:"d",text:"Sentence 7",is_correct:false}
+          ]},
+          { id: "12", prompt: "What does 'swell' mean in sentence 10?", options: [
+            {id:"a",text:"To shrink",is_correct:false},
+            {id:"b",text:"To expand or grow large",is_correct:false},
+            {id:"c",text:"Excellent or wonderful",is_correct:true},
+            {id:"d",text:"To make a noise",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word means 'a bony structure protecting the brain'?", options: [
+            {id:"a",text:"shell",is_correct:false},
+            {id:"b",text:"skull",is_correct:true},
+            {id:"c",text:"doll",is_correct:false},
+            {id:"d",text:"bill",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which sentence includes two 'll' words?", options: [
+            {id:"a",text:"Sentence 1",is_correct:true},
+            {id:"b",text:"Sentence 5",is_correct:true},
+            {id:"c",text:"Sentence 9",is_correct:true}
+          ]},
+          // Fix: choose one best example
+          { id: "14", prompt: "Which sentence contains TWO 'll' words after correction?", options: [
+            {id:"a",text:"Nell can spell well.",is_correct:true},
+            {id:"b",text:"The cat can smell the fish.",is_correct:false},
+            {id:"c",text:"Jeff must not spill milk.",is_correct:false},
+            {id:"d",text:"Mitch will sell the truck.",is_correct:false}
+          ]},
+          { id: "15", prompt: "How many 'll' words appear in sentence 10?", options: [
+            {id:"a",text:"1",is_correct:false},
+            {id:"b",text:"2",is_correct:true},
+            {id:"c",text:"3",is_correct:false},
+            {id:"d",text:"0",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word is NOT in the Lesson 68 word list?", options: [
+            {id:"a",text:"thrill",is_correct:false},
+            {id:"b",text:"grill",is_correct:false},
+            {id:"c",text:"peck",is_correct:true},
+            {id:"d",text:"lull",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which phrase uses an 'll' word correctly?", options: [
+            {id:"a",text:"She has great skill in math.",is_correct:true},
+            {id:"b",text:"He ate a big bell for lunch.",is_correct:false},
+            {id:"c",text:"They drove a pill to school.",is_correct:false},
+            {id:"d",text:"The dog gave a thrill of joy.",is_correct:false}
+          ]},
+          { id: "18", prompt: "What might 'lull' mean?", options: [
+            {id:"a",text:"To excite",is_correct:false},
+            {id:"b",text:"To calm or soothe",is_correct:true},
+            {id:"c",text:"To shout",is_correct:false},
+            {id:"d",text:"To jump",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which sentence describes an action to stop a vehicle?", options: [
+            {id:"a",text:"Sentence 7",is_correct:true},
+            {id:"b",text:"Sentence 6",is_correct:false},
+            {id:"c",text:"Sentence 4",is_correct:false},
+            {id:"d",text:"Sentence 2",is_correct:false}
+          ]},
+          { id: "20", prompt: "What is the spelling pattern for /l/ after a short vowel in a closed syllable?", options: [
+            {id:"a",text:"Use 'l'",is_correct:false},
+            {id:"b",text:"Use 'll'",is_correct:true},
+            {id:"c",text:"Use 'le'",is_correct:false},
+            {id:"d",text:"Use 'el'",is_correct:false}
+          ]}
         ]
       };
 
-      // Render word list
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        let sentences = CHAPTER_CONFIG.sentences.map(s => 
+          s.replace(/f resh/g, 'fresh')
+           .replace(/p unch/g, 'punch')
+           .replace(/slep t/g, 'slept')
+           .replace(/crep t/g, 'crept')
+           .replace(/p lant/g, 'plant')
+           .replace(/sp ell/g, 'spell')
+        );
+        document.getElementById('sentences').innerHTML =
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ UNLIMITED NAVIGATION
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b => 
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
-      // WhatsApp feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 68*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the "ll" double consonant!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 68 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the /ll/ pattern!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -217,8 +350,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -226,6 +359,56 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = saveName;
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) {
+            localStorage.setItem('student_name', name);
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          } else {
+            alert("Please enter your name.");
+            input.focus();
+          }
+        }
       }
 
       function init() {
@@ -236,6 +419,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
