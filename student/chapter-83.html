@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 84: Vowel Team 'ee'"/>
-  <title>Mini OpenStax — Lesson 84: Vowel Team 'ee'</title>
+  <meta name="description" content="Mini OpenStax: Lesson 84: ee=/ē/"/>
+  <title>Mini OpenStax — Lesson 84: ee=/ē/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 84: Vowel Team 'ee'</h1>
-        <div class="lo-tags" id="lo-tags">LO PH84: Decode words with the /ē/ sound spelled 'ee'</div>
+        <h1 id="chapter-title">Lesson 84: ee=/ē/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH084: Decode words with vowel team "ee" pronounced /ē/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Practice reading these words containing the "ee" vowel team:</p>
+        <p>Words with "ee" that say /ē/ (long e sound):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -100,18 +100,17 @@
         return arr;
       }
 
-      const currentChapter = 83; 
+      const currentChapter = 83;
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 84: Vowel Team 'ee'",
-        loTags: ["LO PH84: Decode words with the /ē/ sound spelled 'ee'"],
+        title: "Lesson 84: ee=/ē/",
+        loTags: ["LO PH084: Decode words with vowel team \"ee\" pronounced /ē/"],
         contentWords: [
-          "fee", "feed", "feel", "feet", "flee", "fleet", "free", "glee", 
-          "meek", "meet", "green", "greet", "greed", "Greek", "heel", 
-          "heed", "need", "keep", "keen", "keel", "Jeep", "jeer", "Lee", 
-          "leek", "leer", "leech"
+          "fee", "feed", "feel", "feet", "flee", "fleet", "free", "glee", "meek", "meet",
+          "green", "greet", "greed", "Greek", "heel", "heed", "need", "keep", "keen", "keel",
+          "Jeep", "jeer", "Lee", "leek", "leer", "leech"
         ],
         sentences: [
           "The Jeep went up the steep hill.",
@@ -125,26 +124,126 @@
           "Did Rex feel bad? Did Mom feed him and keep him in bed?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word means a charge or payment?", options: [{id:"a",text:"fee",is_correct:true},{id:"b",text:"feet",is_correct:false},{id:"c",text:"feed",is_correct:false},{id:"d",text:"flee",is_correct:false}]},
-          { id: "2", prompt: "To run away quickly is to...", options: [{id:"a",text:"flee",is_correct:true},{id:"b",text:"fleet",is_correct:false},{id:"c",text:"feel",is_correct:false},{id:"d",text:"feed",is_correct:false}]},
-          { id: "3", prompt: "Finish the sentence: The _____ went up the steep hill.", options: [{id:"a",text:"Jeep",is_correct:true},{id:"b",text:"Greek",is_correct:false},{id:"c",text:"Keel",is_correct:false},{id:"d",text:"Leek",is_correct:false}]},
-          { id: "4", prompt: "Which word rhymes with 'meet'?", options: [{id:"a",text:"feet",is_correct:true},{id:"b",text:"meek",is_correct:false},{id:"c",text:"keel",is_correct:false},{id:"d",text:"jeer",is_correct:false}]},
-          { id: "5", prompt: "Which word describes a color?", options: [{id:"a",text:"green",is_correct:true},{id:"b",text:"greed",is_correct:false},{id:"c",text:"greet",is_correct:false},{id:"d",text:"Greek",is_correct:false}]},
-          { id: "6", prompt: "To give food to someone is to _____ them.", options: [{id:"a",text:"feed",is_correct:true},{id:"b",text:"feel",is_correct:false},{id:"c",text:"feet",is_correct:false},{id:"d",text:"heed",is_correct:false}]},
-          { id: "7", prompt: "A group of ships is called a...", options: [{id:"a",text:"fleet",is_correct:true},{id:"b",text:"flee",is_correct:false},{id:"c",text:"glee",is_correct:false},{id:"d",text:"free",is_correct:false}]},
-          { id: "8", prompt: "Which word means to say hello?", options: [{id:"a",text:"greet",is_correct:true},{id:"b",text:"greed",is_correct:false},{id:"c",text:"green",is_correct:false},{id:"d",text:"Greek",is_correct:false}]},
-          { id: "9", prompt: "If you have a sharp mind, you have a _____ wit.", options: [{id:"a",text:"keen",is_correct:true},{id:"b",text:"keep",is_correct:false},{id:"c",text:"keel",is_correct:false},{id:"d",text:"leek",is_correct:false}]},
-          { id: "10", prompt: "Which word is a person's name?", options: [{id:"a",text:"Lee",is_correct:true},{id:"b",text:"leek",is_correct:false},{id:"c",text:"leer",is_correct:false},{id:"d",text:"leech",is_correct:false}]},
-          { id: "11", prompt: "The back part of your foot is the...", options: [{id:"a",text:"heel",is_correct:true},{id:"b",text:"heed",is_correct:false},{id:"c",text:"keel",is_correct:false},{id:"d",text:"feel",is_correct:false}]},
-          { id: "12", prompt: "Which word means to pay attention or listen?", options: [{id:"a",text:"heed",is_correct:true},{id:"b",text:"heel",is_correct:false},{id:"c",text:"need",is_correct:false},{id:"d",text:"feed",is_correct:false}]},
-          { id: "13", prompt: "A vegetable that looks like a large green onion is a...", options: [{id:"a",text:"leek",is_correct:true},{id:"b",text:"leech",is_correct:false},{id:"c",text:"leer",is_correct:false},{id:"d",text:"meek",is_correct:false}]},
-          { id: "14", prompt: "Which word means great joy or delight?", options: [{id:"a",text:"glee",is_correct:true},{id:"b",text:"free",is_correct:false},{id:"c",text:"flee",is_correct:false},{id:"d",text:"greet",is_correct:false}]},
-          { id: "15", prompt: "What do you do with your hands to hold onto something?", options: [{id:"a",text:"keep",is_correct:true},{id:"b",text:"keen",is_correct:false},{id:"c",text:"jeep",is_correct:false},{id:"d",text:"feet",is_correct:false}]},
-          { id: "16", prompt: "Which word rhymes with 'beer'?", options: [{id:"a",text:"jeer",is_correct:true},{id:"b",text:"jeep",is_correct:false},{id:"c",text:"heel",is_correct:false},{id:"d",text:"keen",is_correct:false}]},
-          { id: "17", prompt: "Something that costs nothing is...", options: [{id:"a",text:"free",is_correct:true},{id:"b",text:"fee",is_correct:false},{id:"c",text:"feed",is_correct:false},{id:"d",text:"flee",is_correct:false}]},
-          { id: "18", prompt: "A quiet or gentle person might be described as...", options: [{id:"a",text:"meek",is_correct:true},{id:"b",text:"meet",is_correct:false},{id:"c",text:"heed",is_correct:false},{id:"d",text:"keep",is_correct:false}]},
-          { id: "19", prompt: "The bottom of a ship is the...", options: [{id:"a",text:"keel",is_correct:true},{id:"b",text:"keen",is_correct:false},{id:"c",text:"keep",is_correct:false},{id:"d",text:"feel",is_correct:false}]},
-          { id: "20", prompt: "Which word refers to someone from Greece?", options: [{id:"a",text:"Greek",is_correct:true},{id:"b",text:"greed",is_correct:false},{id:"c",text:"greet",is_correct:false},{id:"d",text:"green",is_correct:false}]}
+          { id: "1", prompt: "Which word has 'ee' that says /ē/?", options: [
+            {id:"a",text:"cat",is_correct:false},
+            {id:"b",text:"fee",is_correct:true},
+            {id:"c",text:"dog",is_correct:false},
+            {id:"d",text:"hat",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'feed' mean?", options: [
+            {id:"a",text:"to give food",is_correct:true},
+            {id:"b",text:"to run fast",is_correct:false},
+            {id:"c",text:"to sleep",is_correct:false},
+            {id:"d",text:"to build",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word rhymes with 'feel'?", options: [
+            {id:"a",text:"heel",is_correct:true},
+            {id:"b",text:"hall",is_correct:false},
+            {id:"c",text:"hill",is_correct:false},
+            {id:"d",text:"hole",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word is a vehicle?", options: [
+            {id:"a",text:"leek",is_correct:false},
+            {id:"b",text:"leet",is_correct:false},
+            {id:"c",text:"Jeep",is_correct:true},
+            {id:"d",text:"jeep",is_correct:false} // lowercase not in list
+          ]},
+          { id: "5", prompt: "Which sentence uses a word with 'ee' = /ē/?", options: [
+            {id:"a",text:"She ran to the store.",is_correct:false},
+            {id:"b",text:"He got his feet wet.",is_correct:true},
+            {id:"c",text:"It is cold outside.",is_correct:false},
+            {id:"d",text:"They played ball.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'very sharp or intense'?", options: [
+            {id:"a",text:"keel",is_correct:false},
+            {id:"b",text:"keen",is_correct:true},
+            {id:"c",text:"leek",is_correct:false},
+            {id:"d",text:"leer",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word is a type of vegetable?", options: [
+            {id:"a",text:"leek",is_correct:true},
+            {id:"b",text:"leer",is_correct:false},
+            {id:"c",text:"leet",is_correct:false},
+            {id:"d",text:"leech",is_correct:false}
+          ]},
+          { id: "8", prompt: "How is 'ee' pronounced in 'green'?", options: [
+            {id:"a",text:"/ĕ/",is_correct:false},
+            {id:"b",text:"/ē/",is_correct:true},
+            {id:"c",text:"/ĭ/",is_correct:false},
+            {id:"d",text:"/æ/",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to escape quickly'?", options: [
+            {id:"a",text:"flee",is_correct:true},
+            {id:"b",text:"fleet",is_correct:false},
+            {id:"c",text:"feed",is_correct:false},
+            {id:"d",text:"feel",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
+            {id:"a",text:"fee",is_correct:true},
+            {id:"b",text:"feed",is_correct:false},
+            {id:"c",text:"feel",is_correct:false},
+            {id:"d",text:"feet",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word describes a ship's bottom part?", options: [
+            {id:"a",text:"keel",is_correct:true},
+            {id:"b",text:"heel",is_correct:false},
+            {id:"c",text:"leet",is_correct:false},
+            {id:"d",text:"leet",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is NOT in the word list?", options: [
+            {id:"a",text:"heed",is_correct:false},
+            {id:"b",text:"need",is_correct:false},
+            {id:"c",text:"seed",is_correct:true},
+            {id:"d",text:"feed",is_correct:false}
+          ]},
+          { id: "13", prompt: "In 'Lee had a keen wit...', who is 'Lee'?", options: [
+            {id:"a",text:"a type of boat",is_correct:false},
+            {id:"b",text:"a person's name",is_correct:true},
+            {id:"c",text:"a vegetable",is_correct:false},
+            {id:"d",text:"a sound",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'to pay attention to'?", options: [
+            {id:"a",text:"heed",is_correct:true},
+            {id:"b",text:"heel",is_correct:false},
+            {id:"c",text:"leet",is_correct:false},
+            {id:"d",text:"leet",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word has the same vowel sound as 'meet'?", options: [
+            {id:"a",text:"meat",is_correct:false},
+            {id:"b",text:"beat",is_correct:false},
+            {id:"c",text:"feet",is_correct:true},
+            {id:"d",text:"met",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word ends with /d/ and has 'ee'?", options: [
+            {id:"a",text:"feed",is_correct:true},
+            {id:"b",text:"feel",is_correct:false},
+            {id:"c",text:"feet",is_correct:false},
+            {id:"d",text:"flee",is_correct:false}
+          ]},
+          { id: "17", prompt: "What does 'glee' mean?", options: [
+            {id:"a",text:"sadness",is_correct:false},
+            {id:"b",text:"joy or delight",is_correct:true},
+            {id:"c",text:"anger",is_correct:false},
+            {id:"d",text:"fear",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word describes what you do with your eyes when you stare rudely?", options: [
+            {id:"a",text:"leek",is_correct:false},
+            {id:"b",text:"leer",is_correct:true},
+            {id:"c",text:"leet",is_correct:false},
+            {id:"d",text:"leet",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word is a homophone of 'flea'?", options: [
+            {id:"a",text:"flee",is_correct:true},
+            {id:"b",text:"free",is_correct:false},
+            {id:"c",text:"fee",is_correct:false},
+            {id:"d",text:"fleet",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word has 'ee' but is NOT pronounced /ē/?", options: [
+            {id:"a",text:"coffee",is_correct:true},
+            {id:"b",text:"Greek",is_correct:false},
+            {id:"c",text:"green",is_correct:false},
+            {id:"d",text:"Jeep",is_correct:false}
+          ]}
         ]
       };
 
@@ -155,7 +254,8 @@
         [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
         [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
         [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
-        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring']
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/f ee/g, 'fee']
       ];
 
       function renderWords() {
@@ -241,6 +341,8 @@
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
