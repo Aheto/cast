@@ -38,7 +38,7 @@
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 81: Sight Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH81: Read high-frequency sight words</div>
+        <div class="lo-tags" id="lo-tags">LO PH81: Recognize and use high-frequency sight words: we, me, be, he, she, do, who, to, two</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Common <strong>Sight Words</strong> for this lesson:</p>
+        <p>Memorize these essential sight words:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -82,55 +82,116 @@
       'use strict';
       window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 80; // chapter-80.html = Lesson 81
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 80;
+      const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
         title: "Lesson 81: Sight Words",
-        loTags: ["LO PH81: Read high-frequency sight words"],
+        loTags: ["LO PH81: Recognize and use high-frequency sight words: we, me, be, he, she, do, who, to, two"],
         contentWords: ["we", "me", "be", "he", "she", "do", "who", "to", "two"],
         sentences: [
-          "1) What can I do to help you?",
-          "2) Beth can spell, and she can do math.",
-          "3) Mom said, \"Who will pick up the trash?\"",
-          "4) Max said, \"Let me do it, Mom.\"",
-          "5) We can catch a bus at the bus stop at two.",
-          "6) Who will flunk the test, and who will pass?",
-          "7) Frank said, \"Where are we? Are we lost?\"",
-          "8) Jeff says he can swim the length of the pond."
+          "We can go to the park.",
+          "He and she are friends.",
+          "Do you want to be my friend?",
+          "Who is that?",
+          "She gave me two apples.",
+          "Be kind to me.",
+          "He said, 'Do your best!'",
+          "To be or not to be?",
+          "Who are we?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "In sentence 1, what does the speaker ask?", options: [{id:"a",text:"What can I do to help you?",is_correct:true},{id:"b",text:"Where are we?",is_correct:false},{id:"c",text:"Who is there?",is_correct:false},{id:"d",text:"Can you spell?",is_correct:false}]},
-          { id: "2", prompt: "What two things can Beth do?", options: [{id:"a",text:"spell and do math",is_correct:true},{id:"b",text:"swim and run",is_correct:false},{id:"c",text:"catch a bus",is_correct:false},{id:"d",text:"pick up trash",is_correct:false}]},
-          { id: "3", prompt: "Who did Mom ask to pick up the trash?", options: [{id:"a",text:"She asked 'Who will'?",is_correct:true},{id:"b",text:"Beth",is_correct:false},{id:"c",text:"Frank",is_correct:false},{id:"d",text:"Jeff",is_correct:false}]},
-          { id: "4", prompt: "What did Max say to Mom?", options: [{id:"a",text:"Let me do it",is_correct:true},{id:"b",text:"We are lost",is_correct:false},{id:"c",text:"I can swim",is_correct:false},{id:"d",text:"I can spell",is_correct:false}]},
-          { id: "5", prompt: "At what time can they catch the bus?", options: [{id:"a",text:"at two",is_correct:true},{id:"b",text:"at lunch",is_correct:false},{id:"c",text:"at dusk",is_correct:false},{id:"d",text:"at camp",is_correct:false}]},
-          { id: "6", prompt: "What is Frank worried about in sentence 7?", options: [{id:"a",text:"being lost",is_correct:true},{id:"b",text:"the math test",is_correct:false},{id:"c",text:"the trash",is_correct:false},{id:"d",text:"the bus",is_correct:false}]},
-          { id: "7", prompt: "What does Jeff say he can do?", options: [{id:"a",text:"swim the length of the pond",is_correct:true},{id:"b",text:"catch a bus",is_correct:false},{id:"c",text:"spell math",is_correct:false},{id:"d",text:"help Mom",is_correct:false}]},
-          { id: "8", prompt: "Which word is a pronoun for a girl?", options: [{id:"a",text:"she",is_correct:true},{id:"b",text:"he",is_correct:false},{id:"c",text:"we",is_correct:false},{id:"d",text:"me",is_correct:false}]},
-          { id: "9", prompt: "Which word is a pronoun for a boy?", options: [{id:"a",text:"he",is_correct:true},{id:"b",text:"she",is_correct:false},{id:"c",text:"we",is_correct:false},{id:"d",text:"me",is_correct:false}]},
-          { id: "10", prompt: "Which word means the number 2?", options: [{id:"a",text:"two",is_correct:true},{id:"b",text:"to",is_correct:false},{id:"c",text:"do",is_correct:false},{id:"d",text:"who",is_correct:false}]},
-          { id: "11", prompt: "Which word asks about a person?", options: [{id:"a",text:"who",is_correct:true},{id:"b",text:"we",is_correct:false},{id:"c",text:"me",is_correct:false},{id:"d",text:"be",is_correct:false}]},
-          { id: "12", prompt: "In sentence 2, Beth can spell, and ____ can do math.", options: [{id:"a",text:"she",is_correct:true},{id:"b",text:"he",is_correct:false},{id:"c",text:"we",is_correct:false},{id:"d",text:"me",is_correct:false}]},
-          { id: "13", prompt: "Complete the sentence: 'What can I ___ to help you?'", options: [{id:"a",text:"do",is_correct:true},{id:"b",text:"be",is_correct:false},{id:"c",text:"to",is_correct:false},{id:"d",text:"two",is_correct:false}]},
-          { id: "14", prompt: "Which word rhymes with 'me'?", options: [{id:"a",text:"be",is_correct:true},{id:"b",text:"do",is_correct:false},{id:"c",text:"to",is_correct:false},{id:"d",text:"who",is_correct:false}]},
-          { id: "15", prompt: "Which word rhymes with 'do'?", options: [{id:"a",text:"who",is_correct:true},{id:"b",text:"be",is_correct:false},{id:"c",text:"me",is_correct:false},{id:"d",text:"she",is_correct:false}]},
-          { id: "16", prompt: "What does 'we' refer to?", options: [{id:"a",text:"a group of people including me",is_correct:true},{id:"b",text:"only me",is_correct:false},{id:"c",text:"only one boy",is_correct:false},{id:"d",text:"only one girl",is_correct:false}]},
-          { id: "17", prompt: "In sentence 5, where can they catch the bus?", options: [{id:"a",text:"at the bus stop",is_correct:true},{id:"b",text:"at the pond",is_correct:false},{id:"c",text:"at camp",is_correct:false},{id:"d",text:"at the bank",is_correct:false}]},
-          { id: "18", prompt: "Which sentence mentions a 'test'?", options: [{id:"a",text:"Sentence 6",is_correct:true},{id:"b",text:"Sentence 1",is_correct:false},{id:"c",text:"Sentence 4",is_correct:false},{id:"d",text:"Sentence 8",is_correct:false}]},
-          { id: "19", prompt: "Complete the word: 'M _ ' (refers to myself).", options: [{id:"a",text:"e",is_correct:true},{id:"b",text:"o",is_correct:false},{id:"c",text:"u",is_correct:false},{id:"d",text:"i",is_correct:false}]},
-          { id: "20", prompt: "Who is speaking in sentence 7?", options: [{id:"a",text:"Frank",is_correct:true},{id:"b",text:"Max",is_correct:false},{id:"c",text:"Jeff",is_correct:false},{id:"d",text:"Beth",is_correct:false}]}
+          { id: "1", prompt: "Which word means 'more than one person including the speaker'?", options: [
+            {id:"a",text:"me",is_correct:false},{id:"b",text:"we",is_correct:true},{id:"c",text:"he",is_correct:false},{id:"d",text:"she",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word is a subject pronoun for a male?", options: [
+            {id:"a",text:"she",is_correct:false},{id:"b",text:"me",is_correct:false},{id:"c",text:"he",is_correct:true},{id:"d",text:"who",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word is an object pronoun?", options: [
+            {id:"a",text:"we",is_correct:false},{id:"b",text:"me",is_correct:true},{id:"c",text:"be",is_correct:false},{id:"d",text:"do",is_correct:false}
+          ]},
+          { id: "4", prompt: "Choose the correct spelling for the number 2:", options: [
+            {id:"a",text:"to",is_correct:false},{id:"b",text:"too",is_correct:false},{id:"c",text:"two",is_correct:true},{id:"d",text:"tow",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word is a verb meaning 'exist' or 'happen'?", options: [
+            {id:"a",text:"be",is_correct:true},{id:"b",text:"do",is_correct:false},{id:"c",text:"to",is_correct:false},{id:"d",text:"we",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word asks about identity?", options: [
+            {id:"a",text:"what",is_correct:false},{id:"b",text:"who",is_correct:true},{id:"c",text:"where",is_correct:false},{id:"d",text:"when",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which sentence is correct?", options: [
+            {id:"a",text:"Me and him went.",is_correct:false},{id:"b",text:"He and I went.",is_correct:false},{id:"c",text:"She gave it to me.",is_correct:true},{id:"d",text:"Her gave it to I.",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word means 'perform an action'?", options: [
+            {id:"a",text:"be",is_correct:false},{id:"b",text:"do",is_correct:true},{id:"c",text:"to",is_correct:false},{id:"d",text:"two",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word is a preposition showing direction or purpose?", options: [
+            {id:"a",text:"two",is_correct:false},{id:"b",text:"to",is_correct:true},{id:"c",text:"too",is_correct:false},{id:"d",text:"be",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word refers to a female subject?", options: [
+            {id:"a",text:"he",is_correct:false},{id:"b",text:"she",is_correct:true},{id:"c",text:"me",is_correct:false},{id:"d",text:"we",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which pair are both subject pronouns?", options: [
+            {id:"a",text:"me, him",is_correct:false},{id:"b",text:"he, she",is_correct:true},{id:"c",text:"us, them",is_correct:false},{id:"d",text:"her, me",is_correct:false}
+          ]},
+          { id: "12", prompt: "In 'We want to go,' what part of speech is 'to'?", options: [
+            {id:"a",text:"preposition",is_correct:false},{id:"b",text:"infinitive marker",is_correct:true},{id:"c",text:"adjective",is_correct:false},{id:"d",text:"noun",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word is NOT in this lesson?", options: [
+            {id:"a",text:"you",is_correct:true},{id:"b",text:"who",is_correct:false},{id:"c",text:"do",is_correct:false},{id:"d",text:"be",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which sentence uses 'two' correctly?", options: [
+            {id:"a",text:"I have two dogs.",is_correct:true},{id:"b",text:"To go to the store.",is_correct:false},{id:"c",text:"Too many people.",is_correct:false},{id:"d",text:"She is to nice.",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word can be both a verb and a noun?", options: [
+            {id:"a",text:"be",is_correct:true},{id:"b",text:"to",is_correct:false},{id:"c",text:"who",is_correct:false},{id:"d",text:"me",is_correct:false}
+          ]},
+          { id: "16", prompt: "What is the opposite of 'he'?", options: [
+            {id:"a",text:"him",is_correct:false},{id:"b",text:"she",is_correct:true},{id:"c",text:"her",is_correct:false},{id:"d",text:"we",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word is always capitalized when starting a sentence?", options: [
+            {id:"a",text:"me",is_correct:false},{id:"b",text:"we",is_correct:true},{id:"c",text:"to",is_correct:false},{id:"d",text:"be",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word completes: '___ are my friends.'?", options: [
+            {id:"a",text:"Me",is_correct:false},{id:"b",text:"We",is_correct:true},{id:"c",text:"Be",is_correct:false},{id:"d",text:"To",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word is a question word asking about a person?", options: [
+            {id:"a",text:"what",is_correct:false},{id:"b",text:"where",is_correct:false},{id:"c",text:"who",is_correct:true},{id:"d",text:"when",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which sentence contains THREE sight words from this lesson?", options: [
+            {id:"a",text:"He gave me two books.",is_correct:true},{id:"b",text:"The cat ran fast.",is_correct:false},{id:"c",text:"Do you like apples?",is_correct:false},{id:"d",text:"She is very kind.",is_correct:false}
+          ]}
         ]
       };
+
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring']
+      ];
 
       function renderWords() {
         document.getElementById('word-list').innerHTML =
@@ -138,8 +199,15 @@
       }
 
       function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
         document.getElementById('sentences').innerHTML =
-          CHAPTER_CONFIG.sentences.map(s => `<p>${s}</p>`).join('');
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
@@ -148,23 +216,34 @@
         for (let i = 0; i < 4; i++) {
           const c = currentChapter + i;
           const lessonNum = c + 1;
-          if (c > maxChapter) break;
-          buttons.push({ label: `Lesson ${lessonNum}`, url: `chapter-${c}.html`, active: i === 0 });
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
         }
-        nav.innerHTML = buttons.map(b => `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const opts = shuffle([...q.options]);
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
           const correct = q.options.find(o => o.is_correct);
           window.quizCorrectMap[q.id] = correct.id;
-          const optHtml = opts.map((o, i) => {
-            const L = String.fromCharCode(65 + i);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
+
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
@@ -172,11 +251,13 @@
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
         let correctCount = 0, correctList = [], incorrectList = [];
+
         items.forEach((item, i) => {
           const ans = answers[i];
           const correctId = window.quizCorrectMap[item.id];
           const correctOpt = item.options.find(o => o.id === correctId);
-          if (ans === correctId) {
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
             correctCount++;
             correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
@@ -184,27 +265,34 @@
           }
         });
 
-        const score = correctCount, mastery = score >= 15;
+        const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
-        const attemptsKey = `quiz_attempts_${currentChapter}`;
-        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
-        localStorage.setItem(attemptsKey, attempts);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
 
-        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/20 (${Math.round(score/20*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
-        if (correctList.length) report += `✅ CORRECT:\n${correctList.join('\n')}\n\n`;
-        if (incorrectList.length) report += `❌ INCORRECT:\n${incorrectList.join('\n')}\n\n`;
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}/20</h3>
-            <p><strong>${mastery ? '🎉 Excellent!' : 'Keep practicing.'}</strong></p>
-            <p>Time: ${timeOnTask}s | Attempts: ${attempts}</p>
-            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report via WhatsApp</a>
-          </div>`;
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered core sight words!' :
+              score >= 10 ? 'Review tricky words like “to/two”.' : 'Practice sight word recognition daily.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
       }
 
       function setupQuizListeners() {
@@ -215,7 +303,10 @@
             const el = form.querySelector(`input[name="q${i}"]:checked`);
             answers.push(el ? el.value : null);
           }
-          if (answers.includes(null)) { alert("Please answer all questions."); return; }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
           showFeedback(answers);
         });
       }
@@ -228,30 +319,72 @@
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
 
-        promptDiv.style.display = 'block';
         if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
           display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
-          buttons.innerHTML = `<button type="button" class="btn" id="keep-btn">✅ Keep This Name</button> <button type="button" class="btn btn-secondary" id="change-btn">✏️ Change</button>`;
-          document.getElementById('keep-btn').onclick = () => { promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; };
-          document.getElementById('change-btn').onclick = () => { display.style.display = 'none'; input.style.display = 'block'; input.value = ''; input.focus(); buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save & Start</button>`; document.getElementById('save-new').onclick = saveName; };
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
         } else {
-          display.style.display = 'none'; input.style.display = 'block'; buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save & Start</button>`; document.getElementById('save-first').onclick = saveName;
-        }
-
-        function saveName() {
-          const name = input.value.trim();
-          if (name) { localStorage.setItem('student_name', name); promptDiv.style.display = 'none'; quizDiv.style.display = 'block'; }
-          else { alert("Please enter your name."); }
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
         }
       }
 
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
-        renderNavigation(); renderWords(); renderSentences(); renderQuiz(); setupQuizListeners(); initNamePrompt();
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
