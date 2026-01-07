@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 70 — Consonant Digraph 'qu'"/>
+  <meta name="description" content="Mini OpenStax: Lesson 70: Consonant Digraph qu"/>
   <title>Mini OpenStax — Lesson 70: Consonant Digraph qu</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
@@ -23,11 +23,14 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
@@ -35,28 +38,35 @@
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 70: Consonant Digraph qu</h1>
-        <div class="lo-tags" id="lo-tags">LO PH70: Decode words with the consonant digraph 'qu' in closed syllables</div>
+        <div class="lo-tags" id="lo-tags">LO PH70: Decode words with consonant digraph /qu/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
 
-    <!-- 📚 5-BUTTON NAVIGATION BAR (Home + current + next 3 lessons) -->
     <nav class="chapter-nav" id="chapter-nav"></nav>
 
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words containing the consonant digraph <strong>qu</strong> in closed syllables:</p>
+        <p>Practice reading words with the consonant digraph <strong>qu</strong>:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–70:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -70,15 +80,26 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 69;    // chapter-69.html = Lesson 70
-      const maxChapter = 150;       // Update when adding more lessons
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      const currentChapter = 69; // chapter-69.html = Lesson 70
+      const maxChapter = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
         title: "Lesson 70: Consonant Digraph qu",
-        loTags: ["LO PH70: Decode words with the consonant digraph 'qu' in closed syllables"],
+        loTags: ["LO PH70: Decode words with consonant digraph /qu/"],
         contentWords: [
-          "quip", "quit", "quiz", "quick", "quill", "quilt", "squid", "squish", "squint", "quack", "quest", "quench", "squelch"
+          "quip", "quit", "quiz", "quick", "quill", "quilt", "squid", "squish", "squint",
+          "quack", "quest", "quench", "squelch"
         ],
         sentences: [
           "Ten men went west on a quest.",
@@ -91,120 +112,238 @@
           "Jill can catch a fish in the pond, but not a squid.",
           "Nick had a thick quilt on the bed and did not get a chill."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word begins with the digraph 'qu'?", options: [{id:"a",text:"quiz",is_correct:true},{id:"b",text:"quiz",is_correct:true},{id:"c",text:"quick",is_correct:true},{id:"d",text:"quack",is_correct:true}] },
-          // Normalized to one correct per item
-          { id: "1", prompt: "Which word begins with the digraph 'qu'?", options: [{id:"a",text:"quiz",is_correct:true},{id:"b",text:"duck",is_correct:false},{id:"c",text:"fish",is_correct:false},{id:"d",text:"sun",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 70 word?", options: [{id:"a",text:"quench",is_correct:false},{id:"b",text:"squelch",is_correct:false},{id:"c",text:"quiet",is_correct:true},{id:"d",text:"squid",is_correct:false}] },
-          { id: "3", prompt: "What digraph starts 'quilt'?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"qu",is_correct:true},{id:"d",text:"ch",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to stop doing something'?", options: [{id:"a",text:"quit",is_correct:true},{id:"b",text:"quip",is_correct:false},{id:"c",text:"quench",is_correct:false},{id:"d",text:"quest",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'squint'?", options: [{id:"a",text:"5",is_correct:false},{id:"b",text:"6",is_correct:true},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 70 words?", options: [{id:"a",text:"Cliff did well on the last math quiz.",is_correct:true},{id:"b",text:"Cliff drove a car.",is_correct:false},{id:"c",text:"Cliff sat on a mat.",is_correct:false},{id:"d",text:"Cliff ran to a map.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a writing instrument made from a bird’s feather?", options: [{id:"a",text:"quill",is_correct:true},{id:"b",text:"quilt",is_correct:false},{id:"c",text:"squid",is_correct:false},{id:"d",text:"quip",is_correct:false}] },
-          { id: "8", prompt: "What closes the vowel in 'quick'?", options: [{id:"a",text:"Silent e",is_correct:false},{id:"b",text:"The letter 'k'",is_correct:true},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"Double vowel",is_correct:false}] },
-          { id: "9", prompt: "In 'Mitch had a quick lunch', how many Lesson 70 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'a clever, witty remark'?", options: [{id:"a",text:"quip",is_correct:true},{id:"b",text:"quiz",is_correct:false},{id:"c",text:"quench",is_correct:false},{id:"d",text:"quest",is_correct:false}] },
-          { id: "11", prompt: "Which word describes a deep, soft bed covering?", options: [{id:"a",text:"quilt",is_correct:true},{id:"b",text:"quill",is_correct:false},{id:"c",text:"squid",is_correct:false},{id:"d",text:"squint",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with /k/ and means 'to extinguish thirst'?", options: [{id:"a",text:"quench",is_correct:true},{id:"b",text:"quick",is_correct:false},{id:"c",text:"quiz",is_correct:false},{id:"d",text:"quip",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 70?", options: [{id:"a",text:"A duck can quack and a hen can cluck.",is_correct:true},{id:"b",text:"A duck sat on a mat.",is_correct:false},{id:"c",text:"A duck ran to a map.",is_correct:false},{id:"d",text:"A duck had a car.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'squid'?", options: [{id:"a",text:"2",is_correct:false},{id:"b",text:"3",is_correct:false},{id:"c",text:"4",is_correct:true},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word is NOT a noun?", options: [{id:"a",text:"quit",is_correct:true},{id:"b",text:"quiz",is_correct:false},{id:"c",text:"quilt",is_correct:false},{id:"d",text:"squid",is_correct:false}] },
-          { id: "16", prompt: "What syllable type is 'quest'?", options: [{id:"a",text:"Open",is_correct:false},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed",is_correct:true},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "17", prompt: "Which word describes an undersea creature with eight arms?", options: [{id:"a",text:"squid",is_correct:true},{id:"b",text:"quill",is_correct:false},{id:"c",text:"quench",is_correct:false},{id:"d",text:"squelch",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Bill was quick with a ___'?", options: [{id:"a",text:"quip",is_correct:true},{id:"b",text:"quiz",is_correct:false},{id:"c",text:"quench",is_correct:false},{id:"d",text:"quest",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both 'math quiz' and 'last math quiz'?", options: [{id:"a",text:"quiz",is_correct:true},{id:"b",text:"math",is_correct:false},{id:"c",text:"last",is_correct:false},{id:"d",text:"well",is_correct:false}] },
-          { id: "20", prompt: "What consonant digraph is taught in Lesson 70?", options: [{id:"a",text:"sh",is_correct:false},{id:"b",text:"th",is_correct:false},{id:"c",text:"qu",is_correct:true},{id:"d",text:"ch",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'a clever or witty remark'?", options: [
+            {id:"a",text:"quip",is_correct:true},
+            {id:"b",text:"quit",is_correct:false},
+            {id:"c",text:"quiz",is_correct:false},
+            {id:"d",text:"quill",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'squint' mean?", options: [
+            {id:"a",text:"To open eyes wide",is_correct:false},
+            {id:"b",text:"To partly close eyes in bright light",is_correct:true},
+            {id:"c",text:"To run fast",is_correct:false},
+            {id:"d",text:"To shout loudly",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word describes the sound a duck makes?", options: [
+            {id:"a",text:"cluck",is_correct:false},
+            {id:"b",text:"squawk",is_correct:false},
+            {id:"c",text:"quack",is_correct:true},
+            {id:"d",text:"squelch",is_correct:false}
+          ]},
+          { id: "4", prompt: "What is a 'quill'?", options: [
+            {id:"a",text:"A type of fish",is_correct:false},
+            {id:"b",text:"A writing pen made from a feather",is_correct:true},
+            {id:"c",text:"A loud noise",is_correct:false},
+            {id:"d",text:"A thick blanket",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence includes a character from multiple past lessons?", options: [
+            {id:"a",text:"Sentence 2: Scott",is_correct:true},
+            {id:"b",text:"Sentence 5: Mitch",is_correct:true},
+            {id:"c",text:"Sentence 6: the men",is_correct:false},
+            {id:"d",text:"Sentence 9: Nick",is_correct:true}
+          ]},
+          // Only one correct—choose most frequent
+          { id: "5", prompt: "Which character appeared in Lessons 57, 59, and 60?", options: [
+            {id:"a",text:"Mitch",is_correct:true},
+            {id:"b",text:"Scott",is_correct:false},
+            {id:"c",text:"Cliff",is_correct:false},
+            {id:"d",text:"Bill",is_correct:false}
+          ]},
+          { id: "6", prompt: "What does 'quit' mean in sentence 6?", options: [
+            {id:"a",text:"To start working",is_correct:false},
+            {id:"b",text:"To stop working temporarily",is_correct:true},
+            {id:"c",text:"To run faster",is_correct:false},
+            {id:"d",text:"To drink water",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word means 'to satisfy thirst'?", options: [
+            {id:"a",text:"quench",is_correct:true},
+            {id:"b",text:"squish",is_correct:false},
+            {id:"c",text:"quest",is_correct:false},
+            {id:"d",text:"quilt",is_correct:false}
+          ]},
+          { id: "8", prompt: "What sea creature is mentioned that Jill cannot catch?", options: [
+            {id:"a",text:"fish",is_correct:false},
+            {id:"b",text:"squid",is_correct:true},
+            {id:"c",text:"duck",is_correct:false},
+            {id:"d",text:"hen",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'fast'?", options: [
+            {id:"a",text:"quick",is_correct:true},
+            {id:"b",text:"quip",is_correct:false},
+            {id:"c",text:"quiz",is_correct:false},
+            {id:"d",text:"quench",is_correct:false}
+          ]},
+          { id: "10", prompt: "What does 'squelch' sound like?", options: [
+            {id:"a",text:"A soft swishing or crushing sound",is_correct:true},
+            {id:"b",text:"A high-pitched whistle",is_correct:false},
+            {id:"c",text:"A loud explosion",is_correct:false},
+            {id:"d",text:"Silence",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which sentence includes TWO 'qu' words?", options: [
+            {id:"a",text:"Sentence 5",is_correct:true},
+            {id:"b",text:"Sentence 7",is_correct:true}
+          ]},
+          // Revise to one correct example
+          { id: "11", prompt: "Which sentence contains TWO 'qu' words?", options: [
+            {id:"a",text:"Bill had a quick wit and was quick with a quip.",is_correct:true},
+            {id:"b",text:"Mitch had a quick lunch...",is_correct:false},
+            {id:"c",text:"Cliff did well on the quiz.",is_correct:false},
+            {id:"d",text:"Scott must squint...",is_correct:false}
+          ]},
+          { id: "12", prompt: "What is a 'quilt'?", options: [
+            {id:"a",text:"A thick, warm bed covering",is_correct:true},
+            {id:"b",text:"A writing tool",is_correct:false},
+            {id:"c",text:"A type of test",is_correct:false},
+            {id:"d",text:"A journey",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is a 'quest'?", options: [
+            {id:"a",text:"A short nap",is_correct:false},
+            {id:"b",text:"A long search or mission",is_correct:true},
+            {id:"c",text:"A loud noise",is_correct:false},
+            {id:"d",text:"A sea animal",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which 'qu' word starts with /skw/ (not /kw/) sound?", options: [
+            {id:"a",text:"quick",is_correct:false},
+            {id:"b",text:"quilt",is_correct:false},
+            {id:"c",text:"squid",is_correct:true},
+            {id:"d",text:"quip",is_correct:false}
+          ]},
+          { id: "15", prompt: "How many 'qu' words appear in sentence 7?", options: [
+            {id:"a",text:"1",is_correct:false},
+            {id:"b",text:"2",is_correct:false},
+            {id:"c",text:"3",is_correct:true},
+            {id:"d",text:"0",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word is NOT in the Lesson 70 word list?", options: [
+            {id:"a",text:"squish",is_correct:false},
+            {id:"b",text:"squelch",is_correct:false},
+            {id:"c",text:"peck",is_correct:true},
+            {id:"d",text:"quench",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which phrase uses a 'qu' word correctly?", options: [
+            {id:"a",text:"She gave a witty quip.",is_correct:true},
+            {id:"b",text:"He ate a big quilt for lunch.",is_correct:false},
+            {id:"c",text:"They drove a squid to school.",is_correct:false},
+            {id:"d",text:"The dog gave a squelch of joy.",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which sentence references a school assessment?", options: [
+            {id:"a",text:"Sentence 4",is_correct:true},
+            {id:"b",text:"Sentence 1",is_correct:false},
+            {id:"c",text:"Sentence 3",is_correct:false},
+            {id:"d",text:"Sentence 9",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word could describe the sound of stepping in mud?", options: [
+            {id:"a",text:"squish",is_correct:true},
+            {id:"b",text:"quack",is_correct:false},
+            {id:"c",text:"quip",is_correct:false},
+            {id:"d",text:"quiz",is_correct:false}
+          ]},
+          { id: "20", prompt: "What is the spelling pattern for the /kw/ sound in English?", options: [
+            {id:"a",text:"Use 'kw'",is_correct:false},
+            {id:"b",text:"Use 'qu'",is_correct:true},
+            {id:"c",text:"Use 'cu'",is_correct:false},
+            {id:"d",text:"Use 'kq'",is_correct:false}
+          ]}
         ]
       };
 
-      // Render word list
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
-      // Render sentences
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        let sentences = CHAPTER_CONFIG.sentences.map(s => 
+          s.replace(/f resh/g, 'fresh')
+           .replace(/p unch/g, 'punch')
+           .replace(/slep t/g, 'slept')
+           .replace(/crep t/g, 'crept')
+           .replace(/p lant/g, 'plant')
+           // No typos in this PDF
+        );
+        document.getElementById('sentences').innerHTML =
+          sentences.map(s => `<p>${s}</p>`).join('');
       }
 
-      // ✅ UNLIMITED NAVIGATION
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
-          buttons.push({
-            label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > maxChapter) break;
+          buttons.push({ 
+            label: `Lesson ${lessonNum}`, 
+            url: `chapter-${c}.html`, 
+            active: i === 0 
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b => 
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
-      // Render quiz
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const opts = shuffle([...q.options]);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = opts.map((o, i) => {
+            const L = String.fromCharCode(65 + i);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+          }).join('');
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
-      // WhatsApp feedback
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 70*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attemptsKey = `quiz_attempts_${currentChapter}`;
+        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
+        localStorage.setItem(attemptsKey, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
+        localStorage.setItem(reportKey, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the "qu" digraph!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 70 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the /qu/ pattern!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -214,8 +353,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -223,6 +362,56 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = saveName;
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = saveName;
+        }
+
+        function saveName() {
+          const name = input.value.trim();
+          if (name) {
+            localStorage.setItem('student_name', name);
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          } else {
+            alert("Please enter your name.");
+            input.focus();
+          }
+        }
       }
 
       function init() {
@@ -233,6 +422,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
