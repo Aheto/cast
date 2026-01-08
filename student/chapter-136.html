@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 137 — Multisyllable Words with Ending 'er' and Double Consonants"/>
-  <title>Mini OpenStax — Lesson 137: Multisyllable Words (Ending er)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 137: Short Vowel + Consonant + er = /er/"/>
+  <title>Mini OpenStax — Lesson 137: Short Vowel + Consonant + er = /er/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 137: Multisyllable Words (er at end)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH137: Decode multisyllable words ending in 'er' with double consonants.</div>
+        <h1 id="chapter-title">Lesson 137: Short Vowel + Consonant + er = /er/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH137: Decode words with short vowel + consonant + 'er'</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,19 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>In these words, notice how a double consonant often appears before the <strong>er</strong> ending:</p>
+        <p>Words with short vowel + consonant + 'er' (e.g., bet-ter)</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, paying attention to the <strong>-er</strong> words:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your understanding of Lesson 137 vocabulary and sentences.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,132 +80,287 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 136; // chapter-136.html = Lesson 137
-      const maxChapter = 150;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 136; // Lesson 137
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 137: Multisyllable Words (er at end)",
-        loTags: ["LO PH137: Decode multisyllable words ending in 'er' with double consonants."],
+        title: "Lesson 137: Short Vowel + Consonant + er = /er/",
+        loTags: ["LO PH137: Decode words with short vowel + consonant + 'er'"],
         contentWords: [
-          "matter", "chatter", "better", "letter", "butter", "mutter", "dinner", "winner", "hammer", "summer", "shudder", "ladder", "zipper", "slipper", "upper", "supper", "pepper", "offer"
+          "better", "letter", "butter", "supper", "summer", "winter", "number", "finger", "hammer", "zipper", "runner", "hunter", "helper", "singer", "worker", "camper", "farmer", "teacher", "pitcher", "butcher", "walker", "boxer", "speaker", "writer", "planner", "gather", "shaker", "mover", "driver", "keeper", "owner", "shower", "powder", "flower", "slower", "newer", "higher", "outer", "over", "cover", "hover", "clover", "rover", "recover", "discover", "uncover", "silver"
         ],
         sentences: [
-          "1) This one seems to be better than that one.",
-          "2) It doesn't matter which one you choose.",
-          "3) A letter sent by mail must have a stamp.",
-          "4) Gail was a winner in the spelling contest.",
-          "5) Rick had a peanut butter sandwich for lunch.",
-          "6) At seven, Jean will fix supper in the kitchen.",
-          "7) The summer season comes after the spring season.",
-          "8) Please do not offer food to an animal at the zoo.",
-          "9) Neal had an extra helping of fish at dinner.",
-          "10) Neal can season his fish with lemon and black pepper."
+          "Mitch wrote a letter to his grandmother.",
+          "We will have butter on our bread at supper.",
+          "The runner won the race in the summer.",
+          "The farmer grows wheat and corn.",
+          "The teacher helped the student with math.",
+          "The pitcher threw the ball to the batter.",
+          "The helper carried the boxes into the house.",
+          "The zipper on my jacket is broken."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What does a letter sent by mail need?", options: [{id:"a",text:"a zipper",is_correct:false},{id:"b",text:"a stamp",is_correct:true},{id:"c",text:"a slipper",is_correct:false},{id:"d",text:"butter",is_correct:false}] },
-          { id: "2", prompt: "In what contest was Gail a winner?", options: [{id:"a",text:"math",is_correct:false},{id:"b",text:"spelling",is_correct:true},{id:"c",text:"running",is_correct:false},{id:"d",text:"art",is_correct:false}] },
-          { id: "3", prompt: "What kind of sandwich did Rick have for lunch?", options: [{id:"a",text:"ham",is_correct:false},{id:"b",text:"peanut butter",is_correct:true},{id:"c",text:"cheese",is_correct:false},{id:"d",text:"fish",is_correct:false}] },
-          { id: "4", prompt: "At what time will Jean fix supper?", options: [{id:"a",text:"six",is_correct:false},{id:"b",text:"seven",is_correct:true},{id:"c",text:"eight",is_correct:false},{id:"d",text:"noon",is_correct:false}] },
-          { id: "5", prompt: "Where will Jean fix the supper?", options: [{id:"a",text:"in the bedroom",is_correct:false},{id:"b",text:"in the kitchen",is_correct:true},{id:"c",text:"at the zoo",is_correct:false},{id:"d",text:"on a ladder",is_correct:false}] },
-          { id: "6", prompt: "Which season comes after spring?", options: [{id:"a",text:"winter",is_correct:false},{id:"b",text:"summer",is_correct:true},{id:"c",text:"fall",is_correct:false},{id:"d",text:"autumn",is_correct:false}] },
-          { id: "7", prompt: "What should you not do to an animal at the zoo?", options: [{id:"a",text:"look at it",is_correct:false},{id:"b",text:"offer it food",is_correct:true},{id:"c",text:"whisper to it",is_correct:false},{id:"d",text:"draw it",is_correct:false}] },
-          { id: "8", prompt: "What did Neal have an extra helping of at dinner?", options: [{id:"a",text:"pepper",is_correct:false},{id:"b",text:"fish",is_correct:true},{id:"c",text:"butter",is_correct:false},{id:"d",text:"lemon",is_correct:false}] },
-          { id: "9", prompt: "What two things did Neal use to season his fish?", options: [{id:"a",text:"salt and butter",is_correct:false},{id:"b",text:"lemon and black pepper",is_correct:true},{id:"c",text:"sugar and milk",is_correct:false},{id:"d",text:"oil and vinegar",is_correct:false}] },
-          { id: "10", prompt: "Which word means a late afternoon or evening meal?", options: [{id:"a",text:"chatter",is_correct:false},{id:"b",text:"supper",is_correct:true},{id:"c",text:"slipper",is_correct:false},{id:"d",text:"ladder",is_correct:false}] },
-          { id: "11", prompt: "Which tool is used for climbing high?", options: [{id:"a",text:"hammer",is_correct:false},{id:"b",text:"ladder",is_correct:true},{id:"c",text:"zipper",is_correct:false},{id:"d",text:"butter",is_correct:false}] },
-          { id: "12", prompt: "Which tool is used for hitting nails?", options: [{id:"a",text:"ladder",is_correct:false},{id:"b",text:"hammer",is_correct:true},{id:"c",text:"pepper",is_correct:false},{id:"d",text:"zipper",is_correct:false}] },
-          { id: "13", prompt: "Which word describes a light shoe worn indoors?", options: [{id:"a",text:"slipper",is_correct:true},{id:"b",text:"zipper",is_correct:false},{id:"c",text:"ladder",is_correct:false},{id:"d",text:"hammer",is_correct:false}] },
-          { id: "14", prompt: "What do you use to close a jacket or bag?", options: [{id:"a",text:"slipper",is_correct:false},{id:"b",text:"zipper",is_correct:true},{id:"c",text:"letter",is_correct:false},{id:"d",text:"butter",is_correct:false}] },
-          { id: "15", prompt: "Which word means to talk quickly or foolishly?", options: [{id:"a",text:"mutter",is_correct:false},{id:"b",text:"chatter",is_correct:true},{id:"c",text:"better",is_correct:false},{id:"d",text:"dinner",is_correct:false}] },
-          { id: "16", prompt: "Which word means the opposite of 'worse'?", options: [{id:"a",text:"matter",is_correct:false},{id:"b",text:"better",is_correct:true},{id:"c",text:"upper",is_correct:false},{id:"d",text:"offer",is_correct:false}] },
-          { id: "17", prompt: "To speak in a low, quiet, unclear way is to...", options: [{id:"a",text:"chatter",is_correct:false},{id:"b",text:"mutter",is_correct:true},{id:"c",text:"shudder",is_correct:false},{id:"d",text:"better",is_correct:false}] },
-          { id: "18", prompt: "Which word means to shake or tremble from fear or cold?", options: [{id:"a",text:"chatter",is_correct:false},{id:"b",text:"shudder",is_correct:true},{id:"c",text:"winner",is_correct:false},{id:"d",text:"ladder",is_correct:false}] },
-          { id: "19", prompt: "Complete the phrase: 'Peanut ____ sandwich.'", options: [{id:"a",text:"pepper",is_correct:false},{id:"b",text:"butter",is_correct:true},{id:"c",text:"better",is_correct:false},{id:"d",text:"supper",is_correct:false}] },
-          { id: "20", prompt: "How many syllables are in 'summer'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] }
+          { id: "1", prompt: "In 'better,' what sound does the first 'e' make?", options: [
+            {id:"a",text:"Short /e/ as in 'bed'",is_correct:true},
+            {id:"b",text:"Long /ee/ as in 'bee'",is_correct:false},
+            {id:"c",text:"/er/ as in 'her'",is_correct:false},
+            {id:"d",text:"Silent",is_correct:false}
+          ]},
+          { id: "2", prompt: "How is 'letter' correctly divided into syllables?", options: [
+            {id:"a",text:"let-ter",is_correct:true},
+            {id:"b",text:"lett-er",is_correct:false},
+            {id:"c",text:"le-tter",is_correct:false},
+            {id:"d",text:"let-ter-r",is_correct:false}
+          ]},
+          { id: "3", prompt: "Why is there a double 't' in 'butter'?", options: [
+            {id:"a",text:"To keep the first vowel short",is_correct:true},
+            {id:"b",text:"Because it's a long vowel",is_correct:false},
+            {id:"c",text:"It's a mistake",is_correct:false},
+            {id:"d",text:"To make it sound louder",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word has a short 'u' sound?", options: [
+            {id:"a",text:"summer",is_correct:true},
+            {id:"b",text:"supper",is_correct:false},
+            {id:"c",text:"number",is_correct:false},
+            {id:"d",text:"All of the above",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses 'hammer' correctly?", options: [
+            {id:"a",text:"He used a hammer to build the shelf.",is_correct:true},
+            {id:"b",text:"She hammer to school.",is_correct:false},
+            {id:"c",text:"They are very hammer.",is_correct:false},
+            {id:"d",text:"We hammer running.",is_correct:false}
+          ]},
+          { id: "6", prompt: "What does 'runner' mean?", options: [
+            {id:"a",text:"A person who runs",is_correct:true},
+            {id:"b",text:"A type of shoe",is_correct:false},
+            {id:"c",text:"A slow walker",is_correct:false},
+            {id:"d",text:"A bird",is_correct:false}
+          ]},
+          { id: "7", prompt: "In 'zipper,' the first vowel is:", options: [
+            {id:"a",text:"Short /i/",is_correct:true},
+            {id:"b",text:"Long /i/",is_correct:false},
+            {id:"c",text:"/uh/",is_correct:false},
+            {id:"d",text:"/ee/",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word means 'a person who teaches'?", options: [
+            {id:"a",text:"teacher",is_correct:true},
+            {id:"b",text:"farmer",is_correct:false},
+            {id:"c",text:"pitcher",is_correct:false},
+            {id:"d",text:"butcher",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word has the same pattern as 'better'?", options: [
+            {id:"a",text:"letter",is_correct:true},
+            {id:"b",text:"cover",is_correct:false},
+            {id:"c",text:"over",is_correct:false},
+            {id:"d",text:"silver",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'She is a great ___.' (she writes stories)?", options: [
+            {id:"a",text:"writer",is_correct:true},
+            {id:"b",text:"speaker",is_correct:false},
+            {id:"c",text:"planner",is_correct:false},
+            {id:"d",text:"keeper",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'finger,' the 'i' says:", options: [
+            {id:"a",text:"/i/ as in 'sit'",is_correct:true},
+            {id:"b",text:"/eye/ as in 'sky'",is_correct:false},
+            {id:"c",text:"/uh/ as in 'ago'",is_correct:false},
+            {id:"d",text:"/ee/ as in 'see'",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word refers to a meal?", options: [
+            {id:"a",text:"supper",is_correct:true},
+            {id:"b",text:"number",is_correct:false},
+            {id:"c",text:"finger",is_correct:false},
+            {id:"d",text:"zipper",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is the root word in 'helper'?", options: [
+            {id:"a",text:"help",is_correct:true},
+            {id:"b",text:"-er",is_correct:false},
+            {id:"c",text:"hel",is_correct:false},
+            {id:"d",text:"per",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'butterr'?", options: [
+            {id:"a",text:"butter",is_correct:true},
+            {id:"b",text:"letter",is_correct:false},
+            {id:"c",text:"better",is_correct:false},
+            {id:"d",text:"hammer",is_correct:false}
+          ]},
+          { id: "15", prompt: "In 'winter,' the 'i' is:", options: [
+            {id:"a",text:"Short",is_correct:true},
+            {id:"b",text:"Long",is_correct:false},
+            {id:"c",text:"Silent",is_correct:false},
+            {id:"d",text:"Schwa",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word means 'to find something hidden'?", options: [
+            {id:"a",text:"discover",is_correct:true},
+            {id:"b",text:"cover",is_correct:false},
+            {id:"c",text:"hover",is_correct:false},
+            {id:"d",text:"recover",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word has a short 'o' sound?", options: [
+            {id:"a",text:"boxer",is_correct:true},
+            {id:"b",text:"speaker",is_correct:false},
+            {id:"c",text:"writer",is_correct:false},
+            {id:"d",text:"driver",is_correct:false}
+          ]},
+          { id: "18", prompt: "What does the double consonant in 'better' signal?", options: [
+            {id:"a",text:"The vowel before it is short",is_correct:true},
+            {id:"b",text:"The word is plural",is_correct:false},
+            {id:"c",text:"It's a proper noun",is_correct:false},
+            {id:"d",text:"It's pronounced louder",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'a person who drives a vehicle'?", options: [
+            {id:"a",text:"driver",is_correct:true},
+            {id:"b",text:"mover",is_correct:false},
+            {id:"c",text:"shower",is_correct:false},
+            {id:"d",text:"keeper",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is the CVC + -er pattern important to learn?", options: [
+            {id:"a",text:"It helps you spell and read hundreds of common words correctly",is_correct:true},
+            {id:"b",text:"It only applies to three words",is_correct:false},
+            {id:"c",text:"It makes words longer",is_correct:false},
+            {id:"d",text:"It's not used in English",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/b utter/g, 'butter'], [/l etter/g, 'letter'], [/h ammer/g, 'hammer']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 137*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -202,8 +370,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -211,6 +379,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -221,9 +447,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
