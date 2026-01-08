@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 185 — ie=/ē/ in Plurals and Past Tense"/>
-  <title>Mini OpenStax — Lesson 185: ie = /ē/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 185: ie = /ē/ in plural and past-tense words"/>
+  <title>Mini OpenStax — Lesson 185: ie = /ē/ in plural and past-tense words</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 185: ie = /ē/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH185: Decode plurals and past-tense verbs with vowel team ie = /ē/</div>
+        <h1 id="chapter-title">Lesson 185: ie = /ē/ in plural and past-tense words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH185: Decode plural and past-tense words with 'ie' for /ē/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Plurals and past-tense verbs with the <strong>vowel team</strong> <em>ie</em> making <strong>/ē/</strong>:</p>
+        <p>Plural and past-tense words where 'ie' spells /ē/:</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–185:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,25 +80,36 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 184;   // chapter-184.html = Lesson 185
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 184;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 185: ie = /ē/",
-        loTags: ["LO PH185: Decode plurals and past-tense verbs with vowel team ie = /ē/"],
+        title: "Lesson 185: ie = /ē/ in plural and past-tense words",
+        loTags: ["LO PH185: Decode plural and past-tense words with 'ie' for /ē/"],
         contentWords: [
-          "cities", "berries", "pennies", "puppies", "copies",
-          "copied", "studies", "studied", "pities", "pitied",
-          "carries", "carried", "marries", "married", "empties", "emptied"
+          "cities", "berries", "pennies", "puppies", "copies", "copied", "studies", "studied",
+          "pities", "pitied", "carries", "carried", "marries", "married", "empties", "emptied"
         ],
         sentences: [
           "Most cities have a public library.",
@@ -99,131 +121,240 @@
           "The men carried the boxes from the pier and loaded them onto the ship.",
           "Five pennies are equal to a nickel, and ten pennies are equal to a dime."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word is a plural formed by changing 'y' to 'ie'?", options: [{id:"a",text:"berries",is_correct:true},{id:"b",text:"berry",is_correct:false},{id:"c",text:"berryes",is_correct:false},{id:"d",text:"berrie",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 185 word?", options: [{id:"a",text:"emptied",is_correct:false},{id:"b",text:"married",is_correct:false},{id:"c",text:"tried",is_correct:true},{id:"d",text:"puppies",is_correct:false}] },
-          { id: "3", prompt: "In 'cities', what makes the /ē/ sound?", options: [{id:"a",text:"Vowel team 'ie'",is_correct:true},{id:"b",text:"Silent e",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Y as vowel",is_correct:false}] },
-          { id: "4", prompt: "Which word is the past tense of 'carry'?", options: [{id:"a",text:"carried",is_correct:true},{id:"b",text:"carries",is_correct:false},{id:"c",text:"carryed",is_correct:false},{id:"d",text:"carryied",is_correct:false}] },
-          { id: "5", prompt: "How many syllables in 'studied'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 185 words?", options: [{id:"a",text:"Frank emptied the can of soda and tossed it into the trash can.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word means 'small dogs'?", options: [{id:"a",text:"puppies",is_correct:true},{id:"b",text:"pennies",is_correct:false},{id:"c",text:"cities",is_correct:false},{id:"d",text:"copies",is_correct:false}] },
-          { id: "8", prompt: "What vowel team is in 'empties'?", options: [{id:"a",text:"ie",is_correct:true},{id:"b",text:"ea",is_correct:false},{id:"c",text:"oo",is_correct:false},{id:"d",text:"ai",is_correct:false}] },
-          { id: "9", prompt: "In 'Five pennies are equal to a nickel,' how many Lesson 185 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word is the past tense of 'study'?", options: [{id:"a",text:"studied",is_correct:true},{id:"b",text:"studies",is_correct:false},{id:"c",text:"studyed",is_correct:false},{id:"d",text:"studyied",is_correct:false}] },
-          { id: "11", prompt: "Which word refers to multiple urban areas?", options: [{id:"a",text:"cities",is_correct:true},{id:"b",text:"berries",is_correct:false},{id:"c",text:"puppies",is_correct:false},{id:"d",text:"copies",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'ied' and means 'felt compassion'?", options: [{id:"a",text:"pitied",is_correct:true},{id:"b",text:"emptied",is_correct:false},{id:"c",text:"married",is_correct:false},{id:"d",text:"carried",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 185?", options: [{id:"a",text:"April got a little basket of berries at the store.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'married'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "15", prompt: "Which word is the plural of 'penny'?", options: [{id:"a",text:"pennies",is_correct:true},{id:"b",text:"pennys",is_correct:false},{id:"c",text:"pennyies",is_correct:false},{id:"d",text:"pennyes",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern explains the /ē/ in 'carries'?", options: [{id:"a",text:"ie = /ē/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ei'",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'duplicated documents'?", options: [{id:"a",text:"copies",is_correct:true},{id:"b",text:"cities",is_correct:false},{id:"c",text:"berries",is_correct:false},{id:"d",text:"puppies",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'She ___ the laundry basket.'?", options: [{id:"a",text:"emptied",is_correct:true},{id:"b",text:"married",is_correct:false},{id:"c",text:"studied",is_correct:false},{id:"d",text:"pities",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"pennies",is_correct:true},{id:"b",text:"married",is_correct:true},{id:"c",text:"emptied",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 185?", options: [{id:"a",text:"Vowel team ie = /ē/ in plurals and past tense",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word is the plural form of 'puppy'?", options: [
+            {id:"a",text:"puppies",is_correct:true},
+            {id:"b",text:"puppys",is_correct:false},
+            {id:"c",text:"pupies",is_correct:false},
+            {id:"d",text:"puppyes",is_correct:false}
+          ]},
+          { id: "2", prompt: "What is the past tense of 'carry'?", options: [
+            {id:"a",text:"carried",is_correct:true},
+            {id:"b",text:"carryed",is_correct:false},
+            {id:"c",text:"carrys",is_correct:false},
+            {id:"d",text:"carrien",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'showed mercy' and uses 'ie = /ē/'?", options: [
+            {id:"a",text:"pitied",is_correct:true},
+            {id:"b",text:"pitted",is_correct:false},
+            {id:"c",text:"pities",is_correct:false},
+            {id:"d",text:"pityed",is_correct:false}
+          ]},
+          { id: "4", prompt: "How do you spell the plural of 'berry'?", options: [
+            {id:"a",text:"berries",is_correct:true},
+            {id:"b",text:"berrys",is_correct:false},
+            {id:"c",text:"beries",is_correct:false},
+            {id:"d",text:"berryes",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which sentence uses a correctly spelled 'ie = /ē/' word?", options: [
+            {id:"a",text:"Frank emptied the can.",is_correct:true},
+            {id:"b",text:"Frank empited the can.",is_correct:false},
+            {id:"c",text:"Frank empted the can.",is_correct:false},
+            {id:"d",text:"Frank emptied the can.",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word is NOT a plural noun?", options: [
+            {id:"a",text:"studied",is_correct:true},
+            {id:"b",text:"cities",is_correct:false},
+            {id:"c",text:"copies",is_correct:false},
+            {id:"d",text:"pennies",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'studied' mean in: 'She studied hard'?", options: [
+            {id:"a",text:"Reviewed material to learn",is_correct:true},
+            {id:"b",text:"Looked quickly",is_correct:false},
+            {id:"c",text:"Copied answers",is_correct:false},
+            {id:"d",text:"Took a test",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word changes 'y' to 'i' before adding -es?", options: [
+            {id:"a",text:"cities",is_correct:true},
+            {id:"b",text:"puppies",is_correct:false},
+            {id:"c",text:"berries",is_correct:false},
+            {id:"d",text:"pennies",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which verb becomes 'emptied' in the past tense?", options: [
+            {id:"a",text:"empty",is_correct:true},
+            {id:"b",text:"empt",is_correct:false},
+            {id:"c",text:"emptie",is_correct:false},
+            {id:"d",text:"emptify",is_correct:false}
+          ]},
+          { id: "10", prompt: "How many words in the list end with '-ied'?", options: [
+            {id:"a",text:"8",is_correct:true},
+            {id:"b",text:"6",is_correct:false},
+            {id:"c",text:"10",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word is a past-tense verb?", options: [
+            {id:"a",text:"married",is_correct:true},
+            {id:"b",text:"marries",is_correct:false},
+            {id:"c",text:"marry",is_correct:false},
+            {id:"d",text:"marriage",is_correct:false}
+          ]},
+          { id: "12", prompt: "In 'The puppies played', what kind of word is 'puppies'?", options: [
+            {id:"a",text:"Plural noun",is_correct:true},
+            {id:"b",text:"Singular noun",is_correct:false},
+            {id:"c",text:"Adjective",is_correct:false},
+            {id:"d",text:"Verb",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word is misspelled if written as 'studys'?", options: [
+            {id:"a",text:"studies",is_correct:true},
+            {id:"b",text:"studied",is_correct:false},
+            {id:"c",text:"study",is_correct:false},
+            {id:"d",text:"studying",is_correct:false}
+          ]},
+          { id: "14", prompt: "What rule explains why 'penny' becomes 'pennies'?", options: [
+            {id:"a",text:"Change y to i and add -es when consonant + y",is_correct:true},
+            {id:"b",text:"Just add -s",is_correct:false},
+            {id:"c",text:"Double the consonant",is_correct:false},
+            {id:"d",text:"Drop the y and add -ies only for verbs",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word appears in the practice sentences?", options: [
+            {id:"a",text:"emptied",is_correct:true},
+            {id:"b",text:"marries",is_correct:false},
+            {id:"c",text:"studies",is_correct:false},
+            {id:"d",text:"copied",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word has the same ending sound as 'carried'?", options: [
+            {id:"a",text:"studied",is_correct:true},
+            {id:"b",text:"puppies",is_correct:false},
+            {id:"c",text:"cities",is_correct:false},
+            {id:"d",text:"berries",is_correct:false}
+          ]},
+          { id: "17", prompt: "How do you form the past tense of 'marry'?", options: [
+            {id:"a",text:"married",is_correct:true},
+            {id:"b",text:"marryed",is_correct:false},
+            {id:"c",text:"marrys",is_correct:false},
+            {id:"d",text:"marrien",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word is a plural but does NOT use 'ie'?", options: [
+            {id:"a",text:"books",is_correct:true},
+            {id:"b",text:"berries",is_correct:false},
+            {id:"c",text:"puppies",is_correct:false},
+            {id:"d",text:"copies",is_correct:false}
+          ]},
+          { id: "19", prompt: "In the sentence 'She pitied the lost dog,' what part of speech is 'pitied'?", options: [
+            {id:"a",text:"Verb",is_correct:true},
+            {id:"b",text:"Noun",is_correct:false},
+            {id:"c",text:"Adjective",is_correct:false},
+            {id:"d",text:"Adverb",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word demonstrates the 'consonant + y → i + es' rule?", options: [
+            {id:"a",text:"cities",is_correct:true},
+            {id:"b",text:"puppies",is_correct:false},
+            {id:"c",text:"emptied",is_correct:false},
+            {id:"d",text:"carried",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p uppies/g, 'puppies'], [/p ennies/g, 'pennies'], [/emp tied/g, 'emptied']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
 
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
 
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
 
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 185*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered ie=/ē/ in plurals and past tense!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 185 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -233,8 +364,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -242,6 +373,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -252,6 +441,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
