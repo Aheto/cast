@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 177 — Open Syllables (i=/ī/)"/>
-  <title>Mini OpenStax — Lesson 177: Open Syllables (i=/ī/)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 177: Open Syllables — i=/ī/"/>
+  <title>Mini OpenStax — Lesson 177: Open Syllables — i=/ī/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 177: Open Syllables (i=/ī/)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH177: Decode words with open syllables where i = /ī/</div>
+        <h1 id="chapter-title">Lesson 177: Open Syllables — i=/ī/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH177: Decode open syllables with i=/ī/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words containing <strong>open syllables</strong> where <em>i = /ī/</em>:</p>
+        <p>Words with open syllables where <strong>i</strong> says /ī/</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–177:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,24 +80,36 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 176;   // chapter-176.html = Lesson 177
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 176; // Lesson 177
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 177: Open Syllables (i=/ī/)",
-        loTags: ["LO PH177: Decode words with open syllables where i = /ī/"],
+        title: "Lesson 177: Open Syllables — i=/ī/",
+        loTags: ["LO PH177: Decode open syllables with i=/ī/"],
         contentWords: [
-          "Bible", "idle", "rifle", "title", "item", "ivy", "icy", "spicy", "tiny", "shiny", "tiger", "spider", "fiber", 
-          "license", "silent", "silence", "minus", "migrate", "Friday", "china",
+          "Bible", "idle", "rifle", "title", "item", "ivy", "icy", "spicy", "tiny", "shiny",
+          "tiger", "spider", "fiber", "license", "silent", "silence", "minus", "migrate", "Friday", "china",
           "final", "pilot", "direct", "library"
         ],
         sentences: [
@@ -99,131 +122,247 @@
           "June went to the library to study for the final test.",
           "Steve could not remember the license plate number of the vehicle in the accident."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains an open syllable with i=/ī/?", options: [{id:"a",text:"title",is_correct:true},{id:"b",text:"tip",is_correct:false},{id:"c",text:"tin",is_correct:false},{id:"d",text:"sit",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 177 word?", options: [{id:"a",text:"library",is_correct:false},{id:"b",text:"silent",is_correct:false},{id:"c",text:"kite",is_correct:true},{id:"d",text:"fiber",is_correct:false}] },
-          { id: "3", prompt: "Why does 'i' say /ī/ in 'silent'?", options: [{id:"a",text:"It's in an open syllable",is_correct:true},{id:"b",text:"Silent e",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Closed syllable",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'not making noise'?", options: [{id:"a",text:"silent",is_correct:true},{id:"b",text:"idle",is_correct:false},{id:"c",text:"icy",is_correct:false},{id:"d",text:"shiny",is_correct:false}] },
-          { id: "5", prompt: "How many syllables in 'migrate'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 177 words?", options: [{id:"a",text:"Do you like to eat spicy food?",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a sacred religious text?", options: [{id:"a",text:"Bible",is_correct:true},{id:"b",text:"rifle",is_correct:false},{id:"c",text:"item",is_correct:false},{id:"d",text:"license",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is 'ti' in 'title'?", options: [{id:"a",text:"Closed",is_correct:false},{id:"b",text:"Open",is_correct:true},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel Team",is_correct:false}] },
-          { id: "9", prompt: "In 'June went to the library to study for the final test,' how many Lesson 177 words?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"2",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to move from one region to another seasonally'?", options: [{id:"a",text:"migrate",is_correct:true},{id:"b",text:"minus",is_correct:false},{id:"c",text:"direct",is_correct:false},{id:"d",text:"pilot",is_correct:false}] },
-          { id: "11", prompt: "Which word describes something very small?", options: [{id:"a",text:"tiny",is_correct:true},{id:"b",text:"icy",is_correct:false},{id:"c",text:"idle",is_correct:false},{id:"d",text:"shiny",is_correct:false}] },
-          { id: "12", prompt: "Which word begins with an open syllable and means 'a person who flies an aircraft'?", options: [{id:"a",text:"pilot",is_correct:true},{id:"b",text:"Friday",is_correct:false},{id:"c",text:"china",is_correct:false},{id:"d",text:"silent",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 177?", options: [{id:"a",text:"The geese will migrate south in the winter.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'license'?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"3",is_correct:false},{id:"c",text:"5",is_correct:false},{id:"d",text:"2",is_correct:false}] },
-          { id: "15", prompt: "Which word is a proper noun?", options: [{id:"a",text:"Friday",is_correct:true},{id:"b",text:"final",is_correct:false},{id:"c",text:"item",is_correct:false},{id:"d",text:"silence",is_correct:false}] },
-          { id: "16", prompt: "What phonics concept explains the /ī/ in 'ivy'?", options: [{id:"a",text:"Open syllable",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"R-controlled",is_correct:false},{id:"d",text:"Closed syllable",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'to oversee or manage' (as in 'direct traffic')?", options: [{id:"a",text:"direct",is_correct:true},{id:"b",text:"minus",is_correct:false},{id:"c",text:"idle",is_correct:false},{id:"d",text:"rifle",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'He got his driver's ___ yesterday.'?", options: [{id:"a",text:"license",is_correct:true},{id:"b",text:"library",is_correct:false},{id:"c",text:"Bible",is_correct:false},{id:"d",text:"fiber",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"spicy",is_correct:true},{id:"b",text:"spider",is_correct:true},{id:"c",text:"license",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 177?", options: [{id:"a",text:"Open syllables (i=/ī/)",is_correct:true},{id:"b",text:"Magic E (i=/ī/)",is_correct:false},{id:"c",text:"R-controlled vowels",is_correct:false},{id:"d",text:"Vowel teams",is_correct:false}] }
+          { id: "1", prompt: "Which word has an open syllable with /ī/?", options: [
+            {id:"a",text:"Bible",is_correct:true},
+            {id:"b",text:"idle",is_correct:true},
+            {id:"c",text:"tiger",is_correct:true},
+            {id:"d",text:"all of the above",is_correct:true}
+          ]},
+          { id: "2", prompt: "Which word is spelled correctly?", options: [
+            {id:"a",text:"spider",is_correct:true},
+            {id:"b",text:"spidr",is_correct:false},
+            {id:"c",text:"spyder",is_correct:false},
+            {id:"d",text:"spidir",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'not working or active'?", options: [
+            {id:"a",text:"idle",is_correct:true},
+            {id:"b",text:"icy",is_correct:false},
+            {id:"c",text:"ivy",is_correct:false},
+            {id:"d",text:"item",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word rhymes with 'shiny'?", options: [
+            {id:"a",text:"tiny",is_correct:true},
+            {id:"b",text:"spicy",is_correct:false},
+            {id:"c",text:"icy",is_correct:false},
+            {id:"d",text:"silence",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word refers to a large striped cat?", options: [
+            {id:"a",text:"tiger",is_correct:true},
+            {id:"b",text:"spider",is_correct:false},
+            {id:"c",text:"rifle",is_correct:false},
+            {id:"d",text:"fiber",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word fits: 'Study for the ___ test.'?", options: [
+            {id:"a",text:"final",is_correct:true},
+            {id:"b",text:"silent",is_correct:false},
+            {id:"c",text:"minus",is_correct:false},
+            {id:"d",text:"direct",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word has an open first syllable?", options: [
+            {id:"a",text:"pilot",is_correct:true},
+            {id:"b",text:"library",is_correct:true},
+            {id:"c",text:"license",is_correct:true},
+            {id:"d",text:"all of the above",is_correct:true}
+          ]},
+          { id: "8", prompt: "Which word does NOT have an open syllable with /ī/?", options: [
+            {id:"a",text:"china",is_correct:false},
+            {id:"b",text:"Friday",is_correct:false},
+            {id:"c",text:"migrate",is_correct:false},
+            {id:"d",text:"cat",is_correct:true}
+          ]},
+          { id: "9", prompt: "Which sentence uses 'migrate' correctly?", options: [
+            {id:"a",text:"The geese will migrate south in the winter.",is_correct:true},
+            {id:"b",text:"She migrate loud.",is_correct:false},
+            {id:"c",text:"They migrate running.",is_correct:false},
+            {id:"d",text:"We migrate the box.",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word means 'without sound'?", options: [
+            {id:"a",text:"silent",is_correct:true},
+            {id:"b",text:"silence",is_correct:true},
+            {id:"c",text:"both A and B",is_correct:true},
+            {id:"d",text:"none",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word fits: 'The ___ of the book is red.'?", options: [
+            {id:"a",text:"title",is_correct:true},
+            {id:"b",text:"item",is_correct:false},
+            {id:"c",text:"ivy",is_correct:false},
+            {id:"d",text:"rifle",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word has the same /ī/ sound as 'Bible'?", options: [
+            {id:"a",text:"spider",is_correct:true},
+            {id:"b",text:"tiger",is_correct:true},
+            {id:"c",text:"pilot",is_correct:true},
+            {id:"d",text:"all of the above",is_correct:true}
+          ]},
+          { id: "13", prompt: "Which word refers to official permission to drive?", options: [
+            {id:"a",text:"license",is_correct:true},
+            {id:"b",text:"library",is_correct:false},
+            {id:"c",text:"fiber",is_correct:false},
+            {id:"d",text:"direct",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word appears in a sentence about a novel's name?", options: [
+            {id:"a",text:"title",is_correct:true},
+            {id:"b",text:"item",is_correct:false},
+            {id:"c",text:"minus",is_correct:false},
+            {id:"d",text:"icy",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which sentence is from the lesson?", options: [
+            {id:"a",text:"June went to the library to study for the final test.",is_correct:true},
+            {id:"b",text:"She found a rare coin.",is_correct:false},
+            {id:"c",text:"The sun will shine.",is_correct:false},
+            {id:"d",text:"He rode his horse.",is_correct:false}
+          ]},
+          { id: "16", prompt: "How many syllables in 'library'?", options: [
+            {id:"a",text:"3",is_correct:true},
+            {id:"b",text:"2",is_correct:false},
+            {id:"c",text:"1",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word is NOT in the lesson word list?", options: [
+            {id:"a",text:"spicy",is_correct:false},
+            {id:"b",text:"shiny",is_correct:false},
+            {id:"c",text:"kite",is_correct:true},
+            {id:"d",text:"silence",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word shows an open syllable and starts with 'sp'?", options: [
+            {id:"a",text:"spider",is_correct:true},
+            {id:"b",text:"spicy",is_correct:true},
+            {id:"c",text:"both A and B",is_correct:true},
+            {id:"d",text:"none",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word fits: 'He bought a shiny ___.'?", options: [
+            {id:"a",text:"item",is_correct:true},
+            {id:"b",text:"ivy",is_correct:false},
+            {id:"c",text:"icy",is_correct:false},
+            {id:"d",text:"minus",is_correct:false}
+          ]},
+          { id: "20", prompt: "What defines an 'open syllable'?", options: [
+            {id:"a",text:"It ends with a vowel that says its name",is_correct:true},
+            {id:"b",text:"It ends with a consonant",is_correct:false},
+            {id:"c",text:"It has a silent e",is_correct:false},
+            {id:"d",text:"It has two consonants",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/escap e/g, 'escape'], [/airp lane/g, 'airplane'], [/p aste/g, 'paste'],
+        [/supp ose/g, 'suppose'], [/sp oke/g, 'spoke'], [/slop e/g, 'slope'],
+        [/exp lore/g, 'explore'], [/f ume/g, 'fume'], [/f lute/g, 'flute'],
+        [/p lume/g, 'plume'], [/comp lete/g, 'complete'], [/f loor/g, 'floor'],
+        [/stap le/g, 'staple'], [/p ap er/g, 'paper'], [/map le/g, 'maple'],
+        [/bef ore/g, 'before'], [/def end/g, 'defend'],
+        [/resp ect/g, 'respect'], [/rep air/g, 'repair'], [/rep lace/g, 'replace'],
+        [/f emale/g, 'female'], [/prep are/g, 'prepare']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
 
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
 
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
 
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 177*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/20 (${Math.round(score/20*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered open syllables with i=/ī/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 177 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/20</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered open syllables!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -233,8 +372,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -242,6 +381,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -252,6 +449,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
