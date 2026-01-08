@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 135 — Multisyllable Words with Ending 'er'"/>
-  <title>Mini OpenStax — Lesson 134: Multisyllable Words (Ending er)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 135: er = /er/"/>
+  <title>Mini OpenStax — Lesson 135: er = /er/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 135: Multisyllable Words (er at end)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH135: Decode multisyllable words ending with the 'er' vowel sound.</div>
+        <h1 id="chapter-title">Lesson 135: er = /er/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH135: Decode words where 'er' says /er/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,19 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>In these words, the ending <strong>er</strong> creates a common unstressed vowel sound:</p>
+        <p>Words where 'er' says /er/ (like in 'her')</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, focusing on the words ending in <strong>-er</strong>:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your understanding of Lesson 135 content.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,131 +80,286 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 134; // chapter-134.html = Lesson 135
-      const maxChapter = 150;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 134; // Lesson 135
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 135: Multisyllable Words (er at end)",
-        loTags: ["LO PH135: Decode multisyllable words ending with the 'er' vowel sound."],
+        title: "Lesson 135: er = /er/",
+        loTags: ["LO PH135: Decode words where 'er' says /er/"],
         contentWords: [
-          "after", "enter", "winter", "chapter", "faster", "sister", "monster", "member", "number", "under", "thunder", "leader", "powder", "ever", "never", "clever", "silver", "river", "shiver", "proper", "whisper"
+          "member", "winter", "summer", "number", "finger", "hammer", "zipper", "letter", "better", "never", "under", "butter", "supper", "hunter", "helper", "singer", "runner", "worker", "camper", "farmer", "teacher", "pitcher", "butcher", "walker", "boxer", "speaker", "writer", "planner", "gather", "shaker", "mover", "driver", "keeper", "owner", "shower", "powder", "flower", "slower", "newer", "higher", "outer"
         ],
         sentences: [
-          "1) Ray is a member of a swimming team.",
-          "2) The clown did a clever trick for the children.",
-          "3) The spring season comes after the winter season.",
-          "4) Joan must read chapter seven of the novel for class.",
-          "5) This weekend, Beth and her sister will visit the zoo.",
-          "6) The sled went whizzing down the hill, faster and faster!",
-          "7) At the sound of thunder, the pup ran and hid under the couch.",
-          "8) Frank painted the object with silver paint from a spray can.",
-          "9) To solve a difficult math problem, you need the proper method."
+          "Mitch is a new member of the chess club.",
+          "Winter is the coldest season of the year.",
+          "We can count with our fingers to the number ten.",
+          "Mitch can use a hammer to pound a nail into wood.",
+          "It is common to have hamburger for supper.",
+          "Jean had two letters in the mail for her mom.",
+          "Mitch will never forget the good time he had."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Ray is a member of what kind of team?", options: [{id:"a",text:"track",is_correct:false},{id:"b",text:"swimming",is_correct:true},{id:"c",text:"math",is_correct:false},{id:"d",text:"chess",is_correct:false}] },
-          { id: "2", prompt: "Who did a clever trick for the children?", options: [{id:"a",text:"a monster",is_correct:false},{id:"b",text:"a clown",is_correct:true},{id:"c",text:"a leader",is_correct:false},{id:"d",text:"a sister",is_correct:false}] },
-          { id: "3", prompt: "Which season comes after winter?", options: [{id:"a",text:"autumn",is_correct:false},{id:"b",text:"spring",is_correct:true},{id:"c",text:"summer",is_correct:false},{id:"d",text:"fall",is_correct:false}] },
-          { id: "4", prompt: "What chapter of the novel must Joan read?", options: [{id:"a",text:"six",is_correct:false},{id:"b",text:"seven",is_correct:true},{id:"c",text:"ten",is_correct:false},{id:"d",text:"one",is_correct:false}] },
-          { id: "5", prompt: "Where are Beth and her sister going this weekend?", options: [{id:"a",text:"to the river",is_correct:false},{id:"b",text:"to the zoo",is_correct:true},{id:"c",text:"to the park",is_correct:false},{id:"d",text:"to the hospital",is_correct:false}] },
-          { id: "6", prompt: "How did the sled go down the hill?", options: [{id:"a",text:"slower and slower",is_correct:false},{id:"b",text:"faster and faster",is_correct:true},{id:"c",text:"under the couch",is_correct:false},{id:"d",text:"into the river",is_correct:false}] },
-          { id: "7", prompt: "What sound made the pup hide?", options: [{id:"a",text:"a whisper",is_correct:false},{id:"b",text:"thunder",is_correct:true},{id:"c",text:"a shiver",is_correct:false},{id:"d",text:"a splash",is_correct:false}] },
-          { id: "8", prompt: "Where did the pup hide?", options: [{id:"a",text:"under the bed",is_correct:false},{id:"b",text:"under the couch",is_correct:true},{id:"c",text:"in the kitchen",is_correct:false},{id:"d",text:"in the closet",is_correct:false}] },
-          { id: "9", prompt: "What color paint did Frank use?", options: [{id:"a",text:"gold",is_correct:false},{id:"b",text:"silver",is_correct:true},{id:"c",text:"proper",is_correct:false},{id:"d",text:"powder",is_correct:false}] },
-          { id: "10", prompt: "What do you need to solve a difficult math problem?", options: [{id:"a",text:"a silver can",is_correct:false},{id:"b",text:"the proper method",is_correct:true},{id:"c",text:"a clever trick",is_correct:false},{id:"d",text:"a member",is_correct:false}] },
-          { id: "11", prompt: "Which word means to speak very softly?", options: [{id:"a",text:"shiver",is_correct:false},{id:"b",text:"whisper",is_correct:true},{id:"c",text:"thunder",is_correct:false},{id:"d",text:"enter",is_correct:false}] },
-          { id: "12", prompt: "Which word is a person who guides others?", options: [{id:"a",text:"monster",is_correct:false},{id:"b",text:"leader",is_correct:true},{id:"c",text:"member",is_correct:false},{id:"d",text:"sister",is_correct:false}] },
-          { id: "13", prompt: "What do you do when you are very cold?", options: [{id:"a",text:"whisper",is_correct:false},{id:"b",text:"shiver",is_correct:true},{id:"c",text:"enter",is_correct:false},{id:"d",text:"faster",is_correct:false}] },
-          { id: "14", prompt: "Which word means the opposite of 'before'?", options: [{id:"a",text:"never",is_correct:false},{id:"b",text:"after",is_correct:true},{id:"c",text:"under",is_correct:false},{id:"d",text:"ever",is_correct:false}] },
-          { id: "15", prompt: "Which word means at no time?", options: [{id:"a",text:"ever",is_correct:false},{id:"b",text:"never",is_correct:true},{id:"c",text:"proper",is_correct:false},{id:"d",text:"under",is_correct:false}] },
-          { id: "16", prompt: "Where does water flow in a natural channel?", options: [{id:"a",text:"in a silver can",is_correct:false},{id:"b",text:"in a river",is_correct:true},{id:"c",text:"in the winter",is_correct:false},{id:"d",text:"in a chapter",is_correct:false}] },
-          { id: "17", prompt: "Which word is a scary imaginary creature?", options: [{id:"a",text:"leader",is_correct:false},{id:"b",text:"monster",is_correct:true},{id:"c",text:"member",is_correct:false},{id:"d",text:"proper",is_correct:false}] },
-          { id: "18", prompt: "How many syllables are in 'winter'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] },
-          { id: "19", prompt: "Which word means to go inside?", options: [{id:"a",text:"enter",is_correct:true},{id:"b",text:"after",is_correct:false},{id:"c",text:"under",is_correct:false},{id:"d",text:"ever",is_correct:false}] },
-          { id: "20", prompt: "Complete: 'A ___ of a team.'", options: [{id:"a",text:"number",is_correct:false},{id:"b",text:"member",is_correct:true},{id:"c",text:"leader",is_correct:false},{id:"d",text:"clever",is_correct:false}] }
+          { id: "1", prompt: "In 'winter,' the 'er' at the end sounds like:", options: [
+            {id:"a",text:"/er/ as in 'her'",is_correct:true},
+            {id:"b",text:"/air/ as in 'chair'",is_correct:false},
+            {id:"c",text:"/ur/ as in 'fur'",is_correct:false},
+            {id:"d",text:"/ar/ as in 'car'",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'a person who teaches'?", options: [
+            {id:"a",text:"teacher",is_correct:true},
+            {id:"b",text:"worker",is_correct:false},
+            {id:"c",text:"farmer",is_correct:false},
+            {id:"d",text:"runner",is_correct:false}
+          ]},
+          { id: "3", prompt: "What does 'better' mean?", options: [
+            {id:"a",text:"More good; improved",is_correct:true},
+            {id:"b",text:"Worse",is_correct:false},
+            {id:"c",text:"Faster",is_correct:false},
+            {id:"d",text:"Older",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'hammer' correctly?", options: [
+            {id:"a",text:"He used a hammer to drive the nail.",is_correct:true},
+            {id:"b",text:"She hammer a book.",is_correct:false},
+            {id:"c",text:"They are very hammer.",is_correct:false},
+            {id:"d",text:"We hammer running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How many syllables in 'summer'?", options: [
+            {id:"a",text:"2 (sum-mer)",is_correct:true},
+            {id:"b",text:"1",is_correct:false},
+            {id:"c",text:"3",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'a person who runs'?", options: [
+            {id:"a",text:"runner",is_correct:true},
+            {id:"b",text:"walker",is_correct:false},
+            {id:"c",text:"driver",is_correct:false},
+            {id:"d",text:"speaker",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'never' mean?", options: [
+            {id:"a",text:"At no time",is_correct:true},
+            {id:"b",text:"Always",is_correct:false},
+            {id:"c",text:"Sometimes",is_correct:false},
+            {id:"d",text:"Soon",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word is a meal eaten in the evening?", options: [
+            {id:"a",text:"supper",is_correct:true},
+            {id:"b",text:"number",is_correct:false},
+            {id:"c",text:"finger",is_correct:false},
+            {id:"d",text:"zipper",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes someone who helps others?", options: [
+            {id:"a",text:"helper",is_correct:true},
+            {id:"b",text:"hunter",is_correct:false},
+            {id:"c",text:"farmer",is_correct:false},
+            {id:"d",text:"butcher",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'She is a great ___.' (meaning she writes stories)?", options: [
+            {id:"a",text:"writer",is_correct:true},
+            {id:"b",text:"speaker",is_correct:false},
+            {id:"c",text:"planner",is_correct:false},
+            {id:"d",text:"keeper",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'flower,' the 'er' sounds like:", options: [
+            {id:"a",text:"/er/",is_correct:true},
+            {id:"b",text:"/ow/",is_correct:false},
+            {id:"c",text:"/air/",is_correct:false},
+            {id:"d",text:"/ur/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'belonging to someone'?", options: [
+            {id:"a",text:"owner",is_correct:true},
+            {id:"b",text:"keeper",is_correct:false},
+            {id:"c",text:"driver",is_correct:false},
+            {id:"d",text:"mover",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word is a comparative form?", options: [
+            {id:"a",text:"slower",is_correct:true},
+            {id:"b",text:"summer",is_correct:false},
+            {id:"c",text:"number",is_correct:false},
+            {id:"d",text:"finger",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'hamer'?", options: [
+            {id:"a",text:"hammer",is_correct:true},
+            {id:"b",text:"zipper",is_correct:false},
+            {id:"c",text:"butter",is_correct:false},
+            {id:"d",text:"letter",is_correct:false}
+          ]},
+          { id: "15", prompt: "What does 'gather' mean?", options: [
+            {id:"a",text:"To collect things together",is_correct:true},
+            {id:"b",text:"To run fast",is_correct:false},
+            {id:"c",text:"To write",is_correct:false},
+            {id:"d",text:"To speak loudly",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word refers to a season after spring?", options: [
+            {id:"a",text:"summer",is_correct:true},
+            {id:"b",text:"winter",is_correct:false},
+            {id:"c",text:"supper",is_correct:false},
+            {id:"d",text:"number",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word has the same /er/ ending as 'teacher'?", options: [
+            {id:"a",text:"writer",is_correct:true},
+            {id:"b",text:"cat",is_correct:false},
+            {id:"c",text:"map",is_correct:false},
+            {id:"d",text:"hat",is_correct:false}
+          ]},
+          { id: "18", prompt: "What part of 'farmer' means 'one who'?", options: [
+            {id:"a",text:"-er",is_correct:true},
+            {id:"b",text:"farm",is_correct:false},
+            {id:"c",text:"ar",is_correct:false},
+            {id:"d",text:"mer",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'not inside'?", options: [
+            {id:"a",text:"outer",is_correct:true},
+            {id:"b",text:"under",is_correct:false},
+            {id:"c",text:"never",is_correct:false},
+            {id:"d",text:"better",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is recognizing /er/ in words like 'worker' important?", options: [
+            {id:"a",text:"It helps you read and spell common agent nouns and everyday words",is_correct:true},
+            {id:"b",text:"It only matters for singing",is_correct:false},
+            {id:"c",text:"It makes words shorter",is_correct:false},
+            {id:"d",text:"It’s not used in real life",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/s upp er/g, 'supper'], [/h ammer/g, 'hammer'], [/l etter/g, 'letter']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 135*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -201,8 +369,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -210,6 +378,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -220,9 +446,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
