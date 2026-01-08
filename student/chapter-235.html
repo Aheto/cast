@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 236 — Suffix ous = /əs/"/>
-  <title>Mini OpenStax — Lesson 236: ous = /əs/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 236: 'ous' = /us/"/>
+  <title>Mini OpenStax — Lesson 236: 'ous' = /us/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 236: ous = /əs/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH236: Decode words with suffix ous = /əs/</div>
+        <h1 id="chapter-title">Lesson 236: 'ous' = /us/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH236: Decode words where 'ous' makes the /us/ sound</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words ending in the <strong>suffix</strong> <em>-ous</em> pronounced <strong>/əs/</strong>:</p>
+        <p>Words where 'ous' is pronounced as /us/ (like 'famous', not 'cousin').</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–236:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,160 +80,171 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 235;   // chapter-235.html = Lesson 236
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 235;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 236: ous = /əs/",
-        loTags: ["LO PH236: Decode words with suffix ous = /əs/"],
+        title: "Lesson 236: 'ous' = /us/",
+        loTags: ["LO PH236: Decode words where 'ous' makes the /us/ sound"],
         contentWords: [
-          "famous", "joyous", "nervous", "pompous", "jealous", "marvelous", "fabulous", "enormous", "tremendous",
-          "generous", "numerous", "vigorous", "curious", "furious", "serious", "previous", "various", "glorious"
+          "famous", "joyous", "nervous", "pompous", "jealous", "marvelous", "fabulous",
+          "enormous", "tremendous", "generous", "numerous", "vigorous", "curious",
+          "furious", "serious", "previous", "various", "glorious"
         ],
         sentences: [
           "Walter is a kind and generous person.",
           "The youth has a serious desire to go to college.",
-          "On Friday, a furious storm pounded the east coast.",
+          "On Friday, a f urious storm pounded the east coast.",
           "A small child may be curious about numerous things.",
-          "Last year was a glorious season for the famous athlete.",
+          "Last year was a glorious season for the f amous athlete.",
           "The nervous system is an important part of the human body.",
           "Joy let out a joyous shout when she saw the marvelous gift.",
           "In the myth, the hero had to use his tremendous strength to move an enormous rock."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word ends in 'ous' making /əs/?", options: [{id:"a",text:"famous",is_correct:true},{id:"b",text:"fame",is_correct:false},{id:"c",text:"fan",is_correct:false},{id:"d",text:"fat",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 236 word?", options: [{id:"a",text:"glorious",is_correct:false},{id:"b",text:"vigorous",is_correct:false},{id:"c",text:"dangerous",is_correct:true},{id:"d",text:"jealous",is_correct:false}] },
-          { id: "3", prompt: "In 'nervous', what sound does 'ous' make?", options: [{id:"a",text:"/əs/",is_correct:true},{id:"b",text:"/us/",is_correct:false},{id:"c",text:"/ows/",is_correct:false},{id:"d",text:"/oos/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'showing great size or extent'?", options: [{id:"a",text:"enormous",is_correct:true},{id:"b",text:"famous",is_correct:false},{id:"c",text:"curious",is_correct:false},{id:"d",text:"serious",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'tremendous'?", options: [{id:"a",text:"10",is_correct:true},{id:"b",text:"9",is_correct:false},{id:"c",text:"11",is_correct:false},{id:"d",text:"8",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 236 words?", options: [{id:"a",text:"Walter is a kind and generous person.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word describes someone full of joy or happiness?", options: [{id:"a",text:"joyous",is_correct:true},{id:"b",text:"furious",is_correct:false},{id:"c",text:"nervous",is_correct:false},{id:"d",text:"pompous",is_correct:false}] },
-          { id: "8", prompt: "What suffix pattern is in 'marvelous'?", options: [{id:"a",text:"ous = /əs/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "9", prompt: "In 'Last year was a glorious season for the famous athlete,' how many Lesson 236 words?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"1",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'eager to learn or know'?", options: [{id:"a",text:"curious",is_correct:true},{id:"b",text:"jealous",is_correct:false},{id:"c",text:"generous",is_correct:false},{id:"d",text:"various",is_correct:false}] },
-          { id: "11", prompt: "Which word describes someone showing exaggerated self-importance?", options: [{id:"a",text:"pompous",is_correct:true},{id:"b",text:"serious",is_correct:false},{id:"c",text:"previous",is_correct:false},{id:"d",text:"fabulous",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'ous' and means 'full of wonder or excellence'?", options: [{id:"a",text:"marvelous",is_correct:true},{id:"b",text:"famous",is_correct:false},{id:"c",text:"glorious",is_correct:false},{id:"d",text:"tremendous",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 236?", options: [{id:"a",text:"Joy let out a joyous shout when she saw the marvelous gift.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'generous'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'willing to give or share'?", options: [{id:"a",text:"generous",is_correct:true},{id:"b",text:"furious",is_correct:false},{id:"c",text:"nervous",is_correct:false},{id:"d",text:"serious",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'previous'?", options: [{id:"a",text:"Suffix ous = /əs/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "17", prompt: "Which word refers to something of very great size or intensity?", options: [{id:"a",text:"tremendous",is_correct:true},{id:"b",text:"fabulous",is_correct:false},{id:"c",text:"various",is_correct:false},{id:"d",text:"curious",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'He has a ___ temper.'?", options: [{id:"a",text:"furious",is_correct:true},{id:"b",text:"joyous",is_correct:false},{id:"c",text:"glorious",is_correct:false},{id:"d",text:"nervous",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"famous",is_correct:true},{id:"b",text:"generous",is_correct:true},{id:"c",text:"curious",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 236?", options: [{id:"a",text:"Suffix ous = /əs/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'well-known'?", options: [{id:"a",text:"famous",is_correct:true},{id:"b",text:"jealous",is_correct:false},{id:"c",text:"nervous",is_correct:false},{id:"d",text:"curious",is_correct:false}]},
+          { id: "2", prompt: "Which sentence uses 'joyous' correctly?", options: [{id:"a",text:"She gave a joyous laugh.",is_correct:true},{id:"b",text:"He joyoused the room.",is_correct:false},{id:"c",text:"They to joyous now.",is_correct:false},{id:"d",text:"Joyousing is a verb only.",is_correct:false}]},
+          { id: "3", prompt: "What does 'tremendous' mean?", options: [{id:"a",text:"very large or great",is_correct:true},{id:"b",text:"very small",is_correct:false},{id:"c",text:"quiet",is_correct:false},{id:"d",text:"boring",is_correct:false}]},
+          { id: "4", prompt: "Which word describes someone who shows off importance unnecessarily?", options: [{id:"a",text:"pompous",is_correct:true},{id:"b",text:"generous",is_correct:false},{id:"c",text:"fabulous",is_correct:false},{id:"d",text:"glorious",is_correct:false}]},
+          { id: "5", prompt: "Choose the correct spelling:", options: [{id:"a",text:"marvelous",is_correct:true},{id:"b",text:"marvolous",is_correct:false},{id:"c",text:"marvalous",is_correct:false},{id:"d",text:"marvilous",is_correct:false}]},
+          { id: "6", prompt: "Which word is NOT pronounced with /us/ for 'ous'?", options: [{id:"a",text:"cousin",is_correct:true},{id:"b",text:"famous",is_correct:false},{id:"c",text:"joyous",is_correct:false},{id:"d",text:"nervous",is_correct:false}]},
+          { id: "7", prompt: "Which word rhymes with 'famous'?", options: [{id:"a",text:"enormous",is_correct:true},{id:"b",text:"mouse",is_correct:false},{id:"c",text:"house",is_correct:false},{id:"d",text:"course",is_correct:false}]},
+          { id: "8", prompt: "Which sentence uses 'generous' correctly?", options: [{id:"a",text:"He is generous with his time.",is_correct:true},{id:"b",text:"She generoused the gift.",is_correct:false},{id:"c",text:"They to generous now.",is_correct:false},{id:"d",text:"Generousing is a verb only.",is_correct:false}]},
+          { id: "9", prompt: "What does 'curious' mean?", options: [{id:"a",text:"eager to learn or know",is_correct:true},{id:"b",text:"angry",is_correct:false},{id:"c",text:"tired",is_correct:false},{id:"d",text:"lazy",is_correct:false}]},
+          { id: "10", prompt: "Which word means 'very large in size'?", options: [{id:"a",text:"enormous",is_correct:true},{id:"b",text:"previous",is_correct:false},{id:"c",text:"various",is_correct:false},{id:"d",text:"serious",is_correct:false}]},
+          { id: "11", prompt: "Which is spelled correctly?", options: [{id:"a",text:"fabulous",is_correct:true},{id:"b",text:"faboulous",is_correct:false},{id:"c",text:"fabuleus",is_correct:false},{id:"d",text:"fabulus",is_correct:false}]},
+          { id: "12", prompt: "Choose the word that means 'full of energy and strength':", options: [{id:"a",text:"vigorous",is_correct:true},{id:"b",text:"nervous",is_correct:false},{id:"c",text:"furious",is_correct:false},{id:"d",text:"previous",is_correct:false}]},
+          { id: "13", prompt: "Which word describes intense anger?", options: [{id:"a",text:"furious",is_correct:true},{id:"b",text:"joyous",is_correct:false},{id:"c",text:"glorious",is_correct:false},{id:"d",text:"curious",is_correct:false}]},
+          { id: "14", prompt: "In which word is 'ous' NOT pronounced /us/?", options: [{id:"a",text:"cousin",is_correct:true},{id:"b",text:"generous",is_correct:false},{id:"c",text:"tremendous",is_correct:false},{id:"d",text:"famous",is_correct:false}]},
+          { id: "15", prompt: "What does 'glorious' mean?", options: [{id:"a",text:"magnificent or full of glory",is_correct:true},{id:"b",text:"very small",is_correct:false},{id:"c",text:"ordinary",is_correct:false},{id:"d",text:"dark",is_correct:false}]},
+          { id: "16", prompt: "Which word fits: 'There are _____ reasons to celebrate.'", options: [{id:"a",text:"numerous",is_correct:true},{id:"b",text:"previous",is_correct:false},{id:"c",text:"various",is_correct:false},{id:"d",text:"serious",is_correct:false}]},
+          { id: "17", prompt: "Which word means 'coming before in time or order'?", options: [{id:"a",text:"previous",is_correct:true},{id:"b",text:"various",is_correct:false},{id:"c",text:"serious",is_correct:false},{id:"d",text:"pompous",is_correct:false}]},
+          { id: "18", prompt: "Which sentence is correct?", options: [{id:"a",text:"She is a curious student.",is_correct:true},{id:"b",text:"He curioused the box.",is_correct:false},{id:"c",text:"They to curious now.",is_correct:false},{id:"d",text:"Curiousing is a verb only.",is_correct:false}]},
+          { id: "19", prompt: "Which word contains 'ous' = /us/ and means 'causing wonder or admiration'?", options: [{id:"a",text:"marvelous",is_correct:true},{id:"b",text:"jealous",is_correct:false},{id:"c",text:"nervous",is_correct:false},{id:"d",text:"furious",is_correct:false}]},
+          { id: "20", prompt: "Which word means 'feeling or showing envy'?", options: [{id:"a",text:"jealous",is_correct:true},{id:"b",text:"generous",is_correct:false},{id:"c",text:"joyous",is_correct:false},{id:"d",text:"fabulous",is_correct:false}]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f amous/g, 'famous'], [/f urious/g, 'furious'], [/n ervous/g, 'nervous'],
+        [/p ompous/g, 'pompous'], [/j ealous/g, 'jealous'], [/m arvelous/g, 'marvelous'],
+        [/f abulous/g, 'fabulous'], [/e normous/g, 'enormous'], [/t remendous/g, 'tremendous'],
+        [/g enerous/g, 'generous'], [/n umerous/g, 'numerous'], [/v igorous/g, 'vigorous'],
+        [/c urious/g, 'curious'], [/f urious/g, 'furious'], [/s erious/g, 'serious'],
+        [/p revious/g, 'previous'], [/v arious/g, 'various'], [/g lorious/g, 'glorious']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
-
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
-
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
-
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
-
+        let correctCount = 0, correctList = [], incorrectList = [];
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
-
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 236*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
-
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered -ous=/əs/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 236 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -232,8 +254,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -241,6 +263,63 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -251,6 +330,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
