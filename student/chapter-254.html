@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 255 — Silent Letters: tion = /shun/"/>
-  <title>Mini OpenStax — Lesson 255: tion = /shun/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 255: tion=/shun/"/>
+  <title>Mini OpenStax — Lesson 255: tion=/shun/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 255: tion = /shun/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH255: Decode words with tion = /shun/</div>
+        <h1 id="chapter-title">Lesson 255: tion=/shun/</h1>
+        <div class="lo-tags" id="lo-tags">LO TION255: Decode words with 'tion' pronounced as /shun/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the suffix <strong>tion</strong> pronounced <strong>/shun/</strong>:</p>
+        <p>Words where "tion" says /shun/</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–255:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,25 +80,38 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 254;   // chapter-254.html = Lesson 255
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 254;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 255: tion = /shun/",
-        loTags: ["LO PH255: Decode words with tion = /shun/"],
+        title: "Lesson 255: tion=/shun/",
+        loTags: ["LO TION255: Decode words with 'tion' pronounced as /shun/"],
         contentWords: [
-          "action", "fraction", "section", "fiction", "option", "mention", "caution", "ration", "portion", "condition",
-          "tradition", "edition", "audition", "addition", "ambition", "position", "eruption", "description",
-          "invention", "convention", "intention", "attention", "direction", "election", "infection", "affection", "production"
+          "action", "fraction", "section", "fiction", "option", "mention", "caution", "ration",
+          "portion", "condition", "tradition", "edition", "audition", "addition", "ambition",
+          "position", "eruption", "description", "invention", "convention", "intention",
+          "attention", "direction", "election", "infection", "affection", "production"
         ],
         sentences: [
           "The telephone was a major invention.",
@@ -101,131 +125,239 @@
           "Regular exercise will keep a person in good physical condition.",
           "To solve the math problem, Chris must multiply a whole number by a fraction."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains 'tion' making /shun/?", options: [{id:"a",text:"fraction",is_correct:true},{id:"b",text:"fact",is_correct:false},{id:"c",text:"face",is_correct:false},{id:"d",text:"fade",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 255 word?", options: [{id:"a",text:"audition",is_correct:false},{id:"b",text:"election",is_correct:false},{id:"c",text:"nation",is_correct:true},{id:"d",text:"invention",is_correct:false}] },
-          { id: "3", prompt: "In 'condition', what sound does 'tion' make?", options: [{id:"a",text:"/shun/",is_correct:true},{id:"b",text:"/tee-on/",is_correct:false},{id:"c",text:"/tun/",is_correct:false},{id:"d",text:"/shon/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'an imaginative story that is not true'?", options: [{id:"a",text:"fiction",is_correct:true},{id:"b",text:"fraction",is_correct:false},{id:"c",text:"section",is_correct:false},{id:"d",text:"addition",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'description'?", options: [{id:"a",text:"11",is_correct:true},{id:"b",text:"10",is_correct:false},{id:"c",text:"12",is_correct:false},{id:"d",text:"9",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 255 words?", options: [{id:"a",text:"Phil ate a large portion of apple pie.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a formal assembly or agreement?", options: [{id:"a",text:"convention",is_correct:true},{id:"b",text:"eruption",is_correct:false},{id:"c",text:"ration",is_correct:false},{id:"d",text:"position",is_correct:false}] },
-          { id: "8", prompt: "What is special about 'tion' in 'attention'?", options: [{id:"a",text:"It is pronounced /shun/",is_correct:true},{id:"b",text:"It is silent",is_correct:false},{id:"c",text:"It sounds like /tee-on/",is_correct:false},{id:"d",text:"It makes a /chun/ sound",is_correct:false}] },
-          { id: "9", prompt: "In 'John read a section of the Sunday edition of the newspaper,' how many Lesson 255 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'a formal process to try out for a role'?", options: [{id:"a",text:"audition",is_correct:true},{id:"b",text:"election",is_correct:false},{id:"c",text:"invention",is_correct:false},{id:"d",text:"tradition",is_correct:false}] },
-          { id: "11", prompt: "Which word describes a natural discharge of lava and ash?", options: [{id:"a",text:"eruption",is_correct:true},{id:"b",text:"production",is_correct:false},{id:"c",text:"affection",is_correct:false},{id:"d",text:"ambition",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'tion' and means 'a small part of a whole' (math)?", options: [{id:"a",text:"fraction",is_correct:true},{id:"b",text:"section",is_correct:false},{id:"c",text:"fiction",is_correct:false},{id:"d",text:"addition",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 255?", options: [{id:"a",text:"Ralph crossed the busy street with caution.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'election'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "15", prompt: "Which word might complete: 'She has a strong ___ to succeed.'?", options: [{id:"a",text:"ambition",is_correct:true},{id:"b",text:"ration",is_correct:false},{id:"c",text:"caution",is_correct:false},{id:"d",text:"option",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'production'?", options: [{id:"a",text:"tion = /shun/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "17", prompt: "Which word refers to an emotional bond or fondness?", options: [{id:"a",text:"affection",is_correct:true},{id:"b",text:"infection",is_correct:false},{id:"c",text:"attention",is_correct:false},{id:"d",text:"intention",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'He gave a detailed ___ of the event.'?", options: [{id:"a",text:"description",is_correct:true},{id:"b",text:"section",is_correct:false},{id:"c",text:"fiction",is_correct:false},{id:"d",text:"tradition",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"invention",is_correct:true},{id:"b",text:"direction",is_correct:true},{id:"c",text:"election",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 255?", options: [{id:"a",text:"tion = /shun/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+          { id: "1", prompt: "How is the ending 'tion' pronounced?", options: [
+            {id:"a",text:"/shun/",is_correct:true},
+            {id:"b",text:"/t-ee-on/",is_correct:false},
+            {id:"c",text:"/tee-on/",is_correct:false},
+            {id:"d",text:"/chun/",is_correct:false}
+          ]},
+          { id: "2", prompt: "Choose the correct spelling:", options: [
+            {id:"a",text:"invenchen",is_correct:false},
+            {id:"b",text:"invention",is_correct:true},
+            {id:"c",text:"invenchion",is_correct:false},
+            {id:"d",text:"invenshun",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'a formal meeting or agreement'?", options: [
+            {id:"a",text:"convention",is_correct:true},
+            {id:"b",text:"invention",is_correct:false},
+            {id:"c",text:"condition",is_correct:false},
+            {id:"d",text:"fraction",is_correct:false}
+          ]},
+          { id: "4", prompt: "What word completes: 'She has great _____ to become a doctor'?", options: [
+            {id:"a",text:"ambition",is_correct:true},
+            {id:"b",text:"addition",is_correct:false},
+            {id:"c",text:"audition",is_correct:false},
+            {id:"d",text:"eruption",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word contains 'tion' and relates to math?", options: [
+            {id:"a",text:"fraction",is_correct:true},
+            {id:"b",text:"addition",is_correct:true},
+            {id:"c",text:"portion",is_correct:true},
+            {id:"d",text:"All of these",is_correct:true}
+          ]},
+          { id: "6", prompt: "In which sentence is a '-tion' word used correctly?", options: [
+            {id:"a",text:"He has a lot of affecshun for his dog.",is_correct:false},
+            {id:"b",text:"The volcano had a big erupshun.",is_correct:false},
+            {id:"c",text:"She showed great affection for her grandmother.",is_correct:true},
+            {id:"d",text:"He won the elecshun.",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'caution' mean?", options: [
+            {id:"a",text:"carefulness to avoid danger",is_correct:true},
+            {id:"b",text:"speed",is_correct:false},
+            {id:"c",text:"noise",is_correct:false},
+            {id:"d",text:"a type of election",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word means 'a piece or part of something'?", options: [
+            {id:"a",text:"portion",is_correct:true},
+            {id:"b",text:"position",is_correct:false},
+            {id:"c",text:"tradition",is_correct:false},
+            {id:"d",text:"section",is_correct:true}
+          ]},
+          { id: "9", prompt: "Which word is NOT in the lesson list?", options: [
+            {id:"a",text:"attention",is_correct:false},
+            {id:"b",text:"infection",is_correct:false},
+            {id:"c",text:"production",is_correct:false},
+            {id:"d",text:"suggestion",is_correct:true}
+          ]},
+          { id: "10", prompt: "What word means 'a test to select performers'?", options: [
+            {id:"a",text:"audition",is_correct:true},
+            {id:"b",text:"election",is_correct:false},
+            {id:"c",text:"convention",is_correct:false},
+            {id:"d",text:"description",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word ends with 'tion' and means 'strong liking or love'?", options: [
+            {id:"a",text:"affection",is_correct:true},
+            {id:"b",text:"attention",is_correct:false},
+            {id:"c",text:"intention",is_correct:false},
+            {id:"d",text:"condition",is_correct:false}
+          ]},
+          { id: "12", prompt: "How many '-tion' words are in this list: action, fiction, phone, potion?", options: [
+            {id:"a",text:"2 (action, fiction)",is_correct:false},
+            {id:"b",text:"3 (action, fiction, potion)",is_correct:true},
+            {id:"c",text:"1",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word means 'a detailed account'?", options: [
+            {id:"a",text:"description",is_correct:true},
+            {id:"b",text:"eruption",is_correct:false},
+            {id:"c",text:"tradition",is_correct:false},
+            {id:"d",text:"ration",is_correct:false}
+          ]},
+          { id: "14", prompt: "What word means 'a sudden burst, like from a volcano'?", options: [
+            {id:"a",text:"eruption",is_correct:true},
+            {id:"b",text:"infection",is_correct:false},
+            {id:"c",text:"production",is_correct:false},
+            {id:"d",text:"convention",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word relates to government voting?", options: [
+            {id:"a",text:"election",is_correct:true},
+            {id:"b",text:"audition",is_correct:false},
+            {id:"c",text:"addition",is_correct:false},
+            {id:"d",text:"option",is_correct:false}
+          ]},
+          { id: "16", prompt: "What does 'tradition' mean?", options: [
+            {id:"a",text:"a custom passed down through generations",is_correct:true},
+            {id:"b",text:"a new invention",is_correct:false},
+            {id:"c",text:"a type of math problem",is_correct:false},
+            {id:"d",text:"a loud noise",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word is used in 'a Sunday newspaper _____'?", options: [
+            {id:"a",text:"edition",is_correct:true},
+            {id:"b",text:"section",is_correct:true},
+            {id:"c",text:"description",is_correct:false},
+            {id:"d",text:"Both A and B",is_correct:true}
+          ]},
+          { id: "18", prompt: "Which word means 'state of health or fitness'?", options: [
+            {id:"a",text:"condition",is_correct:true},
+            {id:"b",text:"position",is_correct:false},
+            {id:"c",text:"ration",is_correct:false},
+            {id:"d",text:"option",is_correct:false}
+          ]},
+          { id: "19", prompt: "What word means 'focus of the mind'?", options: [
+            {id:"a",text:"attention",is_correct:true},
+            {id:"b",text:"intention",is_correct:false},
+            {id:"c",text:"affection",is_correct:false},
+            {id:"d",text:"mention",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which suffix always makes the /shun/ sound in this lesson?", options: [
+            {id:"a",text:"-sion",is_correct:false},
+            {id:"b",text:"-tion",is_correct:true},
+            {id:"c",text:"-cion",is_correct:false},
+            {id:"d",text:"-xion",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ortion/g, 'portion'], [/f raction/g, 'fraction']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
 
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
-
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
 
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 255*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered tion=/shun/!' : correctCount >= 10 ? 'Good! Review academic suffixes.' : 'Practice Lesson 255 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -235,8 +367,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -244,6 +376,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -254,6 +444,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
