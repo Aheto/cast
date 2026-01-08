@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 208 — ei = /ā/"/>
-  <title>Mini OpenStax — Lesson 208: ei = /ā/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 208: ei = /ā/ (veil, vein, rein, reindeer)"/>
+  <title>Mini OpenStax — Lesson 208: ei = /ā/ (veil, vein, rein, reindeer)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 208: ei = /ā/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH208: Decode words with vowel team ei = /ā/</div>
+        <h1 id="chapter-title">Lesson 208: ei = /ā/ (veil, vein, rein, reindeer)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH208: Decode words with 'ei' spelling for long a (/ā/)</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>vowel team</strong> <em>ei</em> making the <strong>/ā/</strong> sound:</p>
+        <p>Words where 'ei' spells the long a sound (/ā/):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–208:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,156 +80,290 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 207;   // chapter-207.html = Lesson 208
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 207; // Lesson 208
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 208: ei = /ā/",
-        loTags: ["LO PH208: Decode words with vowel team ei = /ā/"],
+        title: "Lesson 208: ei = /ā/ (veil, vein, rein, reindeer)",
+        loTags: ["LO PH208: Decode words with 'ei' spelling for long a (/ā/)"],
         contentWords: [
-          "veil", "vein", "rein", "reindeer"
+          "veil", "vein", "rein", "reindeer", "freight", "eight", "weigh", "neighbor"
         ],
         sentences: [
-          "The lady wore a white veil over her face.",
-          "Sue saw some reindeer on her visit to Alaska.",
-          "The cowboy tried in vain to rein in the wild bronco.",
-          "That evening, a veil of thick fog began to shroud the village.",
-          "The men still believe that they might find a vein of gold in the old mine."
+          "The bride wore a white dress and a delicate veil.",
+          "A vein is a blood vessel that carries blood to the heart.",
+          "Santa's sleigh is pulled by eight reindeer.",
+          "Please hold the reins tightly when you ride the horse.",
+          "The doctor checked the vein in her arm before drawing blood.",
+          "In the story, the reindeer helped Santa deliver presents."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains 'ei' making /ā/?", options: [{id:"a",text:"vein",is_correct:true},{id:"b",text:"veil",is_correct:true},{id:"c",text:"rein",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "2", prompt: "Which is NOT a Lesson 208 word?", options: [{id:"a",text:"reindeer",is_correct:false},{id:"b",text:"veil",is_correct:false},{id:"c",text:"freight",is_correct:true},{id:"d",text:"vein",is_correct:false}] },
-          { id: "3", prompt: "In 'rein', what sound does 'ei' make?", options: [{id:"a",text:"/ā/",is_correct:true},{id:"b",text:"/ē/",is_correct:false},{id:"c",text:"/ĕ/",is_correct:false},{id:"d",text:"/ĭ/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'a thin layer of fabric worn over the face'?", options: [{id:"a",text:"veil",is_correct:true},{id:"b",text:"vein",is_correct:false},{id:"c",text:"rein",is_correct:false},{id:"d",text:"reindeer",is_correct:false}] },
-          { id: "5", prompt: "How many syllables in 'reindeer'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 208 words?", options: [{id:"a",text:"Sue saw some reindeer on her visit to Alaska.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a blood vessel or mineral deposit?", options: [{id:"a",text:"vein",is_correct:true},{id:"b",text:"veil",is_correct:false},{id:"c",text:"rein",is_correct:false},{id:"d",text:"reindeer",is_correct:false}] },
-          { id: "8", prompt: "What vowel team is in 'veil'?", options: [{id:"a",text:"ei",is_correct:true},{id:"b",text:"ie",is_correct:false},{id:"c",text:"ey",is_correct:false},{id:"d",text:"ow",is_correct:false}] },
-          { id: "9", prompt: "In 'The cowboy tried in vain to rein in the wild bronco,' how many Lesson 208 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:true},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'straps used to control a horse'?", options: [{id:"a",text:"rein",is_correct:true},{id:"b",text:"veil",is_correct:false},{id:"c",text:"vein",is_correct:false},{id:"d",text:"reindeer",is_correct:false}] },
-          { id: "11", prompt: "Which word describes a large Arctic deer with antlers?", options: [{id:"a",text:"reindeer",is_correct:true},{id:"b",text:"veil",is_correct:false},{id:"c",text:"vein",is_correct:false},{id:"d",text:"rein",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'ei' and means 'to cover lightly' (as in fog)?", options: [{id:"a",text:"veil",is_correct:true},{id:"b",text:"vein",is_correct:false},{id:"c",text:"rein",is_correct:false},{id:"d",text:"reindeer",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 208?", options: [{id:"a",text:"That evening, a veil of thick fog began to shroud the village.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'vein'?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "15", prompt: "Which word is used in 'to take up the ___s' (horse control)?", options: [{id:"a",text:"rein",is_correct:true},{id:"b",text:"veil",is_correct:false},{id:"c",text:"vein",is_correct:false},{id:"d",text:"believe",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'reindeer'?", options: [{id:"a",text:"ei = /ā/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'a thin tissue or layer, as of fog or fabric'?", options: [{id:"a",text:"veil",is_correct:true},{id:"b",text:"vein",is_correct:false},{id:"c",text:"rein",is_correct:false},{id:"d",text:"reindeer",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'They searched for a gold ___.'?", options: [{id:"a",text:"vein",is_correct:true},{id:"b",text:"veil",is_correct:false},{id:"c",text:"rein",is_correct:false},{id:"d",text:"reindeer",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"veil",is_correct:true},{id:"b",text:"vein",is_correct:true},{id:"c",text:"rein",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What distinguishes Lesson 208 from Lesson 186?", options: [{id:"a",text:"ei = /ā/ vs. ei = /ē/",is_correct:true},{id:"b",text:"ei = /ē/ vs. ei = /ā/",is_correct:false},{id:"c",text:"Magic E vs. Open Syllable",is_correct:false},{id:"d",text:"R-controlled vs. vowel team",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'a thin piece of fabric worn over the face or head'?", options: [
+            {id:"a",text:"veil",is_correct:true},
+            {id:"b",text:"vein",is_correct:false},
+            {id:"c",text:"rein",is_correct:false},
+            {id:"d",text:"reindeer",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word refers to a blood vessel?", options: [
+            {id:"a",text:"vein",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"rein",is_correct:false},
+            {id:"d",text:"freight",is_correct:false}
+          ]},
+          { id: "3", prompt: "What are 'reins'?", options: [
+            {id:"a",text:"Straps used to control a horse",is_correct:true},
+            {id:"b",text:"Types of deer",is_correct:false},
+            {id:"c",text:"Head coverings",is_correct:false},
+            {id:"d",text:"Blood vessels",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses a word with 'ei = /ā/' correctly?", options: [
+            {id:"a",text:"She wore a veil.",is_correct:true},
+            {id:"b",text:"He veiled the horse.",is_correct:false},
+            {id:"c",text:"They reined the blood.",is_correct:false},
+            {id:"d",text:"We veined the sleigh.",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word refers to the animal associated with Santa Claus?", options: [
+            {id:"a",text:"reindeer",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"vein",is_correct:false},
+            {id:"d",text:"rein",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word contains 'ei' but does NOT say /ā/?", options: [
+            {id:"a",text:"receive",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"vein",is_correct:false},
+            {id:"d",text:"rein",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'freight' mean in this lesson’s context?", options: [
+            {id:"a",text:"Cargo (also uses 'eigh = /ā/')",is_correct:true},
+            {id:"b",text:"A type of rein",is_correct:false},
+            {id:"c",text:"A facial covering",is_correct:false},
+            {id:"d",text:"A blood vessel",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word is NOT primarily taught in this lesson (though it contains /ā/)?", options: [
+            {id:"a",text:"neighbor",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"vein",is_correct:false},
+            {id:"d",text:"reindeer",is_correct:false}
+          ]},
+          { id: "9", prompt: "In the sentence 'The reindeer pulled the sleigh,' how many words have 'ei = /ā/'?", options: [
+            {id:"a",text:"One",is_correct:true},
+            {id:"b",text:"Two",is_correct:false},
+            {id:"c",text:"Three",is_correct:false},
+            {id:"d",text:"None",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word means 'to hold back or control' (as in horses)?", options: [
+            {id:"a",text:"rein",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"vein",is_correct:false},
+            {id:"d",text:"freight",is_correct:false}
+          ]},
+          { id: "11", prompt: "What sound does 'ei' make in 'veil'?", options: [
+            {id:"a",text:"/ā/",is_correct:true},
+            {id:"b",text:"/v/",is_correct:false},
+            {id:"c",text:"/ĕ/",is_correct:false},
+            {id:"d",text:"/ĭ/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word appears in medical contexts?", options: [
+            {id:"a",text:"vein",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"rein",is_correct:false},
+            {id:"d",text:"reindeer",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word is part of 'Santa’s reindeer'?", options: [
+            {id:"a",text:"reindeer",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"vein",is_correct:false},
+            {id:"d",text:"freight",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word demonstrates that 'ei = /ā/' often appears after consonants like 'v', 'r', or 'n'?", options: [
+            {id:"a",text:"veil, rein, vein",is_correct:true},
+            {id:"b",text:"only reindeer",is_correct:false},
+            {id:"c",text:"only freight",is_correct:false},
+            {id:"d",text:"receive",is_correct:false}
+          ]},
+          { id: "15", prompt: "How is 'ei' pronounced in 'reindeer'?", options: [
+            {id:"a",text:"/ā/",is_correct:true},
+            {id:"b",text:"/r/",is_correct:false},
+            {id:"c",text:"/ĕ/",is_correct:false},
+            {id:"d",text:"/d/",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word is used in 'pull in the reins'?", options: [
+            {id:"a",text:"rein",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"vein",is_correct:false},
+            {id:"d",text:"eight",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word shows that 'ei = /ā/' appears in both everyday and seasonal vocabulary?", options: [
+            {id:"a",text:"reindeer (seasonal), vein (everyday)",is_correct:true},
+            {id:"b",text:"only veil",is_correct:false},
+            {id:"c",text:"only freight",is_correct:false},
+            {id:"d",text:"neighbor",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word is a homophone of 'vail' (an archaic word for 'lower')?", options: [
+            {id:"a",text:"veil",is_correct:true},
+            {id:"b",text:"vein",is_correct:false},
+            {id:"c",text:"rein",is_correct:false},
+            {id:"d",text:"reindeer",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word contrasts with 'artery' in the circulatory system?", options: [
+            {id:"a",text:"vein",is_correct:true},
+            {id:"b",text:"veil",is_correct:false},
+            {id:"c",text:"rein",is_correct:false},
+            {id:"d",text:"freight",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word illustrates that 'ei = /ā/' is a less common but consistent pattern distinct from 'ei = /ē/' (as in 'receive')?", options: [
+            {id:"a",text:"veil vs. receive",is_correct:true},
+            {id:"b",text:"only rein",is_correct:false},
+            {id:"c",text:"only eight",is_correct:false},
+            {id:"d",text:"neighbor",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/typ e/g, 'type'], [/f our/g, 'four'], [/f lies/g, 'flies'],
+        [/emp tired/g, 'emptied'], [/p ennies/g, 'pennies'], [/f ourth/g, 'fourth'],
+        [/f ried/g, 'fried'], [/multip ly/g, 'multiply'], [/f lying/g, 'flying'],
+        [/p our/g, 'pour'], [/sh oulder/g, 'shoulder'], [/b oulder/g, 'boulder'],
+        [/k now/g, 'know'], [/gr ow/g, 'grow'], [/sn ow/g, 'snow'],
+        [/tom orrow/g, 'tomorrow'], [/yell ow/g, 'yellow'], [/wind ow/g, 'window'],
+        [/fl our/g, 'flour'], [/h onor/g, 'honor'], [/l abor/g, 'labor'],
+        [/mar igold/g, 'marigold'], [/thresh old/g, 'threshold'], [/be hold/g, 'behold'],
+        [/f ellow/g, 'fellow'], [/newsp ap er/g, 'newspaper'],
+        [/f ruit/g, 'fruit'], [/j uicy/g, 'juicy'], [/f reight/g, 'freight'],
+        [/chicken s oup/g, 'chicken soup'], [/y outh g roup/g, 'youth group'],
+        [/s leigh/g, 'sleigh'], [/e ight/g, 'eight'], [/n eighbor/g, 'neighbor'],
+        [/v eil/g, 'veil'], [/v ein/g, 'vein'], [/r ein/g, 'rein']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
 
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
 
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
 
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 208*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered ei=/ā/!' : correctCount >= 10 ? 'Good! Review the /ā/ vs /ē/ distinction.' : 'Practice Lesson 208 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -228,8 +373,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -237,6 +382,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -247,6 +450,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
