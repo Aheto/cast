@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 130 — Multisyllable Words"/>
-  <title>Mini OpenStax — Lesson 129: Multisyllable Words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 130: Multisyllable Nouns"/>
+  <title>Mini OpenStax — Lesson 130: Multisyllable Nouns</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 130: Multisyllable Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH130: Decode multisyllable words with various ending patterns and schwa sounds.</div>
+        <h1 id="chapter-title">Lesson 130: Multisyllable Nouns</h1>
+        <div class="lo-tags" id="lo-tags">LO PH130: Decode and use common multisyllable nouns</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,19 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Practice reading these multisyllable words. Many end with the "-on", "-en", or "-el" patterns:</p>
+        <p>Common multisyllable nouns for reading and speaking</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud. Pay attention to the underlined concepts:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Select the correct answer for each question based on Lesson 130.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,131 +80,288 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 129; // chapter-129.html = Lesson 130
-      const maxChapter = 150;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 129; // Lesson 130
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 130: Multisyllable Words",
-        loTags: ["LO PH130: Decode multisyllable words with various ending patterns and schwa sounds."],
+        title: "Lesson 130: Multisyllable Nouns",
+        loTags: ["LO PH130: Decode and use common multisyllable nouns"],
         contentWords: [
           "reason", "season", "common", "cotton", "gallon", "lesson", "ribbon", "lemon", "wagon", "bottom", "kingdom", "freedom", "problem", "gallop", "method", "travel", "level", "novel", "model", "nickel", "tunnel", "barrel", "towel", "vowel"
         ],
         sentences: [
-          "1) Chuck has a nickel in his pocket.",
-          "2) The gift box has a red ribbon on it.",
-          "3) Gail would enjoy some lemon with her tea.",
-          "4) Joan can solve the math problem on the test.",
-          "5) His mom can explain the reading lesson to Mitch.",
-          "6) A cotton bath towel hung on a rail in the bathroom.",
-          "7) Fran plans to travel to the east coast this spring.",
-          "8) The ship struck a reef and sank to the bottom of the sea.",
-          "9) The log cabin sat on a level spot near the bottom of a hill."
+          "Chuck has a nickel in his pocket.",
+          "The gift box has a red ribbon on it.",
+          "Gail would enjoy some lemon with her tea.",
+          "Joan can solve the math problem on the test.",
+          "His mom can explain the reading lesson to Mitch.",
+          "A cotton bath towel hung on a rail in the bathroom.",
+          "Fran plans to travel to the east coast this spring.",
+          "The ship struck a reef and sank to the bottom of the sea.",
+          "The log cabin sat on a level spot near the bottom of a hill."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What does Chuck have in his pocket?", options: [{id:"a",text:"a ribbon",is_correct:false},{id:"b",text:"a nickel",is_correct:true},{id:"c",text:"a lemon",is_correct:false},{id:"d",text:"a towel",is_correct:false}] },
-          { id: "2", prompt: "What color is the ribbon on the gift box?", options: [{id:"a",text:"blue",is_correct:false},{id:"b",text:"red",is_correct:true},{id:"c",text:"green",is_correct:false},{id:"d",text:"yellow",is_correct:false}] },
-          { id: "3", prompt: "What would Gail enjoy with her tea?", options: [{id:"a",text:"sugar",is_correct:false},{id:"b",text:"lemon",is_correct:true},{id:"c",text:"milk",is_correct:false},{id:"d",text:"honey",is_correct:false}] },
-          { id: "4", prompt: "What can Joan solve on the test?", options: [{id:"a",text:"the mystery",is_correct:false},{id:"b",text:"the math problem",is_correct:true},{id:"c",text:"the riddle",is_correct:false},{id:"d",text:"the puzzle",is_correct:false}] },
-          { id: "5", prompt: "Who can explain the reading lesson to Mitch?", options: [{id:"a",text:"his dad",is_correct:false},{id:"b",text:"his mom",is_correct:true},{id:"c",text:"his teacher",is_correct:false},{id:"d",text:"his pal",is_correct:false}] },
-          { id: "6", prompt: "What is the bath towel made of?", options: [{id:"a",text:"silk",is_correct:false},{id:"b",text:"cotton",is_correct:true},{id:"c",text:"wool",is_correct:false},{id:"d",text:"linen",is_correct:false}] },
-          { id: "7", prompt: "Where did the cotton towel hang?", options: [{id:"a",text:"on a hook",is_correct:false},{id:"b",text:"on a rail",is_correct:true},{id:"c",text:"on the door",is_correct:false},{id:"d",text:"on the bed",is_correct:false}] },
-          { id: "8", prompt: "When does Fran plan to travel to the east coast?", options: [{id:"a",text:"this winter",is_correct:false},{id:"b",text:"this spring",is_correct:true},{id:"c",text:"next year",is_correct:false},{id:"d",text:"August",is_correct:false}] },
-          { id: "9", prompt: "What did the ship strike before it sank?", options: [{id:"a",text:"a dock",is_correct:false},{id:"b",text:"a reef",is_correct:true},{id:"c",text:"a rock",is_correct:false},{id:"d",text:"a whale",is_correct:false}] },
-          { id: "10", prompt: "Where did the ship sink to?", options: [{id:"a",text:"the beach",is_correct:false},{id:"b",text:"the bottom of the sea",is_correct:true},{id:"c",text:"the harbor",is_correct:false},{id:"d",text:"the island",is_correct:false}] },
-          { id: "11", prompt: "What kind of spot did the log cabin sit on?", options: [{id:"a",text:"a rocky spot",is_correct:false},{id:"b",text:"a level spot",is_correct:true},{id:"c",text:"a high spot",is_correct:false},{id:"d",text:"a grassy spot",is_correct:false}] },
-          { id: "12", prompt: "Where was the level spot located?", options: [{id:"a",text:"top of a hill",is_correct:false},{id:"b",text:"bottom of a hill",is_correct:true},{id:"c",text:"near a lake",is_correct:false},{id:"d",text:"in a valley",is_correct:false}] },
-          { id: "13", prompt: "Which word is a fruit?", options: [{id:"a",text:"cotton",is_correct:false},{id:"b",text:"lemon",is_correct:true},{id:"c",text:"ribbon",is_correct:false},{id:"d",text:"nickel",is_correct:false}] },
-          { id: "14", prompt: "Which word refers to a coin worth five cents?", options: [{id:"a",text:"nickel",is_correct:true},{id:"b",text:"gallon",is_correct:false},{id:"c",text:"model",is_correct:false},{id:"d",text:"barrel",is_correct:false}] },
-          { id: "15", prompt: "Which word means a story or a book?", options: [{id:"a",text:"novel",is_correct:true},{id:"b",text:"vowel",is_correct:false},{id:"c",text:"towel",is_correct:false},{id:"d",text:"model",is_correct:false}] },
-          { id: "16", prompt: "Which word describes a unit of liquid measure?", options: [{id:"a",text:"gallon",is_correct:true},{id:"b",text:"common",is_correct:false},{id:"c",text:"wagon",is_correct:false},{id:"d",text:"bottom",is_correct:false}] },
-          { id: "17", prompt: "Which word is a part of speech (A, E, I, O, U)?", options: [{id:"a",text:"vowel",is_correct:true},{id:"b",text:"novel",is_correct:false},{id:"c",text:"nickel",is_correct:false},{id:"d",text:"tunnel",is_correct:false}] },
-          { id: "18", prompt: "What do you use to dry yourself after a bath?", options: [{id:"a",text:"ribbon",is_correct:false},{id:"b",text:"towel",is_correct:true},{id:"c",text:"cotton",is_correct:false},{id:"d",text:"barrel",is_correct:false}] },
-          { id: "19", prompt: "Which word means a passage under the ground?", options: [{id:"a",text:"tunnel",is_correct:true},{id:"b",text:"level",is_correct:false},{id:"c",text:"barrel",is_correct:false},{id:"d",text:"novel",is_correct:false}] },
-          { id: "20", prompt: "Which word means a time of the year (Spring, Summer)?", options: [{id:"a",text:"reason",is_correct:false},{id:"b",text:"season",is_correct:true},{id:"c",text:"lesson",is_correct:false},{id:"d",text:"common",is_correct:false}] }
+          { id: "1", prompt: "Which word is a unit of money equal to 5 cents?", options: [
+            {id:"a",text:"nickel",is_correct:true},
+            {id:"b",text:"gallon",is_correct:false},
+            {id:"c",text:"vowel",is_correct:false},
+            {id:"d",text:"novel",is_correct:false}
+          ]},
+          { id: "2", prompt: "What is a 'tunnel'?", options: [
+            {id:"a",text:"An underground passage",is_correct:true},
+            {id:"b",text:"A type of bird",is_correct:false},
+            {id:"c",text:"A mountain",is_correct:false},
+            {id:"d",text:"A liquid",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'the state of being free'?", options: [
+            {id:"a",text:"freedom",is_correct:true},
+            {id:"b",text:"kingdom",is_correct:false},
+            {id:"c",text:"method",is_correct:false},
+            {id:"d",text:"season",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'bottom' correctly?", options: [
+            {id:"a",text:"The toy sank to the bottom of the pool.",is_correct:true},
+            {id:"b",text:"She bottom the book.",is_correct:false},
+            {id:"c",text:"He is very bottom.",is_correct:false},
+            {id:"d",text:"They bottom running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How many syllables in 'problem'?", options: [
+            {id:"a",text:"2 (prob-lem)",is_correct:true},
+            {id:"b",text:"3",is_correct:false},
+            {id:"c",text:"1",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word is a fabric often used in clothing?", options: [
+            {id:"a",text:"cotton",is_correct:true},
+            {id:"b",text:"barrel",is_correct:false},
+            {id:"c",text:"wagon",is_correct:false},
+            {id:"d",text:"gallop",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'vowel' refer to in reading?", options: [
+            {id:"a",text:"Letters a, e, i, o, u",is_correct:true},
+            {id:"b",text:"Only the letter 'a'",is_correct:false},
+            {id:"c",text:"Consonant sounds",is_correct:false},
+            {id:"d",text:"Punctuation marks",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word means 'a story book, usually long'?", options: [
+            {id:"a",text:"novel",is_correct:true},
+            {id:"b",text:"model",is_correct:false},
+            {id:"c",text:"method",is_correct:false},
+            {id:"d",text:"lesson",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word is an abstract noun?", options: [
+            {id:"a",text:"freedom",is_correct:true},
+            {id:"b",text:"towel",is_correct:false},
+            {id:"c",text:"nickel",is_correct:false},
+            {id:"d",text:"lemon",is_correct:false}
+          ]},
+          { id: "10", prompt: "What is a 'barrel'?", options: [
+            {id:"a",text:"A round container for storing liquids",is_correct:true},
+            {id:"b",text:"A type of hat",is_correct:false},
+            {id:"c",text:"A small boat",is_correct:false},
+            {id:"d",text:"A bird",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word means 'a way of doing something'?", options: [
+            {id:"a",text:"method",is_correct:true},
+            {id:"b",text:"model",is_correct:false},
+            {id:"c",text:"season",is_correct:false},
+            {id:"d",text:"reason",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which sentence uses 'travel' correctly?", options: [
+            {id:"a",text:"We will travel to the mountains.",is_correct:true},
+            {id:"b",text:"She travel a book.",is_correct:false},
+            {id:"c",text:"He is travel happy.",is_correct:false},
+            {id:"d",text:"They travel quickly running.",is_correct:false}
+          ]},
+          { id: "13", prompt: "What part of 'lesson' is the root?", options: [
+            {id:"a",text:"lesson",is_correct:true},
+            {id:"b",text:"less",is_correct:false},
+            {id:"c",text:"on",is_correct:false},
+            {id:"d",text:"son",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word means 'not rare or unusual'?", options: [
+            {id:"a",text:"common",is_correct:true},
+            {id:"b",text:"novel",is_correct:false},
+            {id:"c",text:"kingdom",is_correct:false},
+            {id:"d",text:"freedom",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which word is often used with 'lemon' in drinks?", options: [
+            {id:"a",text:"tea",is_correct:false},
+            {id:"b",text:"None of these — but 'lemon' is the noun",is_correct:true},
+            {id:"c",text:"wagon",is_correct:false},
+            {id:"d",text:"gallop",is_correct:false}
+          ]},
+          { id: "16", prompt: "What is a 'model'?", options: [
+            {id:"a",text:"A small copy of something real",is_correct:true},
+            {id:"b",text:"A type of bird",is_correct:false},
+            {id:"c",text:"A liquid",is_correct:false},
+            {id:"d",text:"A mountain",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word means 'a time of year (spring, summer, etc.)'?", options: [
+            {id:"a",text:"season",is_correct:true},
+            {id:"b",text:"travel",is_correct:false},
+            {id:"c",text:"level",is_correct:false},
+            {id:"d",text:"bottom",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word is a homophone of 'metal' in some accents?", options: [
+            {id:"a",text:"nickel",is_correct:true},
+            {id:"b",text:"novel",is_correct:false},
+            {id:"c",text:"ribbon",is_correct:false},
+            {id:"d",text:"cotton",is_correct:false}
+          ]},
+          { id: "19", prompt: "What does 'gallop' refer to?", options: [
+            {id:"a",text:"The fast gait of a horse",is_correct:true},
+            {id:"b",text:"A type of lemon",is_correct:false},
+            {id:"c",text:"A small tunnel",is_correct:false},
+            {id:"d",text:"A fabric",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is it useful to know nouns like 'problem' and 'reason'?", options: [
+            {id:"a",text:"They help you understand and explain ideas clearly",is_correct:true},
+            {id:"b",text:"They are only for stories",is_correct:false},
+            {id:"c",text:"They are easy to spell",is_correct:false},
+            {id:"d",text:"They are never used in school",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/b ath towel/g, 'bath towel'], [/r ibbon/g, 'ribbon']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 130*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -201,8 +371,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -210,6 +380,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -220,9 +448,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
