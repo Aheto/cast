@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 241 — Silent Letters: sc = /s/"/>
-  <title>Mini OpenStax — Lesson 241: sc = /s/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 241: 'sc' = /s/"/>
+  <title>Mini OpenStax — Lesson 241: 'sc' = /s/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 241: sc = /s/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH241: Decode words with silent c in sc = /s/</div>
+        <h1 id="chapter-title">Lesson 241: 'sc' = /s/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH241: Decode words where 'sc' makes the /s/ sound</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>silent c</strong> pattern <em>sc</em> making the <strong>/s/</strong> sound:</p>
+        <p>Words where 'sc' is pronounced as /s/ (like 'scene', not 'scale').</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–241:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,21 +80,33 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 240;   // chapter-240.html = Lesson 241
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 240;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 241: sc = /s/",
-        loTags: ["LO PH241: Decode words with silent c in sc = /s/"],
+        title: "Lesson 241: 'sc' = /s/",
+        loTags: ["LO PH241: Decode words where 'sc' makes the /s/ sound"],
         contentWords: [
           "scene", "scenic", "scenery", "scent", "ascent", "descent", "ascend", "descend",
           "science", "scientist", "scissors", "scythe"
@@ -98,131 +121,125 @@
           "Mike will ascend to the top of the hill to get a good view of the scenery below.",
           "The ascent to the top of the hill was twice as hard as the descent to the bottom."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains 'sc' making /s/?", options: [{id:"a",text:"scene",is_correct:true},{id:"b",text:"scoop",is_correct:false},{id:"c",text:"scope",is_correct:false},{id:"d",text:"score",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 241 word?", options: [{id:"a",text:"scythe",is_correct:false},{id:"b",text:"science",is_correct:false},{id:"c",text:"school",is_correct:true},{id:"d",text:"scenic",is_correct:false}] },
-          { id: "3", prompt: "In 'scent', what sound does 'sc' make?", options: [{id:"a",text:"/s/",is_correct:true},{id:"b",text:"/sk/",is_correct:false},{id:"c",text:"/sh/",is_correct:false},{id:"d",text:"/st/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to go upward'?", options: [{id:"a",text:"ascend",is_correct:true},{id:"b",text:"descend",is_correct:false},{id:"c",text:"ascent",is_correct:false},{id:"d",text:"descent",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'scissors'?", options: [{id:"a",text:"8",is_correct:true},{id:"b",text:"7",is_correct:false},{id:"c",text:"9",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 241 words?", options: [{id:"a",text:"Lou keeps a pair of scissors in his desk.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a tool used for cutting paper or fabric?", options: [{id:"a",text:"scissors",is_correct:true},{id:"b",text:"scythe",is_correct:false},{id:"c",text:"scene",is_correct:false},{id:"d",text:"scent",is_correct:false}] },
-          { id: "8", prompt: "What is special about the 'c' in 'science'?", options: [{id:"a",text:"It is silent; 'sc' = /s/",is_correct:true},{id:"b",text:"It makes a /k/ sound",is_correct:false},{id:"c",text:"It makes a /ch/ sound",is_correct:false},{id:"d",text:"It is pronounced /sk/",is_correct:false}] },
-          { id: "9", prompt: "In 'The ascent to the top of the hill was twice as hard as the descent,' how many Lesson 241 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'a person who studies the natural world'?", options: [{id:"a",text:"scientist",is_correct:true},{id:"b",text:"scythe",is_correct:false},{id:"c",text:"scene",is_correct:false},{id:"d",text:"scenic",is_correct:false}] },
-          { id: "11", prompt: "Which word describes the natural features of an area seen visually?", options: [{id:"a",text:"scenery",is_correct:true},{id:"b",text:"scent",is_correct:false},{id:"c",text:"ascent",is_correct:false},{id:"d",text:"descent",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'sc' and means 'to go downward'?", options: [{id:"a",text:"descend",is_correct:true},{id:"b",text:"ascend",is_correct:false},{id:"c",text:"ascent",is_correct:false},{id:"d",text:"scene",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 241?", options: [{id:"a",text:"The farmer will use a scythe to mow the crop of wheat.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'scythe'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'odor left by an animal'?", options: [{id:"a",text:"scent",is_correct:true},{id:"b",text:"scene",is_correct:false},{id:"c",text:"science",is_correct:false},{id:"d",text:"scenic",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'scenic'?", options: [{id:"a",text:"sc = /s/ (silent c)",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "17", prompt: "Which word refers to the setting of a play or crime?", options: [{id:"a",text:"scene",is_correct:true},{id:"b",text:"scent",is_correct:false},{id:"c",text:"science",is_correct:false},{id:"d",text:"scythe",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Don’t lose the ___ of the flower.'?", options: [{id:"a",text:"scent",is_correct:true},{id:"b",text:"scene",is_correct:false},{id:"c",text:"scissors",is_correct:false},{id:"d",text:"science",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"scissors",is_correct:true},{id:"b",text:"science",is_correct:true},{id:"c",text:"scene",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 241?", options: [{id:"a",text:"Silent c in sc = /s/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'a view or setting for an event'?", options: [{id:"a",text:"scene",is_correct:true},{id:"b",text:"scent",is_correct:false},{id:"c",text:"science",is_correct:false},{id:"d",text:"scissors",is_correct:false}]},
+          { id: "2", prompt: "Which sentence uses 'scenic' correctly?", options: [{id:"a",text:"They drove the scenic highway.",is_correct:true},{id:"b",text:"He sceniced the room.",is_correct:false},{id:"c",text:"She to scenic now.",is_correct:false},{id:"d",text:"Scenicing is a verb only.",is_correct:false}]},
+          { id: "3", prompt: "What does 'descend' mean?", options: [{id:"a",text:"to go down",is_correct:true},{id:"b",text:"to go up",is_correct:false},{id:"c",text:"to run fast",is_correct:false},{id:"d",text:"to jump",is_correct:false}]},
+          { id: "4", prompt: "Which word refers to 'a tool with two blades for cutting'?", options: [{id:"a",text:"scissors",is_correct:true},{id:"b",text:"scythe",is_correct:false},{id:"c",text:"scene",is_correct:false},{id:"d",text:"scent",is_correct:false}]},
+          { id: "5", prompt: "Choose the correct spelling:", options: [{id:"a",text:"science",is_correct:true},{id:"b",text:"sience",is_correct:false},{id:"c",text:"sciene",is_correct:false},{id:"d",text:"scyence",is_correct:false}]},
+          { id: "6", prompt: "Which word is NOT pronounced with /s/ for 'sc'?", options: [{id:"a",text:"scale",is_correct:true},{id:"b",text:"scene",is_correct:false},{id:"c",text:"scissors",is_correct:false},{id:"d",text:"science",is_correct:false}]},
+          { id: "7", prompt: "Which word rhymes with 'descent'?", options: [{id:"a",text:"ascent",is_correct:true},{id:"b",text:"sent",is_correct:false},{id:"c",text:"tent",is_correct:false},{id:"d",text:"bent",is_correct:false}]},
+          { id: "8", prompt: "Which sentence uses 'ascend' correctly?", options: [{id:"a",text:"The balloon will ascend into the sky.",is_correct:true},{id:"b",text:"He ascends yesterday.",is_correct:false},{id:"c",text:"She to ascend now.",is_correct:false},{id:"d",text:"Ascending are fun.",is_correct:false}]},
+          { id: "9", prompt: "What is a 'scythe'?", options: [{id:"a",text:"a long-handled cutting tool",is_correct:true},{id:"b",text:"a type of bird",is_correct:false},{id:"c",text:"a loud noise",is_correct:false},{id:"d",text:"a plant",is_correct:false}]},
+          { id: "10", prompt: "Which word means 'odor or smell'?", options: [{id:"a",text:"scent",is_correct:true},{id:"b",text:"scene",is_correct:false},{id:"c",text:"scissors",is_correct:false},{id:"d",text:"science",is_correct:false}]},
+          { id: "11", prompt: "Which is spelled correctly?", options: [{id:"a",text:"scenery",is_correct:true},{id:"b",text:"scenary",is_correct:false},{id:"c",text:"scennery",is_correct:false},{id:"d",text:"scenry",is_correct:false}]},
+          { id: "12", prompt: "Choose the word that means 'a person who studies science':", options: [{id:"a",text:"scientist",is_correct:true},{id:"b",text:"scene",is_correct:false},{id:"c",text:"scythe",is_correct:false},{id:"d",text:"scent",is_correct:false}]},
+          { id: "13", prompt: "Which word describes a beautiful natural landscape?", options: [{id:"a",text:"scenic",is_correct:true},{id:"b",text:"science",is_correct:false},{id:"c",text:"scissors",is_correct:false},{id:"d",text:"descent",is_correct:false}]},
+          { id: "14", prompt: "In which word is 'sc' pronounced /sk/ (not /s/)?", options: [{id:"a",text:"scale",is_correct:true},{id:"b",text:"scene",is_correct:false},{id:"c",text:"science",is_correct:false},{id:"d",text:"scissors",is_correct:false}]},
+          { id: "15", prompt: "What does 'ascent' mean?", options: [{id:"a",text:"the act of climbing upward",is_correct:true},{id:"b",text:"the act of falling",is_correct:false},{id:"c",text:"a loud shout",is_correct:false},{id:"d",text:"a type of tool",is_correct:false}]},
+          { id: "16", prompt: "Which word fits: 'The detective examined the crime _____.'", options: [{id:"a",text:"scene",is_correct:true},{id:"b",text:"scent",is_correct:false},{id:"c",text:"science",is_correct:false},{id:"d",text:"scythe",is_correct:false}]},
+          { id: "17", prompt: "Which word means 'to climb or go upward'?", options: [{id:"a",text:"ascend",is_correct:true},{id:"b",text:"descend",is_correct:false},{id:"c",text:"scissors",is_correct:false},{id:"d",text:"scent",is_correct:false}]},
+          { id: "18", prompt: "Which sentence is correct?", options: [{id:"a",text:"She cut the paper with scissors.",is_correct:true},{id:"b",text:"He scissors the paper.",is_correct:false},{id:"c",text:"They to scissors now.",is_correct:false},{id:"d",text:"Scissoring are fun.",is_correct:false}]},
+          { id: "19", prompt: "Which word contains 'sc' = /s/ and means 'natural views in an area'?", options: [{id:"a",text:"scenery",is_correct:true},{id:"b",text:"science",is_correct:false},{id:"c",text:"scene",is_correct:false},{id:"d",text:"scent",is_correct:false}]},
+          { id: "20", prompt: "Which word means 'a curved blade on a long handle used for mowing'?", options: [{id:"a",text:"scythe",is_correct:true},{id:"b",text:"scissors",is_correct:false},{id:"c",text:"scene",is_correct:false},{id:"d",text:"scent",is_correct:false}]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/s cene/g, 'scene'], [/s cent/g, 'scent'], [/s cientist/g, 'scientist'],
+        [/s cissors/g, 'scissors'], [/s cythe/g, 'scythe']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
-
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
-
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
-
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
-
+        let correctCount = 0, correctList = [], incorrectList = [];
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
-
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 241*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
-
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered sc=/s/!' : correctCount >= 10 ? 'Good! Review silent c words.' : 'Practice Lesson 241 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -232,8 +249,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -241,6 +258,63 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -251,6 +325,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
