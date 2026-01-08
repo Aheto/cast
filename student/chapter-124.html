@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 125: Compound words"/>
-  <title>Mini OpenStax — Lesson 125: Compound words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 125: Compound Words"/>
+  <title>Mini OpenStax — Lesson 125: Compound Words</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 125: Compound words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH125: Decode and use compound words formed from two complete words</div>
+        <h1 id="chapter-title">Lesson 125: Compound Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH125: Decode and use common compound words</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Compound words (two words joined to make one):</p>
+        <p>Common compound words — two words joined to make one</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -82,6 +82,7 @@
       'use strict';
       window.startTime = Date.now();
 
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
       function createSeededRNG(seed) {
         let state = Math.abs((seed * 9301 + 49297) % 233280);
         return () => {
@@ -100,150 +101,151 @@
         return arr;
       }
 
-      const currentChapter = 124;
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 124; // Lesson 125
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 125: Compound words",
-        loTags: ["LO PH125: Decode and use compound words formed from two complete words"],
+        title: "Lesson 125: Compound Words",
+        loTags: ["LO PH125: Decode and use common compound words"],
         contentWords: [
-          "airplane", "airport", "armchair", "backpack", "bathtub", "bedtime", "birthday", "blackboard", "bloodhound", "bookcase", "bookstore", "campfire", "cardboard", "childbirth", "classroom", "cookbook", "cupcake", "daytime", "driveway", "earache", "eyelash", "flashlight", "football", "footstep", "forever", "goodbye", "halftime", "headache", "homework", "hometown", "houseboat", "keyboard", "landscape", "lighthouse", "lifetime", "manhood", "nickname", "notebook", "pancake", "paperback", "playback", "playhouse", "playground", "postcard", "railroad", "rainfall"
+          "awful", "because", "birthday", "cowboy", "daytime", "driveway", "earache", "football", "forever", "hallway", "hometown", "inside", "kickoff", "lawsuit", "mailbox", "nobody", "outside", "pickup", "rainfall", "schoolhouse", "seafood", "snowball", "sometimes", "sunflower", "toothbrush", "upstairs", "weekday", "weekend", "workout", "yourself"
         ],
         sentences: [
-          "We went to the bookstore to buy a paperback.",
-          "At halftime, the band played on the football field.",
-          "She has an earache and a bad headache.",
-          "The lighthouse guides ships at night.",
-          "He packed his backpack for the camping trip.",
-          "They built a playhouse in the backyard.",
-          "The rainfall filled the bathtub in the yard.",
-          "My nickname is 'Flash' because I run fast like a flashlight."
+          "She has an awful toothache.",
+          "He found a pickup truck in the driveway.",
+          "We’ll have seafood for dinner tonight.",
+          "My birthday is on a weekend this year.",
+          "She picked a sunflower from the garden.",
+          "He got an earache after swimming.",
+          "Nobody likes to do a workout on a weekday."
         ],
         assessmentItems: [
           { id: "1", prompt: "Which word is a compound word?", options: [
-            {id:"a",text:"bookstore",is_correct:true},
-            {id:"b",text:"store",is_correct:false},
-            {id:"c",text:"book",is_correct:false},
-            {id:"d",text:"stop",is_correct:false}
+            {id:"a",text:"mailbox",is_correct:true},
+            {id:"b",text:"running",is_correct:false},
+            {id:"c",text:"beautiful",is_correct:false},
+            {id:"d",text:"jumped",is_correct:false}
           ]},
-          { id: "2", prompt: "Which two words make 'playground'?", options: [
-            {id:"a",text:"play + ground",is_correct:true},
-            {id:"b",text:"playing + ground",is_correct:false},
-            {id:"c",text:"play + grounds",is_correct:false},
-            {id:"d",text:"played + ground",is_correct:false}
+          { id: "2", prompt: "What two words make 'toothbrush'?", options: [
+            {id:"a",text:"tooth + brush",is_correct:true},
+            {id:"b",text:"too + brush",is_correct:false},
+            {id:"c",text:"tooth + rushed",is_correct:false},
+            {id:"d",text:"tough + brush",is_correct:false}
           ]},
-          { id: "3", prompt: "Which word means 'a house on water'?", options: [
-            {id:"a",text:"houseboat",is_correct:true},
-            {id:"b",text:"playhouse",is_correct:false},
-            {id:"c",text:"lighthouse",is_correct:false},
-            {id:"d",text:"homework",is_correct:false}
+          { id: "3", prompt: "Which compound word means 'a ball made of snow'?", options: [
+            {id:"a",text:"snowball",is_correct:true},
+            {id:"b",text:"snowfall",is_correct:false},
+            {id:"c",text:"snowman",is_correct:false},
+            {id:"d",text:"snowstorm",is_correct:false}
           ]},
-          { id: "4", prompt: "Which word describes 'pain in the head'?", options: [
-            {id:"a",text:"headache",is_correct:true},
-            {id:"b",text:"earache",is_correct:false},
-            {id:"c",text:"footstep",is_correct:false},
-            {id:"d",text:"eyelash",is_correct:false}
+          { id: "4", prompt: "Which word is NOT a compound word?", options: [
+            {id:"a",text:"because",is_correct:false},
+            {id:"b",text:"birthday",is_correct:false},
+            {id:"c",text:"forever",is_correct:false},
+            {id:"d",text:"running",is_correct:true}
           ]},
-          { id: "5", prompt: "Which sentence uses a compound word?", options: [
-            {id:"a",text:"She runs fast.",is_correct:false},
-            {id:"b",text:"We went to the bookstore.",is_correct:true},
-            {id:"c",text:"It is sunny.",is_correct:false},
-            {id:"d",text:"They played.",is_correct:false}
+          { id: "5", prompt: "Choose the compound word for 'the time during the day'.", options: [
+            {id:"a",text:"daytime",is_correct:true},
+            {id:"b",text:"weekday",is_correct:false},
+            {id:"c",text:"weekend",is_correct:false},
+            {id:"d",text:"nighttime",is_correct:false}
           ]},
-          { id: "6", prompt: "Which word means 'a light you hold in your hand'?", options: [
-            {id:"a",text:"flashlight",is_correct:true},
-            {id:"b",text:"lighthouse",is_correct:false},
-            {id:"c",text:"keyboard",is_correct:false},
-            {id:"d",text:"playback",is_correct:false}
+          { id: "6", prompt: "What does 'earache' mean?", options: [
+            {id:"a",text:"Pain in the ear",is_correct:true},
+            {id:"b",text:"A type of music",is_correct:false},
+            {id:"c",text:"A headache",is_correct:false},
+            {id:"d",text:"A loud sound",is_correct:false}
           ]},
-          { id: "7", prompt: "Which word is made from 'rain' + 'fall'?", options: [
-            {id:"a",text:"rainfall",is_correct:true},
-            {id:"b",text:"rainy",is_correct:false},
-            {id:"c",text:"raining",is_correct:false},
-            {id:"d",text:"raincoat",is_correct:false}
+          { id: "7", prompt: "Which compound word means 'a person from the country who herds cattle'?", options: [
+            {id:"a",text:"cowboy",is_correct:true},
+            {id:"b",text:"schoolhouse",is_correct:false},
+            {id:"c",text:"hometown",is_correct:false},
+            {id:"d",text:"football",is_correct:false}
           ]},
-          { id: "8", prompt: "How is 'goodbye' formed?", options: [
-            {id:"a",text:"good + bye",is_correct:true},
-            {id:"b",text:"go + bye",is_correct:false},
-            {id:"c",text:"go + good",is_correct:false},
-            {id:"d",text:"bye + good",is_correct:false}
+          { id: "8", prompt: "Which word completes: 'She brushed her teeth with a ___.'?", options: [
+            {id:"a",text:"toothbrush",is_correct:true},
+            {id:"b",text:"sunflower",is_correct:false},
+            {id:"c",text:"mailbox",is_correct:false},
+            {id:"d",text:"workout",is_correct:false}
           ]},
-          { id: "9", prompt: "Which word means 'a small cake baked in a cup'?", options: [
-            {id:"a",text:"cupcake",is_correct:true},
-            {id:"b",text:"pancake",is_correct:false},
-            {id:"c",text:"notebook",is_correct:false},
-            {id:"d",text:"paperback",is_correct:false}
+          { id: "9", prompt: "What two words make 'weekend'?", options: [
+            {id:"a",text:"week + end",is_correct:true},
+            {id:"b",text:"weak + end",is_correct:false},
+            {id:"c",text:"week + and",is_correct:false},
+            {id:"d",text:"week + send",is_correct:false}
           ]},
-          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
-            {id:"a",text:"airplane",is_correct:true},
-            {id:"b",text:"airport",is_correct:false},
-            {id:"c",text:"armchair",is_correct:false},
-            {id:"d",text:"backpack",is_correct:false}
+          { id: "10", prompt: "Which compound word means 'a place where you receive mail'?", options: [
+            {id:"a",text:"mailbox",is_correct:true},
+            {id:"b",text:"lawsuit",is_correct:false},
+            {id:"c",text:"pickup",is_correct:false},
+            {id:"d",text:"kickoff",is_correct:false}
           ]},
-          { id: "11", prompt: "Which word means 'a path for trains'?", options: [
-            {id:"a",text:"railroad",is_correct:true},
-            {id:"b",text:"driveway",is_correct:false},
-            {id:"c",text:"playground",is_correct:false},
-            {id:"d",text:"landscape",is_correct:false}
+          { id: "11", prompt: "Which word is spelled correctly as a compound?", options: [
+            {id:"a",text:"sunflower",is_correct:true},
+            {id:"b",text:"sun flower",is_correct:false},
+            {id:"c",text:"sunflowr",is_correct:false},
+            {id:"d",text:"sun-flower",is_correct:false}
           ]},
-          { id: "12", prompt: "Which word is NOT a compound word?", options: [
-            {id:"a",text:"running",is_correct:true},
-            {id:"b",text:"notebook",is_correct:false},
-            {id:"c",text:"keyboard",is_correct:false},
-            {id:"d",text:"lifetime",is_correct:false}
+          { id: "12", prompt: "What does 'upstairs' mean?", options: [
+            {id:"a",text:"On a higher floor of a building",is_correct:true},
+            {id:"b",text:"Outside the house",is_correct:false},
+            {id:"c",text:"In the basement",is_correct:false},
+            {id:"d",text:"On the roof",is_correct:false}
           ]},
-          { id: "13", prompt: "In 'She has an earache,' what does 'earache' mean?", options: [
-            {id:"a",text:"pain in the ear",is_correct:true},
-            {id:"b",text:"ringing in the ear",is_correct:false},
-            {id:"c",text:"hearing loss",is_correct:false},
-            {id:"d",text:"ear infection",is_correct:false}
+          { id: "13", prompt: "Which sentence uses a compound word correctly?", options: [
+            {id:"a",text:"He scored a touchdown in football.",is_correct:true},
+            {id:"b",text:"He scored a touch down in football.",is_correct:false},
+            {id:"c",text:"He scored a touch-down in football.",is_correct:false},
+            {id:"d",text:"He scored a touchdowen in football.",is_correct:false}
           ]},
-          { id: "14", prompt: "Which word means 'a book with recipes'?", options: [
-            {id:"a",text:"cookbook",is_correct:true},
-            {id:"b",text:"notebook",is_correct:false},
-            {id:"c",text:"paperback",is_correct:false},
-            {id:"d",text:"playback",is_correct:false}
+          { id: "14", prompt: "What two words make 'rainfall'?", options: [
+            {id:"a",text:"rain + fall",is_correct:true},
+            {id:"b",text:"rainy + fall",is_correct:false},
+            {id:"c",text:"rain + full",is_correct:false},
+            {id:"d",text:"reign + fall",is_correct:false}
           ]},
-          { id: "15", prompt: "Which compound word includes 'book' and 'case'?", options: [
-            {id:"a",text:"bookcase",is_correct:true},
-            {id:"b",text:"bookstore",is_correct:false},
-            {id:"c",text:"notebook",is_correct:false},
-            {id:"d",text:"paperback",is_correct:false}
+          { id: "15", prompt: "Which compound word means 'exercise session'?", options: [
+            {id:"a",text:"workout",is_correct:true},
+            {id:"b",text:"kickoff",is_correct:false},
+            {id:"c",text:"lawsuit",is_correct:false},
+            {id:"d",text:"hometown",is_correct:false}
           ]},
-          { id: "16", prompt: "Which word ends with 'light' and means 'a tower with a light for ships'?", options: [
-            {id:"a",text:"lighthouse",is_correct:true},
-            {id:"b",text:"flashlight",is_correct:false},
-            {id:"c",text:"daytime",is_correct:false},
-            {id:"d",text:"lifetime",is_correct:false}
+          { id: "16", prompt: "What is the compound word in this sentence: 'She lives in her hometown.'?", options: [
+            {id:"a",text:"hometown",is_correct:true},
+            {id:"b",text:"lives",is_correct:false},
+            {id:"c",text:"She",is_correct:false},
+            {id:"d",text:"in",is_correct:false}
           ]},
-          { id: "17", prompt: "What does 'homework' mean?", options: [
-            {id:"a",text:"school work done at home",is_correct:true},
-            {id:"b",text:"work at a home",is_correct:false},
-            {id:"c",text:"house cleaning",is_correct:false},
-            {id:"d",text:"home repair",is_correct:false}
+          { id: "17", prompt: "Which word means 'not anybody'?", options: [
+            {id:"a",text:"nobody",is_correct:true},
+            {id:"b",text:"somebody",is_correct:false},
+            {id:"c",text:"anybody",is_correct:false},
+            {id:"d",text:"everybody",is_correct:false}
           ]},
-          { id: "18", prompt: "Which word means 'a name given instead of a real name'?", options: [
-            {id:"a",text:"nickname",is_correct:true},
-            {id:"b",text:"firstname",is_correct:false},
-            {id:"c",text:"lastname",is_correct:false},
-            {id:"d",text:"username",is_correct:false}
+          { id: "18", prompt: "What two words make 'yourself'?", options: [
+            {id:"a",text:"your + self",is_correct:true},
+            {id:"b",text:"you + self",is_correct:false},
+            {id:"c",text:"yours + elf",is_correct:false},
+            {id:"d",text:"you + selfs",is_correct:false}
           ]},
-          { id: "19", prompt: "Which word means 'all the time, without end'?", options: [
-            {id:"a",text:"forever",is_correct:true},
-            {id:"b",text:"lifetime",is_correct:false},
-            {id:"c",text:"daytime",is_correct:false},
-            {id:"d",text:"halftime",is_correct:false}
+          { id: "19", prompt: "Which compound word refers to 'a building where school is held'?", options: [
+            {id:"a",text:"schoolhouse",is_correct:true},
+            {id:"b",text:"hallway",is_correct:false},
+            {id:"c",text:"driveway",is_correct:false},
+            {id:"d",text:"cowboy",is_correct:false}
           ]},
-          { id: "20", prompt: "Which word is spelled CORRECTLY as a compound?", options: [
-            {id:"a",text:"playground",is_correct:true},
-            {id:"b",text:"play ground",is_correct:false},
-            {id:"c",text:"play-ground",is_correct:false},
-            {id:"d",text:"playgroundd",is_correct:false}
+          { id: "20", prompt: "Why are compound words helpful?", options: [
+            {id:"a",text:"They combine two ideas into one efficient word",is_correct:true},
+            {id:"b",text:"They make sentences longer",is_correct:false},
+            {id:"c",text:"They are only used in poetry",is_correct:false},
+            {id:"d",text:"They are always hard to spell",is_correct:false}
           ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
       const TYPO_CORRECTIONS = [
         [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
         [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
@@ -252,9 +254,11 @@
         [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
         [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
         [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
-        [/b ookstore/g, 'bookstore'], [/p layground/g, 'playground'], [/h alftime/g, 'halftime'], [/sh ouldn't/g, 'shouldn't']
+        [/awf ul/g, 'awful'], [/p ocket/g, 'pocket'], [/p olish/g, 'polish'],
+        [/p ickup/g, 'pickup'], [/e arache/g, 'earache'], [/s unflower/g, 'sunflower']
       ];
 
+      // --- RENDERING ---
       function renderWords() {
         document.getElementById('word-list').innerHTML =
           CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
@@ -293,6 +297,8 @@
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
         const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
