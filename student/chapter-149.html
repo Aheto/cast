@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 150 — Soft C followed by I or Y"/>
-  <title>Mini OpenStax — Lesson 150: Soft C followed by I or Y</title>
+  <meta name="description" content="Mini OpenStax: Lesson 150: Soft c = /s/ before i or y"/>
+  <title>Mini OpenStax — Lesson 150: Soft c = /s/ before i or y</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 150: Soft C followed by I or Y</h1>
-        <div class="lo-tags" id="lo-tags">LO PH150: Decode words where 'c' followed by 'i' or 'y' makes the soft /s/ sound.</div>
+        <h1 id="chapter-title">Lesson 150: Soft c = /s/ before i or y</h1>
+        <div class="lo-tags" id="lo-tags">LO PH150: Decode words where 'c' says /s/ before 'i' or 'y'</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -42,20 +47,28 @@
 
     <main id="main-content">
       <div class="section">
-        <h2>🔤 Soft C Word List (i and y)</h2>
-        <p>In these words, <strong>c</strong> makes the <strong>/s/</strong> sound because it is followed by <strong>i</strong> or <strong>y</strong>:</p>
+        <h2>🔤 Word List</h2>
+        <p>Words where 'c' says /s/ before 'i' or 'y'</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, noting how the 'c' sounds like an 's' in the highlighted words:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your understanding of Lesson 150 vocabulary.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,130 +80,293 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 149; // chapter-149.html = Lesson 150
-      const maxChapter = 155;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 149; // Lesson 150
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 150: Soft C followed by I or Y",
-        loTags: ["LO PH150: Decode words where 'c' followed by 'i' or 'y' makes the soft /s/ sound."],
+        title: "Lesson 150: Soft c = /s/ before i or y",
+        loTags: ["LO PH150: Decode words where 'c' says /s/ before 'i' or 'y'"],
         contentWords: [
           "city", "civil", "cinch", "cinder", "citizen", "acid", "pencil", "council", "medicine", "principal", "principle", "specific", "fancy", "Nancy", "policy", "tendency"
         ],
         sentences: [
-          "1) Cliff said, 'This problem is a cinch!'",
-          "2) The bashful boy has a tendency to mumble.",
-          "3) Nancy is very proud of her fancy red dress.",
-          "4) Betty keeps a pencil and a pen in her handbag.",
-          "5) Nancy is hoarse and needs some medicine for her voice.",
-          "6) The city council has a meeting every week to set city policy.",
-          "7) This summer, Roy will move away from the city and live on a ranch.",
-          "8) The principal will visit a classroom today to speak with the children."
+          "Cliff said,\"This problem is a cinch!\"",
+          "The bashful boy has a tendency to mumble.",
+          "Nancy is very proud of her fancy red dress.",
+          "Betty keeps a pencil and a pen in her handbag.",
+          "Nancy is hoarse and needs some medicine for her voice.",
+          "The city council has a meeting every week to set city policy.",
+          "This summer, Roy will move away from the city and live on a ranch.",
+          "The principal will visit a classroom today to speak with the children."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What did Cliff say about the problem?", options: [{id:"a",text:"it's a cinch",is_correct:true},{id:"b",text:"it's specific",is_correct:false},{id:"c",text:"it's civil",is_correct:false}] },
-          { id: "2", prompt: "What does the bashful boy have a tendency to do?", options: [{id:"a",text:"mumble",is_correct:true},{id:"b",text:"shout",is_correct:false},{id:"c",text:"dance",is_correct:false}] },
-          { id: "3", prompt: "What color is Nancy's fancy dress?", options: [{id:"a",text:"blue",is_correct:false},{id:"b",text:"red",is_correct:true},{id:"c",text:"green",is_correct:false}] },
-          { id: "4", prompt: "Where does Betty keep her pencil?", options: [{id:"a",text:"in her pocket",is_correct:false},{id:"b",text:"in her handbag",is_correct:true},{id:"c",text:"on the desk",is_correct:false}] },
-          { id: "5", prompt: "Why does Nancy need medicine?", options: [{id:"a",text:"for her voice",is_correct:true},{id:"b",text:"for her ankle",is_correct:false},{id:"c",text:"for her eyes",is_correct:false}] },
-          { id: "6", prompt: "How often does the city council meet?", options: [{id:"a",text:"every day",is_correct:false},{id:"b",text:"every week",is_correct:true},{id:"c",text:"once a month",is_correct:false}] },
-          { id: "7", prompt: "Where will Roy live after moving from the city?", options: [{id:"a",text:"on a ranch",is_correct:true},{id:"b",text:"in a castle",is_correct:false},{id:"c",text:"near a river",is_correct:false}] },
-          { id: "8", prompt: "Who is visiting the classroom today?", options: [{id:"a",text:"the principal",is_correct:true},{id:"b",text:"the citizen",is_correct:false},{id:"c",text:"the council",is_correct:false}] },
-          { id: "9", prompt: "Which word means a large town?", options: [{id:"a",text:"city",is_correct:true},{id:"b",text:"acid",is_correct:false},{id:"c",text:"fancy",is_correct:false}] },
-          { id: "10", prompt: "Which word means something that is very easy?", options: [{id:"a",text:"cinch",is_correct:true},{id:"b",text:"cinder",is_correct:false},{id:"c",text:"civil",is_correct:false}] },
-          { id: "11", prompt: "Which word is a writing tool?", options: [{id:"a",text:"pencil",is_correct:true},{id:"b",text:"policy",is_correct:false},{id:"c",text:"principle",is_correct:false}] },
-          { id: "12", prompt: "Which word means 'decorative' or 'elaborate'?", options: [{id:"a",text:"fancy",is_correct:true},{id:"b",text:"specific",is_correct:false},{id:"c",text:"citizen",is_correct:false}] },
-          { id: "13", prompt: "What is a group of people that makes rules for a city?", options: [{id:"a",text:"council",is_correct:true},{id:"b",text:"medicine",is_correct:false},{id:"c",text:"cinder",is_correct:false}] },
-          { id: "14", prompt: "Which word means a member of a country?", options: [{id:"a",text:"citizen",is_correct:true},{id:"b",text:"civil",is_correct:false},{id:"c",text:"fancy",is_correct:false}] },
-          { id: "15", prompt: "Which word describes a sour substance that can burn?", options: [{id:"a",text:"acid",is_correct:true},{id:"b",text:"policy",is_correct:false},{id:"c",text:"cinder",is_correct:false}] },
-          { id: "16", prompt: "Which word means 'particular' or 'exact'?", options: [{id:"a",text:"specific",is_correct:true},{id:"b",text:"tendency",is_correct:false},{id:"c",text:"civil",is_correct:false}] },
-          { id: "17", prompt: "Which word means a rule or a plan of action?", options: [{id:"a",text:"policy",is_correct:true},{id:"b",text:"principle",is_correct:false},{id:"c",text:"cinch",is_correct:false}] },
-          { id: "18", prompt: "Which word means a small piece of burning coal?", options: [{id:"a",text:"cinder",is_correct:true},{id:"b",text:"city",is_correct:false},{id:"c",text:"civil",is_correct:false}] },
-          { id: "19", prompt: "Which word sounds like 'principal' but means a fundamental truth?", options: [{id:"a",text:"principle",is_correct:true},{id:"b",text:"pencil",is_correct:false},{id:"c",text:"council",is_correct:false}] },
-          { id: "20", prompt: "Which word means polite or related to citizens?", options: [{id:"a",text:"civil",is_correct:true},{id:"b",text:"fancy",is_correct:false},{id:"c",text:"acid",is_correct:false}] }
+          { id: "1", prompt: "In which word does 'c' say /s/ because it is followed by 'i'?", options: [
+            {id:"a",text:"city",is_correct:true},
+            {id:"b",text:"cat",is_correct:false},
+            {id:"c",text:"cot",is_correct:false},
+            {id:"d",text:"cup",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'principal' mean in a school context?", options: [
+            {id:"a",text:"The head administrator of a school",is_correct:true},
+            {id:"b",text:"A musical instrument",is_correct:false},
+            {id:"c",text:"Money invested",is_correct:false},
+            {id:"d",text:"A type of teacher",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'easy to do'?", options: [
+            {id:"a",text:"cinch",is_correct:true},
+            {id:"b",text:"acid",is_correct:false},
+            {id:"c",text:"council",is_correct:false},
+            {id:"d",text:"civil",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'pencil' correctly?", options: [
+            {id:"a",text:"She wrote her name with a pencil.",is_correct:true},
+            {id:"b",text:"He pencil to the store.",is_correct:false},
+            {id:"c",text:"They are very pencil.",is_correct:false},
+            {id:"d",text:"We pencil running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How is 'c' pronounced in 'medicine'?", options: [
+            {id:"a",text:"/s/ as in 'sun'",is_correct:true},
+            {id:"b",text:"/k/ as in 'cat'",is_correct:false},
+            {id:"c",text:"/ch/ as in 'chair'",is_correct:false},
+            {id:"d",text:"Silent",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word refers to a person who lives in a city or country?", options: [
+            {id:"a",text:"citizen",is_correct:true},
+            {id:"b",text:"council",is_correct:false},
+            {id:"c",text:"civil",is_correct:false},
+            {id:"d",text:"city",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'policy' mean?", options: [
+            {id:"a",text:"An official set of rules or guidelines",is_correct:true},
+            {id:"b",text:"A type of food",is_correct:false},
+            {id:"c",text:"A loud noise",is_correct:false},
+            {id:"d",text:"A musical note",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word has a HARD 'c' (/k/) sound?", options: [
+            {id:"a",text:"cat",is_correct:true},
+            {id:"b",text:"city",is_correct:false},
+            {id:"c",text:"pencil",is_correct:false},
+            {id:"d",text:"medicine",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes NANCY'S DRESS in: 'Nancy is very proud of her fancy red dress'?", options: [
+            {id:"a",text:"fancy",is_correct:true},
+            {id:"b",text:"red",is_correct:false},
+            {id:"c",text:"dress",is_correct:false},
+            {id:"d",text:"proud",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'The school ___ gave a speech at the assembly.'?", options: [
+            {id:"a",text:"principal",is_correct:true},
+            {id:"b",text:"principle",is_correct:false},
+            {id:"c",text:"council",is_correct:false},
+            {id:"d",text:"citizen",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'council,' the 'c' says:", options: [
+            {id:"a",text:"/s/",is_correct:true},
+            {id:"b",text:"/k/",is_correct:false},
+            {id:"c",text:"/ch/",is_correct:false},
+            {id:"d",text:"/z/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'a fundamental truth or belief'?", options: [
+            {id:"a",text:"principle",is_correct:true},
+            {id:"b",text:"principal",is_correct:false},
+            {id:"c",text:"policy",is_correct:false},
+            {id:"d",text:"civil",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is special about the 'c' in 'specific'?", options: [
+            {id:"a",text:"It is soft (/s/) because it is followed by 'i'",is_correct:true},
+            {id:"b",text:"It is hard (/k/) because it's at the beginning",is_correct:false},
+            {id:"c",text:"It is silent",is_correct:false},
+            {id:"d",text:"It says /ch/",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'pensil'?", options: [
+            {id:"a",text:"pencil",is_correct:true},
+            {id:"b",text:"city",is_correct:false},
+            {id:"c",text:"medicine",is_correct:false},
+            {id:"d",text:"council",is_correct:false}
+          ]},
+          { id: "15", prompt: "In 'tendency,' the 'c' is pronounced:", options: [
+            {id:"a",text:"/s/",is_correct:true},
+            {id:"b",text:"/k/",is_correct:false},
+            {id:"c",text:"/ch/",is_correct:false},
+            {id:"d",text:"/z/",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word refers to a group that makes decisions for a city?", options: [
+            {id:"a",text:"council",is_correct:true},
+            {id:"b",text:"citizen",is_correct:false},
+            {id:"c",text:"principal",is_correct:false},
+            {id:"d",text:"policy",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word means 'related to ordinary people or society'?", options: [
+            {id:"a",text:"civil",is_correct:true},
+            {id:"b",text:"city",is_correct:false},
+            {id:"c",text:"cinder",is_correct:false},
+            {id:"d",text:"acid",is_correct:false}
+          ]},
+          { id: "18", prompt: "Why does 'c' say /s/ in 'Nancy'?", options: [
+            {id:"a",text:"Because it is followed by 'y'",is_correct:true},
+            {id:"b",text:"Because it is at the end",is_correct:false},
+            {id:"c",text:"Because all 'c's say /s/",is_correct:false},
+            {id:"d",text:"It’s random",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'a substance with a pH less than 7'?", options: [
+            {id:"a",text:"acid",is_correct:true},
+            {id:"b",text:"medicine",is_correct:false},
+            {id:"c",text:"pencil",is_correct:false},
+            {id:"d",text:"principle",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is the soft c rule before 'i' and 'y' important?", options: [
+            {id:"a",text:"It appears in science, civics, and everyday words—essential for fluency",is_correct:true},
+            {id:"b",text:"It only applies to five words",is_correct:false},
+            {id:"c",text:"It makes reading slower",is_correct:false},
+            {id:"d",text:"It’s not used in English",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/f amily/g, 'family'], [/p enny/g, 'penny'], [/excep t/g, 'except'],
+        [/simp le/g, 'simple'], [/p uzzle/g, 'puzzle'], [/m uddy/g, 'muddy'],
+        [/w ould/g, 'would'], [/sh ould/g, 'should'], [/s aid/g, 'said'],
+        [/them self/g, 'themselves'], [/his self/g, 'himself'], [/p encil/g, 'pencil'],
+        [/c inema/g, 'cinema'], [/j uice/g, 'juice'], [/f ence/g, 'fence'],
+        [/p eace/g, 'peace'], [/f ancy/g, 'fancy'], [/p encil/g, 'pencil'],
+        [/p olicy/g, 'policy']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 150*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -200,8 +376,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -209,6 +385,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -219,9 +453,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
