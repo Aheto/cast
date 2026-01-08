@@ -4,7 +4,474 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Mini OpenStax: Lesson 152 — Soft G at the End of Words (-ge)"/>
-  <title>Mini OpenStax — Lesson 152: Soft G at the End of Words (-ge)</title>
+  <title>Mini OpenStax — Lesson 152: Soft G at th<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Mini OpenStax: Lesson 152: Soft g = /j/ before i or y"/>
+  <title>Mini OpenStax — Lesson 152: Soft g = /j/ before i or y</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
+    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chapter-btn {
+      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+    }
+    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
+    .section { margin-bottom: 1.5rem; }
+    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+    .sentences { line-height: 1.6; }
+    .quiz { margin-top: 2rem; }
+    .question { margin-bottom: 1.2rem; }
+    .options { margin-left: 1rem; }
+    .option { margin: 0.4rem 0; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
+    .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
+    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 152: Soft g = /j/ before i or y</h1>
+        <div class="lo-tags" id="lo-tags">LO PH152: Decode words where 'g' says /j/ before 'i' or 'y'</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words where 'g' says /j/ before 'i' or 'y'</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      window.startTime = Date.now();
+
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 151; // Lesson 152
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
+
+      const CHAPTER_CONFIG = {
+        title: "Lesson 152: Soft g = /j/ before i or y",
+        loTags: ["LO PH152: Decode words where 'g' says /j/ before 'i' or 'y'"],
+        contentWords: [
+          "gym", "giant", "ginger", "magic", "region", "religion", "original", "danger", "stranger", "vinegar", "energy", "biology", "apology", "strategy", "urgency"
+        ],
+        sentences: [
+          "Mitch goes to the gym to play basketball.",
+          "The giant lived in a big castle on a hill.",
+          "Ginger is a spice used in making gingerbread cookies.",
+          "The magician did a magic trick with a rabbit.",
+          "Africa is a region that includes many countries.",
+          "She made an apology for being late.",
+          "We studied biology in science class today.",
+          "The coach talked about the team's new strategy."
+        ],
+        assessmentItems: [
+          { id: "1", prompt: "In which word does 'g' say /j/ because it is followed by 'y'?", options: [
+            {id:"a",text:"gym",is_correct:true},
+            {id:"b",text:"go",is_correct:false},
+            {id:"c",text:"got",is_correct:false},
+            {id:"d",text:"gum",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'giant' mean?", options: [
+            {id:"a",text:"A very large person or creature",is_correct:true},
+            {id:"b",text:"A small animal",is_correct:false},
+            {id:"c",text:"A type of food",is_correct:false},
+            {id:"d",text:"A loud noise",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'a natural substance used to flavor food'?", options: [
+            {id:"a",text:"ginger",is_correct:true},
+            {id:"b",text:"magic",is_correct:false},
+            {id:"c",text:"vinegar",is_correct:false},
+            {id:"d",text:"energy",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'apology' correctly?", options: [
+            {id:"a",text:"He gave an apology for breaking the vase.",is_correct:true},
+            {id:"b",text:"She apology to the store.",is_correct:false},
+            {id:"c",text:"They are very apology.",is_correct:false},
+            {id:"d",text:"We apology running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How is 'g' pronounced in 'biology'?", options: [
+            {id:"a",text:"/j/ as in 'jump'",is_correct:true},
+            {id:"b",text:"/g/ as in 'go'",is_correct:false},
+            {id:"c",text:"Silent",is_correct:false},
+            {id:"d",text:"/gh/ as in 'ghost'",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word refers to a large area of land or people?", options: [
+            {id:"a",text:"region",is_correct:true},
+            {id:"b",text:"religion",is_correct:false},
+            {id:"c",text:"strategy",is_correct:false},
+            {id:"d",text:"urgency",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'strategy' mean?", options: [
+            {id:"a",text:"A plan to achieve a goal",is_correct:true},
+            {id:"b",text:"A type of food",is_correct:false},
+            {id:"c",text:"A loud sound",is_correct:false},
+            {id:"d",text:"A small insect",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word has a HARD 'g' (/g/) sound?", options: [
+            {id:"a",text:"go",is_correct:true},
+            {id:"b",text:"gym",is_correct:false},
+            {id:"c",text:"giant",is_correct:false},
+            {id:"d",text:"ginger",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes AFRICA in: 'Africa is a region that includes many countries'?", options: [
+            {id:"a",text:"region",is_correct:true},
+            {id:"b",text:"Africa",is_correct:false},
+            {id:"c",text:"countries",is_correct:false},
+            {id:"d",text:"includes",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'She felt a sense of ___ before the big test.'?", options: [
+            {id:"a",text:"urgency",is_correct:true},
+            {id:"b",text:"vinegar",is_correct:false},
+            {id:"c",text:"magic",is_correct:false},
+            {id:"d",text:"gym",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'religion,' the 'g' says:", options: [
+            {id:"a",text:"/j/",is_correct:true},
+            {id:"b",text:"/g/",is_correct:false},
+            {id:"c",text:"/d/",is_correct:false},
+            {id:"d",text:"Silent",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'the study of living things'?", options: [
+            {id:"a",text:"biology",is_correct:true},
+            {id:"b",text:"strategy",is_correct:false},
+            {id:"c",text:"region",is_correct:false},
+            {id:"d",text:"energy",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is special about the 'g' in 'original'?", options: [
+            {id:"a",text:"It is soft (/j/) because it is followed by 'i'",is_correct:true},
+            {id:"b",text:"It is hard (/g/) because it's at the beginning",is_correct:false},
+            {id:"c",text:"It is silent",is_correct:false},
+            {id:"d",text:"It says /d/",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'jym'?", options: [
+            {id:"a",text:"gym",is_correct:true},
+            {id:"b",text:"giant",is_correct:false},
+            {id:"c",text:"ginger",is_correct:false},
+            {id:"d",text:"magic",is_correct:false}
+          ]},
+          { id: "15", prompt: "In 'danger,' the 'g' is pronounced:", options: [
+            {id:"a",text:"/j/",is_correct:true},
+            {id:"b",text:"/g/",is_correct:false},
+            {id:"c",text:"/d/",is_correct:false},
+            {id:"d",text:"/k/",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word refers to a system of beliefs about the sacred?", options: [
+            {id:"a",text:"religion",is_correct:true},
+            {id:"b",text:"region",is_correct:false},
+            {id:"c",text:"strategy",is_correct:false},
+            {id:"d",text:"biology",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word means 'a person you don't know'?", options: [
+            {id:"a",text:"stranger",is_correct:true},
+            {id:"b",text:"giant",is_correct:false},
+            {id:"c",text:"original",is_correct:false},
+            {id:"d",text:"apology",is_correct:false}
+          ]},
+          { id: "18", prompt: "Why does 'g' say /j/ in 'energy'?", options: [
+            {id:"a",text:"Because it is followed by 'y'",is_correct:true},
+            {id:"b",text:"Because it is at the end",is_correct:false},
+            {id:"c",text:"Because all 'g's say /j/",is_correct:false},
+            {id:"d",text:"It’s random",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'a liquid used in cooking, made from fermented juice'?", options: [
+            {id:"a",text:"vinegar",is_correct:true},
+            {id:"b",text:"ginger",is_correct:false},
+            {id:"c",text:"magic",is_correct:false},
+            {id:"d",text:"gym",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is the soft g rule before 'i' and 'y' important?", options: [
+            {id:"a",text:"It appears in science, geography, and daily language—key for fluent reading",is_correct:true},
+            {id:"b",text:"It only applies to five words",is_correct:false},
+            {id:"c",text:"It makes reading slower",is_correct:false},
+            {id:"d",text:"It’s not used in English",is_correct:false}
+          ]}
+        ]
+      };
+
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/f amily/g, 'family'], [/p enny/g, 'penny'], [/excep t/g, 'except'],
+        [/simp le/g, 'simple'], [/p uzzle/g, 'puzzle'], [/m uddy/g, 'muddy'],
+        [/w ould/g, 'would'], [/sh ould/g, 'should'], [/s aid/g, 'said'],
+        [/them self/g, 'themselves'], [/his self/g, 'himself'], [/p encil/g, 'pencil'],
+        [/c inema/g, 'cinema'], [/j uice/g, 'juice'], [/f ence/g, 'fence'],
+        [/p eace/g, 'peace'], [/f ancy/g, 'fancy'], [/p olicy/g, 'policy'],
+        [/j udge/g, 'judge'], [/g em/g, 'gem'], [/f ridge/g, 'fridge'],
+        [/g ym/g, 'gym'], [/g iant/g, 'giant'], [/g inger/g, 'ginger']
+      ];
+
+      // --- RENDERING ---
+      function renderWords() {
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
+      }
+
+      function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
+        for (let i = 0; i < 4; i++) {
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
+        }
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0, correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
+          }
+        });
+
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>e End of Words (-ge)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
