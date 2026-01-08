@@ -83,6 +83,13 @@
       overflow-x: auto;
       position: relative;
     }
+    .report-date {
+      margin-top: 8px;
+      font-style: italic;
+      color: #6c757d;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
     .report-actions {
       margin-top: 8px;
       display: flex;
@@ -135,6 +142,9 @@
   </div>
 
   <script>
+    // Registration message to append to every report
+    const REGISTRATION_LINE = "\nCALL OR WHATSAPP TO REGISTER FOR A CLASS @ +233257320201 / +233205626264";
+
     // Safely override localStorage.setItem to auto-save quiz reports
     (function() {
       const originalSetItem = localStorage.setItem;
@@ -182,18 +192,16 @@
           }
         }
       }
-      // Fallback: download
       downloadBlob(blob, filename);
     }
 
-    // Generate SVG from plain text report
-    function generateSVG(text, width = 800, lineHeight = 16, padding = 20) {
-      const lines = text.split('\n');
+    // Generate SVG from plain text report (with registration line)
+    function generateSVG(textWithReg, width = 800, lineHeight = 16, padding = 20) {
+      const lines = textWithReg.split('\n');
       const height = lines.length * lineHeight + padding * 2;
       const fontSize = 13;
       const fontFamily = 'monospace';
 
-      // Escape text for SVG
       const escapedLines = lines.map(line =>
         line
           .replace(/&/g, '&amp;')
@@ -206,7 +214,7 @@
         .map((line, i) => `<tspan x="${padding}" dy="${i === 0 ? lineHeight : lineHeight}">${line}</tspan>`)
         .join('');
 
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
   <style>
     .report-text { font-family: ${fontFamily}; font-size: ${fontSize}px; }
   </style>
@@ -215,47 +223,50 @@
     ${tspans}
   </text>
 </svg>`;
-
-      return svg;
     }
 
     // Convert SVG string to PNG Blob
-    function svgToPngBlob(svgString, width = 800, height = null) {
+    function svgToPngBlob(svgString, width = 800) {
       return new Promise((resolve, reject) => {
         const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
         const svgUrl = URL.createObjectURL(svgBlob);
-
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
           canvas.width = img.width;
-          canvas.height = img.height || canvas.width * 0.7; // fallback
+          canvas.height = img.height;
           const ctx = canvas.getContext('2d');
           ctx.fillStyle = 'white';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           ctx.drawImage(img, 0, 0);
           URL.revokeObjectURL(svgUrl);
-
-          canvas.toBlob(
-            blob => {
-              if (blob) resolve(blob);
-              else reject(new Error('Canvas toBlob failed'));
-            },
-            'image/png',
-            1.0
-          );
+          canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Canvas toBlob failed')), 'image/png', 1.0);
         };
         img.onerror = () => {
           URL.revokeObjectURL(svgUrl);
-          reject(new Error('Failed to load SVG image'));
+          reject(new Error('Failed to load SVG'));
         };
         img.src = svgUrl;
       });
     }
 
+    // Format date as "January 8, 2026"
+    function formatDate(timestamp) {
+      if (!timestamp) return 'Unknown date';
+      const date = new Date(timestamp);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
     function renderReportCard(reportText, timestamp) {
-      // Escape for safe display in HTML
-      const safeHTML = reportText
+      // Add registration line for display and export
+      const fullReportText = reportText + REGISTRATION_LINE;
+
+      // Safe HTML for on-screen display
+      const safeHTML = fullReportText
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -265,6 +276,7 @@
       card.className = 'report-card';
       card.innerHTML = `
         <div>${safeHTML}</div>
+        <div class="report-date">Report Date: ${formatDate(timestamp)}</div>
         <div class="report-actions">
           <button class="action-btn download-svg">Download SVG</button>
           <button class="action-btn download-png">Download PNG</button>
@@ -273,7 +285,7 @@
         </div>
       `;
 
-      // Extract filename base
+      // Generate filename
       const studentMatch = reportText.match(/Student:\s*(.+)\n/);
       const lessonMatch = reportText.match(/Lesson (\d+)/);
       const studentName = (studentMatch ? studentMatch[1].trim() : 'Student').replace(/[^a-z0-9]/gi, '_');
@@ -281,36 +293,36 @@
       const dateStr = new Date(timestamp).toISOString().slice(0, 10); // YYYY-MM-DD
       const baseName = `QuizReport_Lesson${lessonNum}_${studentName}_${dateStr}`;
 
-      // Add event listeners
+      // Attach event listeners
       card.querySelector('.download-svg').addEventListener('click', () => {
-        const svgStr = generateSVG(reportText);
+        const svgStr = generateSVG(fullReportText);
         const blob = new Blob([svgStr], { type: 'image/svg+xml' });
         downloadBlob(blob, `${baseName}.svg`);
       });
 
       card.querySelector('.download-png').addEventListener('click', async () => {
         try {
-          const svgStr = generateSVG(reportText);
+          const svgStr = generateSVG(fullReportText);
           const pngBlob = await svgToPngBlob(svgStr);
           downloadBlob(pngBlob, `${baseName}.png`);
         } catch (err) {
-          alert('Failed to generate PNG: ' + err.message);
+          alert('PNG generation failed: ' + err.message);
         }
       });
 
       card.querySelector('.share-svg').addEventListener('click', () => {
-        const svgStr = generateSVG(reportText);
+        const svgStr = generateSVG(fullReportText);
         const blob = new Blob([svgStr], { type: 'image/svg+xml' });
         shareOrDownload(blob, `${baseName}.svg`, 'Quiz Report (SVG)');
       });
 
       card.querySelector('.share-png').addEventListener('click', async () => {
         try {
-          const svgStr = generateSVG(reportText);
+          const svgStr = generateSVG(fullReportText);
           const pngBlob = await svgToPngBlob(svgStr);
           shareOrDownload(pngBlob, `${baseName}.png`, 'Quiz Report (PNG)');
         } catch (err) {
-          alert('Failed to generate/share PNG: ' + err.message);
+          alert('Share PNG failed: ' + err.message);
         }
       });
 
