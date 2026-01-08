@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 136 — Multisyllable Words with Ending 'er'"/>
-  <title>Mini OpenStax — Lesson 135: Multisyllable Words (Ending er)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 136: More er = /er/ Words"/>
+  <title>Mini OpenStax — Lesson 136: More er = /er/ Words</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 136: Multisyllable Words (er at end)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH136: Decode multisyllable words ending with the 'er' vowel sound in various contexts.</div>
+        <h1 id="chapter-title">Lesson 136: More er = /er/ Words</h1>
+        <div class="lo-tags" id="lo-tags">LO PH136: Decode additional words where 'er' says /er/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,19 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>This lesson continues with more words where the ending <strong>er</strong> creates the unstressed /er/ sound:</p>
+        <p>Additional words where 'er' says /er/</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, focusing on the <strong>-er</strong> words used in context:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your knowledge of the words and sentences from Lesson 136.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,131 +80,287 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 135; // chapter-135.html = Lesson 136
-      const maxChapter = 150;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 135; // Lesson 136
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 136: Multisyllable Words (er at end)",
-        loTags: ["LO PH136: Decode multisyllable words ending with the 'er' vowel sound in various contexts."],
+        title: "Lesson 136: More er = /er/ Words",
+        loTags: ["LO PH136: Decode additional words where 'er' says /er/"],
         contentWords: [
-          "power", "tower", "flower", "shower", "anger", "hanger", "finger", "hunger", "longer", "eager", "cracker", "thick", "thicker", "locker", "rather", "gather", "bother", "layer", "whether", "player", "pitcher", "teacher", "catcher"
+          "mother", "father", "brother", "sister", "other", "another", "together", "weather", "leather", "feather", "whether", "neither", "either", "over", "cover", "hover", "clover", "rover", "recover", "discover", "uncover", "silver", "finger", "singer", "helper", "winter", "summer", "letter", "better", "never", "under", "butter", "supper"
         ],
         sentences: [
-          "1) Dawn has a silver ring on her finger.",
-          "2) Roy is the pitcher and Troy is the catcher.",
-          "3) The plant will not flower until the spring.",
-          "4) The upstairs bathroom has a tub and a shower.",
-          "5) Would you rather read this novel or that novel?",
-          "6) You can hang your jacket on a hanger in the closet.",
-          "7) For a snack, Fran had a cracker with cheese on top.",
-          "8) Max was eager to visit the ranch and meet a real cowboy.",
-          "9) The teacher must gather up the children for the bus trip."
+          "My mother and father went to the park.",
+          "My brother and sister played together.",
+          "We will go there together on another day.",
+          "The weather in June is usually warm and sunny.",
+          "A leather glove is soft and flexible.",
+          "The bird has a red feather on its wing.",
+          "I do not know whether June or July is hotter.",
+          "Neither June nor July is as cold as January."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Where does Dawn have a silver ring?", options: [{id:"a",text:"on her neck",is_correct:false},{id:"b",text:"on her finger",is_correct:true},{id:"c",text:"in a locker",is_correct:false},{id:"d",text:"on a hanger",is_correct:false}] },
-          { id: "2", prompt: "In the baseball game, who is the pitcher?", options: [{id:"a",text:"Troy",is_correct:false},{id:"b",text:"Roy",is_correct:true},{id:"c",text:"Max",is_correct:false},{id:"d",text:"Dawn",is_correct:false}] },
-          { id: "3", prompt: "Who is the catcher in the sentences?", options: [{id:"a",text:"Roy",is_correct:false},{id:"b",text:"Troy",is_correct:true},{id:"c",text:"Fran",is_correct:false},{id:"d",text:"the teacher",is_correct:false}] },
-          { id: "4", prompt: "When will the plant flower?", options: [{id:"a",text:"in the winter",is_correct:false},{id:"b",text:"until the spring",is_correct:true},{id:"c",text:"after the shower",is_correct:false},{id:"d",text:"never",is_correct:false}] },
-          { id: "5", prompt: "What does the upstairs bathroom have besides a tub?", options: [{id:"a",text:"a locker",is_correct:false},{id:"b",text:"a shower",is_correct:true},{id:"c",text:"a pitcher",is_correct:false},{id:"d",text:"a tower",is_correct:false}] },
-          { id: "6", prompt: "Where can you hang your jacket?", options: [{id:"a",text:"on a cracker",is_correct:false},{id:"b",text:"on a hanger",is_correct:true},{id:"c",text:"in the shower",is_correct:false},{id:"d",text:"on a flower",is_correct:false}] },
-          { id: "7", prompt: "What did Fran have for a snack?", options: [{id:"a",text:"a cracker with cheese",is_correct:true},{id:"b",text:"a lemon",is_correct:false},{id:"c",text:"oatmeal",is_correct:false},{id:"d",text:"a banana",is_correct:false}] },
-          { id: "8", prompt: "Who was eager to visit the ranch?", options: [{id:"a",text:"Roy",is_correct:false},{id:"b",text:"Max",is_correct:true},{id:"c",text:"the teacher",is_correct:false},{id:"d",text:"Dawn",is_correct:false}] },
-          { id: "9", prompt: "Who must gather up the children for the bus trip?", options: [{id:"a",text:"the pitcher",is_correct:false},{id:"b",text:"the teacher",is_correct:true},{id:"c",text:"the cowboy",is_correct:false},{id:"d",text:"the catcher",is_correct:false}] },
-          { id: "10", prompt: "Max wanted to meet a real...", options: [{id:"a",text:"monster",is_correct:false},{id:"b",text:"cowboy",is_correct:true},{id:"c",text:"pitcher",is_correct:false},{id:"d",text:"teacher",is_correct:false}] },
-          { id: "11", prompt: "Which word means to collect things together?", options: [{id:"a",text:"bother",is_correct:false},{id:"b",text:"gather",is_correct:true},{id:"c",text:"rather",is_correct:false},{id:"d",text:"whether",is_correct:false}] },
-          { id: "12", prompt: "Which word is a tall structure?", options: [{id:"a",text:"flower",is_correct:false},{id:"b",text:"tower",is_correct:true},{id:"c",text:"power",is_correct:false},{id:"d",text:"shower",is_correct:false}] },
-          { id: "13", prompt: "Which word describes a feeling of being mad?", options: [{id:"a",text:"hunger",is_correct:false},{id:"b",text:"anger",is_correct:true},{id:"c",text:"eager",is_correct:false},{id:"d",text:"longer",is_correct:false}] },
-          { id: "14", prompt: "Which word describes needing food?", options: [{id:"a",text:"anger",is_correct:false},{id:"b",text:"hunger",is_correct:true},{id:"c",text:"finger",is_correct:false},{id:"d",text:"thicker",is_correct:false}] },
-          { id: "15", prompt: "Which word is the person who throws the ball in baseball?", options: [{id:"a",text:"catcher",is_correct:false},{id:"b",text:"pitcher",is_correct:true},{id:"c",text:"player",is_correct:false},{id:"d",text:"teacher",is_correct:false}] },
-          { id: "16", prompt: "Where is the hanger located in sentence 6?", options: [{id:"a",text:"in the kitchen",is_correct:false},{id:"b",text:"in the closet",is_correct:true},{id:"c",text:"in the bathroom",is_correct:false},{id:"d",text:"at the ranch",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'instead of' or 'to prefer'?", options: [{id:"a",text:"bother",is_correct:false},{id:"b",text:"rather",is_correct:true},{id:"c",text:"whether",is_correct:false},{id:"d",text:"gather",is_correct:false}] },
-          { id: "18", prompt: "How many syllables are in 'cracker'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] },
-          { id: "19", prompt: "Complete the word: 'a silv__ ring.'", options: [{id:"a",text:"al",is_correct:false},{id:"b",text:"er",is_correct:true},{id:"c",text:"ar",is_correct:false},{id:"d",text:"el",is_correct:false}] },
-          { id: "20", prompt: "Which word means 'very excited or wanting to do something'?", options: [{id:"a",text:"anger",is_correct:false},{id:"b",text:"eager",is_correct:true},{id:"c",text:"longer",is_correct:false},{id:"d",text:"rather",is_correct:false}] }
+          { id: "1", prompt: "In 'mother,' the 'er' sounds like:", options: [
+            {id:"a",text:"/er/ as in 'her'",is_correct:true},
+            {id:"b",text:"/air/ as in 'chair'",is_correct:false},
+            {id:"c",text:"/ur/ as in 'fur'",is_correct:false},
+            {id:"d",text:"/ar/ as in 'car'",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word means 'a female parent'?", options: [
+            {id:"a",text:"mother",is_correct:true},
+            {id:"b",text:"father",is_correct:false},
+            {id:"c",text:"brother",is_correct:false},
+            {id:"d",text:"sister",is_correct:false}
+          ]},
+          { id: "3", prompt: "What does 'together' mean?", options: [
+            {id:"a",text:"In the same place or at the same time",is_correct:true},
+            {id:"b",text:"Far apart",is_correct:false},
+            {id:"c",text:"Running fast",is_correct:false},
+            {id:"d",text:"Very quiet",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'weather' correctly?", options: [
+            {id:"a",text:"The weather is sunny today.",is_correct:true},
+            {id:"b",text:"I don't know weather to go.",is_correct:false},
+            {id:"c",text:"She weather a book.",is_correct:false},
+            {id:"d",text:"They are very weather.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How many syllables in 'another'?", options: [
+            {id:"a",text:"3 (an-oth-er)",is_correct:true},
+            {id:"b",text:"2",is_correct:false},
+            {id:"c",text:"1",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word refers to a material from animal skin?", options: [
+            {id:"a",text:"leather",is_correct:true},
+            {id:"b",text:"feather",is_correct:false},
+            {id:"c",text:"silver",is_correct:false},
+            {id:"d",text:"clover",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'neither' mean?", options: [
+            {id:"a",text:"Not one or the other of two",is_correct:true},
+            {id:"b",text:"Both",is_correct:false},
+            {id:"c",text:"One of them",is_correct:false},
+            {id:"d",text:"All of them",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word means 'to find something hidden'?", options: [
+            {id:"a",text:"discover",is_correct:true},
+            {id:"b",text:"cover",is_correct:false},
+            {id:"c",text:"hover",is_correct:false},
+            {id:"d",text:"recover",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes a male sibling?", options: [
+            {id:"a",text:"brother",is_correct:true},
+            {id:"b",text:"sister",is_correct:false},
+            {id:"c",text:"mother",is_correct:false},
+            {id:"d",text:"father",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'She has a red ___ in her hair.'?", options: [
+            {id:"a",text:"feather",is_correct:true},
+            {id:"b",text:"leather",is_correct:false},
+            {id:"c",text:"silver",is_correct:false},
+            {id:"d",text:"clover",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'either,' the 'er' sounds like:", options: [
+            {id:"a",text:"/er/",is_correct:true},
+            {id:"b",text:"/eye/",is_correct:false},
+            {id:"c",text:"/ee/",is_correct:false},
+            {id:"d",text:"/air/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'not under a cover'?", options: [
+            {id:"a",text:"uncover",is_correct:true},
+            {id:"b",text:"cover",is_correct:false},
+            {id:"c",text:"recover",is_correct:false},
+            {id:"d",text:"hover",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word is often confused with 'weather'?", options: [
+            {id:"a",text:"whether",is_correct:true},
+            {id:"b",text:"feather",is_correct:false},
+            {id:"c",text:"leather",is_correct:false},
+            {id:"d",text:"together",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word refers to a precious metal?", options: [
+            {id:"a",text:"silver",is_correct:true},
+            {id:"b",text:"leather",is_correct:false},
+            {id:"c",text:"feather",is_correct:false},
+            {id:"d",text:"clover",is_correct:false}
+          ]},
+          { id: "15", prompt: "In American English, 'either' is commonly pronounced as:", options: [
+            {id:"a",text:"EE-ther or EYE-ther (both accepted)",is_correct:true},
+            {id:"b",text:"Only EE-ther",is_correct:false},
+            {id:"c",text:"Only AY-ther",is_correct:false},
+            {id:"d",text:"ER-ther",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word means 'above something'?", options: [
+            {id:"a",text:"over",is_correct:true},
+            {id:"b",text:"under",is_correct:false},
+            {id:"c",text:"cover",is_correct:false},
+            {id:"d",text:"hover",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word has the same /er/ ending as 'father'?", options: [
+            {id:"a",text:"mother",is_correct:true},
+            {id:"b",text:"cat",is_correct:false},
+            {id:"c",text:"map",is_correct:false},
+            {id:"d",text:"hat",is_correct:false}
+          ]},
+          { id: "18", prompt: "What does 'recover' mean?", options: [
+            {id:"a",text:"To get back or regain",is_correct:true},
+            {id:"b",text:"To cover again",is_correct:false},
+            {id:"c",text:"To fly",is_correct:false},
+            {id:"d",text:"To hide",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word is a small plant often found in fields?", options: [
+            {id:"a",text:"clover",is_correct:true},
+            {id:"b",text:"rover",is_correct:false},
+            {id:"c",text:"silver",is_correct:false},
+            {id:"d",text:"feather",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is recognizing /er/ in words like 'mother' and 'weather' important?", options: [
+            {id:"a",text:"These are high-frequency words used daily in speaking and reading",is_correct:true},
+            {id:"b",text:"They are only used in songs",is_correct:false},
+            {id:"c",text:"They are easy to spell without practice",is_correct:false},
+            {id:"d",text:"They are not used in school",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/w eather/g, 'weather'], [/l eather/g, 'leather'], [/f eather/g, 'feather']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 136*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -201,8 +370,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -210,6 +379,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -220,9 +447,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
