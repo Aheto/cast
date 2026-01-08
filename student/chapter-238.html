@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 239 — Short Vowel o = /ŭ/"/>
-  <title>Mini OpenStax — Lesson 239: o = /ŭ/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 239: 'o' = /ŭ/"/>
+  <title>Mini OpenStax — Lesson 239: 'o' = /ŭ/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 239: o = /ŭ/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH239: Decode words with short vowel o = /ŭ/</div>
+        <h1 id="chapter-title">Lesson 239: 'o' = /ŭ/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH239: Decode words where 'o' makes the /ŭ/ sound</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>short vowel</strong> <em>o</em> making the <strong>/ŭ/</strong> sound:</p>
+        <p>Words where 'o' is pronounced as /ŭ/ (like 'son', not 'go').</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–239:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,21 +80,33 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 238;   // chapter-238.html = Lesson 239
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 238;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 239: o = /ŭ/",
-        loTags: ["LO PH239: Decode words with short vowel o = /ŭ/"],
+        title: "Lesson 239: 'o' = /ŭ/",
+        loTags: ["LO PH239: Decode words where 'o' makes the /ŭ/ sound"],
         contentWords: [
           "son", "ton", "won", "wonder", "wonderful", "front", "frontier", "sponge", "month",
           "money", "honey", "Monday", "monkey", "mother", "brother", "nothing", "dozen", "color",
@@ -101,131 +124,126 @@
           "Reading a book is a great way to discover interesting new things.",
           "The President and Congress must work together to govern the country."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains 'o' making /ŭ/?", options: [{id:"a",text:"son",is_correct:true},{id:"b",text:"soak",is_correct:false},{id:"c",text:"sock",is_correct:false},{id:"d",text:"sore",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 239 word?", options: [{id:"a",text:"oven",is_correct:false},{id:"b",text:"dove",is_correct:false},{id:"c",text:"robot",is_correct:true},{id:"d",text:"shovel",is_correct:false}] },
-          { id: "3", prompt: "In 'love', what sound does 'o' make?", options: [{id:"a",text:"/ŭ/",is_correct:true},{id:"b",text:"/ō/",is_correct:false},{id:"c",text:"/ŏ/",is_correct:false},{id:"d",text:"/ow/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to rule or manage a country'?", options: [{id:"a",text:"govern",is_correct:true},{id:"b",text:"cover",is_correct:false},{id:"c",text:"shove",is_correct:false},{id:"d",text:"oven",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'wonderful'?", options: [{id:"a",text:"9",is_correct:true},{id:"b",text:"8",is_correct:false},{id:"c",text:"10",is_correct:false},{id:"d",text:"7",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 239 words?", options: [{id:"a",text:"January is always the first month of the year.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a male parent?", options: [{id:"a",text:"father",is_correct:false},{id:"b",text:"mother",is_correct:true},{id:"c",text:"brother",is_correct:false},{id:"d",text:"son",is_correct:false}] },
-          { id: "8", prompt: "What vowel sound is in 'money'?", options: [{id:"a",text:"Short u (/ŭ/)",is_correct:true},{id:"b",text:"Short o (/ŏ/)",is_correct:false},{id:"c",text:"Long o (/ō/)",is_correct:false},{id:"d",text:"/ow/",is_correct:false}] },
-          { id: "9", prompt: "In 'The baseball team won the game by a score of four to nothing,' how many Lesson 239 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to push forcefully'?", options: [{id:"a",text:"shove",is_correct:true},{id:"b",text:"love",is_correct:false},{id:"c",text:"oven",is_correct:false},{id:"d",text:"dove",is_correct:false}] },
-          { id: "11", prompt: "Which word describes something extremely good or impressive?", options: [{id:"a",text:"wonderful",is_correct:true},{id:"b",text:"frontier",is_correct:false},{id:"c",text:"sponge",is_correct:false},{id:"d",text:"ton",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'o' and means 'a sweet sticky substance made by bees'?", options: [{id:"a",text:"honey",is_correct:true},{id:"b",text:"money",is_correct:false},{id:"c",text:"monkey",is_correct:false},{id:"d",text:"dozen",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 239?", options: [{id:"a",text:"Reading a book is a great way to discover interesting new things.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'government'?", options: [{id:"a",text:"7",is_correct:true},{id:"b",text:"6",is_correct:false},{id:"c",text:"8",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'a small hand tool for digging'?", options: [{id:"a",text:"shovel",is_correct:true},{id:"b",text:"oven",is_correct:false},{id:"c",text:"glove",is_correct:false},{id:"d",text:"cover",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'color'?", options: [{id:"a",text:"Short vowel o = /ŭ/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "17", prompt: "Which word refers to a female parent?", options: [{id:"a",text:"mother",is_correct:true},{id:"b",text:"brother",is_correct:false},{id:"c",text:"son",is_correct:false},{id:"d",text:"monkey",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'He put on a warm ___.'?", options: [{id:"a",text:"glove",is_correct:true},{id:"b",text:"oven",is_correct:false},{id:"c",text:"shove",is_correct:false},{id:"d",text:"love",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"color",is_correct:true},{id:"b",text:"month",is_correct:true},{id:"c",text:"won",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What distinguishes Lesson 239 from typical short o words?", options: [{id:"a",text:"o = /ŭ/ instead of /ŏ/",is_correct:true},{id:"b",text:"o = /ŏ/ instead of /ŭ/",is_correct:false},{id:"c",text:"Magic E pattern",is_correct:false},{id:"d",text:"Long vowel pattern",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'a male child'?", options: [{id:"a",text:"son",is_correct:true},{id:"b",text:"sun",is_correct:false},{id:"c",text:"soon",is_correct:false},{id:"d",text:"sand",is_correct:false}]},
+          { id: "2", prompt: "Which sentence uses 'wonderful' correctly?", options: [{id:"a",text:"They had a wonderful vacation.",is_correct:true},{id:"b",text:"He wonderfulling the beach.",is_correct:false},{id:"c",text:"She to wonderful now.",is_correct:false},{id:"d",text:"Wonderfulling is a verb only.",is_correct:false}]},
+          { id: "3", prompt: "What does 'govern' mean?", options: [{id:"a",text:"to rule or control",is_correct:true},{id:"b",text:"to destroy",is_correct:false},{id:"c",text:"to ignore",is_correct:false},{id:"d",text:"to hide",is_correct:false}]},
+          { id: "4", prompt: "Which word refers to 'a sweet sticky substance made by bees'?", options: [{id:"a",text:"honey",is_correct:true},{id:"b",text:"money",is_correct:false},{id:"c",text:"monkey",is_correct:false},{id:"d",text:"shovel",is_correct:false}]},
+          { id: "5", prompt: "Choose the correct spelling:", options: [{id:"a",text:"government",is_correct:true},{id:"b",text:"goverment",is_correct:false},{id:"c",text:"goverment",is_correct:false},{id:"d",text:"govermment",is_correct:false}]},
+          { id: "6", prompt: "Which word is NOT pronounced with /ŭ/ for 'o'?", options: [{id:"a",text:"go",is_correct:true},{id:"b",text:"son",is_correct:false},{id:"c",text:"won",is_correct:false},{id:"d",text:"love",is_correct:false}]},
+          { id: "7", prompt: "Which word rhymes with 'oven'?", options: [{id:"a",text:"shoven",is_correct:false},{id:"b",text:"above",is_correct:true},{id:"c",text:"cover",is_correct:false},{id:"d",text:"glove",is_correct:false}]},
+          { id: "8", prompt: "Which sentence uses 'shove' correctly?", options: [{id:"a",text:"He shoved the door open.",is_correct:true},{id:"b",text:"She shoves yesterday.",is_correct:false},{id:"c",text:"They to shove now.",is_correct:false},{id:"d",text:"Shoving are fun.",is_correct:false}]},
+          { id: "9", prompt: "What is a 'sponge'?", options: [{id:"a",text:"a porous material for cleaning",is_correct:true},{id:"b",text:"a type of rock",is_correct:false},{id:"c",text:"a loud noise",is_correct:false},{id:"d",text:"a plant",is_correct:false}]},
+          { id: "10", prompt: "Which word means 'not anything'?", options: [{id:"a",text:"nothing",is_correct:true},{id:"b",text:"something",is_correct:false},{id:"c",text:"everything",is_correct:false},{id:"d",text:"anyone",is_correct:false}]},
+          { id: "11", prompt: "Which is spelled correctly?", options: [{id:"a",text:"discover",is_correct:true},{id:"b",text:"discovor",is_correct:false},{id:"c",text:"discoover",is_correct:false},{id:"d",text:"discuver",is_correct:false}]},
+          { id: "12", prompt: "Choose the word that means 'to push with force':", options: [{id:"a",text:"shove",is_correct:true},{id:"b",text:"shovel",is_correct:false},{id:"c",text:"cover",is_correct:false},{id:"d",text:"oven",is_correct:false}]},
+          { id: "13", prompt: "Which word describes a feeling of deep affection?", options: [{id:"a",text:"love",is_correct:true},{id:"b",text:"glove",is_correct:false},{id:"c",text:"dove",is_correct:false},{id:"d",text:"shovel",is_correct:false}]},
+          { id: "14", prompt: "In which word is 'o' NOT pronounced /ŭ/?", options: [{id:"a",text:"bone",is_correct:true},{id:"b",text:"son",is_correct:false},{id:"c",text:"money",is_correct:false},{id:"d",text:"monkey",is_correct:false}]},
+          { id: "15", prompt: "What does 'purpose' mean?", options: [{id:"a",text:"the reason for which something is done",is_correct:true},{id:"b",text:"a type of food",is_correct:false},{id:"c",text:"a loud sound",is_correct:false},{id:"d",text:"a color",is_correct:false}]},
+          { id: "16", prompt: "Which word fits: 'She wore a soft _____ sweater.'", options: [{id:"a",text:"lovely",is_correct:true},{id:"b",text:"money",is_correct:false},{id:"c",text:"monkey",is_correct:false},{id:"d",text:"shovel",is_correct:false}]},
+          { id: "17", prompt: "Which word means 'a tool for digging'?", options: [{id:"a",text:"shovel",is_correct:true},{id:"b",text:"oven",is_correct:false},{id:"c",text:"dove",is_correct:false},{id:"d",text:"glove",is_correct:false}]},
+          { id: "18", prompt: "Which sentence is correct?", options: [{id:"a",text:"He won the race.",is_correct:true},{id:"b",text:"She win yesterday.",is_correct:false},{id:"c",text:"They to win now.",is_correct:false},{id:"d",text:"Winning are fun.",is_correct:false}]},
+          { id: "19", prompt: "Which word contains 'o' = /ŭ/ and means 'to find something for the first time'?", options: [{id:"a",text:"discover",is_correct:true},{id:"b",text:"cover",is_correct:false},{id:"c",text:"govern",is_correct:false},{id:"d",text:"purpose",is_correct:false}]},
+          { id: "20", prompt: "Which word means 'a group of twelve'?", options: [{id:"a",text:"dozen",is_correct:true},{id:"b",text:"ton",is_correct:false},{id:"c",text:"month",is_correct:false},{id:"d",text:"frontier",is_correct:false}]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/p erf ect/g, 'perfect'], [/f lood/g, 'flood'], [/breakf ast/g, 'breakfast'],
+        [/p eople/g, 'people'], [/f ront/g, 'front'], [/sp onge/g, 'sponge'],
+        [/w onderful/g, 'wonderful']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
-
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
-
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
-
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
-
+        let correctCount = 0, correctList = [], incorrectList = [];
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
-
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 239*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
-
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered short o=/ŭ/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 239 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -235,8 +253,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -244,6 +262,63 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -254,6 +329,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
