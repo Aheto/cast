@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 218 — R-Controlled or = /ôr/"/>
-  <title>Mini OpenStax — Lesson 218: or = /ôr/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 218: R-Controlled 'or'"/>
+  <title>Mini OpenStax — Lesson 218: R-Controlled 'or'</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 218: or = /ôr/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH218: Decode words with r-controlled or = /ôr/</div>
+        <h1 id="chapter-title">Lesson 218: R-Controlled 'or'</h1>
+        <div class="lo-tags" id="lo-tags">LO PH218: Apply r-controlled 'or' in multi-syllable and contextual reading</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>r-controlled</strong> <em>or</em> making the <strong>/ôr/</strong> sound:</p>
+        <p>Advanced and contextual words featuring the r-controlled 'or' sound (/ɔr/).</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–218:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,161 +80,168 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 217;   // chapter-217.html = Lesson 218
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 217;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 218: or = /ôr/",
-        loTags: ["LO PH218: Decode words with r-controlled or = /ôr/"],
+        title: "Lesson 218: R-Controlled 'or'",
+        loTags: ["LO PH218: Apply r-controlled 'or' in multi-syllable and contextual reading"],
         contentWords: [
-          "order", "border", "corner", "morning", "forest", "normal", "glory", "story", "orange", "horrible",
-          "correct", "forget", "forgive", "forever", "perform", "platform", "uniform", "record", "favorite",
-          "export", "import", "airport", "report", "support", "important", "history", "victory", "territory"
+          "important", "perform", "report", "support", "transport", "inform", "transform", "before",
+          "ignore", "explore", "adore", "restore", "forecast", "foreign", "border", "order",
+          "moreover", "therefore", "mortgage", "normal", "morning", "storage", "horrible"
         ],
         sentences: [
-          "Bert is reading an interesting story.",
-          "Judy can pour a glass of orange juice for herself.",
-          "Martin thinks that history is his favorite subject.",
-          "Jane tries to follow the motto,\"Forgive and forget\".",
-          "The city has an important airport near its north border.",
-          "In the forest, Mike saw a rabbit, a squirrel and a deer.",
-          "At the circus, the clown will perform magic tricks to entertain the crowd.",
-          "The man must salute and say\"Yes Sir!\" when the general gives him an order."
+          "It is important to inform someone if you see an emergency.",
+          "The actor will perform in a play at the local theater.",
+          "A good citizen should report any suspicious activity to the police.",
+          "My dad had to take his car to the garage to have it restored.",
+          "Before you leave the house, please turn off all the lights.",
+          "The explorer will explore unknown regions of the Amazon jungle.",
+          "The weather forecast says there will be rain tomorrow.",
+          "It is horrible to see animals treated with cruelty."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains 'or' making /ôr/?", options: [{id:"a",text:"order",is_correct:true},{id:"b",text:"open",is_correct:false},{id:"c",text:"oven",is_correct:false},{id:"d",text:"over",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 218 word?", options: [{id:"a",text:"history",is_correct:false},{id:"b",text:"orange",is_correct:false},{id:"c",text:"doctor",is_correct:true},{id:"d",text:"forest",is_correct:false}] },
-          { id: "3", prompt: "In 'morning', what sound does 'or' make?", options: [{id:"a",text:"/ôr/",is_correct:true},{id:"b",text:"/är/",is_correct:false},{id:"c",text:"/ər/",is_correct:false},{id:"d",text:"/ō/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'a series of events, real or imagined, told for entertainment'?", options: [{id:"a",text:"story",is_correct:true},{id:"b",text:"glory",is_correct:false},{id:"c",text:"corner",is_correct:false},{id:"d",text:"border",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'favorite'?", options: [{id:"a",text:"7",is_correct:true},{id:"b",text:"6",is_correct:false},{id:"c",text:"8",is_correct:false},{id:"d",text:"5",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 218 words?", options: [{id:"a",text:"Bert is reading an interesting story.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to a large wooded area?", options: [{id:"a",text:"forest",is_correct:true},{id:"b",text:"morning",is_correct:false},{id:"c",text:"platform",is_correct:false},{id:"d",text:"uniform",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'perform'?", options: [{id:"a",text:"R-controlled",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Open syllable",is_correct:false},{id:"d",text:"Closed syllable",is_correct:false}] },
-          { id: "9", prompt: "In 'The city has an important airport near its north border,' how many Lesson 218 words?", options: [{id:"a",text:"4",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"1",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to carry out an action, especially before an audience'?", options: [{id:"a",text:"perform",is_correct:true},{id:"b",text:"record",is_correct:false},{id:"c",text:"support",is_correct:false},{id:"d",text:"export",is_correct:false}] },
-          { id: "11", prompt: "Which word describes the time of day after sunrise?", options: [{id:"a",text:"morning",is_correct:true},{id:"b",text:"orange",is_correct:false},{id:"c",text:"history",is_correct:false},{id:"d",text:"victory",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'or' and means 'a command or instruction from an authority'?", options: [{id:"a",text:"order",is_correct:true},{id:"b",text:"border",is_correct:false},{id:"c",text:"corner",is_correct:false},{id:"d",text:"territory",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 218?", options: [{id:"a",text:"At the circus, the clown will perform magic tricks to entertain the crowd.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'victory'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'most liked or preferred'?", options: [{id:"a",text:"favorite",is_correct:true},{id:"b",text:"normal",is_correct:false},{id:"c",text:"horrible",is_correct:false},{id:"d",text:"glory",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'airport'?", options: [{id:"a",text:"R-controlled or = /ôr/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "17", prompt: "Which word refers to the study of past events?", options: [{id:"a",text:"history",is_correct:true},{id:"b",text:"territory",is_correct:false},{id:"c",text:"platform",is_correct:false},{id:"d",text:"uniform",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Please don’t ___ what I said.'?", options: [{id:"a",text:"forget",is_correct:true},{id:"b",text:"order",is_correct:false},{id:"c",text:"perform",is_correct:false},{id:"d",text:"support",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"story",is_correct:true},{id:"b",text:"orange",is_correct:true},{id:"c",text:"history",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 218?", options: [{id:"a",text:"R-controlled or = /ôr/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel teams",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'to carry out an action, especially on stage'?", options: [{id:"a",text:"perform",is_correct:true},{id:"b",text:"inform",is_correct:false},{id:"c",text:"ignore",is_correct:false},{id:"d",text:"explore",is_correct:false}]},
+          { id: "2", prompt: "Which sentence uses 'important' correctly?", options: [{id:"a",text:"It is important to brush your teeth.",is_correct:true},{id:"b",text:"He important the book.",is_correct:false},{id:"c",text:"She is very importanting.",is_correct:false},{id:"d",text:"Important is a type of fruit.",is_correct:false}]},
+          { id: "3", prompt: "What does 'transform' mean?", options: [{id:"a",text:"to change completely",is_correct:true},{id:"b",text:"to copy",is_correct:false},{id:"c",text:"to hide",is_correct:false},{id:"d",text:"to forget",is_correct:false}]},
+          { id: "4", prompt: "Which word has 'or' pronounced as /ɔr/ in the middle?", options: [{id:"a",text:"report",is_correct:true},{id:"b",text:"before",is_correct:false},{id:"c",text:"ignore",is_correct:false},{id:"d",text:"horrible",is_correct:true}]},
+          { id: "5", prompt: "Choose the correct spelling:", options: [{id:"a",text:"transport",is_correct:true},{id:"b",text:"transpourt",is_correct:false},{id:"c",text:"transpurrt",is_correct:false},{id:"d",text:"transpaurt",is_correct:false}]},
+          { id: "6", prompt: "Which word is NOT an 'or' word with /ɔr/ sound?", options: [{id:"a",text:"foreign",is_correct:true},{id:"b",text:"support",is_correct:false},{id:"c",text:"moreover",is_correct:false},{id:"d",text:"therefore",is_correct:false}]},
+          { id: "7", prompt: "Which word rhymes with 'adore'?", options: [{id:"a",text:"explore",is_correct:true},{id:"b",text:"error",is_correct:false},{id:"c",text:"mirror",is_correct:false},{id:"d",text:"arrow",is_correct:false}]},
+          { id: "8", prompt: "Which sentence uses 'restore' correctly?", options: [{id:"a",text:"The artist will restore the old painting.",is_correct:true},{id:"b",text:"She restore to school.",is_correct:false},{id:"c",text:"He restores yesterday.",is_correct:false},{id:"d",text:"Restore is a type of food.",is_correct:false}]},
+          { id: "9", prompt: "What is a 'mortgage'?", options: [{id:"a",text:"a loan to buy a house",is_correct:true},{id:"b",text:"a type of car",is_correct:false},{id:"c",text:"a musical instrument",is_correct:false},{id:"d",text:"a small animal",is_correct:false}]},
+          { id: "10", prompt: "Which word means 'in addition to what has been said'?", options: [{id:"a",text:"moreover",is_correct:true},{id:"b",text:"therefore",is_correct:false},{id:"c",text:"before",is_correct:false},{id:"d",text:"ignore",is_correct:false}]},
+          { id: "11", prompt: "Which word is spelled correctly?", options: [{id:"a",text:"forecast",is_correct:true},{id:"b",text:"forcast",is_correct:false},{id:"c",text:"forcasst",is_correct:false},{id:"d",text:"fourcast",is_correct:false}]},
+          { id: "12", prompt: "Choose the word that means 'to love deeply':", options: [{id:"a",text:"adore",is_correct:true},{id:"b",text:"ignore",is_correct:false},{id:"c",text:"report",is_correct:false},{id:"d",text:"perform",is_correct:false}]},
+          { id: "13", prompt: "Which word refers to the line between two countries?", options: [{id:"a",text:"border",is_correct:true},{id:"b",text:"order",is_correct:false},{id:"c",text:"storage",is_correct:false},{id:"d",text:"normal",is_correct:false}]},
+          { id: "14", prompt: "In which word is 'or' NOT pronounced /ɔr/?", options: [{id:"a",text:"word",is_correct:true},{id:"b",text:"horrible",is_correct:false},{id:"c",text:"morning",is_correct:false},{id:"d",text:"storage",is_correct:false}]},
+          { id: "15", prompt: "What does 'horrible' mean?", options: [{id:"a",text:"very unpleasant",is_correct:true},{id:"b",text:"very nice",is_correct:false},{id:"c",text:"extremely fast",is_correct:false},{id:"d",text:"highly intelligent",is_correct:false}]},
+          { id: "16", prompt: "Which word fits: 'The doctor gave a weather _____ for rain.'", options: [{id:"a",text:"forecast",is_correct:true},{id:"b",text:"storage",is_correct:false},{id:"c",text:"mortgage",is_correct:false},{id:"d",text:"transform",is_correct:false}]},
+          { id: "17", prompt: "Which word means 'usual or typical'?", options: [{id:"a",text:"normal",is_correct:true},{id:"b",text:"horrible",is_correct:false},{id:"c",text:"foreign",is_correct:false},{id:"d",text:"important",is_correct:false}]},
+          { id: "18", prompt: "Which sentence is correct?", options: [{id:"a",text:"I need more storage for my files.",is_correct:true},{id:"b",text:"I needs more storagge.",is_correct:false},{id:"c",text:"He storages the boxes.",is_correct:false},{id:"d",text:"Storage is a verb only.",is_correct:false}]},
+          { id: "19", prompt: "Which word contains 'or' but sounds like /ər/ (schwa + r)?", options: [{id:"a",text:"important",is_correct:true},{id:"b",text:"perform",is_correct:false},{id:"c",text:"report",is_correct:false},{id:"d",text:"support",is_correct:false}]},
+          { id: "20", prompt: "Which word means 'as a result'?", options: [{id:"a",text:"therefore",is_correct:true},{id:"b",text:"moreover",is_correct:false},{id:"c",text:"before",is_correct:false},{id:"d",text:"ignore",is_correct:false}]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f orm/g, 'form'], [/f ort/g, 'fort'], [/f orce/g, 'force'], [/p ork/g, 'pork'],
+        [/f avorite/g, 'favorite'], [/p erf orm/g, 'perform'], [/af ternoon/g, 'afternoon'],
+        [/interrup t/g, 'interrupt'], [/f oreign/g, 'foreign'], [/f orecast/g, 'forecast']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
-
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
-
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
-
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
-
+        let correctCount = 0, correctList = [], incorrectList = [];
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
-
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 218*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
-
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered r-controlled or=/ôr/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 218 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -233,8 +251,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -242,6 +260,63 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -252,6 +327,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
