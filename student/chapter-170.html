@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 171 — Magic E Syllables (e=/ē/)"/>
-  <title>Mini OpenStax — Lesson 171: Magic E (e=/ē/)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 171: Magic E — e=/ē/"/>
+  <title>Mini OpenStax — Lesson 171: Magic E — e=/ē/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 171: Magic E (e=/ē/)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH171: Decode words with Magic E pattern (e = /ē/)</div>
+        <h1 id="chapter-title">Lesson 171: Magic E — e=/ē/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH171: Decode Magic E words with e=/ē/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>Magic E</strong> pattern where <em>e = /ē/</em> (long e):</p>
+        <p>Words with Magic E where <strong>e</strong> says /ē/</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–171:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,21 +80,33 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 170;   // chapter-170.html = Lesson 171
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 170; // Lesson 171
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 171: Magic E (e=/ē/)",
-        loTags: ["LO PH171: Decode words with Magic E pattern (e = /ē/)"],
+        title: "Lesson 171: Magic E — e=/ē/",
+        loTags: ["LO PH171: Decode Magic E words with e=/ē/"],
         contentWords: [
           "eve", "Steve", "here", "mere", "sincere", "these", "gene", "theme", "extreme",
           "Pete", "complete", "athlete", "concrete"
@@ -91,138 +114,250 @@
         sentences: [
           "The theme of the novel was difficult to grasp.",
           "An athlete must practice to improve his skill.",
-          "Eve asked Steve,\"Did the accident happen here?\"",
+          "Eve asked Steve, \"Did the accident happen here?\"",
           "Mike gave a sincere apology for his rude conduct.",
-          "Pete did not have time to complete the entire test.",
+          "Pete did not have time to comp lete the entire test.",
           "In the summer, the heat from the sun can be extreme.",
           "A bridge made of steel and concrete stretches across the river.",
-          "The boy asked Pete,\"Would you like to play with some of these toys?\""
+          "The boy asked Pete, \"Would you like to play with some of these toys?\""
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word uses the Magic E pattern with e=/ē/?", options: [{id:"a",text:"theme",is_correct:true},{id:"b",text:"them",is_correct:false},{id:"c",text:"then",is_correct:false},{id:"d",text:"the",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 171 word?", options: [{id:"a",text:"concrete",is_correct:false},{id:"b",text:"athlete",is_correct:false},{id:"c",text:"sphere",is_correct:true},{id:"d",text:"sincere",is_correct:false}] },
-          { id: "3", prompt: "What sound does 'e' make in 'eve'?", options: [{id:"a",text:"/ĕ/",is_correct:false},{id:"b",text:"/ē/",is_correct:true},{id:"c",text:"/e/",is_correct:false},{id:"d",text:"/i/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'central subject or message'?", options: [{id:"a",text:"theme",is_correct:true},{id:"b",text:"gene",is_correct:false},{id:"c",text:"mere",is_correct:false},{id:"d",text:"here",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'complete'?", options: [{id:"a",text:"8",is_correct:true},{id:"b",text:"7",is_correct:false},{id:"c",text:"9",is_correct:false},{id:"d",text:"6",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 171 words?", options: [{id:"a",text:"The theme of the novel was difficult to grasp.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word means 'truthful and genuine'?", options: [{id:"a",text:"sincere",is_correct:true},{id:"b",text:"extreme",is_correct:false},{id:"c",text:"mere",is_correct:false},{id:"d",text:"gene",is_correct:false}] },
-          { id: "8", prompt: "What makes the 'e' long in 'these'?", options: [{id:"a",text:"Silent e",is_correct:true},{id:"b",text:"Double e",is_correct:false},{id:"c",text:"It's open",is_correct:false},{id:"d",text:"R-controlled",is_correct:false}] },
-          { id: "9", prompt: "In 'Eve asked Steve,\"Did the accident happen here?\"', how many Lesson 171 words?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"2",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to finish or make whole'?", options: [{id:"a",text:"complete",is_correct:true},{id:"b",text:"concrete",is_correct:false},{id:"c",text:"athlete",is_correct:false},{id:"d",text:"extreme",is_correct:false}] },
-          { id: "11", prompt: "Which word refers to a unit of heredity?", options: [{id:"a",text:"gene",is_correct:true},{id:"b",text:"theme",is_correct:false},{id:"c",text:"eve",is_correct:false},{id:"d",text:"Pete",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with Magic E and means 'in this place'?", options: [{id:"a",text:"here",is_correct:true},{id:"b",text:"mere",is_correct:false},{id:"c",text:"these",is_correct:false},{id:"d",text:"Steve",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 171?", options: [{id:"a",text:"An athlete must practice to improve his skill.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'concrete'?", options: [{id:"a",text:"5",is_correct:true},{id:"b",text:"4",is_correct:false},{id:"c",text:"6",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "15", prompt: "Which word is a proper noun?", options: [{id:"a",text:"Pete",is_correct:true},{id:"b",text:"theme",is_correct:false},{id:"c",text:"gene",is_correct:false},{id:"d",text:"concrete",is_correct:false}] },
-          { id: "16", prompt: "What syllable type is 'eve'?", options: [{id:"a",text:"Closed",is_correct:false},{id:"b",text:"Open",is_correct:false},{id:"c",text:"Magic E",is_correct:true},{id:"d",text:"Vowel Team",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'intense or very great'?", options: [{id:"a",text:"extreme",is_correct:true},{id:"b",text:"sincere",is_correct:false},{id:"c",text:"mere",is_correct:false},{id:"d",text:"athlete",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Would you like to play with ___ toys?'", options: [{id:"a",text:"these",is_correct:true},{id:"b",text:"here",is_correct:false},{id:"c",text:"eve",is_correct:false},{id:"d",text:"gene",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"theme",is_correct:true},{id:"b",text:"Pete",is_correct:true},{id:"c",text:"these",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics pattern is taught in Lesson 171?", options: [{id:"a",text:"Magic E (e=/ē/)",is_correct:true},{id:"b",text:"Magic E (u=/yoo/)",is_correct:false},{id:"c",text:"-ang",is_correct:false},{id:"d",text:"Bossy R",is_correct:false}] }
+          { id: "1", prompt: "Which word has the /ē/ sound?", options: [
+            {id:"a",text:"eve",is_correct:true},
+            {id:"b",text:"ev",is_correct:false},
+            {id:"c",text:"even",is_correct:false},
+            {id:"d",text:"ever",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word is spelled correctly?", options: [
+            {id:"a",text:"complete",is_correct:true},
+            {id:"b",text:"comp lete",is_correct:false},
+            {id:"c",text:"compleet",is_correct:false},
+            {id:"d",text:"compelte",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'true and honest'?", options: [
+            {id:"a",text:"mere",is_correct:false},
+            {id:"b",text:"sincere",is_correct:true},
+            {id:"c",text:"extreme",is_correct:false},
+            {id:"d",text:"concrete",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word rhymes with 'Steve'?", options: [
+            {id:"a",text:"eve",is_correct:true},
+            {id:"b",text:"even",is_correct:false},
+            {id:"c",text:"ever",is_correct:false},
+            {id:"d",text:"event",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word means 'the central topic of a story'?", options: [
+            {id:"a",text:"gene",is_correct:false},
+            {id:"b",text:"theme",is_correct:true},
+            {id:"c",text:"mere",is_correct:false},
+            {id:"d",text:"athlete",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word fits: 'He is a great sports ___.'?", options: [
+            {id:"a",text:"concrete",is_correct:false},
+            {id:"b",text:"athlete",is_correct:true},
+            {id:"c",text:"extreme",is_correct:false},
+            {id:"d",text:"gene",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word ends with 'ete' and has /ē/?", options: [
+            {id:"a",text:"complete",is_correct:true},
+            {id:"b",text:"athlete",is_correct:false},
+            {id:"c",text:"concrete",is_correct:false},
+            {id:"d",text:"none of these",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word does NOT have Magic E?", options: [
+            {id:"a",text:"here",is_correct:false},
+            {id:"b",text:"these",is_correct:false},
+            {id:"c",text:"Pete",is_correct:false},
+            {id:"d",text:"cat",is_correct:true}
+          ]},
+          { id: "9", prompt: "Which sentence uses 'sincere' correctly?", options: [
+            {id:"a",text:"Mike gave a sincere apology...",is_correct:true},
+            {id:"b",text:"She sincere loud.",is_correct:false},
+            {id:"c",text:"They sincere running.",is_correct:false},
+            {id:"d",text:"We sincere the box.",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word means 'only; just'?", options: [
+            {id:"a",text:"mere",is_correct:true},
+            {id:"b",text:"here",is_correct:false},
+            {id:"c",text:"gene",is_correct:false},
+            {id:"d",text:"extreme",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word fits: 'The heat was ___.'?", options: [
+            {id:"a",text:"concrete",is_correct:false},
+            {id:"b",text:"extreme",is_correct:true},
+            {id:"c",text:"athlete",is_correct:false},
+            {id:"d",text:"mere",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word has the same /ē/ sound as 'these'?", options: [
+            {id:"a",text:"theme",is_correct:true},
+            {id:"b",text:"them",is_correct:false},
+            {id:"c",text:"then",is_correct:false},
+            {id:"d",text:"that",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word refers to a unit of heredity?", options: [
+            {id:"a",text:"gene",is_correct:true},
+            {id:"b",text:"theme",is_correct:false},
+            {id:"c",text:"mere",is_correct:false},
+            {id:"d",text:"eve",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which typo appears in the lesson sentences?", options: [
+            {id:"a",text:"comp lete",is_correct:true},
+            {id:"b",text:"concrete",is_correct:false},
+            {id:"c",text:"athlete",is_correct:false},
+            {id:"d",text:"Steve",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which sentence is from the lesson?", options: [
+            {id:"a",text:"A bridge made of steel and concrete stretches...",is_correct:true},
+            {id:"b",text:"She found a rare coin.",is_correct:false},
+            {id:"c",text:"The sun will shine.",is_correct:false},
+            {id:"d",text:"He rode his horse.",is_correct:false}
+          ]},
+          { id: "16", prompt: "How many syllables in 'athlete'?", options: [
+            {id:"a",text:"2",is_correct:true},
+            {id:"b",text:"1",is_correct:false},
+            {id:"c",text:"3",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word is NOT in the lesson word list?", options: [
+            {id:"a",text:"extreme",is_correct:false},
+            {id:"b",text:"concrete",is_correct:false},
+            {id:"c",text:"scene",is_correct:true},
+            {id:"d",text:"sincere",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word shows Magic E and starts with 'th'?", options: [
+            {id:"a",text:"theme",is_correct:true},
+            {id:"b",text:"these",is_correct:true},
+            {id:"c",text:"both A and B",is_correct:true},
+            {id:"d",text:"none",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word fits: 'What happened ___?'", options: [
+            {id:"a",text:"here",is_correct:true},
+            {id:"b",text:"mere",is_correct:false},
+            {id:"c",text:"gene",is_correct:false},
+            {id:"d",text:"eve",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word means 'to finish fully'?", options: [
+            {id:"a",text:"complete",is_correct:true},
+            {id:"b",text:"concrete",is_correct:false},
+            {id:"c",text:"extreme",is_correct:false},
+            {id:"d",text:"athlete",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/escap e/g, 'escape'], [/airp lane/g, 'airplane'], [/p aste/g, 'paste'],
+        [/supp ose/g, 'suppose'], [/sp oke/g, 'spoke'], [/slop e/g, 'slope'],
+        [/exp lore/g, 'explore'], [/f ume/g, 'fume'], [/f lute/g, 'flute'],
+        [/p lume/g, 'plume'], [/comp lete/g, 'complete']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
 
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
 
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
 
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 171*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered the Magic E (e=/ē/) pattern!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 171 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -232,8 +367,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -241,6 +376,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -251,6 +444,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
