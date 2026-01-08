@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 195 — ow = /ō/"/>
-  <title>Mini OpenStax — Lesson 195: ow = /ō/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 195: ow = /ō/ (low, grow, snow, throw, etc.)"/>
+  <title>Mini OpenStax — Lesson 195: ow = /ō/ (low, grow, snow, throw, etc.)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 195: ow = /ō/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH195: Decode words with vowel team ow = /ō/</div>
+        <h1 id="chapter-title">Lesson 195: ow = /ō/ (low, grow, snow, throw, etc.)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH195: Decode words with 'ow' spelling for long o (/ō/)</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>vowel team</strong> <em>ow</em> making the <strong>/ō/</strong> sound:</p>
+        <p>Words where 'ow' spells the long o sound (/ō/):</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–195:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,161 +80,285 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 194;   // chapter-194.html = Lesson 195
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 194; // Lesson 195
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 195: ow = /ō/",
-        loTags: ["LO PH195: Decode words with vowel team ow = /ō/"],
+        title: "Lesson 195: ow = /ō/ (low, grow, snow, throw, etc.)",
+        loTags: ["LO PH195: Decode words with 'ow' spelling for long o (/ō/)"],
         contentWords: [
-          "own", "owe", "low", "mow", "row", "sow", "tow", "bow", "bowl", "blow", "flow", "glow", "slow", "slowly", "grow", "grown", "growth", "crow", "snow", "stow", "show", "shown", "throw", "thrown", "blown", "flown",
-          "owner", "lower"
+          "low", "grow", "snow", "throw", "blow", "crow", "flow", "glow",
+          "know", "show", "slow", "sow", "glow", "bow", "tow", "row"
         ],
         sentences: [
-          "Some plants require direct sunlight to grow.",
-          "Joe can blow a big pink bubble with his bubble gum.",
-          "Judy can row the boat to the other side of the lake.",
-          "When the grass gets too high, Steve must mow the lawn.",
-          "The man must step on the brake to slow down the truck.",
-          "Joe ate a bowl of oatmeal with milk and fresh berries.",
-          "The pitcher tried to throw a fast pitch to the catcher.",
-          "In the winter, a white blanket of snow lay over the land.",
-          "The teacher will show the student how to multiply and divide."
+          "The grass will grow tall if it gets enough rain.",
+          "The water will flow quickly down the steep hill.",
+          "On a clear night, you can see the stars and the moon glow.",
+          "Jill can show you the way to the park if you don't know.",
+          "It will be hard to throw the ball if your arm is sore.",
+          "The wind can blow leaves all over the yard in the fall.",
+          "If you plant seeds in the ground, you can grow flowers.",
+          "The snow covered the ground and made everything look white."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains the vowel team 'ow' making /ō/?", options: [{id:"a",text:"snow",is_correct:true},{id:"b",text:"sow",is_correct:true},{id:"c",text:"cow",is_correct:false},{id:"d",text:"how",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 195 word?", options: [{id:"a",text:"flown",is_correct:false},{id:"b",text:"blown",is_correct:false},{id:"c",text:"brown",is_correct:true},{id:"d",text:"owner",is_correct:false}] },
-          { id: "3", prompt: "In 'grow', what makes the long /ō/ sound?", options: [{id:"a",text:"Vowel team 'ow'",is_correct:true},{id:"b",text:"Silent e",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Open syllable",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to propel air from the mouth'?", options: [{id:"a",text:"blow",is_correct:true},{id:"b",text:"bow",is_correct:false},{id:"c",text:"row",is_correct:false},{id:"d",text:"sow",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'slowly'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 195 words?", options: [{id:"a",text:"Joe ate a bowl of oatmeal with milk and fresh berries.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to frozen precipitation?", options: [{id:"a",text:"snow",is_correct:true},{id:"b",text:"crow",is_correct:false},{id:"c",text:"glow",is_correct:false},{id:"d",text:"flow",is_correct:false}] },
-          { id: "8", prompt: "What vowel team is in 'throw'?", options: [{id:"a",text:"ow",is_correct:true},{id:"b",text:"oe",is_correct:false},{id:"c",text:"ie",is_correct:false},{id:"d",text:"ei",is_correct:false}] },
-          { id: "9", prompt: "In 'The teacher will show the student how to multiply,' how many Lesson 195 words?", options: [{id:"a",text:"1",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"0",is_correct:false},{id:"d",text:"3",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to cut grass with a machine'?", options: [{id:"a",text:"mow",is_correct:true},{id:"b",text:"sow",is_correct:false},{id:"c",text:"tow",is_correct:false},{id:"d",text:"row",is_correct:false}] },
-          { id: "11", prompt: "Which word describes something that has already been cultivated?", options: [{id:"a",text:"grown",is_correct:true},{id:"b",text:"grow",is_correct:false},{id:"c",text:"growth",is_correct:false},{id:"d",text:"owner",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'ow' and means 'to display or demonstrate'?", options: [{id:"a",text:"show",is_correct:true},{id:"b",text:"snow",is_correct:false},{id:"c",text:"crow",is_correct:false},{id:"d",text:"blow",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 195?", options: [{id:"a",text:"Judy can row the boat to the other side of the lake.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'owner'?", options: [{id:"a",text:"3",is_correct:true},{id:"b",text:"2",is_correct:false},{id:"c",text:"4",is_correct:false},{id:"d",text:"1",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'to pull a vehicle with a chain'?", options: [{id:"a",text:"tow",is_correct:true},{id:"b",text:"mow",is_correct:false},{id:"c",text:"sow",is_correct:false},{id:"d",text:"row",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'glow'?", options: [{id:"a",text:"ow = /ō/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'oe'",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'increase in size or development'?", options: [{id:"a",text:"growth",is_correct:true},{id:"b",text:"grown",is_correct:false},{id:"c",text:"slow",is_correct:false},{id:"d",text:"flow",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Don’t ___ your own horn.' (meaning brag)?", options: [{id:"a",text:"blow",is_correct:true},{id:"b",text:"bow",is_correct:false},{id:"c",text:"row",is_correct:false},{id:"d",text:"snow",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"grow",is_correct:true},{id:"b",text:"blow",is_correct:true},{id:"c",text:"snow",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 195?", options: [{id:"a",text:"Vowel team ow = /ō/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"R-controlled vowels",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'to make something move through the air with force'?", options: [
+            {id:"a",text:"throw",is_correct:true},
+            {id:"b",text:"blow",is_correct:false},
+            {id:"c",text:"grow",is_correct:false},
+            {id:"d",text:"flow",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word describes frozen rain that falls from the sky?", options: [
+            {id:"a",text:"snow",is_correct:true},
+            {id:"b",text:"crow",is_correct:false},
+            {id:"c",text:"glow",is_correct:false},
+            {id:"d",text:"tow",is_correct:false}
+          ]},
+          { id: "3", prompt: "What does 'glow' mean?", options: [
+            {id:"a",text:"To give off a soft light",is_correct:true},
+            {id:"b",text:"To make a loud noise",is_correct:false},
+            {id:"c",text:"To run quickly",is_correct:false},
+            {id:"d",text:"To fall down",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses a word with 'ow = /ō/' correctly?", options: [
+            {id:"a",text:"The stars glow at night.",is_correct:true},
+            {id:"b",text:"She throwed the ball.",is_correct:false},
+            {id:"c",text:"He growed a garden.",is_correct:false},
+            {id:"d",text:"They blowed out candles.",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word means 'to move like a liquid'?", options: [
+            {id:"a",text:"flow",is_correct:true},
+            {id:"b",text:"throw",is_correct:false},
+            {id:"c",text:"crow",is_correct:false},
+            {id:"d",text:"row",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word contains 'ow' but does NOT say /ō/?", options: [
+            {id:"a",text:"cow",is_correct:true},
+            {id:"b",text:"snow",is_correct:false},
+            {id:"c",text:"show",is_correct:false},
+            {id:"d",text:"slow",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'sow' mean?", options: [
+            {id:"a",text:"To plant seeds",is_correct:true},
+            {id:"b",text:"To pull a car",is_correct:false},
+            {id:"c",text:"To bend forward",is_correct:false},
+            {id:"d",text:"To shout loudly",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word is NOT on the Lesson 195 word list?", options: [
+            {id:"a",text:"follow",is_correct:true},
+            {id:"b",text:"bow",is_correct:false},
+            {id:"c",text:"tow",is_correct:false},
+            {id:"d",text:"row",is_correct:false}
+          ]},
+          { id: "9", prompt: "In the sentence 'The wind can blow leaves,' how many words have 'ow = /ō/'?", options: [
+            {id:"a",text:"One",is_correct:true},
+            {id:"b",text:"Two",is_correct:false},
+            {id:"c",text:"Three",is_correct:false},
+            {id:"d",text:"None",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word means 'to pull something behind a vehicle'?", options: [
+            {id:"a",text:"tow",is_correct:true},
+            {id:"b",text:"bow",is_correct:false},
+            {id:"c",text:"row",is_correct:false},
+            {id:"d",text:"crow",is_correct:false}
+          ]},
+          { id: "11", prompt: "What sound does 'ow' make in 'slow'?", options: [
+            {id:"a",text:"/ō/",is_correct:true},
+            {id:"b",text:"/ow/ as in cow",is_correct:false},
+            {id:"c",text:"/ŭ/",is_correct:false},
+            {id:"d",text:"/ă/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word is a black bird that makes a loud call?", options: [
+            {id:"a",text:"crow",is_correct:true},
+            {id:"b",text:"bow",is_correct:false},
+            {id:"c",text:"tow",is_correct:false},
+            {id:"d",text:"row",is_correct:false}
+          ]},
+          { id: "13", prompt: "Which word means 'to bend at the waist as a gesture of respect'?", options: [
+            {id:"a",text:"bow",is_correct:true},
+            {id:"b",text:"row",is_correct:false},
+            {id:"c",text:"tow",is_correct:false},
+            {id:"d",text:"sow",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word appears in the practice sentences?", options: [
+            {id:"a",text:"glow",is_correct:true},
+            {id:"b",text:"bow",is_correct:false},
+            {id:"c",text:"sow",is_correct:false},
+            {id:"d",text:"tow",is_correct:false}
+          ]},
+          { id: "15", prompt: "How is 'ow' pronounced in 'know'?", options: [
+            {id:"a",text:"/ō/",is_correct:true},
+            {id:"b",text:"/kno/",is_correct:false},
+            {id:"c",text:"/nŏ/",is_correct:false},
+            {id:"d",text:"silent",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word is a homophone of 'no'?", options: [
+            {id:"a",text:"know",is_correct:true},
+            {id:"b",text:"snow",is_correct:false},
+            {id:"c",text:"flow",is_correct:false},
+            {id:"d",text:"crow",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word demonstrates that 'ow = /ō/' often appears in verbs of motion or change?", options: [
+            {id:"a",text:"grow, throw, blow",is_correct:true},
+            {id:"b",text:"only low",is_correct:false},
+            {id:"c",text:"only snow",is_correct:false},
+            {id:"d",text:"bow",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word means 'not high'?", options: [
+            {id:"a",text:"low",is_correct:true},
+            {id:"b",text:"slow",is_correct:false},
+            {id:"c",text:"crow",is_correct:false},
+            {id:"d",text:"row",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word is an irregular past tense (e.g., 'knew')?", options: [
+            {id:"a",text:"know",is_correct:true},
+            {id:"b",text:"show",is_correct:false},
+            {id:"c",text:"throw",is_correct:false},
+            {id:"d",text:"blow",is_correct:false}
+          ]},
+          { id: "20", prompt: "Which word shows that 'ow = /ō/' can be confused with 'ow = /ow/' (as in cow), but context clarifies meaning?", options: [
+            {id:"a",text:"bow (to bend) vs. bow (weapon)",is_correct:true},
+            {id:"b",text:"snow",is_correct:false},
+            {id:"c",text:"glow",is_correct:false},
+            {id:"d",text:"flow",is_correct:false}
+          ]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/typ e/g, 'type'], [/f our/g, 'four'], [/f lies/g, 'flies'],
+        [/emp tied/g, 'emptied'], [/p ennies/g, 'pennies'], [/f ourth/g, 'fourth'],
+        [/f ried/g, 'fried'], [/multip ly/g, 'multiply'], [/f lying/g, 'flying'],
+        [/p our/g, 'pour'], [/sh oulder/g, 'shoulder'], [/b oulder/g, 'boulder'],
+        [/k now/g, 'know'], [/gr ow/g, 'grow'], [/sn ow/g, 'snow']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
 
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
 
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
 
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 195*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered ow=/ō/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 195 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -233,8 +368,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -242,6 +377,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -252,6 +445,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
