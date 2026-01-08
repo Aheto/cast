@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 147 — Compound Sight Words"/>
-  <title>Mini OpenStax — Lesson 147: Compound Sight Words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 147: Sight Words in Compound Forms"/>
+  <title>Mini OpenStax — Lesson 147: Sight Words in Compound Forms</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 147: Compound Sight Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH147: Identify and decode compound words and multisyllable words containing sight word elements.</div>
+        <h1 id="chapter-title">Lesson 147: Sight Words in Compound Forms</h1>
+        <div class="lo-tags" id="lo-tags">LO PH147: Decode compound words containing high-frequency sight words</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,23 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>These words combine sight words or use irregular patterns. Practice reading them as whole units:</p>
+        <p>Compound words made from sight words</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
-        <h2>📖 Concept Overview</h2>
-        <p>In this lesson, we look at how sight words can be combined to form longer words, or how they appear as parts of larger words.</p>
-        <ul class="sentences">
-            <li><strong>Compound Sight Words:</strong> Words like <em>into</em>, <em>onto</em>, and <em>today</em> are made of two smaller parts[cite: 2, 3, 4].</li>
-            <li><strong>The "Every" and "Any" Family:</strong> Notice how <em>every</em> and <em>any</em> can join with <em>where</em>, <em>body</em>, or <em>thing</em>[cite: 9, 10, 11].</li>
-            <li><strong>Irregular Multisyllables:</strong> Words like <em>handsome</em> and <em>against</em> don't follow standard phonics rules[cite: 15, 20].</li>
-        </ul>
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud:</p>
+        <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your ability to recognize and use Lesson 147 words.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -71,113 +80,290 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 146; // chapter-146.html = Lesson 147
-      const maxChapter = 150;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 146; // Lesson 147
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 147: Compound Sight Words",
-        loTags: ["LO PH147: Identify and decode compound words and multisyllable words containing sight word elements."],
+        title: "Lesson 147: Sight Words in Compound Forms",
+        loTags: ["LO PH147: Decode compound words containing high-frequency sight words"],
         contentWords: [
-          "into", "onto", "today", "together", "myself", "yourself", "someone", "everyone", "somewhere", "everywhere", "nobody", "everybody", "anybody", "everything", "anything", "something", "welcome", "income", "handsome", "improve", "against", "maybe", "another"
+          "into", "today", "myself", "yourself", "himself", "herself", "itself", "ourselves", "yourselves", "themselves", "everybody", "somebody", "anybody", "nobody", "everything", "something", "anything", "nothing", "everyone", "someone", "anyone", "no one"
         ],
-        whatsappNumber: "233257320201",
+        sentences: [
+          "She walked into the room quietly.",
+          "We will go to the park today.",
+          "I hurt myself while playing soccer.",
+          "Did you enjoy yourself at the party?",
+          "Everybody likes ice cream.",
+          "Is there anything I can do to help?",
+          "Nobody answered the phone.",
+          "Everything will be all right."
+        ],
         assessmentItems: [
-          { id: "1", prompt: "Which word means 'each person'?", options: [{id:"a",text:"everyone",is_correct:true},{id:"b",text:"anybody",is_correct:false},{id:"c",text:"someone",is_correct:false}] },
-          { id: "2", prompt: "Which word means 'the current day'?", options: [{id:"a",text:"today",is_correct:true},{id:"b",text:"maybe",is_correct:false},{id:"c",text:"another",is_correct:false}] },
-          { id: "3", prompt: "Which word means 'good looking'?", options: [{id:"a",text:"handsome",is_correct:true},{id:"b",text:"welcome",is_correct:false},{id:"c",text:"improve",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'in every place'?", options: [{id:"a",text:"everywhere",is_correct:true},{id:"b",text:"somewhere",is_correct:false},{id:"c",text:"anything",is_correct:false}] },
-          { id: "5", prompt: "Which word means 'no person'?", options: [{id:"a",text:"nobody",is_correct:true},{id:"b",text:"anybody",is_correct:false},{id:"c",text:"someone",is_correct:false}] },
-          { id: "6", prompt: "Which word means 'to get better'?", options: [{id:"a",text:"improve",is_correct:true},{id:"b",text:"income",is_correct:false},{id:"c",text:"against",is_correct:false}] },
-          { id: "7", prompt: "Which word is a polite greeting for a guest?", options: [{id:"a",text:"welcome",is_correct:true},{id:"b",text:"yourself",is_correct:false},{id:"c",text:"together",is_correct:false}] },
-          { id: "8", prompt: "Which word means 'in opposition to'?", options: [{id:"a",text:"against",is_correct:true},{id:"b",text:"another",is_correct:false},{id:"c",text:"improve",is_correct:false}] },
-          { id: "9", prompt: "Which word means 'the money one earns'?", options: [{id:"a",text:"income",is_correct:true},{id:"b",text:"into",is_correct:false},{id:"c",text:"onto",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'one more'?", options: [{id:"a",text:"another",is_correct:true},{id:"b",text:"maybe",is_correct:false},{id:"c",text:"anybody",is_correct:false}] },
-          { id: "11", prompt: "Complete the compound: some + where = ____", options: [{id:"a",text:"somewhere",is_correct:true},{id:"b",text:"anywhere",is_correct:false},{id:"c",text:"everywhere",is_correct:false}] },
-          { id: "12", prompt: "Complete the compound: your + self = ____", options: [{id:"a",text:"yourself",is_correct:true},{id:"b",text:"myself",is_correct:false},{id:"c",text:"nobody",is_correct:false}] },
-          { id: "13", prompt: "Which word means 'perhaps'?", options: [{id:"a",text:"maybe",is_correct:true},{id:"b",text:"today",is_correct:false},{id:"c",text:"another",is_correct:false}] },
-          { id: "14", prompt: "Which word means 'all things'?", options: [{id:"a",text:"everything",is_correct:true},{id:"b",text:"anything",is_correct:false},{id:"c",text:"something",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'not a single thing'?", options: [{id:"a",text:"nothing (not in list)",is_correct:false},{id:"b",text:"anything",is_correct:false},{id:"c",text:"none (previous lesson)",is_correct:false}] },
-          { id: "16", prompt: "Which word means 'in a group'?", options: [{id:"a",text:"together",is_correct:true},{id:"b",text:"myself",is_correct:false},{id:"c",text:"someone",is_correct:false}] },
-          { id: "17", prompt: "Identify the base of 'everything'.", options: [{id:"a",text:"every",is_correct:true},{id:"b",text:"any",is_correct:false},{id:"c",text:"some",is_correct:false}] },
-          { id: "18", prompt: "Which word describes an unidentified person?", options: [{id:"a",text:"someone",is_correct:true},{id:"b",text:"everybody",is_correct:false},{id:"c",text:"myself",is_correct:false}] },
-          { id: "19", prompt: "How many syllables are in 'everybody'?", options: [{id:"a",text:"four",is_correct:true},{id:"b",text:"three",is_correct:false},{id:"c",text:"five",is_correct:false}] },
-          { id: "20", prompt: "Which word rhymes with 'onto'?", options: [{id:"a",text:"into",is_correct:true},{id:"b",text:"today",is_correct:false},{id:"c",text:"income",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'on this day'?", options: [
+            {id:"a",text:"today",is_correct:true},
+            {id:"b",text:"into",is_correct:false},
+            {id:"c",text:"myself",is_correct:false},
+            {id:"d",text:"nobody",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word completes: 'He fixed the bike ___.'?", options: [
+            {id:"a",text:"himself",is_correct:true},
+            {id:"b",text:"hisself",is_correct:false},
+            {id:"c",text:"his self",is_correct:false},
+            {id:"d",text:"he",is_correct:false}
+          ]},
+          { id: "3", prompt: "What does 'everybody' mean?", options: [
+            {id:"a",text:"All people",is_correct:true},
+            {id:"b",text:"One person",is_correct:false},
+            {id:"c",text:"No one",is_correct:false},
+            {id:"d",text:"A body",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'into' correctly?", options: [
+            {id:"a",text:"She walked into the store.",is_correct:true},
+            {id:"b",text:"He into the book.",is_correct:false},
+            {id:"c",text:"They are very into.",is_correct:false},
+            {id:"d",text:"We into running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How many words are combined in 'yourself'?", options: [
+            {id:"a",text:"2 (your + self)",is_correct:true},
+            {id:"b",text:"1",is_correct:false},
+            {id:"c",text:"3",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'not anything'?", options: [
+            {id:"a",text:"nothing",is_correct:true},
+            {id:"b",text:"something",is_correct:false},
+            {id:"c",text:"anything",is_correct:false},
+            {id:"d",text:"everything",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'nobody' mean?", options: [
+            {id:"a",text:"No person",is_correct:true},
+            {id:"b",text:"A body",is_correct:false},
+            {id:"c",text:"A nobody (famous person)",is_correct:false},
+            {id:"d",text:"Someone",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word is a reflexive pronoun for 'I'?", options: [
+            {id:"a",text:"myself",is_correct:true},
+            {id:"b",text:"yourself",is_correct:false},
+            {id:"c",text:"himself",is_correct:false},
+            {id:"d",text:"herself",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes ALL PEOPLE in: 'Everybody laughed'?", options: [
+            {id:"a",text:"everybody",is_correct:true},
+            {id:"b",text:"laughed",is_correct:false},
+            {id:"c",text:"the",is_correct:false},
+            {id:"d",text:"room",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'Is there ___ I can help you with?'?", options: [
+            {id:"a",text:"anything",is_correct:true},
+            {id:"b",text:"nothing",is_correct:false},
+            {id:"c",text:"everything",is_correct:false},
+            {id:"d",text:"something",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'themselves,' the 'selves' part comes from:", options: [
+            {id:"a",text:"self",is_correct:true},
+            {id:"b",text:"them",is_correct:false},
+            {id:"c",text:"they",is_correct:false},
+            {id:"d",text:"body",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'one unknown person'?", options: [
+            {id:"a",text:"someone",is_correct:true},
+            {id:"b",text:"everyone",is_correct:false},
+            {id:"c",text:"nobody",is_correct:false},
+            {id:"d",text:"no one",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is the difference between 'no one' and 'nobody'?", options: [
+            {id:"a",text:"They mean the same thing; 'no one' is two words",is_correct:true},
+            {id:"b",text:"'No one' means one person; 'nobody' means zero",is_correct:false},
+            {id:"c",text:"'Nobody' is for objects; 'no one' is for people",is_correct:false},
+            {id:"d",text:"There is no such word as 'no one'",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'themself'?", options: [
+            {id:"a",text:"themselves",is_correct:true},
+            {id:"b",text:"yourself",is_correct:false},
+            {id:"c",text:"myself",is_correct:false},
+            {id:"d",text:"himself",is_correct:false}
+          ]},
+          { id: "15", prompt: "In 'everything,' the base words are:", options: [
+            {id:"a",text:"every + thing",is_correct:true},
+            {id:"b",text:"ever + thing",is_correct:false},
+            {id:"c",text:"every + think",is_correct:false},
+            {id:"d",text:"all + thing",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word refers to ALL THINGS?", options: [
+            {id:"a",text:"everything",is_correct:true},
+            {id:"b",text:"something",is_correct:false},
+            {id:"c",text:"anything",is_correct:false},
+            {id:"d",text:"nothing",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word is used when talking to one person?", options: [
+            {id:"a",text:"yourself",is_correct:true},
+            {id:"b",text:"yourselves",is_correct:false},
+            {id:"c",text:"ourselves",is_correct:false},
+            {id:"d",text:"themselves",is_correct:false}
+          ]},
+          { id: "18", prompt: "Why are words like 'everybody' written as one word?", options: [
+            {id:"a",text:"Because they function as a single unit of meaning",is_correct:true},
+            {id:"b",text:"Because they are adjectives",is_correct:false},
+            {id:"c",text:"Because they are verbs",is_correct:false},
+            {id:"d",text:"It’s just a spelling rule with no reason",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'not anyone'?", options: [
+            {id:"a",text:"nobody",is_correct:true},
+            {id:"b",text:"somebody",is_correct:false},
+            {id:"c",text:"anybody",is_correct:false},
+            {id:"d",text:"everybody",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is it important to know compound sight words like 'myself'?", options: [
+            {id:"a",text:"They are extremely common in speaking and writing and must be recognized instantly",is_correct:true},
+            {id:"b",text:"They are only used in old books",is_correct:false},
+            {id:"c",text:"They follow simple phonics rules",is_correct:false},
+            {id:"d",text:"They are rarely used",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/f amily/g, 'family'], [/p enny/g, 'penny'], [/excep t/g, 'except'],
+        [/simp le/g, 'simple'], [/p uzzle/g, 'puzzle'], [/m uddy/g, 'muddy'],
+        [/w ould/g, 'would'], [/sh ould/g, 'should'], [/s aid/g, 'said'],
+        [/them self/g, 'themselves'], [/his self/g, 'himself']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
+      }
+
+      function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 147*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -187,8 +373,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -198,16 +384,80 @@
         });
       }
 
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
+      }
+
       function init() {
         document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
         document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
         renderNavigation();
         renderWords();
+        renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
