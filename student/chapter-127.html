@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 128 — Multisyllable Words"/>
-  <title>Mini OpenStax — Lesson 127: Multisyllable Words</title>
+  <meta name="description" content="Mini OpenStax: Lesson 128: Multisyllable Words (Advanced)"/>
+  <title>Mini OpenStax — Lesson 128: Multisyllable Words (Advanced)</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 128: Multisyllable Words</h1>
-        <div class="lo-tags" id="lo-tags">LO PH128: Recognize and decode multisyllable words with complex structures.</div>
+        <h1 id="chapter-title">Lesson 128: Multisyllable Words (Advanced)</h1>
+        <div class="lo-tags" id="lo-tags">LO PH128: Decode and use advanced multisyllable vocabulary</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,19 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Practice reading these multisyllable words by breaking them into parts:</p>
+        <p>Advanced multisyllable vocabulary for fluency and comprehension</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud. Look for the longer words:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Select the best answer for each question based on Lesson 128.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,131 +80,286 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 127;    // chapter-127.html = Lesson 128
-      const maxChapter = 150;        
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 127; // Lesson 128
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 128: Multisyllable Words",
-        loTags: ["LO PH128: Recognize and decode multisyllable words with complex structures."],
+        title: "Lesson 128: Multisyllable Words (Advanced)",
+        loTags: ["LO PH128: Decode and use advanced multisyllable vocabulary"],
         contentWords: [
-          "contest", "dentist", "August", "active", "promise", "nonsense", "conduct", "product", "contact", "contract", "subject", "object", "insect", "parent", "comment", "payment", "absent", "present", "Sunday", "sandwich", "coffee", "hundred", "crayon", "awful", "compound", "insult"
+          "elegant", "electric", "elephant", "elevator", "eleven", "evening", "evergreen", "everybody", "everywhere", "example", "excellent", "excited", "exercise", "favorite", "February", "festival", "fireplace", "flowerpot", "footstool", "furniture", "generous", "government", "handsome", "headache", "helicopter", "hospital", "important", "interest", "January", "jewelry"
         ],
         sentences: [
-          "1) Last week, Max was sick and felt awful.",
-          "2) Max was absent from class last week.",
-          "3) What was the subject of his speech?",
-          "4) Do you think his comment was foolish?",
-          "5) Bess got a dress as a present from her mom.",
-          "6) Beth fixed herself a chicken sandwich for lunch.",
-          "7) Beth had a cup of coffee and cream with her sandwich.",
-          "8) Please promise me that you will try to do your best.",
-          "9) Each year you should visit your dentist to have your teeth cleaned."
+          "The elephant walked slowly through the jungle.",
+          "She gave an excellent example in class.",
+          "We watched fireworks during the festival.",
+          "January is the first month of the year.",
+          "He has a headache from reading too long.",
+          "The government built a new hospital.",
+          "My favorite jewelry is a silver necklace."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "How did Max feel last week?", options: [{id:"a",text:"active",is_correct:false},{id:"b",text:"awful",is_correct:true},{id:"c",text:"cheerful",is_correct:false},{id:"d",text:"present",is_correct:false}] },
-          { id: "2", prompt: "Why was Max absent from class?", options: [{id:"a",text:"he was at the dentist",is_correct:false},{id:"b",text:"he was sick",is_correct:true},{id:"c",text:"he was at a contest",is_correct:false},{id:"d",text:"he was sleeping",is_correct:false}] },
-          { id: "3", prompt: "What did the sentence ask about Max's speech?", options: [{id:"a",text:"the length",is_correct:false},{id:"b",text:"the subject",is_correct:true},{id:"c",text:"the payment",is_correct:false},{id:"d",text:"the object",is_correct:false}] },
-          { id: "4", prompt: "What word was used to describe a potentially silly comment?", options: [{id:"a",text:"active",is_correct:false},{id:"b",text:"foolish",is_correct:true},{id:"c",text:"absent",is_correct:false},{id:"d",text:"solid",is_correct:false}] },
-          { id: "5", prompt: "What did Bess get as a present?", options: [{id:"a",text:"a sandwich",is_correct:false},{id:"b",text:"a dress",is_correct:true},{id:"c",text:"a crayon",is_correct:false},{id:"d",text:"a ticket",is_correct:false}] },
-          { id: "6", prompt: "What kind of sandwich did Beth fix?", options: [{id:"a",text:"ham",is_correct:false},{id:"b",text:"chicken",is_correct:true},{id:"c",text:"peanut",is_correct:false},{id:"d",text:"solid",is_correct:false}] },
-          { id: "7", prompt: "What did Beth have with her sandwich?", options: [{id:"a",text:"liquid",is_correct:false},{id:"b",text:"coffee and cream",is_correct:true},{id:"c",text:"oatmeal",is_correct:false},{id:"d",text:"a pumpkin",is_correct:false}] },
-          { id: "8", prompt: "What should you do to do your best?", options: [{id:"a",text:"insult",is_correct:false},{id:"b",text:"promise",is_correct:true},{id:"c",text:"absent",is_correct:false},{id:"d",text:"conduct",is_correct:false}] },
-          { id: "9", prompt: "Who should you visit each year?", options: [{id:"a",text:"a parent",is_correct:false},{id:"b",text:"your dentist",is_correct:true},{id:"c",text:"the children",is_correct:false},{id:"d",text:"a robin",is_correct:false}] },
-          { id: "10", prompt: "Why visit the dentist?", options: [{id:"a",text:"to get a present",is_correct:false},{id:"b",text:"to have teeth cleaned",is_correct:true},{id:"c",text:"to get a sandwich",is_correct:false},{id:"d",text:"to win a contest",is_correct:false}] },
-          { id: "11", prompt: "Which word is a month of the year?", options: [{id:"a",text:"Sunday",is_correct:false},{id:"b",text:"August",is_correct:true},{id:"c",text:"Payment",is_correct:false},{id:"d",text:"Present",is_correct:false}] },
-          { id: "12", prompt: "Which word means a small bug?", options: [{id:"a",text:"insect",is_correct:true},{id:"b",text:"object",is_correct:false},{id:"c",text:"subject",is_correct:false},{id:"d",text:"contact",is_correct:false}] },
-          { id: "13", prompt: "Which word refers to a day of the week?", options: [{id:"a",text:"August",is_correct:false},{id:"b",text:"Sunday",is_correct:true},{id:"c",text:"Sunday",is_correct:true},{id:"d",text:"Sunday",is_correct:true}] }, 
-          { id: "14", prompt: "What do you use to color a picture?", options: [{id:"a",text:"contract",is_correct:false},{id:"b",text:"crayon",is_correct:true},{id:"c",text:"coffee",is_correct:false},{id:"d",text:"comment",is_correct:false}] },
-          { id: "15", prompt: "Which word means silly or meaningless?", options: [{id:"a",text:"promise",is_correct:false},{id:"b",text:"nonsense",is_correct:true},{id:"c",text:"contact",is_correct:false},{id:"d",text:"active",is_correct:false}] },
-          { id: "16", prompt: "What word means a competition?", options: [{id:"a",text:"conduct",is_correct:false},{id:"b",text:"contest",is_correct:true},{id:"c",text:"product",is_correct:false},{id:"d",text:"contact",is_correct:false}] },
-          { id: "17", prompt: "Which word is the number 100?", options: [{id:"a",text:"hundred",is_correct:true},{id:"b",text:"August",is_correct:false},{id:"c",text:"Sunday",is_correct:false},{id:"d",text:"August",is_correct:false}] },
-          { id: "18", prompt: "What word means the opposite of being there?", options: [{id:"a",text:"present",is_correct:false},{id:"b",text:"absent",is_correct:true},{id:"c",text:"active",is_correct:false},{id:"d",text:"contact",is_correct:false}] },
-          { id: "19", prompt: "How many syllables are in 'sandwich'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] },
-          { id: "20", prompt: "Which word means to reach out to someone?", options: [{id:"a",text:"contact",is_correct:true},{id:"b",text:"contract",is_correct:false},{id:"c",text:"conduct",is_correct:false},{id:"d",text:"insult",is_correct:false}] }
+          { id: "1", prompt: "How is 'excellent' stressed?", options: [
+            {id:"a",text:"ex-CEL-lent",is_correct:true},
+            {id:"b",text:"EX-cell-ent",is_correct:false},
+            {id:"c",text:"ex-cel-LENT",is_correct:false},
+            {id:"d",text:"EX-CEL-LENT",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word has a silent 'h'?", options: [
+            {id:"a",text:"helicopter",is_correct:false},
+            {id:"b",text:"headache",is_correct:true},
+            {id:"c",text:"handsome",is_correct:false},
+            {id:"d",text:"hospital",is_correct:false}
+          ]},
+          { id: "3", prompt: "What does 'generous' mean?", options: [
+            {id:"a",text:"Willing to give or share",is_correct:true},
+            {id:"b",text:"Very tall",is_correct:false},
+            {id:"c",text:"Angry",is_correct:false},
+            {id:"d",text:"Fast",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which word contains the root 'govern' meaning 'to rule or control'?", options: [
+            {id:"a",text:"government",is_correct:true},
+            {id:"b",text:"generous",is_correct:false},
+            {id:"c",text:"festival",is_correct:false},
+            {id:"d",text:"electric",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word is NOT spelled with 'j' but sounds like it starts with /j/?", options: [
+            {id:"a",text:"January",is_correct:true},
+            {id:"b",text:"jewelry",is_correct:false},
+            {id:"c",text:"jump",is_correct:false},
+            {id:"d",text:"jungle",is_correct:false}
+          ]},
+          { id: "6", prompt: "How many syllables in 'elephant'?", options: [
+            {id:"a",text:"3 (el-e-phant)",is_correct:true},
+            {id:"b",text:"2",is_correct:false},
+            {id:"c",text:"4",is_correct:false},
+            {id:"d",text:"1",is_correct:false}
+          ]},
+          { id: "7", prompt: "Which word means 'all people'?", options: [
+            {id:"a",text:"everybody",is_correct:true},
+            {id:"b",text:"everywhere",is_correct:false},
+            {id:"c",text:"example",is_correct:false},
+            {id:"d",text:"exercise",is_correct:false}
+          ]},
+          { id: "8", prompt: "What is a 'footstool'?", options: [
+            {id:"a",text:"A small stool to rest your feet on",is_correct:true},
+            {id:"b",text:"A type of shoe",is_correct:false},
+            {id:"c",text:"A stool for your head",is_correct:false},
+            {id:"d",text:"A tall ladder",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word has the same /j/ sound as 'jewelry'?", options: [
+            {id:"a",text:"January",is_correct:true},
+            {id:"b",text:"helicopter",is_correct:false},
+            {id:"c",text:"furniture",is_correct:false},
+            {id:"d",text:"exercise",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which sentence uses 'festival' correctly?", options: [
+            {id:"a",text:"We danced at the music festival.",is_correct:true},
+            {id:"b",text:"She festival to school.",is_correct:false},
+            {id:"c",text:"He bought a new festival.",is_correct:false},
+            {id:"d",text:"The festival is blue.",is_correct:false}
+          ]},
+          { id: "11", prompt: "What does 'evergreen' refer to?", options: [
+            {id:"a",text:"A tree that stays green all year",is_correct:true},
+            {id:"b",text:"A color that fades",is_correct:false},
+            {id:"c",text:"A type of flower",is_correct:false},
+            {id:"d",text:"A green festival",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'a place to sit by a fire'?", options: [
+            {id:"a",text:"fireplace",is_correct:true},
+            {id:"b",text:"flowerpot",is_correct:false},
+            {id:"c",text:"footstool",is_correct:false},
+            {id:"d",text:"furniture",is_correct:false}
+          ]},
+          { id: "13", prompt: "How is 'February' typically pronounced in casual speech?", options: [
+            {id:"a",text:"FEB-roo-ary",is_correct:true},
+            {id:"b",text:"FEB-you-ary",is_correct:false},
+            {id:"c",text:"FEB-u-ary",is_correct:false},
+            {id:"d",text:"FEB-ru-ary",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word contains the prefix 'ex-' meaning 'out' or 'thoroughly'?", options: [
+            {id:"a",text:"exercise",is_correct:false},
+            {id:"b",text:"excellent",is_correct:true},
+            {id:"c",text:"example",is_correct:false},
+            {id:"d",text:"excited",is_correct:false}
+          ]},
+          { id: "15", prompt: "What does 'important' mean?", options: [
+            {id:"a",text:"Having great significance or value",is_correct:true},
+            {id:"b",text:"Very small",is_correct:false},
+            {id:"c",text:"Old-fashioned",is_correct:false},
+            {id:"d",text:"Round",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word is often misspelled as 'jewlery'?", options: [
+            {id:"a",text:"jewelry",is_correct:true},
+            {id:"b",text:"January",is_correct:false},
+            {id:"c",text:"government",is_correct:false},
+            {id:"d",text:"helicopter",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word means 'physical activity to stay healthy'?", options: [
+            {id:"a",text:"exercise",is_correct:true},
+            {id:"b",text:"example",is_correct:false},
+            {id:"c",text:"eleven",is_correct:false},
+            {id:"d",text:"elevator",is_correct:false}
+          ]},
+          { id: "18", prompt: "What part of 'helicopter' comes from Greek 'helix' (spiral)?", options: [
+            {id:"a",text:"hel-",is_correct:true},
+            {id:"b",text:"copter",is_correct:false},
+            {id:"c",text:"li",is_correct:false},
+            {id:"d",text:"pter",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'attractive in appearance (for a man)'?", options: [
+            {id:"a",text:"handsome",is_correct:true},
+            {id:"b",text:"elegant",is_correct:false},
+            {id:"c",text:"generous",is_correct:false},
+            {id:"d",text:"excellent",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is learning words like 'government' and 'electric' important?", options: [
+            {id:"a",text:"They appear often in school, news, and everyday life",is_correct:true},
+            {id:"b",text:"They are only used in poetry",is_correct:false},
+            {id:"c",text:"They are easy to spell",is_correct:false},
+            {id:"d",text:"They are never used in speech",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/awf ul/g, 'awful'], [/p ocket/g, 'pocket'], [/p olish/g, 'polish'],
+        [/J anuary/g, 'January'], [/j ewelry/g, 'jewelry'], [/h elicopter/g, 'helicopter'],
+        [/e lephant/g, 'elephant']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 128*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -201,8 +369,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -210,6 +378,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -220,9 +446,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
