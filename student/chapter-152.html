@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 153 — The -age Ending (/ij/ sound)"/>
-  <title>Mini OpenStax — Lesson 153: The -age Ending (/ij/ sound)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 153: -age = /ij/"/>
+  <title>Mini OpenStax — Lesson 153: -age = /ij/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 153: The -age Ending (/ij/ sound)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH153: Decode multi-syllable words ending in '-age' where it makes the /ij/ sound.</div>
+        <h1 id="chapter-title">Lesson 153: -age = /ij/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH153: Decode words ending in -age where 'age' says /ij/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -42,20 +47,28 @@
 
     <main id="main-content">
       <div class="section">
-        <h2>🔤 Word List: The -age Ending</h2>
-        <p>In these multi-syllable words, the ending <strong>-age</strong> sounds like <strong>/ij/</strong> (as in "edge" or "idge"):</p>
+        <h2>🔤 Word List</h2>
+        <p>Words ending in -age (pronounced /ij/)</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, paying close attention to the sound of the <strong>-age</strong> suffix:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your understanding of Lesson 153 vocabulary.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,130 +80,295 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 152; // chapter-152.html = Lesson 153
-      const maxChapter = 155;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 152; // Lesson 153
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 153: The -age Ending (/ij/ sound)",
-        loTags: ["LO PH153: Decode multi-syllable words ending in '-age' where it makes the /ij/ sound."],
+        title: "Lesson 153: -age = /ij/",
+        loTags: ["LO PH153: Decode words ending in -age where 'age' says /ij/"],
         contentWords: [
-          "image", "manage", "voyage", "bandage", "cottage", "village", "baggage", "damage", "savage", "package", "advantage", "message", "cabbage", "luggage"
+          "message", "village", "baggage", "package", "garbage", "advantage", "average", "damage", "manage", "image", "mirage", "passage", "postage", "savage", "storage", "voyage"
         ],
         sentences: [
-          "1) A rabbit can nibble on cabbage leaves.",
-          "2) Max got a big brown package in the mail.",
-          "3) The messenger had a message for the prince.",
-          "4) The train can carry a passenger and his baggage.",
-          "5) A bandage will keep a cut clean and help it to heal.",
-          "6) Gail had some peaches with cottage cheese for lunch.",
-          "7) The ship set sail on a long sea voyage to South America.",
-          "8) The dog and the cat manage to get along with each other."
+          "Mitch sent a message to his friend.",
+          "The village was located near a river.",
+          "Please take out the garbage.",
+          "She received a package in the mail.",
+          "The storm caused damage to the roof.",
+          "We stored our luggage in the baggage compartment.",
+          "The mirage made the desert look like an ocean.",
+          "The ship went on a long voyage across the sea."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "What can a rabbit nibble on?", options: [{id:"a",text:"cabbage leaves",is_correct:true},{id:"b",text:"baggage",is_correct:false},{id:"c",text:"a bandage",is_correct:false}] },
-          { id: "2", prompt: "What color was the package Max got in the mail?", options: [{id:"a",text:"red",is_correct:false},{id:"b",text:"brown",is_correct:true},{id:"c",text:"white",is_correct:false}] },
-          { id: "3", prompt: "Who did the messenger have a message for?", options: [{id:"a",text:"the prince",is_correct:true},{id:"b",text:"the village",is_correct:false},{id:"c",text:"the savage",is_correct:false}] },
-          { id: "4", prompt: "What can a train carry along with a passenger?", options: [{id:"a",text:"his baggage",is_correct:true},{id:"b",text:"a cottage",is_correct:false},{id:"c",text:"an advantage",is_correct:false}] },
-          { id: "5", prompt: "What is the purpose of a bandage?", options: [{id:"a",text:"to damage a cut",is_correct:false},{id:"b",text:"to keep a cut clean and help it heal",is_correct:true},{id:"c",text:"to carry luggage",is_correct:false}] },
-          { id: "6", prompt: "What did Gail have with her peaches for lunch?", options: [{id:"a",text:"cabbage",is_correct:false},{id:"b",text:"cottage cheese",is_correct:true},{id:"c",text:"a package",is_correct:false}] },
-          { id: "7", prompt: "Where was the ship going on its voyage?", options: [{id:"a",text:"South America",is_correct:true},{id:"b",text:"the village",is_correct:false},{id:"c",text:"the cottage",is_correct:false}] },
-          { id: "8", prompt: "How do the dog and cat interact?", options: [{id:"a",text:"they damage each other",is_correct:false},{id:"b",text:"they manage to get along",is_correct:true},{id:"c",text:"they send a message",is_correct:false}] },
-          { id: "9", prompt: "Which word means a long journey, especially by sea?", options: [{id:"a",text:"voyage",is_correct:true},{id:"b",text:"village",is_correct:false},{id:"c",text:"cabbage",is_correct:false}] },
-          { id: "10", prompt: "Which word means a small house in the country?", options: [{id:"a",text:"cottage",is_correct:true},{id:"b",text:"baggage",is_correct:false},{id:"c",text:"advantage",is_correct:false}] },
-          { id: "11", prompt: "Which word means a small town or community?", options: [{id:"a",text:"village",is_correct:true},{id:"b",text:"image",is_correct:false},{id:"c",text:"manage",is_correct:false}] },
-          { id: "12", prompt: "Which word refers to bags and suitcases used for travel?", options: [{id:"a",text:"luggage",is_correct:true},{id:"b",text:"bandage",is_correct:false},{id:"c",text:"message",is_correct:false}] },
-          { id: "13", prompt: "Which word means a picture or mental representation?", options: [{id:"a",text:"image",is_correct:true},{id:"b",text:"savage",is_correct:false},{id:"c",text:"damage",is_correct:false}] },
-          { id: "14", prompt: "Which word means harm or injury to something?", options: [{id:"a",text:"damage",is_correct:true},{id:"b",text:"advantage",is_correct:false},{id:"c",text:"package",is_correct:false}] },
-          { id: "15", prompt: "Which word means a condition that puts one in a favorable position?", options: [{id:"a",text:"advantage",is_correct:true},{id:"b",text:"voyage",is_correct:false},{id:"c",text:"village",is_correct:false}] },
-          { id: "16", prompt: "Which word refers to a green leafy vegetable?", options: [{id:"a",text:"cabbage",is_correct:true},{id:"b",text:"luggage",is_correct:false},{id:"c",text:"bandage",is_correct:false}] },
-          { id: "17", prompt: "Which word means to be in charge of or to handle successfully?", options: [{id:"a",text:"manage",is_correct:true},{id:"b",text:"image",is_correct:false},{id:"c",text:"savage",is_correct:false}] },
-          { id: "18", prompt: "Which word means fierce, violent, or uncontrolled?", options: [{id:"a",text:"savage",is_correct:true},{id:"b",text:"cottage",is_correct:false},{id:"c",text:"message",is_correct:false}] },
-          { id: "19", prompt: "What sound does '-age' make in these words?", options: [{id:"a",text:"/ayj/",is_correct:false},{id:"b",text:"/ij/",is_correct:true},{id:"c",text:"/ag/",is_correct:false}] },
-          { id: "20", prompt: "Which word refers to information sent to someone?", options: [{id:"a",text:"message",is_correct:true},{id:"b",text:"baggage",is_correct:false},{id:"c",text:"package",is_correct:false}] }
+          { id: "1", prompt: "How is '-age' pronounced in 'message'?", options: [
+            {id:"a",text:"/ij/ as in 'edge'",is_correct:true},
+            {id:"b",text:"/ayj/ as in 'cage'",is_correct:false},
+            {id:"c",text:"/ag/ as in 'bag'",is_correct:false},
+            {id:"d",text:"/ahzh/ as in French 'garage'",is_correct:false}
+          ]},
+          { id: "2", prompt: "What does 'village' mean?", options: [
+            {id:"a",text:"A small group of houses in the countryside",is_correct:true},
+            {id:"b",text:"A large city",is_correct:false},
+            {id:"c",text:"A type of food",is_correct:false},
+            {id:"d",text:"A loud noise",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'unwanted waste material'?", options: [
+            {id:"a",text:"garbage",is_correct:true},
+            {id:"b",text:"package",is_correct:false},
+            {id:"c",text:"message",is_correct:false},
+            {id:"d",text:"voyage",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'damage' correctly?", options: [
+            {id:"a",text:"The hailstorm did damage to the car.",is_correct:true},
+            {id:"b",text:"He damage to the store.",is_correct:false},
+            {id:"c",text:"They are very damage.",is_correct:false},
+            {id:"d",text:"We damage running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How many syllables in 'baggage'?", options: [
+            {id:"a",text:"2 (bag-age)",is_correct:true},
+            {id:"b",text:"1",is_correct:false},
+            {id:"c",text:"3",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word refers to a wrapped parcel?", options: [
+            {id:"a",text:"package",is_correct:true},
+            {id:"b",text:"message",is_correct:false},
+            {id:"c",text:"voyage",is_correct:false},
+            {id:"d",text:"mirage",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'voyage' mean?", options: [
+            {id:"a",text:"A long journey by sea or in space",is_correct:true},
+            {id:"b",text:"A short walk",is_correct:false},
+            {id:"c",text:"A type of food",is_correct:false},
+            {id:"d",text:"A loud sound",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word has a HARD 'g' (/g/) sound?", options: [
+            {id:"a",text:"go",is_correct:true},
+            {id:"b",text:"message",is_correct:false},
+            {id:"c",text:"village",is_correct:false},
+            {id:"d",text:"baggage",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes the DESERT ILLUSION in: 'The mirage made the desert look like an ocean'?", options: [
+            {id:"a",text:"mirage",is_correct:true},
+            {id:"b",text:"desert",is_correct:false},
+            {id:"c",text:"ocean",is_correct:false},
+            {id:"d",text:"look",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'She checked her email for a new ___.'?", options: [
+            {id:"a",text:"message",is_correct:true},
+            {id:"b",text:"garbage",is_correct:false},
+            {id:"c",text:"voyage",is_correct:false},
+            {id:"d",text:"savage",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'storage,' the '-age' says:", options: [
+            {id:"a",text:"/ij/",is_correct:true},
+            {id:"b",text:"/ayj/",is_correct:false},
+            {id:"c",text:"/ag/",is_correct:false},
+            {id:"d",text:"/zh/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'to handle or control something'?", options: [
+            {id:"a",text:"manage",is_correct:true},
+            {id:"b",text:"damage",is_correct:false},
+            {id:"c",text:"package",is_correct:false},
+            {id:"d",text:"average",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is special about the 'g' in 'passage'?", options: [
+            {id:"a",text:"It is soft (/j/) because it is followed by 'e', making /ij/",is_correct:true},
+            {id:"b",text:"It is hard (/g/) because it's at the end",is_correct:false},
+            {id:"c",text:"It is silent",is_correct:false},
+            {id:"d",text:"It says /d/",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'messge'?", options: [
+            {id:"a",text:"message",is_correct:true},
+            {id:"b",text:"village",is_correct:false},
+            {id:"c",text:"package",is_correct:false},
+            {id:"d",text:"garbage",is_correct:false}
+          ]},
+          { id: "15", prompt: "In 'postage,' the '-age' is pronounced:", options: [
+            {id:"a",text:"/ij/",is_correct:true},
+            {id:"b",text:"/ayj/",is_correct:false},
+            {id:"c",text:"/ag/",is_correct:false},
+            {id:"d",text:"/zh/",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word refers to the cost of mailing a letter?", options: [
+            {id:"a",text:"postage",is_correct:true},
+            {id:"b",text:"package",is_correct:false},
+            {id:"c",text:"message",is_correct:false},
+            {id:"d",text:"voyage",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word means 'a false appearance caused by atmospheric conditions'?", options: [
+            {id:"a",text:"mirage",is_correct:true},
+            {id:"b",text:"image",is_correct:false},
+            {id:"c",text:"village",is_correct:false},
+            {id:"d",text:"savage",is_correct:false}
+          ]},
+          { id: "18", prompt: "Why does '-age' say /ij/ in 'damage'?", options: [
+            {id:"a",text:"Because 'g' is followed by 'e', making it soft (/j/), and the whole suffix sounds like 'ij'",is_correct:true},
+            {id:"b",text:"Because it's always spelled with 'age'",is_correct:false},
+            {id:"c",text:"Because it's French",is_correct:false},
+            {id:"d",text:"It’s random",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'luggage carried on a trip'?", options: [
+            {id:"a",text:"baggage",is_correct:true},
+            {id:"b",text:"package",is_correct:false},
+            {id:"c",text:"message",is_correct:false},
+            {id:"d",text:"storage",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is the -age = /ij/ pattern important?", options: [
+            {id:"a",text:"It appears in common nouns for objects, actions, and states—essential for reading fluency",is_correct:true},
+            {id:"b",text:"It only applies to three words",is_correct:false},
+            {id:"c",text:"It makes reading slower",is_correct:false},
+            {id:"d",text:"It’s not used in English",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/f amily/g, 'family'], [/p enny/g, 'penny'], [/excep t/g, 'except'],
+        [/simp le/g, 'simple'], [/p uzzle/g, 'puzzle'], [/m uddy/g, 'muddy'],
+        [/w ould/g, 'would'], [/sh ould/g, 'should'], [/s aid/g, 'said'],
+        [/them self/g, 'themselves'], [/his self/g, 'himself'], [/p encil/g, 'pencil'],
+        [/c inema/g, 'cinema'], [/j uice/g, 'juice'], [/f ence/g, 'fence'],
+        [/p eace/g, 'peace'], [/f ancy/g, 'fancy'], [/p olicy/g, 'policy'],
+        [/j udge/g, 'judge'], [/g em/g, 'gem'], [/f ridge/g, 'fridge'],
+        [/g ym/g, 'gym'], [/g iant/g, 'giant'], [/g inger/g, 'ginger'],
+        [/m essage/g, 'message'], [/v illage/g, 'village'], [/b aggage/g, 'baggage']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 153*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -200,8 +378,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -209,6 +387,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -219,9 +455,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
