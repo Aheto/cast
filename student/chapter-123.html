@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 124: n't Contractions"/>
-  <title>Mini OpenStax — Lesson 124: n't Contractions</title>
+  <meta name="description" content="Mini OpenStax: Lesson 144: y = /ē/ in Adjectives"/>
+  <title>Mini OpenStax — Lesson 144: y = /ē/ in Adjectives</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 124: n't Contractions</h1>
-        <div class="lo-tags" id="lo-tags">LO PH124: Decode and use common n't contractions</div>
+        <h1 id="chapter-title">Lesson 144: y = /ē/ in Adjectives</h1>
+        <div class="lo-tags" id="lo-tags">LO PH144: Decode words ending in -y where 'y' says /ē/</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the n't contraction ending</p>
+        <p>Words ending in -y (y = /ē/)</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -102,145 +102,145 @@
       }
 
       // === CONFIGURE PER LESSON ===
-      const currentChapter = 123; // e.g., 76 for chapter-76.html = Lesson 77
+      const currentChapter = 143; // Lesson 144
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 124: n't Contractions",
-        loTags: ["LO PH124: Decode and use common n't contractions"],
+        title: "Lesson 144: y = /ē/ in Adjectives",
+        loTags: ["LO PH144: Decode words ending in -y where 'y' says /ē/"],
         contentWords: [
-          "didn't", "hadn't", "isn't", "hasn't", "haven't", "wouldn't", "couldn't", "shouldn't", "aren't", "weren't", "wasn't", "doesn't"
+          "body", "study", "copy", "pity", "very", "dairy", "lucky", "rocky", "sticky"
         ],
         sentences: [
-          "You shouldn't cheat or steal.",
-          "Gail hadn't seen Joan in two weeks.",
-          "Roy couldn't see well in the thick fog.",
-          "They aren't going to fail the test next week.",
-          "Jay isn't running on the track team this year.",
-          "Chuck didn't get to go on the trip to the beach.",
-          "I haven't been to the zoo in at least three years."
+          "Cheese is a dairy product.",
+          "This could be your lucky day.",
+          "This problem is not very difficult.",
+          "Mitch must study for the test next week.",
+          "The pink cotton candy was very sweet and sticky.",
+          "Beth can rest her weary body in a hot bubble bath.",
+          "The ship struck the rocky reef and then sank to the bottom of the sea."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which contraction means 'would not'?", options: [
-            {id:"a",text:"wouldn't",is_correct:true},
-            {id:"b",text:"won't",is_correct:false},
-            {id:"c",text:"shouldn't",is_correct:false},
-            {id:"d",text:"couldn't",is_correct:false}
+          { id: "1", prompt: "In 'study,' the 'y' sounds like:", options: [
+            {id:"a",text:"/ē/ as in 'see'",is_correct:true},
+            {id:"b",text:"/ī/ as in 'sky'",is_correct:false},
+            {id:"c",text:"/y/ as in 'yes'",is_correct:false},
+            {id:"d",text:"/uh/ as in 'ago'",is_correct:false}
           ]},
-          { id: "2", prompt: "What two words make 'isn't'?", options: [
-            {id:"a",text:"is not",is_correct:true},
-            {id:"b",text:"it is not",is_correct:false},
-            {id:"c",text:"was not",is_correct:false},
-            {id:"d",text:"has not",is_correct:false}
+          { id: "2", prompt: "Which word describes the DAY in: 'This could be your lucky day'?", options: [
+            {id:"a",text:"lucky",is_correct:true},
+            {id:"b",text:"day",is_correct:false},
+            {id:"c",text:"your",is_correct:false},
+            {id:"d",text:"could",is_correct:false}
           ]},
-          { id: "3", prompt: "Which sentence uses a contraction correctly?", options: [
-            {id:"a",text:"She doesn't like spinach.",is_correct:true},
-            {id:"b",text:"She don't like spinach.",is_correct:false},
-            {id:"c",text:"She do not likes spinach.",is_correct:false},
-            {id:"d",text:"She doesn't likes spinach.",is_correct:false}
+          { id: "3", prompt: "What does 'dairy' mean?", options: [
+            {id:"a",text:"Related to milk and milk products",is_correct:true},
+            {id:"b",text:"Related to chickens",is_correct:false},
+            {id:"c",text:"Related to vegetables",is_correct:false},
+            {id:"d",text:"Related to meat",is_correct:false}
           ]},
-          { id: "4", prompt: "What does 'hadn't' stand for?", options: [
-            {id:"a",text:"had not",is_correct:true},
-            {id:"b",text:"has not",is_correct:false},
-            {id:"c",text:"have not",is_correct:false},
-            {id:"d",text:"he had not",is_correct:false}
+          { id: "4", prompt: "Which sentence uses 'very' correctly?", options: [
+            {id:"a",text:"The test was very hard.",is_correct:true},
+            {id:"b",text:"He very to the store.",is_correct:false},
+            {id:"c",text:"They are very.",is_correct:false},
+            {id:"d",text:"We very running.",is_correct:false}
           ]},
-          { id: "5", prompt: "Which word is NOT a contraction with n't?", options: [
-            {id:"a",text:"cannot",is_correct:true},
-            {id:"b",text:"shouldn't",is_correct:false},
-            {id:"c",text:"weren't",is_correct:false},
-            {id:"d",text:"doesn't",is_correct:false}
+          { id: "5", prompt: "How many syllables in 'sticky'?", options: [
+            {id:"a",text:"2 (stick-y)",is_correct:true},
+            {id:"b",text:"1",is_correct:false},
+            {id:"c",text:"3",is_correct:false},
+            {id:"d",text:"4",is_correct:false}
           ]},
-          { id: "6", prompt: "Choose the contraction for 'have not'.", options: [
-            {id:"a",text:"haven't",is_correct:true},
-            {id:"b",text:"hasn't",is_correct:false},
-            {id:"c",text:"hadn't",is_correct:false},
-            {id:"d",text:"won't",is_correct:false}
+          { id: "6", prompt: "Which word means 'full of rocks'?", options: [
+            {id:"a",text:"rocky",is_correct:true},
+            {id:"b",text:"sticky",is_correct:false},
+            {id:"c",text:"lucky",is_correct:false},
+            {id:"d",text:"dairy",is_correct:false}
           ]},
-          { id: "7", prompt: "Which contraction means 'was not'?", options: [
-            {id:"a",text:"wasn't",is_correct:true},
-            {id:"b",text:"weren't",is_correct:false},
-            {id:"c",text:"isn't",is_correct:false},
-            {id:"d",text:"aren't",is_correct:false}
+          { id: "7", prompt: "What does 'pity' mean?", options: [
+            {id:"a",text:"Feeling sorry for someone",is_correct:true},
+            {id:"b",text:"Anger",is_correct:false},
+            {id:"c",text:"Happiness",is_correct:false},
+            {id:"d",text:"Excitement",is_correct:false}
           ]},
-          { id: "8", prompt: "What is the full form of 'couldn't'?", options: [
-            {id:"a",text:"could not",is_correct:true},
-            {id:"b",text:"can not",is_correct:false},
-            {id:"c",text:"would not",is_correct:false},
-            {id:"d",text:"should not",is_correct:false}
+          { id: "8", prompt: "Which word is a noun that can also describe type (as in 'body lotion')?", options: [
+            {id:"a",text:"body",is_correct:true},
+            {id:"b",text:"study",is_correct:false},
+            {id:"c",text:"copy",is_correct:false},
+            {id:"d",text:"pity",is_correct:false}
           ]},
-          { id: "9", prompt: "Which sentence is grammatically correct?", options: [
-            {id:"a",text:"They haven't finished their homework.",is_correct:true},
-            {id:"b",text:"They hasn't finished their homework.",is_correct:false},
-            {id:"c",text:"They haven't finished his homework.",is_correct:false},
-            {id:"d",text:"They haven't finished her homework.",is_correct:false}
+          { id: "9", prompt: "Which word tells HOW DIFFICULT the problem is?", options: [
+            {id:"a",text:"very",is_correct:true},
+            {id:"b",text:"problem",is_correct:false},
+            {id:"c",text:"not",is_correct:false},
+            {id:"d",text:"this",is_correct:false}
           ]},
-          { id: "10", prompt: "What does 'aren't' mean?", options: [
-            {id:"a",text:"are not",is_correct:true},
-            {id:"b",text:"is not",is_correct:false},
-            {id:"c",text:"am not",is_correct:false},
-            {id:"d",text:"was not",is_correct:false}
+          { id: "10", prompt: "Which word completes: 'She made a photocopy of the ___.'?", options: [
+            {id:"a",text:"study",is_correct:false},
+            {id:"b",text:"document",is_correct:false},
+            {id:"c",text:"All of the above could fit, but 'copy' is the root",is_correct:true},
+            {id:"d",text:"body",is_correct:false}
           ]},
-          { id: "11", prompt: "Which contraction is used with third-person singular (he, she, it)?", options: [
-            {id:"a",text:"doesn't",is_correct:true},
-            {id:"b",text:"don't",is_correct:false},
-            {id:"c",text:"aren't",is_correct:false},
-            {id:"d",text:"weren't",is_correct:false}
+          { id: "11", prompt: "In 'body,' the 'y' says:", options: [
+            {id:"a",text:"/ē/",is_correct:true},
+            {id:"b",text:"/ī/",is_correct:false},
+            {id:"c",text:"/y/",is_correct:false},
+            {id:"d",text:"/uh/",is_correct:false}
           ]},
-          { id: "12", prompt: "What is the contraction for 'should not'?", options: [
-            {id:"a",text:"shouldn't",is_correct:true},
-            {id:"b",text:"wouldn't",is_correct:false},
-            {id:"c",text:"couldn't",is_correct:false},
-            {id:"d",text:"isn't",is_correct:false}
+          { id: "12", prompt: "Which word means 'having good fortune'?", options: [
+            {id:"a",text:"lucky",is_correct:true},
+            {id:"b",text:"rocky",is_correct:false},
+            {id:"c",text:"sticky",is_correct:false},
+            {id:"d",text:"dairy",is_correct:false}
           ]},
-          { id: "13", prompt: "Which word completes the sentence: 'He ___ going to the party.' (meaning 'is not')?", options: [
-            {id:"a",text:"isn't",is_correct:true},
-            {id:"b",text:"wasn't",is_correct:false},
-            {id:"c",text:"aren't",is_correct:false},
-            {id:"d",text:"weren't",is_correct:false}
+          { id: "13", prompt: "What part of speech is 'study' in: 'Mitch must study'?", options: [
+            {id:"a",text:"Verb",is_correct:true},
+            {id:"b",text:"Adjective",is_correct:false},
+            {id:"c",text:"Noun",is_correct:false},
+            {id:"d",text:"Adverb",is_correct:false}
           ]},
-          { id: "14", prompt: "What is the contraction for 'will not'?", options: [
-            {id:"a",text:"won't",is_correct:false},
-            {id:"b",text:"wouldn't",is_correct:false},
-            {id:"c",text:"None of these — it's not an n't contraction!",is_correct:true},
-            {id:"d",text:"wasn't",is_correct:false}
+          { id: "14", prompt: "Which word is often misspelled as 'stickie'?", options: [
+            {id:"a",text:"sticky",is_correct:true},
+            {id:"b",text:"lucky",is_correct:false},
+            {id:"c",text:"rocky",is_correct:false},
+            {id:"d",text:"dairy",is_correct:false}
           ]},
-          { id: "15", prompt: "Which contraction matches 'did not'?", options: [
-            {id:"a",text:"didn't",is_correct:true},
-            {id:"b",text:"don't",is_correct:false},
-            {id:"c",text:"doesn't",is_correct:false},
-            {id:"d",text:"do not",is_correct:false}
+          { id: "15", prompt: "In 'copy,' the 'y' is pronounced:", options: [
+            {id:"a",text:"/ē/",is_correct:true},
+            {id:"b",text:"/ī/",is_correct:false},
+            {id:"c",text:"/y/",is_correct:false},
+            {id:"d",text:"/uh/",is_correct:false}
           ]},
-          { id: "16", prompt: "Which sentence uses 'weren't' correctly?", options: [
-            {id:"a",text:"They weren't at school yesterday.",is_correct:true},
-            {id:"b",text:"She weren't at school yesterday.",is_correct:false},
-            {id:"c",text:"He weren't at school yesterday.",is_correct:false},
-            {id:"d",text:"I weren't at school yesterday.",is_correct:false}
+          { id: "16", prompt: "Which word refers to milk-based foods?", options: [
+            {id:"a",text:"dairy",is_correct:true},
+            {id:"b",text:"body",is_correct:false},
+            {id:"c",text:"study",is_correct:false},
+            {id:"d",text:"pity",is_correct:false}
           ]},
-          { id: "17", prompt: "What is the contraction for 'has not'?", options: [
-            {id:"a",text:"hasn't",is_correct:true},
-            {id:"b",text:"haven't",is_correct:false},
-            {id:"c",text:"hadn't",is_correct:false},
-            {id:"d",text:"isn't",is_correct:false}
+          { id: "17", prompt: "Which word describes a SURFACE that is hard to pull things off of?", options: [
+            {id:"a",text:"sticky",is_correct:true},
+            {id:"b",text:"rocky",is_correct:false},
+            {id:"c",text:"lucky",is_correct:false},
+            {id:"d",text:"very",is_correct:false}
           ]},
-          { id: "18", prompt: "Which word is the contraction in this sentence: 'We couldn't find the keys.'?", options: [
-            {id:"a",text:"couldn't",is_correct:true},
-            {id:"b",text:"find",is_correct:false},
-            {id:"c",text:"keys",is_correct:false},
-            {id:"d",text:"We",is_correct:false}
+          { id: "18", prompt: "Why does 'y' say /ē/ in these words?", options: [
+            {id:"a",text:"Because it’s at the end of a multisyllable word after a consonant",is_correct:true},
+            {id:"b",text:"Because it’s always /ē/",is_correct:false},
+            {id:"c",text:"Because it’s a vowel",is_correct:false},
+            {id:"d",text:"It’s random",is_correct:false}
           ]},
-          { id: "19", prompt: "Which contraction should be used here: 'She ___ seen that movie.' (meaning 'has not')?", options: [
-            {id:"a",text:"hasn't",is_correct:true},
-            {id:"b",text:"haven't",is_correct:false},
-            {id:"c",text:"hadn't",is_correct:false},
-            {id:"d",text:"isn't",is_correct:false}
+          { id: "19", prompt: "Which word means 'to learn by reading or practicing'?", options: [
+            {id:"a",text:"study",is_correct:true},
+            {id:"b",text:"copy",is_correct:false},
+            {id:"c",text:"body",is_correct:false},
+            {id:"d",text:"pity",is_correct:false}
           ]},
-          { id: "20", prompt: "Why do we use contractions like 'don't' or 'can't'?", options: [
-            {id:"a",text:"To speak or write more quickly and informally",is_correct:true},
-            {id:"b",text:"To make sentences longer",is_correct:false},
-            {id:"c",text:"To confuse readers",is_correct:false},
-            {id:"d",text:"Only in formal writing",is_correct:false}
+          { id: "20", prompt: "Why is recognizing /ē/ in -y words important?", options: [
+            {id:"a",text:"It helps with fluent reading and correct pronunciation of common English words",is_correct:true},
+            {id:"b",text:"It only matters for spelling bees",is_correct:false},
+            {id:"c",text:"It makes words shorter",is_correct:false},
+            {id:"d",text:"It’s not used in real life",is_correct:false}
           ]}
         ]
       };
@@ -254,7 +254,10 @@
         [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
         [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
         [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
-        [/awf ul/g, 'awful'], [/p ocket/g, 'pocket'], [/p olish/g, 'polish']
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/f amily/g, 'family'], [/p enny/g, 'penny'], [/excep t/g, 'except'],
+        [/simp le/g, 'simple'], [/p uzzle/g, 'puzzle']
       ];
 
       // --- RENDERING ---
