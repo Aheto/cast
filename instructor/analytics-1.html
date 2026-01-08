@@ -81,12 +81,37 @@
       font-size: 13px;
       line-height: 1.4;
       overflow-x: auto;
+      position: relative;
+    }
+    .report-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      padding: 4px 8px;
+      font-size: 12px;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .action-btn:hover {
+      background: #5a6268;
     }
     .error {
       text-align: center;
       color: #dc3545;
       padding: 20px;
       font-weight: bold;
+    }
+    .note {
+      text-align: center;
+      color: #6c757d;
+      font-size: 0.875rem;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -101,28 +126,27 @@
     </div>
 
     <div class="search-box">
-      <input type="text" id="student-search" placeholder="Search by student name (optional)" />
-      <button id="search-btn">Show All Reports</button>
+      <input type="text" id="student-search" placeholder="Enter student name or leave blank for all" />
+      <button id="search-btn">Search Reports</button>
     </div>
+    <div class="note">Reports are saved only in this browser and tied to your quiz attempts.</div>
 
     <div id="results" class="reports-container"></div>
   </div>
 
   <script>
-    // Listen for quiz reports and save them permanently
+    // Safely override localStorage.setItem to auto-save quiz reports
     (function() {
       const originalSetItem = localStorage.setItem;
       localStorage.setItem = function(key, value) {
-        // Detect WhatsApp report generation
         if (typeof value === 'string' && value.includes('*Mini OpenStax —') && value.includes('Student:')) {
-          // Parse lesson number to determine valid range (2–262)
           const lessonMatch = value.match(/Lesson (\d+)/);
           if (lessonMatch) {
-            const lessonNum = parseInt(lessonMatch[1]);
+            const lessonNum = parseInt(lessonMatch[1], 10);
             if (lessonNum >= 2 && lessonNum <= 262) {
-              const chapter = lessonNum - 1; // Lesson 2 → chapter 1
-              const reportKey = `saved_report_${chapter}_${Date.now()}`; // Unique key per attempt
-              localStorage.setItem(reportKey, value);
+              const chapter = lessonNum - 1;
+              const reportKey = `saved_report_${chapter}_${Date.now()}`;
+              originalSetItem.call(localStorage, reportKey, value);
             }
           }
         }
@@ -130,55 +154,219 @@
       };
     })();
 
-    document.getElementById('search-btn').addEventListener('click', showReports);
-    document.getElementById('student-search').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') showReports();
-    });
+    // Helper: download a blob as file
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Helper: share file (Web Share API fallback to download)
+    async function shareOrDownload(blob, filename, title = 'Quiz Report') {
+      if (navigator.share && navigator.canShare) {
+        const file = new File([blob], filename, { type: blob.type });
+        if (navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              title,
+              files: [file],
+            });
+            return;
+          } catch (err) {
+            if (err.name !== 'AbortError') console.warn('Share failed:', err);
+          }
+        }
+      }
+      // Fallback: download
+      downloadBlob(blob, filename);
+    }
+
+    // Generate SVG from plain text report
+    function generateSVG(text, width = 800, lineHeight = 16, padding = 20) {
+      const lines = text.split('\n');
+      const height = lines.length * lineHeight + padding * 2;
+      const fontSize = 13;
+      const fontFamily = 'monospace';
+
+      // Escape text for SVG
+      const escapedLines = lines.map(line =>
+        line
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+      );
+
+      const tspans = escapedLines
+        .map((line, i) => `<tspan x="${padding}" dy="${i === 0 ? lineHeight : lineHeight}">${line}</tspan>`)
+        .join('');
+
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <style>
+    .report-text { font-family: ${fontFamily}; font-size: ${fontSize}px; }
+  </style>
+  <rect width="100%" height="100%" fill="white" stroke="#ccc" stroke-width="1"/>
+  <text x="0" y="${padding}" class="report-text">
+    ${tspans}
+  </text>
+</svg>`;
+
+      return svg;
+    }
+
+    // Convert SVG string to PNG Blob
+    function svgToPngBlob(svgString, width = 800, height = null) {
+      return new Promise((resolve, reject) => {
+        const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+        const svgUrl = URL.createObjectURL(svgBlob);
+
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height || canvas.width * 0.7; // fallback
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = 'white';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0);
+          URL.revokeObjectURL(svgUrl);
+
+          canvas.toBlob(
+            blob => {
+              if (blob) resolve(blob);
+              else reject(new Error('Canvas toBlob failed'));
+            },
+            'image/png',
+            1.0
+          );
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(svgUrl);
+          reject(new Error('Failed to load SVG image'));
+        };
+        img.src = svgUrl;
+      });
+    }
+
+    function renderReportCard(reportText, timestamp) {
+      // Escape for safe display in HTML
+      const safeHTML = reportText
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\n/g, '<br>');
+
+      const card = document.createElement('div');
+      card.className = 'report-card';
+      card.innerHTML = `
+        <div>${safeHTML}</div>
+        <div class="report-actions">
+          <button class="action-btn download-svg">Download SVG</button>
+          <button class="action-btn download-png">Download PNG</button>
+          <button class="action-btn share-svg">Share SVG</button>
+          <button class="action-btn share-png">Share PNG</button>
+        </div>
+      `;
+
+      // Extract filename base
+      const studentMatch = reportText.match(/Student:\s*(.+)\n/);
+      const lessonMatch = reportText.match(/Lesson (\d+)/);
+      const studentName = (studentMatch ? studentMatch[1].trim() : 'Student').replace(/[^a-z0-9]/gi, '_');
+      const lessonNum = lessonMatch ? lessonMatch[1] : 'X';
+      const dateStr = new Date(timestamp).toISOString().slice(0, 10); // YYYY-MM-DD
+      const baseName = `QuizReport_Lesson${lessonNum}_${studentName}_${dateStr}`;
+
+      // Add event listeners
+      card.querySelector('.download-svg').addEventListener('click', () => {
+        const svgStr = generateSVG(reportText);
+        const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+        downloadBlob(blob, `${baseName}.svg`);
+      });
+
+      card.querySelector('.download-png').addEventListener('click', async () => {
+        try {
+          const svgStr = generateSVG(reportText);
+          const pngBlob = await svgToPngBlob(svgStr);
+          downloadBlob(pngBlob, `${baseName}.png`);
+        } catch (err) {
+          alert('Failed to generate PNG: ' + err.message);
+        }
+      });
+
+      card.querySelector('.share-svg').addEventListener('click', () => {
+        const svgStr = generateSVG(reportText);
+        const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+        shareOrDownload(blob, `${baseName}.svg`, 'Quiz Report (SVG)');
+      });
+
+      card.querySelector('.share-png').addEventListener('click', async () => {
+        try {
+          const svgStr = generateSVG(reportText);
+          const pngBlob = await svgToPngBlob(svgStr);
+          shareOrDownload(pngBlob, `${baseName}.png`, 'Quiz Report (PNG)');
+        } catch (err) {
+          alert('Failed to generate/share PNG: ' + err.message);
+        }
+      });
+
+      return card;
+    }
 
     function showReports() {
       const searchTerm = document.getElementById('student-search').value.trim().toLowerCase();
       const allKeys = Object.keys(localStorage);
-      const reports = [];
+      const reportEntries = [];
 
-      // Find all saved reports (keys like saved_report_X_*)
       for (const key of allKeys) {
         if (key.startsWith('saved_report_')) {
           const reportText = localStorage.getItem(key);
           if (reportText && typeof reportText === 'string') {
-            // Extract student name for filtering
             const studentMatch = reportText.match(/Student:\s*(.+)\n/);
             const studentName = studentMatch ? studentMatch[1].trim() : '[Unknown]';
-            
             if (!searchTerm || studentName.toLowerCase().includes(searchTerm)) {
-              reports.push(reportText);
+              const parts = key.split('_');
+              const timestamp = parts.length >= 4 ? parseInt(parts[parts.length - 1], 10) : 0;
+              reportEntries.push({ text: reportText, time: timestamp });
             }
           }
         }
       }
 
+      reportEntries.sort((a, b) => b.time - a.time);
+
       const container = document.getElementById('results');
-      if (reports.length === 0) {
+
+      if (reportEntries.length === 0) {
         container.innerHTML = `<div class="error">No quiz reports found${searchTerm ? ` for "${searchTerm}"` : ''}.</div>`;
         container.style.display = 'block';
         return;
       }
 
-      // Sort newest first (based on timestamp in key, if possible)
-      reports.sort((a, b) => {
-        // We can't perfectly sort without timestamps, so just reverse to show newest saved first
-        return 0; // Keep insertion order
+      const fragment = document.createDocumentFragment();
+      const heading = document.createElement('h2');
+      heading.textContent = `${reportEntries.length} Report(s) Found`;
+      fragment.appendChild(heading);
+
+      reportEntries.forEach(entry => {
+        const card = renderReportCard(entry.text, entry.time);
+        fragment.appendChild(card);
       });
 
-      let html = `<h2>${reports.length} Report(s) Found</h2>`;
-      reports.forEach(report => {
-        html += `<div class="report-card">${report}</div>`;
-      });
-
-      container.innerHTML = html;
+      container.innerHTML = '';
+      container.appendChild(fragment);
       container.style.display = 'block';
     }
 
-    // Load all reports on page load
+    document.getElementById('search-btn').addEventListener('click', showReports);
+    document.getElementById('student-search').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') showReports();
+    });
+
     window.addEventListener('DOMContentLoaded', showReports);
   </script>
 </body>
