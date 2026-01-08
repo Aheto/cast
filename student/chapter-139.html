@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 140 — Multisyllable Words with the -le Syllable Ending"/>
-  <title>Mini OpenStax — Lesson 140: Multisyllable Words (Ending le)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 140: -le with Blends"/>
+  <title>Mini OpenStax — Lesson 140: -le with Blends</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 140: Multisyllable Words (le Syllable)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH140: Decode multisyllable words ending with various 'consonant + le' patterns including 'ckle' and 'ngle'.</div>
+        <h1 id="chapter-title">Lesson 140: -le with Blends</h1>
+        <div class="lo-tags" id="lo-tags">LO PH140: Decode words with consonant blends + 'le'</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,19 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Focus on words ending in <strong>-kle</strong> (often spelled <strong>ckle</strong>) and <strong>-gle</strong>:</p>
+        <p>Words with consonant blends + 'le' (e.g., buck-le)</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, paying attention to the final <strong>-le</strong> syllables:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your knowledge of Lesson 140 vocabulary and context.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,131 +80,290 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 139; // chapter-139.html = Lesson 140
-      const maxChapter = 150;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 139; // Lesson 140
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 140: Multisyllable Words (le Syllable)",
-        loTags: ["LO PH140: Decode multisyllable words ending with various 'consonant + le' patterns including 'ckle' and 'ngle'."],
+        title: "Lesson 140: -le with Blends",
+        loTags: ["LO PH140: Decode words with consonant blends + 'le'"],
         contentWords: [
           "pickle", "tickle", "tackle", "crackle", "buckle", "freckle", "angle", "jungle", "single", "tingle", "twinkle", "sprinkle", "ankle"
         ],
         sentences: [
-          "1) The kitten will enjoy a tickle on the ear.",
-          "2) The cowboy had a belt with a big silver buckle.",
-          "3) Gail had a dill pickle with her cheese sandwich.",
-          "4) The animal in the zoo is from a jungle in Africa.",
-          "5) A house on Elm Street has a single room for rent.",
-          "6) That little brown spot on your cheek is a freckle.",
-          "7) Ann will tackle the difficult problem and solve it.",
-          "8) Kent must sprinkle the lawn to keep the grass green.",
-          "9) Matt sprained his ankle and must get around on crutches."
+          "The kitten will enjoy a tickle on the ear.",
+          "The cowboy had a belt with a big silver buckle.",
+          "Gail had a dill pickle with her cheese sandwich.",
+          "The animal in the zoo is from a jungle in Africa.",
+          "A house on Elm Street has a single room for rent.",
+          "That little brown spot on your cheek is a freckle.",
+          "Ann will tackle the difficult problem and solve it.",
+          "Kent must sprinkle the lawn to keep the grass green.",
+          "Matt sprained his ankle and must get around on crutches."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Where will the kitten enjoy a tickle?", options: [{id:"a",text:"on the nose",is_correct:false},{id:"b",text:"on the ear",is_correct:true},{id:"c",text:"on the tail",is_correct:false},{id:"d",text:"on the paw",is_correct:false}] },
-          { id: "2", prompt: "What kind of buckle did the cowboy have?", options: [{id:"a",text:"gold",is_correct:false},{id:"b",text:"silver",is_correct:true},{id:"c",text:"plastic",is_correct:false},{id:"d",text:"brass",is_correct:false}] },
-          { id: "3", prompt: "What did Gail have with her cheese sandwich?", options: [{id:"a",text:"a dill pickle",is_correct:true},{id:"b",text:"an apple",is_correct:false},{id:"c",text:"a banana",is_correct:false},{id:"d",text:"a cracker",is_correct:false}] },
-          { id: "4", prompt: "Where is the zoo animal originally from?", options: [{id:"a",text:"a farm in America",is_correct:false},{id:"b",text:"a jungle in Africa",is_correct:true},{id:"c",text:"a forest in Alaska",is_correct:false},{id:"d",text:"a desert",is_correct:false}] },
-          { id: "5", prompt: "How many rooms are for rent in the house on Elm Street?", options: [{id:"a",text:"double",is_correct:false},{id:"b",text:"single",is_correct:true},{id:"c",text:"triple",is_correct:false},{id:"d",text:"none",is_correct:false}] },
-          { id: "6", prompt: "What is the brown spot on the cheek called?", options: [{id:"a",text:"a pebble",is_correct:false},{id:"b",text:"a freckle",is_correct:true},{id:"c",text:"a bubble",is_correct:false},{id:"d",text:"a wrinkle",is_correct:false}] },
-          { id: "7", prompt: "What will Ann do with the difficult problem?", options: [{id:"a",text:"tackle and solve it",is_correct:true},{id:"b",text:"ignore it",is_correct:false},{id:"c",text:"mumble about it",is_correct:false},{id:"d",text:"tumble over it",is_correct:false}] },
-          { id: "8", prompt: "Why must Kent sprinkle the lawn?", options: [{id:"a",text:"to wash the car",is_correct:false},{id:"b",text:"to keep the grass green",is_correct:true},{id:"c",text:"to make a puddle",is_correct:false},{id:"d",text:"to find a pebble",is_correct:false}] },
-          { id: "9", prompt: "What did Matt sprain?", options: [{id:"a",text:"his wrist",is_correct:false},{id:"b",text:"his ankle",is_correct:true},{id:"c",text:"his elbow",is_correct:false},{id:"d",text:"his knee",is_correct:false}] },
-          { id: "10", prompt: "How does Matt get around after spraining his ankle?", options: [{id:"a",text:"on a bike",is_correct:false},{id:"b",text:"on crutches",is_correct:true},{id:"c",text:"in a wagon",is_correct:false},{id:"d",text:"running",is_correct:false}] },
-          { id: "11", prompt: "Which word means to water lightly?", options: [{id:"a",text:"sprinkle",is_correct:true},{id:"b",text:"crackle",is_correct:false},{id:"c",text:"twinkle",is_correct:false},{id:"d",text:"tingle",is_correct:false}] },
-          { id: "12", prompt: "Which word describes a starry night sky?", options: [{id:"a",text:"crackle",is_correct:false},{id:"b",text:"twinkle",is_correct:true},{id:"c",text:"buckle",is_correct:false},{id:"d",text:"tackle",is_correct:false}] },
-          { id: "13", prompt: "Which word means only one?", options: [{id:"a",text:"angle",is_correct:false},{id:"b",text:"single",is_correct:true},{id:"c",text:"jungle",is_correct:false},{id:"d",text:"tingle",is_correct:false}] },
-          { id: "14", prompt: "What word means a thick forest in a hot area?", options: [{id:"a",text:"puddle",is_correct:false},{id:"b",text:"jungle",is_correct:true},{id:"c",text:"shudder",is_correct:false},{id:"d",text:"ankle",is_correct:false}] },
-          { id: "15", prompt: "What is the spelling pattern for 'pickle'?", options: [{id:"a",text:"-kle",is_correct:false},{id:"b",text:"-ckle",is_correct:true},{id:"c",text:"-gle",is_correct:false},{id:"d",text:"-tle",is_correct:false}] },
-          { id: "16", prompt: "Which word means the space between two lines that meet?", options: [{id:"a",text:"ankle",is_correct:false},{id:"b",text:"angle",is_correct:true},{id:"c",text:"single",is_correct:false},{id:"d",text:"buckle",is_correct:false}] },
-          { id: "17", prompt: "What word describes a slight stinging or prickly feeling?", options: [{id:"a",text:"twinkle",is_correct:false},{id:"b",text:"tingle",is_correct:true},{id:"c",text:"sprinkle",is_correct:false},{id:"d",text:"crackle",is_correct:false}] },
-          { id: "18", prompt: "How many syllables are in 'freckle'?", options: [{id:"a",text:"one",is_correct:false},{id:"b",text:"two",is_correct:true},{id:"c",text:"three",is_correct:false},{id:"d",text:"four",is_correct:false}] },
-          { id: "19", prompt: "Complete the word: 'twink___'", options: [{id:"a",text:"el",is_correct:false},{id:"b",text:"le",is_correct:true},{id:"c",text:"al",is_correct:false},{id:"d",text:"il",is_correct:false}] },
-          { id: "20", prompt: "Which word rhymes with 'tickle'?", options: [{id:"a",text:"buckle",is_correct:false},{id:"b",text:"pickle",is_correct:true},{id:"c",text:"angle",is_correct:false},{id:"d",text:"single",is_correct:false}] }
+          { id: "1", prompt: "How is 'pickle' correctly divided into syllables?", options: [
+            {id:"a",text:"pick-le",is_correct:true},
+            {id:"b",text:"pic-kle",is_correct:false},
+            {id:"c",text:"pi-ckle",is_correct:false},
+            {id:"d",text:"pick-l-e",is_correct:false}
+          ]},
+          { id: "2", prompt: "What blend appears in 'buckle'?", options: [
+            {id:"a",text:"ck",is_correct:true},
+            {id:"b",text:"bl",is_correct:false},
+            {id:"c",text:"bu",is_correct:false},
+            {id:"d",text:"le",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'a small brown spot on the skin'?", options: [
+            {id:"a",text:"freckle",is_correct:true},
+            {id:"b",text:"pickle",is_correct:false},
+            {id:"c",text:"tickle",is_correct:false},
+            {id:"d",text:"angle",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'sprinkle' correctly?", options: [
+            {id:"a",text:"She will sprinkle water on the plants.",is_correct:true},
+            {id:"b",text:"He sprinkle to the store.",is_correct:false},
+            {id:"c",text:"They are very sprinkle.",is_correct:false},
+            {id:"d",text:"We sprinkle running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "In 'jungle,' the 'u' says:", options: [
+            {id:"a",text:"Short /u/ as in 'cup'",is_correct:true},
+            {id:"b",text:"Long /u/ as in 'cute'",is_correct:false},
+            {id:"c",text:"/uh/ as in 'ago'",is_correct:false},
+            {id:"d",text:"Silent",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word refers to a part of the leg near the foot?", options: [
+            {id:"a",text:"ankle",is_correct:true},
+            {id:"b",text:"angle",is_correct:false},
+            {id:"c",text:"tackle",is_correct:false},
+            {id:"d",text:"crackle",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'tackle' mean in sports?", options: [
+            {id:"a",text:"To stop a player by grabbing them",is_correct:true},
+            {id:"b",text:"To throw a ball",is_correct:false},
+            {id:"c",text:"To run fast",is_correct:false},
+            {id:"d",text:"To cheer",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word has the 'ng' blend?", options: [
+            {id:"a",text:"jungle",is_correct:true},
+            {id:"b",text:"pickle",is_correct:false},
+            {id:"c",text:"buckle",is_correct:false},
+            {id:"d",text:"sprinkle",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word means 'to make a series of small, sharp sounds'?", options: [
+            {id:"a",text:"crackle",is_correct:true},
+            {id:"b",text:"twinkle",is_correct:false},
+            {id:"c",text:"tingle",is_correct:false},
+            {id:"d",text:"freckle",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'She wore a shiny ___ on her belt.'?", options: [
+            {id:"a",text:"buckle",is_correct:true},
+            {id:"b",text:"pickle",is_correct:false},
+            {id:"c",text:"ankle",is_correct:false},
+            {id:"d",text:"angle",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'twinkle,' the 'i' says:", options: [
+            {id:"a",text:"Short /i/",is_correct:true},
+            {id:"b",text:"Long /i/",is_correct:false},
+            {id:"c",text:"/eye/",is_correct:false},
+            {id:"d",text:"/ee/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'not married or alone'?", options: [
+            {id:"a",text:"single",is_correct:true},
+            {id:"b",text:"jungle",is_correct:false},
+            {id:"c",text:"tackle",is_correct:false},
+            {id:"d",text:"crackle",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is special about the 'le' in 'tingle'?", options: [
+            {id:"a",text:"It forms its own syllable",is_correct:true},
+            {id:"b",text:"It's silent",is_correct:false},
+            {id:"c",text:"It makes the vowel long",is_correct:false},
+            {id:"d",text:"It's pronounced /el/",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'freckel'?", options: [
+            {id:"a",text:"freckle",is_correct:true},
+            {id:"b",text:"pickle",is_correct:false},
+            {id:"c",text:"tickle",is_correct:false},
+            {id:"d",text:"buckle",is_correct:false}
+          ]},
+          { id: "15", prompt: "In 'angle,' the 'a' is:", options: [
+            {id:"a",text:"Short",is_correct:true},
+            {id:"b",text:"Long",is_correct:false},
+            {id:"c",text:"Silent",is_correct:false},
+            {id:"d",text:"Schwa",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word means 'a large wild forest, especially in a hot country'?", options: [
+            {id:"a",text:"jungle",is_correct:true},
+            {id:"b",text:"angle",is_correct:false},
+            {id:"c",text:"single",is_correct:false},
+            {id:"d",text:"twinkle",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word has the 'spr' blend?", options: [
+            {id:"a",text:"sprinkle",is_correct:true},
+            {id:"b",text:"crackle",is_correct:false},
+            {id:"c",text:"pickle",is_correct:false},
+            {id:"d",text:"tackle",is_correct:false}
+          ]},
+          { id: "18", prompt: "What does the blend in 'crackle' signal?", options: [
+            {id:"a",text:"Two consonants that blend together",is_correct:true},
+            {id:"b",text:"A long vowel",is_correct:false},
+            {id:"c",text:"A silent letter",is_correct:false},
+            {id:"d",text:"A suffix",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'a feeling of slight stinging or tingling'?", options: [
+            {id:"a",text:"tingle",is_correct:true},
+            {id:"b",text:"twinkle",is_correct:false},
+            {id:"c",text:"freckle",is_correct:false},
+            {id:"d",text:"pickle",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is recognizing blends + -le important?", options: [
+            {id:"a",text:"It helps you decode and spell many descriptive and action words correctly",is_correct:true},
+            {id:"b",text:"It only applies to five words",is_correct:false},
+            {id:"c",text:"It makes reading slower",is_correct:false},
+            {id:"d",text:"It’s not used in English",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/p uddle/g, 'puddle'], [/p ebble/g, 'pebble'], [/f amily/g, 'family'],
+        [/p uzzle/g, 'puzzle'], [/f reckle/g, 'freckle'], [/supp er/g, 'supper'],
+        [/p epp er/g, 'pepper']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 140*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -201,8 +373,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -210,6 +382,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -220,9 +450,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
