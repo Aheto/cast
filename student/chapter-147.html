@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 148 — Multisyllable Words with the schwa sound"/>
-  <title>Mini OpenStax — Lesson 148: Multisyllable Words (The Schwa sound)</title>
+  <meta name="description" content="Mini OpenStax: Lesson 148: Soft c = /s/"/>
+  <title>Mini OpenStax — Lesson 148: Soft c = /s/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,8 +23,13 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
   </style>
 </head>
@@ -32,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 148: Multisyllable Words (The Schwa sound)</h1>
-        <div class="lo-tags" id="lo-tags">LO PH148: Decode multisyllable words where vowels make the unstressed 'schwa' sound.</div>
+        <h1 id="chapter-title">Lesson 148: Soft c = /s/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH148: Decode words where 'c' says /s/ before e, i, or y</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -43,19 +48,27 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>In these multisyllable words, one of the vowels makes the <strong>schwa</strong> sound (like a soft "uh"):</p>
+        <p>Words where 'c' says /s/ (soft c) before e, i, or y</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read these sentences aloud, paying attention to the underlined vowels that make the soft "uh" sound:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
-        <p>Test your understanding of Lesson 148 words and their meanings.</p>
+        <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
         <button type="button" class="btn" id="submit-quiz">Check Answers</button>
       </div>
@@ -67,131 +80,291 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      const currentChapter = 147; // chapter-147.html = Lesson 148
-      const maxChapter = 150;
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 147; // Lesson 148
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 148: Multisyllable Words (The Schwa sound)",
-        loTags: ["LO PH148: Decode multisyllable words where vowels make the unstressed 'schwa' sound."],
+        title: "Lesson 148: Soft c = /s/",
+        loTags: ["LO PH148: Decode words where 'c' says /s/ before e, i, or y"],
         contentWords: [
-          "ago", "alike", "alone", "along", "ahead", "around", "apart", "afraid", "asleep", "across", "amount", "agree", "above", "against", "upon", "until", "unless", "extra", "comma", "sofa", "data", "area"
+          "cent", "center", "city", "circle", "circus", "cycle", "celery", "cinema", "cyclist", "decide", "icicle", "pencil", "price", "spice", "office", "officer", "practice", "service", "dance", "fancy", "juice", "nice", "piece", "race", "rice", "twice"
         ],
         sentences: [
-          "1) The pup fell asleep upon the rug.",
-          "2) It was a long time ago that the king lived.",
-          "3) Don't go into the dark basement if you are afraid.",
-          "4) The man had an extra nickel in his pocket.",
-          "5) The twins are alike in many ways.",
-          "6) The dog ran across the street and around the corner.",
-          "7) The total amount of the bill was fifty dollars.",
-          "8) Put a comma between the words in a list.",
-          "9) The big tan sofa in the den is very soft."
+          "The pencil has a pink eraser on one end.",
+          "We watched a movie at the cinema last night.",
+          "The cyclist wore a helmet and gloves.",
+          "She added spice to the soup to make it taste better.",
+          "The ice cream is made with real fruit juice.",
+          "He won the race and got a gold medal.",
+          "We will practice dancing for the school play.",
+          "The office is on the second floor of the building."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Where did the pup fall asleep?", options: [{id:"a",text:"upon the rug",is_correct:true},{id:"b",text:"around the corner",is_correct:false},{id:"c",text:"above the sofa",is_correct:false}] },
-          { id: "2", prompt: "When did the king live?", options: [{id:"a",text:"today",is_correct:false},{id:"b",text:"a long time ago",is_correct:true},{id:"c",text:"until dawn",is_correct:false}] },
-          { id: "3", prompt: "Where should you not go if you are afraid?", options: [{id:"a",text:"into the dark basement",is_correct:true},{id:"b",text:"across the street",is_correct:false},{id:"c",text:"around the rug",is_correct:false}] },
-          { id: "4", prompt: "What did the man have extra in his pocket?", options: [{id:"a",text:"a penny",is_correct:false},{id:"b",text:"a nickel",is_correct:true},{id:"c",text:"a comma",is_correct:false}] },
-          { id: "5", prompt: "How are the twins described?", options: [{id:"a",text:"alike in many ways",is_correct:true},{id:"b",text:"apart",is_correct:false},{id:"c",text:"asleep",is_correct:false}] },
-          { id: "6", prompt: "Where did the dog run?", options: [{id:"a",text:"across the street and around the corner",is_correct:true},{id:"b",text:"ahead of the ship",is_correct:false},{id:"c",text:"against the wall",is_correct:false}] },
-          { id: "7", prompt: "What was the total amount of the bill?", options: [{id:"a",text:"twenty dollars",is_correct:false},{id:"b",text:"fifty dollars",is_correct:true},{id:"c",text:"nothing",is_correct:false}] },
-          { id: "8", prompt: "Where should you put a comma?", options: [{id:"a",text:"between words in a list",is_correct:true},{id:"b",text:"above the sofa",is_correct:false},{id:"c",text:"unless it rains",is_correct:false}] },
-          { id: "9", prompt: "What color and type of furniture is in the den?", options: [{id:"a",text:"a big tan sofa",is_correct:true},{id:"b",text:"a rocky chair",is_correct:false},{id:"c",text:"an extra bed",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'not with anyone else'?", options: [{id:"a",text:"along",is_correct:false},{id:"b",text:"alone",is_correct:true},{id:"c",text:"around",is_correct:false}] },
-          { id: "11", prompt: "Which word means 'on top of'?", options: [{id:"a",text:"above",is_correct:true},{id:"b",text:"across",is_correct:false},{id:"c",text:"around",is_correct:false}] },
-          { id: "12", prompt: "Which word means 'to have the same opinion'?", options: [{id:"a",text:"agree",is_correct:true},{id:"b",text:"ahead",is_correct:false},{id:"c",text:"amount",is_correct:false}] },
-          { id: "13", prompt: "Which word is a punctuation mark?", options: [{id:"a",text:"comma",is_correct:true},{id:"b",text:"data",is_correct:false},{id:"c",text:"area",is_correct:false}] },
-          { id: "14", prompt: "Which word means 'information or facts'?", options: [{id:"a",text:"data",is_correct:true},{id:"b",text:"sofa",is_correct:false},{id:"c",text:"extra",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'in front of'?", options: [{id:"a",text:"ahead",is_correct:true},{id:"b",text:"apart",is_correct:false},{id:"c",text:"alike",is_correct:false}] },
-          { id: "16", prompt: "Which word means 'not together'?", options: [{id:"a",text:"apart",is_correct:true},{id:"b",text:"along",is_correct:false},{id:"c",text:"agree",is_correct:false}] },
-          { id: "17", prompt: "Which word means 'from one side to the other'?", options: [{id:"a",text:"across",is_correct:true},{id:"b",text:"around",is_correct:false},{id:"c",text:"above",is_correct:false}] },
-          { id: "18", prompt: "In the word 'ago', which letter makes the schwa sound?", options: [{id:"a",text:"a",is_correct:true},{id:"b",text:"g",is_correct:false},{id:"c",text:"o",is_correct:false}] },
-          { id: "19", prompt: "Complete: 'I won't go ____ you come too.'", options: [{id:"a",text:"unless",is_correct:true},{id:"b",text:"until",is_correct:false},{id:"c",text:"upon",is_correct:false}] },
-          { id: "20", prompt: "Which word refers to a specific section or space?", options: [{id:"a",text:"area",is_correct:true},{id:"b",text:"comma",is_correct:false},{id:"c",text:"data",is_correct:false}] }
+          { id: "1", prompt: "When does 'c' say /s/ (soft c)?", options: [
+            {id:"a",text:"Before e, i, or y",is_correct:true},
+            {id:"b",text:"Before a, o, or u",is_correct:false},
+            {id:"c",text:"At the end of a word",is_correct:false},
+            {id:"d",text:"Always",is_correct:false}
+          ]},
+          { id: "2", prompt: "Which word has a soft 'c' sound?", options: [
+            {id:"a",text:"cent",is_correct:true},
+            {id:"b",text:"cat",is_correct:false},
+            {id:"c",text:"cot",is_correct:false},
+            {id:"d",text:"cup",is_correct:false}
+          ]},
+          { id: "3", prompt: "What does 'office' mean?", options: [
+            {id:"a",text:"A place where people work, often with desks and computers",is_correct:true},
+            {id:"b",text:"A type of drink",is_correct:false},
+            {id:"c",text:"A vehicle",is_correct:false},
+            {id:"d",text:"A game",is_correct:false}
+          ]},
+          { id: "4", prompt: "Which sentence uses 'pencil' correctly?", options: [
+            {id:"a",text:"She wrote her name with a pencil.",is_correct:true},
+            {id:"b",text:"He pencil to the store.",is_correct:false},
+            {id:"c",text:"They are very pencil.",is_correct:false},
+            {id:"d",text:"We pencil running.",is_correct:false}
+          ]},
+          { id: "5", prompt: "How is 'c' pronounced in 'city'?", options: [
+            {id:"a",text:"/s/ as in 'sun'",is_correct:true},
+            {id:"b",text:"/k/ as in 'cat'",is_correct:false},
+            {id:"c",text:"/ch/ as in 'chair'",is_correct:false},
+            {id:"d",text:"Silent",is_correct:false}
+          ]},
+          { id: "6", prompt: "Which word means 'a person who rides a bicycle'?", options: [
+            {id:"a",text:"cyclist",is_correct:true},
+            {id:"b",text:"cinema",is_correct:false},
+            {id:"c",text:"circle",is_correct:false},
+            {id:"d",text:"circus",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'juice' refer to?", options: [
+            {id:"a",text:"Liquid from fruits or vegetables",is_correct:true},
+            {id:"b",text:"A type of meat",is_correct:false},
+            {id:"c",text:"A solid food",is_correct:false},
+            {id:"d",text:"A container",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word has a HARD 'c' (/k/) sound?", options: [
+            {id:"a",text:"cat",is_correct:true},
+            {id:"b",text:"cent",is_correct:false},
+            {id:"c",text:"city",is_correct:false},
+            {id:"d",text:"circle",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word describes the PLACE in: 'The office is on the second floor'?", options: [
+            {id:"a",text:"office",is_correct:true},
+            {id:"b",text:"floor",is_correct:false},
+            {id:"c",text:"second",is_correct:false},
+            {id:"d",text:"building",is_correct:false}
+          ]},
+          { id: "10", prompt: "Which word completes: 'She squeezed an orange to make fresh ___.'?", options: [
+            {id:"a",text:"juice",is_correct:true},
+            {id:"b",text:"rice",is_correct:false},
+            {id:"c",text:"spice",is_correct:false},
+            {id:"d",text:"piece",is_correct:false}
+          ]},
+          { id: "11", prompt: "In 'decide,' the 'c' says:", options: [
+            {id:"a",text:"/s/",is_correct:true},
+            {id:"b",text:"/k/",is_correct:false},
+            {id:"c",text:"/ch/",is_correct:false},
+            {id:"d",text:"/z/",is_correct:false}
+          ]},
+          { id: "12", prompt: "Which word means 'to do something again and again to improve'?", options: [
+            {id:"a",text:"practice",is_correct:true},
+            {id:"b",text:"service",is_correct:false},
+            {id:"c",text:"office",is_correct:false},
+            {id:"d",text:"fancy",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is special about the 'c' in 'icicle'?", options: [
+            {id:"a",text:"It is soft (/s/) because it is followed by 'i'",is_correct:true},
+            {id:"b",text:"It is hard (/k/) because it's at the beginning",is_correct:false},
+            {id:"c",text:"It is silent",is_correct:false},
+            {id:"d",text:"It says /ch/",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word is often misspelled as 'sissor'?", options: [
+            {id:"a",text:"None of these — but 'scissors' isn't in this list; common error is 'pensil'",is_correct:true},
+            {id:"b",text:"center",is_correct:false},
+            {id:"c",text:"circle",is_correct:false},
+            {id:"d",text:"city",is_correct:false}
+          ]},
+          { id: "15", prompt: "In 'fancy,' the 'c' is pronounced:", options: [
+            {id:"a",text:"/s/",is_correct:true},
+            {id:"b",text:"/k/",is_correct:false},
+            {id:"c",text:"/ch/",is_correct:false},
+            {id:"d",text:"/z/",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word refers to a place where films are shown?", options: [
+            {id:"a",text:"cinema",is_correct:true},
+            {id:"b",text:"circus",is_correct:false},
+            {id:"c",text:"cycle",is_correct:false},
+            {id:"d",text:"celery",is_correct:false}
+          ]},
+          { id: "17", prompt: "Which word means 'a thin, flat piece of something'?", options: [
+            {id:"a",text:"piece",is_correct:true},
+            {id:"b",text:"price",is_correct:false},
+            {id:"c",text:"spice",is_correct:false},
+            {id:"d",text:"rice",is_correct:false}
+          ]},
+          { id: "18", prompt: "Why does 'c' say /s/ in 'center'?", options: [
+            {id:"a",text:"Because it is followed by 'e'",is_correct:true},
+            {id:"b",text:"Because it is at the beginning",is_correct:false},
+            {id:"c",text:"Because all 'c's say /s/",is_correct:false},
+            {id:"d",text:"It's random",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word means 'two times'?", options: [
+            {id:"a",text:"twice",is_correct:true},
+            {id:"b",text:"race",is_correct:false},
+            {id:"c",text:"rice",is_correct:false},
+            {id:"d",text:"piece",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why is the soft c rule important?", options: [
+            {id:"a",text:"It helps you decode and spell hundreds of academic and everyday words correctly",is_correct:true},
+            {id:"b",text:"It only applies to three words",is_correct:false},
+            {id:"c",text:"It makes reading slower",is_correct:false},
+            {id:"d",text:"It’s not used in English",is_correct:false}
+          ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/p ocket/g, 'pocket'], [/comp liment/g, 'compliment'], [/f antastic/g, 'fantastic'],
+        [/Af rica/g, 'Africa'], [/emp loyee/g, 'employee'], [/p olish/g, 'polish'],
+        [/f amily/g, 'family'], [/p enny/g, 'penny'], [/excep t/g, 'except'],
+        [/simp le/g, 'simple'], [/p uzzle/g, 'puzzle'], [/m uddy/g, 'muddy'],
+        [/w ould/g, 'would'], [/sh ould/g, 'should'], [/s aid/g, 'said'],
+        [/them self/g, 'themselves'], [/his self/g, 'himself'], [/p encil/g, 'pencil'],
+        [/c inema/g, 'cinema'], [/j uice/g, 'juice']
+      ];
+
+      // --- RENDERING ---
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
-        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => `
-          <div class="question">
-            <strong>${q.id}. ${q.prompt}</strong>
-            <div class="options">
-              ${q.options.map(opt => `
-                <div class="option">
-                  <label>
-                    <input type="radio" name="q${q.id}" value="${opt.id}" required> ${opt.id.toUpperCase()}. ${opt.text}
-                  </label>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `).join('');
+        window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
+        let correctCount = 0, correctList = [], incorrectList = [];
 
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOpt = item.options.find(o => o.is_correct);
-          const isCorrect = userAns === correctOpt.id;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
 
-        const score = `${correctCount}/20`;
-        const summary = `*Mini OpenStax — Phonics Lesson 148*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const message = encodeURIComponent(summary + correctList.join('\n\n') + '\n\n' + incorrectList.join('\n\n'));
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
 
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -201,8 +374,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -210,6 +383,64 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -220,9 +451,14 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
-      init();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
     })();
   </script>
 </body>
