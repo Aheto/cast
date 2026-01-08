@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 124: n't contractions"/>
-  <title>Mini OpenStax — Lesson 124: n't contractions</title>
+  <meta name="description" content="Mini OpenStax: Lesson 124: n't Contractions"/>
+  <title>Mini OpenStax — Lesson 124: n't Contractions</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -37,8 +37,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 124: n't contractions</h1>
-        <div class="lo-tags" id="lo-tags">LO PH124: Decode and use negative contractions with "n't"</div>
+        <h1 id="chapter-title">Lesson 124: n't Contractions</h1>
+        <div class="lo-tags" id="lo-tags">LO PH124: Decode and use common n't contractions</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -48,7 +48,7 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Negative contractions with "n't":</p>
+        <p>Words with the n't contraction ending</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
@@ -82,6 +82,7 @@
       'use strict';
       window.startTime = Date.now();
 
+      // 🔒 VERY DIFFICULT RANDOMIZATION: Seeded PRNG for anti-pattern shuffling
       function createSeededRNG(seed) {
         let state = Math.abs((seed * 9301 + 49297) % 233280);
         return () => {
@@ -100,15 +101,16 @@
         return arr;
       }
 
-      const currentChapter = 123;
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 123; // e.g., 76 for chapter-76.html = Lesson 77
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 124: n't contractions",
-        loTags: ["LO PH124: Decode and use negative contractions with \"n't\""],
+        title: "Lesson 124: n't Contractions",
+        loTags: ["LO PH124: Decode and use common n't contractions"],
         contentWords: [
-          "isn't", "doesn't", "wasn't", "weren't", "aren't", "hasn't", "haven't", "hadn't", "won't", "wouldn't", "couldn't", "shouldn't", "didn't"
+          "didn't", "hadn't", "isn't", "hasn't", "haven't", "wouldn't", "couldn't", "shouldn't", "aren't", "weren't", "wasn't", "doesn't"
         ],
         sentences: [
           "You shouldn't cheat or steal.",
@@ -120,129 +122,130 @@
           "I haven't been to the zoo in at least three years."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word is a contraction of 'is not'?", options: [
-            {id:"a",text:"isnt",is_correct:false},
-            {id:"b",text:"isn't",is_correct:true},
-            {id:"c",text:"is not",is_correct:false},
-            {id:"d",text:"isnt'",is_correct:false}
+          { id: "1", prompt: "Which contraction means 'would not'?", options: [
+            {id:"a",text:"wouldn't",is_correct:true},
+            {id:"b",text:"won't",is_correct:false},
+            {id:"c",text:"shouldn't",is_correct:false},
+            {id:"d",text:"couldn't",is_correct:false}
           ]},
-          { id: "2", prompt: "Which word means 'do not'?", options: [
-            {id:"a",text:"don't",is_correct:true},
-            {id:"b",text:"doesn't",is_correct:false},
-            {id:"c",text:"didnt",is_correct:false},
-            {id:"d",text:"do not",is_correct:false}
-          ]},
-          { id: "3", prompt: "Which word is short for 'was not'?", options: [
-            {id:"a",text:"wasnt",is_correct:false},
-            {id:"b",text:"wasn't",is_correct:true},
+          { id: "2", prompt: "What two words make 'isn't'?", options: [
+            {id:"a",text:"is not",is_correct:true},
+            {id:"b",text:"it is not",is_correct:false},
             {id:"c",text:"was not",is_correct:false},
-            {id:"d",text:"wont",is_correct:false}
+            {id:"d",text:"has not",is_correct:false}
           ]},
-          { id: "4", prompt: "Which word means 'they are not'?", options: [
-            {id:"a",text:"they're",is_correct:false},
-            {id:"b",text:"they aren't",is_correct:true},
-            {id:"c",text:"theyre",is_correct:false},
-            {id:"d",text:"they not",is_correct:false}
+          { id: "3", prompt: "Which sentence uses a contraction correctly?", options: [
+            {id:"a",text:"She doesn't like spinach.",is_correct:true},
+            {id:"b",text:"She don't like spinach.",is_correct:false},
+            {id:"c",text:"She do not likes spinach.",is_correct:false},
+            {id:"d",text:"She doesn't likes spinach.",is_correct:false}
           ]},
-          { id: "5", prompt: "Which sentence uses a correct contraction?", options: [
-            {id:"a",text:"He doesnt like spinach.",is_correct:false},
-            {id:"b",text:"He doesn't like spinach.",is_correct:true},
-            {id:"c",text:"He don't like spinach.",is_correct:false},
-            {id:"d",text:"He do not like spinach.",is_correct:false}
+          { id: "4", prompt: "What does 'hadn't' stand for?", options: [
+            {id:"a",text:"had not",is_correct:true},
+            {id:"b",text:"has not",is_correct:false},
+            {id:"c",text:"have not",is_correct:false},
+            {id:"d",text:"he had not",is_correct:false}
           ]},
-          { id: "6", prompt: "Which word means 'will not'?", options: [
-            {id:"a",text:"won't",is_correct:true},
-            {id:"b",text:"wouldn't",is_correct:false},
-            {id:"c",text:"couldn't",is_correct:false},
-            {id:"d",text:"shouldn't",is_correct:false}
+          { id: "5", prompt: "Which word is NOT a contraction with n't?", options: [
+            {id:"a",text:"cannot",is_correct:true},
+            {id:"b",text:"shouldn't",is_correct:false},
+            {id:"c",text:"weren't",is_correct:false},
+            {id:"d",text:"doesn't",is_correct:false}
           ]},
-          { id: "7", prompt: "Which word means 'have not'?", options: [
+          { id: "6", prompt: "Choose the contraction for 'have not'.", options: [
             {id:"a",text:"haven't",is_correct:true},
             {id:"b",text:"hasn't",is_correct:false},
             {id:"c",text:"hadn't",is_correct:false},
-            {id:"d",text:"has not",is_correct:false}
+            {id:"d",text:"won't",is_correct:false}
           ]},
-          { id: "8", prompt: "What does 'shouldn't' mean?", options: [
-            {id:"a",text:"should not",is_correct:true},
-            {id:"b",text:"shall not",is_correct:false},
-            {id:"c",text:"could not",is_correct:false},
-            {id:"d",text:"would not",is_correct:false}
+          { id: "7", prompt: "Which contraction means 'was not'?", options: [
+            {id:"a",text:"wasn't",is_correct:true},
+            {id:"b",text:"weren't",is_correct:false},
+            {id:"c",text:"isn't",is_correct:false},
+            {id:"d",text:"aren't",is_correct:false}
           ]},
-          { id: "9", prompt: "Which word means 'did not'?", options: [
-            {id:"a",text:"didn't",is_correct:true},
-            {id:"b",text:"doesn't",is_correct:false},
-            {id:"c",text:"don't",is_correct:false},
-            {id:"d",text:"do not",is_correct:false}
+          { id: "8", prompt: "What is the full form of 'couldn't'?", options: [
+            {id:"a",text:"could not",is_correct:true},
+            {id:"b",text:"can not",is_correct:false},
+            {id:"c",text:"would not",is_correct:false},
+            {id:"d",text:"should not",is_correct:false}
           ]},
-          { id: "10", prompt: "Which word comes FIRST alphabetically?", options: [
-            {id:"a",text:"aren't",is_correct:true},
-            {id:"b",text:"couldn't",is_correct:false},
-            {id:"c",text:"didn't",is_correct:false},
-            {id:"d",text:"doesn't",is_correct:false}
+          { id: "9", prompt: "Which sentence is grammatically correct?", options: [
+            {id:"a",text:"They haven't finished their homework.",is_correct:true},
+            {id:"b",text:"They hasn't finished their homework.",is_correct:false},
+            {id:"c",text:"They haven't finished his homework.",is_correct:false},
+            {id:"d",text:"They haven't finished her homework.",is_correct:false}
           ]},
-          { id: "11", prompt: "Which word means 'had not'?", options: [
-            {id:"a",text:"hadn't",is_correct:true},
-            {id:"b",text:"hasn't",is_correct:false},
-            {id:"c",text:"haven't",is_correct:false},
-            {id:"d",text:"has not",is_correct:false}
-          ]},
-          { id: "12", prompt: "Which word is NOT a contraction?", options: [
-            {id:"a",text:"book",is_correct:true},
-            {id:"b",text:"won't",is_correct:false},
-            {id:"c",text:"couldn't",is_correct:false},
-            {id:"d",text:"shouldn't",is_correct:false}
-          ]},
-          { id: "13", prompt: "In 'They aren't going,' what does 'aren't' mean?", options: [
+          { id: "10", prompt: "What does 'aren't' mean?", options: [
             {id:"a",text:"are not",is_correct:true},
-            {id:"b",text:"were not",is_correct:false},
-            {id:"c",text:"is not",is_correct:false},
-            {id:"d",text:"am not",is_correct:false}
-          ]},
-          { id: "14", prompt: "Which word means 'would not'?", options: [
-            {id:"a",text:"wouldn't",is_correct:true},
-            {id:"b",text:"couldn't",is_correct:false},
-            {id:"c",text:"shouldn't",is_correct:false},
-            {id:"d",text:"won't",is_correct:false}
-          ]},
-          { id: "15", prompt: "Which contraction includes an apostrophe replacing 'o' in 'not'?", options: [
-            {id:"a",text:"isn't",is_correct:true},
             {id:"b",text:"is not",is_correct:false},
-            {id:"c",text:"it's",is_correct:false},
-            {id:"d",text:"they're",is_correct:false}
+            {id:"c",text:"am not",is_correct:false},
+            {id:"d",text:"was not",is_correct:false}
           ]},
-          { id: "16", prompt: "Which word ends with 'n't' and means 'could not'?", options: [
-            {id:"a",text:"couldn't",is_correct:true},
-            {id:"b",text:"shouldn't",is_correct:false},
-            {id:"c",text:"wouldn't",is_correct:false},
-            {id:"d",text:"won't",is_correct:false}
-          ]},
-          { id: "17", prompt: "What does 'hasn't' mean?", options: [
-            {id:"a",text:"has not",is_correct:true},
-            {id:"b",text:"have not",is_correct:false},
-            {id:"c",text:"had not",is_correct:false},
-            {id:"d",text:"will not",is_correct:false}
-          ]},
-          { id: "18", prompt: "Which word means 'were not'?", options: [
-            {id:"a",text:"weren't",is_correct:true},
-            {id:"b",text:"wasn't",is_correct:false},
+          { id: "11", prompt: "Which contraction is used with third-person singular (he, she, it)?", options: [
+            {id:"a",text:"doesn't",is_correct:true},
+            {id:"b",text:"don't",is_correct:false},
             {id:"c",text:"aren't",is_correct:false},
+            {id:"d",text:"weren't",is_correct:false}
+          ]},
+          { id: "12", prompt: "What is the contraction for 'should not'?", options: [
+            {id:"a",text:"shouldn't",is_correct:true},
+            {id:"b",text:"wouldn't",is_correct:false},
+            {id:"c",text:"couldn't",is_correct:false},
             {id:"d",text:"isn't",is_correct:false}
           ]},
-          { id: "19", prompt: "Which word means 'should not'?", options: [
-            {id:"a",text:"shouldn't",is_correct:true},
-            {id:"b",text:"couldn't",is_correct:false},
-            {id:"c",text:"wouldn't",is_correct:false},
-            {id:"d",text:"won't",is_correct:false}
+          { id: "13", prompt: "Which word completes the sentence: 'He ___ going to the party.' (meaning 'is not')?", options: [
+            {id:"a",text:"isn't",is_correct:true},
+            {id:"b",text:"wasn't",is_correct:false},
+            {id:"c",text:"aren't",is_correct:false},
+            {id:"d",text:"weren't",is_correct:false}
           ]},
-          { id: "20", prompt: "Which word is spelled INCORRECTLY?", options: [
-            {id:"a",text:"didnt",is_correct:true},
-            {id:"b",text:"didn't",is_correct:false},
-            {id:"c",text:"couldn't",is_correct:false},
-            {id:"d",text:"shouldn't",is_correct:false}
+          { id: "14", prompt: "What is the contraction for 'will not'?", options: [
+            {id:"a",text:"won't",is_correct:false},
+            {id:"b",text:"wouldn't",is_correct:false},
+            {id:"c",text:"None of these — it's not an n't contraction!",is_correct:true},
+            {id:"d",text:"wasn't",is_correct:false}
+          ]},
+          { id: "15", prompt: "Which contraction matches 'did not'?", options: [
+            {id:"a",text:"didn't",is_correct:true},
+            {id:"b",text:"don't",is_correct:false},
+            {id:"c",text:"doesn't",is_correct:false},
+            {id:"d",text:"do not",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which sentence uses 'weren't' correctly?", options: [
+            {id:"a",text:"They weren't at school yesterday.",is_correct:true},
+            {id:"b",text:"She weren't at school yesterday.",is_correct:false},
+            {id:"c",text:"He weren't at school yesterday.",is_correct:false},
+            {id:"d",text:"I weren't at school yesterday.",is_correct:false}
+          ]},
+          { id: "17", prompt: "What is the contraction for 'has not'?", options: [
+            {id:"a",text:"hasn't",is_correct:true},
+            {id:"b",text:"haven't",is_correct:false},
+            {id:"c",text:"hadn't",is_correct:false},
+            {id:"d",text:"isn't",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word is the contraction in this sentence: 'We couldn't find the keys.'?", options: [
+            {id:"a",text:"couldn't",is_correct:true},
+            {id:"b",text:"find",is_correct:false},
+            {id:"c",text:"keys",is_correct:false},
+            {id:"d",text:"We",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which contraction should be used here: 'She ___ seen that movie.' (meaning 'has not')?", options: [
+            {id:"a",text:"hasn't",is_correct:true},
+            {id:"b",text:"haven't",is_correct:false},
+            {id:"c",text:"hadn't",is_correct:false},
+            {id:"d",text:"isn't",is_correct:false}
+          ]},
+          { id: "20", prompt: "Why do we use contractions like 'don't' or 'can't'?", options: [
+            {id:"a",text:"To speak or write more quickly and informally",is_correct:true},
+            {id:"b",text:"To make sentences longer",is_correct:false},
+            {id:"c",text:"To confuse readers",is_correct:false},
+            {id:"d",text:"Only in formal writing",is_correct:false}
           ]}
         ]
       };
 
+      // --- TYPO CORRECTION (EXTENSIBLE) ---
       const TYPO_CORRECTIONS = [
         [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
         [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
@@ -251,9 +254,10 @@
         [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
         [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
         [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
-        [/sh ouldn't/g, 'shouldn't'], [/d idn't/g, 'didn't'], [/p ocket/g, 'pocket']
+        [/awf ul/g, 'awful'], [/p ocket/g, 'pocket'], [/p olish/g, 'polish']
       ];
 
+      // --- RENDERING ---
       function renderWords() {
         document.getElementById('word-list').innerHTML =
           CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
@@ -292,6 +296,8 @@
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+
+        // Unique seed per lesson + time + question ID → near-unpredictable
         const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
