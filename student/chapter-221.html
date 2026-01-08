@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Mini OpenStax: Lesson 222 — R-Controlled ear = /ər/"/>
-  <title>Mini OpenStax — Lesson 222: ear = /ər/</title>
+  <meta name="description" content="Mini OpenStax: Lesson 222: 'ear' = /ər/"/>
+  <title>Mini OpenStax — Lesson 222: 'ear' = /ər/</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
     .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
@@ -23,19 +23,22 @@
     .question { margin-bottom: 1.2rem; }
     .options { margin-left: 1rem; }
     .option { margin: 0.4rem 0; }
-    .btn { background: #28a745; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+    .btn {
+      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
+      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+    }
     .btn:hover { background: #218838; }
+    .btn-secondary { background: #6c757d; }
+    .btn-secondary:hover { background: #5a6268; }
     .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
-    .correct { color: #28a745; }
-    .incorrect { color: #dc3545; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div>
-        <h1 id="chapter-title">Lesson 222: ear = /ər/</h1>
-        <div class="lo-tags" id="lo-tags">LO PH222: Decode words with r-controlled ear = /ər/</div>
+        <h1 id="chapter-title">Lesson 222: 'ear' = /ər/</h1>
+        <div class="lo-tags" id="lo-tags">LO PH222: Decode words where 'ear' makes the /ər/ sound</div>
       </div>
       <div class="role-badge">Student View</div>
     </div>
@@ -45,17 +48,25 @@
     <main id="main-content">
       <div class="section">
         <h2>🔤 Word List</h2>
-        <p>Words with the <strong>r-controlled</strong> <em>ear</em> making the <strong>/ər/</strong> sound:</p>
+        <p>Words where 'ear' is pronounced as /ər/ (like 'her'), not /ɪr/ or /ɛr/.</p>
         <div class="word-list" id="word-list"></div>
       </div>
 
       <div class="section">
         <h2>📖 Practice Sentences</h2>
-        <p>Read aloud. All words are decodable from Lessons 2–222:</p>
+        <p>Read aloud:</p>
         <div class="sentences" id="sentences"></div>
       </div>
 
-      <div class="quiz" id="quiz-container">
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
         <h2>📝 Quick Check (20 Questions)</h2>
         <p>Select the best answer for each question.</p>
         <form id="quiz-form"></form>
@@ -69,24 +80,36 @@
   <script>
     (function () {
       'use strict';
+      window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
-      const currentChapter = 221;   // chapter-221.html = Lesson 222
-      const maxChapter = 261;
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      const currentChapter = 221;
+      const MAX_CHAPTER = 261;
+      const WHATSAPP_NUMBER = "233257320201";
 
       const CHAPTER_CONFIG = {
-        title: "Lesson 222: ear = /ər/",
-        loTags: ["LO PH222: Decode words with r-controlled ear = /ər/"],
+        title: "Lesson 222: 'ear' = /ər/",
+        loTags: ["LO PH222: Decode words where 'ear' makes the /ər/ sound"],
         contentWords: [
-          "earth", "earn", "Earl", "pearl", "learn", "yearn", "search", "research", "hearse", "rehearse",
-          "heard", "early", "earnest", "earthquake"
+          "earth", "earn", "Earl", "pearl", "learn", "yearn", "search", "research",
+          "hearse", "rehearse", "heard", "early", "earnest", "earthquake"
         ],
         sentences: [
           "Earl must study hard to earn a top grade.",
@@ -97,131 +120,127 @@
           "During the trial, the jury was earnest in its search for the truth.",
           "During the storm, Earl saw a flash of lightning and heard a crash of thunder."
         ],
-        whatsappNumber: "233257320201",
         assessmentItems: [
-          { id: "1", prompt: "Which word contains 'ear' making /ər/?", options: [{id:"a",text:"learn",is_correct:true},{id:"b",text:"leap",is_correct:false},{id:"c",text:"lead",is_correct:false},{id:"d",text:"less",is_correct:false}] },
-          { id: "2", prompt: "Which is NOT a Lesson 222 word?", options: [{id:"a",text:"rehearse",is_correct:false},{id:"b",text:"earthquake",is_correct:false},{id:"c",text:"beard",is_correct:true},{id:"d",text:"hearse",is_correct:false}] },
-          { id: "3", prompt: "In 'heard', what sound does 'ear' make?", options: [{id:"a",text:"/ər/",is_correct:true},{id:"b",text:"/ēr/",is_correct:false},{id:"c",text:"/ar/",is_correct:false},{id:"d",text:"/air/",is_correct:false}] },
-          { id: "4", prompt: "Which word means 'to gain through work or effort'?", options: [{id:"a",text:"earn",is_correct:true},{id:"b",text:"yearn",is_correct:false},{id:"c",text:"pearl",is_correct:false},{id:"d",text:"search",is_correct:false}] },
-          { id: "5", prompt: "How many letters in 'earthquake'?", options: [{id:"a",text:"10",is_correct:true},{id:"b",text:"9",is_correct:false},{id:"c",text:"11",is_correct:false},{id:"d",text:"8",is_correct:false}] },
-          { id: "6", prompt: "Which sentence uses only Lesson 222 words?", options: [{id:"a",text:"Earl must study hard to earn a top grade.",is_correct:true},{id:"b",text:"She sat on a mat.",is_correct:false},{id:"c",text:"He ran fast.",is_correct:false},{id:"d",text:"They played ball.",is_correct:false}] },
-          { id: "7", prompt: "Which word refers to the planet we live on?", options: [{id:"a",text:"earth",is_correct:true},{id:"b",text:"pearl",is_correct:false},{id:"c",text:"hearse",is_correct:false},{id:"d",text:"research",is_correct:false}] },
-          { id: "8", prompt: "What syllable type is in 'early'?", options: [{id:"a",text:"R-controlled",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Open syllable",is_correct:false},{id:"d",text:"Closed syllable",is_correct:false}] },
-          { id: "9", prompt: "In 'During the storm, Earl saw a flash of lightning and heard a crash of thunder,' how many Lesson 222 words?", options: [{id:"a",text:"2",is_correct:true},{id:"b",text:"1",is_correct:false},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
-          { id: "10", prompt: "Which word means 'to practice in preparation for a performance'?", options: [{id:"a",text:"rehearse",is_correct:true},{id:"b",text:"search",is_correct:false},{id:"c",text:"yearn",is_correct:false},{id:"d",text:"learn",is_correct:false}] },
-          { id: "11", prompt: "Which word describes someone sincere and serious?", options: [{id:"a",text:"earnest",is_correct:true},{id:"b",text:"early",is_correct:false},{id:"c",text:"earth",is_correct:false},{id:"d",text:"pearl",is_correct:false}] },
-          { id: "12", prompt: "Which word ends with 'ear' and means 'to want strongly'?", options: [{id:"a",text:"yearn",is_correct:true},{id:"b",text:"earn",is_correct:false},{id:"c",text:"learn",is_correct:false},{id:"d",text:"hear",is_correct:false}] },
-          { id: "13", prompt: "Which sentence is from Lesson 222?", options: [{id:"a",text:"A big earthquake can cause major damage to a city.",is_correct:true},{id:"b",text:"She likes apples.",is_correct:false},{id:"c",text:"He jumped high.",is_correct:false},{id:"d",text:"They walked home.",is_correct:false}] },
-          { id: "14", prompt: "How many consonants in 'research'?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"5",is_correct:false},{id:"c",text:"7",is_correct:false},{id:"d",text:"4",is_correct:false}] },
-          { id: "15", prompt: "Which word means 'a hard, shiny gem formed inside oysters'?", options: [{id:"a",text:"pearl",is_correct:true},{id:"b",text:"earth",is_correct:false},{id:"c",text:"hearse",is_correct:false},{id:"d",text:"search",is_correct:false}] },
-          { id: "16", prompt: "What phonics pattern is in 'heard'?", options: [{id:"a",text:"R-controlled ear = /ər/",is_correct:true},{id:"b",text:"Magic E",is_correct:false},{id:"c",text:"Closed syllable",is_correct:false},{id:"d",text:"Vowel team 'ie'",is_correct:false}] },
-          { id: "17", prompt: "Which word refers to a vehicle that carries coffins?", options: [{id:"a",text:"hearse",is_correct:true},{id:"b",text:"earth",is_correct:false},{id:"c",text:"rehearse",is_correct:false},{id:"d",text:"research",is_correct:false}] },
-          { id: "18", prompt: "Which word might complete: 'Scientists conduct ___ to find cures.'?", options: [{id:"a",text:"research",is_correct:true},{id:"b",text:"pearl",is_correct:false},{id:"c",text:"yearn",is_correct:false},{id:"d",text:"earn",is_correct:false}] },
-          { id: "19", prompt: "Which word appears in both the word list and sentences?", options: [{id:"a",text:"Earl",is_correct:true},{id:"b",text:"earn",is_correct:true},{id:"c",text:"learn",is_correct:true},{id:"d",text:"All of the above",is_correct:true}] },
-          { id: "20", prompt: "What phonics concept is taught in Lesson 222?", options: [{id:"a",text:"R-controlled ear = /ər/",is_correct:true},{id:"b",text:"Split vowel pairs",is_correct:false},{id:"c",text:"Magic E",is_correct:false},{id:"d",text:"Vowel teams",is_correct:false}] }
+          { id: "1", prompt: "Which word means 'to receive payment for work'?", options: [{id:"a",text:"earn",is_correct:true},{id:"b",text:"earth",is_correct:false},{id:"c",text:"pearl",is_correct:false},{id:"d",text:"yearn",is_correct:false}]},
+          { id: "2", prompt: "Which sentence uses 'hearse' correctly?", options: [{id:"a",text:"A hearse carries a coffin to a funeral.",is_correct:true},{id:"b",text:"She hearse the song.",is_correct:false},{id:"c",text:"He rehearses in a hearse.",is_correct:false},{id:"d",text:"Hearse is a type of dance.",is_correct:false}]},
+          { id: "3", prompt: "What does 'earnest' mean?", options: [{id:"a",text:"serious and sincere",is_correct:true},{id:"b",text:"funny",is_correct:false},{id:"c",text:"angry",is_correct:false},{id:"d",text:"lazy",is_correct:false}]},
+          { id: "4", prompt: "Which word sounds like 'herd'?", options: [{id:"a",text:"heard",is_correct:true},{id:"b",text:"heart",is_correct:false},{id:"c",text:"heat",is_correct:false},{id:"d",text:"head",is_correct:false}]},
+          { id: "5", prompt: "Choose the correct spelling:", options: [{id:"a",text:"earthquake",is_correct:true},{id:"b",text:"earthquack",is_correct:false},{id:"c",text:"earthquike",is_correct:false},{id:"d",text:"erthquake",is_correct:false}]},
+          { id: "6", prompt: "Which word is NOT pronounced with /ər/ for 'ear'?", options: [{id:"a",text:"pear",is_correct:true},{id:"b",text:"earth",is_correct:false},{id:"c",text:"learn",is_correct:false},{id:"d",text:"heard",is_correct:false}]},
+          { id: "7", prompt: "Which word rhymes with 'search'?", options: [{id:"a",text:"research",is_correct:true},{id:"b",text:"lurch",is_correct:false},{id:"c",text:"porch",is_correct:false},{id:"d",text:"torch",is_correct:false}]},
+          { id: "8", prompt: "Which sentence uses 'rehearse' correctly?", options: [{id:"a",text:"The band will rehearse before the concert.",is_correct:true},{id:"b",text:"She rehearse yesterday.",is_correct:false},{id:"c",text:"He to rehearse the lines.",is_correct:false},{id:"d",text:"Rehearse is a noun.",is_correct:false}]},
+          { id: "9", prompt: "What is 'pearl'?", options: [{id:"a",text:"a smooth, shiny gem from an oyster",is_correct:true},{id:"b",text:"a type of fruit",is_correct:false},{id:"c",text:"a metal",is_correct:false},{id:"d",text:"a bird",is_correct:false}]},
+          { id: "10", prompt: "Which word means 'before the usual time'?", options: [{id:"a",text:"early",is_correct:true},{id:"b",text:"earth",is_correct:false},{id:"c",text:"earn",is_correct:false},{id:"d",text:"earnest",is_correct:false}]},
+          { id: "11", prompt: "Which is spelled correctly?", options: [{id:"a",text:"yearn",is_correct:true},{id:"b",text:"yern",is_correct:false},{id:"c",text:"yarn",is_correct:false},{id:"d",text:"yurn",is_correct:false}]},
+          { id: "12", prompt: "Choose the word that means 'to want something deeply':", options: [{id:"a",text:"yearn",is_correct:true},{id:"b",text:"learn",is_correct:false},{id:"c",text:"search",is_correct:false},{id:"d",text:"rehearse",is_correct:false}]},
+          { id: "13", prompt: "Which word refers to our planet?", options: [{id:"a",text:"earth",is_correct:true},{id:"b",text:"earn",is_correct:false},{id:"c",text:"Earl",is_correct:false},{id:"d",text:"pearl",is_correct:false}]},
+          { id: "14", prompt: "In which word is 'ear' NOT pronounced /ər/?", options: [{id:"a",text:"dear",is_correct:true},{id:"b",text:"heard",is_correct:false},{id:"c",text:"learn",is_correct:false},{id:"d",text:"earth",is_correct:false}]},
+          { id: "15", prompt: "What does 'search' mean?", options: [{id:"a",text:"to look carefully for something",is_correct:true},{id:"b",text:"to destroy",is_correct:false},{id:"c",text:"to ignore",is_correct:false},{id:"d",text:"to hide",is_correct:false}]},
+          { id: "16", prompt: "Which word fits: 'The geologist will _____ for oil.'", options: [{id:"a",text:"search",is_correct:true},{id:"b",text:"rehearse",is_correct:false},{id:"c",text:"earn",is_correct:false},{id:"d",text:"yearn",is_correct:false}]},
+          { id: "17", prompt: "Which word is a male given name?", options: [{id:"a",text:"Earl",is_correct:true},{id:"b",text:"earth",is_correct:false},{id:"c",text:"earn",is_correct:false},{id:"d",text:"hearse",is_correct:false}]},
+          { id: "18", prompt: "Which sentence is correct?", options: [{id:"a",text:"She heard the thunder during the storm.",is_correct:true},{id:"b",text:"She heared the thunder.",is_correct:false},{id:"c",text:"He hear the thunder yesterday.",is_correct:false},{id:"d",text:"They to hear the noise.",is_correct:false}]},
+          { id: "19", prompt: "Which word contains 'ear' and names a natural disaster?", options: [{id:"a",text:"earthquake",is_correct:true},{id:"b",text:"hearse",is_correct:false},{id:"c",text:"pearl",is_correct:false},{id:"d",text:"rehearse",is_correct:false}]},
+          { id: "20", prompt: "Which word means 'to practice a performance'?", options: [{id:"a",text:"rehearse",is_correct:true},{id:"b",text:"research",is_correct:false},{id:"c",text:"search",is_correct:false},{id:"d",text:"earn",is_correct:false}]}
         ]
       };
 
+      const TYPO_CORRECTIONS = [
+        [/e arth/g, 'earth'], [/e arn/g, 'earn'], [/E arl/g, 'Earl'], [/p earl/g, 'pearl'],
+        [/l earn/g, 'learn'], [/y earn/g, 'yearn'], [/s earch/g, 'search'], [/r esearch/g, 'research'],
+        [/h earse/g, 'hearse'], [/r ehearse/g, 'rehearse'], [/h eard/g, 'heard'], [/e arly/g, 'early'],
+        [/e arnest/g, 'earnest'], [/e arthquake/g, 'earthquake']
+      ];
+
       function renderWords() {
-        const container = document.getElementById('word-list');
-        container.innerHTML = CHAPTER_CONFIG.contentWords.map(word =>
-          `<span class="word-item">${word}</span>`
-        ).join('');
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        const container = document.getElementById('sentences');
-        container.innerHTML = CHAPTER_CONFIG.sentences.map(s =>
-          `<p>${s}</p>`
-        ).join('');
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
         const nav = document.getElementById('chapter-nav');
-        const buttons = [];
-        buttons.push({ label: "Home", url: "../index.html", active: false });
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
         for (let i = 0; i < 4; i++) {
-          const chapterNum = currentChapter + i;
-          if (chapterNum > maxChapter) break;
-          const lessonNum = chapterNum + 1;
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
           buttons.push({
             label: `Lesson ${lessonNum}`,
-            url: `chapter-${chapterNum}.html`,
-            active: (i === 0)
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(btn => `
-          <a href="${btn.url}" class="chapter-btn ${btn.active ? 'active' : ''}">
-            ${btn.label}
-          </a>
-        `).join('');
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
       }
 
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-
-        const quizHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          let shuffledOptions = [...q.options];
-          shuffle(shuffledOptions);
-
-          const correctOpt = q.options.find(opt => opt.is_correct);
-          window.quizCorrectMap[q.id] = correctOpt.id;
-
-          const optionsHTML = shuffledOptions.map((opt, idx) => {
-            const label = String.fromCharCode(97 + idx).toUpperCase();
-            return `
-              <div class="option">
-                <label>
-                  <input type="radio" name="q${q.id}" value="${opt.id}" required> ${label}. ${opt.text}
-                </label>
-              </div>
-            `;
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
-
-          return `
-            <div class="question">
-              <strong>${q.id}. ${q.prompt}</strong>
-              <div class="options">
-                ${optionsHTML}
-              </div>
-            </div>
-          `;
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
-
-        form.innerHTML = quizHTML;
       }
 
       function showFeedback(answers) {
         const items = CHAPTER_CONFIG.assessmentItems;
-        let correctCount = 0;
-        let correctList = [], incorrectList = [];
-
+        let correctCount = 0, correctList = [], incorrectList = [];
         items.forEach((item, i) => {
-          const userAns = answers[i];
-          const correctOptId = window.quizCorrectMap[item.id];
-          const correctOpt = item.options.find(o => o.id === correctOptId);
-          const isCorrect = userAns === correctOptId;
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
           if (isCorrect) {
             correctCount++;
-            correctList.push(`${item.id}. ${item.prompt}\n   ✅ Correct: ${correctOpt.text}`);
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
           } else {
-            incorrectList.push(`${item.id}. ${item.prompt}\n   ❌ You chose: ${item.options.find(o => o.id === userAns)?.text || '—'}\n   ✅ Correct: ${correctOpt.text}`);
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
           }
         });
-
-        const score = `${correctCount}/20}`;
-        const summary = `*Mini OpenStax — Phonics Lesson 222*\nStudent: [Name]\nScore: ${score}\n\n`;
-        const correctStr = correctList.length ? '✅ CORRECT:\n' + correctList.join('\n\n') + '\n\n' : '';
-        const incorrectStr = incorrectList.length ? '❌ INCORRECT:\n' + incorrectList.join('\n\n') : '';
-        const message = encodeURIComponent(summary + correctStr + incorrectStr + `\nReport generated via Mini OpenStax. Share with instructor: https://wa.me/${CHAPTER_CONFIG.whatsappNumber}`);
-        const whatsappLink = `https://wa.me/${CHAPTER_CONFIG.whatsappNumber}?text=${message}`;
-
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
-            <h3>📊 Results: ${score}</h3>
-            <p><strong>${correctCount >= 15 ? 'Excellent! You’ve mastered r-controlled ear=/ər/!' : correctCount >= 10 ? 'Good! Review missed items.' : 'Practice Lesson 222 words again.'}</strong></p>
-            <p><a href="${whatsappLink}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">📲 Send Report to Instructor</a></p>
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
           </div>
         `;
       }
@@ -231,8 +250,8 @@
           const form = document.getElementById('quiz-form');
           const answers = [];
           for (let i = 1; i <= 20; i++) {
-            const selected = form.querySelector(`input[name="q${i}"]:checked`);
-            answers.push(selected ? selected.value : null);
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
           }
           if (answers.includes(null)) {
             alert("Please answer all questions.");
@@ -240,6 +259,63 @@
           }
           showFeedback(answers);
         });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
       }
 
       function init() {
@@ -250,6 +326,7 @@
         renderSentences();
         renderQuiz();
         setupQuizListeners();
+        initNamePrompt();
       }
 
       if (document.readyState === 'loading') {
