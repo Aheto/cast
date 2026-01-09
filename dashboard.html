@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini OpenStax Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .role-badge {
+      background: #e9ecef;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+    h1 { color: #007bff; margin: 0; }
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .progress-bar {
+      height: 24px;
+      background: #e9ecef;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #28a745;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .lesson-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .lesson-item:last-child { border-bottom: none; }
+    .mastery-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+    .mastery-yes { background: #28a745; }
+    .mastery-no { background: #dc3545; }
+    .mastery-partial { background: #ffc107; }
+    .note {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-top: 1.5rem;
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+    .btn:hover { background: #0056b3; }
+    .loading { text-align: center; color: #6c757d; }
+    .error { background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 6px; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Mini OpenStax Dashboard</h1>
+        <div class="role-badge" id="role-badge">Loading...</div>
+      </div>
+      <a href="setup.html" style="font-size:0.9rem;">✏️ Change Role</a>
+    </header>
+
+    <main id="dashboard-content">
+      <div class="loading">Loading your dashboard...</div>
+    </main>
+
+    <footer class="note">
+      <p>Data is updated weekly. No personal information is stored on servers.</p>
+      <p>Powered by open educational principles • Ghana-made</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const ROLE = localStorage.getItem('user_role') || 'student';
+      const STUDENT_NAME = localStorage.getItem('student_name') || 'Learner';
+      const DASHBOARD_DATA_URL = 'data/class-mastery.json'; // Public JSON (see note below)
+
+      function renderHeader() {
+        document.getElementById('role-badge').textContent = 
+          ROLE === 'teacher' ? 'Teacher View' : 'Student View';
+      }
+
+      // === STUDENT VIEW ===
+      function renderStudentDashboard() {
+        // Count mastered lessons (from localStorage)
+        let mastered = 0, total = 262;
+        for (let i = 0; i <= 261; i++) {
+          if (localStorage.getItem(`mastery_${i}`) === '1') {
+            mastered++;
+          }
+        }
+        const masteryPercent = Math.round((mastered / total) * 100);
+
+        const html = `
+          <div class="card">
+            <h2>Hello, ${STUDENT_NAME}!</h2>
+            <p>You've mastered <strong>${mastered} of ${total}</strong> phonics lessons.</p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:${masteryPercent}%">
+                ${masteryPercent}%
+              </div>
+            </div>
+            <a href="chapter-0.html" class="btn">Continue Learning</a>
+          </div>
+
+          <div class="card">
+            <h3>Your Recent Activity</h3>
+            <div id="recent-lessons">
+              ${getRecentLessons()}
+            </div>
+          </div>
+        `;
+        document.getElementById('dashboard-content').innerHTML = html;
+      }
+
+      function getRecentLessons() {
+        const lessons = [];
+        for (let i = 261; i >= 0 && lessons.length < 5; i--) {
+          const mastered = localStorage.getItem(`mastery_${i}`) === '1';
+          if (mastered || localStorage.getItem(`quiz_attempts_${i}`)) {
+            const lessonNum = i + 1;
+            const masteryClass = mastered ? 'mastery-yes' : 'mastery-partial';
+            const masteryText = mastered ? 'Mastered' : 'In Progress';
+            lessons.push(`
+              <div class="lesson-item">
+                <span><span class="mastery-indicator ${masteryClass}"></span> Lesson ${lessonNum}</span>
+                <span>${masteryText}</span>
+              </div>
+            `);
+          }
+        }
+        return lessons.length ? lessons.join('') : '<p>No recent activity.</p>';
+      }
+
+      // === TEACHER VIEW ===
+      function renderTeacherDashboard() {
+        // Try to load class data
+        fetch(DASHBOARD_DATA_URL)
+          .then(response => {
+            if (!response.ok) throw new Error('Data not available');
+            return response.json();
+          })
+          .then(data => {
+            renderTeacherWithData(data);
+          })
+          .catch(err => {
+            renderTeacherWithError(err.message);
+          });
+      }
+
+      function renderTeacherWithData(data) {
+        const totalLessons = data.total_lessons || 262;
+        const classSize = data.class_size || 'Unknown';
+        const avgMastery = (data.average_mastery_rate * 100).toFixed(1);
+
+        // Find lessons needing review (mastery < 70%)
+        const reviewLessons = (data.lessons || [])
+          .filter(l => l.mastery_rate < 0.7)
+          .sort((a, b) => a.mastery_rate - b.mastery_rate)
+          .slice(0, 5);
+
+        let reviewHtml = '';
+        if (reviewLessons.length > 0) {
+          reviewHtml = reviewLessons.map(l => `
+            <div class="lesson-item">
+              <span>Lesson ${l.lesson_id}: ${l.title}</span>
+              <span>${Math.round(l.mastery_rate * 100)}% mastered</span>
+            </div>
+          `).join('');
+        } else {
+          reviewHtml = '<p>All lessons show strong mastery! 🎉</p>';
+        }
+
+        const html = `
+          <div class="card">
+            <h2>Class Overview</h2>
+            <p>Students: <strong>${classSize}</strong> | Lessons: <strong>${totalLessons}</strong></p>
+            <p>Average mastery: <strong>${avgMastery}%</strong></p>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width:${avgMastery}%">
+                ${avgMastery}%
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Lessons Needing Attention</h3>
+            <div>${reviewHtml}</div>
+            <a href="premium.html" class="btn">✨ Get Printable Intervention Worksheets</a>
+          </div>
+
+          <div class="note">
+            <p>Data updated weekly from anonymized, opt-in teacher reports.</p>
+          </div>
+        `;
+        document.getElementById('dashboard-content').innerHTML = html;
+      }
+
+      function renderTeacherWithError(error) {
+        document.getElementById('dashboard-content').innerHTML = `
+          <div class="card">
+            <h2>Class Dashboard</h2>
+            <div class="error">
+              Class data not available yet.<br>
+              Ensure you've enabled analytics and sent a usage report via WhatsApp.
+            </div>
+            <a href="javascript:window.location.reload()" class="btn">Retry</a>
+          </div>
+        `;
+      }
+
+      // === INIT ===
+      function init() {
+        renderHeader();
+        if (ROLE === 'teacher') {
+          renderTeacherDashboard();
+        } else {
+          renderStudentDashboard();
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>
