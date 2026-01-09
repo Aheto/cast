@@ -6,72 +6,91 @@
   <title>Mini OpenStax Premium — Unlock Progress & Insights</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
-    header { text-align: center; margin-bottom: 2rem; }
-    h1 { color: #007bff; }
-    .card { background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .feature { display: flex; gap: 1rem; margin: 0.8rem 0; }
-    .feature-icon { font-size: 1.4rem; color: #28a745; }
+    .container { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem; }
+    header { text-align: center; margin-bottom: 1.5rem; }
+    h1 { color: #007bff; font-size: 1.8rem; }
+    .card {
+      background: white; padding: 1.3rem; border-radius: 10px;
+      margin-bottom: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-left: 4px solid #007bff;
+    }
+    .feature { display: flex; gap: 1rem; margin: 0.8rem 0; align-items: flex-start; }
+    .feature-icon { font-size: 1.3rem; color: #28a745; min-width: 24px; }
     .btn {
       display: inline-block; background: #007bff; color: white; text-decoration: none;
-      padding: 0.75rem 1.5rem; border-radius: 4px; font-weight: bold; margin-top: 1rem;
+      padding: 0.7rem 1.4rem; border-radius: 6px; font-weight: bold; margin-top: 1rem;
+      text-align: center;
     }
     .btn:hover { background: #0056b3; }
-    .footer { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #666; }
-    .free-forever { background: #e9ecef; padding: 1rem; border-radius: 6px; font-style: italic; }
+    .footer { text-align: center; margin-top: 2rem; font-size: 0.85rem; color: #666; }
+    .free-forever {
+      background: #e9ecef; padding: 1rem; border-radius: 8px;
+      font-style: italic; text-align: center; margin-bottom: 1.2rem;
+    }
+    .momo-instruction {
+      background: #fff8e1; padding: 1.2rem; border-radius: 8px; border-left: 4px solid #ffc107;
+      font-size: 0.95rem;
+    }
+    .momo-number {
+      font-weight: bold; font-size: 1.2rem; color: #d32f2f;
+      letter-spacing: 1px;
+    }
+    .step { margin: 0.6rem 0; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>✨ Mini OpenStax Premium</h1>
-      <p>Enhance your child’s phonics journey—without ads, trackers, or paywalls.</p>
+      <p>Enhance your child’s phonics journey—offline, ethical, and Ghana-made.</p>
     </header>
 
     <div class="free-forever">
-      <strong>Core app remains 100% free & offline.</strong> Premium adds convenience, not content.
+      <strong>The full 262-lesson app is always 100% free & offline.</strong><br>
+      Premium adds convenience—never locks learning behind a paywall.
     </div>
 
     <div class="card">
-      <h2>✨ What You Get</h2>
+      <h2>✨ Premium Features</h2>
       <div class="feature">
         <span class="feature-icon">☁️</span>
-        <div><strong>Progress Sync</strong> — Mastery data backed up securely across devices.</div>
+        <div><strong>Progress Backup</strong> — Securely save mastery data across devices.</div>
       </div>
       <div class="feature">
         <span class="feature-icon">📊</span>
-        <div><strong>Weekly Reports</strong> — See which patterns (e.g., <em>ph=/f/</em>) need review.</div>
+        <div><strong>Weekly Insights</strong> — See which patterns (e.g., <em>ph=/f/</em>) need review.</div>
       </div>
       <div class="feature">
         <span class="feature-icon">🖨️</span>
-        <div><strong>Printable Worksheets</strong> — Auto-generated PDFs from any lesson.</div>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">✅</span>
-        <div><strong>Ad-Free Experience</strong> — Even in the web portal.</div>
+        <div><<strong>Printable Worksheets</strong> — Generate PDFs from any lesson.</div>
       </div>
     </div>
 
     <div class="card">
-      <h2>💰 Pricing</h2>
-      <p><strong>$4/month</strong> or <strong>$36/year</strong> (2 months free)</p>
-      <p>Free for students in Title I schools — <a href="mailto:support@miniopenstax.org?subject=Title%20I%20Access">apply here</a>.</p>
-      <a href="#" id="upgrade-btn" class="btn">🔓 Upgrade Now</a>
+      <h2>💰 Pricing (GHS)</h2>
+      <p>• <strong>GHS 50/year</strong> (≈ $4) — Full family access<br>
+         • <strong>FREE</strong> for public school teachers (email verification required)</p>
+    </div>
+
+    <div class="card">
+      <h2>📲 How to Pay via MTN MoMo</h2>
+      <div class="momo-instruction">
+        <div class="step">1. Open your <strong>MTN MoMo app</strong> or dial <code>*170#</code></div>
+        <div class="step">2. Choose <strong>“Transfer Money”</strong> → <strong>“MoMo Pay”</strong> or <strong>“Pay Merchant”</strong></div>
+        <div class="step">3. Enter the number: <span class="momo-number">+233 25 732 0201</span></div>
+        <div class="step">4. Enter amount: <strong>GHS 50</strong></div>
+        <div class="step">5. In the reference, type: <strong>Your Child’s First Name</strong> (e.g., “Kwame”)</div>
+        <div class="step">6. Complete payment</div>
+      </div>
+      <p style="margin-top: 1rem;"><strong>✅ After payment:</strong> WhatsApp us your name and payment confirmation at  
+      <a href="https://wa.me/233257320201" style="color:#25D366; font-weight:bold;">+233 25 732 0201</a>.  
+      We’ll activate your premium access within 24 hours.</p>
     </div>
 
     <div class="footer">
-      <p>© Mini OpenStax • Built with ❤️ for literacy equity</p>
-      <p>Your data is never sold. We comply with COPPA and FERPA.</p>
+      <p>© Mini OpenStax • Literacy for all, powered by Ghana</p>
+      <p>No ads • No tracking • COPPA & FERPA compliant</p>
     </div>
   </div>
-
-  <script src="aheto1227@gmail.com"></script>
-  <script>
-    document.getElementById('upgrade-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      // Redirect to Stripe Checkout (see snippet below)
-      window.location.href = 'aheto1227@gmail.com';
-    });
-  </script>
 </body>
 </html>
