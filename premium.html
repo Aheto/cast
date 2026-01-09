@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini OpenStax Premium — Unlock Progress & Insights</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
+    .container { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    header { text-align: center; margin-bottom: 2rem; }
+    h1 { color: #007bff; }
+    .card { background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .feature { display: flex; gap: 1rem; margin: 0.8rem 0; }
+    .feature-icon { font-size: 1.4rem; color: #28a745; }
+    .btn {
+      display: inline-block; background: #007bff; color: white; text-decoration: none;
+      padding: 0.75rem 1.5rem; border-radius: 4px; font-weight: bold; margin-top: 1rem;
+    }
+    .btn:hover { background: #0056b3; }
+    .footer { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #666; }
+    .free-forever { background: #e9ecef; padding: 1rem; border-radius: 6px; font-style: italic; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ Mini OpenStax Premium</h1>
+      <p>Enhance your child’s phonics journey—without ads, trackers, or paywalls.</p>
+    </header>
+
+    <div class="free-forever">
+      <strong>Core app remains 100% free & offline.</strong> Premium adds convenience, not content.
+    </div>
+
+    <div class="card">
+      <h2>✨ What You Get</h2>
+      <div class="feature">
+        <span class="feature-icon">☁️</span>
+        <div><strong>Progress Sync</strong> — Mastery data backed up securely across devices.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📊</span>
+        <div><strong>Weekly Reports</strong> — See which patterns (e.g., <em>ph=/f/</em>) need review.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🖨️</span>
+        <div><strong>Printable Worksheets</strong> — Auto-generated PDFs from any lesson.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">✅</span>
+        <div><strong>Ad-Free Experience</strong> — Even in the web portal.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>💰 Pricing</h2>
+      <p><strong>$4/month</strong> or <strong>$36/year</strong> (2 months free)</p>
+      <p>Free for students in Title I schools — <a href="mailto:support@miniopenstax.org?subject=Title%20I%20Access">apply here</a>.</p>
+      <a href="#" id="upgrade-btn" class="btn">🔓 Upgrade Now</a>
+    </div>
+
+    <div class="footer">
+      <p>© Mini OpenStax • Built with ❤️ for literacy equity</p>
+      <p>Your data is never sold. We comply with COPPA and FERPA.</p>
+    </div>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    document.getElementById('upgrade-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      // Redirect to Stripe Checkout (see snippet below)
+      window.location.href = 'https://buy.stripe.com/your_checkout_link';
+    });
+  </script>
+</body>
+</html>
