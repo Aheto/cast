@@ -6,9 +6,17 @@
   <title>Mini OpenStax Premium — Unlock Progress & Insights</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem; }
+    .container { max-width: 700px; margin: 0 auto; padding: 1.5rem 1rem; }
     header { text-align: center; margin-bottom: 1.5rem; }
     h1 { color: #007bff; font-size: 1.8rem; }
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; justify-content: center; }
+    .tab-btn {
+      padding: 0.5rem 1.2rem; background: #e9ecef; border: none; border-radius: 6px;
+      cursor: pointer; font-weight: bold;
+    }
+    .tab-btn.active { background: #007bff; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
     .card {
       background: white; padding: 1.3rem; border-radius: 10px;
       margin-bottom: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -17,9 +25,9 @@
     .feature { display: flex; gap: 1rem; margin: 0.8rem 0; align-items: flex-start; }
     .feature-icon { font-size: 1.3rem; color: #28a745; min-width: 24px; }
     .btn {
-      display: inline-block; background: #007bff; color: white; text-decoration: none;
-      padding: 0.7rem 1.4rem; border-radius: 6px; font-weight: bold; margin-top: 1rem;
-      text-align: center;
+      background: #007bff; color: white; border: none; padding: 0.7rem 1.4rem;
+      border-radius: 6px; font-size: 1.1rem; cursor: pointer; width: 100%;
+      margin-top: 1rem;
     }
     .btn:hover { background: #0056b3; }
     .footer { text-align: center; margin-top: 2rem; font-size: 0.85rem; color: #666; }
@@ -36,6 +44,9 @@
       letter-spacing: 1px;
     }
     .step { margin: 0.6rem 0; }
+    label { display: block; margin: 1rem 0 0.4rem; font-weight: bold; }
+    input, select { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+    .note { background: #e9ecef; padding: 1rem; border-radius: 6px; font-size: 0.9rem; margin-top: 1.5rem; }
   </style>
 </head>
 <body>
@@ -50,41 +61,84 @@
       Premium adds convenience—never locks learning behind a paywall.
     </div>
 
-    <div class="card">
-      <h2>✨ Premium Features</h2>
-      <div class="feature">
-        <span class="feature-icon">☁️</span>
-        <div><strong>Progress Backup</strong> — Securely save mastery data across devices.</div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="info">✨ Learn More</button>
+      <button class="tab-btn" data-tab="confirm">✅ Confirm Payment</button>
+    </div>
+
+    <!-- Tab 1: Info -->
+    <div id="info" class="tab-content active">
+      <div class="card">
+        <h2>Premium Features</h2>
+        <div class="feature">
+          <span class="feature-icon">☁️</span>
+          <div><strong>Progress Backup</strong> — Securely save mastery data across devices.</div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">📊</span>
+          <div><strong>Weekly Insights</strong> — See which patterns (e.g., <em>ph=/f/</em>) need review.</div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🖨️</span>
+          <div><strong>Printable Worksheets</strong> — Generate PDFs from any lesson.</div>
+        </div>
       </div>
-      <div class="feature">
-        <span class="feature-icon">📊</span>
-        <div><strong>Weekly Insights</strong> — See which patterns (e.g., <em>ph=/f/</em>) need review.</div>
+
+      <div class="card">
+        <h2>💰 Pricing (GHS)</h2>
+        <p>• <strong>GHS 50/year</strong> — Full family access<br>
+           • <strong>FREE</strong> for public school teachers (email verification required)</p>
       </div>
-      <div class="feature">
-        <span class="feature-icon">🖨️</span>
-        <div><<strong>Printable Worksheets</strong> — Generate PDFs from any lesson.</div>
+
+      <div class="card">
+        <h2>📲 How to Pay via MTN MoMo</h2>
+        <div class="momo-instruction">
+          <div class="step">1. Open your <strong>MTN MoMo app</strong> or dial <code>*170#</code></div>
+          <div class="step">2. Choose <strong>“Transfer Money”</strong> → <strong>“MoMo Pay”</strong></div>
+          <div class="step">3. Enter the number: <span class="momo-number">+233 25 732 0201</span></div>
+          <div class="step">4. Enter amount: <strong>GHS 50</strong></div>
+          <div class="step">5. In the reference, type: <strong>Your Child’s First Name</strong></div>
+          <div class="step">6. Complete payment</div>
+        </div>
+        <p style="margin-top: 1rem;"><strong>✅ After payment:</strong> Tap “Confirm Payment” above to submit your details.</p>
       </div>
     </div>
 
-    <div class="card">
-      <h2>💰 Pricing (GHS)</h2>
-      <p>• <strong>GHS 50/year</strong> (≈ $4) — Full family access<br>
-         • <strong>FREE</strong> for public school teachers (email verification required)</p>
-    </div>
+    <!-- Tab 2: Confirmation Form -->
+    <div id="confirm" class="tab-content">
+      <div class="card">
+        <h2>✅ Confirm Your MTN MoMo Payment</h2>
+        <p>Thank you for supporting Mini OpenStax! Please fill in the details below so we can activate your premium access.</p>
 
-    <div class="card">
-      <h2>📲 How to Pay via MTN MoMo</h2>
-      <div class="momo-instruction">
-        <div class="step">1. Open your <strong>MTN MoMo app</strong> or dial <code>*170#</code></div>
-        <div class="step">2. Choose <strong>“Transfer Money”</strong> → <strong>“MoMo Pay”</strong> or <strong>“Pay Merchant”</strong></div>
-        <div class="step">3. Enter the number: <span class="momo-number">+233 25 732 0201</span></div>
-        <div class="step">4. Enter amount: <strong>GHS 50</strong></div>
-        <div class="step">5. In the reference, type: <strong>Your Child’s First Name</strong> (e.g., “Kwame”)</div>
-        <div class="step">6. Complete payment</div>
+        <form id="momo-form">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="e.g., Ama Serwah">
+
+          <label for="child">Child's First Name (for reference)</label>
+          <input type="text" id="child" name="child" required placeholder="e.g., Kwame">
+
+          <label for="phone">Your WhatsApp Number</label>
+          <input type="tel" id="phone" name="phone" required placeholder="+233 24 123 4567">
+
+          <label for="school">Affiliation</label>
+          <select id="school" name="school">
+            <option value="parent">Parent / Guardian</option>
+            <option value="teacher">Public School Teacher</option>
+            <option value="private">Private School</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="ref">MoMo Reference Number (Optional)</label>
+          <input type="text" id="ref" name="ref" placeholder="e.g., TXN123456">
+
+          <button type="submit" class="btn">Submit for Verification</button>
+        </form>
+
+        <div class="note">
+          <strong>What happens next?</strong><br>
+          We’ll review your payment and WhatsApp you within 24 hours with your premium access code.
+        </div>
       </div>
-      <p style="margin-top: 1rem;"><strong>✅ After payment:</strong> WhatsApp us your name and payment confirmation at  
-      <a href="https://wa.me/233257320201" style="color:#25D366; font-weight:bold;">+233 25 732 0201</a>.  
-      We’ll activate your premium access within 24 hours.</p>
     </div>
 
     <div class="footer">
@@ -92,5 +146,30 @@
       <p>No ads • No tracking • COPPA & FERPA compliant</p>
     </div>
   </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Form submission
+    document.getElementById('momo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const phone = document.getElementById('phone').value.replace(/\s/g, '');
+      const child = document.getElementById('child').value;
+      const message = `Hi! I just paid for Mini OpenStax Premium for ${child}. Please activate my access. Thank you!`;
+      const waUrl = `https://wa.me/233257320201?text=${encodeURIComponent(message)}`;
+      
+      alert('Thank you! We’ll verify your payment soon.\n\nYou can also message us directly on WhatsApp to speed up the process.');
+      window.open(waUrl, '_blank');
+    });
+  </script>
 </body>
 </html>
