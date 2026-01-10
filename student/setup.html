@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini OpenStax — Setup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 90%;
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-top: 0;
+    }
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: bold;
+      color: #495057;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    .checkbox-group {
+      background: #f1f8ff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.2rem 0;
+    }
+    .checkbox-group label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-weight: normal;
+      font-size: 0.95rem;
+      color: #212529;
+    }
+    input[type="checkbox"] {
+      margin-top: 0.25rem;
+    }
+    .btn {
+      width: 100%;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #6c757d;
+      text-align: center;
+      margin-top: 1.5rem;
+      line-height: 1.5;
+    }
+    .role-badge {
+      display: inline-block;
+      background: #e9ecef;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>👋 Welcome to Mini OpenStax</h1>
+    
+    <div class="input-group">
+      <label for="student-name">Your Name</label>
+      <input type="text" id="student-name" placeholder="e.g., Kwame or Ama" maxlength="30" autocomplete="off">
+    </div>
+
+    <div class="checkbox-group">
+      <label>
+        <input type="checkbox" id="teacher-mode">
+        <span><strong>I'm a teacher</strong> — I help students learn phonics.<br>
+          (Analytics auto-enabled to improve lessons. No personal data is collected.)</span>
+      </label>
+    </div>
+
+    <button id="save-btn" class="btn">Continue to Lessons</button>
+
+    <div class="note">
+      <p>Your name is stored only on this device.<br>
+        You can change it anytime. No data leaves your phone.</p>
+      <div id="role-preview" style="text-align:center;"></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const nameInput = document.getElementById('student-name');
+      const teacherCheckbox = document.getElementById('teacher-mode');
+      const saveBtn = document.getElementById('save-btn');
+      const rolePreview = document.getElementById('role-preview');
+
+      // Update role preview
+      teacherCheckbox.addEventListener('change', () => {
+        const role = teacherCheckbox.checked ? 'Teacher View' : 'Student View';
+        rolePreview.innerHTML = `<div class="role-badge">${role}</div>`;
+      });
+
+      // Focus on load
+      window.addEventListener('DOMContentLoaded', () => {
+        nameInput.focus();
+        rolePreview.innerHTML = '<div class="role-badge">Student View</div>';
+      });
+
+      saveBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (!name) {
+          alert("Please enter your name.");
+          nameInput.focus();
+          return;
+        }
+
+        const isTeacher = teacherCheckbox.checked;
+        localStorage.setItem('student_name', name);
+        localStorage.setItem('user_role', isTeacher ? 'teacher' : 'student');
+
+        // Auto-enable analytics for teachers
+        if (isTeacher) {
+          localStorage.setItem('miniopenstax_analytics_consent', '1');
+        }
+
+        // Redirect to first lesson
+        window.location.href = 'student/chapter-1.html';
+      });
+
+      // Allow Enter key
+      nameInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          saveBtn.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
