@@ -3,51 +3,183 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Quiz Reports</title>
+  <meta name="description" content="Mini OpenStax: Student Dashboard — Track your phonics mastery" />
+  <title>Mini OpenStax — Dashboard</title>
   <style>
+    :root {
+      --green: #006b3d;
+      --gold: #cead00;
+      --red: #ce1126;
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.5;
       padding: 0;
-      background: #f8f9fa;
-      color: #333;
     }
+
     .container {
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 1.5rem;
     }
+
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .greeting {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    .progress-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 3px solid var(--green);
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--green);
+      margin: 0.25rem 0;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--dark);
+    }
+
+    .lesson-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .lesson-card {
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .lesson-info h3 {
+      margin: 0 0 0.25rem;
+      font-size: 1.1rem;
+    }
+
+    .lesson-info .status {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    .status-mastered { color: var(--green); font-weight: bold; }
+    .status-incomplete { color: #888; }
+
+    .btn {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      font-weight: 700;
+      padding: 0.75rem 16px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-align: center;
+    }
+
+    .btn:hover, .btn:focus {
+      opacity: 0.92;
+      outline: 2px solid currentColor;
+      outline-offset: 4px;
+    }
+
+    .btn-secondary {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--green);
+      color: var(--green);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1.5rem 0 1rem;
+      color: #777;
+      font-size: 0.9rem;
+      border-top: 1px solid #eee;
+      margin-top: 1rem;
+    }
+
+    /* === REPORTS PANEL === */
+    #reports-panel {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
       gap: 10px;
     }
-    h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-    .nav {
-      display: flex;
-      gap: 10px;
-    }
-    .btn {
-      padding: 8px 16px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    .btn:hover, .btn.active {
-      background: #0056b3;
-    }
+
     .search-box {
-      margin: 20px 0;
+      margin: 1rem 0;
       text-align: center;
     }
+
     #student-search {
       padding: 8px 12px;
       width: 250px;
@@ -55,21 +187,28 @@
       border-radius: 4px;
       font-size: 16px;
     }
+
     #search-btn {
       padding: 8px 16px;
-      background: #28a745;
+      background: var(--green);
       color: white;
       border: none;
       border-radius: 4px;
       margin-left: 10px;
       cursor: pointer;
     }
+
     #search-btn:hover {
-      background: #218838;
+      background: #0056b3;
     }
-    .reports-container {
-      display: none;
+
+    .note {
+      text-align: center;
+      color: #6c757d;
+      font-size: 0.875rem;
+      margin: 10px 0 1.5rem;
     }
+
     .report-card {
       background: white;
       border: 1px solid #dee2e6;
@@ -81,8 +220,8 @@
       font-size: 13px;
       line-height: 1.4;
       overflow-x: auto;
-      position: relative;
     }
+
     .report-date {
       margin-top: 8px;
       font-style: italic;
@@ -90,12 +229,14 @@
       font-family: Arial, sans-serif;
       font-size: 12px;
     }
+
     .report-actions {
       margin-top: 8px;
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
+
     .action-btn {
       padding: 4px 8px;
       font-size: 12px;
@@ -105,47 +246,135 @@
       border-radius: 3px;
       cursor: pointer;
     }
+
     .action-btn:hover {
       background: #5a6268;
     }
+
     .error {
       text-align: center;
       color: #dc3545;
       padding: 20px;
       font-weight: bold;
     }
-    .note {
-      text-align: center;
-      color: #6c757d;
-      font-size: 0.875rem;
-      margin-top: 10px;
+
+    @media (max-width: 600px) {
+      .header, .lesson-card, .panel-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .lesson-card { align-items: stretch; }
+      #student-search { width: 100%; margin-bottom: 10px; }
+      #search-btn, #whatsapp-all { margin-left: 0; width: 100%; }
+      .panel-header > * { width: 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>All Student Quiz Reports (Lessons 2–262)</h1>
-      <div class="nav">
-        <a href="../index.html" class="btn">Home</a>
-        <a href="analytics-1.html" class="btn active">Analytics</a>
+      <div class="greeting" id="greeting">Hello, [Name]</div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <a href="../index.html" class="btn btn-secondary">← Home</a>
+        <button id="toggle-reports" class="btn btn-outline">📊 View All Reports</button>
       </div>
     </div>
 
-    <div class="search-box">
-      <input type="text" id="student-search" placeholder="Enter student name or leave blank for all" />
-      <button id="search-btn">Search Reports</button>
+    <div class="progress-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="lessons-attempted">0</div>
+        <div class="stat-label">Lessons Attempted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="lessons-mastered">0</div>
+        <div class="stat-label">Mastered</div>
+      </div>
     </div>
-    <div class="note">Reports are saved only in this browser and tied to your quiz attempts.</div>
 
-    <div id="results" class="reports-container"></div>
+    <h2 class="section-title">Continue Learning</h2>
+    <div class="lesson-grid" id="lesson-list">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- REPORTS PANEL -->
+    <div id="reports-panel">
+      <div class="panel-header">
+        <h2>All Quiz Reports (Lessons 2–262)</h2>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <button id="whatsapp-all" class="btn btn-whatsapp">📤 Send All via WhatsApp</button>
+          <button id="close-reports" class="btn btn-outline">✕ Close</button>
+        </div>
+      </div>
+      <div class="search-box">
+        <input type="text" id="student-search" placeholder="Enter student name or leave blank for all" />
+        <button id="search-btn">Search Reports</button>
+      </div>
+      <div class="note">Reports are saved only in this browser and tied to your quiz attempts.</div>
+      <div id="results"></div>
+    </div>
+
+    <div class="footer">
+      <p><a href="premium.html" style="color:var(--gold);">✨ Unlock Premium</a> • 
+         <a href="instructor/analytics-1.html" style="color:#666;">📊 Instructor View</a></p>
+    </div>
   </div>
 
   <script>
-    // Registration message to append to every report
-    const REGISTRATION_LINE = "\nCALL OR WHATSAPP TO REGISTER FOR A CLASS @ +233257320201 / +233205626264";
+    // ===== CONFIG =====
+    const MAX_CHAPTER = 261;
+    const STUDENT_NAME = localStorage.getItem('student_name') || 'Friend';
+    const WHATSAPP_NUMBER = "233257320201";
+    const REGISTRATION_LINE = "\n\nCALL OR WHATSAPP TO REGISTER FOR A CLASS @ +233257320201 / +233205626264";
 
-    // Safely override localStorage.setItem to auto-save quiz reports
+    // ===== DASHBOARD INIT =====
+    document.getElementById('greeting').textContent = `Hello, ${STUDENT_NAME}!`;
+
+    let attempted = 0, mastered = 0;
+    for (let i = 0; i <= MAX_CHAPTER; i++) {
+      if (localStorage.getItem(`quiz_attempts_${i}`)) attempted++;
+      if (localStorage.getItem(`mastery_${i}`) === '1') mastered++;
+    }
+    document.getElementById('lessons-attempted').textContent = attempted;
+    document.getElementById('lessons-mastered').textContent = mastered;
+
+    // Find next lesson to show
+    let startChapter = 0;
+    for (let i = 0; i <= Math.min(10, MAX_CHAPTER); i++) {
+      if (localStorage.getItem(`mastery_${i}`) !== '1') {
+        startChapter = i;
+        break;
+      }
+    }
+
+    const lessonList = document.getElementById('lesson-list');
+    let rendered = 0;
+    for (let i = startChapter; i <= MAX_CHAPTER && rendered < 4; i++) {
+      const lessonNum = i + 1;
+      const isMastered = localStorage.getItem(`mastery_${i}`) === '1';
+      const attempts = localStorage.getItem(`quiz_attempts_${i}`);
+      const statusText = isMastered ? '✅ Mastered' : attempts ? '🔄 In Progress' : 'Not Started';
+      const statusClass = isMastered ? 'status-mastered' : 'status-incomplete';
+
+      const card = document.createElement('div');
+      card.className = 'lesson-card';
+      card.innerHTML = `
+        <div class="lesson-info">
+          <h3>Lesson ${lessonNum}: Short Vowel ${getVowel(i)}</h3>
+          <div class="status ${statusClass}">${statusText}</div>
+        </div>
+        <a href="chapter-${i}.html" class="btn">Open</a>
+      `;
+      lessonList.appendChild(card);
+      rendered++;
+    }
+
+    function getVowel(chapterIndex) {
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      return vowels[chapterIndex % 5];
+    }
+
+    // ===== REPORTS SYSTEM =====
     (function() {
       const originalSetItem = localStorage.setItem;
       localStorage.setItem = function(key, value) {
@@ -164,108 +393,33 @@
       };
     })();
 
-    // Helper: download a blob as file
-    function downloadBlob(blob, filename) {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+    function formatDate(timestamp) {
+      if (!timestamp) return 'Unknown date';
+      return new Date(timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
-    // Helper: share file (Web Share API fallback to download)
-    async function shareOrDownload(blob, filename, title = 'Quiz Report') {
-      if (navigator.share && navigator.canShare) {
-        const file = new File([blob], filename, { type: blob.type });
-        if (navigator.canShare({ files: [file] })) {
-          try {
-            await navigator.share({
-              title,
-              files: [file],
-            });
-            return;
-          } catch (err) {
-            if (err.name !== 'AbortError') console.warn('Share failed:', err);
+    function getFilteredReports(searchTerm = '') {
+      const allKeys = Object.keys(localStorage);
+      const reportEntries = [];
+      for (const key of allKeys) {
+        if (key.startsWith('saved_report_')) {
+          const reportText = localStorage.getItem(key);
+          if (reportText && typeof reportText === 'string') {
+            const studentMatch = reportText.match(/Student:\s*(.+)\n/);
+            const studentName = studentMatch ? studentMatch[1].trim() : '[Unknown]';
+            if (!searchTerm || studentName.toLowerCase().includes(searchTerm.toLowerCase())) {
+              const parts = key.split('_');
+              const timestamp = parts.length >= 4 ? parseInt(parts[parts.length - 1], 10) : 0;
+              reportEntries.push({ text: reportText, time: timestamp });
+            }
           }
         }
       }
-      downloadBlob(blob, filename);
-    }
-
-    // Generate SVG from plain text report (with registration line)
-    function generateSVG(textWithReg, width = 800, lineHeight = 16, padding = 20) {
-      const lines = textWithReg.split('\n');
-      const height = lines.length * lineHeight + padding * 2;
-      const fontSize = 13;
-      const fontFamily = 'monospace';
-
-      const escapedLines = lines.map(line =>
-        line
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-      );
-
-      const tspans = escapedLines
-        .map((line, i) => `<tspan x="${padding}" dy="${i === 0 ? lineHeight : lineHeight}">${line}</tspan>`)
-        .join('');
-
-      return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-  <style>
-    .report-text { font-family: ${fontFamily}; font-size: ${fontSize}px; }
-  </style>
-  <rect width="100%" height="100%" fill="white" stroke="#ccc" stroke-width="1"/>
-  <text x="0" y="${padding}" class="report-text">
-    ${tspans}
-  </text>
-</svg>`;
-    }
-
-    // Convert SVG string to PNG Blob
-    function svgToPngBlob(svgString, width = 800) {
-      return new Promise((resolve, reject) => {
-        const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-        const svgUrl = URL.createObjectURL(svgBlob);
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext('2d');
-          ctx.fillStyle = 'white';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0);
-          URL.revokeObjectURL(svgUrl);
-          canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('Canvas toBlob failed')), 'image/png', 1.0);
-        };
-        img.onerror = () => {
-          URL.revokeObjectURL(svgUrl);
-          reject(new Error('Failed to load SVG'));
-        };
-        img.src = svgUrl;
-      });
-    }
-
-    // Format date as "January 8, 2026"
-    function formatDate(timestamp) {
-      if (!timestamp) return 'Unknown date';
-      const date = new Date(timestamp);
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
+      return reportEntries.sort((a, b) => b.time - a.time);
     }
 
     function renderReportCard(reportText, timestamp) {
-      // Add registration line for display and export
       const fullReportText = reportText + REGISTRATION_LINE;
-
-      // Safe HTML for on-screen display
       const safeHTML = fullReportText
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -285,101 +439,156 @@
         </div>
       `;
 
-      // Generate filename
+      // === EXPORT LOGIC ===
       const studentMatch = reportText.match(/Student:\s*(.+)\n/);
       const lessonMatch = reportText.match(/Lesson (\d+)/);
       const studentName = (studentMatch ? studentMatch[1].trim() : 'Student').replace(/[^a-z0-9]/gi, '_');
       const lessonNum = lessonMatch ? lessonMatch[1] : 'X';
-      const dateStr = new Date(timestamp).toISOString().slice(0, 10); // YYYY-MM-DD
+      const dateStr = new Date(timestamp).toISOString().slice(0, 10);
       const baseName = `QuizReport_Lesson${lessonNum}_${studentName}_${dateStr}`;
 
-      // Attach event listeners
-      card.querySelector('.download-svg').addEventListener('click', () => {
-        const svgStr = generateSVG(fullReportText);
-        const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+      // Helper: download blob
+      function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      // Helper: share or download
+      async function shareOrDownload(blob, filename, title = 'Quiz Report') {
+        if (navigator.share && navigator.canShare) {
+          const file = new File([blob], filename, { type: blob.type });
+          if (navigator.canShare({ files: [file] })) {
+            try { await navigator.share({ title, files: [file] }); return; }
+            catch (err) { if (err.name !== 'AbortError') console.warn('Share failed:', err); }
+          }
+        }
+        downloadBlob(blob, filename);
+      }
+
+      // Generate SVG
+      function generateSVG(text, width = 800, lineHeight = 16, padding = 20) {
+        const lines = text.split('\n');
+        const height = lines.length * lineHeight + padding * 2;
+        const escapedLines = lines.map(line =>
+          line.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+        );
+        const tspans = escapedLines.map((line, i) => 
+          `<tspan x="${padding}" dy="${i === 0 ? lineHeight : lineHeight}">${line}</tspan>`
+        ).join('');
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <style>.report-text { font-family: monospace; font-size: 13px; }</style>
+  <rect width="100%" height="100%" fill="white" stroke="#ccc"/>
+  <text x="0" y="${padding}" class="report-text">${tspans}</text>
+</svg>`;
+      }
+
+      // SVG → PNG
+      function svgToPngBlob(svgString) {
+        return new Promise((resolve, reject) => {
+          const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
+          const url = URL.createObjectURL(svgBlob);
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width; canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            URL.revokeObjectURL(url);
+            canvas.toBlob(blob => blob ? resolve(blob) : reject(), 'image/png');
+          };
+          img.onerror = () => { URL.revokeObjectURL(url); reject(); };
+          img.src = url;
+        });
+      }
+
+      // Button handlers
+      card.querySelector('.download-svg').onclick = () => {
+        const blob = new Blob([generateSVG(fullReportText)], { type: 'image/svg+xml' });
         downloadBlob(blob, `${baseName}.svg`);
-      });
+      };
 
-      card.querySelector('.download-png').addEventListener('click', async () => {
+      card.querySelector('.download-png').onclick = async () => {
         try {
-          const svgStr = generateSVG(fullReportText);
-          const pngBlob = await svgToPngBlob(svgStr);
-          downloadBlob(pngBlob, `${baseName}.png`);
-        } catch (err) {
-          alert('PNG generation failed: ' + err.message);
-        }
-      });
+          const png = await svgToPngBlob(generateSVG(fullReportText));
+          downloadBlob(png, `${baseName}.png`);
+        } catch (e) { alert('PNG export failed'); }
+      };
 
-      card.querySelector('.share-svg').addEventListener('click', () => {
-        const svgStr = generateSVG(fullReportText);
-        const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+      card.querySelector('.share-svg').onclick = () => {
+        const blob = new Blob([generateSVG(fullReportText)], { type: 'image/svg+xml' });
         shareOrDownload(blob, `${baseName}.svg`, 'Quiz Report (SVG)');
-      });
+      };
 
-      card.querySelector('.share-png').addEventListener('click', async () => {
+      card.querySelector('.share-png').onclick = async () => {
         try {
-          const svgStr = generateSVG(fullReportText);
-          const pngBlob = await svgToPngBlob(svgStr);
-          shareOrDownload(pngBlob, `${baseName}.png`, 'Quiz Report (PNG)');
-        } catch (err) {
-          alert('Share PNG failed: ' + err.message);
-        }
-      });
+          const png = await svgToPngBlob(generateSVG(fullReportText));
+          shareOrDownload(png, `${baseName}.png`, 'Quiz Report (PNG)');
+        } catch (e) { alert('Share failed'); }
+      };
 
       return card;
     }
 
     function showReports() {
-      const searchTerm = document.getElementById('student-search').value.trim().toLowerCase();
-      const allKeys = Object.keys(localStorage);
-      const reportEntries = [];
-
-      for (const key of allKeys) {
-        if (key.startsWith('saved_report_')) {
-          const reportText = localStorage.getItem(key);
-          if (reportText && typeof reportText === 'string') {
-            const studentMatch = reportText.match(/Student:\s*(.+)\n/);
-            const studentName = studentMatch ? studentMatch[1].trim() : '[Unknown]';
-            if (!searchTerm || studentName.toLowerCase().includes(searchTerm)) {
-              const parts = key.split('_');
-              const timestamp = parts.length >= 4 ? parseInt(parts[parts.length - 1], 10) : 0;
-              reportEntries.push({ text: reportText, time: timestamp });
-            }
-          }
-        }
-      }
-
-      reportEntries.sort((a, b) => b.time - a.time);
-
+      const searchTerm = document.getElementById('student-search').value.trim();
+      const reports = getFilteredReports(searchTerm);
       const container = document.getElementById('results');
 
-      if (reportEntries.length === 0) {
+      if (reports.length === 0) {
         container.innerHTML = `<div class="error">No quiz reports found${searchTerm ? ` for "${searchTerm}"` : ''}.</div>`;
-        container.style.display = 'block';
         return;
       }
 
-      const fragment = document.createDocumentFragment();
-      const heading = document.createElement('h2');
-      heading.textContent = `${reportEntries.length} Report(s) Found`;
-      fragment.appendChild(heading);
+      const frag = document.createDocumentFragment();
+      const heading = document.createElement('h3');
+      heading.textContent = `${reports.length} Report(s) Found`;
+      frag.appendChild(heading);
 
-      reportEntries.forEach(entry => {
-        const card = renderReportCard(entry.text, entry.time);
-        fragment.appendChild(card);
-      });
-
+      reports.forEach(entry => frag.appendChild(renderReportCard(entry.text, entry.time)));
       container.innerHTML = '';
-      container.appendChild(fragment);
-      container.style.display = 'block';
+      container.appendChild(frag);
     }
 
+    // ✅ WHATSAPP BATCH SEND
+    function sendAllReportsViaWhatsApp() {
+      const searchTerm = document.getElementById('student-search').value.trim();
+      const reports = getFilteredReports(searchTerm);
+      if (reports.length === 0) return alert("No reports to send.");
+
+      let msg = `*📚 Mini OpenStax — All Quiz Reports*\nStudent: ${STUDENT_NAME}\nFiltered: ${searchTerm || 'All'}\nTotal: ${reports.length} report(s)\n\n---\n`;
+      reports.forEach(r => msg += `\n${r.text}\n---\n`);
+      msg += REGISTRATION_LINE;
+
+      // Truncate to stay under WhatsApp limit (~4k chars)
+      if (msg.length > 3800) msg = msg.substring(0, 3800) + "\n\n... (truncated)";
+
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // ===== EVENT LISTENERS =====
+    document.getElementById('toggle-reports').addEventListener('click', () => {
+      document.getElementById('reports-panel').style.display = 'block';
+      showReports();
+    });
+
+    document.getElementById('close-reports').addEventListener('click', () => {
+      document.getElementById('reports-panel').style.display = 'none';
+    });
+
     document.getElementById('search-btn').addEventListener('click', showReports);
-    document.getElementById('student-search').addEventListener('keypress', (e) => {
+    document.getElementById('student-search').addEventListener('keypress', e => {
       if (e.key === 'Enter') showReports();
     });
 
-    window.addEventListener('DOMContentLoaded', showReports);
+    document.getElementById('whatsapp-all').addEventListener('click', sendAllReportsViaWhatsApp);
   </script>
 </body>
 </html>
