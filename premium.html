@@ -5,52 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini OpenStax Premium — Unlock Progress & Insights</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
-    .container { max-width: 700px; margin: 0 auto; padding: 1.5rem 1rem; }
-    header { text-align: center; margin-bottom: 1.5rem; }
-    h1 { color: #007bff; font-size: 1.8rem; }
-    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; justify-content: center; }
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --red: #ce1126;     /* Ghana red */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: var(--light); 
+      color: var(--dark); 
+    }
+    .container { 
+      max-width: 700px; 
+      margin: 0 auto; 
+      padding: 1.5rem 1rem; 
+    }
+    header { 
+      text-align: center; 
+      margin-bottom: 1.5rem; 
+    }
+    h1 { 
+      color: var(--green); 
+      font-size: 1.8rem; 
+    }
+    .tabs { 
+      display: flex; 
+      gap: 0.5rem; 
+      margin-bottom: 1.5rem; 
+      justify-content: center; 
+    }
     .tab-btn {
-      padding: 0.5rem 1.2rem; background: #e9ecef; border: none; border-radius: 6px;
-      cursor: pointer; font-weight: bold;
+      padding: 0.5rem 1.2rem; 
+      background: #e9ecef; 
+      border: none; 
+      border-radius: 6px;
+      cursor: pointer; 
+      font-weight: bold;
     }
-    .tab-btn.active { background: #007bff; color: white; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    .tab-btn.active { 
+      background: var(--green); 
+      color: white; 
+    }
+    .tab-content { 
+      display: none; 
+    }
+    .tab-content.active { 
+      display: block; 
+    }
     .card {
-      background: white; padding: 1.3rem; border-radius: 10px;
-      margin-bottom: 1.3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border-left: 4px solid #007bff;
+      background: var(--card-bg); 
+      padding: 1.3rem; 
+      border-radius: 12px;
+      margin-bottom: 1.3rem; 
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--green);
     }
-    .feature { display: flex; gap: 1rem; margin: 0.8rem 0; align-items: flex-start; }
-    .feature-icon { font-size: 1.3rem; color: #28a745; min-width: 24px; }
+    .feature { 
+      display: flex; 
+      gap: 1rem; 
+      margin: 0.8rem 0; 
+      align-items: flex-start; 
+    }
+    .feature-icon { 
+      font-size: 1.3rem; 
+      color: var(--gold); 
+      min-width: 24px; 
+    }
     .btn {
-      background: #007bff; color: white; border: none; padding: 0.7rem 1.4rem;
-      border-radius: 6px; font-size: 1.1rem; cursor: pointer; width: 100%;
+      background: var(--green); 
+      color: white; 
+      border: none; 
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px; 
+      font-size: 1.1rem; 
+      cursor: pointer; 
+      width: 100%;
       margin-top: 1rem;
+      font-weight: 600;
     }
-    .btn:hover { background: #0056b3; }
-    .footer { text-align: center; margin-top: 2rem; font-size: 0.85rem; color: #666; }
+    .btn:hover { 
+      background: #00502e; 
+    }
+    .footer { 
+      text-align: center; 
+      margin-top: 2rem; 
+      font-size: 0.85rem; 
+      color: #666; 
+    }
     .free-forever {
-      background: #e9ecef; padding: 1rem; border-radius: 8px;
-      font-style: italic; text-align: center; margin-bottom: 1.2rem;
+      background: #e9ecef; 
+      padding: 1rem; 
+      border-radius: 8px;
+      font-style: italic; 
+      text-align: center; 
+      margin-bottom: 1.2rem;
     }
     .momo-instruction {
-      background: #fff8e1; padding: 1.2rem; border-radius: 8px; border-left: 4px solid #ffc107;
+      background: #fff8e1; 
+      padding: 1.2rem; 
+      border-radius: 8px; 
+      border-left: 4px solid #ffc107;
       font-size: 0.95rem;
     }
     .momo-number {
-      font-weight: bold; font-size: 1.2rem; color: #d32f2f;
+      font-weight: bold; 
+      font-size: 1.2rem; 
+      color: var(--red);
       letter-spacing: 1px;
     }
-    .step { margin: 0.6rem 0; }
-    label { display: block; margin: 1rem 0 0.4rem; font-weight: bold; }
-    input, select { width: 100%; padding: 0.6rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
-    .note { background: #e9ecef; padding: 1rem; border-radius: 6px; font-size: 0.9rem; margin-top: 1.5rem; }
+    .step { 
+      margin: 0.6rem 0; 
+    }
+    label { 
+      display: block; 
+      margin: 1rem 0 0.4rem; 
+      font-weight: bold; 
+    }
+    input, select { 
+      width: 100%; 
+      padding: 0.6rem; 
+      margin-bottom: 1rem; 
+      border: 1px solid #ccc; 
+      border-radius: 4px; 
+      font-size: 1rem; 
+    }
+    .note { 
+      background: #e9ecef; 
+      padding: 1rem; 
+      border-radius: 6px; 
+      font-size: 0.9rem; 
+      margin-top: 1.5rem; 
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+
     <header>
       <h1>✨ Mini OpenStax Premium</h1>
       <p>Enhance your child’s phonics journey—offline, ethical, and Ghana-made.</p>
@@ -94,8 +202,8 @@
         <h2>📲 How to Pay via MTN MoMo</h2>
         <div class="momo-instruction">
           <div class="step">1. Open your <strong>MTN MoMo app</strong> or dial <code>*170#</code></div>
-          <div class="step">2. Choose <strong>“Transfer Money”</strong> → <strong>“MoMo Pay”</strong></div>
-          <div class="step">3. Enter the number: <span class="momo-number">+233 25 732 0201</span></div>
+          <div class="step">2. Choose <strong>“Transfer Money”</strong> → <strong>“Pay Merchant”</strong></div>
+          <div class="step">3. Enter the number: <span class="momo-number">0257320201</span></div>
           <div class="step">4. Enter amount: <strong>GHS 50</strong></div>
           <div class="step">5. In the reference, type: <strong>Your Child’s First Name</strong></div>
           <div class="step">6. Complete payment</div>
@@ -108,7 +216,7 @@
     <div id="confirm" class="tab-content">
       <div class="card">
         <h2>✅ Confirm Your MTN MoMo Payment</h2>
-        <p>Thank you for supporting Mini OpenStax! Please fill in the details below so we can activate your premium access.</p>
+        <p id="welcome-message">Thank you for supporting Mini OpenStax! Please fill in the details below so we can activate your premium access.</p>
 
         <form id="momo-form">
           <label for="name">Full Name</label>
@@ -148,6 +256,18 @@
   </div>
 
   <script>
+    // Set personalized welcome message
+    const studentName = localStorage.getItem('student_name') || 'Learner';
+    const userRole = localStorage.getItem('user_role');
+    const welcomeMsg = document.getElementById('welcome-message');
+    
+    if (userRole === 'instructor') {
+      welcomeMsg.textContent = 'Thank you for your dedication to literacy! As a teacher, your premium access is FREE. Please verify your school affiliation below.';
+      document.querySelector('#school option[value="teacher"]').selected = true;
+    } else {
+      welcomeMsg.textContent = `Thank you for supporting Mini OpenStax, ${studentName}’s guardian! Please fill in the details below so we can activate your premium access.`;
+    }
+
     // Tab switching
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -162,9 +282,25 @@
     document.getElementById('momo-form').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      const phone = document.getElementById('phone').value.replace(/\s/g, '');
-      const child = document.getElementById('child').value;
-      const message = `Hi! I just paid for Mini OpenStax Premium for ${child}. Please activate my access. Thank you!`;
+      const phone = document.getElementById('phone').value.replace(/\D/g, '');
+      const child = document.getElementById('child').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const school = document.getElementById('school').value;
+      
+      // Basic validation
+      if (!phone.startsWith('233') || phone.length !== 12) {
+        alert('Please enter a valid Ghanaian WhatsApp number (e.g., +233 24 123 4567)');
+        return;
+      }
+      
+      let message = `Hi! I just paid for Mini OpenStax Premium.\n\n`;
+      message += `Name: ${name}\n`;
+      message += `Child: ${child}\n`;
+      message += `Affiliation: ${school}\n`;
+      message += `Phone: +${phone}\n\n`;
+      message += `Please activate my premium access. Thank you!`;
+      
+      // ✅ Fixed WhatsApp URL (no extra spaces)
       const waUrl = `https://wa.me/233257320201?text=${encodeURIComponent(message)}`;
       
       alert('Thank you! We’ll verify your payment soon.\n\nYou can also message us directly on WhatsApp to speed up the process.');
