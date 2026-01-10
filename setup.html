@@ -5,28 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini OpenStax — Setup</title>
   <style>
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--light);
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      color: #333;
+      color: var(--dark);
     }
     .card {
-      background: white;
+      background: var(--card-bg);
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow);
       max-width: 500px;
       width: 90%;
     }
     h1 {
       text-align: center;
-      color: #007bff;
+      color: var(--green);
       margin-top: 0;
     }
     .input-group {
@@ -65,7 +74,7 @@
     }
     .btn {
       width: 100%;
-      background: #007bff;
+      background: var(--green);
       color: white;
       border: none;
       padding: 0.85rem;
@@ -76,7 +85,7 @@
       transition: background 0.2s;
     }
     .btn:hover {
-      background: #0056b3;
+      background: #00502e;
     }
     .note {
       font-size: 0.85rem;
@@ -93,10 +102,22 @@
       font-size: 0.85rem;
       margin-top: 0.5rem;
     }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="card">
+    <a href="index.html" class="back-link">← Back to Home</a>
     <h1>👋 Welcome to Mini OpenStax</h1>
     
     <div class="input-group">
@@ -112,7 +133,7 @@
       </label>
     </div>
 
-    <button id="save-btn" class="btn">Continue to Lessons</button>
+    <button id="save-btn" class="btn">Continue</button>
 
     <div class="note">
       <p>Your name is stored only on this device.<br>
@@ -132,7 +153,7 @@
 
       // Update role preview
       teacherCheckbox.addEventListener('change', () => {
-        const role = teacherCheckbox.checked ? 'Teacher View' : 'Student View';
+        const role = teacherCheckbox.checked ? 'Instructor View' : 'Student View';
         rolePreview.innerHTML = `<div class="role-badge">${role}</div>`;
       });
 
@@ -152,15 +173,19 @@
 
         const isTeacher = teacherCheckbox.checked;
         localStorage.setItem('student_name', name);
-        localStorage.setItem('user_role', isTeacher ? 'teacher' : 'student');
+        localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
 
         // Auto-enable analytics for teachers
         if (isTeacher) {
           localStorage.setItem('miniopenstax_analytics_consent', '1');
         }
 
-        // Redirect to first lesson
-        window.location.href = 'student/chapter-1.html';
+        // ✅ Redirect based on role
+        if (isTeacher) {
+          window.location.href = 'instructor/analytics-1.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
       });
 
       // Allow Enter key
