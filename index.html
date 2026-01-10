@@ -179,5 +179,20 @@
 
   <!-- Privacy-friendly analytics by Plausible -->
   <script defer data-domain="miniopenstax.example" src="https://plausible.io/js/script.js"></script>
+
+  <!-- Optional: Auto-redirect based on saved role (comment out if not desired) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedRole = localStorage.getItem('user_role');
+      if (savedRole === 'student') {
+        // Only redirect if user is clearly a returning student
+        if (localStorage.getItem('student_name')) {
+          window.location.href = 'dashboard.html';
+        }
+      } else if (savedRole === 'instructor') {
+        window.location.href = 'instructor/analytics-1.html';
+      }
+    });
+  </script>
 </body>
 </html>
