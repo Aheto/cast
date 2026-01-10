@@ -5,12 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini OpenStax Dashboard</title>
   <style>
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --red: #ce1126;     /* Ghana red */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f8f9fa;
-      color: #333;
+      background: var(--light);
+      color: var(--dark);
     }
     .container {
       max-width: 800px;
@@ -31,13 +41,13 @@
       border-radius: 20px;
       font-size: 0.85rem;
     }
-    h1 { color: #007bff; margin: 0; }
+    h1 { color: var(--green); margin: 0; }
     .card {
-      background: white;
+      background: var(--card-bg);
       padding: 1.5rem;
-      border-radius: 10px;
+      border-radius: 12px;
       margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      box-shadow: var(--shadow);
     }
     .progress-bar {
       height: 24px;
@@ -48,7 +58,7 @@
     }
     .progress-fill {
       height: 100%;
-      background: #28a745;
+      background: var(--green);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -70,8 +80,8 @@
       border-radius: 50%;
       margin-right: 0.5rem;
     }
-    .mastery-yes { background: #28a745; }
-    .mastery-no { background: #dc3545; }
+    .mastery-yes { background: var(--green); }
+    .mastery-no { background: var(--red); }
     .mastery-partial { background: #ffc107; }
     .note {
       font-size: 0.85rem;
@@ -81,16 +91,111 @@
     }
     .btn {
       display: inline-block;
-      background: #007bff;
+      background: var(--green);
       color: white;
       text-decoration: none;
       padding: 0.6rem 1.2rem;
       border-radius: 6px;
       margin-top: 1rem;
+      font-weight: 600;
     }
-    .btn:hover { background: #0056b3; }
+    .btn:hover { background: #00502e; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--green);
+      color: var(--green);
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: white;
+    }
     .loading { text-align: center; color: #6c757d; }
-    .error { background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 6px; margin: 1rem 0; }
+    .error { 
+      background: #f8d7da; 
+      color: #721c24; 
+      padding: 1rem; 
+      border-radius: 6px; 
+      margin: 1rem 0; 
+    }
+
+    /* === REPORTS PANEL === */
+    #reports-panel {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .search-box {
+      margin: 1rem 0;
+      text-align: center;
+    }
+    #student-search {
+      padding: 8px 12px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    #search-btn {
+      padding: 8px 16px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .report-card {
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 16px;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+    .report-date {
+      margin-top: 8px;
+      font-style: italic;
+      color: #6c757d;
+      font-size: 12px;
+    }
+    .report-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      padding: 4px 8px;
+      font-size: 12px;
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .action-btn:hover {
+      background: #5a6268;
+    }
+    @media (max-width: 600px) {
+      .panel-header > * { width: 100%; text-align: center; }
+      #student-search { width: 100%; margin-bottom: 10px; }
+      #search-btn, #whatsapp-all { margin-left: 0; width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -100,15 +205,35 @@
         <h1>Mini OpenStax Dashboard</h1>
         <div class="role-badge" id="role-badge">Loading...</div>
       </div>
-      <a href="setup.html" style="font-size:0.9rem;">✏️ Change Role</a>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <a href="setup.html" style="font-size:0.9rem;">✏️ Change Role</a>
+        <button id="toggle-reports" class="btn btn-outline" style="padding:0.4rem 0.8rem;font-size:0.9rem;">📊 Reports</button>
+      </div>
     </header>
 
     <main id="dashboard-content">
       <div class="loading">Loading your dashboard...</div>
     </main>
 
+    <!-- REPORTS PANEL -->
+    <div id="reports-panel">
+      <div class="panel-header">
+        <h2>All Quiz Reports</h2>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <button id="whatsapp-all" class="btn btn-whatsapp" style="padding:0.4rem 0.8rem;font-size:0.9rem;">📤 Send All</button>
+          <button id="close-reports" class="btn btn-outline" style="padding:0.4rem 0.8rem;font-size:0.9rem;">✕ Close</button>
+        </div>
+      </div>
+      <div class="search-box">
+        <input type="text" id="student-search" placeholder="Enter student name or leave blank for all" />
+        <button id="search-btn">Search Reports</button>
+      </div>
+      <div class="note">Reports are saved only in this browser.</div>
+      <div id="results"></div>
+    </div>
+
     <footer class="note">
-      <p>Data is updated weekly. No personal information is stored on servers.</p>
+      <p>Data is stored locally. No personal information is sent to servers.</p>
       <p>Powered by open educational principles • Ghana-made</p>
     </footer>
   </div>
@@ -119,34 +244,42 @@
 
       const ROLE = localStorage.getItem('user_role') || 'student';
       const STUDENT_NAME = localStorage.getItem('student_name') || 'Learner';
-      const DASHBOARD_DATA_URL = 'data/class-mastery.json'; // Public JSON (see note below)
+      const WHATSAPP_NUMBER = "233257320201";
+      const REGISTRATION_LINE = "\n\nCALL OR WHATSAPP TO REGISTER FOR A CLASS @ +233257320201 / +233205626264";
 
       function renderHeader() {
         document.getElementById('role-badge').textContent = 
-          ROLE === 'teacher' ? 'Teacher View' : 'Student View';
+          ROLE === 'instructor' ? 'Instructor View' : 'Student View';
       }
 
-      // === STUDENT VIEW ===
+      // ===== STUDENT VIEW =====
       function renderStudentDashboard() {
-        // Count mastered lessons (from localStorage)
-        let mastered = 0, total = 262;
+        const totalLessons = 262;
+        let mastered = 0;
         for (let i = 0; i <= 261; i++) {
-          if (localStorage.getItem(`mastery_${i}`) === '1') {
-            mastered++;
+          if (localStorage.getItem(`mastery_${i}`) === '1') mastered++;
+        }
+        const masteryPercent = Math.round((mastered / totalLessons) * 100);
+
+        // Find next lesson to continue
+        let nextLesson = 0;
+        for (let i = 0; i <= 261; i++) {
+          if (localStorage.getItem(`mastery_${i}`) !== '1') {
+            nextLesson = i;
+            break;
           }
         }
-        const masteryPercent = Math.round((mastered / total) * 100);
 
         const html = `
           <div class="card">
             <h2>Hello, ${STUDENT_NAME}!</h2>
-            <p>You've mastered <strong>${mastered} of ${total}</strong> phonics lessons.</p>
+            <p>You've mastered <strong>${mastered} of ${totalLessons}</strong> phonics lessons.</p>
             <div class="progress-bar">
               <div class="progress-fill" style="width:${masteryPercent}%">
                 ${masteryPercent}%
               </div>
             </div>
-            <a href="chapter-0.html" class="btn">Continue Learning</a>
+            <a href="student/chapter-${nextLesson}.html" class="btn">Continue Learning</a>
           </div>
 
           <div class="card">
@@ -178,91 +311,140 @@
         return lessons.length ? lessons.join('') : '<p>No recent activity.</p>';
       }
 
-      // === TEACHER VIEW ===
-      function renderTeacherDashboard() {
-        // Try to load class data
-        fetch(DASHBOARD_DATA_URL)
-          .then(response => {
-            if (!response.ok) throw new Error('Data not available');
-            return response.json();
-          })
-          .then(data => {
-            renderTeacherWithData(data);
-          })
-          .catch(err => {
-            renderTeacherWithError(err.message);
-          });
-      }
-
-      function renderTeacherWithData(data) {
-        const totalLessons = data.total_lessons || 262;
-        const classSize = data.class_size || 'Unknown';
-        const avgMastery = (data.average_mastery_rate * 100).toFixed(1);
-
-        // Find lessons needing review (mastery < 70%)
-        const reviewLessons = (data.lessons || [])
-          .filter(l => l.mastery_rate < 0.7)
-          .sort((a, b) => a.mastery_rate - b.mastery_rate)
-          .slice(0, 5);
-
-        let reviewHtml = '';
-        if (reviewLessons.length > 0) {
-          reviewHtml = reviewLessons.map(l => `
-            <div class="lesson-item">
-              <span>Lesson ${l.lesson_id}: ${l.title}</span>
-              <span>${Math.round(l.mastery_rate * 100)}% mastered</span>
-            </div>
-          `).join('');
-        } else {
-          reviewHtml = '<p>All lessons show strong mastery! 🎉</p>';
-        }
-
-        const html = `
-          <div class="card">
-            <h2>Class Overview</h2>
-            <p>Students: <strong>${classSize}</strong> | Lessons: <strong>${totalLessons}</strong></p>
-            <p>Average mastery: <strong>${avgMastery}%</strong></p>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width:${avgMastery}%">
-                ${avgMastery}%
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Lessons Needing Attention</h3>
-            <div>${reviewHtml}</div>
-            <a href="premium.html" class="btn">✨ Get Printable Intervention Worksheets</a>
-          </div>
-
-          <div class="note">
-            <p>Data updated weekly from anonymized, opt-in teacher reports.</p>
-          </div>
-        `;
-        document.getElementById('dashboard-content').innerHTML = html;
-      }
-
-      function renderTeacherWithError(error) {
+      // ===== INSTRUCTOR VIEW =====
+      function renderInstructorDashboard() {
         document.getElementById('dashboard-content').innerHTML = `
           <div class="card">
-            <h2>Class Dashboard</h2>
-            <div class="error">
-              Class data not available yet.<br>
-              Ensure you've enabled analytics and sent a usage report via WhatsApp.
+            <h2>Instructor Dashboard</h2>
+            <p>Welcome! As an instructor, you can:</p>
+            <ul style="margin: 1rem 0 1.5rem; padding-left: 1.2rem;">
+              <li>Review anonymized class reports via WhatsApp</li>
+              <li>Guide students using their mastery data</li>
+              <li>Encourage consistent practice</li>
+            </ul>
+            <div class="note">
+              <p><strong>Note:</strong> This demo does not include real-time class analytics.<br>
+              In a live deployment, you'd receive aggregated reports from students who opt in.</p>
             </div>
-            <a href="javascript:window.location.reload()" class="btn">Retry</a>
           </div>
         `;
       }
 
-      // === INIT ===
+      // ===== REPORTS SYSTEM =====
+      (function() {
+        const originalSetItem = localStorage.setItem;
+        localStorage.setItem = function(key, value) {
+          if (typeof value === 'string' && value.includes('*Mini OpenStax —') && value.includes('Student:')) {
+            const lessonMatch = value.match(/Lesson (\d+)/);
+            if (lessonMatch) {
+              const lessonNum = parseInt(lessonMatch[1], 10);
+              if (lessonNum >= 2 && lessonNum <= 262) {
+                const chapter = lessonNum - 1;
+                const reportKey = `saved_report_${chapter}_${Date.now()}`;
+                originalSetItem.call(localStorage, reportKey, value);
+              }
+            }
+          }
+          return originalSetItem.apply(this, arguments);
+        };
+      })();
+
+      function formatDate(timestamp) {
+        if (!timestamp) return 'Unknown date';
+        return new Date(timestamp).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      function getFilteredReports(searchTerm = '') {
+        const allKeys = Object.keys(localStorage);
+        const reportEntries = [];
+        for (const key of allKeys) {
+          if (key.startsWith('saved_report_')) {
+            const reportText = localStorage.getItem(key);
+            if (reportText && typeof reportText === 'string') {
+              const studentMatch = reportText.match(/Student:\s*(.+)\n/);
+              const studentName = studentMatch ? studentMatch[1].trim() : '[Unknown]';
+              if (!searchTerm || studentName.toLowerCase().includes(searchTerm.toLowerCase())) {
+                const parts = key.split('_');
+                const timestamp = parts.length >= 4 ? parseInt(parts[parts.length - 1], 10) : 0;
+                reportEntries.push({ text: reportText, time: timestamp });
+              }
+            }
+          }
+        }
+        return reportEntries.sort((a, b) => b.time - a.time);
+      }
+
+      function renderReportCard(reportText, timestamp) {
+        const fullReportText = reportText + REGISTRATION_LINE;
+        const safeHTML = fullReportText
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\n/g, '<br>');
+
+        const card = document.createElement('div');
+        card.className = 'report-card';
+        card.innerHTML = `
+          <div>${safeHTML}</div>
+          <div class="report-date">Report Date: ${formatDate(timestamp)}</div>
+        `;
+        return card;
+      }
+
+      function showReports() {
+        const searchTerm = document.getElementById('student-search').value.trim();
+        const reports = getFilteredReports(searchTerm);
+        const container = document.getElementById('results');
+
+        if (reports.length === 0) {
+          container.innerHTML = `<div style="text-align:center;color:#dc3545;padding:20px;">
+            No quiz reports found${searchTerm ? ` for "${searchTerm}"` : ''}.
+          </div>`;
+          return;
+        }
+
+        const frag = document.createDocumentFragment();
+        reports.forEach(entry => frag.appendChild(renderReportCard(entry.text, entry.time)));
+        container.innerHTML = '';
+        container.appendChild(frag);
+      }
+
+      function sendAllReportsViaWhatsApp() {
+        const searchTerm = document.getElementById('student-search').value.trim();
+        const reports = getFilteredReports(searchTerm);
+        if (reports.length === 0) return alert("No reports to send.");
+
+        let msg = `*📚 Mini OpenStax — All Quiz Reports*\nStudent: ${STUDENT_NAME}\nFiltered: ${searchTerm || 'All'}\nTotal: ${reports.length} report(s)\n\n---\n`;
+        reports.forEach(r => msg += `\n${r.text}\n---\n`);
+        msg += REGISTRATION_LINE;
+
+        if (msg.length > 3800) msg = msg.substring(0, 3800) + "\n\n... (truncated)";
+
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+      }
+
+      // ===== INIT =====
       function init() {
         renderHeader();
-        if (ROLE === 'teacher') {
-          renderTeacherDashboard();
+        if (ROLE === 'instructor') {
+          renderInstructorDashboard();
         } else {
           renderStudentDashboard();
         }
+
+        // Reports panel listeners
+        document.getElementById('toggle-reports').onclick = () => {
+          document.getElementById('reports-panel').style.display = 'block';
+          showReports();
+        };
+        document.getElementById('close-reports').onclick = () => {
+          document.getElementById('reports-panel').style.display = 'none';
+        };
+        document.getElementById('search-btn').onclick = showReports;
+        document.getElementById('student-search').onkeypress = (e) => {
+          if (e.key === 'Enter') showReports();
+        };
+        document.getElementById('whatsapp-all').onclick = sendAllReportsViaWhatsApp;
       }
 
       if (document.readyState === 'loading') {
