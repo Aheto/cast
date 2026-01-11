@@ -6,31 +6,123 @@
   <meta name="description" content="Mini OpenStax: Lesson 202: ue = /yoo/ (cue, hue, value, rescue, continue, etc.)"/>
   <title>Mini OpenStax — Lesson 202: ue = /yoo/ (cue, hue, value, rescue, continue, etc.)</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
-    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+    }
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #fff; 
+      color: var(--dark); 
+    }
+    .container { 
+      max-width: 800px; 
+      margin: 0 auto; 
+      padding: 1rem; 
+    }
+    .header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+    }
+    .role-badge { 
+      background: #e9ecef; 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-size: 0.85rem; 
+    }
+    .chapter-nav { 
+      margin: 1.2rem 0; 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.4rem; 
+      justify-content: center; 
+    }
     .chapter-btn {
-      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+      padding: 0.4rem 0.8rem; 
+      background: var(--green); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 4px; 
+      font-size: 0.9rem;
     }
-    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
-    .section { margin-bottom: 1.5rem; }
-    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
-    .sentences { line-height: 1.6; }
-    .quiz { margin-top: 2rem; }
-    .question { margin-bottom: 1.2rem; }
-    .options { margin-left: 1rem; }
-    .option { margin: 0.4rem 0; }
+    .chapter-btn.active, .chapter-btn:hover { 
+      background: #00502e; 
+    }
+    .section { 
+      margin-bottom: 1.5rem; 
+    }
+    .word-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+      margin: 0.5rem 0; 
+    }
+    .word-item { 
+      background: var(--light); 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-family: monospace; 
+    }
+    .sentences { 
+      line-height: 1.6; 
+    }
+    .quiz { 
+      margin-top: 2rem; 
+    }
+    .question { 
+      margin-bottom: 1.2rem; 
+    }
+    .options { 
+      margin-left: 1rem; 
+    }
+    .option { 
+      margin: 0.4rem 0; 
+    }
     .btn {
-      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
-      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+      background: var(--green); 
+      color: white; 
+      border: none; 
+      padding: 0.5rem 1rem;
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 1rem; 
+      margin-right: 0.5rem;
     }
-    .btn:hover { background: #218838; }
-    .btn-secondary { background: #6c757d; }
-    .btn-secondary:hover { background: #5a6268; }
-    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .btn:hover { 
+      background: #00502e; 
+    }
+    .btn-secondary { 
+      background: #6c757d; 
+    }
+    .btn-secondary:hover { 
+      background: #5a6268; 
+    }
+    .feedback { 
+      margin-top: 1.5rem; 
+      padding: 1rem; 
+      background: var(--light); 
+      border-left: 4px solid var(--green); 
+    }
+    footer { 
+      text-align: center; 
+      margin-top: 2rem; 
+      font-size: 0.9rem; 
+    }
+    a { 
+      color: var(--green); 
+      text-decoration: none; 
+    }
+    a:hover { 
+      text-decoration: underline; 
+    }
   </style>
 </head>
 <body>
@@ -74,6 +166,14 @@
       </div>
 
       <div id="feedback"></div>
+
+      <!-- FOOTER -->
+      <footer>
+        <a href="../premium.html" style="display:block; margin-bottom:0.5rem;">✨ Unlock Premium Features</a>
+        <a href="#" id="send-analytics" style="color:#6c757d;">📤 Send Anonymous Usage Data</a>
+        <br>
+        <a href="../dashboard.html">📊 View Dashboard</a>
+      </footer>
     </main>
   </div>
 
@@ -82,6 +182,7 @@
       'use strict';
       window.startTime = Date.now();
 
+      // === Seeded RNG & Shuffle ===
       function createSeededRNG(seed) {
         let state = Math.abs((seed * 9301 + 49297) % 233280);
         return () => {
@@ -100,151 +201,54 @@
         return arr;
       }
 
-      const currentChapter = 201; // Lesson 202
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 201; // Lesson 202 → chapter-201.html
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
-      const CHAPTER_CONFIG = {
-        title: "Lesson 202: ue = /yoo/ (cue, hue, value, rescue, continue, etc.)",
-        loTags: ["LO PH202: Decode words with 'ue' spelling for /yoo/"],
-        contentWords: [
-          "cue", "hue", "fue", "rue", "blue", "true", "due", "rescue",
-          "statue", "barbecue", "value", "argue", "continue", "revenue"
-        ],
-        sentences: [
-          "The actor waited for his cue to walk onto the stage.",
-          "The artist mixed paints to get the right hue for the sky.",
-          "Please rescue the kitten that is stuck in the tall tree.",
-          "The statue in the park is made of bronze and is very old.",
-          "We will have a barbecue on Saturday if the weather is nice.",
-          "The value of honesty is something that parents should teach.",
-          "The team will continue to practice until they win a game.",
-          "Most people rue the mistakes they made when they were young."
-        ],
-        assessmentItems: [
-          { id: "1", prompt: "Which word means 'a signal to begin'?", options: [
-            {id:"a",text:"cue",is_correct:true},
-            {id:"b",text:"hue",is_correct:false},
-            {id:"c",text:"rue",is_correct:false},
-            {id:"d",text:"fue",is_correct:false}
-          ]},
-          { id: "2", prompt: "Which word refers to a shade or tint of color?", options: [
-            {id:"a",text:"hue",is_correct:true},
-            {id:"b",text:"cue",is_correct:false},
-            {id:"c",text:"blue",is_correct:false},
-            {id:"d",text:"true",is_correct:false}
-          ]},
-          { id: "3", prompt: "What does 'rue' mean?", options: [
-            {id:"a",text:"To feel regret or sorrow",is_correct:true},
-            {id:"b",text:"To shout loudly",is_correct:false},
-            {id:"c",text:"To run fast",is_correct:false},
-            {id:"d",text:"To cook meat",is_correct:false}
-          ]},
-          { id: "4", prompt: "Which sentence uses a word with 'ue = /yoo/' correctly?", options: [
-            {id:"a",text:"He waited for his cue.",is_correct:true},
-            {id:"b",text:"She cued the color.",is_correct:false},
-            {id:"c",text:"They hued the signal.",is_correct:false},
-            {id:"d",text:"We rued the statue.",is_correct:false}
-          ]},
-          { id: "5", prompt: "Which word means 'to save someone from danger'?", options: [
-            {id:"a",text:"rescue",is_correct:true},
-            {id:"b",text:"statue",is_correct:false},
-            {id:"c",text:"barbecue",is_correct:false},
-            {id:"d",text:"continue",is_correct:false}
-          ]},
-          { id: "6", prompt: "Which word contains 'ue' but does NOT say /yoo/?", options: [
-            {id:"a",text:"glue",is_correct:true},
-            {id:"b",text:"cue",is_correct:false},
-            {id:"c",text:"hue",is_correct:false},
-            {id:"d",text:"rescue",is_correct:false}
-          ]},
-          { id: "7", prompt: "What is a 'statue'?", options: [
-            {id:"a",text:"A sculpture representing a person or animal",is_correct:true},
-            {id:"b",text:"A type of food",is_correct:false},
-            {id:"c",text:"A loud noise",is_correct:false},
-            {id:"d",text:"A signal",is_correct:false}
-          ]},
-          { id: "8", prompt: "Which word is NOT on the Lesson 202 word list?", options: [
-            {id:"a",text:"queue",is_correct:true},
-            {id:"b",text:"barbecue",is_correct:false},
-            {id:"c",text:"value",is_correct:false},
-            {id:"d",text:"argue",is_correct:false}
-          ]},
-          { id: "9", prompt: "In the sentence 'The actor waited for his cue,' how many words have 'ue = /yoo/'?", options: [
-            {id:"a",text:"One",is_correct:true},
-            {id:"b",text:"Two",is_correct:false},
-            {id:"c",text:"Three",is_correct:false},
-            {id:"d",text:"None",is_correct:false}
-          ]},
-          { id: "10", prompt: "Which word refers to an outdoor meal with grilled food?", options: [
-            {id:"a",text:"barbecue",is_correct:true},
-            {id:"b",text:"statue",is_correct:false},
-            {id:"c",text:"rescue",is_correct:false},
-            {id:"d",text:"continue",is_correct:false}
-          ]},
-          { id: "11", prompt: "What sound does 'ue' make in 'value'?", options: [
-            {id:"a",text:"/yoo/",is_correct:true},
-            {id:"b",text:"/oo/",is_correct:false},
-            {id:"c",text:"/ŭ/",is_correct:false},
-            {id:"d",text:"/ĕ/",is_correct:false}
-          ]},
-          { id: "12", prompt: "Which word means 'worth or importance'?", options: [
-            {id:"a",text:"value",is_correct:true},
-            {id:"b",text:"revenue",is_correct:false},
-            {id:"c",text:"argue",is_correct:false},
-            {id:"d",text:"continue",is_correct:false}
-          ]},
-          { id: "13", prompt: "Which word means 'to keep going'?", options: [
-            {id:"a",text:"continue",is_correct:true},
-            {id:"b",text:"rescue",is_correct:false},
-            {id:"c",text:"rue",is_correct:false},
-            {id:"d",text:"cue",is_correct:false}
-          ]},
-          { id: "14", prompt: "Which word appears in the practice sentences?", options: [
-            {id:"a",text:"statue",is_correct:true},
-            {id:"b",text:"queue",is_correct:false},
-            {id:"c",text:"fue",is_correct:false},
-            {id:"d",text:"glue",is_correct:false}
-          ]},
-          { id: "15", prompt: "How is 'ue' pronounced in 'argue'?", options: [
-            {id:"a",text:"/yoo/",is_correct:true},
-            {id:"b",text:"/g/",is_correct:false},
-            {id:"c",text:"/ŭ/",is_correct:false},
-            {id:"d",text:"silent",is_correct:false}
-          ]},
-          { id: "16", prompt: "Which word is a homophone of the letter 'Q'?", options: [
-            {id:"a",text:"cue",is_correct:true},
-            {id:"b",text:"hue",is_correct:false},
-            {id:"c",text:"blue",is_correct:false},
-            {id:"d",text:"true",is_correct:false}
-          ]},
-          { id: "17", prompt: "Which word demonstrates that 'ue = /yoo/' often follows consonants like 's', 'r', or 't'?", options: [
-            {id:"a",text:"rescue, statue, barbecue",is_correct:true},
-            {id:"b",text:"only cue",is_correct:false},
-            {id:"c",text:"only hue",is_correct:false},
-            {id:"d",text:"glue",is_correct:false}
-          ]},
-          { id: "18", prompt: "Which word shows that 'ue = /yoo/' appears in words of French origin?", options: [
-            {id:"a",text:"statue, barbecue, revenue",is_correct:true},
-            {id:"b",text:"cue",is_correct:false},
-            {id:"c",text:"rue",is_correct:false},
-            {id:"d",text:"fue",is_correct:false}
-          ]},
-          { id: "19", prompt: "Which word is part of 'continuing education'?", options: [
-            {id:"a",text:"continue",is_correct:true},
-            {id:"b",text:"value",is_correct:false},
-            {id:"c",text:"rescue",is_correct:false},
-            {id:"d",text:"argue",is_correct:false}
-          ]},
-          { id: "20", prompt: "Which word illustrates the contrast between /oo/ and /yoo/ in 'blue' vs. 'value'?", options: [
-            {id:"a",text:"'ue' can say /oo/ OR /yoo/ depending on word origin and position",is_correct:true},
-            {id:"b",text:"'ue' always says /yoo/",is_correct:false},
-            {id:"c",text:"'ue' always says /oo/",is_correct:false},
-            {id:"d",text:"'ue' is silent",is_correct:false}
-          ]}
-        ]
-      };
+      // === ANALYTICS MODULE ===
+      const ANALYTICS_KEY = 'miniopenstax_analytics_consent';
+      const EVENTS_KEY = 'miniopenstax_events';
 
+      function isAnalyticsEnabled() {
+        return localStorage.getItem(ANALYTICS_KEY) === '1';
+      }
+
+      function logEvent(eventType, data = {}) {
+        if (!isAnalyticsEnabled()) return;
+        const event = { type: eventType, timestamp: Date.now(), lesson: currentChapter, data };
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        events.push(event);
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+        if (events.length >= 20) sendAnalyticsEvents();
+      }
+
+      function enableAnalytics() {
+        localStorage.setItem(ANALYTICS_KEY, '1');
+      }
+
+      function sendAnalyticsEvents() {
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        if (events.length === 0) return;
+        const summary = {
+          lessons_attempted: [...new Set(events.map(e => e.lesson))].length,
+          quizzes_submitted: events.filter(e => e.type === 'quiz_submitted').length,
+          mastery_count: events.filter(e => e.type === 'mastery_achieved').length,
+          first_event: new Date(events[0].timestamp).toISOString().split('T')[0],
+          last_event: new Date(events[events.length - 1].timestamp).toISOString().split('T')[0]
+        };
+        const report = `*Mini OpenStax — Anonymous Usage Report*\n` +
+          `Lessons Tried: ${summary.lessons_attempted}\n` +
+          `Quizzes Taken: ${summary.quizzes_submitted}\n` +
+          `Mastery Achieved: ${summary.mastery_count}\n` +
+          `Period: ${summary.first_event} to ${summary.last_event}\n\n` +
+          `Thank you for helping improve literacy tools!`;
+        localStorage.removeItem(EVENTS_KEY);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        window.open(url, '_blank');
+      }
+
+      // === TYPO CORRECTIONS ===
       const TYPO_CORRECTIONS = [
         [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
         [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
@@ -265,6 +269,49 @@
         [/barb ecue/g, 'barbecue'], [/stat ue/g, 'statue'], [/res cue/g, 'rescue']
       ];
 
+      // === CHAPTER CONFIG ===
+      const CHAPTER_CONFIG = {
+        title: "Lesson 202: ue = /yoo/ (cue, hue, value, rescue, continue, etc.)",
+        loTags: ["LO PH202: Decode words with 'ue' spelling for /yoo/"],
+        contentWords: [
+          "cue", "hue", "fue", "rue", "blue", "true", "due", "rescue",
+          "statue", "barbecue", "value", "argue", "continue", "revenue"
+        ],
+        sentences: [
+          "The actor waited for his cue to walk onto the stage.",
+          "The artist mixed paints to get the right hue for the sky.",
+          "Please rescue the kitten that is stuck in the tall tree.",
+          "The statue in the park is made of bronze and is very old.",
+          "We will have a barbecue on Saturday if the weather is nice.",
+          "The value of honesty is something that parents should teach.",
+          "The team will continue to practice until they win a game.",
+          "Most people rue the mistakes they made when they were young."
+        ],
+        assessmentItems: [
+          { id: "1", prompt: "Which word means 'a signal to begin'?", options: [{id:"a",text:"cue",is_correct:true},{id:"b",text:"hue",is_correct:false},{id:"c",text:"rue",is_correct:false},{id:"d",text:"fue",is_correct:false}] },
+          { id: "2", prompt: "Which word refers to a shade or tint of color?", options: [{id:"a",text:"hue",is_correct:true},{id:"b",text:"cue",is_correct:false},{id:"c",text:"blue",is_correct:false},{id:"d",text:"true",is_correct:false}] },
+          { id: "3", prompt: "What does 'rue' mean?", options: [{id:"a",text:"To feel regret or sorrow",is_correct:true},{id:"b",text:"To shout loudly",is_correct:false},{id:"c",text:"To run fast",is_correct:false},{id:"d",text:"To cook meat",is_correct:false}] },
+          { id: "4", prompt: "Which sentence uses a word with 'ue = /yoo/' correctly?", options: [{id:"a",text:"He waited for his cue.",is_correct:true},{id:"b",text:"She cued the color.",is_correct:false},{id:"c",text:"They hued the signal.",is_correct:false},{id:"d",text:"We rued the statue.",is_correct:false}] },
+          { id: "5", prompt: "Which word means 'to save someone from danger'?", options: [{id:"a",text:"rescue",is_correct:true},{id:"b",text:"statue",is_correct:false},{id:"c",text:"barbecue",is_correct:false},{id:"d",text:"continue",is_correct:false}] },
+          { id: "6", prompt: "Which word contains 'ue' but does NOT say /yoo/?", options: [{id:"a",text:"glue",is_correct:true},{id:"b",text:"cue",is_correct:false},{id:"c",text:"hue",is_correct:false},{id:"d",text:"rescue",is_correct:false}] },
+          { id: "7", prompt: "What is a 'statue'?", options: [{id:"a",text:"A sculpture representing a person or animal",is_correct:true},{id:"b",text:"A type of food",is_correct:false},{id:"c",text:"A loud noise",is_correct:false},{id:"d",text:"A signal",is_correct:false}] },
+          { id: "8", prompt: "Which word is NOT on the Lesson 202 word list?", options: [{id:"a",text:"queue",is_correct:true},{id:"b",text:"barbecue",is_correct:false},{id:"c",text:"value",is_correct:false},{id:"d",text:"argue",is_correct:false}] },
+          { id: "9", prompt: "In the sentence 'The actor waited for his cue,' how many words have 'ue = /yoo/'?", options: [{id:"a",text:"One",is_correct:true},{id:"b",text:"Two",is_correct:false},{id:"c",text:"Three",is_correct:false},{id:"d",text:"None",is_correct:false}] },
+          { id: "10", prompt: "Which word refers to an outdoor meal with grilled food?", options: [{id:"a",text:"barbecue",is_correct:true},{id:"b",text:"statue",is_correct:false},{id:"c",text:"rescue",is_correct:false},{id:"d",text:"continue",is_correct:false}] },
+          { id: "11", prompt: "What sound does 'ue' make in 'value'?", options: [{id:"a",text:"/yoo/",is_correct:true},{id:"b",text:"/oo/",is_correct:false},{id:"c",text:"/ŭ/",is_correct:false},{id:"d",text:"/ĕ/",is_correct:false}] },
+          { id: "12", prompt: "Which word means 'worth or importance'?", options: [{id:"a",text:"value",is_correct:true},{id:"b",text:"revenue",is_correct:false},{id:"c",text:"argue",is_correct:false},{id:"d",text:"continue",is_correct:false}] },
+          { id: "13", prompt: "Which word means 'to keep going'?", options: [{id:"a",text:"continue",is_correct:true},{id:"b",text:"rescue",is_correct:false},{id:"c",text:"rue",is_correct:false},{id:"d",text:"cue",is_correct:false}] },
+          { id: "14", prompt: "Which word appears in the practice sentences?", options: [{id:"a",text:"statue",is_correct:true},{id:"b",text:"queue",is_correct:false},{id:"c",text:"fue",is_correct:false},{id:"d",text:"glue",is_correct:false}] },
+          { id: "15", prompt: "How is 'ue' pronounced in 'argue'?", options: [{id:"a",text:"/yoo/",is_correct:true},{id:"b",text:"/g/",is_correct:false},{id:"c",text:"/ŭ/",is_correct:false},{id:"d",text:"silent",is_correct:false}] },
+          { id: "16", prompt: "Which word is a homophone of the letter 'Q'?", options: [{id:"a",text:"cue",is_correct:true},{id:"b",text:"hue",is_correct:false},{id:"c",text:"blue",is_correct:false},{id:"d",text:"true",is_correct:false}] },
+          { id: "17", prompt: "Which word demonstrates that 'ue = /yoo/' often follows consonants like 's', 'r', or 't'?", options: [{id:"a",text:"rescue, statue, barbecue",is_correct:true},{id:"b",text:"only cue",is_correct:false},{id:"c",text:"only hue",is_correct:false},{id:"d",text:"glue",is_correct:false}] },
+          { id: "18", prompt: "Which word shows that 'ue = /yoo/' appears in words of French origin?", options: [{id:"a",text:"statue, barbecue, revenue",is_correct:true},{id:"b",text:"cue",is_correct:false},{id:"c",text:"rue",is_correct:false},{id:"d",text:"fue",is_correct:false}] },
+          { id: "19", prompt: "Which word is part of 'continuing education'?", options: [{id:"a",text:"continue",is_correct:true},{id:"b",text:"value",is_correct:false},{id:"c",text:"rescue",is_correct:false},{id:"d",text:"argue",is_correct:false}] },
+          { id: "20", prompt: "Which word illustrates the contrast between /oo/ and /yoo/ in 'blue' vs. 'value'?", options: [{id:"a",text:"'ue' can say /oo/ OR /yoo/ depending on word origin and position",is_correct:true},{id:"b",text:"'ue' always says /yoo/",is_correct:false},{id:"c",text:"'ue' always says /oo/",is_correct:false},{id:"d",text:"'ue' is silent",is_correct:false}] }
+        ]
+      };
+
+      // === RENDERING FUNCTIONS ===
       function renderWords() {
         document.getElementById('word-list').innerHTML =
           CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
@@ -276,6 +323,7 @@
           TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
             text = text.replace(pattern, replacement);
           });
+          if (text !== s) logEvent('typo_corrected', { original: s, corrected: text });
           return text;
         });
         document.getElementById('sentences').innerHTML =
@@ -303,7 +351,6 @@
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-
         const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
@@ -344,6 +391,9 @@
         localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        logEvent('quiz_submitted', { score, time_sec: timeOnTask, mastery, attempts });
+        if (mastery) logEvent('mastery_achieved', {});
 
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
@@ -386,16 +436,19 @@
 
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
+        const savedRole = localStorage.getItem('user_role') || 'student';
         const promptDiv = document.getElementById('student-name-prompt');
         const quizDiv = document.getElementById('quiz-container');
         const display = document.getElementById('name-display');
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
+        const roleBadge = document.querySelector('.role-badge');
+        roleBadge.textContent = savedRole === 'instructor' ? 'Instructor View' : 'Student View';
 
         if (saved) {
           promptDiv.style.display = 'block';
           quizDiv.style.display = 'none';
-          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved} (${savedRole})</p>`;
           buttons.innerHTML = `
             <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
             <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
@@ -403,19 +456,33 @@
           document.getElementById('keep-btn').onclick = () => {
             promptDiv.style.display = 'none';
             quizDiv.style.display = 'block';
+            logEvent('lesson_start', {});
           };
           document.getElementById('change-btn').onclick = () => {
             display.style.display = 'none';
             input.style.display = 'block';
-            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            buttons.innerHTML = `
+              <button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>
+              <div style="margin-top:1rem; font-size:0.9rem;">
+                <label>
+                  <input type="checkbox" id="teacher-mode"> 
+                  I'm an instructor (analytics auto-enabled to improve lessons)
+                </label>
+              </div>
+            `;
             input.value = '';
             input.focus();
             document.getElementById('save-new').onclick = () => {
               const name = input.value.trim();
               if (name) {
                 localStorage.setItem('student_name', name);
+                const isTeacher = document.getElementById('teacher-mode').checked;
+                localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+                if (isTeacher) enableAnalytics();
                 promptDiv.style.display = 'none';
                 quizDiv.style.display = 'block';
+                roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+                logEvent('lesson_start', {});
               } else {
                 alert("Please enter your name.");
                 input.focus();
@@ -427,13 +494,26 @@
           quizDiv.style.display = 'none';
           display.style.display = 'none';
           input.style.display = 'block';
-          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>
+            <div style="margin-top:1rem; font-size:0.9rem;">
+              <label>
+                <input type="checkbox" id="teacher-mode"> 
+                I'm an instructor (analytics auto-enabled to improve lessons)
+              </label>
+            </div>
+          `;
           document.getElementById('save-first').onclick = () => {
             const name = input.value.trim();
             if (name) {
               localStorage.setItem('student_name', name);
+              const isTeacher = document.getElementById('teacher-mode').checked;
+              localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+              if (isTeacher) enableAnalytics();
               promptDiv.style.display = 'none';
               quizDiv.style.display = 'block';
+              roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+              logEvent('lesson_start', {});
             } else {
               alert("Please enter your name.");
               input.focus();
@@ -452,6 +532,15 @@
         setupQuizListeners();
         initNamePrompt();
       }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('send-analytics').onclick = (e) => {
+          e.preventDefault();
+          if (confirm('Send anonymous usage data to help improve Mini OpenStax?')) {
+            sendAnalyticsEvents();
+          }
+        };
+      });
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
