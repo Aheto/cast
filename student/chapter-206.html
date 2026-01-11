@@ -6,31 +6,123 @@
   <meta name="description" content="Mini OpenStax: Lesson 207: eigh = /ā/ (weigh, weight, eight, sleigh, freight)"/>
   <title>Mini OpenStax — Lesson 207: eigh = /ā/ (weigh, weight, eight, sleigh, freight)</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
-    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+    }
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #fff; 
+      color: var(--dark); 
+    }
+    .container { 
+      max-width: 800px; 
+      margin: 0 auto; 
+      padding: 1rem; 
+    }
+    .header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+    }
+    .role-badge { 
+      background: #e9ecef; 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-size: 0.85rem; 
+    }
+    .chapter-nav { 
+      margin: 1.2rem 0; 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.4rem; 
+      justify-content: center; 
+    }
     .chapter-btn {
-      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+      padding: 0.4rem 0.8rem; 
+      background: var(--green); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 4px; 
+      font-size: 0.9rem;
     }
-    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
-    .section { margin-bottom: 1.5rem; }
-    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
-    .sentences { line-height: 1.6; }
-    .quiz { margin-top: 2rem; }
-    .question { margin-bottom: 1.2rem; }
-    .options { margin-left: 1rem; }
-    .option { margin: 0.4rem 0; }
+    .chapter-btn.active, .chapter-btn:hover { 
+      background: #00502e; 
+    }
+    .section { 
+      margin-bottom: 1.5rem; 
+    }
+    .word-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+      margin: 0.5rem 0; 
+    }
+    .word-item { 
+      background: var(--light); 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-family: monospace; 
+    }
+    .sentences { 
+      line-height: 1.6; 
+    }
+    .quiz { 
+      margin-top: 2rem; 
+    }
+    .question { 
+      margin-bottom: 1.2rem; 
+    }
+    .options { 
+      margin-left: 1rem; 
+    }
+    .option { 
+      margin: 0.4rem 0; 
+    }
     .btn {
-      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
-      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+      background: var(--green); 
+      color: white; 
+      border: none; 
+      padding: 0.5rem 1rem;
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 1rem; 
+      margin-right: 0.5rem;
     }
-    .btn:hover { background: #218838; }
-    .btn-secondary { background: #6c757d; }
-    .btn-secondary:hover { background: #5a6268; }
-    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .btn:hover { 
+      background: #00502e; 
+    }
+    .btn-secondary { 
+      background: #6c757d; 
+    }
+    .btn-secondary:hover { 
+      background: #5a6268; 
+    }
+    .feedback { 
+      margin-top: 1.5rem; 
+      padding: 1rem; 
+      background: var(--light); 
+      border-left: 4px solid var(--green); 
+    }
+    footer { 
+      text-align: center; 
+      margin-top: 2rem; 
+      font-size: 0.9rem; 
+    }
+    a { 
+      color: var(--green); 
+      text-decoration: none; 
+    }
+    a:hover { 
+      text-decoration: underline; 
+    }
   </style>
 </head>
 <body>
@@ -74,6 +166,14 @@
       </div>
 
       <div id="feedback"></div>
+
+      <!-- FOOTER -->
+      <footer>
+        <a href="../premium.html" style="display:block; margin-bottom:0.5rem;">✨ Unlock Premium Features</a>
+        <a href="#" id="send-analytics" style="color:#6c757d;">📤 Send Anonymous Usage Data</a>
+        <br>
+        <a href="../dashboard.html">📊 View Dashboard</a>
+      </footer>
     </main>
   </div>
 
@@ -82,6 +182,7 @@
       'use strict';
       window.startTime = Date.now();
 
+      // === Seeded RNG & Shuffle ===
       function createSeededRNG(seed) {
         let state = Math.abs((seed * 9301 + 49297) % 233280);
         return () => {
@@ -100,148 +201,54 @@
         return arr;
       }
 
-      const currentChapter = 206; // Lesson 207
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 206; // Lesson 207 → chapter-206.html
       const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
-      const CHAPTER_CONFIG = {
-        title: "Lesson 207: eigh = /ā/ (weigh, weight, eight, sleigh, freight)",
-        loTags: ["LO PH207: Decode words with 'eigh' spelling for long a (/ā/)"],
-        contentWords: [
-          "weigh", "weight", "eight", "sleigh", "freight", "neighbor", "straight", "eighteen"
-        ],
-        sentences: [
-          "The baby's weight was eight pounds at birth.",
-          "Santa rides in a sleigh pulled by reindeer.",
-          "The truck carried a heavy load of freight.",
-          "Please weigh the bag of apples on the scale.",
-          "The road ahead is straight for several miles.",
-          "Our neighbor has a big dog that barks a lot."
-        ],
-        assessmentItems: [
-          { id: "1", prompt: "Which word means 'to measure how heavy something is'?", options: [
-            {id:"a",text:"weigh",is_correct:true},
-            {id:"b",text:"weight",is_correct:false},
-            {id:"c",text:"eight",is_correct:false},
-            {id:"d",text:"sleigh",is_correct:false}
-          ]},
-          { id: "2", prompt: "Which word refers to the number after seven?", options: [
-            {id:"a",text:"eight",is_correct:true},
-            {id:"b",text:"weigh",is_correct:false},
-            {id:"c",text:"freight",is_correct:false},
-            {id:"d",text:"straight",is_correct:false}
-          ]},
-          { id: "3", prompt: "What does 'freight' mean?", options: [
-            {id:"a",text:"Goods transported by truck, train, or ship",is_correct:true},
-            {id:"b",text:"A type of vehicle",is_correct:false},
-            {id:"c",text:"A measurement of height",is_correct:false},
-            {id:"d",text:"A holiday celebration",is_correct:false}
-          ]},
-          { id: "4", prompt: "Which sentence uses a word with 'eigh = /ā/' correctly?", options: [
-            {id:"a",text:"Santa rides in a sleigh.",is_correct:true},
-            {id:"b",text:"He sleighed the road.",is_correct:false},
-            {id:"c",text:"She eighted the dog.",is_correct:false},
-            {id:"d",text:"They freighted the apples.",is_correct:false}
-          ]},
-          { id: "5", prompt: "Which word means 'a person who lives nearby'?", options: [
-            {id:"a",text:"neighbor",is_correct:true},
-            {id:"b",text:"freight",is_correct:false},
-            {id:"c",text:"weigh",is_correct:false},
-            {id:"d",text:"straight",is_correct:false}
-          ]},
-          { id: "6", prompt: "Which word contains 'eigh' but does NOT say /ā/?", options: [
-            {id:"a",text:"height",is_correct:true},
-            {id:"b",text:"eight",is_correct:false},
-            {id:"c",text:"sleigh",is_correct:false},
-            {id:"d",text:"freight",is_correct:false}
-          ]},
-          { id: "7", prompt: "What is a 'sleigh'?", options: [
-            {id:"a",text:"A vehicle on runners pulled by horses or reindeer",is_correct:true},
-            {id:"b",text:"A type of scale",is_correct:false},
-            {id:"c",text:"A unit of measurement",is_correct:false},
-            {id:"d",text:"A straight road",is_correct:false}
-          ]},
-          { id: "8", prompt: "Which word is NOT on the Lesson 207 word list?", options: [
-            {id:"a",text:"light",is_correct:true},
-            {id:"b",text:"eighteen",is_correct:false},
-            {id:"c",text:"neighbor",is_correct:false},
-            {id:"d",text:"straight",is_correct:false}
-          ]},
-          { id: "9", prompt: "In the sentence 'The baby weighed eight pounds,' how many words have 'eigh = /ā/'?", options: [
-            {id:"a",text:"Two",is_correct:true},
-            {id:"b",text:"One",is_correct:false},
-            {id:"c",text:"Three",is_correct:false},
-            {id:"d",text:"None",is_correct:false}
-          ]},
-          { id: "10", prompt: "Which word means 'not curved or bent'?", options: [
-            {id:"a",text:"straight",is_correct:true},
-            {id:"b",text:"freight",is_correct:false},
-            {id:"c",text:"sleigh",is_correct:false},
-            {id:"d",text:"weigh",is_correct:false}
-          ]},
-          { id: "11", prompt: "What sound does 'eigh' make in 'weight'?", options: [
-            {id:"a",text:"/ā/",is_correct:true},
-            {id:"b",text:"/w/",is_correct:false},
-            {id:"c",text:"/ĕ/",is_correct:false},
-            {id:"d",text:"/ĭ/",is_correct:false}
-          ]},
-          { id: "12", prompt: "Which word refers to cargo carried by transport?", options: [
-            {id:"a",text:"freight",is_correct:true},
-            {id:"b",text:"eight",is_correct:false},
-            {id:"c",text:"neighbor",is_correct:false},
-            {id:"d",text:"sleigh",is_correct:false}
-          ]},
-          { id: "13", prompt: "Which word appears in the practice sentences?", options: [
-            {id:"a",text:"straight",is_correct:true},
-            {id:"b",text:"light",is_correct:false},
-            {id:"c",text:"height",is_correct:false},
-            {id:"d",text:"sight",is_correct:false}
-          ]},
-          { id: "14", prompt: "Which word demonstrates that 'eigh = /ā/' often appears in high-frequency English words?", options: [
-            {id:"a",text:"neighbor, straight, weigh",is_correct:true},
-            {id:"b",text:"only sleigh",is_correct:false},
-            {id:"c",text:"only freight",is_correct:false},
-            {id:"d",text:"height",is_correct:false}
-          ]},
-          { id: "15", prompt: "How is 'eigh' pronounced in 'eighteen'?", options: [
-            {id:"a",text:"/ā/",is_correct:true},
-            {id:"b",text:"/t/",is_correct:false},
-            {id:"c",text:"/ĕ/",is_correct:false},
-            {id:"d",text:"silent",is_correct:false}
-          ]},
-          { id: "16", prompt: "Which word is a homophone of 'ate'?", options: [
-            {id:"a",text:"eight",is_correct:true},
-            {id:"b",text:"weigh",is_correct:false},
-            {id:"c",text:"freight",is_correct:false},
-            {id:"d",text:"sleigh",is_correct:false}
-          ]},
-          { id: "17", prompt: "Which word shows that 'eigh = /ā/' can appear in compound words?", options: [
-            {id:"a",text:"eighteen",is_correct:true},
-            {id:"b",text:"only neighbor",is_correct:false},
-            {id:"c",text:"only straight",is_correct:false},
-            {id:"d",text:"freight",is_correct:false}
-          ]},
-          { id: "18", prompt: "Which word is used in 'go straight ahead'?", options: [
-            {id:"a",text:"straight",is_correct:true},
-            {id:"b",text:"weigh",is_correct:false},
-            {id:"c",text:"eight",is_correct:false},
-            {id:"d",text:"freight",is_correct:false}
-          ]},
-          { id: "19", prompt: "Which word contrasts with 'curved'?", options: [
-            {id:"a",text:"straight",is_correct:true},
-            {id:"b",text:"sleigh",is_correct:false},
-            {id:"c",text:"neighbor",is_correct:false},
-            {id:"d",text:"weight",is_correct:false}
-          ]},
-          { id: "20", prompt: "Which word illustrates that 'eigh = /ā/' is a regular and reliable spelling pattern?", options: [
-            {id:"a",text:"weigh, eight, sleigh, freight",is_correct:true},
-            {id:"b",text:"height",is_correct:false},
-            {id:"c",text:"light",is_correct:false},
-            {id:"d",text:"sight",is_correct:false}
-          ]}
-        ]
-      };
+      // === ANALYTICS MODULE ===
+      const ANALYTICS_KEY = 'miniopenstax_analytics_consent';
+      const EVENTS_KEY = 'miniopenstax_events';
 
+      function isAnalyticsEnabled() {
+        return localStorage.getItem(ANALYTICS_KEY) === '1';
+      }
+
+      function logEvent(eventType, data = {}) {
+        if (!isAnalyticsEnabled()) return;
+        const event = { type: eventType, timestamp: Date.now(), lesson: currentChapter, data };
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        events.push(event);
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+        if (events.length >= 20) sendAnalyticsEvents();
+      }
+
+      function enableAnalytics() {
+        localStorage.setItem(ANALYTICS_KEY, '1');
+      }
+
+      function sendAnalyticsEvents() {
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        if (events.length === 0) return;
+        const summary = {
+          lessons_attempted: [...new Set(events.map(e => e.lesson))].length,
+          quizzes_submitted: events.filter(e => e.type === 'quiz_submitted').length,
+          mastery_count: events.filter(e => e.type === 'mastery_achieved').length,
+          first_event: new Date(events[0].timestamp).toISOString().split('T')[0],
+          last_event: new Date(events[events.length - 1].timestamp).toISOString().split('T')[0]
+        };
+        const report = `*Mini OpenStax — Anonymous Usage Report*\n` +
+          `Lessons Tried: ${summary.lessons_attempted}\n` +
+          `Quizzes Taken: ${summary.quizzes_submitted}\n` +
+          `Mastery Achieved: ${summary.mastery_count}\n` +
+          `Period: ${summary.first_event} to ${summary.last_event}\n\n` +
+          `Thank you for helping improve literacy tools!`;
+        localStorage.removeItem(EVENTS_KEY);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        window.open(url, '_blank');
+      }
+
+      // === TYPO CORRECTIONS ===
       const TYPO_CORRECTIONS = [
         [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
         [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
@@ -264,6 +271,46 @@
         [/s leigh/g, 'sleigh'], [/e ight/g, 'eight'], [/n eighbor/g, 'neighbor']
       ];
 
+      // === CHAPTER CONFIG ===
+      const CHAPTER_CONFIG = {
+        title: "Lesson 207: eigh = /ā/ (weigh, weight, eight, sleigh, freight)",
+        loTags: ["LO PH207: Decode words with 'eigh' spelling for long a (/ā/)"],
+        contentWords: [
+          "weigh", "weight", "eight", "sleigh", "freight", "neighbor", "straight", "eighteen"
+        ],
+        sentences: [
+          "The baby's weight was eight pounds at birth.",
+          "Santa rides in a sleigh pulled by reindeer.",
+          "The truck carried a heavy load of freight.",
+          "Please weigh the bag of apples on the scale.",
+          "The road ahead is straight for several miles.",
+          "Our neighbor has a big dog that barks a lot."
+        ],
+        assessmentItems: [
+          { id: "1", prompt: "Which word means 'to measure how heavy something is'?", options: [{id:"a",text:"weigh",is_correct:true},{id:"b",text:"weight",is_correct:false},{id:"c",text:"eight",is_correct:false},{id:"d",text:"sleigh",is_correct:false}] },
+          { id: "2", prompt: "Which word refers to the number after seven?", options: [{id:"a",text:"eight",is_correct:true},{id:"b",text:"weigh",is_correct:false},{id:"c",text:"freight",is_correct:false},{id:"d",text:"straight",is_correct:false}] },
+          { id: "3", prompt: "What does 'freight' mean?", options: [{id:"a",text:"Goods transported by truck, train, or ship",is_correct:true},{id:"b",text:"A type of vehicle",is_correct:false},{id:"c",text:"A measurement of height",is_correct:false},{id:"d",text:"A holiday celebration",is_correct:false}] },
+          { id: "4", prompt: "Which sentence uses a word with 'eigh = /ā/' correctly?", options: [{id:"a",text:"Santa rides in a sleigh.",is_correct:true},{id:"b",text:"He sleighed the road.",is_correct:false},{id:"c",text:"She eighted the dog.",is_correct:false},{id:"d",text:"They freighted the apples.",is_correct:false}] },
+          { id: "5", prompt: "Which word means 'a person who lives nearby'?", options: [{id:"a",text:"neighbor",is_correct:true},{id:"b",text:"freight",is_correct:false},{id:"c",text:"weigh",is_correct:false},{id:"d",text:"straight",is_correct:false}] },
+          { id: "6", prompt: "Which word contains 'eigh' but does NOT say /ā/?", options: [{id:"a",text:"height",is_correct:true},{id:"b",text:"eight",is_correct:false},{id:"c",text:"sleigh",is_correct:false},{id:"d",text:"freight",is_correct:false}] },
+          { id: "7", prompt: "What is a 'sleigh'?", options: [{id:"a",text:"A vehicle on runners pulled by horses or reindeer",is_correct:true},{id:"b",text:"A type of scale",is_correct:false},{id:"c",text:"A unit of measurement",is_correct:false},{id:"d",text:"A straight road",is_correct:false}] },
+          { id: "8", prompt: "Which word is NOT on the Lesson 207 word list?", options: [{id:"a",text:"light",is_correct:true},{id:"b",text:"eighteen",is_correct:false},{id:"c",text:"neighbor",is_correct:false},{id:"d",text:"straight",is_correct:false}] },
+          { id: "9", prompt: "In the sentence 'The baby weighed eight pounds,' how many words have 'eigh = /ā/'?", options: [{id:"a",text:"Two",is_correct:true},{id:"b",text:"One",is_correct:false},{id:"c",text:"Three",is_correct:false},{id:"d",text:"None",is_correct:false}] },
+          { id: "10", prompt: "Which word means 'not curved or bent'?", options: [{id:"a",text:"straight",is_correct:true},{id:"b",text:"freight",is_correct:false},{id:"c",text:"sleigh",is_correct:false},{id:"d",text:"weigh",is_correct:false}] },
+          { id: "11", prompt: "What sound does 'eigh' make in 'weight'?", options: [{id:"a",text:"/ā/",is_correct:true},{id:"b",text:"/w/",is_correct:false},{id:"c",text:"/ĕ/",is_correct:false},{id:"d",text:"/ĭ/",is_correct:false}] },
+          { id: "12", prompt: "Which word refers to cargo carried by transport?", options: [{id:"a",text:"freight",is_correct:true},{id:"b",text:"eight",is_correct:false},{id:"c",text:"neighbor",is_correct:false},{id:"d",text:"sleigh",is_correct:false}] },
+          { id: "13", prompt: "Which word appears in the practice sentences?", options: [{id:"a",text:"straight",is_correct:true},{id:"b",text:"light",is_correct:false},{id:"c",text:"height",is_correct:false},{id:"d",text:"sight",is_correct:false}] },
+          { id: "14", prompt: "Which word demonstrates that 'eigh = /ā/' often appears in high-frequency English words?", options: [{id:"a",text:"neighbor, straight, weigh",is_correct:true},{id:"b",text:"only sleigh",is_correct:false},{id:"c",text:"only freight",is_correct:false},{id:"d",text:"height",is_correct:false}] },
+          { id: "15", prompt: "How is 'eigh' pronounced in 'eighteen'?", options: [{id:"a",text:"/ā/",is_correct:true},{id:"b",text:"/t/",is_correct:false},{id:"c",text:"/ĕ/",is_correct:false},{id:"d",text:"silent",is_correct:false}] },
+          { id: "16", prompt: "Which word is a homophone of 'ate'?", options: [{id:"a",text:"eight",is_correct:true},{id:"b",text:"weigh",is_correct:false},{id:"c",text:"freight",is_correct:false},{id:"d",text:"sleigh",is_correct:false}] },
+          { id: "17", prompt: "Which word shows that 'eigh = /ā/' can appear in compound words?", options: [{id:"a",text:"eighteen",is_correct:true},{id:"b",text:"only neighbor",is_correct:false},{id:"c",text:"only straight",is_correct:false},{id:"d",text:"freight",is_correct:false}] },
+          { id: "18", prompt: "Which word is used in 'go straight ahead'?", options: [{id:"a",text:"straight",is_correct:true},{id:"b",text:"weigh",is_correct:false},{id:"c",text:"eight",is_correct:false},{id:"d",text:"freight",is_correct:false}] },
+          { id: "19", prompt: "Which word contrasts with 'curved'?", options: [{id:"a",text:"straight",is_correct:true},{id:"b",text:"sleigh",is_correct:false},{id:"c",text:"neighbor",is_correct:false},{id:"d",text:"weight",is_correct:false}] },
+          { id: "20", prompt: "Which word illustrates that 'eigh = /ā/' is a regular and reliable spelling pattern?", options: [{id:"a",text:"weigh, eight, sleigh, freight",is_correct:true},{id:"b",text:"height",is_correct:false},{id:"c",text:"light",is_correct:false},{id:"d",text:"sight",is_correct:false}] }
+        ]
+      };
+
+      // === RENDERING FUNCTIONS ===
       function renderWords() {
         document.getElementById('word-list').innerHTML =
           CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
@@ -275,6 +322,7 @@
           TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
             text = text.replace(pattern, replacement);
           });
+          if (text !== s) logEvent('typo_corrected', { original: s, corrected: text });
           return text;
         });
         document.getElementById('sentences').innerHTML =
@@ -302,7 +350,6 @@
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
-
         const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
 
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
@@ -343,6 +390,9 @@
         localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        logEvent('quiz_submitted', { score, time_sec: timeOnTask, mastery, attempts });
+        if (mastery) logEvent('mastery_achieved', {});
 
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
@@ -385,16 +435,19 @@
 
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
+        const savedRole = localStorage.getItem('user_role') || 'student';
         const promptDiv = document.getElementById('student-name-prompt');
         const quizDiv = document.getElementById('quiz-container');
         const display = document.getElementById('name-display');
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
+        const roleBadge = document.querySelector('.role-badge');
+        roleBadge.textContent = savedRole === 'instructor' ? 'Instructor View' : 'Student View';
 
         if (saved) {
           promptDiv.style.display = 'block';
           quizDiv.style.display = 'none';
-          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved} (${savedRole})</p>`;
           buttons.innerHTML = `
             <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
             <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
@@ -402,19 +455,33 @@
           document.getElementById('keep-btn').onclick = () => {
             promptDiv.style.display = 'none';
             quizDiv.style.display = 'block';
+            logEvent('lesson_start', {});
           };
           document.getElementById('change-btn').onclick = () => {
             display.style.display = 'none';
             input.style.display = 'block';
-            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            buttons.innerHTML = `
+              <button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>
+              <div style="margin-top:1rem; font-size:0.9rem;">
+                <label>
+                  <input type="checkbox" id="teacher-mode"> 
+                  I'm an instructor (analytics auto-enabled to improve lessons)
+                </label>
+              </div>
+            `;
             input.value = '';
             input.focus();
             document.getElementById('save-new').onclick = () => {
               const name = input.value.trim();
               if (name) {
                 localStorage.setItem('student_name', name);
+                const isTeacher = document.getElementById('teacher-mode').checked;
+                localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+                if (isTeacher) enableAnalytics();
                 promptDiv.style.display = 'none';
                 quizDiv.style.display = 'block';
+                roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+                logEvent('lesson_start', {});
               } else {
                 alert("Please enter your name.");
                 input.focus();
@@ -426,13 +493,26 @@
           quizDiv.style.display = 'none';
           display.style.display = 'none';
           input.style.display = 'block';
-          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>
+            <div style="margin-top:1rem; font-size:0.9rem;">
+              <label>
+                <input type="checkbox" id="teacher-mode"> 
+                I'm an instructor (analytics auto-enabled to improve lessons)
+              </label>
+            </div>
+          `;
           document.getElementById('save-first').onclick = () => {
             const name = input.value.trim();
             if (name) {
               localStorage.setItem('student_name', name);
+              const isTeacher = document.getElementById('teacher-mode').checked;
+              localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+              if (isTeacher) enableAnalytics();
               promptDiv.style.display = 'none';
               quizDiv.style.display = 'block';
+              roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+              logEvent('lesson_start', {});
             } else {
               alert("Please enter your name.");
               input.focus();
@@ -451,6 +531,15 @@
         setupQuizListeners();
         initNamePrompt();
       }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('send-analytics').onclick = (e) => {
+          e.preventDefault();
+          if (confirm('Send anonymous usage data to help improve Mini OpenStax?')) {
+            sendAnalyticsEvents();
+          }
+        };
+      });
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
