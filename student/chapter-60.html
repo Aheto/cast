@@ -6,31 +6,123 @@
   <meta name="description" content="Mini OpenStax: Lesson 61: Consonant Digraph wh"/>
   <title>Mini OpenStax — Lesson 61: Consonant Digraph wh</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
-    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+    }
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #fff; 
+      color: var(--dark); 
+    }
+    .container { 
+      max-width: 800px; 
+      margin: 0 auto; 
+      padding: 1rem; 
+    }
+    .header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+    }
+    .role-badge { 
+      background: #e9ecef; 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-size: 0.85rem; 
+    }
+    .chapter-nav { 
+      margin: 1.2rem 0; 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.4rem; 
+      justify-content: center; 
+    }
     .chapter-btn {
-      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+      padding: 0.4rem 0.8rem; 
+      background: var(--green); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 4px; 
+      font-size: 0.9rem;
     }
-    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
-    .section { margin-bottom: 1.5rem; }
-    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
-    .sentences { line-height: 1.6; }
-    .quiz { margin-top: 2rem; }
-    .question { margin-bottom: 1.2rem; }
-    .options { margin-left: 1rem; }
-    .option { margin: 0.4rem 0; }
+    .chapter-btn.active, .chapter-btn:hover { 
+      background: #00502e; 
+    }
+    .section { 
+      margin-bottom: 1.5rem; 
+    }
+    .word-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+      margin: 0.5rem 0; 
+    }
+    .word-item { 
+      background: var(--light); 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-family: monospace; 
+    }
+    .sentences { 
+      line-height: 1.6; 
+    }
+    .quiz { 
+      margin-top: 2rem; 
+    }
+    .question { 
+      margin-bottom: 1.2rem; 
+    }
+    .options { 
+      margin-left: 1rem; 
+    }
+    .option { 
+      margin: 0.4rem 0; 
+    }
     .btn {
-      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
-      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+      background: var(--green); 
+      color: white; 
+      border: none; 
+      padding: 0.5rem 1rem;
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 1rem; 
+      margin-right: 0.5rem;
     }
-    .btn:hover { background: #218838; }
-    .btn-secondary { background: #6c757d; }
-    .btn-secondary:hover { background: #5a6268; }
-    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .btn:hover { 
+      background: #00502e; 
+    }
+    .btn-secondary { 
+      background: #6c757d; 
+    }
+    .btn-secondary:hover { 
+      background: #5a6268; 
+    }
+    .feedback { 
+      margin-top: 1.5rem; 
+      padding: 1rem; 
+      background: var(--light); 
+      border-left: 4px solid var(--green); 
+    }
+    footer { 
+      text-align: center; 
+      margin-top: 2rem; 
+      font-size: 0.9rem; 
+    }
+    a { 
+      color: var(--green); 
+      text-decoration: none; 
+    }
+    a:hover { 
+      text-decoration: underline; 
+    }
   </style>
 </head>
 <body>
@@ -74,6 +166,14 @@
       </div>
 
       <div id="feedback"></div>
+
+      <!-- FOOTER -->
+      <footer>
+        <a href="../premium.html" style="display:block; margin-bottom:0.5rem;">✨ Unlock Premium Features</a>
+        <a href="#" id="send-analytics" style="color:#6c757d;">📤 Send Anonymous Usage Data</a>
+        <br>
+        <a href="../dashboard.html">📊 View Dashboard</a>
+      </footer>
     </main>
   </div>
 
@@ -82,18 +182,88 @@
       'use strict';
       window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      // === Seeded RNG & Shuffle ===
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
       const currentChapter = 60; // chapter-60.html = Lesson 61
-      const maxChapter = 261;
+      const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
+      // === ANALYTICS MODULE ===
+      const ANALYTICS_KEY = 'miniopenstax_analytics_consent';
+      const EVENTS_KEY = 'miniopenstax_events';
+
+      function isAnalyticsEnabled() {
+        return localStorage.getItem(ANALYTICS_KEY) === '1';
+      }
+
+      function logEvent(eventType, data = {}) {
+        if (!isAnalyticsEnabled()) return;
+        const event = { type: eventType, timestamp: Date.now(), lesson: currentChapter, data };
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        events.push(event);
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+        if (events.length >= 20) sendAnalyticsEvents();
+      }
+
+      function enableAnalytics() {
+        localStorage.setItem(ANALYTICS_KEY, '1');
+      }
+
+      function sendAnalyticsEvents() {
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        if (events.length === 0) return;
+        const summary = {
+          lessons_attempted: [...new Set(events.map(e => e.lesson))].length,
+          quizzes_submitted: events.filter(e => e.type === 'quiz_submitted').length,
+          mastery_count: events.filter(e => e.type === 'mastery_achieved').length,
+          first_event: new Date(events[0].timestamp).toISOString().split('T')[0],
+          last_event: new Date(events[events.length - 1].timestamp).toISOString().split('T')[0]
+        };
+        const report = `*Mini OpenStax — Anonymous Usage Report*\n` +
+          `Lessons Tried: ${summary.lessons_attempted}\n` +
+          `Quizzes Taken: ${summary.quizzes_submitted}\n` +
+          `Mastery Achieved: ${summary.mastery_count}\n` +
+          `Period: ${summary.first_event} to ${summary.last_event}\n\n` +
+          `Thank you for helping improve literacy tools!`;
+        localStorage.removeItem(EVENTS_KEY);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        window.open(url, '_blank');
+      }
+
+      // === TYPO CORRECTIONS (FROM ALL PDFs) ===
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/f ault/g, 'fault'], [/f launt/g, 'flaunt'], [/p oint/g, 'point'],
+        [/p ool/g, 'pool'], [/p ooch/g, 'pooch'], [/p lain/g, 'plain'],
+        [/s our/g, 'sour'], [/f rown/g, 'frown'], [/c rown/g, 'crown'],
+        [/d rown/g, 'drown']
+      ];
+
+      // === CHAPTER CONFIG ===
       const CHAPTER_CONFIG = {
         title: "Lesson 61: Consonant Digraph wh",
         loTags: ["LO PH61: Decode words with consonant digraph /wh/"],
@@ -111,145 +281,46 @@
           "Bud had a frog and Ted had a frog.\nWhich frog can jump the best?"
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which word means 'to move very fast'?", options: [
-            {id:"a",text:"wham",is_correct:false},
-            {id:"b",text:"whiz",is_correct:true},
-            {id:"c",text:"whet",is_correct:false},
-            {id:"d",text:"whisk",is_correct:false}
-          ]},
-          { id: "2", prompt: "What does 'whip' mean in sentence 1?", options: [
-            {id:"a",text:"To defeat easily",is_correct:false},
-            {id:"b",text:"A flexible tool for striking",is_correct:true},
-            {id:"c",text:"To stir quickly",is_correct:false},
-            {id:"d",text:"A type of candy",is_correct:false}
-          ]},
-          { id: "3", prompt: "If someone acts 'on a whim,' they are acting...", options: [
-            {id:"a",text:"After careful planning",is_correct:false},
-            {id:"b",text:"On a sudden impulse",is_correct:true},
-            {id:"c",text:"With great caution",is_correct:false},
-            {id:"d",text:"In a group",is_correct:false}
-          ]},
-          { id: "4", prompt: "What does 'whisk' mean in sentence 7?", options: [
-            {id:"a",text:"To sweep or brush away quickly",is_correct:true},
-            {id:"b",text:"To cook slowly",is_correct:false},
-            {id:"c",text:"To shout loudly",is_correct:false},
-            {id:"d",text:"To freeze something",is_correct:false}
-          ]},
-          { id: "5", prompt: "Which sentence uses 'whiz' as a noun?", options: [
-            {id:"a",text:"The cab can whiz past the bus.",is_correct:false},
-            {id:"b",text:"Beth was a whiz at math.",is_correct:true},
-            {id:"c",text:"Clem can whip up lunch.",is_correct:false},
-            {id:"d",text:"Ben can snap a whip.",is_correct:false}
-          ]},
-          { id: "6", prompt: "Which word is used to ask a question about choice?", options: [
-            {id:"a",text:"when",is_correct:false},
-            {id:"b",text:"which",is_correct:true},
-            {id:"c",text:"whim",is_correct:false},
-            {id:"d",text:"whet",is_correct:false}
-          ]},
-          { id: "7", prompt: "What does 'whet' mean (though not used in sentences)?", options: [
-            {id:"a",text:"To sharpen or stimulate",is_correct:true},
-            {id:"b",text:"To throw away",is_correct:false},
-            {id:"c",text:"To whisper",is_correct:false},
-            {id:"d",text:"To whistle",is_correct:false}
-          ]},
-          { id: "8", prompt: "In sentence 5, what sport is Chet playing?", options: [
-            {id:"a",text:"Soccer",is_correct:false},
-            {id:"b",text:"Basketball",is_correct:false},
-            {id:"c",text:"Baseball",is_correct:true},
-            {id:"d",text:"Tennis",is_correct:false}
-          ]},
-          { id: "9", prompt: "Which 'wh' word expresses a sudden loud sound (like an impact)?", options: [
-            {id:"a",text:"wham",is_correct:true},
-            {id:"b",text:"whiz",is_correct:false},
-            {id:"c",text:"whisk",is_correct:false},
-            {id:"d",text:"whip",is_correct:false}
-          ]},
-          { id: "10", prompt: "Which sentence contains a compound sentence with two independent clauses?", options: [
-            {id:"a",text:"Ben can snap a whip.",is_correct:false},
-            {id:"b",text:"When Chet was at bat...",is_correct:false},
-            {id:"c",text:"Bud had a frog and Ted had a frog. Which frog can jump the best?",is_correct:true},
-            {id:"d",text:"On a whim, Jim let the pup...",is_correct:false}
-          ]},
-          { id: "11", prompt: "Which word is NOT in the Lesson 61 word list?", options: [
-            {id:"a",text:"wham",is_correct:false},
-            {id:"b",text:"whisk",is_correct:false},
-            {id:"c",text:"whiff",is_correct:true},
-            {id:"d",text:"whiz",is_correct:false}
-          ]},
-          { id: "12", prompt: "What is the /wh/ sound like in most American accents?", options: [
-            {id:"a",text:"/w/ as in 'water'",is_correct:true},
-            {id:"b",text:"/h/ as in 'hat'",is_correct:false},
-            {id:"c",text:"/f/ as in 'fish'",is_correct:false},
-            {id:"d",text:"Silent",is_correct:false}
-          ]},
-          { id: "13", prompt: "Which sentence uses 'whip' as a verb meaning 'to prepare quickly'?", options: [
-            {id:"a",text:"Ben can snap a whip.",is_correct:false},
-            {id:"b",text:"Clem can whip up a hot lunch.",is_correct:true},
-            {id:"c",text:"Peg can whisk the dust.",is_correct:false},
-            {id:"d",text:"The cab can whiz past.",is_correct:false}
-          ]},
-          { id: "14", prompt: "Which character appears in multiple past lessons?", options: [
-            {id:"a",text:"Ben",is_correct:false},
-            {id:"b",text:"Chet",is_correct:true},
-            {id:"c",text:"Peg",is_correct:false},
-            {id:"d",text:"Jim",is_correct:false}
-          ]},
-          { id: "15", prompt: "What does 'when' function as in sentence 5?", options: [
-            {id:"a",text:"A noun",is_correct:false},
-            {id:"b",text:"An adjective",is_correct:false},
-            {id:"c",text:"A subordinating conjunction",is_correct:true},
-            {id:"d",text:"An interjection",is_correct:false}
-          ]},
-          { id: "16", prompt: "Which 'wh' word is often used before adjectives like 'best' or 'biggest'?", options: [
-            {id:"a",text:"whim",is_correct:false},
-            {id:"b",text:"which",is_correct:true},
-            {id:"c",text:"whet",is_correct:false},
-            {id:"d",text:"wham",is_correct:false}
-          ]},
-          { id: "17", prompt: "Which word could describe a genius student?", options: [
-            {id:"a",text:"whiz",is_correct:true},
-            {id:"b",text:"whim",is_correct:false},
-            {id:"c",text:"whet",is_correct:false},
-            {id:"d",text:"wham",is_correct:false}
-          ]},
-          { id: "18", prompt: "Which sentence uses a food-related context?", options: [
-            {id:"a",text:"Ben can snap a whip.",is_correct:false},
-            {id:"b",text:"Clem can whip up a hot lunch.",is_correct:true},
-            {id:"c",text:"The cab can whiz past.",is_correct:false},
-            {id:"d",text:"Bud had a frog.",is_correct:false}
-          ]},
-          { id: "19", prompt: "How many 'wh' words appear in the 8 sentences?", options: [
-            {id:"a",text:"6",is_correct:true},
-            {id:"b",text:"7",is_correct:false},
-            {id:"c",text:"8",is_correct:false},
-            {id:"d",text:"5",is_correct:false}
-          ]},
-          { id: "20", prompt: "Which phrase uses a 'wh' word correctly in everyday English?", options: [
-            {id:"a",text:"She is a math whiz.",is_correct:true},
-            {id:"b",text:"He gave a loud whim.",is_correct:false},
-            {id:"c",text:"They whet the crowd.",is_correct:false},
-            {id:"d",text:"The car made a soft wham.",is_correct:false}
-          ]}
+          { id: "1", prompt: "Which word means 'to move very fast'?", options: [{id:"a",text:"wham",is_correct:false},{id:"b",text:"whiz",is_correct:true},{id:"c",text:"whet",is_correct:false},{id:"d",text:"whisk",is_correct:false}] },
+          { id: "2", prompt: "What does 'whip' mean in sentence 1?", options: [{id:"a",text:"To defeat easily",is_correct:false},{id:"b",text:"A flexible tool for striking",is_correct:true},{id:"c",text:"To stir quickly",is_correct:false},{id:"d",text:"A type of candy",is_correct:false}] },
+          { id: "3", prompt: "If someone acts 'on a whim,' they are acting...", options: [{id:"a",text:"After careful planning",is_correct:false},{id:"b",text:"On a sudden impulse",is_correct:true},{id:"c",text:"With great caution",is_correct:false},{id:"d",text:"In a group",is_correct:false}] },
+          { id: "4", prompt: "What does 'whisk' mean in sentence 7?", options: [{id:"a",text:"To sweep or brush away quickly",is_correct:true},{id:"b",text:"To cook slowly",is_correct:false},{id:"c",text:"To shout loudly",is_correct:false},{id:"d",text:"To freeze something",is_correct:false}] },
+          { id: "5", prompt: "Which sentence uses 'whiz' as a noun?", options: [{id:"a",text:"The cab can whiz past the bus.",is_correct:false},{id:"b",text:"Beth was a whiz at math.",is_correct:true},{id:"c",text:"Clem can whip up lunch.",is_correct:false},{id:"d",text:"Ben can snap a whip.",is_correct:false}] },
+          { id: "6", prompt: "Which word is used to ask a question about choice?", options: [{id:"a",text:"when",is_correct:false},{id:"b",text:"which",is_correct:true},{id:"c",text:"whim",is_correct:false},{id:"d",text:"whet",is_correct:false}] },
+          { id: "7", prompt: "What does 'whet' mean (though not used in sentences)?", options: [{id:"a",text:"To sharpen or stimulate",is_correct:true},{id:"b",text:"To throw away",is_correct:false},{id:"c",text:"To whisper",is_correct:false},{id:"d",text:"To whistle",is_correct:false}] },
+          { id: "8", prompt: "In sentence 5, what sport is Chet playing?", options: [{id:"a",text:"Soccer",is_correct:false},{id:"b",text:"Basketball",is_correct:false},{id:"c",text:"Baseball",is_correct:true},{id:"d",text:"Tennis",is_correct:false}] },
+          { id: "9", prompt: "Which 'wh' word expresses a sudden loud sound (like an impact)?", options: [{id:"a",text:"wham",is_correct:true},{id:"b",text:"whiz",is_correct:false},{id:"c",text:"whisk",is_correct:false},{id:"d",text:"whip",is_correct:false}] },
+          { id: "10", prompt: "Which sentence contains a compound sentence with two independent clauses?", options: [{id:"a",text:"Ben can snap a whip.",is_correct:false},{id:"b",text:"When Chet was at bat...",is_correct:false},{id:"c",text:"Bud had a frog and Ted had a frog. Which frog can jump the best?",is_correct:true},{id:"d",text:"On a whim, Jim let the pup...",is_correct:false}] },
+          { id: "11", prompt: "Which word is NOT in the Lesson 61 word list?", options: [{id:"a",text:"wham",is_correct:false},{id:"b",text:"whisk",is_correct:false},{id:"c",text:"whiff",is_correct:true},{id:"d",text:"whiz",is_correct:false}] },
+          { id: "12", prompt: "What is the /wh/ sound like in most American accents?", options: [{id:"a",text:"/w/ as in 'water'",is_correct:true},{id:"b",text:"/h/ as in 'hat'",is_correct:false},{id:"c",text:"/f/ as in 'fish'",is_correct:false},{id:"d",text:"Silent",is_correct:false}] },
+          { id: "13", prompt: "Which sentence uses 'whip' as a verb meaning 'to prepare quickly'?", options: [{id:"a",text:"Ben can snap a whip.",is_correct:false},{id:"b",text:"Clem can whip up a hot lunch.",is_correct:true},{id:"c",text:"Peg can whisk the dust.",is_correct:false},{id:"d",text:"The cab can whiz past.",is_correct:false}] },
+          { id: "14", prompt: "Which character appears in multiple past lessons?", options: [{id:"a",text:"Ben",is_correct:false},{id:"b",text:"Chet",is_correct:true},{id:"c",text:"Peg",is_correct:false},{id:"d",text:"Jim",is_correct:false}] },
+          { id: "15", prompt: "What does 'when' function as in sentence 5?", options: [{id:"a",text:"A noun",is_correct:false},{id:"b",text:"An adjective",is_correct:false},{id:"c",text:"A subordinating conjunction",is_correct:true},{id:"d",text:"An interjection",is_correct:false}] },
+          { id: "16", prompt: "Which 'wh' word is often used before adjectives like 'best' or 'biggest'?", options: [{id:"a",text:"whim",is_correct:false},{id:"b",text:"which",is_correct:true},{id:"c",text:"whet",is_correct:false},{id:"d",text:"wham",is_correct:false}] },
+          { id: "17", prompt: "Which word could describe a genius student?", options: [{id:"a",text:"whiz",is_correct:true},{id:"b",text:"whim",is_correct:false},{id:"c",text:"whet",is_correct:false},{id:"d",text:"wham",is_correct:false}] },
+          { id: "18", prompt: "Which sentence uses a food-related context?", options: [{id:"a",text:"Ben can snap a whip.",is_correct:false},{id:"b",text:"Clem can whip up a hot lunch.",is_correct:true},{id:"c",text:"The cab can whiz past.",is_correct:false},{id:"d",text:"Bud had a frog.",is_correct:false}] },
+          { id: "19", prompt: "How many 'wh' words appear in the 8 sentences?", options: [{id:"a",text:"6",is_correct:true},{id:"b",text:"7",is_correct:false},{id:"c",text:"8",is_correct:false},{id:"d",text:"5",is_correct:false}] },
+          { id: "20", prompt: "Which phrase uses a 'wh' word correctly in everyday English?", options: [{id:"a",text:"She is a math whiz.",is_correct:true},{id:"b",text:"He gave a loud whim.",is_correct:false},{id:"c",text:"They whet the crowd.",is_correct:false},{id:"d",text:"The car made a soft wham.",is_correct:false}] }
         ]
       };
 
+      // === RENDERING FUNCTIONS ===
       function renderWords() {
         document.getElementById('word-list').innerHTML =
           CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        let sentences = CHAPTER_CONFIG.sentences.map(s => 
-          s.replace(/f resh/g, 'fresh')
-           .replace(/p unch/g, 'punch')
-           .replace(/slep t/g, 'slept')
-           .replace(/crep t/g, 'crept')
-           .replace(/p lant/g, 'plant')
-           // No typos in this PDF, but keep pipeline ready
-        );
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          if (text !== s) logEvent('typo_corrected', { original: s, corrected: text });
+          return text;
+        });
         document.getElementById('sentences').innerHTML =
-          sentences.map(s => `<p>${s.replace(/\n/g, '<br>')}</p>`).join('');
+          corrected.map(s => `<p>${s.replace(/\n/g, '<br>')}</p>`).join('');
       }
 
       function renderNavigation() {
@@ -258,14 +329,14 @@
         for (let i = 0; i < 4; i++) {
           const c = currentChapter + i;
           const lessonNum = c + 1;
-          if (c > maxChapter) break;
-          buttons.push({ 
-            label: `Lesson ${lessonNum}`, 
-            url: `chapter-${c}.html`, 
-            active: i === 0 
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(b => 
+        nav.innerHTML = buttons.map(b =>
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
       }
@@ -273,14 +344,19 @@
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const opts = shuffle([...q.options]);
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
           const correct = q.options.find(o => o.is_correct);
           window.quizCorrectMap[q.id] = correct.id;
-          const optHtml = opts.map((o, i) => {
-            const L = String.fromCharCode(65 + i);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
+
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
@@ -304,27 +380,28 @@
 
         const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
-        const attemptsKey = `quiz_attempts_${currentChapter}`;
-        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
-        localStorage.setItem(attemptsKey, attempts);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        logEvent('quiz_submitted', { score, time_sec: timeOnTask, mastery, attempts });
+        if (mastery) logEvent('mastery_achieved', {});
 
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
 
-        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
-        localStorage.setItem(reportKey, report);
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
           <div class="feedback">
             <h3>📊 Results: ${score}/${total}</h3>
             <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
-              mastery ? 'You’ve mastered the concept!' :
-              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+              mastery ? 'You’ve mastered the /wh/ digraph!' :
+              score >= 10 ? 'Review missed items.' : 'Practice Lesson 61 words again.'
             }</p>
             <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
             <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
@@ -352,16 +429,19 @@
 
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
+        const savedRole = localStorage.getItem('user_role') || 'student';
         const promptDiv = document.getElementById('student-name-prompt');
         const quizDiv = document.getElementById('quiz-container');
         const display = document.getElementById('name-display');
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
+        const roleBadge = document.querySelector('.role-badge');
+        roleBadge.textContent = savedRole === 'instructor' ? 'Instructor View' : 'Student View';
 
         if (saved) {
           promptDiv.style.display = 'block';
           quizDiv.style.display = 'none';
-          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved} (${savedRole})</p>`;
           buttons.innerHTML = `
             <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
             <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
@@ -369,34 +449,69 @@
           document.getElementById('keep-btn').onclick = () => {
             promptDiv.style.display = 'none';
             quizDiv.style.display = 'block';
+            logEvent('lesson_start', {});
           };
           document.getElementById('change-btn').onclick = () => {
             display.style.display = 'none';
             input.style.display = 'block';
-            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            buttons.innerHTML = `
+              <button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>
+              <div style="margin-top:1rem; font-size:0.9rem;">
+                <label>
+                  <input type="checkbox" id="teacher-mode"> 
+                  I'm an instructor (analytics auto-enabled to improve lessons)
+                </label>
+              </div>
+            `;
             input.value = '';
             input.focus();
-            document.getElementById('save-new').onclick = saveName;
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                const isTeacher = document.getElementById('teacher-mode').checked;
+                localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+                if (isTeacher) enableAnalytics();
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+                roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+                logEvent('lesson_start', {});
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
           };
         } else {
           promptDiv.style.display = 'block';
           quizDiv.style.display = 'none';
           display.style.display = 'none';
           input.style.display = 'block';
-          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
-          document.getElementById('save-first').onclick = saveName;
-        }
-
-        function saveName() {
-          const name = input.value.trim();
-          if (name) {
-            localStorage.setItem('student_name', name);
-            promptDiv.style.display = 'none';
-            quizDiv.style.display = 'block';
-          } else {
-            alert("Please enter your name.");
-            input.focus();
-          }
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>
+            <div style="margin-top:1rem; font-size:0.9rem;">
+              <label>
+                <input type="checkbox" id="teacher-mode"> 
+                I'm an instructor (analytics auto-enabled to improve lessons)
+              </label>
+            </div>
+          `;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              const isTeacher = document.getElementById('teacher-mode').checked;
+              localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+              if (isTeacher) enableAnalytics();
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+              roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+              logEvent('lesson_start', {});
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
         }
       }
 
@@ -410,6 +525,15 @@
         setupQuizListeners();
         initNamePrompt();
       }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('send-analytics').onclick = (e) => {
+          e.preventDefault();
+          if (confirm('Send anonymous usage data to help improve Mini OpenStax?')) {
+            sendAnalyticsEvents();
+          }
+        };
+      });
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
