@@ -6,31 +6,123 @@
   <meta name="description" content="Mini OpenStax: Lesson 65: Consonant Digraph ck (Final Practice Set)"/>
   <title>Mini OpenStax — Lesson 65: Consonant Digraph ck (Final Practice Set)</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
-    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+    }
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #fff; 
+      color: var(--dark); 
+    }
+    .container { 
+      max-width: 800px; 
+      margin: 0 auto; 
+      padding: 1rem; 
+    }
+    .header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+    }
+    .role-badge { 
+      background: #e9ecef; 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-size: 0.85rem; 
+    }
+    .chapter-nav { 
+      margin: 1.2rem 0; 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.4rem; 
+      justify-content: center; 
+    }
     .chapter-btn {
-      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+      padding: 0.4rem 0.8rem; 
+      background: var(--green); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 4px; 
+      font-size: 0.9rem;
     }
-    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
-    .section { margin-bottom: 1.5rem; }
-    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
-    .sentences { line-height: 1.6; }
-    .quiz { margin-top: 2rem; }
-    .question { margin-bottom: 1.2rem; }
-    .options { margin-left: 1rem; }
-    .option { margin: 0.4rem 0; }
+    .chapter-btn.active, .chapter-btn:hover { 
+      background: #00502e; 
+    }
+    .section { 
+      margin-bottom: 1.5rem; 
+    }
+    .word-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+      margin: 0.5rem 0; 
+    }
+    .word-item { 
+      background: var(--light); 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-family: monospace; 
+    }
+    .sentences { 
+      line-height: 1.6; 
+    }
+    .quiz { 
+      margin-top: 2rem; 
+    }
+    .question { 
+      margin-bottom: 1.2rem; 
+    }
+    .options { 
+      margin-left: 1rem; 
+    }
+    .option { 
+      margin: 0.4rem 0; 
+    }
     .btn {
-      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
-      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+      background: var(--green); 
+      color: white; 
+      border: none; 
+      padding: 0.5rem 1rem;
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 1rem; 
+      margin-right: 0.5rem;
     }
-    .btn:hover { background: #218838; }
-    .btn-secondary { background: #6c757d; }
-    .btn-secondary:hover { background: #5a6268; }
-    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .btn:hover { 
+      background: #00502e; 
+    }
+    .btn-secondary { 
+      background: #6c757d; 
+    }
+    .btn-secondary:hover { 
+      background: #5a6268; 
+    }
+    .feedback { 
+      margin-top: 1.5rem; 
+      padding: 1rem; 
+      background: var(--light); 
+      border-left: 4px solid var(--green); 
+    }
+    footer { 
+      text-align: center; 
+      margin-top: 2rem; 
+      font-size: 0.9rem; 
+    }
+    a { 
+      color: var(--green); 
+      text-decoration: none; 
+    }
+    a:hover { 
+      text-decoration: underline; 
+    }
   </style>
 </head>
 <body>
@@ -74,6 +166,14 @@
       </div>
 
       <div id="feedback"></div>
+
+      <!-- FOOTER -->
+      <footer>
+        <a href="../premium.html" style="display:block; margin-bottom:0.5rem;">✨ Unlock Premium Features</a>
+        <a href="#" id="send-analytics" style="color:#6c757d;">📤 Send Anonymous Usage Data</a>
+        <br>
+        <a href="../dashboard.html">📊 View Dashboard</a>
+      </footer>
     </main>
   </div>
 
@@ -82,18 +182,88 @@
       'use strict';
       window.startTime = Date.now();
 
-      function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+      // === Seeded RNG & Shuffle ===
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
       }
 
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
       const currentChapter = 64; // chapter-64.html = Lesson 65
-      const maxChapter = 261;
+      const MAX_CHAPTER = 261;
       const WHATSAPP_NUMBER = "233257320201";
 
+      // === ANALYTICS MODULE ===
+      const ANALYTICS_KEY = 'miniopenstax_analytics_consent';
+      const EVENTS_KEY = 'miniopenstax_events';
+
+      function isAnalyticsEnabled() {
+        return localStorage.getItem(ANALYTICS_KEY) === '1';
+      }
+
+      function logEvent(eventType, data = {}) {
+        if (!isAnalyticsEnabled()) return;
+        const event = { type: eventType, timestamp: Date.now(), lesson: currentChapter, data };
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        events.push(event);
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+        if (events.length >= 20) sendAnalyticsEvents();
+      }
+
+      function enableAnalytics() {
+        localStorage.setItem(ANALYTICS_KEY, '1');
+      }
+
+      function sendAnalyticsEvents() {
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        if (events.length === 0) return;
+        const summary = {
+          lessons_attempted: [...new Set(events.map(e => e.lesson))].length,
+          quizzes_submitted: events.filter(e => e.type === 'quiz_submitted').length,
+          mastery_count: events.filter(e => e.type === 'mastery_achieved').length,
+          first_event: new Date(events[0].timestamp).toISOString().split('T')[0],
+          last_event: new Date(events[events.length - 1].timestamp).toISOString().split('T')[0]
+        };
+        const report = `*Mini OpenStax — Anonymous Usage Report*\n` +
+          `Lessons Tried: ${summary.lessons_attempted}\n` +
+          `Quizzes Taken: ${summary.quizzes_submitted}\n` +
+          `Mastery Achieved: ${summary.mastery_count}\n` +
+          `Period: ${summary.first_event} to ${summary.last_event}\n\n` +
+          `Thank you for helping improve literacy tools!`;
+        localStorage.removeItem(EVENTS_KEY);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        window.open(url, '_blank');
+      }
+
+      // === TYPO CORRECTIONS (FROM ALL PDFs) ===
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/f ault/g, 'fault'], [/f launt/g, 'flaunt'], [/p oint/g, 'point'],
+        [/p ool/g, 'pool'], [/p ooch/g, 'pooch'], [/p lain/g, 'plain'],
+        [/s our/g, 'sour'], [/f rown/g, 'frown'], [/c rown/g, 'crown'],
+        [/d rown/g, 'drown']
+      ];
+
+      // === CHAPTER CONFIG ===
       const CHAPTER_CONFIG = {
         title: "Lesson 65: Consonant Digraph ck (Final Practice Set)",
         loTags: ["LO PH65: Apply and master words with consonant digraph /ck/ in authentic contexts"],
@@ -104,7 +274,7 @@
         sentences: [
           "The ship sat at the dock.",
           "The clock in the den struck ten.",
-          "The shop had a black f rock in stock.",
+          "The shop had a black frock in stock.",
           "Beth had a black sock and a red sock.",
           "Nick must not mock the man with a lisp.",
           "The shack had a latch with a lock on it.",
@@ -112,145 +282,46 @@
           "Jack can jump from a big rock and land in the pond."
         ],
         assessmentItems: [
-          { id: "1", prompt: "Which sentence contains a typo that needs fixing?", options: [
-            {id:"a",text:"The ship sat at the dock.",is_correct:false},
-            {id:"b",text:"The shop had a black f rock in stock.",is_correct:true},
-            {id:"c",text:"Beth had a black sock...",is_correct:false},
-            {id:"d",text:"Jack can jump from a big rock...",is_correct:false}
-          ]},
-          { id: "2", prompt: "After correction, 'f rock' becomes:", options: [
-            {id:"a",text:"flock",is_correct:false},
-            {id:"b",text:"frock",is_correct:true},
-            {id:"c",text:"flick",is_correct:false},
-            {id:"d",text:"frick",is_correct:false}
-          ]},
-          { id: "3", prompt: "What is a 'frock'?", options: [
-            {id:"a",text:"A type of shoe",is_correct:false},
-            {id:"b",text:"A loose dress or gown",is_correct:true},
-            {id:"c",text:"A loud sound",is_correct:false},
-            {id:"d",text:"A small boat",is_correct:false}
-          ]},
-          { id: "4", prompt: "Which word means 'to make fun of someone'?", options: [
-            {id:"a",text:"sock",is_correct:false},
-            {id:"b",text:"mock",is_correct:true},
-            {id:"c",text:"dock",is_correct:false},
-            {id:"d",text:"lock",is_correct:false}
-          ]},
-          { id: "5", prompt: "What strikes ten in sentence 2?", options: [
-            {id:"a",text:"A bell",is_correct:false},
-            {id:"b",text:"The clock",is_correct:true},
-            {id:"c",text:"A ship",is_correct:false},
-            {id:"d",text:"A rock",is_correct:false}
-          ]},
-          { id: "6", prompt: "Which sentence includes a security device?", options: [
-            {id:"a",text:"The shack had a latch with a lock on it.",is_correct:true},
-            {id:"b",text:"Beth had a black sock...",is_correct:false},
-            {id:"c",text:"Nick must not mock...",is_correct:false},
-            {id:"d",text:"The ship sat at the dock.",is_correct:false}
-          ]},
-          { id: "7", prompt: "Which character appears in multiple past lessons?", options: [
-            {id:"a",text:"Beth",is_correct:true},
-            {id:"b",text:"Fred",is_correct:false},
-            {id:"c",text:"Fran",is_correct:false},
-            {id:"d",text:"Glen",is_correct:false}
-          ]},
-          { id: "8", prompt: "What does 'stock' mean in sentence 3?", options: [
-            {id:"a",text:"A type of rock",is_correct:false},
-            {id:"b",text:"Items available for sale",is_correct:true},
-            {id:"c",text:"A loud noise",is_correct:false},
-            {id:"d",text:"A wooden block",is_correct:false}
-          ]},
-          { id: "9", prompt: "Which word could describe a group of sheep?", options: [
-            {id:"a",text:"flock",is_correct:true},
-            {id:"b",text:"sock",is_correct:false},
-            {id:"c",text:"dock",is_correct:false},
-            {id:"d",text:"chock",is_correct:false}
-          ]},
-          { id: "10", prompt: "Which sentence describes a physical action with a projectile?", options: [
-            {id:"a",text:"Jack can jump from a big rock...",is_correct:false},
-            {id:"b",text:"Chuck can pick up a rock and pitch it at a log.",is_correct:true},
-            {id:"c",text:"The clock struck ten.",is_correct:false},
-            {id:"d",text:"Beth had socks.",is_correct:false}
-          ]},
-          { id: "11", prompt: "What is a 'chock' (though not used in sentences)?", options: [
-            {id:"a",text:"A wedge used to secure a wheel",is_correct:true},
-            {id:"b",text:"A type of sock",is_correct:false},
-            {id:"c",text:"A loud laugh",is_correct:false},
-            {id:"d",text:"A sea creature",is_correct:false}
-          ]},
-          { id: "12", prompt: "Which word is NOT in the Lesson 65 word list?", options: [
-            {id:"a",text:"smock",is_correct:false},
-            {id:"b",text:"pock",is_correct:false},
-            {id:"c",text:"peck",is_correct:true},
-            {id:"d",text:"block",is_correct:false}
-          ]},
-          { id: "13", prompt: "Which sentence uses 'rock' twice?", options: [
-            {id:"a",text:"Sentence 7",is_correct:false},
-            {id:"b",text:"Sentence 8",is_correct:true},
-            {id:"c",text:"Sentence 1",is_correct:false},
-            {id:"d",text:"Sentence 3",is_correct:false}
-          ]},
-          { id: "14", prompt: "What might cause 'shock'?", options: [
-            {id:"a",text:"A pleasant surprise",is_correct:false},
-            {id:"b",text:"A sudden surprise or electrical jolt",is_correct:true},
-            {id:"c",text:"A type of sock",is_correct:false},
-            {id:"d",text:"A clock ringing",is_correct:false}
-          ]},
-          { id: "15", prompt: "How many 'ck' words appear in sentence 4?", options: [
-            {id:"a",text:"1",is_correct:false},
-            {id:"b",text:"2",is_correct:true},
-            {id:"c",text:"3",is_correct:false},
-            {id:"d",text:"0",is_correct:false}
-          ]},
-          { id: "16", prompt: "Which 'ck' word refers to a place where ships park?", options: [
-            {id:"a",text:"dock",is_correct:true},
-            {id:"b",text:"lock",is_correct:false},
-            {id:"c",text:"sock",is_correct:false},
-            {id:"d",text:"rock",is_correct:false}
-          ]},
-          { id: "17", prompt: "Which phrase uses a 'ck' word correctly?", options: [
-            {id:"a",text:"She wore a floral frock.",is_correct:true},
-            {id:"b",text:"He ate a big dock for lunch.",is_correct:false},
-            {id:"c",text:"They drove a sock to school.",is_correct:false},
-            {id:"d",text:"The bird gave a mock of joy.",is_correct:false}
-          ]},
-          { id: "18", prompt: "Which sentence implies a moral lesson about kindness?", options: [
-            {id:"a",text:"Nick must not mock the man with a lisp.",is_correct:true},
-            {id:"b",text:"The ship sat at the dock.",is_correct:false},
-            {id:"c",text:"The clock struck ten.",is_correct:false},
-            {id:"d",text:"Jack can jump from a rock.",is_correct:false}
-          ]},
-          { id: "19", prompt: "Which word could also mean 'to block or obstruct'?", options: [
-            {id:"a",text:"sock",is_correct:false},
-            {id:"b",text:"block",is_correct:true},
-            {id:"c",text:"frock",is_correct:false},
-            {id:"d",text:"chock",is_correct:false}
-          ]},
-          { id: "20", prompt: "After four lessons (62–65), what is the consistent spelling pattern for /k/ after a short vowel?", options: [
-            {id:"a",text:"Use 'c'",is_correct:false},
-            {id:"b",text:"Use 'k'",is_correct:false},
-            {id:"c",text:"Use 'ck'",is_correct:true},
-            {id:"d",text:"Use 'ch'",is_correct:false}
-          ]}
+          { id: "1", prompt: "Which sentence contains a typo that needs fixing?", options: [{id:"a",text:"The ship sat at the dock.",is_correct:false},{id:"b",text:"The shop had a black f rock in stock.",is_correct:true},{id:"c",text:"Beth had a black sock...",is_correct:false},{id:"d",text:"Jack can jump from a big rock...",is_correct:false}] },
+          { id: "2", prompt: "After correction, 'f rock' becomes:", options: [{id:"a",text:"flock",is_correct:false},{id:"b",text:"frock",is_correct:true},{id:"c",text:"flick",is_correct:false},{id:"d",text:"frick",is_correct:false}] },
+          { id: "3", prompt: "What is a 'frock'?", options: [{id:"a",text:"A type of shoe",is_correct:false},{id:"b",text:"A loose dress or gown",is_correct:true},{id:"c",text:"A loud sound",is_correct:false},{id:"d",text:"A small boat",is_correct:false}] },
+          { id: "4", prompt: "Which word means 'to make fun of someone'?", options: [{id:"a",text:"sock",is_correct:false},{id:"b",text:"mock",is_correct:true},{id:"c",text:"dock",is_correct:false},{id:"d",text:"lock",is_correct:false}] },
+          { id: "5", prompt: "What strikes ten in sentence 2?", options: [{id:"a",text:"A bell",is_correct:false},{id:"b",text:"The clock",is_correct:true},{id:"c",text:"A ship",is_correct:false},{id:"d",text:"A rock",is_correct:false}] },
+          { id: "6", prompt: "Which sentence includes a security device?", options: [{id:"a",text:"The shack had a latch with a lock on it.",is_correct:true},{id:"b",text:"Beth had a black sock...",is_correct:false},{id:"c",text:"Nick must not mock...",is_correct:false},{id:"d",text:"The ship sat at the dock.",is_correct:false}] },
+          { id: "7", prompt: "Which character appears in multiple past lessons?", options: [{id:"a",text:"Beth",is_correct:true},{id:"b",text:"Fred",is_correct:false},{id:"c",text:"Fran",is_correct:false},{id:"d",text:"Glen",is_correct:false}] },
+          { id: "8", prompt: "What does 'stock' mean in sentence 3?", options: [{id:"a",text:"A type of rock",is_correct:false},{id:"b",text:"Items available for sale",is_correct:true},{id:"c",text:"A loud noise",is_correct:false},{id:"d",text:"A wooden block",is_correct:false}] },
+          { id: "9", prompt: "Which word could describe a group of sheep?", options: [{id:"a",text:"flock",is_correct:true},{id:"b",text:"sock",is_correct:false},{id:"c",text:"dock",is_correct:false},{id:"d",text:"chock",is_correct:false}] },
+          { id: "10", prompt: "Which sentence describes a physical action with a projectile?", options: [{id:"a",text:"Jack can jump from a big rock...",is_correct:false},{id:"b",text:"Chuck can pick up a rock and pitch it at a log.",is_correct:true},{id:"c",text:"The clock struck ten.",is_correct:false},{id:"d",text:"Beth had socks.",is_correct:false}] },
+          { id: "11", prompt: "What is a 'chock' (though not used in sentences)?", options: [{id:"a",text:"A wedge used to secure a wheel",is_correct:true},{id:"b",text:"A type of sock",is_correct:false},{id:"c",text:"A loud laugh",is_correct:false},{id:"d",text:"A sea creature",is_correct:false}] },
+          { id: "12", prompt: "Which word is NOT in the Lesson 65 word list?", options: [{id:"a",text:"smock",is_correct:false},{id:"b",text:"pock",is_correct:false},{id:"c",text:"peck",is_correct:true},{id:"d",text:"block",is_correct:false}] },
+          { id: "13", prompt: "Which sentence uses 'rock' twice?", options: [{id:"a",text:"Sentence 7",is_correct:false},{id:"b",text:"Sentence 8",is_correct:true},{id:"c",text:"Sentence 1",is_correct:false},{id:"d",text:"Sentence 3",is_correct:false}] },
+          { id: "14", prompt: "What might cause 'shock'?", options: [{id:"a",text:"A pleasant surprise",is_correct:false},{id:"b",text:"A sudden surprise or electrical jolt",is_correct:true},{id:"c",text:"A type of sock",is_correct:false},{id:"d",text:"A clock ringing",is_correct:false}] },
+          { id: "15", prompt: "How many 'ck' words appear in sentence 4?", options: [{id:"a",text:"1",is_correct:false},{id:"b",text:"2",is_correct:true},{id:"c",text:"3",is_correct:false},{id:"d",text:"0",is_correct:false}] },
+          { id: "16", prompt: "Which 'ck' word refers to a place where ships park?", options: [{id:"a",text:"dock",is_correct:true},{id:"b",text:"lock",is_correct:false},{id:"c",text:"sock",is_correct:false},{id:"d",text:"rock",is_correct:false}] },
+          { id: "17", prompt: "Which phrase uses a 'ck' word correctly?", options: [{id:"a",text:"She wore a floral frock.",is_correct:true},{id:"b",text:"He ate a big dock for lunch.",is_correct:false},{id:"c",text:"They drove a sock to school.",is_correct:false},{id:"d",text:"The bird gave a mock of joy.",is_correct:false}] },
+          { id: "18", prompt: "Which sentence implies a moral lesson about kindness?", options: [{id:"a",text:"Nick must not mock the man with a lisp.",is_correct:true},{id:"b",text:"The ship sat at the dock.",is_correct:false},{id:"c",text:"The clock struck ten.",is_correct:false},{id:"d",text:"Jack can jump from a rock.",is_correct:false}] },
+          { id: "19", prompt: "Which word could also mean 'to block or obstruct'?", options: [{id:"a",text:"sock",is_correct:false},{id:"b",text:"block",is_correct:true},{id:"c",text:"frock",is_correct:false},{id:"d",text:"chock",is_correct:false}] },
+          { id: "20", prompt: "After four lessons (62–65), what is the consistent spelling pattern for /k/ after a short vowel?", options: [{id:"a",text:"Use 'c'",is_correct:false},{id:"b",text:"Use 'k'",is_correct:false},{id:"c",text:"Use 'ck'",is_correct:true},{id:"d",text:"Use 'ch'",is_correct:false}] }
         ]
       };
 
+      // === RENDERING FUNCTIONS ===
       function renderWords() {
         document.getElementById('word-list').innerHTML =
           CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
       }
 
       function renderSentences() {
-        let sentences = CHAPTER_CONFIG.sentences.map(s => 
-          s.replace(/f resh/g, 'fresh')
-           .replace(/p unch/g, 'punch')
-           .replace(/slep t/g, 'slept')
-           .replace(/crep t/g, 'crept')
-           .replace(/p lant/g, 'plant')
-           .replace(/f rock/g, 'frock')
-        );
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          if (text !== s) logEvent('typo_corrected', { original: s, corrected: text });
+          return text;
+        });
         document.getElementById('sentences').innerHTML =
-          sentences.map(s => `<p>${s}</p>`).join('');
+          corrected.map(s => `<p>${s}</p>`).join('');
       }
 
       function renderNavigation() {
@@ -259,14 +330,14 @@
         for (let i = 0; i < 4; i++) {
           const c = currentChapter + i;
           const lessonNum = c + 1;
-          if (c > maxChapter) break;
-          buttons.push({ 
-            label: `Lesson ${lessonNum}`, 
-            url: `chapter-${c}.html`, 
-            active: i === 0 
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
           });
         }
-        nav.innerHTML = buttons.map(b => 
+        nav.innerHTML = buttons.map(b =>
           `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
         ).join('');
       }
@@ -274,14 +345,19 @@
       function renderQuiz() {
         const form = document.getElementById('quiz-form');
         window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
         form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
-          const opts = shuffle([...q.options]);
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
           const correct = q.options.find(o => o.is_correct);
           window.quizCorrectMap[q.id] = correct.id;
-          const optHtml = opts.map((o, i) => {
-            const L = String.fromCharCode(65 + i);
-            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${L}. ${o.text}</label></div>`;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
           }).join('');
+
           return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
         }).join('');
       }
@@ -305,19 +381,20 @@
 
         const score = correctCount, total = 20, mastery = score >= 15;
         const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
-        const attemptsKey = `quiz_attempts_${currentChapter}`;
-        const attempts = (parseInt(localStorage.getItem(attemptsKey)) || 0) + 1;
-        localStorage.setItem(attemptsKey, attempts);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
         localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
         const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        logEvent('quiz_submitted', { score, time_sec: timeOnTask, mastery, attempts });
+        if (mastery) logEvent('mastery_achieved', {});
 
         let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
         if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
         if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
         report += `Report generated via Mini OpenStax.`;
 
-        const reportKey = `saved_report_${currentChapter}_${Date.now()}`;
-        localStorage.setItem(reportKey, report);
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
         document.getElementById('feedback').innerHTML = `
@@ -353,16 +430,19 @@
 
       function initNamePrompt() {
         const saved = localStorage.getItem('student_name');
+        const savedRole = localStorage.getItem('user_role') || 'student';
         const promptDiv = document.getElementById('student-name-prompt');
         const quizDiv = document.getElementById('quiz-container');
         const display = document.getElementById('name-display');
         const input = document.getElementById('student-name');
         const buttons = document.getElementById('name-buttons');
+        const roleBadge = document.querySelector('.role-badge');
+        roleBadge.textContent = savedRole === 'instructor' ? 'Instructor View' : 'Student View';
 
         if (saved) {
           promptDiv.style.display = 'block';
           quizDiv.style.display = 'none';
-          display.innerHTML = `<p><strong>Current name:</strong> ${saved}</p>`;
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved} (${savedRole})</p>`;
           buttons.innerHTML = `
             <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
             <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
@@ -370,34 +450,69 @@
           document.getElementById('keep-btn').onclick = () => {
             promptDiv.style.display = 'none';
             quizDiv.style.display = 'block';
+            logEvent('lesson_start', {});
           };
           document.getElementById('change-btn').onclick = () => {
             display.style.display = 'none';
             input.style.display = 'block';
-            buttons.innerHTML = `<button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>`;
+            buttons.innerHTML = `
+              <button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>
+              <div style="margin-top:1rem; font-size:0.9rem;">
+                <label>
+                  <input type="checkbox" id="teacher-mode"> 
+                  I'm an instructor (analytics auto-enabled to improve lessons)
+                </label>
+              </div>
+            `;
             input.value = '';
             input.focus();
-            document.getElementById('save-new').onclick = saveName;
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                const isTeacher = document.getElementById('teacher-mode').checked;
+                localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+                if (isTeacher) enableAnalytics();
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+                roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+                logEvent('lesson_start', {});
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
           };
         } else {
           promptDiv.style.display = 'block';
           quizDiv.style.display = 'none';
           display.style.display = 'none';
           input.style.display = 'block';
-          buttons.innerHTML = `<button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>`;
-          document.getElementById('save-first').onclick = saveName;
-        }
-
-        function saveName() {
-          const name = input.value.trim();
-          if (name) {
-            localStorage.setItem('student_name', name);
-            promptDiv.style.display = 'none';
-            quizDiv.style.display = 'block';
-          } else {
-            alert("Please enter your name.");
-            input.focus();
-          }
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>
+            <div style="margin-top:1rem; font-size:0.9rem;">
+              <label>
+                <input type="checkbox" id="teacher-mode"> 
+                I'm an instructor (analytics auto-enabled to improve lessons)
+              </label>
+            </div>
+          `;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              const isTeacher = document.getElementById('teacher-mode').checked;
+              localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+              if (isTeacher) enableAnalytics();
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+              roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+              logEvent('lesson_start', {});
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
         }
       }
 
@@ -411,6 +526,15 @@
         setupQuizListeners();
         initNamePrompt();
       }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('send-analytics').onclick = (e) => {
+          e.preventDefault();
+          if (confirm('Send anonymous usage data to help improve Mini OpenStax?')) {
+            sendAnalyticsEvents();
+          }
+        };
+      });
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
