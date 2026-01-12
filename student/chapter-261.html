@@ -6,35 +6,648 @@
   <meta name="description" content="Mini OpenStax: Lesson 262: ture=/chur/"/>
   <title>Mini OpenStax — Lesson 262: ture=/chur/</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
-    .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-    .role-badge { background: #e9ecef; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; }
-    .chapter-nav { margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    :root {
+      --green: #006b3d;   /* Ghana green */
+      --gold: #cead00;    /* Ghana gold */
+      --light: #f9f9f9;
+      --dark: #2d2d2d;
+    }
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #fff; 
+      color: var(--dark); 
+    }
+    .container { 
+      max-width: 800px; 
+      margin: 0 auto; 
+      padding: 1rem; 
+    }
+    .header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+    }
+    .role-badge { 
+      background: #e9ecef; 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-size: 0.85rem; 
+    }
+    .chapter-nav { 
+      margin: 1.2rem 0; 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.4rem; 
+      justify-content: center; 
+    }
     .chapter-btn {
-      padding: 0.4rem 0.8rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;
+      padding: 0.4rem 0.8rem; 
+      background: var(--green); 
+      color: white; 
+      text-decoration: none; 
+      border-radius: 4px; 
+      font-size: 0.9rem;
     }
-    .chapter-btn.active, .chapter-btn:hover { background: #0056b3; }
-    .section { margin-bottom: 1.5rem; }
-    .word-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-    .word-item { background: #f8f9fa; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
-    .sentences { line-height: 1.6; }
-    .quiz { margin-top: 2rem; }
-    .question { margin-bottom: 1.2rem; }
-    .options { margin-left: 1rem; }
-    .option { margin: 0.4rem 0; }
+    .chapter-btn.active, .chapter-btn:hover { 
+      background: #00502e; 
+    }
+    .section { 
+      margin-bottom: 1.5rem; 
+    }
+    .word-list { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 0.5rem; 
+      margin: 0.5rem 0; 
+    }
+    .word-item { 
+      background: var(--light); 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 4px; 
+      font-family: monospace; 
+    }
+    .sentences { 
+      line-height: 1.6; 
+    }
+    .quiz { 
+      margin-top: 2rem; 
+    }
+    .question { 
+      margin-bottom: 1.2rem; 
+    }
+    .options { 
+      margin-left: 1rem; 
+    }
+    .option { 
+      margin: 0.4rem 0; 
+    }
     .btn {
-      background: #28a745; color: white; border: none; padding: 0.5rem 1rem;
-      border-radius: 4px; cursor: pointer; font-size: 1rem; margin-right: 0.5rem;
+      background: var(--green); 
+      color: white; 
+      border: none; 
+      padding: 0.5rem 1rem;
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-size: 1rem; 
+      margin-right: 0.5rem;
     }
-    .btn:hover { background: #218838; }
-    .btn-secondary { background: #6c757d; }
-    .btn-secondary:hover { background: #5a6268; }
-    .feedback { margin-top: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid #007bff; }
+    .btn:hover { 
+      background: #00502e; 
+    }
+    .btn-secondary { 
+      background: #6c757d; 
+    }
+    .btn-secondary:hover { 
+      background: #5a6268; 
+    }
+    .feedback { 
+      margin-top: 1.5rem; 
+      padding: 1rem; 
+      background: var(--light); 
+      border-left: 4px solid var(--green); 
+    }
+    footer { 
+      text-align: center; 
+      margin-top: 2rem; 
+      font-size: 0.9rem; 
+    }
+    a { 
+      color: var(--green); 
+      text-decoration: none; 
+    }
+    a:hover { 
+      text-decoration: underline; 
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="header">
+      <div>
+        <h1 id="chapter-title">Lesson 262: ture=/chur/</h1>
+        <div class="lo-tags" id="lo-tags">LO TURE262: Decode words with 'ture' pronounced as /chur/</div>
+      </div>
+      <div class="role-badge">Student View</div>
+    </div>
+
+    <nav class="chapter-nav" id="chapter-nav"></nav>
+
+    <main id="main-content">
+      <div class="section">
+        <h2>🔤 Word List</h2>
+        <p>Words where "ture" says /chur/</p>
+        <div class="word-list" id="word-list"></div>
+      </div>
+
+      <div class="section">
+        <h2>📖 Practice Sentences</h2>
+        <p>Read aloud:</p>
+        <div class="sentences" id="sentences"></div>
+      </div>
+
+      <div id="student-name-prompt" class="section" style="display:none;">
+        <h2>👤 Your Name</h2>
+        <div id="name-display"></div>
+        <input type="text" id="student-name" placeholder="Enter your name" maxlength="30"
+          style="padding:0.5rem;font-size:1rem;width:100%;margin:0.5rem 0;display:none;">
+        <div id="name-buttons"></div>
+      </div>
+
+      <div class="quiz" id="quiz-container" style="display:none;">
+        <h2>📝 Quick Check (20 Questions)</h2>
+        <p>Select the best answer for each question.</p>
+        <form id="quiz-form"></form>
+        <button type="button" class="btn" id="submit-quiz">Check Answers</button>
+      </div>
+
+      <div id="feedback"></div>
+
+      <!-- FOOTER -->
+      <footer>
+        <a href="../premium.html" style="display:block; margin-bottom:0.5rem;">✨ Unlock Premium Features</a>
+        <a href="#" id="send-analytics" style="color:#6c757d;">📤 Send Anonymous Usage Data</a>
+        <br>
+        <a href="../dashboard.html">📊 View Dashboard</a>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      window.startTime = Date.now();
+
+      // === Seeded RNG & Shuffle ===
+      function createSeededRNG(seed) {
+        let state = Math.abs((seed * 9301 + 49297) % 233280);
+        return () => {
+          state = (state * 9301 + 49297) % 233280;
+          return state / 233280;
+        };
+      }
+
+      function shuffleWithSeed(array, seed) {
+        const rng = createSeededRNG(seed);
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(rng() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      // === CONFIGURE PER LESSON ===
+      const currentChapter = 261; // Lesson 262 → index 261
+      const MAX_CHAPTER = 261;    // Note: This caps navigation at Lesson 262
+      const WHATSAPP_NUMBER = "233257320201";
+
+      // === ANALYTICS MODULE ===
+      const ANALYTICS_KEY = 'miniopenstax_analytics_consent';
+      const EVENTS_KEY = 'miniopenstax_events';
+
+      function isAnalyticsEnabled() {
+        return localStorage.getItem(ANALYTICS_KEY) === '1';
+      }
+
+      function logEvent(eventType, data = {}) {
+        if (!isAnalyticsEnabled()) return;
+        const event = { type: eventType, timestamp: Date.now(), lesson: currentChapter, data };
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        events.push(event);
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(events));
+        if (events.length >= 20) sendAnalyticsEvents();
+      }
+
+      function enableAnalytics() {
+        localStorage.setItem(ANALYTICS_KEY, '1');
+      }
+
+      function sendAnalyticsEvents() {
+        const events = JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+        if (events.length === 0) return;
+        const summary = {
+          lessons_attempted: [...new Set(events.map(e => e.lesson))].length,
+          quizzes_submitted: events.filter(e => e.type === 'quiz_submitted').length,
+          mastery_count: events.filter(e => e.type === 'mastery_achieved').length,
+          first_event: new Date(events[0].timestamp).toISOString().split('T')[0],
+          last_event: new Date(events[events.length - 1].timestamp).toISOString().split('T')[0]
+        };
+        const report = `*Mini OpenStax — Anonymous Usage Report*\n` +
+          `Lessons Tried: ${summary.lessons_attempted}\n` +
+          `Quizzes Taken: ${summary.quizzes_submitted}\n` +
+          `Mastery Achieved: ${summary.mastery_count}\n` +
+          `Period: ${summary.first_event} to ${summary.last_event}\n\n` +
+          `Thank you for helping improve literacy tools!`;
+        localStorage.removeItem(EVENTS_KEY);
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        window.open(url, '_blank');
+      }
+
+      // === TYPO CORRECTIONS ===
+      const TYPO_CORRECTIONS = [
+        [/f resh/g, 'fresh'], [/p unch/g, 'punch'], [/slep t/g, 'slept'],
+        [/crep t/g, 'crept'], [/p lant/g, 'plant'], [/p ath/g, 'path'],
+        [/f roth/g, 'froth'], [/p eck/g, 'peck'], [/f luck/g, 'pluck'],
+        [/p luck/g, 'pluck'], [/f ling/g, 'fling'], [/p ass/g, 'pass'],
+        [/f uss/g, 'fuss'], [/sp ell/g, 'spell'], [/f uzz/g, 'fuzz'],
+        [/thef t/g, 'theft'], [/thrif t/g, 'thrift'], [/dep th/g, 'depth'],
+        [/fif th/g, 'fifth'], [/st ink/g, 'stink'], [/wr ink/g, 'wring'],
+        [/f ault/g, 'fault'], [/f launt/g, 'flaunt'], [/p oint/g, 'point'],
+        [/p ool/g, 'pool'], [/p ooch/g, 'pooch'], [/p lain/g, 'plain'],
+        [/s our/g, 'sour'], [/f rown/g, 'frown'], [/c rown/g, 'crown'],
+        [/d rown/g, 'drown'],
+        [/sculp ture/g, 'sculpture'], [/f urniture/g, 'furniture'],
+        [/f eature/g, 'feature'], [/temp erature/g, 'temperature'],
+        [/f uture/g, 'future']
+      ];
+
+      // === CHAPTER CONFIG ===
+      const CHAPTER_CONFIG = {
+        title: "Lesson 262: ture=/chur/",
+        loTags: ["LO TURE262: Decode words with 'ture' pronounced as /chur/"],
+        contentWords: [
+          "feature", "creature", "torture", "moisture", "nature", "future", "stature", "sculpture",
+          "adventure", "departure", "furniture", "signature", "temperature"
+        ],
+        sentences: [
+          "The artist will create a sculpture.",
+          "June has a kind and generous nature.",
+          "A chair is an essential piece of furniture.",
+          "An autograph is the same thing as a signature.",
+          "The comic strip is a regular feature in the newspaper.",
+          "John is reading a book about an adventure in a jungle in Africa.",
+          "When you have a fever, your body temperature will rise above normal.",
+          "I think that you have a bright future ahead of you."
+        ],
+        assessmentItems: [
+          { id: "1", prompt: "How is 'ture' pronounced in 'future'?", options: [
+            {id:"a",text:"/tur/",is_correct:false},
+            {id:"b",text:"/chur/",is_correct:true},
+            {id:"c",text:"/ture/ like 'too-re'",is_correct:false},
+            {id:"d",text:"silent",is_correct:false}
+          ]},
+          { id: "2", prompt: "Choose the correct spelling:", options: [
+            {id:"a",text:"sculp ture",is_correct:false},
+            {id:"b",text:"sculpture",is_correct:true},
+            {id:"c",text:"sculchure",is_correct:false},
+            {id:"d",text:"sculpter",is_correct:false}
+          ]},
+          { id: "3", prompt: "Which word means 'a distinctive part or attribute'?", options: [
+            {id:"a",text:"feature",is_correct:true},
+            {id:"b",text:"creature",is_correct:false},
+            {id:"c",text:"stature",is_correct:false},
+            {id:"d",text:"moisture",is_correct:false}
+          ]},
+          { id: "4", prompt: "What word completes: 'The desert has very little _____.'?", options: [
+            {id:"a",text:"moisture",is_correct:true},
+            {id:"b",text:"furniture",is_correct:false},
+            {id:"c",text:"signature",is_correct:false},
+            {id:"d",text:"adventure",is_correct:false}
+          ]},
+          { id: "5", prompt: "Which word refers to all living and non-living things in the environment?", options: [
+            {id:"a",text:"nature",is_correct:true},
+            {id:"b",text:"creature",is_correct:false},
+            {id:"c",text:"temperature",is_correct:false},
+            {id:"d",text:"departure",is_correct:false}
+          ]},
+          { id: "6", prompt: "In which sentence is a '-ture=/chur/' word used correctly?", options: [
+            {id:"a",text:"He carved a sculchure.",is_correct:false},
+            {id:"b",text:"She signed her signachure.",is_correct:false},
+            {id:"c",text:"The comic strip is a regular feature.",is_correct:true},
+            {id:"d",text:"The temp erature rose.",is_correct:false}
+          ]},
+          { id: "7", prompt: "What does 'stature' mean?", options: [
+            {id:"a",text:"height or importance",is_correct:true},
+            {id:"b",text:"a type of sculpture",is_correct:false},
+            {id:"c",text:"a furniture style",is_correct:false},
+            {id:"d",text:"a future event",is_correct:false}
+          ]},
+          { id: "8", prompt: "Which word means 'a living being, especially an animal'?", options: [
+            {id:"a",text:"creature",is_correct:true},
+            {id:"b",text:"adventure",is_correct:false},
+            {id:"c",text:"torture",is_correct:false},
+            {id:"d",text:"departure",is_correct:false}
+          ]},
+          { id: "9", prompt: "Which word is NOT in the lesson word list?", options: [
+            {id:"a",text:"temperature",is_correct:false},
+            {id:"b",text:"furniture",is_correct:false},
+            {id:"c",text:"lecture",is_correct:true},
+            {id:"d",text:"signature",is_correct:false}
+          ]},
+          { id: "10", prompt: "What word means 'the act of leaving'?", options: [
+            {id:"a",text:"departure",is_correct:true},
+            {id:"b",text:"adventure",is_correct:false},
+            {id:"c",text:"future",is_correct:false},
+            {id:"d",text:"nature",is_correct:false}
+          ]},
+          { id: "11", prompt: "Which word describes 'a bold, exciting undertaking'?", options: [
+            {id:"a",text:"adventure",is_correct:true},
+            {id:"b",text:"torture",is_correct:false},
+            {id:"c",text:"moisture",is_correct:false},
+            {id:"d",text:"stature",is_correct:false}
+          ]},
+          { id: "12", prompt: "How many '-ture=/chur/' words are in: 'The sculpture was a feature of the furniture exhibit.'?", options: [
+            {id:"a",text:"1",is_correct:false},
+            {id:"b",text:"2 (sculpture, feature)",is_correct:false},
+            {id:"c",text:"3 (sculpture, feature, furniture)",is_correct:true},
+            {id:"d",text:"0",is_correct:false}
+          ]},
+          { id: "13", prompt: "What is a 'signature'?", options: [
+            {id:"a",text:"a person’s name written in their own handwriting",is_correct:true},
+            {id:"b",text:"a type of temperature",is_correct:false},
+            {id:"c",text:"a departure time",is_correct:false},
+            {id:"d",text:"a nature trail",is_correct:false}
+          ]},
+          { id: "14", prompt: "Which word refers to household items like chairs and tables?", options: [
+            {id:"a",text:"furniture",is_correct:true},
+            {id:"b",text:"sculpture",is_correct:false},
+            {id:"c",text:"creature",is_correct:false},
+            {id:"d",text:"adventure",is_correct:false}
+          ]},
+          { id: "15", prompt: "What word completes: 'Your body _____ changes when you have a fever.'?", options: [
+            {id:"a",text:"temperature",is_correct:true},
+            {id:"b",text:"moisture",is_correct:false},
+            {id:"c",text:"stature",is_correct:false},
+            {id:"d",text:"nature",is_correct:false}
+          ]},
+          { id: "16", prompt: "Which word means 'extreme pain or suffering'?", options: [
+            {id:"a",text:"torture",is_correct:true},
+            {id:"b",text:"adventure",is_correct:false},
+            {id:"c",text:"feature",is_correct:false},
+            {id:"d",text:"departure",is_correct:false}
+          ]},
+          { id: "17", prompt: "What word describes 'what is to come'?", options: [
+            {id:"a",text:"future",is_correct:true},
+            {id:"b",text:"pasture",is_correct:false},
+            {id:"c",text:"creature",is_correct:false},
+            {id:"d",text:"signature",is_correct:false}
+          ]},
+          { id: "18", prompt: "Which word best fits: 'She left her _____ on the contract.'?", options: [
+            {id:"a",text:"signature",is_correct:true},
+            {id:"b",text:"sculpture",is_correct:false},
+            {id:"c",text:"temperature",is_correct:false},
+            {id:"d",text:"moisture",is_correct:false}
+          ]},
+          { id: "19", prompt: "Which word refers to a three-dimensional artwork?", options: [
+            {id:"a",text:"sculpture",is_correct:true},
+            {id:"b",text:"furniture",is_correct:false},
+            {id:"c",text:"feature",is_correct:false},
+            {id:"d",text:"adventure",is_correct:false}
+          ]},
+          { id: "20", prompt: "In all words in this lesson, how is the suffix '-ture' pronounced?", options: [
+            {id:"a",text:"/chur/",is_correct:true},
+            {id:"b",text:"/tur/",is_correct:false},
+            {id:"c",text:"/shur/",is_correct:false},
+            {id:"d",text:"It varies by word",is_correct:false}
+          ]}
+        ]
+      };
+
+      // === RENDERING FUNCTIONS ===
+      function renderWords() {
+        document.getElementById('word-list').innerHTML =
+          CHAPTER_CONFIG.contentWords.map(w => `<span class="word-item">${w}</span>`).join('');
+      }
+
+      function renderSentences() {
+        const corrected = CHAPTER_CONFIG.sentences.map(s => {
+          let text = s;
+          TYPO_CORRECTIONS.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+          });
+          if (text !== s) logEvent('typo_corrected', { original: s, corrected: text });
+          return text;
+        });
+        document.getElementById('sentences').innerHTML =
+          corrected.map(s => `<p>${s}</p>`).join('');
+      }
+
+      function renderNavigation() {
+        const nav = document.getElementById('chapter-nav');
+        const buttons = [{ label: "Home", url: "../index.html", active: false }];
+        for (let i = 0; i < 4; i++) {
+          const c = currentChapter + i;
+          const lessonNum = c + 1;
+          if (c > MAX_CHAPTER) break;
+          buttons.push({
+            label: `Lesson ${lessonNum}`,
+            url: `chapter-${c}.html`,
+            active: i === 0
+          });
+        }
+        nav.innerHTML = buttons.map(b =>
+          `<a href="${b.url}" class="chapter-btn ${b.active ? 'active' : ''}">${b.label}</a>`
+        ).join('');
+      }
+
+      function renderQuiz() {
+        const form = document.getElementById('quiz-form');
+        window.quizCorrectMap = {};
+        const baseSeed = currentChapter * 1000000 + (Date.now() % 1000000);
+
+        form.innerHTML = CHAPTER_CONFIG.assessmentItems.map(q => {
+          const seed = baseSeed + parseInt(q.id, 10);
+          const shuffledOpts = shuffleWithSeed([...q.options], seed);
+          const correct = q.options.find(o => o.is_correct);
+          window.quizCorrectMap[q.id] = correct.id;
+
+          const optHtml = shuffledOpts.map((opt, idx) => {
+            const letter = String.fromCharCode(65 + idx);
+            return `<div class="option"><label><input type="radio" name="q${q.id}" value="${opt.id}" required> ${letter}. ${opt.text}</label></div>`;
+          }).join('');
+
+          return `<div class="question"><strong>${q.id}. ${q.prompt}</strong><div class="options">${optHtml}</div></div>`;
+        }).join('');
+      }
+
+      function showFeedback(answers) {
+        const items = CHAPTER_CONFIG.assessmentItems;
+        let correctCount = 0, correctList = [], incorrectList = [];
+
+        items.forEach((item, i) => {
+          const ans = answers[i];
+          const correctId = window.quizCorrectMap[item.id];
+          const correctOpt = item.options.find(o => o.id === correctId);
+          const isCorrect = ans === correctId;
+          if (isCorrect) {
+            correctCount++;
+            correctList.push(`${item.id}. ${item.prompt} → ✅ ${correctOpt.text}`);
+          } else {
+            incorrectList.push(`${item.id}. ${item.prompt} → ❌ Your answer: ${item.options.find(o => o.id === ans)?.text || '—'} | ✅ ${correctOpt.text}`);
+          }
+        });
+
+        const score = correctCount, total = 20, mastery = score >= 15;
+        const timeOnTask = Math.floor((Date.now() - window.startTime) / 1000);
+        const attempts = (parseInt(localStorage.getItem(`quiz_attempts_${currentChapter}`)) || 0) + 1;
+        localStorage.setItem(`quiz_attempts_${currentChapter}`, attempts);
+        localStorage.setItem(`mastery_${currentChapter}`, mastery ? '1' : '0');
+        const studentName = localStorage.getItem('student_name') || '[Name]';
+
+        logEvent('quiz_submitted', { score, time_sec: timeOnTask, mastery, attempts });
+        if (mastery) logEvent('mastery_achieved', {});
+
+        let report = `*Mini OpenStax — ${CHAPTER_CONFIG.title}*\nStudent: ${studentName}\nScore: ${score}/${total} (${Math.round(score/total*100)}%) — ${mastery ? '✅ MASTERED' : '❌ Needs Review'}\nTime: ${timeOnTask}s | Attempts: ${attempts}\n\n`;
+        if (correctList.length) report += `✅ CORRECT (${correctList.length}):\n${correctList.join('\n')}\n\n`;
+        if (incorrectList.length) report += `❌ INCORRECT (${incorrectList.length}):\n${incorrectList.join('\n')}\n\n`;
+        report += `Report generated via Mini OpenStax.`;
+
+        localStorage.setItem(`saved_report_${currentChapter}_${Date.now()}`, report);
+
+        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(report)}`;
+        document.getElementById('feedback').innerHTML = `
+          <div class="feedback">
+            <h3>📊 Results: ${score}/${total}</h3>
+            <p><strong>${mastery ? '🎉 Excellent!' : score >= 10 ? 'Good!' : 'Keep practicing.'}</strong> ${
+              mastery ? 'You’ve mastered the concept!' :
+              score >= 10 ? 'Review missed items.' : 'Practice this lesson again.'
+            }</p>
+            <p><strong>Time:</strong> ${timeOnTask}s | <strong>Attempts:</strong> ${attempts}</p>
+            <a href="${url}" target="_blank" class="btn" style="background:#25D366;display:inline-block;text-decoration:none;">
+              📲 Send Report via WhatsApp
+            </a>
+          </div>
+        `;
+      }
+
+      function setupQuizListeners() {
+        document.getElementById('submit-quiz').addEventListener('click', () => {
+          const form = document.getElementById('quiz-form');
+          const answers = [];
+          for (let i = 1; i <= 20; i++) {
+            const el = form.querySelector(`input[name="q${i}"]:checked`);
+            answers.push(el ? el.value : null);
+          }
+          if (answers.includes(null)) {
+            alert("Please answer all questions.");
+            return;
+          }
+          showFeedback(answers);
+        });
+      }
+
+      function initNamePrompt() {
+        const saved = localStorage.getItem('student_name');
+        const savedRole = localStorage.getItem('user_role') || 'student';
+        const promptDiv = document.getElementById('student-name-prompt');
+        const quizDiv = document.getElementById('quiz-container');
+        const display = document.getElementById('name-display');
+        const input = document.getElementById('student-name');
+        const buttons = document.getElementById('name-buttons');
+        const roleBadge = document.querySelector('.role-badge');
+        roleBadge.textContent = savedRole === 'instructor' ? 'Instructor View' : 'Student View';
+
+        if (saved) {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.innerHTML = `<p><strong>Current name:</strong> ${saved} (${savedRole})</p>`;
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="keep-btn">✅ Keep This Name</button>
+            <button type="button" class="btn btn-secondary" id="change-btn">✏️ Use a Different Name</button>
+          `;
+          document.getElementById('keep-btn').onclick = () => {
+            promptDiv.style.display = 'none';
+            quizDiv.style.display = 'block';
+            logEvent('lesson_start', {});
+          };
+          document.getElementById('change-btn').onclick = () => {
+            display.style.display = 'none';
+            input.style.display = 'block';
+            buttons.innerHTML = `
+              <button type="button" class="btn" id="save-new">💾 Save and Start Quiz</button>
+              <div style="margin-top:1rem; font-size:0.9rem;">
+                <label>
+                  <input type="checkbox" id="teacher-mode"> 
+                  I'm an instructor (analytics auto-enabled to improve lessons)
+                </label>
+              </div>
+            `;
+            input.value = '';
+            input.focus();
+            document.getElementById('save-new').onclick = () => {
+              const name = input.value.trim();
+              if (name) {
+                localStorage.setItem('student_name', name);
+                const isTeacher = document.getElementById('teacher-mode').checked;
+                localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+                if (isTeacher) enableAnalytics();
+                promptDiv.style.display = 'none';
+                quizDiv.style.display = 'block';
+                roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+                logEvent('lesson_start', {});
+              } else {
+                alert("Please enter your name.");
+                input.focus();
+              }
+            };
+          };
+        } else {
+          promptDiv.style.display = 'block';
+          quizDiv.style.display = 'none';
+          display.style.display = 'none';
+          input.style.display = 'block';
+          buttons.innerHTML = `
+            <button type="button" class="btn" id="save-first">💾 Save and Start Quiz</button>
+            <div style="margin-top:1rem; font-size:0.9rem;">
+              <label>
+                <input type="checkbox" id="teacher-mode"> 
+                I'm an instructor (analytics auto-enabled to improve lessons)
+              </label>
+            </div>
+          `;
+          document.getElementById('save-first').onclick = () => {
+            const name = input.value.trim();
+            if (name) {
+              localStorage.setItem('student_name', name);
+              const isTeacher = document.getElementById('teacher-mode').checked;
+              localStorage.setItem('user_role', isTeacher ? 'instructor' : 'student');
+              if (isTeacher) enableAnalytics();
+              promptDiv.style.display = 'none';
+              quizDiv.style.display = 'block';
+              roleBadge.textContent = isTeacher ? 'Instructor View' : 'Student View';
+              logEvent('lesson_start', {});
+            } else {
+              alert("Please enter your name.");
+              input.focus();
+            }
+          };
+        }
+      }
+
+      function init() {
+        document.getElementById('chapter-title').textContent = CHAPTER_CONFIG.title;
+        document.getElementById('lo-tags').textContent = CHAPTER_CONFIG.loTags[0];
+        renderNavigation();
+        renderWords();
+        renderSentences();
+        renderQuiz();
+        setupQuizListeners();
+        initNamePrompt();
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('send-analytics').onclick = (e) => {
+          e.preventDefault();
+          if (confirm('Send anonymous usage data to help improve Mini OpenStax?')) {
+            sendAnalyticsEvents();
+          }
+        };
+      });
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>  <div class="container">
     <div class="header">
       <div>
         <h1 id="chapter-title">Lesson 262: ture=/chur/</h1>
